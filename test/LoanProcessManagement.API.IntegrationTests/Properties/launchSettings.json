@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "LoanProcessManagement.API.IntegrationTests": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
