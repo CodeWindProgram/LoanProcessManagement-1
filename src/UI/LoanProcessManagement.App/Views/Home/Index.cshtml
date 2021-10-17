@@ -1,0 +1,61 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Home";
+}
+
+<style>
+    .tile .tile-content {
+        margin: 10px auto !important;
+    }
+
+    .tile .brand, .tile .tile-status {
+        min-height: 30px !important;
+    }
+</style>
+<div class="container report-list" style="margin-top: 40px;" runat="server" id="grid">
+    <ul class="nav tiles nomargin">
+        <li class='col-lg-3 col-md-4 col-sm-6 col-xs-6'>
+            <div class="tile bluediv bg-color-blueLight icon">
+                <a target="_blank" href="https://www.google.co.in/">
+                    <div class="tile-content"><i><img src="~/css/images/icon/DetailedList.png" /></i></div>
+                    <div class="brand">User Management</div>
+                </a>
+            </div>
+        </li>
+        <li class='col-lg-3 col-md-4 col-sm-6 col-xs-6'>
+            <div class="tile bluediv bg-color-blueLight icon">
+                <a target="_blank" href="https://www.google.co.in/">
+                    <div class="tile-content"><i><img src="~/css/images/icon/Lead.png" /></i></div>
+                    <div class="brand">Add Lead</div>
+                </a>
+            </div>
+        </li>
+        <li class='col-lg-3 col-md-4 col-sm-6 col-xs-6'>
+            <div class="tile bluediv bg-color-blueLight icon">
+                <a target="_blank" href="https://www.google.co.in/">
+                    <div class="tile-content"><i><img src="~/css/images/icon/businessPerformance.png" /></i></div>
+                    <div class="brand">Track Lead</div>
+                </a>
+            </div>
+        </li>
+        <li class='col-lg-3 col-md-4 col-sm-6 col-xs-6'>
+            <div class="tile bluediv bg-color-blueLight icon">
+                <a target="_blank" href="https://www.google.co.in/">
+                    <div class="tile-content"><i><img src="~/css/images/icon/myQueue.png" /></i></div>
+                    <div class="brand">Menu Management</div>
+                </a>
+            </div>
+        </li>
+        <li class='col-lg-3 col-md-4 col-sm-6 col-xs-6'>
+            <div class="tile bluediv bg-color-blueLight icon">
+                <a target="_blank" href="https://www.google.co.in/">
+                    <div class="tile-content"><i><img src="~/css/images/icon/ChangePassword.png" /></i></div>
+                    <div class="brand">Change Password</div>
+                </a>
+            </div>
+        </li>
+    </ul>
+</div>
