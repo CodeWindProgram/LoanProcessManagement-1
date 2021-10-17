@@ -9,9 +9,9 @@ namespace LoanProcessManagement.App.Controllers
     [Route("Login")]
     public class LoginController : Controller
     {
-        [Route("")]
         [Route("Index")]
         [Route("~/")]
+        [Route("~/Login/Index")]
         public IActionResult Index()
         {
             return View();

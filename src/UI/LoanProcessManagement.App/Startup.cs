@@ -41,19 +41,26 @@ namespace LoanProcessManagement.App
             app.UseStaticFiles();
 
             app.UseRouting();
-            //to be added
             app.UseAuthentication();
             app.UseAuthorization();
 
+            //app.UseMvc();
+
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
-                //endpoints.MapControllerRoute(
-                //       name: "default",
-                //       pattern: "{controller=Login}/{action=Index}/{id?}");
-                //endpoints.MapRazorPages();
-                //endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Login}/{action=Index}/{id?}");
             });
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllers();
+
+            //    //endpoints.MapControllerRoute(
+            //    //    name: "default",
+            //    //    pattern: "{controller=Login}/{action=Index}/{id?}");
+            //    endpoints.MapRazorPages();
+            //});
         }
     }
 }
