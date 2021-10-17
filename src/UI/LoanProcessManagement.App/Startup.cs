@@ -42,52 +42,19 @@ namespace LoanProcessManagement.App
 
             app.UseRouting();
             app.UseAuthentication();
+            app.UseAuthorization();
 
-=========
+
             //app.UseMvc();
-
->>>>>>>>> Temporary merge branch 2
-
+            app.UseEndpoints(endpoints =>
+            {
                 endpoints.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Login}/{action=Index}/{id?}");
->>>>>>>>> Temporary merge branch 2
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllers();
-
-            //    //endpoints.MapControllerRoute(
-            //    //    name: "default",
-            //    //    pattern: "{controller=Login}/{action=Index}/{id?}");
-            //    endpoints.MapRazorPages();
-            //});
-                //endpoints.MapRazorPages();
->>>>>>>>> Temporary merge branch 2
->>>>>>>>> Temporary merge branch 2
-            app.UseAuthorization();
-<<<<<<<<< Temporary merge branch 1
-                endpoints.MapRazorPages();
-=========
-                endpoints.MapControllers();
-                //endpoints.MapControllerRoute(
-                //       name: "default",
-                //       pattern: "{controller=Login}/{action=Index}/{id?}");
-                //endpoints.MapRazorPages();
-                //endpoints.MapRazorPages();
->>>>>>>>> Temporary merge branch 2
-                endpoints.MapControllers();
-                //endpoints.MapControllerRoute(
-                //       name: "default",
-                //       pattern: "{controller=Login}/{action=Index}/{id?}");
-                //endpoints.MapRazorPages();
-                //endpoints.MapRazorPages();
->>>>>>>>> Temporary merge branch 2
-                //       name: "default",
-                //       pattern: "{controller=Login}/{action=Index}/{id?}");
-                //endpoints.MapRazorPages();
-                //endpoints.MapRazorPages();
->>>>>>>>> Temporary merge branch 2
             });
+
+
+
             //app.UseEndpoints(endpoints =>
             //{
             //    endpoints.MapControllers();
@@ -97,6 +64,8 @@ namespace LoanProcessManagement.App
             //    //    pattern: "{controller=Login}/{action=Index}/{id?}");
             //    endpoints.MapRazorPages();
             //});
+            //endpoints.MapRazorPages();        
+
         }
     }
 }
