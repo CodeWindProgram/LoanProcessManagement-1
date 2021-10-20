@@ -63,6 +63,8 @@ namespace LoanProcessManagement.Api
             });
             services.AddHealthcheckExtensionService(Configuration);
 
+            services.AddMvc()
+            .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
