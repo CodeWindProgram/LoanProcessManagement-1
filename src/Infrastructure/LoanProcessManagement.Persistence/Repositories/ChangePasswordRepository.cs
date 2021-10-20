@@ -24,15 +24,30 @@ namespace LoanProcessManagement.Persistence.Repositories
         {
             _logger.LogInformation("Change Password With Events Initiated");
 
-            changePassword.Issuccess = false;
-            changePassword.Message = "Invalid current password provided";
-            //var allCategories = await _dbContext.Categories.Include(x => x.Events).ToListAsync();
+            if (changePassword != null)
+            {
+                var userDetails = await _dbContext.LpmUserMasters.Include(x => x.LgId == changePassword.lg_id).FirstOrDefaultAsync();
+                
+                //here we need to check old password is correct or not - with encryption
+                //if matched encrypt new password with key
 
-            //if (!includePassedEvents)
-            //{
-            //    allCategories.ForEach(p => p.Events.ToList().RemoveAll(c => c.Date < DateTime.Today));
-            //}
-
+                if (userDetails != null && !string.IsNullOrEmpty(changePassword.NewPassword))
+                {
+                    userDetails.Password = changePassword.NewPassword;
+                    userDetails.LastModifiedDate = DateTime.Now;
+                    _dbContext.SaveChanges();
+                }
+                else
+                {
+                    changePassword.Issuccess = false;
+                    changePassword.Message = "Provided password is invalid, Please retry with correct password.";
+                }
+            }
+            else
+            {
+                changePassword.Issuccess = false;
+                changePassword.Message = "Invalid details, Please retry with correct details";
+            }
             _logger.LogInformation("Change Password With Events Completed");
 
             return changePassword;

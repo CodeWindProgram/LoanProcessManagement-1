@@ -20,5 +20,9 @@
   <ItemGroup>
     <ProjectReference Include="..\LoanProcessManagement.Domain\LoanProcessManagement.Domain.csproj" />
   </ItemGroup>
+	
+  <ItemGroup>
+    <Folder Include="Features\ChangePassword\Queries\" />
+  </ItemGroup>
 
 </Project>
