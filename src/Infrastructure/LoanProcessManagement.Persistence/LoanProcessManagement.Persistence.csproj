@@ -4,6 +4,14 @@
 	  <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Migrations\20210826051409_initial.cs" />
+    <Compile Remove="Migrations\20210826051409_initial.Designer.cs" />
+    <Compile Remove="Migrations\20211020200251_Initial.cs" />
+    <Compile Remove="Migrations\20211020200251_Initial.Designer.cs" />
+    <Compile Remove="Migrations\GloboTicketDbContextModelSnapshot.cs" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.10" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.10" />

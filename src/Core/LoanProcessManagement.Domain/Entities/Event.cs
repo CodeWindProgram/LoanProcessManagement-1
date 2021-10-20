@@ -1,8 +1,10 @@
 using LoanProcessManagement.Domain.Common;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LoanProcessManagement.Domain.Entities
 {
+    [Table("Events")]
     public class Event : AuditableEntity
     {
         public Guid EventId { get; set; }

@@ -26,6 +26,11 @@ namespace LoanProcessManagement.Persistence
         public DbSet<Event> Events { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<LpmUserMaster> LpmUserMasters { get; set; }
+        public DbSet<LpmUserRoleMaster> LpmUserRoleMasters { get; set; }
+        public DbSet<LpmMenuMaster> LpmMenuMasters { get; set; }
+        public DbSet<LpmUserRoleMenuMap> LpmUserRoleMenuMaps { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
