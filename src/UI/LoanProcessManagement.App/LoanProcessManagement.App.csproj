@@ -4,4 +4,23 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="APICalls\**" />
+    <Compile Remove="Helpers\**" />
+    <Content Remove="APICalls\**" />
+    <Content Remove="Helpers\**" />
+    <EmbeddedResource Remove="APICalls\**" />
+    <EmbeddedResource Remove="Helpers\**" />
+    <None Remove="APICalls\**" />
+    <None Remove="Helpers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LoanProcessManagement.App.Services\LoanProcessManagement.App.Services.csproj" />
+  </ItemGroup>
+
 </Project>
