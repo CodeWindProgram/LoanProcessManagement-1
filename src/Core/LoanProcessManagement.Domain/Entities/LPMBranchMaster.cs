@@ -15,5 +15,6 @@ namespace LoanProcessManagement.Domain.Entities
         public string branchname { get; set; }
         public bool IsActive { get; set; }
         public ICollection<LpmUserMaster> LpmUserMasters { get; set; }
+
     }
 }
