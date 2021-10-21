@@ -12,7 +12,8 @@ namespace LoanProcessManagement.Domain.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
         public string Rolename { get; set; }
-        public bool Isactive { get; set; }
+        public bool IsActive { get; set; }
         public ICollection<LpmUserMaster> LpmUserMasters { get; set; }
+        public ICollection<LpmUserRoleMenuMap> LpmUserRoleMenuMaps { get; set; }
     }
 }

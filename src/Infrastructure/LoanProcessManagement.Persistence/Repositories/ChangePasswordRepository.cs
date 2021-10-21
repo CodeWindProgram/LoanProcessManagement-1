@@ -37,6 +37,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                     userDetails.Password = changePassword.NewPassword;
                     userDetails.LastModifiedDate = DateTime.Now;
                     _dbContext.SaveChanges();
+                    changePassword.Issuccess = true;
                 }
                 else
                 {

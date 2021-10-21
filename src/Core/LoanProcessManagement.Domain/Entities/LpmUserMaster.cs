@@ -20,7 +20,7 @@ namespace LoanProcessManagement.Domain.Entities
         public string SaltKey { get; set; }
         public string? StaffType { get; set; }
         public long BranchId { get; set; }
-        public LPMBranchMaster Branch { get; set; }
+        public LpmBranchMaster Branch { get; set; }
         public string? SaleType { get; set; }
         public string PhoneNumber { get; set; }
         public long UserRoleId { get; set; }
