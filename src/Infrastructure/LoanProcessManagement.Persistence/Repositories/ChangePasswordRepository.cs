@@ -26,7 +26,8 @@ namespace LoanProcessManagement.Persistence.Repositories
 
             if (changePassword != null)
             {
-                var userDetails = await _dbContext.LpmUserMasters.Where(x => x.LgId == changePassword.lg_id).FirstOrDefaultAsync();
+                var userDetails = await _dbContext.LpmUserMasters.Include(x=>x.Branch).Include(x=>x.UserRole)
+                    .Where(x => x.LgId == changePassword.lg_id).FirstOrDefaultAsync();
                 
                 //here we need to check old password is correct or not - with encryption
                 //if matched encrypt new password with key
