@@ -7,7 +7,7 @@ using System.Text;
 
 namespace LoanProcessManagement.Domain.Entities
 {
-    public class LPMBranchMaster : AuditableEntity
+    public class LpmBranchMaster : AuditableEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

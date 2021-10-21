@@ -9,6 +9,18 @@
     <Compile Remove="Migrations\20210826051409_initial.Designer.cs" />
     <Compile Remove="Migrations\20211020200251_Initial.cs" />
     <Compile Remove="Migrations\20211020200251_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20211021142506_Initial2.cs" />
+    <Compile Remove="Migrations\20211021142506_Initial2.Designer.cs" />
+    <Compile Remove="Migrations\20211021143206_Initial3.cs" />
+    <Compile Remove="Migrations\20211021143206_Initial3.Designer.cs" />
+    <Compile Remove="Migrations\20211021184148_Initial4.cs" />
+    <Compile Remove="Migrations\20211021184148_Initial4.Designer.cs" />
+    <Compile Remove="Migrations\20211021184604_Initial5.cs" />
+    <Compile Remove="Migrations\20211021184604_Initial5.Designer.cs" />
+    <Compile Remove="Migrations\20211021195044_Initial7.cs" />
+    <Compile Remove="Migrations\20211021195044_Initial7.Designer.cs" />
+    <Compile Remove="Migrations\20211021195622_Initial4.cs" />
+    <Compile Remove="Migrations\20211021195622_Initial4.Designer.cs" />
     <Compile Remove="Migrations\GloboTicketDbContextModelSnapshot.cs" />
   </ItemGroup>
 

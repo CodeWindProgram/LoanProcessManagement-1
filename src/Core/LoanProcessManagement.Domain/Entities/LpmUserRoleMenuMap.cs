@@ -14,6 +14,6 @@ namespace LoanProcessManagement.Domain.Entities
         public LpmUserRoleMaster UserRole { get; set; }
         public long MenuId { get; set; }
         public LpmMenuMaster MenuName { get; set; }
-        public bool Isactive { get; set; }
+        public bool IsActive { get; set; }
     }
 }
