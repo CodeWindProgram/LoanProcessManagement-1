@@ -1,6 +1,7 @@
-﻿using LoanProcessManagement.App.Services.Helper.APIHelper;
+﻿using LoanProcessManagement.App.Helper.APIHelper;
 using LoanProcessManagement.App.Services.Interfaces;
-using LoanProcessManagement.App.Services.Models.DTOs.ChangePassword;
+using LoanProcessManagement.Application.Features.ChangePassword.Commands.ChangePassword;
+using LoanProcessManagement.Application.Responses;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Net.Http;
@@ -22,11 +23,11 @@ namespace LoanProcessManagement.App.Services.Implementation
             _apiDetails = apiDetails;
         }
 
-        public async Task<Response<ChangePasswordDTO>> ChangePassword(ChangePasswordDTO changePassword)
+        public async Task<Response<ChangePasswordDto>> ChangePassword(ChangePasswordDto changePassword)
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
-            var model = new Response<ChangePasswordDTO>();
+            var model = new Response<ChangePasswordDto>();
 
             var content = JsonConvert.SerializeObject(changePassword);
 
@@ -37,7 +38,7 @@ namespace LoanProcessManagement.App.Services.Implementation
 
 
             var options = new JsonSerializerOptions();
-            model = System.Text.Json.JsonSerializer.Deserialize<Response<ChangePasswordDTO>>(jsonString, options);
+            model = System.Text.Json.JsonSerializer.Deserialize<Response<ChangePasswordDto>>(jsonString, options);
 
             //JavaScriptSerializer js = new JavaScriptSerializer();
             //getStatusResponseModel = js.Deserialize<EMandateGetStatusResponseModel>(Finalresult);

@@ -1,5 +1,5 @@
 ﻿using LoanProcessManagement.App.Services.Interfaces;
-using LoanProcessManagement.App.Services.Models.DTOs.ChangePassword;
+using LoanProcessManagement.Application.Features.ChangePassword.Commands.ChangePassword;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -23,7 +23,7 @@ namespace LoanProcessManagement.App.Controllers
         [Route("/ChangePasswordUI")]
         public async Task<IActionResult> ChangePassword()
         {
-            ChangePasswordDTO changePassword = new ChangePasswordDTO();
+            ChangePasswordDto changePassword = new ChangePasswordDto();
             changePassword.lg_id = "lg_01";
             changePassword.OldPassword = "safdsafdsad";
             changePassword.NewPassword = "gfdgfdg";

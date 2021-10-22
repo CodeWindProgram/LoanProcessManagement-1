@@ -1,11 +1,11 @@
-﻿using LoanProcessManagement.App.Services.Helper.APIHelper;
-using LoanProcessManagement.App.Services.Models.DTOs.ChangePassword;
+﻿using LoanProcessManagement.Application.Features.ChangePassword.Commands.ChangePassword;
+using LoanProcessManagement.Application.Responses;
 using System.Threading.Tasks;
 
 namespace LoanProcessManagement.App.Services.Interfaces
 {
     public interface IAccountService
     {
-        Task<Response<ChangePasswordDTO>> ChangePassword(ChangePasswordDTO changePassword);        
+        Task<Response<ChangePasswordDto>> ChangePassword(ChangePasswordDto changePassword);        
     }
 }

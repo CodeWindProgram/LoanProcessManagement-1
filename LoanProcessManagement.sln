@@ -35,8 +35,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{897D2488-7642-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoanProcessManagement.App", "src\UI\LoanProcessManagement.App\LoanProcessManagement.App.csproj", "{A8EAEF69-EC19-4D44-87B8-FFACB414C7C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoanProcessManagement.App.Services", "src\UI\LoanProcessManagement.App.Services\LoanProcessManagement.App.Services.csproj", "{AEE60CF5-4BEE-43EF-AF69-401696788E10}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,10 +81,6 @@ Global
 		{A8EAEF69-EC19-4D44-87B8-FFACB414C7C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8EAEF69-EC19-4D44-87B8-FFACB414C7C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8EAEF69-EC19-4D44-87B8-FFACB414C7C2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AEE60CF5-4BEE-43EF-AF69-401696788E10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AEE60CF5-4BEE-43EF-AF69-401696788E10}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AEE60CF5-4BEE-43EF-AF69-401696788E10}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AEE60CF5-4BEE-43EF-AF69-401696788E10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -106,7 +100,6 @@ Global
 		{E942FDF4-7A8E-403C-A567-BD6B9A1E9CE4} = {BA01B50D-9B93-405E-8122-1DFF4E8B2F45}
 		{897D2488-7642-4BE6-9467-7704B7196B07} = {FD758DAD-AFBA-4786-BB35-C8AC176B3AB8}
 		{A8EAEF69-EC19-4D44-87B8-FFACB414C7C2} = {897D2488-7642-4BE6-9467-7704B7196B07}
-		{AEE60CF5-4BEE-43EF-AF69-401696788E10} = {897D2488-7642-4BE6-9467-7704B7196B07}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F9ADF41-2588-44BD-B59D-3D9B40A97E57}

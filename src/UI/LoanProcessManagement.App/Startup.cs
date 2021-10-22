@@ -1,4 +1,4 @@
-using LoanProcessManagement.App.Services.Helper.APIHelper;
+using LoanProcessManagement.App.Helper.APIHelper;
 using LoanProcessManagement.App.Services.Implementation;
 using LoanProcessManagement.App.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;

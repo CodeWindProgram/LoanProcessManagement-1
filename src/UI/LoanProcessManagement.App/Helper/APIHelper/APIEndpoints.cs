@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace LoanProcessManagement.App.Services.Helper.APIHelper
+namespace LoanProcessManagement.App.Helper.APIHelper
 {
     public class APIEndpoints
     {

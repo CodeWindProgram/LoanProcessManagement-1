@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LoanProcessManagement.App.Services\LoanProcessManagement.App.Services.csproj" />
+    <ProjectReference Include="..\..\Core\LoanProcessManagement.Application\LoanProcessManagement.Application.csproj" />
   </ItemGroup>
 
 </Project>
