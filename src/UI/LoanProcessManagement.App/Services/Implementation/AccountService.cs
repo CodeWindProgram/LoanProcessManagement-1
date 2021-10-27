@@ -23,7 +23,7 @@ namespace LoanProcessManagement.App.Services.Implementation
             _apiDetails = apiDetails;
         }
 
-        public async Task<Response<ChangePasswordDto>> ChangePassword(ChangePasswordDto changePassword)
+        public async Task<Response<ChangePasswordDto>> ChangePassword(ChangePasswordCommand changePassword)
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 

@@ -41,25 +41,27 @@ namespace LoanProcessManagement.Application.Features.ChangePassword.Commands.Cha
             {
                 OldPassword = request.OldPassword,
                 NewPassword = request.NewPassword,
-                lg_id = request.lg_id
+                lg_id = request.lg_id,
+                ConfirmPassword=request.ConfirmPassword,
+                ModifiedBy=request.ModifiedBy
             };
 
-            changePassword = await _changePasswordRepository.ChangePasswordWithEvents(changePassword);
+            var changePasswordResult = await _changePasswordRepository.ChangePasswordWithEvents(changePassword);
 
-            if (changePassword != null && changePassword.Issuccess)
+            if (changePasswordResult != null && changePasswordResult.Issuccess)
             {
 
-                changePasswordCommandResponse.Data = _mapper.Map<ChangePasswordDto>(changePassword);
+                changePasswordCommandResponse.Data = _mapper.Map<ChangePasswordDto>(changePasswordResult);
                 changePasswordCommandResponse.Succeeded = true;
-                changePasswordCommandResponse.Message = "success";
+                changePasswordCommandResponse.Message = changePasswordResult.Message;
             }
             else
             {
                 changePasswordCommandResponse.Succeeded = false;
-                changePasswordCommandResponse.Message = changePassword == null ? "failed to update password." : changePassword.Message;
+                changePasswordCommandResponse.Message = changePasswordResult.Message;  
+                //changePassword == null ? "failed to update password." : changePassword.Message;
             }
-            //}
-
+            
             return changePasswordCommandResponse;
         }
     }

@@ -6,6 +6,6 @@ namespace LoanProcessManagement.App.Services.Interfaces
 {
     public interface IAccountService
     {
-        Task<Response<ChangePasswordDto>> ChangePassword(ChangePasswordDto changePassword);        
+        Task<Response<ChangePasswordDto>> ChangePassword(ChangePasswordCommand changePassword);        
     }
 }
