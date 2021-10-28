@@ -8,5 +8,7 @@ namespace LoanProcessManagement.App.Helper.APIHelper
     public class APIEndpoints
     {
         public const string ChangePassword = "api/v1/ChangePassword";
+        public const string AuthenticateUser = "api/v1/User/authenticateUser";
+
     }
 }

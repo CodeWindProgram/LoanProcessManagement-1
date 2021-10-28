@@ -1,4 +1,5 @@
-﻿@*
+﻿@model LoanProcessManagement.App.Models.UserAuthenticationRequestVM
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -49,7 +50,7 @@
         margin-bottom: -1px;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
-}
+    }
 
     .form-signin input[type="password"] {
         margin-bottom: 10px;
@@ -71,23 +72,31 @@
 
         <h2 class="form-signin-heading text-center">Sign in</h2>
 
-        <input type="text" id="txtEmpId" placeholder="Enter Login Id" class="form-control" autofocus required />
+        <form asp-action="Index" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger font-italic"></div>
+            @*<input type="text" id="txtEmpId" placeholder="Enter Login Id" class="form-control" autofocus required />*@
+            <input asp-for="EmployeeId" class="form-control" id="txtEmpId" type="text" placeholder="Enter Login Id" autofocus />
+            <span asp-validation-for="EmployeeId" class="text-danger"></span>
 
-        <input type="Password" id="txtPassword" class="form-control" placeholder="Password" autofocus required />
+            @*<input type="Password" id="txtPassword" class="form-control" placeholder="Password" autofocus required />*@
+            <input asp-for="Password" class="form-control" id="txtPassword" type="password" placeholder="Password" autofocus />
+            <span asp-validation-for="Password" class="text-danger"></span>
 
-        <label class="checkbox">
-            <input type="checkbox" id="chkPersistCookie" />Remember me<br />
-        </label>
+            <label class="checkbox">
+                <input type="checkbox" id="chkPersistCookie" />Remember me<br />
+            </label>
 
-        <div id="alertMsg" style="display:none;">
-            <label id="lblAlert" Style="color: red"></label>
-            <div style="margin-bottom: 10px"></div>
-        </div>
+            <div id="alertMsg" style="display:none;">
+                <label id="lblAlert" Style="color: red"></label>
+                <div style="margin-bottom: 10px"></div>
+            </div>
 
-        <input type="button" " value="Login" id="btnSignIn" onclick="EncryptPassword();" Class="btn btn-lg btn-primary btn-block" />
+            @*<input type="button" " value="Login" id="btnSignIn" onclick="EncryptPassword();" Class="btn btn-lg btn-primary btn-block" />*@
+            <input type="submit" value="Login" id="btnSignIn" Class="btn btn-lg btn-primary btn-block" />
 
-        <center>@*<asp:Label runat="server" ID="lblStatus" style="color:red;text-align:center;font-weight:bold;font-size:large;" Visible="false">UAT Version</asp:Label>*@</center>
-        <center><a class="forgot" id="ancForgotPassword" href="~/ForgotPassword.aspx" runat="server">Forgot Password</a></center>
-        <center>@*How to log in to Sankalp portal: <a class="forgot" id="a1" href="https://vimeo.com/332191388/a61e0fd20a" target="_blank" runat="server">DSA</a> | <a class="forgot" id="a2" href="https://vimeo.com/332189417/dd735b723c" target="_blank" runat="server"> Branch</a>*@</center>
+            <center>@*<asp:Label runat="server" ID="lblStatus" style="color:red;text-align:center;font-weight:bold;font-size:large;" Visible="false">UAT Version</asp:Label>*@</center>
+            <center><a class="forgot" id="ancForgotPassword" href="~/ForgotPassword.aspx" runat="server">Forgot Password</a></center>
+            <center>@*How to log in to Sankalp portal: <a class="forgot" id="a1" href="https://vimeo.com/332191388/a61e0fd20a" target="_blank" runat="server">DSA</a> | <a class="forgot" id="a2" href="https://vimeo.com/332189417/dd735b723c" target="_blank" runat="server"> Branch</a>*@</center>
+        </form>
     </div>
 </div>
