@@ -27,47 +27,59 @@ namespace LoanProcessManagement.App
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            services.AddSingleton<ITypedClientConfig, TypedClientConfig>();
+            services.AddHttpClient("LoanService", c =>
+            {
+                c.BaseAddress = new Uri(Configuration["APIConfiguration:LoanProcessAPIUrl"].ToString());
+                c.Timeout = TimeSpan.FromSeconds(Configuration["APIConfiguration:Timeout"] != null 
+                    ? Convert.ToDouble(Configuration["APIConfiguration:Timeout"]) : 1000);
+                c.DefaultRequestHeaders.Add("Accept", "application/json");
+                c.DefaultRequestHeaders.Add("User-Agent", "HttpClientFactory");
+            });
+            services.AddSingleton<IAccountService, AccountService>();
+            services.AddSingleton<IMenuService, MenuService>();
 
-            services.AddHttpClient<IAccountService, AccountService>()
-                .ConfigureHttpClient((serviceProvider, httpClient) =>
-                {
-                    var clientConfig = serviceProvider.GetRequiredService<ITypedClientConfig>();
-                    httpClient.BaseAddress = clientConfig.BaseUrl;
-                    httpClient.Timeout = TimeSpan.FromSeconds(clientConfig.Timeout);
-                    //httpClient.DefaultRequestHeaders.Add("User-Agent", "BlahAgent");
-                    //httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
-                })
-                .SetHandlerLifetime(TimeSpan.FromMinutes(5))    // Default is 2 mins
-                .ConfigurePrimaryHttpMessageHandler(x =>
-                    new HttpClientHandler
-                    {
-                        AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
-                        UseCookies = false,
-                        AllowAutoRedirect = false,
-                        UseDefaultCredentials = true,
-                    });
+            #region Unnecessary changes
+            //services.AddHttpClient<IAccountService, AccountService>()
+            //    .ConfigureHttpClient((serviceProvider, httpClient) =>
+            //    {
+            //        var clientConfig = serviceProvider.GetRequiredService<ITypedClientConfig>();
+            //        httpClient.BaseAddress = clientConfig.BaseUrl;
+            //        httpClient.Timeout = TimeSpan.FromSeconds(clientConfig.Timeout);
+            //        //httpClient.DefaultRequestHeaders.Add("User-Agent", "BlahAgent");
+            //        //httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+            //    })
+            //    .SetHandlerLifetime(TimeSpan.FromMinutes(5))    // Default is 2 mins
+            //    .ConfigurePrimaryHttpMessageHandler(x =>
+            //        new HttpClientHandler
+            //        {
+            //            AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
+            //            UseCookies = false,
+            //            AllowAutoRedirect = false,
+            //            UseDefaultCredentials = true,
+            //        });
             #region Service Added for Menu in the Startup - Saif Khan - 28/10/2021
-            services.AddHttpClient<IMenuService, MenuService>()
-                    .ConfigureHttpClient((serviceProvider, httpClient) =>
-                    {
-                        var clientConfig = serviceProvider.GetRequiredService<ITypedClientConfig>();
-                        httpClient.BaseAddress = clientConfig.BaseUrl;
-                        httpClient.Timeout = TimeSpan.FromSeconds(clientConfig.Timeout);
-                    })
-                    .SetHandlerLifetime(TimeSpan.FromMinutes(5))    // Default is 2 mins
-                    .ConfigurePrimaryHttpMessageHandler(x =>
-                        new HttpClientHandler
-                        {
-                            AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
-                            UseCookies = false,
-                            AllowAutoRedirect = false,
-                            UseDefaultCredentials = true,
-                        });
+            //services.AddHttpClient<IMenuService, MenuService>()
+            //        .ConfigureHttpClient((serviceProvider, httpClient) =>
+            //        {
+            //            //var clientConfig = serviceProvider.GetRequiredService<ITypedClientConfig>();
+            //            //httpClient.BaseAddress = clientConfig.BaseUrl;
+            //            //httpClient.Timeout = TimeSpan.FromSeconds(clientConfig.Timeout);
+            //        })
+            //        .SetHandlerLifetime(TimeSpan.FromMinutes(5))    // Default is 2 mins
+            //        .ConfigurePrimaryHttpMessageHandler(x =>
+            //            new HttpClientHandler
+            //            {
+            //                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
+            //                UseCookies = false,
+            //                AllowAutoRedirect = false,
+            //                UseDefaultCredentials = true,
+            //            });
             #endregion
 
             //services.AddHttpClient();
-            //services.AddScoped<IAccountService, AccountService>();
+            //services.AddScoped<IAccountService, AccountService>(); 
+            #endregion
+
             services.Configure<APIConfiguration>(Configuration.GetSection("APIConfiguration"));
             services.AddSession();
         }
@@ -90,7 +102,7 @@ namespace LoanProcessManagement.App
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-           
+
 
 
             //app.UseMvc();

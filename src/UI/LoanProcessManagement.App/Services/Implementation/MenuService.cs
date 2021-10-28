@@ -16,12 +16,13 @@ namespace LoanProcessManagement.App.Services.Implementation
     public class MenuService : IMenuService
     {
         private string BaseUrl = "";
-        private HttpClient _client;
+        private IHttpClientFactory clientfact;
         IOptions<APIConfiguration> _apiDetails;
 
-        public MenuService(HttpClient client, IOptions<APIConfiguration> apiDetails)
+
+        public MenuService(IHttpClientFactory client, IOptions<APIConfiguration> apiDetails)
         {
-            _client = client;
+            clientfact = client;
             _apiDetails = apiDetails;
         }
 
@@ -37,18 +38,22 @@ namespace LoanProcessManagement.App.Services.Implementation
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
-            var model = new Response<IEnumerable<GetMenuMasterServicesVm>>();
-
             var content = JsonConvert.SerializeObject(menuProcess);
 
-            var httpResponse = await _client.PostAsync(BaseUrl + APIEndpoints.MenuProcess, new StringContent(content, Encoding.Default,
-                "application/json"));
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.PostAsync
+                (
+                    BaseUrl + APIEndpoints.MenuProcess, 
+                    new StringContent(content, Encoding.Default,
+                    "application/json")
+                );
 
             var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
 
-
             var options = new JsonSerializerOptions();
-            model = System.Text.Json.JsonSerializer.Deserialize<Response<IEnumerable<GetMenuMasterServicesVm>>>(jsonString, options);
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<Response<IEnumerable<GetMenuMasterServicesVm>>>(jsonString, options);
 
             return model;
         } 
