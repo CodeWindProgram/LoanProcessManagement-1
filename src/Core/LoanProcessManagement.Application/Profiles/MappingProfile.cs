@@ -8,6 +8,7 @@ using LoanProcessManagement.Application.Features.Events.Commands.UpdateEvent;
 using LoanProcessManagement.Application.Features.Events.Queries.GetEventDetail;
 using LoanProcessManagement.Application.Features.Events.Queries.GetEventsExport;
 using LoanProcessManagement.Application.Features.Events.Queries.GetEventsList;
+using LoanProcessManagement.Application.Features.Menu.Query;
 using LoanProcessManagement.Application.Features.Orders.Queries.GetOrdersForMonth;
 using LoanProcessManagement.Domain.CustomModels;
 using LoanProcessManagement.Domain.Entities;
@@ -23,6 +24,13 @@ namespace LoanProcessManagement.Application.Profiles
             CreateMap<Event, EventDetailVm>().ReverseMap();
             CreateMap<Event, CategoryEventDto>().ReverseMap();
             CreateMap<Event, EventExportDto>().ReverseMap();
+            #region Mapping Created for Menu Master Services - Saif Khan - 28/10/2021
+            ///28/10/2021-Mapping Created for Menu Master Services
+            //Commented By Saif Khan
+            ///entity Name = LpmMenuMaster
+            ///Class Name = GetMenuMasterServicesVm
+            CreateMap<LpmMenuMaster, GetMenuMasterServicesVm>().ReverseMap();
+            #endregion
 
             CreateMap<Category, CategoryDto>();
             CreateMap<Category, CategoryListVm>();

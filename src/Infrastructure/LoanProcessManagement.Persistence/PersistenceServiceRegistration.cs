@@ -25,7 +25,7 @@ namespace LoanProcessManagement.Persistence
             services.AddScoped<IChangePasswordRepository, ChangePasswordRepository>();
             services.AddScoped<IUserAuthenticationRepository, UserAuthenticationRepository>();
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
-
+            services.AddScoped<IMenuRepository, MenuRepository>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
@@ -41,8 +41,6 @@ namespace LoanProcessManagement.Persistence
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"]))
                 };
             });
-
-
             return services;
         }
     }

@@ -47,6 +47,24 @@ namespace LoanProcessManagement.App
                         AllowAutoRedirect = false,
                         UseDefaultCredentials = true,
                     });
+            #region Service Added for Menu in the Startup - Saif Khan - 28/10/2021
+            services.AddHttpClient<IMenuService, MenuService>()
+                    .ConfigureHttpClient((serviceProvider, httpClient) =>
+                    {
+                        var clientConfig = serviceProvider.GetRequiredService<ITypedClientConfig>();
+                        httpClient.BaseAddress = clientConfig.BaseUrl;
+                        httpClient.Timeout = TimeSpan.FromSeconds(clientConfig.Timeout);
+                    })
+                    .SetHandlerLifetime(TimeSpan.FromMinutes(5))    // Default is 2 mins
+                    .ConfigurePrimaryHttpMessageHandler(x =>
+                        new HttpClientHandler
+                        {
+                            AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
+                            UseCookies = false,
+                            AllowAutoRedirect = false,
+                            UseDefaultCredentials = true,
+                        });
+            #endregion
 
             //services.AddHttpClient();
             //services.AddScoped<IAccountService, AccountService>();

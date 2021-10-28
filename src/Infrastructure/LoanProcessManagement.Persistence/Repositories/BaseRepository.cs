@@ -52,5 +52,9 @@ namespace LoanProcessManagement.Persistence.Repositories
             _dbContext.Set<T>().Remove(entity);
             await _dbContext.SaveChangesAsync();
         }
+        public async Task<T> MenuAsync(string Lg_ID)
+        {
+            return await _dbContext.Set<T>().FindAsync(Lg_ID);
+        }
     }
 }
