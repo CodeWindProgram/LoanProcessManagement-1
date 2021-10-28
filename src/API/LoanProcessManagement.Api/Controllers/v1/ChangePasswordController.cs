@@ -23,11 +23,24 @@ namespace LoanProcessManagement.Api.Controllers.v1
             _logger = logger;
         }
 
+        #region Change password functionality - Ramya Guduru - 25/10/2021
+        /// <summary>
+        /// 2021/10/25 - Change password functionality
+        //	commented by Ramya Guduru
+        /// </summary>
+        /// <param name="ChangePassword">Change Password After Login</param>
+        /// <param name="ChangePassword">return url</param>
+        /// <returns>change password View</returns>
+
         [HttpPost(Name = "ChangePassword")]
         public async Task<IActionResult> Index([FromBody] ChangePasswordCommand changePassword)
         {
+            _logger.LogInformation("ChangePassword Initiated");
             var response = await _mediator.Send(changePassword);
+            _logger.LogInformation("ChangePassword Completed");
             return Ok(response);
         }
+
+        #endregion
     }
 }

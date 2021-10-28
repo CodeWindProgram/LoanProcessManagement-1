@@ -51,20 +51,62 @@ namespace LoanProcessManagement.App.Controllers
 
             }
             return View();
-        } 
+        }
         #endregion
 
-        [Route("/ChangePasswordUI")]
-        public async Task<IActionResult> ChangePassword()
-        {
-            ChangePasswordDto changePassword = new ChangePasswordDto();
-            changePassword.lg_id = "lg_01";
-            changePassword.OldPassword = "safdsafdsad";
-            changePassword.NewPassword = "gfdgfdg";
+        #region Change password functionality - Ramya Guduru - 25/10/2021
+        /// <summary>
+        /// 2021/10/25 - Change password functionality
+        //	commented by Ramya Guduru
+        /// </summary>
+        /// <param name="ChangePasswordUI">Change Password By Old Password</param>
+        /// <param name="ChangePassword">Update New password with old password</param>
+        /// <returns>change password View</returns>
 
-            var changePasswordResponse = await _accountService.ChangePassword(changePassword);
+        [HttpGet("/ChangePasswordUI")]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+
+        [HttpPost("/ChangePasswordUI")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordCommand changePasswordCommand)
+        {
+
+            var message = "";
+
+            if (ModelState.IsValid)
+            {
+                //ChangePasswordDto changePassword = new ChangePasswordDto();
+                //changePassword.lg_id = "LG_1";
+                //changePassword.OldPassword = changePasswordCommand.OldPassword;
+                //changePassword.NewPassword = changePasswordCommand.NewPassword;
+                //changePassword.ConfirmPassword = changePasswordCommand.ConfirmPassword;
+
+                changePasswordCommand.lg_id = "LG_3";
+                changePasswordCommand.ModifiedBy = "LG_3";
+
+                var changePasswordResponse = await _accountService.ChangePassword(changePasswordCommand);
+
+
+                if (changePasswordResponse.Succeeded)
+                {
+                    message = changePasswordResponse.Message;
+                    ViewBag.Issuccesflag = true;
+                    ViewBag.Message = message;
+                }
+                else
+                {
+                    message = changePasswordResponse.Message;
+                    ViewBag.Issuccesflag = false;
+                    ViewBag.Message = message;
+                }
+            }
 
             return View();
         }
+
+        #endregion
     }
 }

@@ -44,6 +44,8 @@ namespace LoanProcessManagement.Application.Profiles
 
 
             CreateMap<ChangePasswordModel, ChangePasswordDto>().ReverseMap();
+
+
         }
     }
 }

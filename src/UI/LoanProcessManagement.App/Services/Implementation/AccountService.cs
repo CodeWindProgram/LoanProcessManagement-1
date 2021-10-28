@@ -26,7 +26,7 @@ namespace LoanProcessManagement.App.Services.Implementation
             _apiDetails = apiDetails;
         }
 
-        public async Task<Response<ChangePasswordDto>> ChangePassword(ChangePasswordDto changePassword)
+        public async Task<Response<ChangePasswordDto>> ChangePassword(ChangePasswordCommand changePassword)
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
@@ -50,6 +50,7 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             return model;
         }
+
 
         #region This method will call actual api and return response to action method by - Akshay Pawar - 28/10/2021
         /// <summary>
