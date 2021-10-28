@@ -38,48 +38,6 @@ namespace LoanProcessManagement.App
             services.AddSingleton<IAccountService, AccountService>();
             services.AddSingleton<IMenuService, MenuService>();
 
-            #region Unnecessary changes
-            //services.AddHttpClient<IAccountService, AccountService>()
-            //    .ConfigureHttpClient((serviceProvider, httpClient) =>
-            //    {
-            //        var clientConfig = serviceProvider.GetRequiredService<ITypedClientConfig>();
-            //        httpClient.BaseAddress = clientConfig.BaseUrl;
-            //        httpClient.Timeout = TimeSpan.FromSeconds(clientConfig.Timeout);
-            //        //httpClient.DefaultRequestHeaders.Add("User-Agent", "BlahAgent");
-            //        //httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
-            //    })
-            //    .SetHandlerLifetime(TimeSpan.FromMinutes(5))    // Default is 2 mins
-            //    .ConfigurePrimaryHttpMessageHandler(x =>
-            //        new HttpClientHandler
-            //        {
-            //            AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
-            //            UseCookies = false,
-            //            AllowAutoRedirect = false,
-            //            UseDefaultCredentials = true,
-            //        });
-            #region Service Added for Menu in the Startup - Saif Khan - 28/10/2021
-            //services.AddHttpClient<IMenuService, MenuService>()
-            //        .ConfigureHttpClient((serviceProvider, httpClient) =>
-            //        {
-            //            //var clientConfig = serviceProvider.GetRequiredService<ITypedClientConfig>();
-            //            //httpClient.BaseAddress = clientConfig.BaseUrl;
-            //            //httpClient.Timeout = TimeSpan.FromSeconds(clientConfig.Timeout);
-            //        })
-            //        .SetHandlerLifetime(TimeSpan.FromMinutes(5))    // Default is 2 mins
-            //        .ConfigurePrimaryHttpMessageHandler(x =>
-            //            new HttpClientHandler
-            //            {
-            //                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
-            //                UseCookies = false,
-            //                AllowAutoRedirect = false,
-            //                UseDefaultCredentials = true,
-            //            });
-            #endregion
-
-            //services.AddHttpClient();
-            //services.AddScoped<IAccountService, AccountService>(); 
-            #endregion
-
             services.Configure<APIConfiguration>(Configuration.GetSection("APIConfiguration"));
             services.AddSession();
         }
