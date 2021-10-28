@@ -17,40 +17,46 @@ namespace LoanProcessManagement.App.Services.Implementation
     public class AccountService : IAccountService
     {
         private string BaseUrl = "";
-        private HttpClient _client;
+        private IHttpClientFactory clientfact;
         IOptions<APIConfiguration> _apiDetails;
 
-        public AccountService(HttpClient client, IOptions<APIConfiguration> apiDetails)
+        public AccountService(IHttpClientFactory client, IOptions<APIConfiguration> apiDetails)
         {
-            _client = client;
+            clientfact = client;
             _apiDetails = apiDetails;
         }
 
+        #region This method will call actual api and return response for change Password API - Ramya Guduru - 28/10/2021
+        /// <summary>
+        /// 2021/10/28 - Change Password API call
+        //	commented by Ramya Guduru
+        /// </summary>
+        /// <param name="changePassword">Change Password model parameters</param>
+        /// <returns>Response</returns>
         public async Task<Response<ChangePasswordDto>> ChangePassword(ChangePasswordCommand changePassword)
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
-            var model = new Response<ChangePasswordDto>();
-
             var content = JsonConvert.SerializeObject(changePassword);
 
-            var httpResponse = await _client.PostAsync(BaseUrl + APIEndpoints.ChangePassword, new StringContent(content, Encoding.Default,
-                "application/json"));
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.PostAsync
+                (
+                    BaseUrl + APIEndpoints.ChangePassword, 
+                    new StringContent(content, Encoding.Default,
+                    "application/json")
+                );
 
             var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
 
-
             var options = new JsonSerializerOptions();
-            model = System.Text.Json.JsonSerializer.Deserialize<Response<ChangePasswordDto>>(jsonString, options);
 
-            //JavaScriptSerializer js = new JavaScriptSerializer();
-            //getStatusResponseModel = js.Deserialize<EMandateGetStatusResponseModel>(Finalresult);
-            //model = JsonSerializer.Deserialize<ChangePasswordDto>(jsonString);
-            //model = jsonString.DeserializeJsonObject<ChangePasswordDto>();
+            var model = System.Text.Json.JsonSerializer.Deserialize<Response<ChangePasswordDto>>(jsonString, options);
 
             return model;
-        }
-
+        } 
+        #endregion
 
         #region This method will call actual api and return response to action method by - Akshay Pawar - 28/10/2021
         /// <summary>
@@ -62,13 +68,24 @@ namespace LoanProcessManagement.App.Services.Implementation
         public async Task<UserAuthenticationResponse> AuthenticateUser(UserAuthenticationRequestVM user)
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
-            var response = new UserAuthenticationResponse();
+
             var content = JsonConvert.SerializeObject(user);
-            var httpResponse = await _client.PostAsync(BaseUrl + APIEndpoints.AuthenticateUser, new StringContent(content, Encoding.Default,
-               "application/json"));
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.PostAsync
+                (
+                    BaseUrl + APIEndpoints.AuthenticateUser, 
+                    new StringContent(content, Encoding.Default,
+                    "application/json")
+                );
+
             var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
             var options = new JsonSerializerOptions();
-            response = System.Text.Json.JsonSerializer.Deserialize<UserAuthenticationResponse>(jsonString, options);
+
+            var response = System.Text.Json.JsonSerializer.Deserialize<UserAuthenticationResponse>(jsonString, options);
+
             return response;
 
         } 
