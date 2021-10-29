@@ -1,4 +1,5 @@
 using LoanProcessManagement.App.Helper.APIHelper;
+using LoanProcessManagement.App.Middleware;
 using LoanProcessManagement.App.Services.Implementation;
 using LoanProcessManagement.App.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -61,7 +62,8 @@ namespace LoanProcessManagement.App
             app.UseAuthentication();
             app.UseAuthorization();
 
-
+            app.UseStatusCodePagesWithRedirects("/Error?statuscode=404");
+            app.UseCustomExceptionHandler();
 
             //app.UseMvc();
             app.UseEndpoints(endpoints =>
