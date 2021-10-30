@@ -4,6 +4,7 @@ using LoanProcessManagement.App.Services.Implementation;
 using LoanProcessManagement.App.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -58,6 +59,22 @@ namespace LoanProcessManagement.App
 
             app.UseStaticFiles();
             app.UseSession();
+
+            //app.Use(async (context, next) =>
+            //{
+            //    string CurrentUserIDSession = context.Session.GetString("user");
+            //    if (!context.Request.Path.Value.Contains("/Account/Login"))
+            //    {
+            //        if (string.IsNullOrEmpty(CurrentUserIDSession))
+            //        {
+            //            var path = $"/Account/Login?ReturnUrl={context.Request.Path}";
+            //            context.Response.Redirect(path);
+            //            return;
+            //        }
+
+            //    }
+            //    await next();
+            //});
 
             app.UseRouting();
             app.UseAuthentication();

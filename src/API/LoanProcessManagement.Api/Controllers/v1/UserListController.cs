@@ -23,7 +23,7 @@ namespace LoanProcessManagement.Api.Controllers.v1
 
         #region Get All User List - Saif Khan - 30/10/2021
         /// <summary>
-        /// 2021/10/30 -  Get All User List API Call
+        /// 2021/10/30 -  Get All User List API Call OK  
         /// Commented By Saif Khan
         /// </summary>
         /// <returns>UserListResponse</returns>
@@ -35,6 +35,8 @@ namespace LoanProcessManagement.Api.Controllers.v1
             return Ok(res);
         } 
         #endregion
+
+
 
     }
 }
