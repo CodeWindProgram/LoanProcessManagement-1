@@ -19,5 +19,6 @@ namespace LoanProcessManagement.Domain.Entities
         public int? Position { get; set; }
         public bool IsActive { get; set; }
         public ICollection<LpmUserRoleMenuMap> LpmUserRoleMenuMaps { get; set; }
+        public string LgId { get; set; }
     }
 }

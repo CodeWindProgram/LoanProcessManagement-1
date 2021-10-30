@@ -26,6 +26,9 @@ namespace LoanProcessManagement.Persistence
             services.AddScoped<IUserAuthenticationRepository, UserAuthenticationRepository>();
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
             services.AddScoped<IMenuRepository, MenuRepository>();
+            services.AddScoped<IUserListRepository, UserListRepository>();
+
+
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>

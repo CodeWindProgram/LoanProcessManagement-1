@@ -10,6 +10,7 @@ using LoanProcessManagement.Application.Features.Events.Queries.GetEventsExport;
 using LoanProcessManagement.Application.Features.Events.Queries.GetEventsList;
 using LoanProcessManagement.Application.Features.Menu.Query;
 using LoanProcessManagement.Application.Features.Orders.Queries.GetOrdersForMonth;
+using LoanProcessManagement.Application.Features.UserList.Query;
 using LoanProcessManagement.Domain.CustomModels;
 using LoanProcessManagement.Domain.Entities;
 
@@ -31,6 +32,7 @@ namespace LoanProcessManagement.Application.Profiles
             ///Class Name = GetMenuMasterServicesVm
             CreateMap<LpmMenuMaster, GetMenuMasterServicesVm>().ReverseMap();
             #endregion
+            CreateMap<LpmUserMaster, GetUserListQueryVm>().ReverseMap();
 
             CreateMap<Category, CategoryDto>();
             CreateMap<Category, CategoryListVm>();
