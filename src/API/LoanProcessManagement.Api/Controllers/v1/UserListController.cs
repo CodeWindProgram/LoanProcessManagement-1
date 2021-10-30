@@ -21,15 +21,15 @@ namespace LoanProcessManagement.Api.Controllers.v1
             _mediator = mediator;
         }
 
-        [HttpGet("all", Name = "GetAllUsers")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> GetAllUsers()
-        {
-            _logger.LogInformation("GetAllUsers Initiated");
-            var dtos = await _mediator.Send(new GetUserListQuery());
-            _logger.LogInformation("GetAllUsers Completed");
-            return Ok(dtos);
-        }
+        //[HttpGet("all", Name = "GetAllUsers")]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //public async Task<ActionResult> GetAllUsers()
+        //{
+        //    _logger.LogInformation("GetAllUsers Initiated");
+        //    var dtos = await _mediator.Send(new GetUserListQuery());
+        //    _logger.LogInformation("GetAllUsers Completed");
+        //    return Ok(dtos);
+        //}
 
         //[HttpPost(Name = "UserList")]
         //public async Task<IActionResult> Index([FromBody] GetUserListQuery getUserListQuery)

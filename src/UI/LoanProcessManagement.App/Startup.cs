@@ -38,6 +38,7 @@ namespace LoanProcessManagement.App
             });
             services.AddSingleton<IAccountService, AccountService>();
             services.AddSingleton<IMenuService, MenuService>();
+            services.AddSingleton<IUserListService, UserListService>();
 
             services.Configure<APIConfiguration>(Configuration.GetSection("APIConfiguration"));
             services.AddSession();
