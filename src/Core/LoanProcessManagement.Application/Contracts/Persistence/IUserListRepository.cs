@@ -1,11 +1,12 @@
 ﻿using LoanProcessManagement.Domain.CustomModels;
 using LoanProcessManagement.Domain.Entities;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LoanProcessManagement.Application.Contracts.Persistence
 {
-    public interface IUserListRepository : IAsyncRepository<LpmUserMaster>
+    public interface IUserListRepository : IAsyncRepository<IEnumerable<UserMasterListModel>>
     {
-        //Task<LpmUserMaster> GetUserList(string LgId);
+        Task<IEnumerable<UserMasterListModel>> GetUserList();
     }
 }

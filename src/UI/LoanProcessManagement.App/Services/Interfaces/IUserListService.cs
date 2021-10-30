@@ -10,7 +10,7 @@ namespace LoanProcessManagement.App.Services.Interfaces
     #region Created the Interface for the User List Service - Saif Khan -29/10/2021
     public interface IUserListService
     {
-       Task<IEnumerable<GetUserListQueryVm>> UserListProcess(GetUserListQuery userListProcess);
+       Task<Response<IEnumerable<GetUserListQueryVm>>> UserListProcess(GetUserListQuery userListProcess);
 
     }
     #endregion

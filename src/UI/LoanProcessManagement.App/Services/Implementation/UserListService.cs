@@ -34,7 +34,7 @@ namespace LoanProcessManagement.App.Services.Implementation
         /// <EndPoints>BaseUrl + APIEndPoints</EndPoints>
         /// <param name="userListProcess"></param>
         /// <returns>Model</returns>
-        public async Task<IEnumerable<GetUserListQueryVm>> UserListProcess(GetUserListQuery userListProcess)
+        public async Task<Response<IEnumerable<GetUserListQueryVm>>> UserListProcess(GetUserListQuery userListProcess)
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
@@ -51,7 +51,7 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             var options = new JsonSerializerOptions();
 
-            var model = System.Text.Json.JsonSerializer.Deserialize<IEnumerable<GetUserListQueryVm>>(jsonString, options);
+            var model = System.Text.Json.JsonSerializer.Deserialize<Response<IEnumerable<GetUserListQueryVm>>>(jsonString, options);
 
             return model;
         } 

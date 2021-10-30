@@ -28,12 +28,12 @@ namespace LoanProcessManagement.App.Controllers
         {
             GetUserListQuery UserList = new GetUserListQuery();
             var UserListServiceResponse = await _userListService.UserListProcess(UserList);
-            if (UserListServiceResponse != null)
+            if (UserListServiceResponse != null && UserListServiceResponse.Data != null)
             {
                 //var users = _mapper.Map<UserMasterListModel>(UserListServiceResponse);
-                return View(UserListServiceResponse);
+                return View(UserListServiceResponse.Data);
             }
-            return View();
+            return View("Error");
         } 
         #endregion
     }

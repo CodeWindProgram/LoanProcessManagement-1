@@ -21,27 +21,20 @@ namespace LoanProcessManagement.Api.Controllers.v1
             _mediator = mediator;
         }
 
-        [HttpGet("all", Name = "GetAllUsers")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> GetAllUsers()
-        {
-            _logger.LogInformation("GetAllUsers Initiated");
-            var dtos = await _mediator.Send(new GetUserListQuery());
-            _logger.LogInformation("GetAllUsers Completed");
-            return Ok(dtos);
-        }
-
-        //[HttpPost(Name = "UserList")]
-        //public async Task<IActionResult> Index([FromBody] GetUserListQuery getUserListQuery)
-        //{
-        //    return Ok(await _mediator.Send(getUserListQuery));
-        //}
+        #region Get All User List - Saif Khan - 30/10/2021
+        /// <summary>
+        /// 2021/10/30 -  Get All User List API Call
+        /// Commented By Saif Khan
+        /// </summary>
+        /// <returns>UserListResponse</returns>
         [HttpGet(Name = "GetUserList")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> GetAllUserList()
         {
             var res = await _mediator.Send(new GetUserListQuery());
             return Ok(res);
-        }
+        } 
+        #endregion
 
     }
 }
