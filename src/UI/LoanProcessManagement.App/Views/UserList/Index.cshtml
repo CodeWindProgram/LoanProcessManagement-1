@@ -1,0 +1,100 @@
+﻿@model IEnumerable<LoanProcessManagement.Application.Features.UserList.Query.GetUserListQueryVm>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Index";
+}
+<div class="container app">
+    <div class="col-sm-12">
+        <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
+            <div class="panel-heading">User List</div>
+            <div class="panel-body">
+            </div>
+            <div id="alertMsg" visible="false" runat="server">
+                <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
+                <div style="margin-bottom: 10px"></div>
+            </div>
+            <div class=" card">
+                <div class="card">
+                    <table id="tblUserList" class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.LgId)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.EmployeeId)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.BranchName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.StaffType)
+                                </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LgId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EmployeeId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.BranchName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.StaffType)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Modify", "Modify", new { /* id=item.PrimaryKey */ })
+                                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                                    </td>
+                                </tr>
+                             }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+        $(document).ready(function () {
+            var usrTable = $('#tblUserList').dataTable({
+                "oLanguage": {
+                    "sZeroRecords": "No records to display",
+                    "sSearch": "Search "
+                },
+                "iDisplayLength": 15,
+                "aLengthMenu": [[25, 50, 100, 200, 500], [25, 50, 100, 200, 500]],
+                "bSortClasses": false,
+                "bPaginate": true,
+                "bAutoWidth": false,
+                "bProcessing": true,
+                "bDestroy": true
+		    });
+        });
+</script>
