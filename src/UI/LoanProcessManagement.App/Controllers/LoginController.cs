@@ -108,5 +108,21 @@ namespace LoanProcessManagement.App.Controllers
         }
 
         #endregion
+
+        #region This action method will internally call remove user api by - Akshay Pawar 31/10/2021
+        /// <summary>
+        /// 31/10/2021 - This action method will internally call remove user api by
+        //	commented by Akshay
+        /// </summary>
+        /// <param name="user">User object </param>
+        /// <returns>Add user view</returns>
+        [Route("{lgid}")]
+        public async Task<IActionResult> RemoveUser([FromRoute] string lgid)
+        {
+            var response = await _accountService.RemoveUser(lgid);
+            return RedirectToAction("Index", "UserList");
+
+        } 
+        #endregion
     }
 }

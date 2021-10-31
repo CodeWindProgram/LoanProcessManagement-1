@@ -1,4 +1,7 @@
-﻿using LoanProcessManagement.Application.Models.Authentication;
+﻿using LoanProcessManagement.Application.Features.User.Commands.CreateUser;
+using LoanProcessManagement.Application.Features.User.Commands.RemoveUser;
+using LoanProcessManagement.Application.Models.Authentication;
+using LoanProcessManagement.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +12,9 @@ namespace LoanProcessManagement.Application.Contracts.Persistence
     public interface IUserAuthenticationRepository
     {
         Task<UserAuthenticationResponse> AuthenticateUserAsync(UserAuthenticationRequest request);
-        //Task<UserRegistrationResponse> RegisterUserAsync(UserRegistrationRequest request);
+        Task<CreateUserDto> RegisterUserAsync(LpmUserMaster request);
+        Task<RemoveUserDto> RemoveUserAsync(string lgid);
+
 
     }
 }

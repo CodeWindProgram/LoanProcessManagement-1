@@ -1,4 +1,5 @@
 using AutoMapper;
+using LoanProcessManagement.Application.Features.Branch.Queries;
 using LoanProcessManagement.Application.Features.Categories.Commands.CreateCateogry;
 using LoanProcessManagement.Application.Features.Categories.Queries.GetCategoriesList;
 using LoanProcessManagement.Application.Features.Categories.Queries.GetCategoriesListWithEvents;
@@ -10,9 +11,13 @@ using LoanProcessManagement.Application.Features.Events.Queries.GetEventsExport;
 using LoanProcessManagement.Application.Features.Events.Queries.GetEventsList;
 using LoanProcessManagement.Application.Features.Menu.Query;
 using LoanProcessManagement.Application.Features.Orders.Queries.GetOrdersForMonth;
+using LoanProcessManagement.Application.Features.Roles.Queries;
+using LoanProcessManagement.Application.Features.User.Commands.CreateUser;
+using LoanProcessManagement.Application.Models.Authentication;
 using LoanProcessManagement.Application.Features.UserList.Query;
 using LoanProcessManagement.Domain.CustomModels;
 using LoanProcessManagement.Domain.Entities;
+using System.Collections.Generic;
 
 namespace LoanProcessManagement.Application.Profiles
 {
@@ -46,6 +51,12 @@ namespace LoanProcessManagement.Application.Profiles
 
 
             CreateMap<ChangePasswordModel, ChangePasswordDto>().ReverseMap();
+            CreateMap<CreateUserCommand, LpmUserMaster>().ReverseMap();
+            CreateMap<LpmUserRoleMaster, GetAllRolesDto>().ReverseMap();
+            CreateMap<LpmBranchMaster, GetAllBranchesDto>().ReverseMap();
+
+
+
 
             CreateMap<UserMasterListModel, GetUserListQueryVm>().ReverseMap();
 

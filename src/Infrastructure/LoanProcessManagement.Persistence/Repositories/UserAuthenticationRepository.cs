@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
 using LoanProcessManagement.Application.Contracts.Persistence;
+using LoanProcessManagement.Application.Features.User.Commands.CreateUser;
+using LoanProcessManagement.Application.Features.User.Commands.RemoveUser;
 using LoanProcessManagement.Application.Models.Authentication;
+using LoanProcessManagement.Domain.Entities;
 using LoanProcessManagement.Infrastructure.EncryptDecrypt;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -122,6 +125,94 @@ namespace LoanProcessManagement.Persistence.Repositories
                signingCredentials: credentials);
 
             return jwtSecurityToken;
+        }
+        #endregion
+
+        #region This method will add user in db by - Akshay Pawar 31/10/2021
+        /// <summary>
+        /// 31/10/2021 - This method will add user in db
+        //	commented by Akshay
+        /// </summary>
+        /// <param name="request">User object</param>
+        /// <returns>Response</returns>
+        public async Task<CreateUserDto> RegisterUserAsync(LpmUserMaster request)
+        {
+            var user = await _dbContext.LpmUserMasters.Include(x => x.Branch).Include(x => x.UserRole)
+                        .Where(x => x.EmployeeId == request.EmployeeId).FirstOrDefaultAsync();
+            CreateUserDto response = new CreateUserDto();
+
+            if (user != null)
+            {
+                response.Message = "Employee id already exists .";
+                response.Succeeded = false;
+                return response;
+            }
+
+            user = await _dbContext.LpmUserMasters.Include(x => x.Branch).Include(x => x.UserRole)
+                        .Where(x => x.Email == request.Email).FirstOrDefaultAsync();
+            if (user != null)
+            {
+                response.Message = "Email Already exists .";
+                response.Succeeded = false;
+                return response;
+            }
+
+            user = await _dbContext.LpmUserMasters.Include(x => x.Branch).Include(x => x.UserRole)
+            .Where(x => x.PhoneNumber == request.PhoneNumber).FirstOrDefaultAsync();
+            if (user != null)
+            {
+                response.Message = "Phone number already exists .";
+                response.Succeeded = false;
+                return response;
+            }
+            var pwd = "welcome2gichf";
+            var encryptedPwd = EncryptionDecryption.EncryptString(pwd);
+            request.Password = encryptedPwd;
+            request.SaltKey = "key";
+            request.WrongLoginAttempt = 0;
+            request.IsLocked = false;
+            request.IsActive = true;
+            request.LgId = "LG_";
+            await _dbContext.LpmUserMasters.AddAsync(request);
+            await _dbContext.SaveChangesAsync();
+            request.LgId = request.LgId + request.Id;
+            _dbContext.SaveChanges();
+            response.EmpId = request.EmployeeId;
+            response.Message = "User registered successfully .";
+            response.Succeeded = true;
+            return response;
+        }
+        #endregion
+
+        #region This method will remove user from db by - Akshay Pawar 31/10/2021
+        /// <summary>
+        /// 31/10/2021 - This method will remove user from db
+        //	commented by Akshay
+        /// </summary>
+        /// <param name="lgid">lgid</param>
+        /// <returns>Response</returns>
+        public async Task<RemoveUserDto> RemoveUserAsync(string lgid)
+        {
+            var user = await _dbContext.LpmUserMasters.Include(x => x.Branch).Include(x => x.UserRole)
+            .Where(x => x.LgId == lgid).FirstOrDefaultAsync();
+            RemoveUserDto response = new RemoveUserDto();
+
+            if (user != null)
+            {
+                user.IsActive = false;
+                await _dbContext.SaveChangesAsync();
+                response.LgId = lgid;
+                response.Message = $"User of id:{lgid} has been removed successfully .";
+                response.Succeeded = true;
+                return response;
+            }
+            else
+            {
+                response.LgId = lgid;
+                response.Message = $"User of id:{lgid} does not exists .";
+                response.Succeeded = false;
+                return response;
+            }
         } 
         #endregion
     }
