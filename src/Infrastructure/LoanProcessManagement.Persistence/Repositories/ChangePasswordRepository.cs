@@ -1,4 +1,5 @@
-﻿using LoanProcessManagement.Application.Contracts.Persistence;
+﻿using LoanProcessManagement.Application.Contracts.Infrastructure;
+using LoanProcessManagement.Application.Contracts.Persistence;
 using LoanProcessManagement.Domain.CustomModels;
 using LoanProcessManagement.Domain.Entities;
 using LoanProcessManagement.Infrastructure.EncryptDecrypt;
@@ -15,10 +16,12 @@ namespace LoanProcessManagement.Persistence.Repositories
     public class ChangePasswordRepository : BaseRepository<ChangePasswordModel>, IChangePasswordRepository
     {
         private readonly ILogger _logger;
+        private readonly IEmailService _emailService;
 
-        public ChangePasswordRepository(ApplicationDbContext dbContext, ILogger<ChangePasswordModel> logger) : base(dbContext, logger)
+        public ChangePasswordRepository(ApplicationDbContext dbContext, ILogger<ChangePasswordModel> logger,IEmailService emailService) : base(dbContext, logger,emailService)
         {
             _logger = logger;
+            _emailService = emailService;
         }
 
         public async Task<ChangePasswordModel> ChangePasswordWithEvents(ChangePasswordModel changePassword)

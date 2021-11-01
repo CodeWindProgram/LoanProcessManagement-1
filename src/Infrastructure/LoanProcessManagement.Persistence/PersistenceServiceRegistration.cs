@@ -23,7 +23,9 @@ namespace LoanProcessManagement.Persistence
             services.AddScoped<IEventRepository, EventRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IChangePasswordRepository, ChangePasswordRepository>();
+            services.AddScoped<IForgotPasswordRepository, ForgotPasswordRepository>();
             services.AddScoped<IUserAuthenticationRepository, UserAuthenticationRepository>();
+            services.AddScoped<IUnlockUserAccountRepository,UnlockUserAccountRepository>();
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
             services.AddScoped<IMenuRepository, MenuRepository>();
             services.AddScoped<IUserListRepository, UserListRepository>();

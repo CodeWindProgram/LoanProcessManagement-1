@@ -1,3 +1,4 @@
+using LoanProcessManagement.Application.Contracts.Infrastructure;
 using LoanProcessManagement.Application.Contracts.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -12,9 +13,12 @@ namespace LoanProcessManagement.Persistence.Repositories
     {
         protected readonly ApplicationDbContext _dbContext;
         private readonly ILogger _logger;
-        public BaseRepository(ApplicationDbContext dbContext, ILogger<T> logger)
+        private readonly IEmailService _emailService;
+
+        public BaseRepository(ApplicationDbContext dbContext, ILogger<T> logger,IEmailService emailService)
         {
             _dbContext = dbContext; _logger = logger;
+            _emailService = emailService;
         }
 
         public virtual async Task<T> GetByIdAsync(Guid id)

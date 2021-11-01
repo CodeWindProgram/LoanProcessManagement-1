@@ -2,6 +2,10 @@
 using LoanProcessManagement.App.Models;
 using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.ChangePassword.Commands.ChangePassword;
+using LoanProcessManagement.Application.Features.ForgotPassword.Commands.ForgotPassword;
+using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.ActivateUserAccount;
+using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockAndResetPassword;
+using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockUserAccount;
 using LoanProcessManagement.Application.Features.User.Commands.CreateUser;
 using LoanProcessManagement.Application.Features.User.Commands.RemoveUser;
 using LoanProcessManagement.Application.Models.Authentication;
@@ -136,6 +140,137 @@ namespace LoanProcessManagement.App.Services.Implementation
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
+        }
+        #endregion
+
+        #region This method will call actual api and return response for Unlock user account API - Ramya Guduru - 29/10/2021
+        /// <summary>
+        /// 2021/10/29 - Unlock user account API call
+        //	commented by Ramya Guduru
+        /// </summary>
+        /// <param name="UnlockUserAccount">unlock user account model parameters</param>
+        /// <returns>Response</returns>
+        public async Task<Response<UnlockUserAccountDto>> UnlockUserAccount(UnlockUserAccountCommand unlockUserAccount)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var content = JsonConvert.SerializeObject(unlockUserAccount);
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.PostAsync
+                (
+                    BaseUrl + APIEndpoints.UnlockUserAccount,
+                    new StringContent(content, Encoding.Default,
+                    "application/json")
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<Response<UnlockUserAccountDto>>(jsonString, options);
+
+            return model;
+
+        }
+        #endregion
+
+        #region This method will call actual api and return response for UnlockAndResetPassword account API - Ramya Guduru - 29/10/2021
+        /// <summary>
+        /// 2021/10/29 - UnlockAndResetPassword API call
+        //	commented by Ramya Guduru
+        /// </summary>
+        /// <param name="UnlockAndResetPassword">UnlockAndResetPassword  model parameters</param>
+        /// <returns>Response</returns>
+        public async Task<Response<UnlockAndResetPasswordDto>> UnlockAndResetPassword(UnlockAndResetPasswordCommand unlockAndReset)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var content = JsonConvert.SerializeObject(unlockAndReset);
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.PostAsync
+                (
+                    BaseUrl + APIEndpoints.UnlockAndResetPassword,
+                    new StringContent(content, Encoding.Default,
+                    "application/json")
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<Response<UnlockAndResetPasswordDto>>(jsonString, options);
+
+            return model;
+
+        }
+        #endregion
+
+        #region This method will call actual api and return response for ActivateUserAccount account API - Ramya Guduru - 29/10/2021
+        /// <summary>
+        /// 2021/10/29 - ActivateUserAccountCommand API call
+        //	commented by Ramya Guduru
+        /// </summary>
+        /// <param name="ActivateUserAccountCommand">ActivateUserAccountCommand  model parameters</param>
+        /// <returns>Response</returns>
+        public async Task<Response<ActivateUserAccountDto>> ActivateUserAccount(ActivateUserAccountCommand activateUserAccount)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var content = JsonConvert.SerializeObject(activateUserAccount);
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.PostAsync
+                (
+                    BaseUrl + APIEndpoints.ActivateUserAccount,
+                    new StringContent(content, Encoding.Default,
+                    "application/json")
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<Response<ActivateUserAccountDto>>(jsonString, options);
+
+            return model;
+        }
+        #endregion
+
+        #region This method will call actual api and return response for ForgotPassword  API - Ramya Guduru - 01/11/2021
+        /// <summary>
+        /// 2021/11/01 - ForgotPassword API call
+        //	commented by Ramya Guduru
+        /// </summary>
+        /// <param name="ForgotPassword">ForgotPassword  model </param>
+        /// <returns>Response</returns>
+        public async Task<Response<ForgotPasswordDto>> ForgotPassword(ForgotPasswordCommand forgotPassword)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var content = JsonConvert.SerializeObject(forgotPassword);
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.PostAsync
+                (
+                    BaseUrl + APIEndpoints.ForgotPassword,
+                    new StringContent(content, Encoding.Default,
+                    "application/json")
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<Response<ForgotPasswordDto>>(jsonString, options);
+
+            return model;
+        }
             var _client = clientfact.CreateClient("LoanService");
 
             var httpResponse = await _client.PostAsync

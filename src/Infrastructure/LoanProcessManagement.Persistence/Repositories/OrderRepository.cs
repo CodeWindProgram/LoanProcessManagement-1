@@ -1,3 +1,4 @@
+using LoanProcessManagement.Application.Contracts.Infrastructure;
 using LoanProcessManagement.Application.Contracts.Persistence;
 using LoanProcessManagement.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -12,9 +13,11 @@ namespace LoanProcessManagement.Persistence.Repositories
     public class OrderRepository : BaseRepository<Order>, IOrderRepository
     {
         private readonly ILogger _logger;
-        public OrderRepository(ApplicationDbContext dbContext, ILogger<Order> logger) : base(dbContext, logger)
+        private readonly IEmailService _emailService;
+        public OrderRepository(ApplicationDbContext dbContext, ILogger<Order> logger,IEmailService emailService) : base(dbContext, logger,emailService)
         {
             _logger = logger;
+            _emailService = emailService;
         }
 
         public async Task<List<Order>> GetPagedOrdersForMonth(DateTime date, int page, int size)

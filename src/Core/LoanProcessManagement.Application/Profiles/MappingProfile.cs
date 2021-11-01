@@ -9,11 +9,15 @@ using LoanProcessManagement.Application.Features.Events.Commands.UpdateEvent;
 using LoanProcessManagement.Application.Features.Events.Queries.GetEventDetail;
 using LoanProcessManagement.Application.Features.Events.Queries.GetEventsExport;
 using LoanProcessManagement.Application.Features.Events.Queries.GetEventsList;
+using LoanProcessManagement.Application.Features.ForgotPassword.Commands.ForgotPassword;
 using LoanProcessManagement.Application.Features.Menu.Query;
 using LoanProcessManagement.Application.Features.Orders.Queries.GetOrdersForMonth;
 using LoanProcessManagement.Application.Features.Roles.Queries;
 using LoanProcessManagement.Application.Features.User.Commands.CreateUser;
 using LoanProcessManagement.Application.Models.Authentication;
+using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.ActivateUserAccount;
+using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockAndResetPassword;
+using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockUserAccount;
 using LoanProcessManagement.Application.Features.UserList.Query;
 using LoanProcessManagement.Domain.CustomModels;
 using LoanProcessManagement.Domain.Entities;
@@ -49,6 +53,9 @@ namespace LoanProcessManagement.Application.Profiles
 
             CreateMap<Event, EventListVm>().ConvertUsing<EventVmCustomMapper>();
 
+            #region Changepassword mapping has created by-Ramya Guduru-28-10-2021
+            CreateMap<ChangePasswordModel, ChangePasswordDto>().ReverseMap();
+            #endregion
 
             CreateMap<ChangePasswordModel, ChangePasswordDto>().ReverseMap();
             CreateMap<CreateUserCommand, LpmUserMaster>().ReverseMap();
@@ -57,10 +64,22 @@ namespace LoanProcessManagement.Application.Profiles
 
 
 
+            #region forgotpassword mapping has created by - Ramya Guduru -01/11/2021
+            CreateMap<ForgotPasswordModel, ForgotPasswordDto>().ReverseMap();
+            #endregion
 
             CreateMap<UserMasterListModel, GetUserListQueryVm>().ReverseMap();
 
 
+            #region UnlockUserAccount mapping has created by-Ramya Guduru-29-10-2021
+            CreateMap<UnlockUserAccountModel, UnlockUserAccountDto>().ReverseMap();
+            #endregion
+            #region ActivateUserAccount mapping has created by-Ramya Guduru-29-10-2021
+            CreateMap<UnlockUserAccountModel, ActivateUserAccountDto>().ReverseMap();
+            #endregion
+            #region UnlockUserAccountAndResetPassword mapping has created by-Ramya Guduru-29-10-2021
+            CreateMap<UnlockUserAccountModel, UnlockAndResetPasswordDto>().ReverseMap();
+            #endregion
         }
     }
 }

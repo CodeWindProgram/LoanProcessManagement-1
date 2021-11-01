@@ -1,7 +1,12 @@
 ﻿using LoanProcessManagement.App.Models;
 using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.ChangePassword.Commands.ChangePassword;
+using LoanProcessManagement.Application.Features.ForgotPassword.Commands.ForgotPassword;
+using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.ActivateUserAccount;
+using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockAndResetPassword;
+using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockUserAccount;
 using LoanProcessManagement.Application.Models.Authentication;
+using LoanProcessManagement.Domain.CustomModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -105,6 +110,147 @@ namespace LoanProcessManagement.App.Controllers
             }
 
             return View();
+        }
+
+        #endregion
+
+
+
+        #region Forgot password functionality - Ramya Guduru - 27/10/2021
+        /// <summary>
+        /// 2021/10/27 - Forgot password functionality
+        //	commented by Ramya Guduru
+        /// </summary>
+        /// <param name="ForgotPassword">Forgot Password</param>
+        /// <param name="ForgotPassword">return Secret code to registered Email</param>
+        /// <returns>Forgot password View</returns>
+
+        [HttpGet("/ForgotPasswordUI")]
+        public IActionResult ForgotPassword()
+        {
+            // ViewData["isUpdated"] = false;
+            return View();
+        }
+
+        [HttpPost("/ForgotPasswordUI")]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordCommand forgotPasswordCommand)
+        {
+            var message = "";
+
+            if (ModelState.IsValid)
+            {
+                var forgotPasswordResponse = await _accountService.ForgotPassword(forgotPasswordCommand);
+
+
+                if (forgotPasswordResponse.Succeeded)
+                {
+                    message = forgotPasswordResponse.Message;
+                    ViewBag.Issuccesflag = true;
+                    ViewBag.Message = message;
+                }
+                else
+                {
+                    message = forgotPasswordResponse.Message;
+                    ViewBag.Issuccesflag = false;
+                    ViewBag.Message = message;
+                }
+            }
+
+            return View();
+        }
+        #endregion
+
+
+        #region UnlockUserAccount functionality - Ramya Guduru - 29/10/2021
+        /// <summary>
+        /// 2021/10/27 -  UnlockUserAccount functionality
+        //	commented by Ramya Guduru
+        /// </summary>
+        /// <param name=" UnlockUserAccount">Forgot Password</param>
+        /// <param name=" UnlockUserAccount">Unlock account, reset and unlock account and activate account</param>
+        /// <returns> UnlockUserAccount View</returns>
+
+        [HttpGet("/UnlockUserAccount")]
+        public IActionResult UnlockUserAccount()
+        {
+            return View();
+        }
+
+        [HttpPost("/UnlockUserAccount")]
+        public async Task<IActionResult> UnlockUserAccount(UnlockUserAccountCommand unlockUserAccountCommand)
+        {
+            var message = "";
+
+            if (ModelState.IsValid)
+            {
+                var UnlockUserAccountResponse = await _accountService.UnlockUserAccount(unlockUserAccountCommand);
+
+
+                if (UnlockUserAccountResponse.Succeeded)
+                {
+                    message = UnlockUserAccountResponse.Message;
+                    ViewBag.Issuccesflag = true;
+                    ViewBag.Message = message;
+                }
+                else
+                {
+                    message = UnlockUserAccountResponse.Message;
+                    ViewBag.Issuccesflag = false;
+                    ViewBag.Message = message;
+                }
+            }
+            return View("UnlockUserAccount");
+        }
+        [HttpPost("/UnlockAndResetPassword")]
+        public async Task<IActionResult> UnlockAndResetPassword(UnlockAndResetPasswordCommand unlockUserAccountCommand)
+        {
+            var message = "";
+
+            if (ModelState.IsValid)
+            {
+                var UnlockUserAccountResponse = await _accountService.UnlockAndResetPassword(unlockUserAccountCommand);
+
+
+                if (UnlockUserAccountResponse.Succeeded)
+                {
+                    message = UnlockUserAccountResponse.Message;
+                    ViewBag.Issuccesflag = true;
+                    ViewBag.Message = message;
+                }
+                else
+                {
+                    message = UnlockUserAccountResponse.Message;
+                    ViewBag.Issuccesflag = false;
+                    ViewBag.Message = message;
+                }
+            }
+            return View("UnlockUserAccount");
+        }
+
+        [HttpPost("/ActivateUserAccount")]
+        public async Task<IActionResult> ActivateUserAccount(ActivateUserAccountCommand unlockUserAccountCommand)
+        {
+            var message = "";
+
+            if (ModelState.IsValid)
+            {
+                var UnlockUserAccountResponse = await _accountService.ActivateUserAccount(unlockUserAccountCommand);
+
+
+                if (UnlockUserAccountResponse.Succeeded)
+                {
+                    message = UnlockUserAccountResponse.Message;
+                    ViewBag.Issuccesflag = true;
+                    ViewBag.Message = message;
+                }
+                else
+                {
+                    message = UnlockUserAccountResponse.Message;
+                    ViewBag.Issuccesflag = false;
+                    ViewBag.Message = message;
+                }
+            }
+            return View("UnlockUserAccount");
         }
 
         #endregion

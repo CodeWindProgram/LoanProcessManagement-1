@@ -1,4 +1,5 @@
-﻿using LoanProcessManagement.Application.Contracts.Persistence;
+﻿using LoanProcessManagement.Application.Contracts.Infrastructure;
+using LoanProcessManagement.Application.Contracts.Persistence;
 using LoanProcessManagement.Domain.CustomModels;
 using LoanProcessManagement.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -14,9 +15,11 @@ namespace LoanProcessManagement.Persistence.Repositories
     public class UserListRepository : BaseRepository<IEnumerable<UserMasterListModel>>, IUserListRepository
     {
         private readonly ILogger _logger;
-        public UserListRepository(ApplicationDbContext dbContext, ILogger<IEnumerable<UserMasterListModel>> logger) : base(dbContext, logger)
+        private readonly IEmailService _emailService;
+        public UserListRepository(ApplicationDbContext dbContext, ILogger<IEnumerable<UserMasterListModel>> logger, IEmailService emailService) : base(dbContext, logger, emailService)
         {
             _logger = logger;
+            _emailService = emailService;
         }
 
         #region Get All User List - Saif Khan - 30/10/2021

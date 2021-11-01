@@ -1,3 +1,4 @@
+using LoanProcessManagement.Application.Contracts.Infrastructure;
 using LoanProcessManagement.Application.Contracts.Persistence;
 using LoanProcessManagement.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -13,9 +14,12 @@ namespace LoanProcessManagement.Persistence.Repositories
     {
 
         private readonly ILogger _logger;
-        public CategoryRepository(ApplicationDbContext dbContext, ILogger<Category> logger) : base(dbContext, logger)
+        private readonly IEmailService _emailService;
+
+        public CategoryRepository(ApplicationDbContext dbContext, ILogger<Category> logger,IEmailService emailService) : base(dbContext, logger,emailService)
         {
             _logger = logger;
+            _emailService = emailService;
         }
 
         public async Task<List<Category>> GetCategoriesWithEvents(bool includePassedEvents)

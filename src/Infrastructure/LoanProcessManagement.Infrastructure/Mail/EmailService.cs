@@ -32,6 +32,7 @@ namespace LoanProcessManagement.Infrastructure.Mail
         /// <param name="email">email of type Email</param>
         public async Task<bool> SendEmail(Email email)
         {
+
             var emailmsg = new MimeMessage();
             emailmsg.Sender = MailboxAddress.Parse(_emailSettings.Mail);
             emailmsg.To.Add(MailboxAddress.Parse(email.To));
@@ -50,7 +51,8 @@ namespace LoanProcessManagement.Infrastructure.Mail
 
             _logger.LogInformation("Email sent");
             return true;
-        } 
-        #endregion
+           
+            #endregion
+        }
     }
 }

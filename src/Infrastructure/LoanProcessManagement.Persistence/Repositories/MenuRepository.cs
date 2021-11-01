@@ -1,4 +1,5 @@
-﻿using LoanProcessManagement.Application.Contracts.Persistence;
+﻿using LoanProcessManagement.Application.Contracts.Infrastructure;
+using LoanProcessManagement.Application.Contracts.Persistence;
 using LoanProcessManagement.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -11,9 +12,11 @@ namespace LoanProcessManagement.Persistence.Repositories
     public class MenuRepository : BaseRepository<LpmMenuMaster> ,IMenuRepository
     {
         private readonly ILogger _logger;
-        public MenuRepository(ApplicationDbContext dbContext, ILogger<LpmMenuMaster> logger) : base(dbContext, logger)
+        private readonly IEmailService _emailService;
+        public MenuRepository(ApplicationDbContext dbContext, ILogger<LpmMenuMaster> logger,IEmailService emailService) : base(dbContext, logger,emailService)
         {
             _logger = logger;
+            _emailService = emailService;
         }
 
         public async Task<List<LpmMenuMaster>> GetMenuMasterService(long userroleid)

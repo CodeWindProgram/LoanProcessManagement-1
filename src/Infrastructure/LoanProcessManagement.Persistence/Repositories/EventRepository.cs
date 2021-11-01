@@ -1,3 +1,4 @@
+using LoanProcessManagement.Application.Contracts.Infrastructure;
 using LoanProcessManagement.Application.Contracts.Persistence;
 using LoanProcessManagement.Domain.Entities;
 using Microsoft.Extensions.Logging;
@@ -10,9 +11,12 @@ namespace LoanProcessManagement.Persistence.Repositories
     public class EventRepository : BaseRepository<Event>, IEventRepository
     {
         private readonly ILogger _logger;
-        public EventRepository(ApplicationDbContext dbContext, ILogger<Event> logger) : base(dbContext, logger)
+        private readonly IEmailService _emailService;
+
+        public EventRepository(ApplicationDbContext dbContext, ILogger<Event> logger,IEmailService emailService) : base(dbContext, logger,emailService)
         {
             _logger = logger;
+            _emailService = emailService;
         }
 
         public Task<bool> IsEventNameAndDateUnique(string name, DateTime eventDate)
