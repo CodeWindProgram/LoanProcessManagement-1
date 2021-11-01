@@ -31,6 +31,9 @@ namespace LoanProcessManagement.Persistence
         public DbSet<LpmMenuMaster> LpmMenuMasters { get; set; }
         public DbSet<LpmUserRoleMenuMap> LpmUserRoleMenuMaps { get; set; }
         public DbSet<LpmBranchMaster> LpmBranchMasters { get; set; }
+        public DbSet<LpmLeadMaster> LpmLeadMasters { get; set; }
+        public DbSet<LpmLeadStatusMaster> LpmLeadStatusMasters { get; set; }
+        public DbSet<LpmLoanProductMaster> LpmLoanProductMasters { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
