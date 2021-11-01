@@ -9,16 +9,16 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace LoanProcessManagement.Application.Features.User.Commands.RemoveUser
+namespace LoanProcessManagement.Application.Features.User.Queries
 {
-    public class RemoveUserCommandHandler : IRequestHandler<RemoveUserCommand, Response<RemoveUserDto>>
+    public class GetUserByLgIdQueryHandler : IRequestHandler<GetUserByLgIdQuery, Response<GetUserByLgIdDto>>
     {
         private readonly IUserAuthenticationRepository _userAuthenticationRepository;
-        private readonly ILogger<RemoveUserCommandHandler> _logger;
+        private readonly ILogger<GetUserByLgIdQueryHandler> _logger;
         private readonly IMapper _mapper;
 
-        public RemoveUserCommandHandler(IUserAuthenticationRepository userAuthenticationRepository,
-            ILogger<RemoveUserCommandHandler> logger,
+        public GetUserByLgIdQueryHandler(IUserAuthenticationRepository userAuthenticationRepository,
+            ILogger<GetUserByLgIdQueryHandler> logger,
             IMapper mapper)
         {
             _userAuthenticationRepository = userAuthenticationRepository;
@@ -31,23 +31,16 @@ namespace LoanProcessManagement.Application.Features.User.Commands.RemoveUser
         //	commented by Akshay
         /// </summary>
         /// <param name="request">request</param>
-        /// <returns>RemoveUserDto</returns>
-        public async Task<Response<RemoveUserDto>> Handle(RemoveUserCommand request, CancellationToken cancellationToken)
+        /// <returns>GetUserByLgIdDto</returns>
+        public async Task<Response<GetUserByLgIdDto>> Handle(GetUserByLgIdQuery request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Handle Initiated");
-            var userDto = await _userAuthenticationRepository.RemoveUserAsync(request.LgId);
+            var user = await _userAuthenticationRepository.GetUserAsync(request.LgId);
+            var mappedUser = _mapper.Map<GetUserByLgIdDto>(user);
             _logger.LogInformation("Hanlde Completed");
-            if (userDto.Succeeded)
-            {
-                return new Response<RemoveUserDto>(userDto, "success");
-            }
-            else
-            {
-                var res = new Response<RemoveUserDto>(userDto, "Failed");
-                res.Succeeded = false;
-                return res;
+            return new Response<GetUserByLgIdDto>(mappedUser, "success");
 
-            }
+
         } 
         #endregion
     }

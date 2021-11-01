@@ -226,7 +226,6 @@ namespace LoanProcessManagement.App.Services.Implementation
             return model;
 
         }
-        }
         #endregion
 
         #region This method will call actual api and return response for ActivateUserAccount account API - Ramya Guduru - 29/10/2021
@@ -291,9 +290,16 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             return model;
         }
-        
+
         #endregion
 
+        #region This method will call get user api by - Akshay Pawar - 01/11/2021
+        /// <summary>
+        /// 01/11/2021 - This method will call get user api
+        //	commented by Akshay
+        /// </summary>
+        /// <param name="lgid">lgid</param>
+        /// <returns>GetUserByLgIdDto</returns>
         public async Task<Response<GetUserByLgIdDto>> GetUser(string lgid)
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
@@ -313,7 +319,15 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             return response;
         }
+        #endregion
 
+        #region This method will call update user api by - Akshay Pawar - 01/11/2021
+        /// <summary>
+        /// 01/11/2021 - This method will call update user api
+        //	commented by Akshay
+        /// </summary>
+        /// <param name="user">user</param>
+        /// <returns>UpdateUserDto</returns>
         public async Task<Response<UpdateUserDto>> UpdateUser(CreateUserCommandVM user)
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
@@ -336,6 +350,7 @@ namespace LoanProcessManagement.App.Services.Implementation
             var response = System.Text.Json.JsonSerializer.Deserialize<Response<UpdateUserDto>>(jsonString, options);
 
             return response;
-        }
+        } 
+        #endregion
     }
 }

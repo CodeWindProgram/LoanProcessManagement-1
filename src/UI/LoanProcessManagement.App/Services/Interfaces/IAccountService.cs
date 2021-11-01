@@ -28,15 +28,6 @@ namespace LoanProcessManagement.App.Services.Interfaces
         Task<Response<UpdateUserDto>> UpdateUser(CreateUserCommandVM user);
 
 
-
-
-
-
-
-
-
-
-
         #region added account service for Unlock user Account - Ramya Guduru -29/10/2021
         Task<Response<UnlockUserAccountDto>> UnlockUserAccount(UnlockUserAccountCommand unlockUserAccount);
         #endregion

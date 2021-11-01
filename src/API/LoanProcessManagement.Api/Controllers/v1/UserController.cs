@@ -85,6 +85,13 @@ namespace LoanProcessManagement.Api.Controllers.v1
         }
         #endregion
 
+        #region Api which will update user by - Akshay Pawar - 01/11/2021
+        /// <summary>
+        /// 01/11/2021 - Api which will update user
+        //	commented by Akshay
+        /// </summary>
+        /// <param name="user">User object</param>
+        /// <returns>Response</returns>
         [HttpPut("updateUser")]
         public async Task<ActionResult> UpdateAsync([FromBody] UpdateUserCommand user)
         {
@@ -93,7 +100,15 @@ namespace LoanProcessManagement.Api.Controllers.v1
             _logger.LogInformation("UpdateAsync Completed");
             return Ok(dtos);
         }
+        #endregion
 
+        #region Api which will get user by - Akshay Pawar - 01/11/2021
+        /// <summary>
+        /// 01/11/2021 - Api which will get user
+        //	commented by Akshay
+        /// </summary>
+        /// <param name="lgid">lgid</param>
+        /// <returns>Response</returns>
         [HttpGet("getUser/{lgid}")]
         public async Task<ActionResult> GetUserAsync([FromRoute] string lgid)
         {
@@ -101,7 +116,8 @@ namespace LoanProcessManagement.Api.Controllers.v1
             var dtos = await _mediator.Send(new GetUserByLgIdQuery(lgid));
             _logger.LogInformation("GetUserAsync Completed");
             return Ok(dtos);
-        }
+        } 
+        #endregion
 
     }
 }

@@ -9,16 +9,16 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace LoanProcessManagement.Application.Features.User.Commands.RemoveUser
+namespace LoanProcessManagement.Application.Features.User.Commands.UpdateUser
 {
-    public class RemoveUserCommandHandler : IRequestHandler<RemoveUserCommand, Response<RemoveUserDto>>
+    public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Response<UpdateUserDto>>
     {
         private readonly IUserAuthenticationRepository _userAuthenticationRepository;
-        private readonly ILogger<RemoveUserCommandHandler> _logger;
+        private readonly ILogger<UpdateUserCommandHandler> _logger;
         private readonly IMapper _mapper;
 
-        public RemoveUserCommandHandler(IUserAuthenticationRepository userAuthenticationRepository,
-            ILogger<RemoveUserCommandHandler> logger,
+        public UpdateUserCommandHandler(IUserAuthenticationRepository userAuthenticationRepository,
+            ILogger<UpdateUserCommandHandler> logger,
             IMapper mapper)
         {
             _userAuthenticationRepository = userAuthenticationRepository;
@@ -31,19 +31,19 @@ namespace LoanProcessManagement.Application.Features.User.Commands.RemoveUser
         //	commented by Akshay
         /// </summary>
         /// <param name="request">request</param>
-        /// <returns>RemoveUserDto</returns>
-        public async Task<Response<RemoveUserDto>> Handle(RemoveUserCommand request, CancellationToken cancellationToken)
+        /// <returns>UpdateUserDto</returns>
+        public async Task<Response<UpdateUserDto>> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Handle Initiated");
-            var userDto = await _userAuthenticationRepository.RemoveUserAsync(request.LgId);
+            var userDto = await _userAuthenticationRepository.UpdateUserAsync(request.LgId, request);
             _logger.LogInformation("Hanlde Completed");
             if (userDto.Succeeded)
             {
-                return new Response<RemoveUserDto>(userDto, "success");
+                return new Response<UpdateUserDto>(userDto, "success");
             }
             else
             {
-                var res = new Response<RemoveUserDto>(userDto, "Failed");
+                var res = new Response<UpdateUserDto>(userDto, "Failed");
                 res.Succeeded = false;
                 return res;
 

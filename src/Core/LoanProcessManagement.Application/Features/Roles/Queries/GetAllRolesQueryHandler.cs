@@ -25,6 +25,13 @@ namespace LoanProcessManagement.Application.Features.Roles.Queries
             _logger = logger;
             _mapper = mapper;
         }
+        #region This method will call repository method by - Akshay Pawar - 01/11/2021
+        /// <summary>
+        /// 01/11/2021 - This method will call repository method
+        //	commented by Akshay
+        /// </summary>
+        /// <param name="request">request</param>
+        /// <returns>list of roles</returns>
         public async Task<IEnumerable<GetAllRolesDto>> Handle(GetAllRolesQuery request, CancellationToken cancellationToken)
         {
 
@@ -33,6 +40,7 @@ namespace LoanProcessManagement.Application.Features.Roles.Queries
             var mappedRoles = _mapper.Map<IEnumerable<GetAllRolesDto>>(roles);
             _logger.LogInformation("Hanlde Completed");
             return mappedRoles;
-        }
+        } 
+        #endregion
     }
 }

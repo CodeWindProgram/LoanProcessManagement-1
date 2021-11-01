@@ -219,6 +219,14 @@ namespace LoanProcessManagement.Persistence.Repositories
         }
         #endregion
 
+        #region This method update user by - Akshay Pawar - 01/11/2021
+        /// <summary>
+        /// 01/11/2021 - This method update user
+        //	commented by Akshay
+        /// </summary>
+        /// <param name="lgid">lgid</param>
+        /// <param name="request">request</param>
+        /// <returns>UpdateUserDto</returns>
         public async Task<UpdateUserDto> UpdateUserAsync(string lgid, UpdateUserCommand request)
         {
             var user = await _dbContext.LpmUserMasters.Include(x => x.Branch).Include(x => x.UserRole)
@@ -277,12 +285,21 @@ namespace LoanProcessManagement.Persistence.Repositories
 
 
         }
+        #endregion
 
+        #region This method get user by lgid by - Akshay Pawar - 01/11/2021
+        /// <summary>
+        /// 01/11/2021 - This method get user by lgid
+        //	commented by Akshay
+        /// </summary>
+        /// <param name="lgid">lgid</param>
+        /// <returns>LpmUserMaster</returns>
         public async Task<LpmUserMaster> GetUserAsync(string lgid)
         {
             var user = await _dbContext.LpmUserMasters.Include(x => x.Branch).Include(x => x.UserRole)
             .Where(x => x.LgId == lgid).FirstOrDefaultAsync();
             return user;
-        }
+        } 
+        #endregion
     }
 }

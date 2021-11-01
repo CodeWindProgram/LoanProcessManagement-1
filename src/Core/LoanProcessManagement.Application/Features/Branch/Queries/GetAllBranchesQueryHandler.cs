@@ -25,6 +25,13 @@ namespace LoanProcessManagement.Application.Features.Branch.Queries
             _logger = logger;
             _mapper = mapper;
         }
+        #region This method will call repository method by - Akshay Pawar - 01/11/2021
+        /// <summary>
+        /// 01/11/2021 - This method will call repository method
+        //	commented by Akshay
+        /// </summary>
+        /// <param name="request">request</param>
+        /// <returns>list of branches</returns>
         public async Task<IEnumerable<GetAllBranchesDto>> Handle(GetAllBranchesQuery request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Handle Initiated");
@@ -32,6 +39,7 @@ namespace LoanProcessManagement.Application.Features.Branch.Queries
             var mappedBranches = _mapper.Map<IEnumerable<GetAllBranchesDto>>(branches);
             _logger.LogInformation("Hanlde Completed");
             return mappedBranches;
-        }
+        } 
+        #endregion
     }
 }

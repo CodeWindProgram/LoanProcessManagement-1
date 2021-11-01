@@ -276,6 +276,13 @@ namespace LoanProcessManagement.App.Controllers
         }
         #endregion
 
+        #region This method will call get user api by - Akshay Pawar - 01/11/2021
+        /// <summary>
+        /// 01/11/2021 - This method will call get user api
+        //	commented by Akshay
+        /// </summary>
+        /// <param name="lgid">lgid</param>
+        /// <returns>view</returns>
         [HttpGet("{lgid}")]
         public async Task<IActionResult> UpdateUser(string lgid)
         {
@@ -298,8 +305,16 @@ namespace LoanProcessManagement.App.Controllers
             ViewBag.branches = new SelectList(branches, "Id", "branchname");
             return View(user);
         }
+        #endregion
 
 
+        #region This method will call update user api by - Akshay Pawar - 01/11/2021
+        /// <summary>
+        /// 01/11/2021 - This method will call update user api
+        //	commented by Akshay
+        /// </summary>
+        /// <param name="user">user</param>
+        /// <returns>view</returns>
         [HttpPost]
         public async Task<IActionResult> UpdateUser(CreateUserCommandVM user)
         {
@@ -324,6 +339,7 @@ namespace LoanProcessManagement.App.Controllers
             var branches = await _commonService.GetAllBranches();
             ViewBag.branches = new SelectList(branches, "Id", "branchname");
             return View();
-        }
+        } 
+        #endregion
     }
 }

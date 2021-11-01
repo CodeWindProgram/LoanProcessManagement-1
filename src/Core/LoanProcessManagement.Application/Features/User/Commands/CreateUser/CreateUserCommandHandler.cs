@@ -31,6 +31,13 @@ namespace LoanProcessManagement.Application.Features.User.Commands.CreateUser
             _mapper = mapper;
             _emailService = emailService;
         }
+        #region This method will call repository method by - Akshay Pawar - 01/11/2021
+        /// <summary>
+        /// 01/11/2021 - This method will call repository method
+        //	commented by Akshay
+        /// </summary>
+        /// <param name="request">request</param>
+        /// <returns>return createuserDto</returns>
         public async Task<Response<CreateUserDto>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Handle Initiated");
@@ -40,21 +47,22 @@ namespace LoanProcessManagement.Application.Features.User.Commands.CreateUser
             if (userDto.Succeeded)
             {
                 var email = new Email()
-                { 
+                {
                     To = userDto.Email,
                     Body = @$"User Registered Successfully !! \nEmployee id : {userDto.EmpId} \nPassword : {userDto.Password}",
-                    Subject = "User Credentials" 
+                    Subject = "User Credentials"
                 };
                 await _emailService.SendEmail(email);
                 return new Response<CreateUserDto>(userDto, "success");
             }
             else
             {
-                var res=new Response<CreateUserDto>(userDto, "Failed");
+                var res = new Response<CreateUserDto>(userDto, "Failed");
                 res.Succeeded = false;
                 return res;
 
             }
-        }
+        } 
+        #endregion
     }
 }
