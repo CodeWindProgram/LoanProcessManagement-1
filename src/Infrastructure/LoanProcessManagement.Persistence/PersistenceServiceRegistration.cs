@@ -29,6 +29,7 @@ namespace LoanProcessManagement.Persistence
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
             services.AddScoped<IMenuRepository, MenuRepository>();
             services.AddScoped<IUserListRepository, UserListRepository>();
+            services.AddScoped<ILeadListRepository, LeadListRepository>();
 
 
 

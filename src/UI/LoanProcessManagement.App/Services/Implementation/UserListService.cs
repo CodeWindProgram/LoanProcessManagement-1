@@ -56,8 +56,6 @@ namespace LoanProcessManagement.App.Services.Implementation
             return model;
         } 
         #endregion
-
-        
     }
     #endregion
 }
