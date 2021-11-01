@@ -139,8 +139,25 @@ namespace LoanProcessManagement.App.Services.Implementation
         public async Task<Response<RemoveUserDto>> RemoveUser(string lgid)
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+            var _client = clientfact.CreateClient("LoanService");
 
+            var httpResponse = await _client.PostAsync
+                (
+                    BaseUrl + APIEndpoints.RemoveUser + $"{lgid}",
+                    null
+
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var response = System.Text.Json.JsonSerializer.Deserialize<Response<RemoveUserDto>>(jsonString, options);
+
+            return response;
         }
+
+    
         #endregion
 
         #region This method will call actual api and return response for Unlock user account API - Ramya Guduru - 29/10/2021
@@ -271,23 +288,7 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             return model;
         }
-            var _client = clientfact.CreateClient("LoanService");
-
-            var httpResponse = await _client.PostAsync
-                (
-                    BaseUrl + APIEndpoints.RemoveUser + $"{lgid}",
-                    null
-
-                );
-
-            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
-
-            var options = new JsonSerializerOptions();
-
-            var response = System.Text.Json.JsonSerializer.Deserialize<Response<RemoveUserDto>>(jsonString, options);
-
-            return response;
-        } 
+        
         #endregion
     }
 }
