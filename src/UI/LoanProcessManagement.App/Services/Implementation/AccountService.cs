@@ -8,6 +8,8 @@ using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockUserAccount;
 using LoanProcessManagement.Application.Features.User.Commands.CreateUser;
 using LoanProcessManagement.Application.Features.User.Commands.RemoveUser;
+using LoanProcessManagement.Application.Features.User.Commands.UpdateUser;
+using LoanProcessManagement.Application.Features.User.Queries;
 using LoanProcessManagement.Application.Models.Authentication;
 using LoanProcessManagement.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -224,6 +226,7 @@ namespace LoanProcessManagement.App.Services.Implementation
             return model;
 
         }
+        }
         #endregion
 
         #region This method will call actual api and return response for ActivateUserAccount account API - Ramya Guduru - 29/10/2021
@@ -290,5 +293,49 @@ namespace LoanProcessManagement.App.Services.Implementation
         }
         
         #endregion
+
+        public async Task<Response<GetUserByLgIdDto>> GetUser(string lgid)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.GetAsync
+                (
+                    BaseUrl + APIEndpoints.GetUser + lgid
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var response = System.Text.Json.JsonSerializer.Deserialize<Response<GetUserByLgIdDto>>(jsonString, options);
+
+            return response;
+        }
+
+        public async Task<Response<UpdateUserDto>> UpdateUser(CreateUserCommandVM user)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var content = JsonConvert.SerializeObject(user);
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.PutAsync
+                (
+                    BaseUrl + APIEndpoints.UpdateUser,
+                    new StringContent(content, Encoding.Default,
+                    "application/json")
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var response = System.Text.Json.JsonSerializer.Deserialize<Response<UpdateUserDto>>(jsonString, options);
+
+            return response;
+        }
     }
 }

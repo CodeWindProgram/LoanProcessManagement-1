@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using LoanProcessManagement.Application.Contracts.Infrastructure;
 using LoanProcessManagement.Application.Contracts.Persistence;
+using LoanProcessManagement.Application.Models.Mail;
 using LoanProcessManagement.Application.Responses;
 using LoanProcessManagement.Domain.Entities;
 using MediatR;
@@ -17,14 +19,17 @@ namespace LoanProcessManagement.Application.Features.User.Commands.CreateUser
         private readonly IUserAuthenticationRepository _userAuthenticationRepository;
         private readonly ILogger<CreateUserCommandHandler> _logger;
         private readonly IMapper _mapper;
+        private readonly IEmailService _emailService;
 
         public CreateUserCommandHandler(IUserAuthenticationRepository userAuthenticationRepository,
             ILogger<CreateUserCommandHandler> logger,
-            IMapper mapper)
+            IMapper mapper,
+            IEmailService emailService)
         {
             _userAuthenticationRepository = userAuthenticationRepository;
             _logger = logger;
             _mapper = mapper;
+            _emailService = emailService;
         }
         public async Task<Response<CreateUserDto>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
@@ -34,6 +39,13 @@ namespace LoanProcessManagement.Application.Features.User.Commands.CreateUser
             _logger.LogInformation("Hanlde Completed");
             if (userDto.Succeeded)
             {
+                var email = new Email()
+                { 
+                    To = userDto.Email,
+                    Body = @$"User Registered Successfully !! \nEmployee id : {userDto.EmpId} \nPassword : {userDto.Password}",
+                    Subject = "User Credentials" 
+                };
+                await _emailService.SendEmail(email);
                 return new Response<CreateUserDto>(userDto, "success");
             }
             else

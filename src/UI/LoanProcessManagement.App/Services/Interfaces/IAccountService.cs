@@ -6,6 +6,8 @@ using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockUserAccount;
 using LoanProcessManagement.Application.Features.User.Commands.CreateUser;
 using LoanProcessManagement.Application.Features.User.Commands.RemoveUser;
+using LoanProcessManagement.Application.Features.User.Commands.UpdateUser;
+using LoanProcessManagement.Application.Features.User.Queries;
 using LoanProcessManagement.Application.Models.Authentication;
 using LoanProcessManagement.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +24,16 @@ namespace LoanProcessManagement.App.Services.Interfaces
         Task<UserAuthenticationResponse> AuthenticateUser(UserAuthenticationRequestVM user);
         Task<Response<CreateUserDto>> RegisterUser(CreateUserCommandVM user);
         Task<Response<RemoveUserDto>> RemoveUser(string lgid);
+        Task<Response<GetUserByLgIdDto>> GetUser(string lgid);
+        Task<Response<UpdateUserDto>> UpdateUser(CreateUserCommandVM user);
+
+
+
+
+
+
+
+
 
 
 

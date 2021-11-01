@@ -1,6 +1,8 @@
 ﻿using LoanProcessManagement.Application.Contracts.Persistence;
 using LoanProcessManagement.Application.Features.User.Commands.CreateUser;
 using LoanProcessManagement.Application.Features.User.Commands.RemoveUser;
+using LoanProcessManagement.Application.Features.User.Commands.UpdateUser;
+using LoanProcessManagement.Application.Features.User.Queries;
 using LoanProcessManagement.Application.Models.Authentication;
 using LoanProcessManagement.Infrastructure.EncryptDecrypt;
 using MediatR;
@@ -80,8 +82,26 @@ namespace LoanProcessManagement.Api.Controllers.v1
             var dtos = await _mediator.Send(new RemoveUserCommand(lgid));
             _logger.LogInformation("RemoveAsync Completed");
             return Ok(dtos);
-        } 
+        }
         #endregion
+
+        [HttpPut("updateUser")]
+        public async Task<ActionResult> UpdateAsync([FromBody] UpdateUserCommand user)
+        {
+            _logger.LogInformation("UpdateAsync Initiated");
+            var dtos = await _mediator.Send(user);
+            _logger.LogInformation("UpdateAsync Completed");
+            return Ok(dtos);
+        }
+
+        [HttpGet("getUser/{lgid}")]
+        public async Task<ActionResult> GetUserAsync([FromRoute] string lgid)
+        {
+            _logger.LogInformation("GetUserAsync Initiated");
+            var dtos = await _mediator.Send(new GetUserByLgIdQuery(lgid));
+            _logger.LogInformation("GetUserAsync Completed");
+            return Ok(dtos);
+        }
 
     }
 }

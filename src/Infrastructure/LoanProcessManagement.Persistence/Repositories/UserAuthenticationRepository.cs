@@ -2,6 +2,7 @@
 using LoanProcessManagement.Application.Contracts.Persistence;
 using LoanProcessManagement.Application.Features.User.Commands.CreateUser;
 using LoanProcessManagement.Application.Features.User.Commands.RemoveUser;
+using LoanProcessManagement.Application.Features.User.Commands.UpdateUser;
 using LoanProcessManagement.Application.Models.Authentication;
 using LoanProcessManagement.Domain.Entities;
 using LoanProcessManagement.Infrastructure.EncryptDecrypt;
@@ -176,8 +177,10 @@ namespace LoanProcessManagement.Persistence.Repositories
             await _dbContext.LpmUserMasters.AddAsync(request);
             await _dbContext.SaveChangesAsync();
             request.LgId = request.LgId + request.Id;
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
             response.EmpId = request.EmployeeId;
+            response.Password = pwd;
+            response.Email = request.Email;
             response.Message = "User registered successfully .";
             response.Succeeded = true;
             return response;
@@ -213,7 +216,73 @@ namespace LoanProcessManagement.Persistence.Repositories
                 response.Succeeded = false;
                 return response;
             }
-        } 
+        }
         #endregion
+
+        public async Task<UpdateUserDto> UpdateUserAsync(string lgid, UpdateUserCommand request)
+        {
+            var user = await _dbContext.LpmUserMasters.Include(x => x.Branch).Include(x => x.UserRole)
+            .Where(x => x.EmployeeId == request.EmployeeId && x.LgId != lgid).FirstOrDefaultAsync();
+            UpdateUserDto response = new UpdateUserDto();
+
+            if (user != null)
+            {
+                response.Message = "Employee id already exists .";
+                response.Succeeded = false;
+                return response;
+            }
+
+            user = await _dbContext.LpmUserMasters.Include(x => x.Branch).Include(x => x.UserRole)
+             .Where(x => x.Email == request.Email && x.LgId != lgid).FirstOrDefaultAsync();
+            if (user != null)
+            {
+                response.Message = "Email Already exists .";
+                response.Succeeded = false;
+                return response;
+            }
+
+            user = await _dbContext.LpmUserMasters.Include(x => x.Branch).Include(x => x.UserRole)
+            .Where(x => x.PhoneNumber == request.PhoneNumber && x.LgId != lgid).FirstOrDefaultAsync();
+            if (user != null)
+            {
+                response.Message = "Phone number already exists .";
+                response.Succeeded = false;
+                return response;
+            }
+            var userToUpdate = await _dbContext.LpmUserMasters.Include(x => x.Branch).Include(x => x.UserRole)
+            .Where(x => x.LgId == lgid).FirstOrDefaultAsync();
+
+            if (userToUpdate != null)
+            {
+                userToUpdate.EmployeeId = request.EmployeeId;
+                userToUpdate.Email = request.Email;
+                userToUpdate.PhoneNumber = request.PhoneNumber;
+                userToUpdate.BranchId = request.BranchId;
+                userToUpdate.UserRoleId = request.UserRoleId;
+                userToUpdate.Name = request.Name;
+                await _dbContext.SaveChangesAsync();
+                response.Message = "User details Updated Successfully";
+                response.Succeeded = true;
+                response.EmployeeId = userToUpdate.EmployeeId;
+                return response;
+
+            }
+            else
+            {
+                response.Message = "User doesn't exists .";
+                response.Succeeded = false;
+                response.EmployeeId = userToUpdate.EmployeeId;
+                return response;
+            }
+
+
+        }
+
+        public async Task<LpmUserMaster> GetUserAsync(string lgid)
+        {
+            var user = await _dbContext.LpmUserMasters.Include(x => x.Branch).Include(x => x.UserRole)
+            .Where(x => x.LgId == lgid).FirstOrDefaultAsync();
+            return user;
+        }
     }
 }

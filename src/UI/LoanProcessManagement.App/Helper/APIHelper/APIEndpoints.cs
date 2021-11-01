@@ -17,6 +17,10 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string GetBranches = "api/v1/Branch/GetBranches";
         public const string RegisterUser = "api/v1/User/registerUser";
         public const string RemoveUser = "api/v1/User/removeUser/";
+        public const string GetUser = "api/v1/User/getUser/";
+        public const string UpdateUser = "api/v1/User/updateUser";
+
+
 
 
 

@@ -69,7 +69,7 @@
                                         @Html.DisplayFor(modelItem => item.StaffType)
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Modify", "Modify", new { /* id=item.PrimaryKey */ })
+                                        @Html.ActionLink("Modify", "UpdateUser", "Login", new { lgid = item.LgId })
                                         @Html.ActionLink("Delete", "RemoveUser", "Login", new { lgid = item.LgId },
                                        new { onclick = "return confirm('Are sure wants to delete?');" })
                                     </td>

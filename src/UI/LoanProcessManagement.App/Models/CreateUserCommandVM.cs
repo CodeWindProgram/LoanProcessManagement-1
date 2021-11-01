@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,6 +9,9 @@ namespace LoanProcessManagement.App.Models
 {
     public class CreateUserCommandVM
     {
+        [HiddenInput]
+        public string LgId { get; set; }
+
         [Display(Name="Login Id")]
         [Required(ErrorMessage = "Employee Id is required .")]
         public string EmployeeId { get; set; }

@@ -1,6 +1,7 @@
 ﻿using LoanProcessManagement.App.Models;
 using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.ChangePassword.Commands.ChangePassword;
+using LoanProcessManagement.Application.Features.UserList.Query;
 using LoanProcessManagement.Application.Features.ForgotPassword.Commands.ForgotPassword;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.ActivateUserAccount;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockAndResetPassword;
@@ -9,6 +10,7 @@ using LoanProcessManagement.Application.Models.Authentication;
 using LoanProcessManagement.Domain.CustomModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 
@@ -18,9 +20,12 @@ namespace LoanProcessManagement.App.Controllers
     public class LoginController : Controller
     {
         private IAccountService _accountService;
-        public LoginController(IAccountService accountService)
+        private readonly ICommonServices _commonService;
+
+        public LoginController(IAccountService accountService, ICommonServices commonService)
         {
             _accountService = accountService;
+            _commonService = commonService;
         }
 
         [Route("~/")]
@@ -268,7 +273,57 @@ namespace LoanProcessManagement.App.Controllers
             var response = await _accountService.RemoveUser(lgid);
             return RedirectToAction("Index", "UserList");
 
-        } 
+        }
         #endregion
+
+        [HttpGet("{lgid}")]
+        public async Task<IActionResult> UpdateUser(string lgid)
+        {
+            var response = await _accountService.GetUser(lgid);
+            var user = new CreateUserCommandVM()
+            {
+                LgId = response.Data.LgId,
+                EmployeeId = response.Data.EmployeeId,
+                Name = response.Data.Name,
+                Email = response.Data.Email,
+                BranchId = response.Data.BranchId,
+                UserRoleId = response.Data.UserRoleId,
+                PhoneNumber = response.Data.PhoneNumber
+
+            };
+            var roles = await _commonService.GetAllRoles();
+            ViewBag.roles = new SelectList(roles, "Id", "Rolename");
+
+            var branches = await _commonService.GetAllBranches();
+            ViewBag.branches = new SelectList(branches, "Id", "branchname");
+            return View(user);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateUser(CreateUserCommandVM user)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _accountService.UpdateUser(user);
+                if (response.Succeeded)
+                {
+                    ViewBag.isSuccess = response.Succeeded;
+                    ViewBag.Message = response.Data.Message;
+                }
+                else
+                {
+                    ViewBag.isSuccess = response.Succeeded;
+                    ViewBag.Message = response.Data.Message;
+
+                }
+            }
+            var roles = await _commonService.GetAllRoles();
+            ViewBag.roles = new SelectList(roles, "Id", "Rolename");
+
+            var branches = await _commonService.GetAllBranches();
+            ViewBag.branches = new SelectList(branches, "Id", "branchname");
+            return View();
+        }
     }
 }

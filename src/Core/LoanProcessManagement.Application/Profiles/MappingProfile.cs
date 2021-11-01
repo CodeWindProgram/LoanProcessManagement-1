@@ -22,6 +22,7 @@ using LoanProcessManagement.Application.Features.UserList.Query;
 using LoanProcessManagement.Domain.CustomModels;
 using LoanProcessManagement.Domain.Entities;
 using System.Collections.Generic;
+using LoanProcessManagement.Application.Features.User.Queries;
 
 namespace LoanProcessManagement.Application.Profiles
 {
@@ -61,7 +62,7 @@ namespace LoanProcessManagement.Application.Profiles
             CreateMap<CreateUserCommand, LpmUserMaster>().ReverseMap();
             CreateMap<LpmUserRoleMaster, GetAllRolesDto>().ReverseMap();
             CreateMap<LpmBranchMaster, GetAllBranchesDto>().ReverseMap();
-
+            CreateMap<LpmUserMaster, GetUserByLgIdDto>().ReverseMap();
 
 
             #region forgotpassword mapping has created by - Ramya Guduru -01/11/2021
