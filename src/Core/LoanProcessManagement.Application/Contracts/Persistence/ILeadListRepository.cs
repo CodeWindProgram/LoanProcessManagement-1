@@ -8,6 +8,6 @@ namespace LoanProcessManagement.Application.Contracts.Persistence
 {
     public interface ILeadListRepository 
     {
-        Task<IEnumerable<LeadListModel>> GetAllLeadList(string LgId);
+        Task<IEnumerable<LeadListModel>> GetAllLeadList();
     }
 }

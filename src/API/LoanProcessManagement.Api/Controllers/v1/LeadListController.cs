@@ -1,4 +1,5 @@
-﻿using LoanProcessManagement.Application.Features.LeadList.Commands;
+﻿using LoanProcessManagement.Application.Contracts.Persistence;
+using LoanProcessManagement.Application.Features.LeadList.Commands;
 using LoanProcessManagement.Domain.CustomModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,7 @@ namespace LoanProcessManagement.Api.Controllers.v1
     [ApiController]
     public class LeadListController : Controller
     {
+        #region Lead List Controller API - Saif Khan -02/11/2021
         private readonly IMediator _mediator;
         private readonly ILogger _logger;
 
@@ -20,11 +22,12 @@ namespace LoanProcessManagement.Api.Controllers.v1
             _logger = logger;
             _mediator = mediator;
         }
-        [HttpGet(Name = "GetLeadList")]
-        public async Task<ActionResult> GetAllLeadList()
+        [HttpPost(Name = "GetLeadList")]
+        public async Task<ActionResult> Index([FromBody] LeadListCommand leadListCommand)
         {
-            var res = await _mediator.Send(new LeadListCommandDto());
+            var res = await _mediator.Send(leadListCommand);
             return Ok(res);
-        }
+        } 
+        #endregion
     }
 }

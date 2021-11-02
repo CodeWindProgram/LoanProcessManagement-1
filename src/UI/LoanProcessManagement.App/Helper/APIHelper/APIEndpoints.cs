@@ -40,5 +40,6 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         #region added url Endpoints - Ramya Guduru -01/11/2021
         public const string ForgotPassword = "api/v1/ForgotPassword/ForgotPassword";
         #endregion
+        public const string LeadList = "api/v1/LeadList";
     }
 }

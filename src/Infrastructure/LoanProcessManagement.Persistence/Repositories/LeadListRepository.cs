@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace LoanProcessManagement.Persistence.Repositories
 {
-    public class LeadListRepository : ILeadListRepository 
+    #region Repository Created While Inheriting ILeadListRepository - Saif Khan-02/11/2021
+    public class LeadListRepository : ILeadListRepository
     {
         protected readonly ApplicationDbContext _dbContext;
         private readonly ILogger _logger;
@@ -17,22 +18,29 @@ namespace LoanProcessManagement.Persistence.Repositories
         {
             _dbContext = dbContext; _logger = logger;
         }
-        public async Task<IEnumerable<LeadListModel>> GetAllLeadList(string LgId)
+        #region Method for the Lead List - Saif Khan - 02/11/2021
+        /// <summary>
+        /// Method for the Lead List - 02/11/2021
+        /// Commented by - Saif Khan 
+        /// </summary>
+        /// <returns>result</returns>
+        public async Task<IEnumerable<LeadListModel>> GetAllLeadList()
         {
             var result = await (from A in _dbContext.LpmLeadMasters
                                 join B in _dbContext.LpmLoanProductMasters on A.ProductID equals B.Id
                                 join C in _dbContext.LpmLeadStatusMasters on A.CurrentStatus equals C.Id
-                                where A.IsActive == true
                                 select new LeadListModel
                                 {
                                     FormNo = A.FormNo,
-                                    CustomerName=A.FirstName,
-                                    CustomerPhone=A.CustomerPhone,
-                                    ProductName=B.ProductName,
-                                    Appointment_Date =A.Appointment_Date,
-                                    StatusDescription = C.StatusDescription
+                                    CustomerName = A.FirstName + " " + A.LastName,
+                                    CustomerPhone = A.CustomerPhone,
+                                    Product = B.ProductName,
+                                    Appointment_Date = A.Appointment_Date,
+                                    LeadStatus = C.StatusDescription
                                 }).ToListAsync();
             return result;
-        }
-    }
+        } 
+        #endregion
+    } 
+    #endregion
 }

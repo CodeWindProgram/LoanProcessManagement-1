@@ -41,6 +41,7 @@ namespace LoanProcessManagement.App
             services.AddSingleton<IMenuService, MenuService>();
             services.AddScoped<ICommonServices, CommonServices>();
             services.AddSingleton<IUserListService, UserListService>();
+            services.AddSingleton<ILeadListService, LeadListService>();
 
             services.Configure<APIConfiguration>(Configuration.GetSection("APIConfiguration"));
             services.AddSession();
