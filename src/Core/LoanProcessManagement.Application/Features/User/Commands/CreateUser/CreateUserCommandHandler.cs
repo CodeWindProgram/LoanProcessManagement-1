@@ -49,7 +49,7 @@ namespace LoanProcessManagement.Application.Features.User.Commands.CreateUser
                 var email = new Email()
                 {
                     To = userDto.Email,
-                    Body = @$"User Registered Successfully !! \nEmployee id : {userDto.EmpId} \nPassword : {userDto.Password}",
+                    Body = $"User Registered Successfully !! \r\nEmployee id : {userDto.EmpId} \r\nPassword : {userDto.Password}",
                     Subject = "User Credentials"
                 };
                 await _emailService.SendEmail(email);
