@@ -4,7 +4,7 @@
 *@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Login Page";
+ViewData["Title"] = "Login Page";
 }
 
 <style>
@@ -72,7 +72,7 @@
 
         <h2 class="form-signin-heading text-center">Sign in</h2>
 
-        <form asp-action="Index" method="post">
+        <form asp-action="Index" method="post" asp-route-returnurl="@ViewBag.ReturnUrl">
             <div asp-validation-summary="ModelOnly" class="text-danger font-italic"></div>
             @*<input type="text" id="txtEmpId" placeholder="Enter Login Id" class="form-control" autofocus required />*@
             <input asp-for="EmployeeId" class="form-control" id="txtEmpId" type="text" placeholder="Enter Login Id" autofocus />

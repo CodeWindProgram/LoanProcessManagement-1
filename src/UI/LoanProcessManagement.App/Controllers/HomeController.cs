@@ -1,6 +1,8 @@
 ﻿using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.Menu.Query;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace LoanProcessManagement.App.Controllers
@@ -22,6 +24,7 @@ namespace LoanProcessManagement.App.Controllers
         /// <param name="menuProcess">MenuProcess</param>
         /// </summary>
         /// <returns>MenuServiceResponse View</returns>
+        [Authorize(AuthenticationSchemes = "Cookies")]  
         [Route("/Home")]
         public async Task<IActionResult> Index()
         {
@@ -32,12 +35,15 @@ namespace LoanProcessManagement.App.Controllers
 
             var MenuServiceResponse = await _menuService.MenuProcess(menuProcess);
 
+            //Get the current claims principal
+            var identity = (ClaimsPrincipal)User;
+
             if (MenuServiceResponse != null && MenuServiceResponse.Succeeded == true && MenuServiceResponse.Data != null)
             {
                 return View(MenuServiceResponse.Data);
             }
             return View();
         }
-        #endregion
+        #endregion       
     }
 }

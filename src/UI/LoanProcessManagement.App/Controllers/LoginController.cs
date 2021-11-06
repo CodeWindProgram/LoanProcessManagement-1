@@ -13,6 +13,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace LoanProcessManagement.App.Controllers
 {
@@ -29,36 +34,59 @@ namespace LoanProcessManagement.App.Controllers
         }
 
         [Route("~/")]
-        public IActionResult Index()
+        public IActionResult Index(string returnUrl = null)
         {
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
-        #region This action method will authenticate user and return view by - Akshay Pawar - 28/10/2021
+        #region This action method will authenticate user and return view by - Akshay Pawar - 28/10/2021, User login using Cookie Authentication Added by - Pratiksha, Akshay - 05/11/2021
         /// <summary>
         /// 2021/10/28 - This action method will call api and check whether user is authenticated or not
-        //	commented by Akshay
+        /// 2021/11/05 - after authentication user will be logged in and authorized based on Cookie Authentication Scheme 
+        //	commented by Akshay, Pratiksha
         /// </summary>
         /// <param name="user">User object which will contain (EmployeeId and Password)</param>
+        /// <param name="returnUrl"> Url requested by unauthenticated user is stored in returnUrl</param>
         /// <returns>if user is authenticated it'll redirect to Home view</returns>
         [HttpPost]
-        public async Task<IActionResult> Index(UserAuthenticationRequestVM user)
+        public async Task<IActionResult> Index(UserAuthenticationRequestVM user, string returnUrl = null)
         {
+            ViewBag.ReturnUrl = returnUrl;  
             if (ModelState.IsValid)
             {
                 var authenticateUserResponse = await _accountService.AuthenticateUser(user);
                 if (authenticateUserResponse.IsAuthenticated)
                 {
                     //after login logic
-                    HttpContext.Session.SetString("user", JsonConvert.SerializeObject(authenticateUserResponse));
-                    var userFromSession = JsonConvert.DeserializeObject<UserAuthenticationResponse>(HttpContext.Session.GetString("user"));
-                    return RedirectToAction("Index", "Home");
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.NameIdentifier, user.EmployeeId.ToString()),
+                        new Claim(ClaimTypes.Email, authenticateUserResponse.Email),
+                        new Claim(ClaimTypes.Role, authenticateUserResponse.Role),
+                        new Claim(ClaimTypes.Name, authenticateUserResponse.Name),
+                        new Claim("Branch", authenticateUserResponse.Branch),
+                    };
+
+                    var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var principal = new ClaimsPrincipal(identity);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                            principal,
+                            new AuthenticationProperties { IsPersistent = true }); //sign in a principal for the default authentication scheme
+
+                    if (!string.IsNullOrEmpty(ViewBag.ReturnUrl) && Url.IsLocalUrl(ViewBag.ReturnUrl))
+                    {
+                        return Redirect(ViewBag.ReturnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
                 else
                 {
                     ModelState.AddModelError("", authenticateUserResponse.Message);
                 }
-
             }
             return View();
         }
@@ -339,7 +367,20 @@ namespace LoanProcessManagement.App.Controllers
             var branches = await _commonService.GetAllBranches();
             ViewBag.branches = new SelectList(branches, "Id", "branchname");
             return View();
-        } 
+        }
+        #endregion
+
+        #region This action method will log out user - Pratiksha - 5/11/2021
+        /// <summary>
+        /// 5/11/2021 - This action method will log out user 
+        /// </summary>
+        /// <returns>Login View</returns>
+        public async Task<IActionResult> LogOut()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            return Redirect("/");
+        }
         #endregion
     }
 }
