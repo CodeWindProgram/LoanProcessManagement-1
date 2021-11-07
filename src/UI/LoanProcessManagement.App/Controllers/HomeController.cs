@@ -2,6 +2,8 @@
 using LoanProcessManagement.Application.Features.Menu.Query;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -30,8 +32,8 @@ namespace LoanProcessManagement.App.Controllers
         {
 
             GetMenuMasterServicesQuery menuProcess = new GetMenuMasterServicesQuery();
-            menuProcess.UserRoleId = 1;
-
+            var roleId= User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value;
+            menuProcess.UserRoleId = long.Parse(roleId);
 
             var MenuServiceResponse = await _menuService.MenuProcess(menuProcess);
 

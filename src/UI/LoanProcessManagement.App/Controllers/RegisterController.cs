@@ -1,5 +1,6 @@
 ﻿using LoanProcessManagement.App.Models;
 using LoanProcessManagement.App.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -9,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace LoanProcessManagement.App.Controllers
 {
-    [Route("[controller]/[action]")]
 
     public class RegisterController : Controller
     {
@@ -27,6 +27,9 @@ namespace LoanProcessManagement.App.Controllers
         //	commented by Akshay
         /// </summary>
         /// <returns>Add user view</returns>
+        [Route("[controller]/[action]")]
+        [Route("/AddUser")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             var roles = await _commonService.GetAllRoles();

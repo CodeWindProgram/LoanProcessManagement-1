@@ -66,6 +66,8 @@ namespace LoanProcessManagement.App.Controllers
                         new Claim(ClaimTypes.Role, authenticateUserResponse.Role),
                         new Claim(ClaimTypes.Name, authenticateUserResponse.Name),
                         new Claim("Branch", authenticateUserResponse.Branch),
+                        new Claim("UserRoleId", authenticateUserResponse.UserRoleId.ToString()),
+
                     };
 
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

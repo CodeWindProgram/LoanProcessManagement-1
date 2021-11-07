@@ -94,6 +94,7 @@ namespace LoanProcessManagement.Persistence.Repositories
             response.Name = result.Name;
             response.Branch = result.Branch.branchname;
             response.Role = result.UserRole.Rolename;
+            response.UserRoleId = result.UserRoleId;
             response.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
             result.WrongLoginAttempt = 0;
             result.LastLogin = DateTime.Now;
