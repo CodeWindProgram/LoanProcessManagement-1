@@ -1,0 +1,271 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "AddLead";
+}
+<style>
+    #maindiv,p{
+        border:1px solid grey;
+    }
+    h4{
+        color:white;
+        text-align:center;
+    }
+    .group1{
+        padding-left:4px;
+        float:left;
+    }
+    .group2 {
+        float: right;
+        width:65%;
+        padding-right:4px;
+    }
+    .button1{
+        padding-left:5px;
+        padding-bottom:5px;
+    }
+    #button1{
+        background-color:darkblue;
+        color:white;
+    }
+    input[type=text],textarea,select{
+        width:100%;
+    }
+</style>
+
+<div class="container" id="maindiv">
+    <div class="container" id="adduplead"  style="background-color:darkblue">
+        <h4>New Lead Details</h4>
+    </div>
+    <form method="post" action="#">
+        <br /><br />
+        <div class="initial1">
+            <div class="group1"><label for="Formno">Form Number:</label></div>
+            <div class="group2"><input type="text" name="Formno" placeholder="Form Number" value="" /></div>
+        </div><br /><hr />
+        <div class="initial1">
+            <div class="group1"><label for="Empid">Employee Id:</label></div>
+            <div class="group2"><input type="text" name="Empid" placeholder="Employee Id" value="" /></div>
+        </div><br /><hr />
+        <div class="initial1">
+            <div class="group1"><label for="DDL_PropId">Property Identified:</label></div>
+            <div class="group2"><select id="DDL_PropId" name="PropertyIdentified">
+                <option value="-1">Select</option>
+                <option value="YES">Yes</option>
+                <option value="NO">No</option>
+            </select></div>
+        </div><br /><hr />
+        <div class="initial1">
+            <div class="group1"><label for="customername">Customer Name:</label></div>
+            <div class="group2"><input type="text" name="customername" placeholder="Customer Name" value="" /></div>
+        </div><br /><hr />
+        <div class="initial1">
+            <div class="group1"><label for="employmentType">Employment Type:</label></div>
+            <div class="group2"><input type="radio" name="employmentType" value="Sal" checked="checked">
+            Salaried
+            &nbsp;&nbsp;&nbsp;
+            <input type="radio" name="employmentType" value="NotSal">
+            Self Employed</div>
+        </div><br /><hr />
+        <div class="initial1">
+            <div class="group1"><label for="annualIncome">Annual turnover in Last FY (Applicant only) :</label></div>
+            <div class="group2"><input type="text" name="annualIncome" maxlength="10" placeholder="0.00"></div>
+        </div><br /><hr />
+        <div class="initial1">
+            <div class="group1"><label for="typeoffirms">Type Of Firms:</label></div>
+            <div class="group2"><select id="DDL_typeoffirms" name="typeoffirms">
+                <option value="-1">Select</option>
+                <option value="1">Sole Proprietorship</option>
+                <option value="2">Partnership</option>
+                <option value="3">Private Limited</option>
+            </select></div>
+        </div><br /><hr />
+        <div class="initial1">
+            <div class="group1"><label for="gst">Is applicant exempted from GST? (> 40L turnover) :</label></div>
+            <div class="group2"><input type="radio" name="IsExempted" value="1">
+            Yes
+            &nbsp;&nbsp;&nbsp;
+            <input type="radio" name="IsExempted" id="no_IsExempted" value="0" checked="checked">
+            No
+            <div><span style="color: red; font-weight: bold;">[ Please note that misreporting of GST exemption will be penalized. ]</span></div></div>
+        </div><br /><br /><hr />
+        <div class="initial1">
+            <div class="group1"><label for="phno1">Phone Number 1 :</label></div>
+            <div class="group2"><input type="text" placeholder="Phone No 1(Should be 10 digits)" maxlength="10" required=""></div>
+        </div><br /><hr />
+        <div class="initial1">
+            <div class="group1"><label for="phno2">Phone Number 2 :</label></div>
+            <div class="group2"><input type="text" placeholder="Phone No 2(Should be 10 digits)" maxlength="10" required=""></div>
+        </div><br /><hr />
+        <div class="initial1">
+            <div class="group1"><label for="email">Email Address :</label></div>
+            <div class="group2"><input type="text" maxlength="300" placeholder="Customer Email Address"></div>
+        </div><br /><hr />
+        <div class="initial1">
+            <div class="group1"><label for="residentalstatus">Residental Status :</label></div>
+            <div class="group2"><select id="DDL_ResidentialStatus">
+                <option value="Resident Indian">Resident Indian</option>
+                <option value="Non-Resident Indian">Non-Resident Indian</option>
+            </select></div>
+        </div><br /><hr />
+        <div class="initial1">
+            <div class="group1"><label for="residenceAddress"> Residence Address :</label></div>
+            <div class="group2"><input type="text" placeholder="Residence Address" name="residenceAddress" maxlength="300" /></div>
+        </div><br /><hr />
+        <div class="initial1">
+            <div class="group1"><label for="business/emp"> Business/Employee Address :</label></div>
+            <div class="group2"><input type="text" placeholder=" Business/Employee Address" name="residenceAddress" maxlength="300" /></div>
+        </div><br /><hr />
+        <div class="initial1">
+            <div class="group1"><label for="productchosen">Product Chosen :</label></div>
+                <div class="group2"><select id="DDL_ProductInterest">
+                    <option value="1">Purchase of New Property from Builder</option>
+                    <option value="2">Purchase in Co-operative Society</option>
+                    <option value="3">Purchase on Second Sale</option>
+                    <option value="4">Construction on Plot by Govt Bodies</option>
+                    <option value="5">Construction on Plot by Pvt Bodies</option>
+                    <option value="6">Repairs/ Extensions</option>
+                    <option value="7">Commercial Loans</option>
+                    <option value="9">Takeover</option>
+                    <option value="10">Takeover + Construction</option>
+                    <option value="11">Takeover of HSG Loan + Renovation</option>
+                    <option value="12">Takeover of HSG Loan + Mortgage</option>
+                    <option value="13">Home Improvement Loan</option>
+                    <option value="23">Purchase of Land + Construction on the same Land (Composite Loan)</option>
+                    <option value="24">LAP  VALUE OFFER - 2019</option>
+                    <option value="25">HOME IMPROVEMENT LOAN- LOYALTY SCHEME 2019</option>
+                    <option value="26">Repairs &amp; Renovation</option>
+                    <option value="27">Takeover of Repair Renovation Loan</option>
+                    <option value="28">Takeover of Mortgage Loan</option>
+                    <option value="29">Top-up</option>
+                </select></div>
+        </div><br /><hr />
+        <div class="initial1">
+            <div class="group1"><label for="schemechosen">Scheme Chosen :</label></div>
+            <div class="group2"><select id="ddl_Scheme">
+                <option value="0">Select</option>
+                <option value="1">Affordable Housing Loan - Urban &amp; Rural 2019</option>
+                <option value="3">COVID SAVIOUR SCHEME 2020</option>
+                <option value="4">DEFENCE PLUS SCHEME 2020-21 - FLOATING</option>
+                <option value="5">DELHI AGRANTE KAVYAM&nbsp;2019 -&nbsp;FLOATING&nbsp;OFFER</option>
+                <option value="6">DELHI ANDROMIDA PLANET ONE 2019</option>
+                <option value="7">DOCTOR PLUS SCHEME 2020-21 - FLOATING</option>
+                <option value="9">FLOATING RATE OFFER 2020-21</option>
+                <option value="15">GIC RE SPECIAL OFFER - 2017</option>
+                <option value="16">GICHFL EMPLOYEES SCHEME - NEW YEAR 2017&nbsp;</option>
+                <option value="17">HYDERABAD LAKE SIDE ENCLAVE 2020 - FLOATING OFFER</option>
+                <option value="18">LOCKDOWN VALUE&nbsp;OFFER&nbsp;2020 (Q2 &amp; Q3)&nbsp;</option>
+                <option value="19">NAGPUR HIMALAYA SUNSHINE APT - II 2020 - FLOATING OFFER</option>
+                <option value="20">Online Scheme 2020</option>
+                <option value="21">PALGHAR PARSHV GLORY 2020 - FLOATING</option>
+                <option value="24">PRIME CUSTOMER HOUSING SCHEME (SALARIED, SALARIED WOMEN)</option>
+                <option value="25">PUNE SARA CITY 2019 -&nbsp;FLOATING&nbsp;OFFER</option>
+                <option value="26">RENT PLUS SCHEME</option>
+                <option value="27">Sampoorna Scheme</option>
+                <option value="28">SARAL SELF EMPLOYED SCHEME</option>
+                <option value="29">SPECIAL GOVT. EMPLOYEE SCHEME 2020-21 - FLOATING</option>
+                <option value="31">Vinay Niwas Yojana</option>
+            </select></div>
+        </div><br /><hr />
+        <div class="initial1">
+            <div class="group1"><label for="branchname">Branch Name :</label></div>
+            <div class="group2"><select id="DDL_Branch">
+            <option value="-1">Select</option>
+            <option value="2">Bangalore</option>
+            <option value="3">Mumbai</option>
+            <option value="4">Navi Mumbai</option>
+            <option value="5">Chennai</option>
+            <option value="6">Hyderabad</option>
+            <option value="7">Kolkata</option>
+            <option value="8">Coimbatore</option>
+            <option value="9">Kochi</option>
+            <option value="10">Lucknow</option>
+            <option value="11">Delhi</option>
+            <option value="12">Panaji</option>
+            <option value="13">Pune</option>
+            <option value="14">Trivandrum</option>
+            <option value="15">Vizag</option>
+            <option value="17">Panvel</option>
+            <option value="18">Madurai</option>
+            <option value="19">Trichy</option>
+            <option value="21">Noida</option>
+            <option value="23">Thane</option>
+            <option value="27">Chinchwad</option>
+            <option value="29">Chandigarh</option>
+            <option value="30">Bhubaneshwar</option>
+            <option value="31">Jaipur</option>
+            <option value="34">Virar</option>
+            <option value="36">Ludhiana</option>
+            <option value="37">Patiala</option>
+            <option value="41">Nagpur</option>
+            <option value="43">Vadodara</option>
+            <option value="45">Nashik</option>
+            <option value="46">Durgapur</option>
+            <option value="47">Kolhapur</option>
+            <option value="48">Jodhpur</option>
+            <option value="49">Nere Panvel</option>
+            <option value="51">Gurgaon</option>
+            <option value="52">Indore</option>
+            <option value="53">Tambaram</option>
+            <option value="54">Patna</option>
+            <option value="55">Ahmedabad</option>
+            <option value="56">Kalyan</option>
+            <option value="57">Dehradun</option>
+            <option value="58">Borivali</option>
+            <option value="59">Yelahanka</option>
+            <option value="60">Chandanagar</option>
+            <option value="61">Meerut</option>
+            <option value="62">Ghaziabad</option>
+            <option value="63">Boisar</option>
+            <option value="64">Porur</option>
+            <option value="65">MARGAO</option>
+            <option value="66">Dwarka</option>
+            <option value="67">Electronic City</option>
+            <option value="68">Hadapsar</option>
+            <option value="69">LB Nagar</option>
+            <option value="70">Garia</option>
+            <option value="71">Greater Noida</option>
+            <option value="72">Raipur</option>
+            <option value="73">Vijayawada</option>
+            <option value="74">Vasai</option>
+            <option value="75">Pitampura</option>
+            <option value="76">Hinjewadi</option>
+            <option value="77">Barasat</option>
+            <option value="78">Mangalore</option>
+            <option value="79">Guwahati</option>
+            <option value="80">Kozhikode</option>
+            <option value="81">Nellore</option>
+            <option value="82">White field</option>
+            <option value="83">Hubli</option>
+            <option value="84">Siliguri</option>
+            <option value="85">Thrissur</option>
+            <option value="86">Surat</option>
+            <option value="88">Suchitra</option>
+            <option value="89">Kengeri</option>
+            <option value="90">Varanasi</option>
+            <option value="91">OnlineBranch</option>
+                </select></div>
+        </div><br /><hr />
+        <div class="initial1">
+            <div class="group1"><label for="date">Date :</label></div>
+            <div class="group2">@*<input type="text" id="dates" name="date" />*@<p id="dates"></p></div>
+        </div><br /><hr />
+        <div class="initial1">
+            <div class="group1"><label for="comments">Comments :</label></div>
+            <div class="group2"><textarea placeholder="Comments"></textarea></div>
+        </div><br /><br /><hr />
+        <div class="button1">
+            <input id="button1" type="submit" value="Add Lead" onsubmit="#"/>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+
+    n = new Date();
+    y = n.getFullYear();
+    m = n.getMonth() + 1;
+    d = n.getDate();
+    document.getElementById("dates").innerHTML = m + "/" + d + "/" + y;
+</script>

@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 namespace LoanProcessManagement.App.Controllers
 {
     public class LeadListController : Controller
-    #region Lead List MOdule Controller API - Saif Khan - 02/11/2021
-    ///<summary>
-    ///Lead List Module Controller API - 02/11/2021
-    ///Commented By - Saif Khan 
-    ///<returns>leadlistresponse.data</returns>
-    ///</summary>
     {
         private ILeadListService _leadListService;
         public LeadListController(ILeadListService leadListService)
         {
             _leadListService = leadListService;
         }
+        #region Lead List Module Controller API - Saif Khan - 02/11/2021
+        ///<summary>
+        ///Lead List Module Controller API - 02/11/2021
+        ///Commented By - Saif Khan 
+        ///<returns>leadlistresponse.data</returns>
+        ///</summary>
         public async Task<IActionResult> Index(LeadListCommand leadListCommand)
         {
             //LeadListCommand LeadList = new LeadListCommand();
@@ -55,6 +55,14 @@ namespace LoanProcessManagement.App.Controllers
             }
             return View();
         }
+        #endregion
+        public async Task<IActionResult> AddLead()
+        {
+            return View();
+        }
+        public async Task<IActionResult> LeadHistory()
+        {
+            return View();
+        }
     } 
-    #endregion
 }
