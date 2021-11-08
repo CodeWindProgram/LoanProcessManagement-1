@@ -55,6 +55,10 @@ namespace LoanProcessManagement.App.Controllers
             }
             return View();
         }
-    } 
-    #endregion
+        #endregion
+        public async Task<IActionResult> LeadSummary(LeadListCommand leadListCommand)
+        {
+            return View();
+        }
+    }
 }

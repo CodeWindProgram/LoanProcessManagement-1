@@ -96,7 +96,7 @@ namespace LoanProcessManagement.Domain.CustomModels
         public string GoggleLatitude { get; set; }
 
         public string GoggleLongitude { get; set; }
-        public bool IsActive { get; set; } \
+        public bool IsActive { get; set; } 
         #endregion
     }
 }
