@@ -23,15 +23,16 @@ namespace LoanProcessManagement.Persistence.Repositories
         {
             //return await _dbContext.LpmMenuMasters.Where(m => m.Id== id).ToListAsync();
             var result = await (from A in _dbContext.LpmUserRoleMenuMaps
-                          join B in _dbContext.LpmMenuMasters on A.MenuId equals B.Id
-                          where A.UserRoleId == userroleid && A.IsActive == true
-                          select new LpmMenuMaster
-                          {
-                              Position =  B.Position,
-                              Icon = B.Icon,
-                              Link = B.Link,
-                              MenuName = B.MenuName,
-                          }).ToListAsync();
+                                join B in _dbContext.LpmMenuMasters on A.MenuId equals B.Id
+                                where A.UserRoleId == userroleid && A.IsActive == true
+                                orderby B.Position
+                                select new LpmMenuMaster
+                                {
+                                    Position =  B.Position,
+                                    Icon = B.Icon,
+                                    Link = B.Link,
+                                    MenuName = B.MenuName,
+                                }).ToListAsync();
             return result;
         }
     }
