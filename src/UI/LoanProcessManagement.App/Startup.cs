@@ -2,6 +2,7 @@ using LoanProcessManagement.App.Helper.APIHelper;
 using LoanProcessManagement.App.Middleware;
 using LoanProcessManagement.App.Services.Implementation;
 using LoanProcessManagement.App.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -26,6 +27,14 @@ namespace LoanProcessManagement.App
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie("Cookies", options =>
+            {
+                options.LoginPath = "/";
+                options.LogoutPath = "/Login/LogOut";
+                options.ReturnUrlParameter = "ReturnUrl";
+            });
+
             services.AddControllersWithViews();
             services.AddRazorPages();
 
@@ -79,6 +88,16 @@ namespace LoanProcessManagement.App
             //});
 
             app.UseRouting();
+
+            var cookiePolicyOptions = new CookiePolicyOptions
+            {
+                MinimumSameSitePolicy = SameSiteMode.Strict,
+                HttpOnly = Microsoft.AspNetCore.CookiePolicy.HttpOnlyPolicy.Always,
+                Secure = CookieSecurePolicy.None,
+            };
+
+            app.UseCookiePolicy(cookiePolicyOptions);
+
             app.UseAuthentication();
             app.UseAuthorization();
 
