@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace LoanProcessManagement.App.Controllers
 {
-
     public class RegisterController : Controller
     {
         private readonly ICommonServices _commonService;
@@ -48,6 +47,7 @@ namespace LoanProcessManagement.App.Controllers
         /// </summary>
         /// <param name="user">User object </param>
         /// <returns>Add user view</returns>
+        [Route("[controller]/[action]")]
         [HttpPost]
         public async Task<IActionResult> Index(CreateUserCommandVM user)
         {

@@ -61,6 +61,7 @@ namespace LoanProcessManagement.App.Controllers
                     //after login logic
                     var claims = new List<Claim>
                     {
+                        new Claim("Lg_id", authenticateUserResponse.Lg_id),
                         new Claim(ClaimTypes.NameIdentifier, user.EmployeeId.ToString()),
                         new Claim(ClaimTypes.Email, authenticateUserResponse.Email),
                         new Claim(ClaimTypes.Role, authenticateUserResponse.Role),
@@ -124,8 +125,8 @@ namespace LoanProcessManagement.App.Controllers
                 //changePassword.NewPassword = changePasswordCommand.NewPassword;
                 //changePassword.ConfirmPassword = changePasswordCommand.ConfirmPassword;
 
-                changePasswordCommand.lg_id = "LG_3";
-                changePasswordCommand.ModifiedBy = "LG_3";
+                changePasswordCommand.lg_id = User.FindFirst("lg_id").Value;
+                changePasswordCommand.ModifiedBy = User.FindFirst("lg_id").Value;
 
                 var changePasswordResponse = await _accountService.ChangePassword(changePasswordCommand);
 
