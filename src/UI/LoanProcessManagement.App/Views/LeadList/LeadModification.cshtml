@@ -1,0 +1,296 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "LeadModification";
+}
+
+<style>
+    #maindiv, p {
+        border: 1px solid grey;
+    }
+
+    h4 {
+        color: white;
+        text-align: center;
+    }
+
+    .group1 {
+        padding-left: 4px;
+        float: left;
+    }
+
+    .group2 {
+        float: right;
+        width: 65%;
+        padding-right: 4px;
+    }
+
+    .button1 {
+        padding-left: 5px;
+        padding-bottom: 5px;
+        margin-right:10px;
+        display:flex;
+        flex-direction: row;
+        justify-content: end;
+        align-self: end;
+        align-items: end;
+        border-width:0px;
+    }
+
+    #button1 {
+        background-color: darkblue;
+        color: white;
+        
+    }
+
+    input[type=text], textarea, select {
+        width: 100%;
+    }
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+    input:checked + .slider {
+        background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+    .card {
+        /*background-color:slategray;*/
+        background: linear-gradient(to bottom, rgba(251,251,251,10) 0%,rgba(242,242,242,10) 100%);
+        font-family: sans-serif;
+        font-size: 18px;
+        border: 1px solid;
+        margin-top:20px;
+        margin-bottom:20px;
+    }
+    select {
+    border-radius:4px;
+    height:30px;
+    }
+    input {
+        border-radius: 5px;
+    }
+    .buttons {
+    display:flex;
+    flex-direction:row;
+    /*justify-content:center;
+    align-content:center;
+    align-items:center;
+    align-self:center;
+    */
+    }
+    .btn1 {
+    margin-right:7px;
+    padding-left:8px;
+    padding-right:8px;
+    margin-top:7px;
+    }
+</style>
+
+<div class="container app" id="maindiv">
+    <div class="container" id="adduplead" style="background-color:darkblue">
+        <h4>Modification</h4>
+    </div>
+    <form method="post" action="#">
+        <br /><br />
+
+        <div class="initial1">
+            <div class="group1"><label for="status_lead">Status of Lead</label></div>
+            <div class="group2">
+                <select id="status_lead" name="status_lead">
+                    <option value="Converted Lead">Converted Lead</option>
+                    <option value="Branch (Data Entry)">Branch (Data Entry)</option>
+                    <option value="Lost Lead">Lost Lead</option>
+                </select>
+            </div>
+        </div><br /><br>
+
+        <div class="initial1">
+            <div class="group1"><label for="residential_status">Residential Status</label></div>
+            <div class="group2">
+                <select id="residential_status" name="residential_status">
+                    <option value="Resident Indian">Resident Indian</option>
+
+                </select>
+            </div>
+        </div><br /><hr />
+
+        <div class="initial1">
+            <div class="group1"><label for="employement">Employment / Business classification:</label></div>
+            <div class="group2"><input type="text" name="employement" placeholder="Please enter and select employement/Business classification" value="" /></div>
+        </div><br />
+
+        <div class="card initial1">
+            <h5>Freedom Logsheet</h5>
+        </div>
+
+        <div class="initial1">
+            <div class="group1">
+                <label for="request_edit_sanction" style="margin-right:250px">Request edit sanction:</label>
+            </div>
+            <label class="switch ml-4">
+                <input type="checkbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
+
+        <div class="initial1">
+            <div class="group1"><label for="comments">Comments:</label></div>
+            <div class="group2"><input type="text" name="comments" placeholder="Comments"></div>
+        </div><br /><br>
+
+        <div class="initial1">
+            <div class="group1"><label for="Status">Status</label></div>
+            <div class="group2">
+                <select id="Status" name="Status">
+                    <option value="-1">Select</option>
+                </select>
+            </div>
+        </div><br />
+
+        <div class="card initial1">
+            <h5>Loan Product</h5>
+        </div>
+
+        <div class="initial1">
+            <div class="group1"><label for="property_purchase_loan">Product Sold(if sale made)</label></div>
+            <div class="group2">
+                <select id="property_purchase_loan" name="property_purchase_loan">
+                    <option value="-1">Purchase of new property from builder</option>
+                </select>
+            </div>
+        </div><br /><br>
+
+        <div class="initial1">
+            <div class="group1"><label for="Form_No">Form No:</label></div>
+            <div class="group2"><input type="text" name="Form_No" placeholder="212226"></div>
+        </div><br /><br>
+
+        <div class="initial1">
+            <div class="group1"><label for="amount">Amount(in INR):</label></div>
+            <div class="group2"><input type="text" name="amount" placeholder="5000000"></div>
+        </div><br /><br>
+
+
+        <div class="card initial1">
+            <h5>Insurance Product</h5>
+        </div>
+
+        <div class="initial1">
+            <div class="group1"><label for="property_purchase_insurance">Product Sold(if sale made)</label></div>
+            <div class="group2">
+                <select id="property_purchase_insurance" name="property_purchase_loan">
+                    <option value="-1">Select</option>
+                    <option value="-2">Future Generali</option>
+                    <option value="-3">Kotak Life Insurance</option>
+                    <option value="-4">Birla sunlife</option>
+                    <option value="-5">To be decided</option>
+                    <option value="-6">Tata AIG</option>
+                </select>
+            </div>
+        </div><br /><br>
+
+        <div class="initial1">
+            <div class="group1"><label for="Form_No_insurance">Form No:</label></div>
+            <div class="group2"><input type="text" name="Form_No_insurance" placeholder="212226"></div>
+        </div><br /><br>
+
+        <div class="initial1">
+            <div class="group1"><label for="amount_insurance">Amount(in INR):</label></div>
+            <div class="group2"><input type="text" name="amount_insurance" placeholder="60000"></div>
+        </div><br /><br>
+
+        <div class="card initial1">
+            <h5>Date of Action</h5>
+        </div>
+
+        <div class="initial1">
+            <div class="group1"><label for="date">Date :</label></div>
+            <div class="group2"><p id="dates"></p></div>            
+        </div><br /><br>
+        <div class="initial1">
+            <div class="group1"><label for="comments">Comments</label></div>
+            <div class="group2"><textarea placeholder="Comments"></textarea></div>
+        </div><br /><br /><br>
+        <div class="button1 d-flex flex-row justify-content-end">
+            <input id="button1" type="submit" value="Submit" onsubmit="#" class="button"/>
+        </div>
+    </form>
+    
+</div>
+<div class="container app">
+    <div class="buttons">
+
+        <button class="btn btn-primary btn1">Summary</button>
+        <button class="btn btn-primary btn1">Modification</button>
+        <button class="btn btn-primary btn1">History</button>
+        <button class="btn btn-primary btn1">Query History</button>
+        <button class="btn btn-primary btn1">Products</button>
+        <button class="btn btn-primary btn1">Property Details</button>
+</div>
+    </div>
+
+
+    <script type="text/javascript">
+
+        n = new Date();
+        y = n.getFullYear();
+        m = n.getMonth() + 1;
+        d = n.getDate();
+        document.getElementById("dates").innerHTML = m + "/" + d + "/" + y;
+
+        // Data Picker Initialization
+        $('.datepicker').datepicker();
+    </script>

@@ -69,6 +69,14 @@ namespace LoanProcessManagement.App.Controllers
         {
             return View();
         }
+        public async Task<IActionResult> LeadProducts(LeadListCommand leadListCommand)
+        {
+            return View();
+        }
+        public async Task<IActionResult> LeadModification()
+        {
+            return View();
+        }
     }
     
 }
