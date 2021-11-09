@@ -26,7 +26,7 @@
                     @if (ViewBag.isSuccess == true)
                     {
                         <div class="alert alert-success" role="alert">
-                            <strong>Well done!</strong> @ViewBag.Message <a asp-controller="userlist" asp-action="index">Check user list</a>
+                            @ViewBag.Message <a asp-controller="userlist" asp-action="index">Go to user list</a>
                         </div>
                     }
                     else if (ViewBag.isSuccess == false)

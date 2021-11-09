@@ -18,8 +18,8 @@
 </style>
 <div class="container">
     <div class="row text-primary">
-        <div class="col-md-6">Welcome : @User.Identity.Name</div>
-        <div class="col-md-6 text-right">Branch : @User.FindFirst("Branch").Value</div>
+        <div class="col-md-6"><h5>Welcome : <span style="text-transform:uppercase">@User.Identity.Name</span></h5></div>
+        <div class="col-md-6 text-right"><h5>Branch : <span style="text-transform:uppercase">@User.FindFirst("Branch").Value</span></h5></div>
     </div>
 </div>
 <hr />
