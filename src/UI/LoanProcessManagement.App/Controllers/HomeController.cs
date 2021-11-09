@@ -12,8 +12,8 @@ namespace LoanProcessManagement.App.Controllers
     [Route("Home")]
     public class HomeController : Controller
     {
-        private IAccountService _accountService;
-        private IMenuService _menuService;
+        private readonly IAccountService _accountService;
+        private readonly IMenuService _menuService;
         public HomeController(IAccountService accountService, IMenuService menuService)
         {
             _accountService = accountService;

@@ -24,7 +24,7 @@ namespace LoanProcessManagement.App.Controllers
     [Route("[controller]/[action]")]
     public class LoginController : Controller
     {
-        private IAccountService _accountService;
+        private readonly IAccountService _accountService;
         private readonly ICommonServices _commonService;
 
         public LoginController(IAccountService accountService, ICommonServices commonService)
@@ -352,17 +352,9 @@ namespace LoanProcessManagement.App.Controllers
             if (ModelState.IsValid)
             {
                 var response = await _accountService.UpdateUser(user);
-                if (response.Succeeded)
-                {
-                    ViewBag.isSuccess = response.Succeeded;
-                    ViewBag.Message = response.Data.Message;
-                }
-                else
-                {
-                    ViewBag.isSuccess = response.Succeeded;
-                    ViewBag.Message = response.Data.Message;
+                ViewBag.isSuccess = response.Succeeded;
+                ViewBag.Message = response.Data.Message;
 
-                }
             }
             var roles = await _commonService.GetAllRoles();
             ViewBag.roles = new SelectList(roles, "Id", "Rolename");

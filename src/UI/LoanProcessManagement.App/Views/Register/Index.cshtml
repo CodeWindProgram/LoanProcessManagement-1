@@ -99,5 +99,12 @@
         </div>
     </div>
 </div>
+<script>
+    $("form").submit(function () {
+        if ($('form').valid()) {
+            $("#btnSignIn").prop('disabled', true);
+        }
+    });
+</script>
 
 

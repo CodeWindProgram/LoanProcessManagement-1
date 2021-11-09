@@ -54,17 +54,8 @@ namespace LoanProcessManagement.App.Controllers
             if (ModelState.IsValid)
             {
                 var response = await _accountService.RegisterUser(user);
-                if (response.Succeeded)
-                {
-                    ViewBag.isSuccess = response.Succeeded;
-                    ViewBag.Message = response.Data.Message;
-                }
-                else
-                {
-                    ViewBag.isSuccess = response.Succeeded;
-                    ViewBag.Message = response.Data.Message;
-
-                }
+                ViewBag.isSuccess = response.Succeeded;
+                ViewBag.Message = response.Data.Message;
             }
             var roles = await _commonService.GetAllRoles();
             ViewBag.roles = new SelectList(roles, "Id", "Rolename");
