@@ -34,6 +34,8 @@ namespace LoanProcessManagement.Persistence
         public DbSet<LpmLeadMaster> LpmLeadMasters { get; set; }
         public DbSet<LpmLeadStatusMaster> LpmLeadStatusMasters { get; set; }
         public DbSet<LpmLoanProductMaster> LpmLoanProductMasters { get; set; }
+        public DbSet<LpmLoanSchemeMaster> LpmLoanSchemeMasters { get; set; }
+        public DbSet<LpmLoanProductSchemeMapping> LpmLoanProductSchemeMappings { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

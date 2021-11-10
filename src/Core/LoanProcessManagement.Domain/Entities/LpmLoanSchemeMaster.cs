@@ -7,22 +7,13 @@ using System.Text;
 
 namespace LoanProcessManagement.Domain.Entities
 {
-    public class LpmLoanProductMaster : AuditableEntity
+    public class LpmLoanSchemeMaster : AuditableEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
-
-        public string ProductType { get; set; }
-
-        public string ProductName { get; set; }
-
-        public string ProducDescription { get; set; }
-
-        public int SerialOrder { get; set; }
-
+        public string SchemeName { get; set; }
         public bool IsActive { get; set; }
-        public ICollection<LpmLeadMaster> LpmLeadMasters { get; set; }
-        public ICollection<LpmLoanProductSchemeMapping> LpmLoanProductSchemeMappings { get; set; }
+        public virtual ICollection<LpmLoanProductSchemeMapping> LpmLoanProductSchemeMappings { get; set; }
     }
 }

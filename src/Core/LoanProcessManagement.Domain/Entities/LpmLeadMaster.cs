@@ -70,6 +70,8 @@ namespace LoanProcessManagement.Domain.Entities
 
         public string NationalityType { get; set; }
 
+        public string PropertyType { get; set; }
+
         public string IsPropertyIdentified { get; set; }
 
         public string PropertyPincode { get; set; }
