@@ -10,7 +10,7 @@ namespace LoanProcessManagement.Domain.Entities
     public class LpmLeadMaster : AuditableEntity
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
 
         public string lead_Id { get; set; }
@@ -69,9 +69,9 @@ namespace LoanProcessManagement.Domain.Entities
         public string EmploymentType { get; set; }
 
         public string NationalityType { get; set; }
-
-        public string PropertyType { get; set; }
-
+        public long? PropertyID { get; set; }
+        public LpmLoanPropertyType PropertyTypes { get; set; }
+        
         public string IsPropertyIdentified { get; set; }
 
         public string PropertyPincode { get; set; }
@@ -84,7 +84,8 @@ namespace LoanProcessManagement.Domain.Entities
 
         public string ProjectAddress { get; set; }
 
-        public string IsSanctionedPlanReceived { get; set; }
+        public long? IsSanctionedPlanReceivedID { get; set; }
+        public LpmLoanSanctionedPlan SanctionedPlans { get; set; }
 
         public long LostLeadReasonID { get; set; }
 
