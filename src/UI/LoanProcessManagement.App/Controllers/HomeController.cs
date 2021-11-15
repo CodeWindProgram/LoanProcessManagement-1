@@ -1,4 +1,8 @@
-﻿using LoanProcessManagement.App.Services.Interfaces;
+﻿using LoanProcessManagement.App.Models;
+using LoanProcessManagement.App.Services.Interfaces;
+using LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands;
+using LoanProcessManagement.Application.Features.Menu.Commands.DeleteCommand;
+using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand;
 using LoanProcessManagement.Application.Features.Menu.Query;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -46,6 +50,87 @@ namespace LoanProcessManagement.App.Controllers
             }
             return View();
         }
-        #endregion       
+        #endregion
+
+        #region Calling the API for the Create Menu - Saif Khan - 11//11/2021
+        /// <summary>
+        /// Calling the API for the Create Menu - 11//11/2021
+        /// Commented By Saif Khan
+        /// </summary>
+        /// <returns>View</returns>
+        [HttpGet("/MenuCreate")]
+        public IActionResult CreateMenu()
+        {
+            return View();
+        }
+
+        [HttpPost("/MenuCreate")]
+        public async Task<IActionResult> CreateMenu(CreateMenuCommand createMenuCommand)
+        {
+            var message = "";
+
+            if (ModelState.IsValid)
+            {
+                var createmenuresponse = await _menuService.CreateMenu(createMenuCommand);
+
+                if (createmenuresponse.Succeeded)
+                {
+                    message = createmenuresponse.Message;
+                    ViewBag.Issuccesflag = true;
+                    ViewBag.Message = message;
+                }
+                else
+                {
+                    message = createmenuresponse.Message;
+                    ViewBag.Issuccesflag = false;
+                    ViewBag.Message = message;
+                }
+            }
+            return View();
+        }
+        #endregion
+
+        #region Calling API for Updtae Menu - Saif Khan - 11/11/2021
+        /// <summary>
+        /// Calling API for Updtae Menu - Saif Khan - 11/11/2021
+        /// </summary>
+        /// <returns>View</returns>
+        [HttpGet("/MenuUpdate")]
+        public IActionResult UpdateMenu()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateMenu(UpdateMenuCommand user)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _menuService.UpdateMenu(user);
+                ViewBag.isSuccess = response.Succeeded;
+                ViewBag.Message = response.Data.Message;
+
+            }
+            return View();
+        }
+        #endregion
+
+        #region Calling API fro the Delete Menu - Saif Khan - 11/11/2021
+        /// <summary>
+        /// Calling API fro the Delete Menu - Saif Khan - 11/11/2021
+        /// </summary>
+        [HttpGet("/MenuDelete")]
+        public IActionResult DeleteMenu()
+        {
+            return View();
+        }
+        [HttpPost("DeleteMenu")]
+        //[Route("{Id}")]
+        public async Task<IActionResult> DeleteMenu(DeleteMenuVm deleteMenuCommand)
+        {
+            var response = await _menuService.DeleteMenu(deleteMenuCommand.Id);
+            return RedirectToAction("Index");
+        } 
+        #endregion
     }
 }

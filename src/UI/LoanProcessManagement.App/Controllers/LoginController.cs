@@ -150,8 +150,6 @@ namespace LoanProcessManagement.App.Controllers
 
         #endregion
 
-
-
         #region Forgot password functionality - Ramya Guduru - 27/10/2021
         /// <summary>
         /// 2021/10/27 - Forgot password functionality
@@ -195,7 +193,6 @@ namespace LoanProcessManagement.App.Controllers
             return View();
         }
         #endregion
-
 
         #region UnlockUserAccount functionality - Ramya Guduru - 29/10/2021
         /// <summary>
@@ -337,7 +334,6 @@ namespace LoanProcessManagement.App.Controllers
             return View(user);
         }
         #endregion
-
 
         #region This method will call update user api by - Akshay Pawar - 01/11/2021
         /// <summary>

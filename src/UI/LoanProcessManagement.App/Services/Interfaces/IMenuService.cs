@@ -1,4 +1,7 @@
-﻿using LoanProcessManagement.Application.Features.Menu.Query;
+﻿using LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands;
+using LoanProcessManagement.Application.Features.Menu.Commands.DeleteCommand;
+using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand;
+using LoanProcessManagement.Application.Features.Menu.Query;
 using LoanProcessManagement.Application.Responses;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,6 +13,13 @@ namespace LoanProcessManagement.App.Services.Interfaces
     public interface IMenuService
     {
         public Task<Response<IEnumerable<GetMenuMasterServicesVm>>> MenuProcess(GetMenuMasterServicesQuery menuProcess);
+
+        public Task<Response<CreateMenuCommandDto>> CreateMenu(CreateMenuCommand menuCreate);
+
+        public Task<Response<UpdateMenuCommandDto>> UpdateMenu(UpdateMenuCommand menuUpdate);
+
+        public Task<Response<DeleteMenuCommandDto>> DeleteMenu(long Id);
+
     } 
     #endregion
 }

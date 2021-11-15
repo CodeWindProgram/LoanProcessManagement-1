@@ -1,4 +1,7 @@
-﻿using LoanProcessManagement.Application.Features.Menu.Query;
+﻿using LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands;
+using LoanProcessManagement.Application.Features.Menu.Commands.DeleteCommand;
+using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand;
+using LoanProcessManagement.Application.Features.Menu.Query;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,29 +25,58 @@ namespace LoanProcessManagement.Api.Controllers.v1
             _logger = logger;
             _mediator = mediator;
         }
-        #region Created Logger for Menu Service - Saif Khan - 28/20/2021
-        /// <summary>
-        /// 28/20/2021 - Logger for Menu Services
-        /// commented by Saif Khan
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet("all", Name = "GetAllMenus")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> GetAllMenus()
-        {
-            _logger.LogInformation("GetAllMenus Initiated");
-            var dtos = await _mediator.Send(new GetMenuMasterServicesQuery());
-            _logger.LogInformation("GetAllMenus Completed");
-            return Ok(dtos);
-        } 
-        #endregion
 
-        #region Fetch Femu List By User ID - Saif Khan - 28/10/2021
+        #region Fetch Menu List By User ID - Saif Khan - 28/10/2021
 
         [HttpPost(Name = "Menu")]
         public async Task<IActionResult> Index([FromBody] GetMenuMasterServicesQuery getMenuMasterDetailQuery)
         {
             return Ok(await _mediator.Send(getMenuMasterDetailQuery));
+        }
+        #endregion
+
+        #region Create Menu - Saif Khan - 10/11/2021
+        /// <summary>
+        /// Create Menu - Saif Khan - 10/11/2021
+        /// </summary>
+        /// <param name="createMenuCommand"></param>
+        /// <returns></returns>
+        [HttpPost("Create", Name = "CreateMenu")]
+        public async Task<IActionResult> CreateMenu([FromBody] CreateMenuCommand createMenuCommand)
+        {
+            return Ok(await _mediator.Send(createMenuCommand));
+        } 
+        #endregion
+
+        #region Delete Menu By Id - Saif Khan - 10-11-2021
+        /// <summary>
+        /// Delete Menu By Id - Saif Khan - 10-11-2021
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        [HttpPost("removeMenu/{Id}")]
+        public async Task<ActionResult> DeleteMenu([FromRoute] long Id)
+        {
+            _logger.LogInformation("RemoveMenu Initiated");
+            var dtos = await _mediator.Send(new DeleteMenuCommand(Id));
+            _logger.LogInformation("RemoveMenu Completed");
+            return Ok(dtos);
+        }
+        #endregion
+
+        #region Update Menu By Id - Saif Khan - 10-11-2021
+        /// <summary>
+        /// Update Menu By Id - Saif Khan - 10-11-2021
+        /// </summary>
+        /// <param name="menuCommand"></param>
+        /// <returns></returns>
+        [HttpPut("updateMenu")]
+        public async Task<ActionResult> UpdateMenu([FromBody] UpdateMenuCommand menuCommand)
+        {
+            _logger.LogInformation("UpdateMenu Initiated");
+            var dtos = await _mediator.Send(menuCommand);
+            _logger.LogInformation("UpdateMenu Completed");
+            return Ok(dtos);
         } 
         #endregion
     }

@@ -24,6 +24,7 @@ using LoanProcessManagement.Domain.Entities;
 using System.Collections.Generic;
 using LoanProcessManagement.Application.Features.LeadList.Commands;
 using LoanProcessManagement.Application.Features.User.Queries;
+using LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands;
 
 namespace LoanProcessManagement.Application.Profiles
 {
@@ -45,6 +46,9 @@ namespace LoanProcessManagement.Application.Profiles
             #endregion
             CreateMap<LpmUserMaster, GetUserListQueryVm>().ReverseMap();
             CreateMap<LeadListModel, LeadListCommandDto>().ReverseMap();
+
+            CreateMap<LpmMenuMaster, CreateMenuCommandDto>().ReverseMap();
+            CreateMap<LpmMenuMaster, CreateMenuCommand>().ReverseMap();
 
             CreateMap<Category, CategoryDto>();
             CreateMap<Category, CategoryListVm>();

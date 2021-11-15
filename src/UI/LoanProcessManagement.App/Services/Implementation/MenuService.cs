@@ -1,5 +1,8 @@
 ﻿using LoanProcessManagement.App.Helper.APIHelper;
 using LoanProcessManagement.App.Services.Interfaces;
+using LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands;
+using LoanProcessManagement.Application.Features.Menu.Commands.DeleteCommand;
+using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand;
 using LoanProcessManagement.Application.Features.Menu.Query;
 using LoanProcessManagement.Application.Responses;
 using Microsoft.Extensions.Options;
@@ -56,8 +59,97 @@ namespace LoanProcessManagement.App.Services.Implementation
             var model = System.Text.Json.JsonSerializer.Deserialize<Response<IEnumerable<GetMenuMasterServicesVm>>>(jsonString, options);
 
             return model;
-        } 
+        }
         #endregion
-    } 
+
+        #region Calling API for Create Menu - Saif Khan - 11/11/2021
+        /// <summary>
+        /// Calling API for Create Menu - Saif Khan - 11/11/2021
+        /// </summary>
+        /// <param name="menuCreate"></param>
+        /// <returns></returns>
+        public async Task<Response<CreateMenuCommandDto>> CreateMenu(CreateMenuCommand menuCreate)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var content = JsonConvert.SerializeObject(menuCreate);
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.PostAsync
+                (
+                    BaseUrl + APIEndpoints.MenuCreate,
+                    new StringContent(content, Encoding.Default,
+                    "application/json")
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<Response<CreateMenuCommandDto>>(jsonString, options);
+
+            return model;
+        }
+        #endregion
+
+        #region Calling API for Update Menu - Saif Khan - 11/11/2021
+        /// <summary>
+        /// Calling API for Create Menu - Saif Khan - 11/11/2021
+        /// </summary>
+        /// <param name="menuUpdate"></param>
+        /// <returns></returns>
+        public async Task<Response<UpdateMenuCommandDto>> UpdateMenu(UpdateMenuCommand menuUpdate)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var content = JsonConvert.SerializeObject(menuUpdate);
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.PutAsync
+                (
+                    BaseUrl + APIEndpoints.MenuUpdate,
+                    new StringContent(content, Encoding.Default,
+                    "application/json")
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<Response<UpdateMenuCommandDto>>(jsonString, options);
+
+            return model;
+        }
+        #endregion
+
+        #region Calling API for Delete Menu - Saif Khan - 11/11/2021
+        /// <summary>
+        /// Calling API for Create Menu - Saif Khan - 11/11/2021
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public async Task<Response<DeleteMenuCommandDto>> DeleteMenu(long Id)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.PostAsync
+                (
+                    BaseUrl + APIEndpoints.MenuDelete + Id,null
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<Response<DeleteMenuCommandDto>>(jsonString, options);
+
+            return model;
+        }
+        #endregion
+    }
     #endregion
 }

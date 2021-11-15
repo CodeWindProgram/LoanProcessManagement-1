@@ -1,4 +1,7 @@
-﻿using LoanProcessManagement.Application.Features.Menu.Query;
+﻿using LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands;
+using LoanProcessManagement.Application.Features.Menu.Commands.DeleteCommand;
+using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand;
+using LoanProcessManagement.Application.Features.Menu.Query;
 using LoanProcessManagement.Domain.CustomModels;
 using LoanProcessManagement.Domain.Entities;
 using System.Collections.Generic;
@@ -16,6 +19,12 @@ namespace LoanProcessManagement.Application.Contracts.Persistence
     public interface IMenuRepository : IAsyncRepository<LpmMenuMaster>
     {
         Task<List<LpmMenuMaster>> GetMenuMasterService(long UserRoleId);
+
+        Task<LpmMenuMaster> CreateMenu(LpmMenuMaster request);
+
+        Task<DeleteMenuCommandDto> DeleteMenu( long Id);
+
+        Task<UpdateMenuCommandDto> UpdateMenu(long Id, UpdateMenuCommand request);
     }
     #endregion
 }

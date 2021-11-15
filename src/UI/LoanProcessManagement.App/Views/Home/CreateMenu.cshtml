@@ -1,0 +1,94 @@
+﻿@model LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands.CreateMenuCommand
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "CreateMenu";
+}
+<style type="text/css">
+    #pswd_info {
+        position: relative;
+        left: 20px;
+        right: 40px;
+        width: 70%;
+        padding: 15px;
+        background: #fefefe;
+        font-family: Arial;
+        font-size: 15px;
+        color: #444;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px #ccc;
+        border: 1px solid #ddd;
+    }
+
+        #pswd_info::before {
+            content: "\25B2";
+            position: relative;
+            top: -19px;
+            left: 45%;
+            font-size: 16px;
+            line-height: 14px;
+            color: #ddd;
+            text-shadow: none;
+            display: block;
+        }
+    input[type=submit] {
+        color: white;
+        background-color: #191970;
+    }
+    .border-part{
+        padding-left:60px;
+        padding-right:60px;
+    }
+
+</style>
+<div class="container app">
+    <div class="col-sm-12 col-lg-12">
+        <div data-effect="helix" id="panels" class="panel panel-info effect-helix in">
+            <div class="panel-heading">
+                Create Menu
+            </div>
+            <div class="panel-body">
+                <div class="border-part">
+                    <form asp-action="CreateMenu">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="MenuName" class="control-label"></label>
+                            <input asp-for="MenuName" class="form-control" />
+                            <span asp-validation-for="MenuName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Link" class="control-label"></label>
+                            <input asp-for="Link" class="form-control" />
+                            <span asp-validation-for="Link" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Icon" class="control-label"></label>
+                            <input asp-for="Icon" class="form-control" />
+                            <span asp-validation-for="Icon" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Position" class="control-label"></label>
+                            <input asp-for="Position" class="form-control" />
+                            <span asp-validation-for="Position" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CreatedDate" class="control-label"></label>
+                            <input asp-for="CreatedDate" class="form-control" />
+                            <span asp-validation-for="CreatedDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-default" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
