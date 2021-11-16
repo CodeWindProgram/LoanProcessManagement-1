@@ -100,6 +100,15 @@ namespace LoanProcessManagement.Domain.Entities
         public string GoggleLatitude { get; set; }
 
         public string GoggleLongitude { get; set; }
+
         public bool IsActive { get; set; }
+
+        public string AnnualTurnOverInLastFy { get; set; }
+
+        public string IsApplicantExemptedFromGst { get; set; }
+
+        public string ExemptedCategory { get; set; }
+
+        public string TypeOfFirms { get; set; }
     }
 }
