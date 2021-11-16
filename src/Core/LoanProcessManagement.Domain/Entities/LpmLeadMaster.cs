@@ -110,5 +110,7 @@ namespace LoanProcessManagement.Domain.Entities
         public string ExemptedCategory { get; set; }
 
         public string TypeOfFirms { get; set; }
+        public ICollection<LpmLeadProcessCycle> LpmLeadProcessCycle { get; set; }
+
     }
 }
