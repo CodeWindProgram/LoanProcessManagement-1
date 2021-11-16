@@ -41,5 +41,13 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string ForgotPassword = "api/v1/ForgotPassword/ForgotPassword";
         #endregion
         public const string LeadList = "api/v1/LeadList";
+
+        public const string GetProperty = "api/v1/PropertyDetails/getProperty/";
+        public const string GetPropertyType = "api/v1/PropertyType/GetPropertyTypes";
+        public const string GetSanctionedPlan = "api/v1/SanctionedPlanReceived/GetSanctionedPlan";
+        public const string UpdateProperties = "api/v1/PropertyDetails/updateProperty";
+
+        public const string AllProductsList = "api/v1/Products/GetProductsList/";
+
     }
 }

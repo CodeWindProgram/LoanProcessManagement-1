@@ -26,6 +26,12 @@ namespace LoanProcessManagement.Persistence.Repositories
             return await _dbContext.Set<T>().FindAsync(id);
         }
 
+
+        public virtual async Task<T> GetByIdAsync(long id)
+        {
+            return await _dbContext.Set<T>().FindAsync(id);
+        }
+
         public async Task<IReadOnlyList<T>> ListAllAsync()
         {
             _logger.LogInformation("ListAllAsync Initiated");
@@ -59,6 +65,11 @@ namespace LoanProcessManagement.Persistence.Repositories
         public async Task<T> MenuAsync(string Lg_ID)
         {
             return await _dbContext.Set<T>().FindAsync(Lg_ID);
+        }
+
+        public async Task<T> GetByNameAsync(string RoleName)
+        {
+            return await _dbContext.Set<T>().FindAsync(RoleName);
         }
     }
 }

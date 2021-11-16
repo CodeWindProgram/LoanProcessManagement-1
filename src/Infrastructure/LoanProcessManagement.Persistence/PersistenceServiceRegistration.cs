@@ -30,8 +30,9 @@ namespace LoanProcessManagement.Persistence
             services.AddScoped<IMenuRepository, MenuRepository>();
             services.AddScoped<IUserListRepository, UserListRepository>();
             services.AddScoped<ILeadListRepository, LeadListRepository>();
-
-
+            services.AddScoped<IRoleMasterRepository, RoleMasterRepository>();
+            services.AddScoped<IPropertyDetailsRepository,PropertyDetailsRepository>();
+            services.AddScoped<IProductsRepository, ProductsRepository>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>

@@ -1,0 +1,93 @@
+﻿@model IEnumerable<LoanProcessManagement.Application.Features.ProductsList.Queries.GetProductsListQueryVm>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "AllProductsList";
+}
+
+<style>
+    table {
+    font-size:20px;
+    }
+
+</style>
+
+<div class="container app">
+    <div class="col-sm-12">
+        <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
+            <div class="panel-heading">Products</div>
+            <div class="panel-body">
+            </div>
+            <div id="alertMsg" visible="false" runat="server">
+                <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
+                <div style="margin-bottom: 10px"></div>
+            </div>
+            <div class=" card">
+                <div class="card">
+                    <table id="tblProducts" class="table">
+                        <thead>
+                            <tr>
+
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ProductName)
+                                    
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FormNo)
+                                </th>
+                                <th>
+                                     @Html.DisplayNameFor(model => model.Amount) 
+                                    
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ProductName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FormNo)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Amount)
+                                        </td>
+                                        
+                                    </tr>
+                                }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex flex-row justify-content-around">
+        <button class="btn btn-primary">Summary</button>
+        <button class="btn btn-primary">Modification</button>
+        <button class="btn btn-primary">History</button>
+        <button class="btn btn-primary">Query History</button>
+        <button class="btn btn-primary">Products</button>
+        <button class="btn btn-primary">Property Details</button>
+    </div>
+</div>
+<script>
+        $(document).ready(function () {
+            var usrTable = $('#tblProducts').dataTable({
+                "oLanguage": {
+                    "sZeroRecords": "No records to display",
+                    "sSearch": "Search "
+                },
+                "iDisplayLength": 15,
+                "aLengthMenu": [[25, 50, 100, 200, 500], [25, 50, 100, 200, 500]],
+                "bSortClasses": false,
+                "bPaginate": true,
+                "bAutoWidth": false,
+                "bProcessing": true,
+                "bDestroy": true
+		    });
+        });
+</script>
+
+

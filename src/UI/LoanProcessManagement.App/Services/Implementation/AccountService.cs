@@ -3,6 +3,11 @@ using LoanProcessManagement.App.Models;
 using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.ChangePassword.Commands.ChangePassword;
 using LoanProcessManagement.Application.Features.ForgotPassword.Commands.ForgotPassword;
+using LoanProcessManagement.Application.Features.ProductsList.Queries;
+using LoanProcessManagement.Application.Features.PropertyDetails.Commands.UpdatePropertyDetails;
+using LoanProcessManagement.Application.Features.PropertyDetails.Queries;
+using LoanProcessManagement.Application.Features.PropertyType.Queries;
+using LoanProcessManagement.Application.Features.SanctionedPlanReceived.Queries;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.ActivateUserAccount;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockAndResetPassword;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockUserAccount;
@@ -15,6 +20,7 @@ using LoanProcessManagement.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -350,7 +356,112 @@ namespace LoanProcessManagement.App.Services.Implementation
             var response = System.Text.Json.JsonSerializer.Deserialize<Response<UpdateUserDto>>(jsonString, options);
 
             return response;
-        } 
+        }
         #endregion
+
+
+        #region This method will call actual api and return response for getproperty type, sanctioned plans and all property details API - Ramya Guduru - 28/10/2021
+        /// <summary>
+        /// 2021/10/28 - get property details API call
+        //	commented by Ramya Guduru
+        /// </summary>
+        /// <param name="get Property Details">Get Property Details model parameters</param>
+        /// <returns>Response</returns>
+        public async Task<Response<GetPropertyDetailsDto>> GetProperty(string lead_Id)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.GetAsync
+                (
+                    BaseUrl + APIEndpoints.GetProperty + lead_Id
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var response = System.Text.Json.JsonSerializer.Deserialize<Response<GetPropertyDetailsDto>>(jsonString, options);
+
+            return response;
+        }
+
+        public async Task<IEnumerable<GetAllpropertyTypeDto>> GetAllPropertyType()
+        {
+            //throw new NotImplementedException();
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.GetAsync
+                (
+                    BaseUrl + APIEndpoints.GetPropertyType
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var response = System.Text.Json.JsonSerializer.Deserialize<IEnumerable<GetAllpropertyTypeDto>>(jsonString, options);
+
+            return response;
+        }
+
+        public async Task<IEnumerable<GetSanctionedPlanDto>> GetSanctionedPlan()
+        {
+            //throw new NotImplementedException();
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.GetAsync
+                (
+                    BaseUrl + APIEndpoints.GetSanctionedPlan
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var response = System.Text.Json.JsonSerializer.Deserialize<IEnumerable<GetSanctionedPlanDto>>(jsonString, options);
+
+            return response;
+        }
+        #endregion
+
+        #region This method will call update property details api by - Ramya Guduru - 15/11/2021
+        /// <summary>
+        /// 01/11/2021 - This method will call update property details api
+        //	commented by Ramya Guduru
+        /// </summary>
+        /// <param name="Property">Property</param>
+        /// <returns>UpdatePropertyDetailsDto</returns>
+        public async Task<Response<UpdatePropertyDetailsDto>> UpdateProperty(UpdatePropertyDetailsCommand property)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var content = JsonConvert.SerializeObject(property);
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.PutAsync
+                (
+                    BaseUrl + APIEndpoints.UpdateProperties,
+                    new StringContent(content, Encoding.Default,
+                    "application/json")
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<Response<UpdatePropertyDetailsDto>>(jsonString, options);
+
+            return model;
+        }
+        #endregion
+
     }
 }
+

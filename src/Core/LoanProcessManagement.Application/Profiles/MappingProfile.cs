@@ -24,6 +24,14 @@ using LoanProcessManagement.Domain.Entities;
 using System.Collections.Generic;
 using LoanProcessManagement.Application.Features.LeadList.Commands;
 using LoanProcessManagement.Application.Features.User.Queries;
+using LoanProcessManagement.Application.Features.RoleMaster.Commands.CreateRoleMaster;
+using LoanProcessManagement.Application.Features.RoleMaster.Commands.UpdateRoleMaster;
+using LoanProcessManagement.Application.Features.RoleMaster.Commands.DeleteRoleMaster;
+using LoanProcessManagement.Application.Features.RoleMaster.Queries.GetRoleMasterList;
+using LoanProcessManagement.Application.Features.PropertyDetails.Queries;
+using LoanProcessManagement.Application.Features.PropertyType.Queries;
+using LoanProcessManagement.Application.Features.SanctionedPlanReceived.Queries;
+using LoanProcessManagement.Application.Features.ProductsList.Queries;
 using LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands;
 
 namespace LoanProcessManagement.Application.Profiles
@@ -86,6 +94,23 @@ namespace LoanProcessManagement.Application.Profiles
             #endregion
             #region UnlockUserAccountAndResetPassword mapping has created by-Ramya Guduru-29-10-2021
             CreateMap<UnlockUserAccountModel, UnlockAndResetPasswordDto>().ReverseMap();
+            #endregion
+
+            #region added role master CRUD operations mapping - by Ramya Guduru - 15/11/2021
+            CreateMap<LpmUserRoleMaster, CreateRoleMasterCommandDto>();
+            CreateMap<LpmUserRoleMaster, UpdateRoleMasterDto>();
+            CreateMap<LpmUserRoleMaster, DeleteRoleMasterCommand>();
+            CreateMap<LpmUserRoleMaster, RoleMasterListVm>().ReverseMap();
+            #endregion
+
+            #region added mapping to get property type, sanctionedPlan ID - Ramya Guduru -15/11/2021
+            CreateMap<LpmLeadMaster, GetPropertyDetailsDto>().ReverseMap();
+            CreateMap<LpmLoanPropertyType, GetAllpropertyTypeDto>().ReverseMap();
+            CreateMap<LpmLoanSanctionedPlan, GetSanctionedPlanDto>().ReverseMap();
+            #endregion
+
+            #region added mapping to update property values - Ramya Guduru -15/11/2021
+            CreateMap<ProductsListModel, GetProductsListQueryVm>().ReverseMap();
             #endregion
         }
     }

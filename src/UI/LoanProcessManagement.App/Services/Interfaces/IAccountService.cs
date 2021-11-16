@@ -1,6 +1,11 @@
 ﻿using LoanProcessManagement.App.Models;
 using LoanProcessManagement.Application.Features.ChangePassword.Commands.ChangePassword;
 using LoanProcessManagement.Application.Features.ForgotPassword.Commands.ForgotPassword;
+using LoanProcessManagement.Application.Features.ProductsList.Queries;
+using LoanProcessManagement.Application.Features.PropertyDetails.Commands.UpdatePropertyDetails;
+using LoanProcessManagement.Application.Features.PropertyDetails.Queries;
+using LoanProcessManagement.Application.Features.PropertyType.Queries;
+using LoanProcessManagement.Application.Features.SanctionedPlanReceived.Queries;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.ActivateUserAccount;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockAndResetPassword;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockUserAccount;
@@ -11,6 +16,7 @@ using LoanProcessManagement.Application.Features.User.Queries;
 using LoanProcessManagement.Application.Models.Authentication;
 using LoanProcessManagement.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LoanProcessManagement.App.Services.Interfaces
@@ -40,5 +46,14 @@ namespace LoanProcessManagement.App.Services.Interfaces
         #region added account service for sending secret message through email by - Ramya Guduru - 01/11/2021
         Task<Response<ForgotPasswordDto>> ForgotPassword(ForgotPasswordCommand forgotPassword);
         #endregion
+
+        #region added services to get property type, property details, sanctioned plans and to update property details - added by - Ramya Guduru - 15/11/2021
+        Task<Response<GetPropertyDetailsDto>> GetProperty(string lead_Id);
+
+        Task<IEnumerable<GetAllpropertyTypeDto>> GetAllPropertyType();
+        Task<IEnumerable<GetSanctionedPlanDto>> GetSanctionedPlan();
+        Task<Response<UpdatePropertyDetailsDto>> UpdateProperty(UpdatePropertyDetailsCommand property);
+        #endregion
+
     }
 }

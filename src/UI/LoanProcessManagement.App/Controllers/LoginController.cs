@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Collections.Generic;
 using System.Threading;
+using LoanProcessManagement.Application.Features.PropertyDetails.Commands.UpdatePropertyDetails;
 
 namespace LoanProcessManagement.App.Controllers
 {
@@ -26,6 +27,7 @@ namespace LoanProcessManagement.App.Controllers
     {
         private readonly IAccountService _accountService;
         private readonly ICommonServices _commonService;
+        private readonly IPropertyDetailsService _propertyDetailsService;
 
         public LoginController(IAccountService accountService, ICommonServices commonService)
         {
@@ -371,6 +373,87 @@ namespace LoanProcessManagement.App.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
             return Redirect("/");
+        }
+        #endregion
+
+
+        #region This method will call get property api by - Ramya Guduru - 12/11/2021
+        /// <summary>
+        /// 12/11/2021 - This method will call get property api
+        //	commented by Ramya Guduru
+        /// </summary>
+        /// <param name="lead_Id">lead_Id</param>
+        /// <returns>view</returns>
+        [HttpGet("{lead_Id}")]
+        public async Task<IActionResult> UpdatePropertyDetails(string lead_Id)
+        {
+            var response = await _accountService.GetProperty(lead_Id);
+            var flag = 0;
+
+            if (response.Data.PropertyID != 0 && response.Data.PropertyPincode!=null && response.Data.PropertyUnderConstruction!=null && response.Data.ProjectName!=null && response.Data.ProjectAddress!=null && response.Data.IsSanctionedPlanReceivedID!=null) {
+                flag = 1;
+            }
+            if (flag == 1)
+            {
+                var property = new PropertyDetailsCommandVm()
+                {
+                    PropertyID = response.Data.PropertyID,
+                    PropertyPincode = response.Data.PropertyPincode,
+                    PropertyUnderConstruction = response.Data.PropertyUnderConstruction,
+                    ProjectName = response.Data.ProjectName,
+                    UnitName = response.Data.UnitName,
+                    ProjectAddress = response.Data.ProjectAddress,
+                    IsSanctionedPlanReceivedID = response.Data.IsSanctionedPlanReceivedID
+                };
+
+                var propertyType = await _accountService.GetAllPropertyType();
+                ViewBag.PropertyType = new SelectList(propertyType, "PropertyID", "PropertyType");
+
+                var sanctionedPlan = await _accountService.GetSanctionedPlan();
+                ViewBag.sanctionedPlan = new SelectList(sanctionedPlan, "IsSanctionedPlanReceivedID", "IsSanctionedPlanReceivedType");
+
+                return View(property);
+            }
+            else {
+                return View("UpdatePropertyDetailsUnFreeze");
+            }
+            
+        }
+        #endregion
+
+
+        #region This method will call update property details api by - Ramya Guduru - 15/11/2021
+        /// <summary>
+        /// 15/11/2021 - This method will call update property details api
+        //	commented by Ramya Guduru
+        /// </summary>
+        /// <param name="property">property</param>
+        /// <returns>view</returns>
+        [HttpPost]
+        public async Task<IActionResult> UpdatePropertyDetailsUnFreeze(UpdatePropertyDetailsCommand property)
+        {
+            if (ModelState.IsValid)
+            {
+                property.lead_Id = "Lead_13";
+                //property.lead_Id = User.FindFirst("lead_Id").Value;
+                var response = await _accountService.UpdateProperty(property);
+                if (response.Data.Succeeded)
+                {
+                    ViewBag.isSuccess = true;
+                    ViewBag.Message = "Successfully Property Details Updated";
+                }
+                else {
+                    ViewBag.isSuccess = false;
+                    ViewBag.Message = "Failed to Update Property Details";
+                }
+
+            }
+            //var propertyType = await _accountService.GetAllPropertyType();
+            //ViewBag.PropertyType = new SelectList(propertyType, "PropertyID", "PropertyType");
+
+           // var sanctionedPlan = await _accountService.GetSanctionedPlan();
+           // ViewBag.sanctionedPlan = new SelectList(sanctionedPlan, "IsSanctionedPlanReceivedID", "IsSanctionedPlanReceivedType");
+            return View("UpdatePropertyDetailsUnFreeze");
         }
         #endregion
     }
