@@ -82,7 +82,7 @@ namespace LoanProcessManagement.Persistence.Repositories
 
             if (user != null)
             {
-                _dbContext.LpmMenuMasters.Remove(user);
+                user.IsActive = false;
                 await _dbContext.SaveChangesAsync();
                 response.Id = Id;
                 response.Message = $"Menu of id:{Id} has been removed successfully .";
