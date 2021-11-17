@@ -44,6 +44,13 @@ namespace LoanProcessManagement.Persistence.Configurations
                 .HasForeignKey(b => b.IsSanctionedPlanReceivedID)
                 .OnDelete(DeleteBehavior.Cascade);
 
+
+            builder
+                .HasOne(b => b.LoanSchemes)
+                .WithMany(b => b.LpmLeadMasters)
+                .HasForeignKey(b => b.SchemeID)
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
     }
 }

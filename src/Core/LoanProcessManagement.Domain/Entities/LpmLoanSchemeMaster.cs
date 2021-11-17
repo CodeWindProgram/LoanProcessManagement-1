@@ -15,5 +15,6 @@ namespace LoanProcessManagement.Domain.Entities
         public string SchemeName { get; set; }
         public bool IsActive { get; set; }
         public virtual ICollection<LpmLoanProductSchemeMapping> LpmLoanProductSchemeMappings { get; set; }
+        public ICollection<LpmLeadMaster> LpmLeadMasters { get; set; }
     }
 }

@@ -112,5 +112,8 @@ namespace LoanProcessManagement.Domain.Entities
         public string TypeOfFirms { get; set; }
         public ICollection<LpmLeadProcessCycle> LpmLeadProcessCycle { get; set; }
 
+        public long? SchemeID { get; set; }
+        public LpmLoanSchemeMaster LoanSchemes { get; set; }
+
     }
 }
