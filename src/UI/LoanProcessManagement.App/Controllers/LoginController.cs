@@ -27,7 +27,7 @@ namespace LoanProcessManagement.App.Controllers
     {
         private readonly IAccountService _accountService;
         private readonly ICommonServices _commonService;
-        private readonly IPropertyDetailsService _propertyDetailsService;
+        //private readonly IPropertyDetailsService _propertyDetailsService;
 
         public LoginController(IAccountService accountService, ICommonServices commonService)
         {
@@ -54,7 +54,7 @@ namespace LoanProcessManagement.App.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(UserAuthenticationRequestVM user, string returnUrl = null)
         {
-            ViewBag.ReturnUrl = returnUrl;  
+            ViewBag.ReturnUrl = returnUrl;
             if (ModelState.IsValid)
             {
                 var authenticateUserResponse = await _accountService.AuthenticateUser(user);
@@ -390,7 +390,7 @@ namespace LoanProcessManagement.App.Controllers
             var response = await _accountService.GetProperty(lead_Id);
             var flag = 0;
 
-            if (response.Data.PropertyID != 0 && response.Data.PropertyPincode!=null && response.Data.PropertyUnderConstruction!=null && response.Data.ProjectName!=null && response.Data.ProjectAddress!=null && response.Data.IsSanctionedPlanReceivedID!=null) {
+            if (response.Data.PropertyID != 0 && response.Data.PropertyPincode != null && response.Data.PropertyUnderConstruction != null && response.Data.ProjectName != null && response.Data.ProjectAddress != null && response.Data.IsSanctionedPlanReceivedID != null) {
                 flag = 1;
             }
             if (flag == 1)
@@ -398,7 +398,7 @@ namespace LoanProcessManagement.App.Controllers
                 var property = new PropertyDetailsCommandVm()
                 {
                     PropertyID = response.Data.PropertyID,
-                    PropertyPincode = response.Data.PropertyPincode,
+                    PropertyPincode =  response.Data.PropertyPincode,
                     PropertyUnderConstruction = response.Data.PropertyUnderConstruction,
                     ProjectName = response.Data.ProjectName,
                     UnitName = response.Data.UnitName,
@@ -417,7 +417,7 @@ namespace LoanProcessManagement.App.Controllers
             else {
                 return View("UpdatePropertyDetailsUnFreeze");
             }
-            
+
         }
         #endregion
 
@@ -434,8 +434,7 @@ namespace LoanProcessManagement.App.Controllers
         {
             if (ModelState.IsValid)
             {
-                property.lead_Id = "Lead_13";
-                //property.lead_Id = User.FindFirst("lead_Id").Value;
+                
                 var response = await _accountService.UpdateProperty(property);
                 if (response.Data.Succeeded)
                 {

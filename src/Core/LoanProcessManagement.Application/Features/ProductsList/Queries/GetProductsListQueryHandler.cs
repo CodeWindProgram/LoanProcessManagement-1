@@ -22,7 +22,7 @@ namespace LoanProcessManagement.Application.Features.ProductsList.Queries
 
         #region handler For the GetAllProductsList handler - Ramya Guduru - 15/11/2021
         /// <summary>
-        /// 29/10/2021 - Logger For the GetAllProductsList handler
+        /// 15/10/2021 - Logger For the GetAllProductsList handler
         /// commented by Ramya Guduru
         /// </summary>
         /// <param name="request"></param>

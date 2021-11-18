@@ -33,6 +33,7 @@ using LoanProcessManagement.Application.Features.PropertyType.Queries;
 using LoanProcessManagement.Application.Features.SanctionedPlanReceived.Queries;
 using LoanProcessManagement.Application.Features.ProductsList.Queries;
 using LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands;
+using LoanProcessManagement.Application.Features.GSTLeadList.Queries;
 
 namespace LoanProcessManagement.Application.Profiles
 {
@@ -109,8 +110,12 @@ namespace LoanProcessManagement.Application.Profiles
             CreateMap<LpmLoanSanctionedPlan, GetSanctionedPlanDto>().ReverseMap();
             #endregion
 
-            #region added mapping to update property values - Ramya Guduru -15/11/2021
+            #region added mapping to get product values - Ramya Guduru -15/11/2021
             CreateMap<ProductsListModel, GetProductsListQueryVm>().ReverseMap();
+            #endregion
+
+            #region added mapping to get GST lead list  - Ramya Guduru -16/11/2021
+            CreateMap<GSTLeadListModel, GetGSTLeadListQueryVm>().ReverseMap();
             #endregion
         }
     }

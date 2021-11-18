@@ -28,7 +28,7 @@ namespace LoanProcessManagement.App.Controllers
         public async Task<IActionResult> AllProductsList(string lead_Id)
         {
             var productListServiceResponse = await _productService.ProductsListProcess(lead_Id);
-            if (productListServiceResponse != null && productListServiceResponse.Data != null)
+            if (productListServiceResponse != null && productListServiceResponse.Data != null && productListServiceResponse.Succeeded)
             {
                 return View(productListServiceResponse.Data);
             }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,16 +12,24 @@ namespace LoanProcessManagement.App.Models
     {
         [Required(ErrorMessage = "Please Enter property Type*")]
         public long PropertyID { get; set; }
+        [HiddenInput]
         public string lead_Id { get; set; }
+
         [Required(ErrorMessage = "Please Enter property Pincode*")]
+       // [RegularExpression(@"^[1-9]{1}[0-9]{2}\\s{0, 1}[0-9]{3}$",ErrorMessage = "Pincode should not start with 0.")]
+        [MaxLength(6)]
         public string PropertyPincode { get; set; }
-        [Required(ErrorMessage = "Please select property construction*")]
+
+        [Required(ErrorMessage = "Please specify property is UnderConstruction*")]
         public string PropertyUnderConstruction { get; set; }
         [Required(ErrorMessage = "Please Enter Project Name*")]
+        [MaxLength(100)]
         public string ProjectName { get; set; }
         [Required(ErrorMessage = "Please Enter Unit Name*")]
+        [MaxLength(100)]
         public string UnitName { get; set; }
         [Required(ErrorMessage = "Please Enter Project Address*")]
+        [MaxLength(200)]
         public string ProjectAddress { get; set; }
         [Required(ErrorMessage = "Please select Sanctioned Plan*")]
         public string IsSanctionedPlanReceivedID { get; set; }

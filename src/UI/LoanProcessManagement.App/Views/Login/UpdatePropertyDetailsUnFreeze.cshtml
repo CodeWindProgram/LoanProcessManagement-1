@@ -22,6 +22,13 @@
         align-content: end;
         align-self: end;
     }
+    .label-top-margin {
+    margin-top:-16px;
+    
+    }
+    .construction {
+    margin-left:270px;
+    }
 </style>
 
 <div class="container app">
@@ -45,90 +52,105 @@
                         </div>
 
                     }
-                    <form action="/login/UpdatePropertyDetailsUnFreeze" method="post">
+                <form action="/login/UpdatePropertyDetailsUnFreeze" method="post">
+                    <input type="hidden" asp-for="lead_Id" />
+                    <div class="form-group row">
+                        <label asp-for="PropertyID" class="col-sm-4 col-form-label">Property Type<span style="color: red; width: 10%;">*</span></label>
+                        <div class="col-sm-8">
+                            <select asp-for="PropertyID" class="form-control">
+                                <option value="">Select Property Type</option>
+                                <option value="2">Plot</option>
+                                <option value="3">Flat</option>
+                                <option value="4">Independent House</option>
+                            </select>
+                            <span asp-validation-for="PropertyID" class="text-danger"></span>
+                        </div>
+                    </div>
 
-                        <div class="form-group row">
-                            <label asp-for="PropertyID" class="col-sm-4 col-form-label">Property Type<span style="color: red; width: 10%;">*</span></label>
-                            <div class="col-sm-8">
-                                <select asp-for="PropertyID" class="form-control">
-                                    <option value="">Select Role</option>
-                                    <option value="2">Plot</option>
-                                    <option value="3">Flat</option>
-                                    <option value="4">Independent House</option>
-                                </select>
-                                <span asp-validation-for="PropertyID" class="text-danger"></span>
-                            </div>
+                    <div class="form-group row">
+                        <label asp-for="PropertyPincode" class="col-sm-4 col-form-label">Add Pincode of identified property<span style="color: red; width: 10%;">*</span></label>
+                        <div class="col-sm-8">
+                            <input asp-for="PropertyPincode" class="form-control" type="text" placeholder="" autofocus id="pincode"/>
+                            <span asp-validation-for="PropertyPincode" class="text-danger" id="error-msg"></span>
                         </div>
+                    </div>
 
-                        <div class="form-group row">
-                            <label asp-for="PropertyPincode" class="col-sm-4 col-form-label">Add Pincode of identified property<span style="color: red; width: 10%;">*</span></label>
-                            <div class="col-sm-8">
-                                <input asp-for="PropertyPincode" class="form-control" type="text" placeholder="" autofocus />
-                                <span asp-validation-for="PropertyPincode" class="text-danger"></span>
-                            </div>
+                    <div class="row">
+                        <label asp-for="PropertyUnderConstruction" class="col-sm-4 col-form-label">a.Under-Construction<span style="color: red; width: 10%;">*</span></label>
+                        <div class="col-sm-2">
+                           
+                               <input asp-for="PropertyUnderConstruction" class="form-control" type="radio" autofocus value="Yes" id="yes"/>
+                               <span class="label-top-margin">YES</span>
+                                                      
                         </div>
+                        <div class="col-sm-2">
+                           
+                            <input asp-for="PropertyUnderConstruction" class="form-control" type="radio" value="No" id="no"/>
+                            <span class="label-top-margin">NO</span>
+                                                     
+                        </div>
+                        <br><br>
+                        <span asp-validation-for="PropertyUnderConstruction" class="text-danger ml-5 construction" ></span>
+                        <br>
+                    </div>
 
-                        <div class="row">
-                            <label asp-for="PropertyUnderConstruction" class="col-sm-4 col-form-label">a.Under-Construction<span style="color: red; width: 10%;">*</span></label>
-                            <div class="col-sm-2">
-                                <input asp-for="PropertyUnderConstruction" class="form-control" type="radio" autofocus value="Yes" id="yes" />
+                    <div class="form-group row">
+                        <label asp-for="ProjectName" class="col-sm-4 col-form-label">b.Project Name<span style="color: red; width: 10%;">*</span></label>
+                        <div class="col-sm-8">
+                            <input asp-for="ProjectName" class="form-control" placeholder="" autofocus />
+                            <span asp-validation-for="ProjectName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="UnitName" class="col-sm-4 col-form-label">c.Unit Name<span style="color: red; width: 10%;">*</span></label>
+                        <div class="col-sm-8">
+                            <input asp-for="UnitName" class="form-control" type="text" placeholder="" autofocus />
+                            <span asp-validation-for="UnitName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="ProjectAddress" class="col-sm-4 col-form-label">d.Project Address<span style="color: red; width: 10%;">*</span></label>
+                        <div class="col-sm-8">
+                            <textarea asp-for="ProjectAddress" class="form-control" placeholder="" autofocus></textarea>
+                            <span asp-validation-for="ProjectAddress" class="text-danger"></span>
+                        </div>
+                    </div>
 
-                                <span asp-validation-for="PropertyUnderConstruction" class="text-danger"></span>
-                            </div>
-                            <div class="col-sm-2">
-                                <input asp-for="PropertyUnderConstruction" class="form-control" type="radio" value="No" id="No" />
+                    <div class="form-group row">
+                        <label asp-for="IsSanctionedPlanReceivedID" class="col-sm-4 col-form-label">e.Does the property have a sanctioned/approved plan ?<span style="color: red; width: 10%;">*</span></label>
+                        <div class="col-sm-8">
+                            <select asp-for="IsSanctionedPlanReceivedID" class="form-control">
+                                <option value="">Select Property Sanctioned Plan</option>
+                                <option value="1">NO- < 120 Sq.mt. (For Delhi NCR only)</option>
+                                <option value="4">NO- < 300 Sq.mt. (For Delhi NCR only)</option>
+                                <option value="5">YES</option>
+                            </select>
+                            <span asp-validation-for="IsSanctionedPlanReceivedID" class="text-danger"></span>
+                        </div>
+                    </div>
 
-                                <span asp-validation-for="PropertyUnderConstruction" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label asp-for="ProjectName" class="col-sm-4 col-form-label">b.Project Name<span style="color: red; width: 10%;">*</span></label>
-                            <div class="col-sm-8">
-                                <input asp-for="ProjectName" class="form-control" placeholder="" autofocus />
-                                <span asp-validation-for="ProjectName" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label asp-for="UnitName" class="col-sm-4 col-form-label">c.Unit Name<span style="color: red; width: 10%;">*</span></label>
-                            <div class="col-sm-8">
-                                <input asp-for="UnitName" class="form-control" type="text" placeholder="" autofocus />
-                                <span asp-validation-for="UnitName" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label asp-for="ProjectAddress" class="col-sm-4 col-form-label">d.Project Address<span style="color: red; width: 10%;">*</span></label>
-                            <div class="col-sm-8">
-                                <textarea asp-for="ProjectAddress" class="form-control" placeholder="" autofocus></textarea>
-                                <span asp-validation-for="ProjectAddress" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label asp-for="IsSanctionedPlanReceivedID" class="col-sm-4 col-form-label">e.Does the property have a sanctioned/approved plan ?<span style="color: red; width: 10%;">*</span></label>
-                            <div class="col-sm-8">
-                                <select asp-for="IsSanctionedPlanReceivedID" class="form-control">
-                                    <option value="">Select Role</option>
-                                    <option value="1">NO- < 120 Sq.mt. (For Delhi NCR only)</option>
-                                    <option value="4">NO- < 300 Sq.mt. (For Delhi NCR only)</option>
-                                    <option value="5">YES</option>
-                                </select>
-                                <span asp-validation-for="IsSanctionedPlanReceivedID" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <div>
-                            <p class="text-danger"><span class="text-danger" style="font-weight:bold;padding-left:10px;">Note: </span>Property Pincode can be entered only once, Please be guided.</p>
-                        </div>
-                        <div class="button">
-                            <input type="submit" value="Save" id="btnSignIn" Class="btn btn-primary btn-sm" />
-                        </div>
-                    </form>
+                    <div>
+                        <p class="text-danger"><span class="text-danger" style="font-weight:bold;padding-left:10px;">Note: </span>Property Pincode can be entered only once, Please be guided.</p>
+                    </div>
+                    <div class="button">
+                        <input type="submit" value="Save" id="btnSignIn" Class="btn btn-primary btn-sm" />
+                    </div>
+                </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    var pincode = document.getElementById("pincode");
+    var errMsg = document.getElementById("error-message");
+    var firstVal = long(pincode[0]);
+    if (firstVal==0) {
+        errMsg.innerText = "Pincode should not start with 0 or alphabet";
+    }
+
+</script>
 
 
 

@@ -48,6 +48,7 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string UpdateProperties = "api/v1/PropertyDetails/updateProperty";
 
         public const string AllProductsList = "api/v1/Products/GetProductsList/";
+        public const string LeadListing = "api/v1/GSTEnquiryLeadList/LeadListing/";
 
     }
 }

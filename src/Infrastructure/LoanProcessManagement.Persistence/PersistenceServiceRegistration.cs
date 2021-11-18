@@ -33,7 +33,7 @@ namespace LoanProcessManagement.Persistence
             services.AddScoped<IRoleMasterRepository, RoleMasterRepository>();
             services.AddScoped<IPropertyDetailsRepository,PropertyDetailsRepository>();
             services.AddScoped<IProductsRepository, ProductsRepository>();
-
+            services.AddScoped<IGSTLeadListRepository, GSTLeadListRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
