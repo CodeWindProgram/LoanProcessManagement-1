@@ -31,7 +31,6 @@ namespace LoanProcessManagement.Api.Controllers.v1
             var res = await _mediator.Send(leadListCommand);
             return Ok(res);
         }
-        }
 
         #region Api which will get lead by Id by - Akshay Pawar - 18/11/2021
         /// <summary>

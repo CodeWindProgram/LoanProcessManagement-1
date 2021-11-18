@@ -129,7 +129,6 @@ namespace LoanProcessManagement.Persistence.Migrations
                             CategoryId = new Guid("b0788d2f-8003-43c1-92a4-edc76a7c5dde"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Date = new DateTime(2022, 5, 17, 19, 58, 23, 471, DateTimeKind.Local).AddTicks(5264),
-                            Date = new DateTime(2022, 5, 18, 16, 11, 58, 221, DateTimeKind.Local).AddTicks(8347),
                             Description = "Join John for his farwell tour across 15 continents. John really needs no introduction since he has already mesmerized the world with his banjo.",
                             ImageUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/GloboTicket/banjo.jpg",
                             Name = "John Egbert Live",
@@ -142,7 +141,6 @@ namespace LoanProcessManagement.Persistence.Migrations
                             CategoryId = new Guid("b0788d2f-8003-43c1-92a4-edc76a7c5dde"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Date = new DateTime(2022, 8, 17, 19, 58, 23, 472, DateTimeKind.Local).AddTicks(7592),
-                            Date = new DateTime(2022, 8, 18, 16, 11, 58, 223, DateTimeKind.Local).AddTicks(4265),
                             Description = "Michael Johnson doesn't need an introduction. His 25 concert across the globe last year were seen by thousands. Can we add you to the list?",
                             ImageUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/GloboTicket/michael.jpg",
                             Name = "The State of Affairs: Michael Live!",
@@ -155,7 +153,6 @@ namespace LoanProcessManagement.Persistence.Migrations
                             CategoryId = new Guid("b0788d2f-8003-43c1-92a4-edc76a7c5dde"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Date = new DateTime(2022, 3, 17, 19, 58, 23, 472, DateTimeKind.Local).AddTicks(7812),
-                            Date = new DateTime(2022, 3, 18, 16, 11, 58, 223, DateTimeKind.Local).AddTicks(4393),
                             Description = "DJs from all over the world will compete in this epic battle for eternal fame.",
                             ImageUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/GloboTicket/dj.jpg",
                             Name = "Clash of the DJs",
@@ -168,7 +165,6 @@ namespace LoanProcessManagement.Persistence.Migrations
                             CategoryId = new Guid("b0788d2f-8003-43c1-92a4-edc76a7c5dde"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Date = new DateTime(2022, 3, 17, 19, 58, 23, 472, DateTimeKind.Local).AddTicks(7851),
-                            Date = new DateTime(2022, 3, 18, 16, 11, 58, 223, DateTimeKind.Local).AddTicks(4424),
                             Description = "Get on the hype of Spanish Guitar concerts with Manuel.",
                             ImageUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/GloboTicket/guitar.jpg",
                             Name = "Spanish guitar hits with Manuel",
@@ -181,7 +177,6 @@ namespace LoanProcessManagement.Persistence.Migrations
                             CategoryId = new Guid("fe98f549-e790-4e9f-aa16-18c2292a2ee9"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Date = new DateTime(2022, 9, 17, 19, 58, 23, 472, DateTimeKind.Local).AddTicks(7880),
-                            Date = new DateTime(2022, 9, 18, 16, 11, 58, 223, DateTimeKind.Local).AddTicks(4454),
                             Description = "The best tech conference in the world",
                             ImageUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/GloboTicket/conf.jpg",
                             Name = "Techorama 2021",
@@ -194,7 +189,6 @@ namespace LoanProcessManagement.Persistence.Migrations
                             CategoryId = new Guid("6313179f-7837-473a-a4d5-a5571b43e6a6"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Date = new DateTime(2022, 7, 17, 19, 58, 23, 472, DateTimeKind.Local).AddTicks(7917),
-                            Date = new DateTime(2022, 7, 18, 16, 11, 58, 223, DateTimeKind.Local).AddTicks(4486),
                             Description = "The critics are over the moon and so will you after you've watched this sing and dance extravaganza written by Nick Sailor, the man from 'My dad and sister'.",
                             ImageUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/GloboTicket/musical.jpg",
                             Name = "To the Moon and Back",
@@ -976,7 +970,6 @@ namespace LoanProcessManagement.Persistence.Migrations
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OrderPaid = true,
                             OrderPlaced = new DateTime(2021, 11, 17, 19, 58, 23, 473, DateTimeKind.Local).AddTicks(2213),
-                            OrderPlaced = new DateTime(2021, 11, 18, 16, 11, 58, 223, DateTimeKind.Local).AddTicks(5830),
                             OrderTotal = 400,
                             UserId = new Guid("a441eb40-9636-4ee6-be49-a66c5ec1330b")
                         },
@@ -986,7 +979,6 @@ namespace LoanProcessManagement.Persistence.Migrations
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OrderPaid = true,
                             OrderPlaced = new DateTime(2021, 11, 17, 19, 58, 23, 473, DateTimeKind.Local).AddTicks(4425),
-                            OrderPlaced = new DateTime(2021, 11, 18, 16, 11, 58, 223, DateTimeKind.Local).AddTicks(6938),
                             OrderTotal = 135,
                             UserId = new Guid("ac3cfaf5-34fd-4e4d-bc04-ad1083ddc340")
                         },
@@ -996,7 +988,6 @@ namespace LoanProcessManagement.Persistence.Migrations
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OrderPaid = true,
                             OrderPlaced = new DateTime(2021, 11, 17, 19, 58, 23, 473, DateTimeKind.Local).AddTicks(4608),
-                            OrderPlaced = new DateTime(2021, 11, 18, 16, 11, 58, 223, DateTimeKind.Local).AddTicks(6990),
                             OrderTotal = 85,
                             UserId = new Guid("d97a15fc-0d32-41c6-9ddf-62f0735c4c1c")
                         },
@@ -1006,7 +997,6 @@ namespace LoanProcessManagement.Persistence.Migrations
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OrderPaid = true,
                             OrderPlaced = new DateTime(2021, 11, 17, 19, 58, 23, 473, DateTimeKind.Local).AddTicks(4666),
-                            OrderPlaced = new DateTime(2021, 11, 18, 16, 11, 58, 223, DateTimeKind.Local).AddTicks(7020),
                             OrderTotal = 245,
                             UserId = new Guid("4ad901be-f447-46dd-bcf7-dbe401afa203")
                         },
@@ -1016,7 +1006,6 @@ namespace LoanProcessManagement.Persistence.Migrations
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OrderPaid = true,
                             OrderPlaced = new DateTime(2021, 11, 17, 19, 58, 23, 473, DateTimeKind.Local).AddTicks(4712),
-                            OrderPlaced = new DateTime(2021, 11, 18, 16, 11, 58, 223, DateTimeKind.Local).AddTicks(7047),
                             OrderTotal = 142,
                             UserId = new Guid("7aeb2c01-fe8e-4b84-a5ba-330bdf950f5c")
                         },
@@ -1026,7 +1015,6 @@ namespace LoanProcessManagement.Persistence.Migrations
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OrderPaid = true,
                             OrderPlaced = new DateTime(2021, 11, 17, 19, 58, 23, 473, DateTimeKind.Local).AddTicks(4764),
-                            OrderPlaced = new DateTime(2021, 11, 18, 16, 11, 58, 223, DateTimeKind.Local).AddTicks(7077),
                             OrderTotal = 40,
                             UserId = new Guid("f5a6a3a0-4227-4973-abb5-a63fbe725923")
                         },
@@ -1036,7 +1024,6 @@ namespace LoanProcessManagement.Persistence.Migrations
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OrderPaid = true,
                             OrderPlaced = new DateTime(2021, 11, 17, 19, 58, 23, 473, DateTimeKind.Local).AddTicks(4806),
-                            OrderPlaced = new DateTime(2021, 11, 18, 16, 11, 58, 223, DateTimeKind.Local).AddTicks(7104),
                             OrderTotal = 116,
                             UserId = new Guid("7aeb2c01-fe8e-4b84-a5ba-330bdf950f5c")
                         });

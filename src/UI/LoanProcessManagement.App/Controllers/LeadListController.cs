@@ -85,11 +85,10 @@ namespace LoanProcessManagement.App.Controllers
                 return View(LeadHistoryResponse.Data);
             }
             return View("Error");
-        } 
+        }
         #endregion
 
         public async Task<IActionResult> LeadSummary(LeadListCommand leadListCommand)
-        public async Task<IActionResult> LeadHistory()
         {
             return View();
         }
@@ -153,6 +152,7 @@ namespace LoanProcessManagement.App.Controllers
             return View(lead);
         }
         #endregion
+
         #region LeadModification functionality by - Akshay Pawar - 18/11/2021
         /// <summary>
         /// 18/11/2021 - LeadModification functionality
@@ -181,5 +181,4 @@ namespace LoanProcessManagement.App.Controllers
         } 
         #endregion
     }
-    
 }

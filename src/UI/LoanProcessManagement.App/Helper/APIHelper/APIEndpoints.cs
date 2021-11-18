@@ -32,10 +32,6 @@ namespace LoanProcessManagement.App.Helper.APIHelper
 
         #region Maintaining the Url EndPoint for Users - Saif Khan - 28/10/2021
         public const string UserList = "api/v1/UserList";
-        public const string RemoveUser = "api/v1/User/removeUser/";
-        public const string GetUser = "api/v1/User/getUser/";
-        public const string UpdateUser = "api/v1/User/updateUser";
-        public const string RegisterUser = "api/v1/User/registerUser";
         public const string AuthenticateUser = "api/v1/User/authenticateUser";
         #endregion
 
@@ -53,7 +49,6 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         #region added url Endpoints - Ramya Guduru -01/11/2021
         public const string ForgotPassword = "api/v1/ForgotPassword/ForgotPassword";
         #endregion
-        public const string LeadList = "api/v1/LeadList";
 
         public const string GetProperty = "api/v1/PropertyDetails/getProperty/";
         public const string GetPropertyType = "api/v1/PropertyType/GetPropertyTypes";
