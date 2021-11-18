@@ -1,5 +1,6 @@
 ﻿using LoanProcessManagement.Application.Contracts.Persistence;
 using LoanProcessManagement.Application.Features.LeadList.Commands;
+using LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory;
 using LoanProcessManagement.Application.Features.LeadList.Commands.UpdateLead;
 using LoanProcessManagement.Application.Features.LeadList.Queries;
 using LoanProcessManagement.Domain.CustomModels;
@@ -29,6 +30,7 @@ namespace LoanProcessManagement.Api.Controllers.v1
         {
             var res = await _mediator.Send(leadListCommand);
             return Ok(res);
+        }
         }
 
         #region Api which will get lead by Id by - Akshay Pawar - 18/11/2021
@@ -62,5 +64,14 @@ namespace LoanProcessManagement.Api.Controllers.v1
         #endregion
 
         #endregion
+
+        [HttpGet("GetLeadHistory/{LeadId}")]
+        public async Task<ActionResult> Index([FromRoute] long LeadId)
+        {
+            _logger.LogInformation("GetHistory Initiated");
+            var dtos = await _mediator.Send(new LeadHistoryQuery(LeadId));
+            _logger.LogInformation("GetHistory Completed");
+            return Ok(dtos);
+        }
     }
 }

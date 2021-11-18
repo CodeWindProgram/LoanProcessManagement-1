@@ -1,6 +1,7 @@
 ﻿using LoanProcessManagement.App.Models;
 using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.LeadList.Commands;
+using LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory;
 using LoanProcessManagement.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace LoanProcessManagement.App.Controllers
 {
+    [Route("[controller]/[action]")]
     public class LeadListController : Controller
     {
         private ILeadListService _leadListService;
@@ -68,6 +70,25 @@ namespace LoanProcessManagement.App.Controllers
         {
             return View();
         }
+
+        #region Lead History Module Controller - Saif khan - 17/11/2021
+        /// <summary>
+        /// Lead History Module Controller - Saif khan - 17/11/2021
+        /// </summary>
+        /// <returns>View</returns>
+        [HttpGet("{LeadId}")]
+        public async Task<IActionResult> LeadHistory(long LeadId)
+        {
+            var LeadHistoryResponse = await _leadListService.LeadHistory(LeadId);
+            if (LeadHistoryResponse != null && LeadHistoryResponse.Data != null)
+            {
+                return View(LeadHistoryResponse.Data);
+            }
+            return View("Error");
+        } 
+        #endregion
+
+        public async Task<IActionResult> LeadSummary(LeadListCommand leadListCommand)
         public async Task<IActionResult> LeadHistory()
         {
             return View();

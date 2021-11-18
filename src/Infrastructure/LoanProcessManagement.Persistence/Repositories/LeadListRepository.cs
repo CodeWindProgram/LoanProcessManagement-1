@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using LoanProcessManagement.Domain.Entities;
 using LoanProcessManagement.Application.Features.LeadList.Commands.UpdateLead;
 using LoanProcessManagement.Application.Features.LeadList.Queries;
+using LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory;
 
 namespace LoanProcessManagement.Persistence.Repositories
 {
@@ -19,7 +20,8 @@ namespace LoanProcessManagement.Persistence.Repositories
         private readonly ILogger _logger;
         public LeadListRepository(ApplicationDbContext dbContext, ILogger<LeadListModel> logger)
         {
-            _dbContext = dbContext; _logger = logger;
+            _dbContext = dbContext;
+            _logger = logger;
         }
         #region Method for the Lead List - Saif Khan - 02/11/2021
         /// <summary>
@@ -153,6 +155,26 @@ namespace LoanProcessManagement.Persistence.Repositories
             }
 
 
+        }
+
+        public async Task<IEnumerable<LeadHistoryQueryVm>> GetLeadhistory(long LeadId)
+        {
+            var result = await (from A in _dbContext.LpmLeadProcessCycles
+                                join B in _dbContext.LpmLeadStatusMasters on A.CurrentStatus equals B.Id
+                                join C in _dbContext.LpmLoanProductMasters on A.LoanProductID equals C.Id
+                                join D in _dbContext.LpmLeadMasters on A.LeadStatus equals D.LeadStatus
+                                where A.lead_Id == LeadId 
+                                select new LeadHistoryQueryVm
+                                {
+                                    Stage = B.StatusDescription,
+                                    StartDate = A.CreatedDate,
+                                    EndDate = A.DateOfAction,
+                                    Description = C.ProducDescription,
+                                    UpdatedBy = A.LastModifiedBy,
+                                    ReasonForReject = D.RejectedLeadComment + " " + D.LostLeadComment,
+                                    ProductsSold = C.ProductName 
+                                }).ToListAsync();
+            return result;
         }
     } 
     #endregion

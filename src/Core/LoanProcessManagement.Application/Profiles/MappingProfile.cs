@@ -37,6 +37,8 @@ using LoanProcessManagement.Application.Features.LeadStatus.Queries;
 using LoanProcessManagement.Application.Features.Product.Queries;
 using LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands;
 using LoanProcessManagement.Application.Features.GSTLeadList.Queries;
+using LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory;
+using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTAddEnuiry;
 
 namespace LoanProcessManagement.Application.Profiles
 {
@@ -81,7 +83,16 @@ namespace LoanProcessManagement.Application.Profiles
             CreateMap<LpmUserRoleMaster, GetAllRolesDto>().ReverseMap();
             CreateMap<LpmBranchMaster, GetAllBranchesDto>().ReverseMap();
             CreateMap<LpmUserMaster, GetUserByLgIdDto>().ReverseMap();
+            CreateMap<LpmLeadProcessCycle, LeadHistoryQueryVm>().ReverseMap();
+            CreateMap<LpmLoanProductMaster, LeadHistoryQueryVm>().ReverseMap();
+            CreateMap<LpmLeadStatusMaster, LeadHistoryQueryVm>().ReverseMap();
+            CreateMap<LpmLeadMaster, LeadHistoryQueryVm>().ReverseMap();
 
+            CreateMap<LpmLeadProcessCycle, LeadHistoryQuery>().ReverseMap();
+            CreateMap<LpmLoanProductMaster, LeadHistoryQuery>().ReverseMap();
+            CreateMap<LpmLeadStatusMaster, LeadHistoryQuery>().ReverseMap();
+            CreateMap<LpmLeadMaster, LeadHistoryQuery>().ReverseMap();
+            CreateMap<LPMGSTEnquiryDetail, GstAddEnquiryCommandDto>().ReverseMap();
 
             #region forgotpassword mapping has created by - Ramya Guduru -01/11/2021
             CreateMap<ForgotPasswordModel, ForgotPasswordDto>().ReverseMap();

@@ -4,6 +4,7 @@ using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.LeadList.Commands;
 using LoanProcessManagement.Application.Features.LeadList.Commands.UpdateLead;
 using LoanProcessManagement.Application.Features.LeadList.Queries;
+using LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory;
 using LoanProcessManagement.Application.Responses;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -17,12 +18,7 @@ namespace LoanProcessManagement.App.Services.Implementation
 {
     public class LeadListService : ILeadListService
     {
-        #region Lead List Service created with inheriring the ILeadListService - Saif Khan - 02/11/2021
-        /// <summary>
-        /// Lead List Service created with inheriring the ILeadListService  - 02/11/2021
-        /// Commented By - Saif Khan
-        /// <Return>Model</Return>
-        /// </summary>
+        
         private string BaseUrl = "";
         private IHttpClientFactory clientfact;
         IOptions<APIConfiguration> _apiDetails;
@@ -32,6 +28,12 @@ namespace LoanProcessManagement.App.Services.Implementation
             _apiDetails = apiDetails;
         }
 
+        #region Lead List Service created with inheriring the ILeadListService - Saif Khan - 02/11/2021
+        /// <summary>
+        /// Lead List Service created with inheriring the ILeadListService  - 02/11/2021
+        /// Commented By - Saif Khan
+        /// <Return>Model</Return>
+        /// </summary>
         public async Task<Response<IEnumerable<LeadListCommandDto>>> LeadListProcess(LeadListCommand leadListCommand)
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
@@ -54,6 +56,33 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             return model;
         }
+        #endregion
+
+        #region Api Calling For Lead History - Saif Khan - 17/11/2021
+        /// <summary>
+        /// Api Calling For Lead History - Saif Khan - 17/11/2021
+        /// </summary>
+        /// <param name="LeadId"></param>
+        /// <returns></returns>
+        public async Task<Response<IEnumerable<LeadHistoryQueryVm>>> LeadHistory(long LeadId)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.GetAsync
+                (
+                    BaseUrl + APIEndpoints.LeadHistory + LeadId
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<Response<IEnumerable<LeadHistoryQueryVm>>>(jsonString, options);
+
+            return model;
+        } 
         #endregion
 
         #region This method will call get lead api by - Akshay Pawar - 18/11/2021

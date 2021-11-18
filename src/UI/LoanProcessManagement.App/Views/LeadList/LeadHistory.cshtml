@@ -1,4 +1,5 @@
-﻿@*
+﻿@model IEnumerable<LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory.LeadHistoryQueryVm>
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -21,98 +22,55 @@
                         <thead>
                             <tr>
                                 <th>
-                                    Stage
+                                    @Html.DisplayNameFor(model => model.Stage)
                                 </th>
                                 <th>
-                                    Start Date
+                                    @Html.DisplayNameFor(model => model.StartDate)
                                 </th>
                                 <th>
-                                    End Date
+                                    @Html.DisplayNameFor(model => model.EndDate)
                                 </th>
                                 <th>
-                                    Description
+                                    @Html.DisplayNameFor(model => model.Description)
                                 </th>
                                 <th>
-                                    Updated By
+                                    @Html.DisplayNameFor(model => model.UpdatedBy)
                                 </th>
                                 <th>
-                                    Reason for Rejection/Lost Lead
+                                    @Html.DisplayNameFor(model => model.ReasonForReject)
                                 </th>
                                 <th>
-                                    Products Sold
+                                    @Html.DisplayNameFor(model => model.ProductsSold)
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    Branch (Data Entry)
-                                </td>
-                                <td>
-                                    3/6/2019
-                                </td>
-                                <td>
-                                    4/8/2019
-                                </td>
-                                <td>
-                                    This is a Static Lead list Example
-                                </td>
-                                <td>
-                                    Magadha Financial Services (HYD/MFS/005)
-                                </td>
-                                <td>
-                                    I dont Know
-                                </td>
-                                <td>
-                                    Purchase of New Property from Builder
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Branch (Data Entry)
-                                </td>
-                                <td>
-                                    3/6/2019
-                                </td>
-                                <td>
-                                    4/8/2019
-                                </td>
-                                <td>
-                                    This is a Static Lead list Example
-                                </td>
-                                <td>
-                                    Magadha Financial Services (HYD/MFS/005)
-                                </td>
-                                <td>
-                                    I dont Know
-                                </td>
-                                <td>
-                                    Purchase of New Property from Builder
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Branch (Data Entry)
-                                </td>
-                                <td>
-                                    3/6/2019
-                                </td>
-                                <td>
-                                    4/8/2019
-                                </td>
-                                <td>
-                                    This is a Static Lead list Example
-                                </td>
-                                <td>
-                                    Magadha Financial Services (HYD/MFS/005)
-                                </td>
-                                <td>
-                                    I dont Know
-                                </td>
-                                <td>
-                                    Purchase of New Property from Builder
-                                </td>
-                            </tr>
+                            @foreach (var item in Model)
+                            {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Stage)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StartDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EndDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UpdatedBy)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReasonForReject)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProductsSold)
+                            </td>
+                        </tr>
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -134,19 +92,19 @@
     </div>
 </div>
 <script>
-        $(document).ready(function () {
-            var usrTable = $('#History').dataTable({
-                "oLanguage": {
-                    "sZeroRecords": "No records to display",
-                    "sSearch": "Search "
-                },
-                "iDisplayLength": 15,
-                "aLengthMenu": [[25, 50, 100, 200, 500], [25, 50, 100, 200, 500]],
-                "bSortClasses": false,
-                "bPaginate": true,
-                "bAutoWidth": false,
-                "bProcessing": true,
-                "bDestroy": true
-		    });
+    $(document).ready(function () {
+        var usrTable = $('#History').dataTable({
+            "oLanguage": {
+                "sZeroRecords": "No records to display",
+                "sSearch": "Search "
+            },
+            "iDisplayLength": 15,
+            "aLengthMenu": [[25, 50, 100, 200, 500], [25, 50, 100, 200, 500]],
+            "bSortClasses": false,
+            "bPaginate": true,
+            "bAutoWidth": false,
+            "bProcessing": true,
+            "bDestroy": true
         });
+    });
 </script>

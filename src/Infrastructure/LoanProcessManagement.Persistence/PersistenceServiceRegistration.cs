@@ -32,6 +32,7 @@ namespace LoanProcessManagement.Persistence
             services.AddScoped<ILeadListRepository, LeadListRepository>();
             services.AddScoped<ILeadStatusRepository, LeadStatusRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IIncomeAssesmentRepository, IncomeAssesmentRepository>();
 
             
 

@@ -39,8 +39,6 @@ namespace LoanProcessManagement.Application.Features.User.Queries
             var mappedUser = _mapper.Map<GetUserByLgIdDto>(user);
             _logger.LogInformation("Hanlde Completed");
             return new Response<GetUserByLgIdDto>(mappedUser, "success");
-
-
         } 
         #endregion
     }
