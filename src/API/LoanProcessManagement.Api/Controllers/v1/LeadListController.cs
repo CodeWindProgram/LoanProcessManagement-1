@@ -1,5 +1,7 @@
 ﻿using LoanProcessManagement.Application.Contracts.Persistence;
 using LoanProcessManagement.Application.Features.LeadList.Commands;
+using LoanProcessManagement.Application.Features.LeadList.Commands.UpdateLead;
+using LoanProcessManagement.Application.Features.LeadList.Queries;
 using LoanProcessManagement.Domain.CustomModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +29,38 @@ namespace LoanProcessManagement.Api.Controllers.v1
         {
             var res = await _mediator.Send(leadListCommand);
             return Ok(res);
+        }
+
+        #region Api which will get lead by Id by - Akshay Pawar - 18/11/2021
+        /// <summary>
+        /// 18/11/2021 - Api which will get lead by Id
+        //	commented by Akshay
+        /// </summary>
+        /// <param name="lead_id">lead_id</param>
+        /// <returns>Response</returns>
+        [HttpGet("GetLeadById/{lead_Id}")]
+        public async Task<ActionResult> GetLeadByLeadId([FromRoute] string lead_Id)
+        {
+            var res = await _mediator.Send(new GetLeadByLeadIdQuery(lead_Id));
+            return Ok(res);
+        }
+        #endregion
+
+        #region Api which will modify lead by - Akshay Pawar - 18/11/2021
+        /// <summary>
+        /// 18/11/2021 - Api which will modify lead
+        //	commented by Akshay
+        /// </summary>
+        /// <param name="request">request</param>
+        /// <returns>Response</returns>
+        [HttpPost("ModifyLead")]
+        public async Task<ActionResult> ModifyLead([FromBody] UpdateLeadCommand request)
+        {
+            var res = await _mediator.Send(request);
+            return Ok(res);
         } 
+        #endregion
+
         #endregion
     }
 }

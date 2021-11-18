@@ -32,6 +32,9 @@ using LoanProcessManagement.Application.Features.PropertyDetails.Queries;
 using LoanProcessManagement.Application.Features.PropertyType.Queries;
 using LoanProcessManagement.Application.Features.SanctionedPlanReceived.Queries;
 using LoanProcessManagement.Application.Features.ProductsList.Queries;
+using LoanProcessManagement.Application.Features.LeadList.Queries;
+using LoanProcessManagement.Application.Features.LeadStatus.Queries;
+using LoanProcessManagement.Application.Features.Product.Queries;
 using LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands;
 using LoanProcessManagement.Application.Features.GSTLeadList.Queries;
 
@@ -117,6 +120,17 @@ namespace LoanProcessManagement.Application.Profiles
             #region added mapping to get GST lead list  - Ramya Guduru -16/11/2021
             CreateMap<GSTLeadListModel, GetGSTLeadListQueryVm>().ReverseMap();
             #endregion
+
+            CreateMap<LpmLeadStatusMaster, GetLeadStatusDto>().ReverseMap();
+            CreateMap<LpmLoanProductMaster, GetLoanProductsDto>().ReverseMap();
+            CreateMap<LpmLoanProductMaster, GetInsuranceProductsDto>().ReverseMap();
+
+            
+
+
+
+
+
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿
+﻿@model LoanProcessManagement.App.Models.ModifyLeadVM
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "LeadModification";
@@ -143,62 +143,75 @@
     <div class="container" id="adduplead" style="background-color:darkblue">
         <h4>Modification</h4>
     </div>
-    <form method="post" action="#">
+    @if (ViewBag.isSuccess == true)
+    {
+        <div class="alert alert-success" role="alert">
+            @ViewBag.Message <a asp-controller="leadlist" asp-action="index">Go to lead list</a>
+        </div>
+    }
+    <form method="post" action="/leadlist/LeadModification">
         <br /><br />
+        <input type="hidden" asp-for="lead_Id" />
+        <input type="hidden" asp-for="login_id" />
+        <input type="hidden" asp-for="UserRoleId" />
 
         <div class="initial1">
             <div class="group1"><label for="status_lead">Status of Lead</label></div>
             <div class="group2">
-                <select id="status_lead" name="status_lead">
-                    <option value="Converted Lead">Converted Lead</option>
-                    <option value="Branch (Data Entry)">Branch (Data Entry)</option>
-                    <option value="Lost Lead">Lost Lead</option>
+                <select id="status_lead" asp-for="CurrentStatus" asp-items="ViewBag.leadStatus">
+                    <option value="">Select</option>
                 </select>
+                <span asp-validation-for="CurrentStatus" class="text-danger"></span>
+
+
             </div>
         </div><br /><br>
 
         <div class="initial1">
             <div class="group1"><label for="residential_status">Residential Status</label></div>
             <div class="group2">
-                <select id="residential_status" name="residential_status">
+                <select id="residential_status" asp-for="ResidentialStatus">
                     <option value="Resident Indian">Resident Indian</option>
+                    <option value="Non-Resident Indian">Non-Resident Indian</option>
 
                 </select>
+                <span asp-validation-for="ResidentialStatus" class="text-danger"></span>
+
             </div>
         </div><br /><hr />
 
         <div class="initial1">
             <div class="group1"><label for="employement">Employment / Business classification:</label></div>
-            <div class="group2"><input type="text" name="employement" placeholder="Please enter and select employement/Business classification" value="" /></div>
+            <div class="group2"><input type="text" id="emp_classification" placeholder="Please enter and select employement/Business classification" value="" disabled /></div>
         </div><br />
 
-        <div class="card initial1">
-            <h5>Freedom Logsheet</h5>
-        </div>
-
-        <div class="initial1">
-            <div class="group1">
-                <label for="request_edit_sanction" style="margin-right:250px">Request edit sanction:</label>
+        @*<div class="card initial1">
+                <h5>Freedom Logsheet</h5>
             </div>
-            <label class="switch ml-4">
-                <input type="checkbox">
-                <span class="slider round"></span>
-            </label>
-        </div>
 
-        <div class="initial1">
-            <div class="group1"><label for="comments">Comments:</label></div>
-            <div class="group2"><input type="text" name="comments" placeholder="Comments"></div>
-        </div><br /><br>
-
-        <div class="initial1">
-            <div class="group1"><label for="Status">Status</label></div>
-            <div class="group2">
-                <select id="Status" name="Status">
-                    <option value="-1">Select</option>
-                </select>
+            <div class="initial1">
+                <div class="group1">
+                    <label for="request_edit_sanction" style="margin-right:250px">Request edit sanction:</label>
+                </div>
+                <label class="switch ml-4">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
             </div>
-        </div><br />
+
+            <div class="initial1">
+                <div class="group1"><label for="comments">Comments:</label></div>
+                <div class="group2"><input type="text" name="comments" placeholder="Comments"></div>
+            </div><br /><br>
+
+            <div class="initial1">
+                <div class="group1"><label for="Status">Status</label></div>
+                <div class="group2">
+                    <select id="Status" name="Status">
+                        <option value="-1">Select</option>
+                    </select>
+                </div>
+            </div><br />*@
 
         <div class="card initial1">
             <h5>Loan Product</h5>
@@ -207,20 +220,27 @@
         <div class="initial1">
             <div class="group1"><label for="property_purchase_loan">Product Sold(if sale made)</label></div>
             <div class="group2">
-                <select id="property_purchase_loan" name="property_purchase_loan">
-                    <option value="-1">Purchase of new property from builder</option>
+                <select id="property_purchase_loan" asp-for="LoanProductID" asp-items="ViewBag.loanProducts">
+                    <option value="">Select</option>
                 </select>
+                <span asp-validation-for="LoanProductID" class="text-danger"></span>
+
             </div>
         </div><br /><br>
 
         <div class="initial1">
             <div class="group1"><label for="Form_No">Form No:</label></div>
-            <div class="group2"><input type="text" name="Form_No" placeholder="212226"></div>
+            <div class="group2"><input type="text" asp-for="FormNo" readonly></div>
         </div><br /><br>
 
         <div class="initial1">
             <div class="group1"><label for="amount">Amount(in INR):</label></div>
-            <div class="group2"><input type="text" name="amount" placeholder="5000000"></div>
+            <div class="group2">
+                <input type="text" asp-for="loanAmount">
+                <span asp-validation-for="loanAmount" class="text-danger"></span>
+
+            </div>
+
         </div><br /><br>
 
 
@@ -231,25 +251,20 @@
         <div class="initial1">
             <div class="group1"><label for="property_purchase_insurance">Product Sold(if sale made)</label></div>
             <div class="group2">
-                <select id="property_purchase_insurance" name="property_purchase_loan">
-                    <option value="-1">Select</option>
-                    <option value="-2">Future Generali</option>
-                    <option value="-3">Kotak Life Insurance</option>
-                    <option value="-4">Birla sunlife</option>
-                    <option value="-5">To be decided</option>
-                    <option value="-6">Tata AIG</option>
+                <select id="property_purchase_insurance" asp-for="InsuranceProductID" asp-items="ViewBag.insuranceProducts">
+                    <option value="">Select</option>
                 </select>
             </div>
         </div><br /><br>
 
         <div class="initial1">
             <div class="group1"><label for="Form_No_insurance">Form No:</label></div>
-            <div class="group2"><input type="text" name="Form_No_insurance" placeholder="212226"></div>
+            <div class="group2"><input type="text" asp-for="FormNo" readonly></div>
         </div><br /><br>
 
         <div class="initial1">
             <div class="group1"><label for="amount_insurance">Amount(in INR):</label></div>
-            <div class="group2"><input type="text" name="amount_insurance" placeholder="60000"></div>
+            <div class="group2"><input type="text" asp-for="insuranceAmount"></div>
         </div><br /><br>
 
         <div class="card initial1">
@@ -258,17 +273,17 @@
 
         <div class="initial1">
             <div class="group1"><label for="date">Date :</label></div>
-            <div class="group2"><p id="dates"></p></div>            
+            <div class="group2"><input type="date" id="dates" asp-for="DateOfAction" readonly></div>
         </div><br /><br>
         <div class="initial1">
             <div class="group1"><label for="comments">Comments</label></div>
-            <div class="group2"><textarea placeholder="Comments"></textarea></div>
+            <div class="group2"><textarea placeholder="Comments" asp-for="Comments"></textarea></div>
         </div><br /><br /><br>
         <div class="button1 d-flex flex-row justify-content-end">
-            <input id="button1" type="submit" value="Submit" onsubmit="#" class="button"/>
+            <input id="button1" type="submit" value="Submit" class="button" />
         </div>
     </form>
-    
+
 </div>
 <div class="container app">
     <div class="buttons">
@@ -285,12 +300,27 @@
 
     <script type="text/javascript">
 
-        n = new Date();
-        y = n.getFullYear();
-        m = n.getMonth() + 1;
-        d = n.getDate();
-        document.getElementById("dates").innerHTML = m + "/" + d + "/" + y;
+        //n = new Date();
+        //y = n.getFullYear();
+        //m = n.getMonth() + 1;
+        //d = n.getDate();
+        //document.getElementById("dates").value = m + "/" + d + "/" + y;
 
         // Data Picker Initialization
-        $('.datepicker').datepicker();
+        // $('.datepicker').datepicker();
+        //$('#dates').val(new Date().toDateInputValue());
+
+        var statusValue = $('#status_lead').val();
+        if (statusValue == 2) {
+            $("#emp_classification").removeAttr("disabled");
+        }
+
+        //$("#status_lead").change(function () {
+        //    if ($(this).val() == 2) {
+        //        $("#emp_classification").removeAttr("disabled");
+        //    }
+        //    else {
+        //        $("#emp_classification").attr("disabled", "disabled");
+        //    }
+        //});
     </script>

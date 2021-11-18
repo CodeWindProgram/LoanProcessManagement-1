@@ -63,7 +63,7 @@
                                 @Html.DisplayFor(modelItem => item.Appointment_Date)
                             </td>
                             <td>
-                                @Html.ActionLink("EditLead", "EditLead", new { /* id=item.PrimaryKey */ })
+                                @Html.ActionLink("Edit", "LeadSummary", "LeadList", new { lead_Id=item.lead_Id })
                             </td>
                         </tr>
                     }

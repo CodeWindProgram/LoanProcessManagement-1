@@ -1,7 +1,10 @@
 ﻿using LoanProcessManagement.App.Helper.APIHelper;
 using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.Branch.Queries;
+using LoanProcessManagement.Application.Features.LeadStatus.Queries;
+using LoanProcessManagement.Application.Features.Product.Queries;
 using LoanProcessManagement.Application.Features.Roles.Queries;
+using LoanProcessManagement.Application.Responses;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
@@ -74,6 +77,89 @@ namespace LoanProcessManagement.App.Services.Implementation
             var options = new JsonSerializerOptions();
 
             var response = System.Text.Json.JsonSerializer.Deserialize<IEnumerable<GetAllBranchesDto>>(jsonString, options);
+
+            return response;
+        }
+        #endregion
+
+        #region This method will call get status api by - Akshay Pawar - 18/11/2021
+        /// <summary>
+        /// 18/11/2021 - This method will call get status api
+        //	commented by Akshay
+        /// </summary>
+        /// <param name="role">role</param>
+        /// <returns>response</returns>
+        public async Task<Response<IEnumerable<GetLeadStatusDto>>> GetAllStatus(string role)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.GetAsync
+                (
+                    BaseUrl + APIEndpoints.GetStatus + role
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var response = System.Text.Json.JsonSerializer.Deserialize<Response<IEnumerable<GetLeadStatusDto>>>(jsonString, options);
+
+            return response;
+        }
+
+        #endregion
+        #region This method will call get loan products api by - Akshay Pawar - 18/11/2021
+        /// <summary>
+        /// 18/11/2021 - This method will call get loan products api
+        //	commented by Akshay
+        /// </summary>
+        /// <returns>response</returns>
+
+        public async Task<Response<IEnumerable<GetLoanProductsDto>>> GetAllLoanProduct()
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.GetAsync
+                (
+                    BaseUrl + APIEndpoints.GetLoanProducts
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var response = System.Text.Json.JsonSerializer.Deserialize<Response<IEnumerable<GetLoanProductsDto>>>(jsonString, options);
+
+            return response;
+        } 
+        #endregion
+
+        #region This method will call get insurance products api by - Akshay Pawar - 18/11/2021
+        /// <summary>
+        /// 18/11/2021 - This method will call get insurance products api
+        //	commented by Akshay
+        /// </summary>
+        /// <returns>response</returns>
+        public async Task<Response<IEnumerable<GetInsuranceProductsDto>>> GetAllInsuranceProducts()
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.GetAsync
+                (
+                    BaseUrl + APIEndpoints.GetInsuranceProducts
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var response = System.Text.Json.JsonSerializer.Deserialize<Response<IEnumerable<GetInsuranceProductsDto>>>(jsonString, options);
 
             return response;
         } 

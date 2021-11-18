@@ -1,4 +1,4 @@
-﻿@model LoanProcessManagement.Domain.CustomModels.LeadListModel
+﻿@model LoanProcessManagement.Application.Features.LeadList.Queries.GetLeadByLeadIdDto
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -41,39 +41,40 @@
     .padding-7 {
         padding-left: 80px;
     }
+    .card > * {
+        padding:8px 0px;
+    }
 </style>
 <div class="container app">
     <div class="col-sm-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
-            <div class="panel-heading">Lead List</div>
+            <div class="panel-heading">Lead Summary</div>
             <div class="card">
                 <div class="card">
                     <div class="d-flex flex-row justify-content-around row ">
                         <p class="padding-1">Form No.</p>
-                        <p class="padding-0">2233</p>
-                    </div><hr>
+                        <p class="padding-0">@Model.FormNo</p>
+                    </div>
                     <div class="d-flex flex-row justify-content-around row ">
                         <p class="padding-1">Full Name</p>
-                        <p class="padding-2">Naresh</p>
-                    </div><hr>
+                        <p class="padding-2">@Model.CustomerName</p>
+                    </div>
                     <div class="d-flex flex-row justify-content-around row">
                         <p class="padding-1">Phone</p>
-                        <p class="padding-3">9988776655</p>
-                    </div><hr>
+                        <p class="padding-3">@Model.CustomerPhone</p>
+                    </div>
                     <div class="d-flex flex-row justify-content-around row">
                         <p class="padding-1">Product Chosen</p>
-                        <p class="padding-4">Purchase of New Property from Builder</p>
-                    </div><hr>
+                        <p class="padding-4">@Model.Product</p>
+                    </div>
                     <div class="d-flex flex-row justify-content-around row">
                         <p class="padding-1">Appointment Date</p>
-                        <p class="padding-5">03/11/2021</p>
+                        <p class="padding-5">@Model.Appointment_Date</p>
                     </div>
-                    <hr>
                     <div class="d-flex flex-row justify-content-around row">
                         <p class="padding-1">Current Status</p>
-                        <p class="padding-6">Branch processing</p>
+                        <p class="padding-6">@Model.LeadStatus</p>
                     </div>
-                    <hr>
                     <div class="d-flex flex-row justify-content-around row">
                         <p class="padding-1">Is Exempted from GST? (> 40L turnover)</p>
                         <p class="padding-7">NA</p>
@@ -84,7 +85,8 @@
 
         <div class="d-flex flex-row justify-content-around">
             <button class="btn btn-primary">Summary</button>
-            <button class="btn btn-primary">Modification</button>
+            @*<button type="submit" class="btn btn-primary" asp-action="LeadModification" asp-route-lead_Id="@Model.lead_Id">Modification</button>*@
+            <a class="btn btn-primary" asp-action="LeadModification" asp-route-lead_Id="@Model.lead_Id">Modification</a>
             <button class="btn btn-primary">History</button>
             <button class="btn btn-primary">Query History</button>
             <button class="btn btn-primary">Products</button>

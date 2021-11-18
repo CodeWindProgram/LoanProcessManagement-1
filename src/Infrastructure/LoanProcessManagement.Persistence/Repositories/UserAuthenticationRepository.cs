@@ -35,7 +35,7 @@ namespace LoanProcessManagement.Persistence.Repositories
             _dbContext = dbContext;
             _logger = logger;
             _jwtSettings = jwtSettings.Value;
-            ;
+            
         }
 
         #region Authenticating user and Generating jwt By - Akshay Pawar - 28/10/2021
