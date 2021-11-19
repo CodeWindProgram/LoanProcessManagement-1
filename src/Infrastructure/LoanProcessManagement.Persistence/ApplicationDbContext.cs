@@ -40,6 +40,7 @@ namespace LoanProcessManagement.Persistence
         public DbSet<LpmLoanSanctionedPlan> LpmLoanSanctionedPlans { get; set; }
         public DbSet<LpmLeadProcessCycle> LpmLeadProcessCycles { get; set; }
         public DbSet<LPMGSTEnquiryDetail> LPMGSTEnquiryDetails { get; set; }
+        public DbSet<LpmLeadQuery> LpmLeadQuerys { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
