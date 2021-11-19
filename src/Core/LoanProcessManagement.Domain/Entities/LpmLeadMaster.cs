@@ -115,5 +115,6 @@ namespace LoanProcessManagement.Domain.Entities
         public long? SchemeID { get; set; }
         public LpmLoanSchemeMaster LoanSchemes { get; set; }
 
+        public ICollection<LpmLeadApplicantsDetails> LpmLeadApplicantsDetails { get; set; }
     }
 }
