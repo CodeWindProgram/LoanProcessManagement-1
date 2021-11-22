@@ -39,6 +39,7 @@ using LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands;
 using LoanProcessManagement.Application.Features.GSTLeadList.Queries;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTAddEnuiry;
+using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTCreateEnquiry;
 
 namespace LoanProcessManagement.Application.Profiles
 {
@@ -93,6 +94,9 @@ namespace LoanProcessManagement.Application.Profiles
             CreateMap<LpmLeadStatusMaster, LeadHistoryQuery>().ReverseMap();
             CreateMap<LpmLeadMaster, LeadHistoryQuery>().ReverseMap();
             CreateMap<LPMGSTEnquiryDetail, GstAddEnquiryCommandDto>().ReverseMap();
+
+            CreateMap<LPMGSTEnquiryDetail, GstCreateEnquiryCommand>().ReverseMap();
+            CreateMap<LPMGSTEnquiryDetail, GstCreateEnquiryCommandDto>().ReverseMap();
 
             #region forgotpassword mapping has created by - Ramya Guduru -01/11/2021
             CreateMap<ForgotPasswordModel, ForgotPasswordDto>().ReverseMap();

@@ -1,4 +1,5 @@
 ﻿using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTAddEnuiry;
+using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTCreateEnquiry;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,8 @@ using System.Threading.Tasks;
 
 namespace LoanProcessManagement.Api.Controllers.v1
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class IncomeAssesmentController : ControllerBase
     {
@@ -23,12 +25,20 @@ namespace LoanProcessManagement.Api.Controllers.v1
             _mediator = mediator;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> AddEnquiry([FromRoute] int ApplicantType , string Lead_Id)
+        [HttpGet("{ApplicantType}/{Lead_Id}")]
+        public async Task<ActionResult> AddEnquiry([FromRoute] int ApplicantType , int Lead_Id)
         {
             _logger.LogInformation("GetHistory Initiated");
             var dtos = await _mediator.Send(new GstAddEnquiryCommand(ApplicantType, Lead_Id));
             _logger.LogInformation("GetHistory Completed");
+            return Ok(dtos);
+        }
+        [HttpPost]
+        public async Task<ActionResult> CreateGstEnquiry([FromBody] GstCreateEnquiryCommand request)
+        {
+            _logger.LogInformation("RegisterAsync Initiated");
+            var dtos = await _mediator.Send(request);
+            _logger.LogInformation("RegisterAsync Completed");
             return Ok(dtos);
         }
     }

@@ -57,6 +57,6 @@ namespace LoanProcessManagement.App.Helper.APIHelper
 
         public const string AllProductsList = "api/v1/Products/GetProductsList/";
         public const string LeadListing = "api/v1/GSTEnquiryLeadList/LeadListing/";
-
+        public const string AddEnquiry = "api/v1/IncomeAssesment/";
     }
 }

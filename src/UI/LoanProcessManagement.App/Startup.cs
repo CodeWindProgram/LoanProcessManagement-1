@@ -54,6 +54,7 @@ namespace LoanProcessManagement.App
             services.AddSingleton<IPropertyDetailsService, PropertyDetailsService>();
             services.AddSingleton<IProductService, ProductService>();
             services.AddSingleton<IGSTLeadListService, GSTLeadListService>();
+            services.AddSingleton<IIncomeAssesmentService, IncomeAssesmentService>();
 
             services.Configure<APIConfiguration>(Configuration.GetSection("APIConfiguration"));
             services.AddSession();

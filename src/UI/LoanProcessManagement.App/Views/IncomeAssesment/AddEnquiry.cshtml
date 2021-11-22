@@ -1,4 +1,5 @@
-﻿@*
+﻿@model LoanProcessManagement.App.Models.IncomeAssesmentGstVm
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -146,7 +147,8 @@
         }
     </style>
 
-    <script>function validate_fileupload(filename, extvalues) {
+    <script>
+    function validate_fileupload(filename, extvalues) {
             debugger;
             var allowedExt = extvalues.split(',');
             var filearr = filename.value.toLowerCase().split('.');
@@ -252,7 +254,8 @@
 
 
 
-    <script>function hideshowbackbtn(rval) {
+    <script>
+    function hideshowbackbtn(rval) {
             if (rval == "1") {
                 $("#anchBackbtn").show();
             }
@@ -262,26 +265,27 @@
         }</script>
 </head>
 <body style="">
-    <form method="post" action="http://1.6.38.247:8090/GSTEnquiryAdd.aspx?app=0&amp;LeadId=LX-97991&amp;FormNo=111221" id="form1" enctype="multipart/form-data">
+    <form method="post" asp-action="CreateEnquiry" id="form1" >
         <div class="aspNetHidden">
             <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
             <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
             <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="yii09FyE5cg6OwicpwcAM02EhEY24KPL31p72GU7heXyZppsltnl1cQWhjQyw0VdMMOEdPdV1fmecvu/BGdWpiV2MhhsXCx0cA/VBOsoT3+8hLwCEXeDmSw1xDlW9zLYaqXNCW+efUHzotY5QSTU/0FbZcz9yrkFFdGJWlB7Ky+WcWJYL6WaAqmh0AqrhLQVh7SiWPMeSqmAxS2vgBoleGfQts0clXSrUE/e3puQtXLniEi56IKJnV32/mpF8GAu1oiWm1yX4s6JuQ0St8plLyCIDCJIcrjt12CCYiCxk12sDgLNdt1g8PzGAeu1VPtP7ogvltfbMbCb/R6KMIWLWH1PnDvmXBJjDwlZuGy2L7F6EZxf4cGB8tvil0CTJj2kZBvaUx8fLOPm0IXHxzsohcUet8sPD2E6PIbLImSyDvLVFUiHZBYAt89YidX2TKWOtKkXOGqUtWHsfBT6EDtO/7c/VDkbHfle5RV+m/bW4+TrmvIpZY9e+MzZtByMTN90EPbKRwXX4XWlZ/MG4uXS6MxbN4qlrk2uX8K0k93Eg/SPiEbdn37mDR8ZpiElRoTGwgpItAcNv4Kdt++8b9NWDjsA/AYB9ttuQKnWmciBKGvssxExNxU5ViQkB4j+Xj4c1K3MjxCdUOufz+u5jrwVd5hNRpzzcdR/aiuOWsNcC/6bjlS0kB6ZIfW1vJtjA8AqONo7TBcKoWcYiQtZ84hvWA==">
         </div>
 
-        <script type="text/javascript">//<![CDATA[
-var theForm = document.forms['form1'];
-if (!theForm) {
-    theForm = document.form1;
-}
-function __doPostBack(eventTarget, eventArgument) {
-    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
-        theForm.__EVENTTARGET.value = eventTarget;
-        theForm.__EVENTARGUMENT.value = eventArgument;
-        theForm.submit();
-    }
-}
-//]]></script>
+        <script type="text/javascript">
+    //<![CDATA[
+            var theForm = document.forms['form1'];
+            if (!theForm) {
+                theForm = document.form1;
+            }
+            function __doPostBack(eventTarget, eventArgument) {
+                if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+                    theForm.__EVENTTARGET.value = eventTarget;
+                    theForm.__EVENTARGUMENT.value = eventArgument;
+                    theForm.submit();
+                }
+            }
+            //]]></script>
 
 
         <script src="./GICHFGst_files/WebResource.axd" type="text/javascript"></script>
@@ -371,7 +375,7 @@ function __doPostBack(eventTarget, eventArgument) {
                                     <div class="col-md-5">
                                         <div class="input-control text">
 
-                                            <input name="ctl00$ContentPlaceHolder1$txtCustomerName" type="text" value="Vishal Gaichor" readonly="readonly" id="ContentPlaceHolder1_txtCustomerName" class="form-control required" placeholder="XYZ">
+                                            <input name="ctl00$ContentPlaceHolder1$txtCustomerName" type="text" asp-for="PostEnquiry.CustomerName" value=@Model.GetEnquiry.CustomerName readonly="readonly" id="ContentPlaceHolder1_txtCustomerName" class="form-control required" placeholder="XYZ">
                                         </div>
                                     </div>
                                     <div class="col-md-2">
@@ -390,7 +394,7 @@ function __doPostBack(eventTarget, eventArgument) {
                                     <div class="col-md-5">
                                         <div class="input-control text">
 
-                                            <input name="ctl00$ContentPlaceHolder1$txtEmail" type="text" value="vishalgaichor954@gmail.com" readonly="readonly" id="ContentPlaceHolder1_txtEmail" class="form-control" placeholder="abc@xyz.com">
+                                            <input name="ctl00$ContentPlaceHolder1$txtEmail" type="text" asp-for="PostEnquiry.Email" value="@Model.GetEnquiry.Email" readonly="readonly" id="ContentPlaceHolder1_txtEmail" class="form-control" placeholder="abc@xyz.com">
                                         </div>
                                     </div>
                                     <div class="col-md-2">
@@ -409,7 +413,7 @@ function __doPostBack(eventTarget, eventArgument) {
                                     <div class="col-md-5">
                                         <div class="input-control text">
 
-                                            <input name="ctl00$ContentPlaceHolder1$txtMobile" value="9999999999" maxlength="10" readonly="readonly" id="ContentPlaceHolder1_txtMobile" type="number" class="form-control" placeholder="Mobile No">
+                                            <input name="ctl00$ContentPlaceHolder1$txtMobile" asp-for="PostEnquiry.MobileNo" value="@Model.GetEnquiry.MobileNo" maxlength="10" readonly="readonly" id="ContentPlaceHolder1_txtMobile" type="number" class="form-control" placeholder="Mobile No">
                                         </div>
                                     </div>
                                     <div class="col-md-2">
@@ -429,7 +433,7 @@ function __doPostBack(eventTarget, eventArgument) {
                                     <div class="col-md-5">
                                         <div class="input-control text">
 
-                                            <input name="ctl00$ContentPlaceHolder1$txtGstNumber" type="text" maxlength="15" id="ContentPlaceHolder1_txtGstNumber" class="form-control uppercase" placeholder="GST Number">
+                                            <input name="ctl00$ContentPlaceHolder1$txtGstNumber" asp-for="PostEnquiry.GstNo"  type="text" maxlength="15" id="ContentPlaceHolder1_txtGstNumber" class="form-control uppercase" placeholder="GST Number">
                                         </div>
                                     </div>
                                 </div>
@@ -444,7 +448,7 @@ function __doPostBack(eventTarget, eventArgument) {
                                         <table id="ContentPlaceHolder1_rdbEmployeeType" class="rbl" style="font-weight:normal;width:60%;">
                                             <tbody>
                                                 <tr>
-                                                    <td><input id="ContentPlaceHolder1_rdbEmployeeType_0" type="radio" name="ctl00$ContentPlaceHolder1$rdbEmployeeType" value="SelfEmployed" checked="checked"><label for="ContentPlaceHolder1_rdbEmployeeType_0">Self-Employed</label></td>
+                                                    <td><input id="ContentPlaceHolder1_rdbEmployeeType_0" type="radio" name="ctl00$ContentPlaceHolder1$rdbEmployeeType" asp-for="PostEnquiry.EmploymentType" value="@Model.GetEnquiry.EmployementType" checked="checked"><label for="ContentPlaceHolder1_rdbEmployeeType_0">Self-Employed</label></td>
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
@@ -477,17 +481,17 @@ function __doPostBack(eventTarget, eventArgument) {
 
                                     </div>
                                     <div class="col-md-8">
-                                        <input type="file" name="ctl00$ContentPlaceHolder1$fileUploadExcel" id="ContentPlaceHolder1_fileUploadExcel" accept=".xls,.xlsx" onchange="validate_fileupload(this,&#39;xls,xlsx&#39;);">
+                                        <input type="file" name="ctl00$ContentPlaceHolder1$fileUploadExcel" asp-for="PostEnquiry.ExcelFilePath" id="ContentPlaceHolder1_fileUploadExcel" accept=".xls,.xlsx" onchange="validate_fileupload(this,&#39;xls,xlsx&#39;);">
                                     </div>
                                 </div>
                                 <div style="height: 5px; display: none;"></div>
                                 <div class="row tab">
                                     <div class="">
                                         <label class="col-md-4">Pdf file</label>
-
+                                        
                                     </div>
                                     <div class="col-md-8">
-                                        <input type="file" name="ctl00$ContentPlaceHolder1$fileUploadPdf" id="ContentPlaceHolder1_fileUploadPdf" accept=".pdf" onchange="validate_fileupload(this,&#39;pdf&#39;);">
+                                        <input type="file" name="ctl00$ContentPlaceHolder1$fileUploadPdf" asp-for="PostEnquiry.PdfFilePath" id="ContentPlaceHolder1_fileUploadPdf" accept=".pdf" onchange="validate_fileupload(this,&#39;pdf&#39;);">
                                     </div>
                                 </div>
                                 <br>
@@ -511,145 +515,145 @@ function __doPostBack(eventTarget, eventArgument) {
         </div>
 
         <script type="text/javascript">
-        $(document).ready(function () {
-            if ($("#ContentPlaceHolder1_btnAddEnquiry").is(":disabled")) {
-                $("#htmlsubmitbtn").prop("disabled", true);
-            }
-        });
-
-        function ValidateUpdate(type) {
-            if (type == 'Name') {
-                if ($("#ContentPlaceHolder1_txtCustomerName").val() == "") {
-                    alert('Customer Name is Mandatory');
-                    return false;
+            $(document).ready(function () {
+                if ($("#ContentPlaceHolder1_btnAddEnquiry").is(":disabled")) {
+                    $("#htmlsubmitbtn").prop("disabled", true);
                 }
-                var namefilter = /^[a-z A-Z]+$/;
-                var name = $("#ContentPlaceHolder1_txtCustomerName").val();
-                if (namefilter.test(name) == false) {
-                    //alert(pattern);
-                    alert('Please Enter Name in proper format');
+            });
 
-                    return false;
-                }
-            }
+            function ValidateUpdate(type) {
+                if (type == 'Name') {
+                    if ($("#ContentPlaceHolder1_txtCustomerName").val() == "") {
+                        alert('Customer Name is Mandatory');
+                        return false;
+                    }
+                    var namefilter = /^[a-z A-Z]+$/;
+                    var name = $("#ContentPlaceHolder1_txtCustomerName").val();
+                    if (namefilter.test(name) == false) {
+                        //alert(pattern);
+                        alert('Please Enter Name in proper format');
 
-            if (type == 'Email') {
-                if ($("#ContentPlaceHolder1_txtEmail").val() == "") {
-                    {
-                        alert('Customer Email is Mandatory');
                         return false;
                     }
                 }
 
-                var pattern = new RegExp(/^[+a-zA-Z0-9._-]+[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
-                var emailid = $("#ContentPlaceHolder1_txtEmail").val();
-                if (pattern.test(emailid) == false) {
-                    //alert(pattern);
-                    alert('Please Enter Email in proper format');
+                //if (type == 'Email') {
+                //    if ($("#ContentPlaceHolder1_txtEmail").val() == "") {
+                //        {
+                //            alert('Customer Email is Mandatory');
+                //            return false;
+                //        }
+                //    }
 
-                    return false;
+                //    var pattern = new RegExp(/^[+a-zA-Z0-9._-]+[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+                //    var emailid = $("#ContentPlaceHolder1_txtEmail").val();
+                //    if (pattern.test(emailid) == false) {
+                //        //alert(pattern);
+                //        alert('Please Enter Email in proper format');
+
+                //        return false;
+                //    }
+                //}
+                if (type == 'Mobile') {
+                    if ($("#ContentPlaceHolder1_txtMobile").val() == "") {
+                        alert('Customer Mobile No is Mandatory');
+                        return false;
+                    }
+
+                    var filter = /^\d{10}$/;
+                    var mobile = $("#ContentPlaceHolder1_txtMobile").val();
+                    if (filter.test(mobile) == false) {
+                        console.log(filter);
+                        alert('Please Enter Mobile No in proper format');
+
+                        return false;
+                    }
                 }
+
             }
-            if (type == 'Mobile') {
-                if ($("#ContentPlaceHolder1_txtMobile").val() == "") {
-                    alert('Customer Mobile No is Mandatory');
-                    return false;
-                }
 
-                var filter = /^\d{10}$/;
-                var mobile = $("#ContentPlaceHolder1_txtMobile").val();
-                if (filter.test(mobile) == false) {
-                    console.log(filter);
-                    alert('Please Enter Mobile No in proper format');
-
-                    return false;
-                }
-            }
-
-        }
-
-        $(document).ready(function () {
-            debugger;
-            console.log('validate');
-            // GetProductList();
-            //$("#btnAddEnquiry").validate();
-            $("#ContentPlaceHolder1_btnAddEnquiry").click(function (e) {
-                //debugger;
-                if ($("#ContentPlaceHolder1_txtCustomerName").val() == "") {
-                    alert('Customer Name is Mandatory');
-                    e.preventDefault();
-                    return false;
-                }
-                var namefilter = /^[a-z A-Z]+$/;
-                var name = $("#ContentPlaceHolder1_txtCustomerName").val();
-                if (namefilter.test(name) == false) {
-                    //alert(pattern);
-                    alert('Please Enter Name in proper format');
-                    e.preventDefault();
-                    return false;
-                }
-
-
-                if ($("#ContentPlaceHolder1_txtEmail").val() == "") {
-                    {
-                        alert('Customer Email is Mandatory');
+            $(document).ready(function () {
+                debugger;
+                console.log('validate');
+                // GetProductList();
+                //$("#btnAddEnquiry").validate();
+                $("#ContentPlaceHolder1_btnAddEnquiry").click(function (e) {
+                    //debugger;
+                    if ($("#ContentPlaceHolder1_txtCustomerName").val() == "") {
+                        alert('Customer Name is Mandatory');
                         e.preventDefault();
                         return false;
                     }
-                }
+                    var namefilter = /^[a-z A-Z]+$/;
+                    var name = $("#ContentPlaceHolder1_txtCustomerName").val();
+                    if (namefilter.test(name) == false) {
+                        //alert(pattern);
+                        alert('Please Enter Name in proper format');
+                        e.preventDefault();
+                        return false;
+                    }
 
-                var pattern = new RegExp(/^[+a-zA-Z0-9._-]+[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
-                var emailid = $("#ContentPlaceHolder1_txtEmail").val();
-                if (pattern.test(emailid) == false) {
-                    //alert(pattern);
-                    alert('Please Enter Email in proper format');
-                    e.preventDefault();
-                    return false;
-                }
 
-                var filter = /^\d{10}$/;
-                var mobile = $("#ContentPlaceHolder1_txtMobile").val();
-                if (filter.test(mobile) == false) {
-                    console.log(filter);
-                    alert('Please Enter Mobile No in proper format');
+                    //if ($("#ContentPlaceHolder1_txtEmail").val() == "") {
+                    //    {
+                    //        alert('Customer Email is Mandatory');
+                    //        e.preventDefault();
+                    //        return false;
+                    //    }
+                    //}
 
-                    return false;
-                }
-                var patterngst = new RegExp("^([0][1-9]|[1-2][0-9]|[3][0-7])([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$");
-                //var patterngst = new RegExp("^([0][1-9]|[1-2][0-9]|[3][0-5])([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$");
-                debugger;
-                var gstno = $("#ContentPlaceHolder1_txtGstNumber").val();
-                if (patterngst.test(gstno) == false) {
-                    //alert(pattern);
-                    alert('Please Enter GST number in proper format');
-                    e.preventDefault();
-                    return false;
-                }
+                    //var pattern = new RegExp(/^[+a-zA-Z0-9._-]+[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+                    //var emailid = $("#ContentPlaceHolder1_txtEmail").val();
+                    //if (pattern.test(emailid) == false) {
+                    //    //alert(pattern);
+                    //    alert('Please Enter Email in proper format');
+                    //    e.preventDefault();
+                    //    return false;
+                    //}
 
-                if ($("#ContentPlaceHolder1_txtMobile").val() == "") {
-                    alert('Customer Mobile No is Mandatory');
-                    e.preventDefault();
-                    return false;
-                }
+                    var filter = /^\d{10}$/;
+                    var mobile = $("#ContentPlaceHolder1_txtMobile").val();
+                    if (filter.test(mobile) == false) {
+                        console.log(filter);
+                        alert('Please Enter Mobile No in proper format');
 
-                var filter = /^\d{10}$/;
-                var mobile = $("#ContentPlaceHolder1_txtMobile").val();
-                if (filter.test(mobile) == false) {
-                    console.log(filter);
-                    alert('Please Enter Mobile No in proper format');
-                    e.preventDefault();
-                    return false;
-                }
-                //excel file validation
-                var fileExcelvalue = $('input[id*="fileUploadExcel"]').val();
-                if (fileExcelvalue == "" || fileExcelvalue == null) {
-                    console.log(fileExcelvalue);
-                    alert('Please select excel file to upload');
-                    e.preventDefault();
-                    return false;
-                }
-            })
-        });
+                        return false;
+                    }
+                    var patterngst = new RegExp("^([0][1-9]|[1-2][0-9]|[3][0-7])([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$");
+                    //var patterngst = new RegExp("^([0][1-9]|[1-2][0-9]|[3][0-5])([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$");
+                    debugger;
+                    var gstno = $("#ContentPlaceHolder1_txtGstNumber").val();
+                    if (patterngst.test(gstno) == false) {
+                        //alert(pattern);
+                        alert('Please Enter GST number in proper format');
+                        e.preventDefault();
+                        return false;
+                    }
+
+                    if ($("#ContentPlaceHolder1_txtMobile").val() == "") {
+                        alert('Customer Mobile No is Mandatory');
+                        e.preventDefault();
+                        return false;
+                    }
+
+                    var filter = /^\d{10}$/;
+                    var mobile = $("#ContentPlaceHolder1_txtMobile").val();
+                    if (filter.test(mobile) == false) {
+                        console.log(filter);
+                        alert('Please Enter Mobile No in proper format');
+                        e.preventDefault();
+                        return false;
+                    }
+                    //excel file validation
+                    var fileExcelvalue = $('input[id*="fileUploadExcel"]').val();
+                    if (fileExcelvalue == "" || fileExcelvalue == null) {
+                        console.log(fileExcelvalue);
+                        alert('Please select excel file to upload');
+                        e.preventDefault();
+                        return false;
+                    }
+                })
+            });
 
         </script>
 
@@ -689,8 +693,9 @@ function __doPostBack(eventTarget, eventArgument) {
 
 
 
-        <script type="text/javascript">//<![CDATA[
-hideshowbackbtn(1)//]]></script>
+        <script type="text/javascript">
+    //<![CDATA[
+            hideshowbackbtn(1)//]]></script>
     </form>
 
 

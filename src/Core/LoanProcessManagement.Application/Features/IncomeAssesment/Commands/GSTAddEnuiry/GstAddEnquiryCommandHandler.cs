@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTAddEnuiry
 {
-    public class GstAddEnquiryCommandHandler : IRequestHandler<GstAddEnquiryCommand, Response<List<GstAddEnquiryCommandDto>>>
+    public class GstAddEnquiryCommandHandler : IRequestHandler<GstAddEnquiryCommand, Response<GstAddEnquiryCommandDto>>
     {
         private readonly IIncomeAssesmentRepository _incomeAssesmentRepository;
         private readonly ILogger<GstAddEnquiryCommandHandler> _logger;
@@ -23,13 +23,13 @@ namespace LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GS
             _logger = logger;
             _mapper = mapper;
         }
-        public async Task<Response<List<GstAddEnquiryCommandDto>>> Handle(GstAddEnquiryCommand gstAddEnquiryCommand, CancellationToken cancellationToken)
+        public async Task<Response<GstAddEnquiryCommandDto>> Handle(GstAddEnquiryCommand gstAddEnquiryCommand, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Handle Initiated");
             var user = await _incomeAssesmentRepository.AddGstEnquiry(gstAddEnquiryCommand.ApplicantType, gstAddEnquiryCommand.Lead_Id);
-            var mappedLead = _mapper.Map<List<GstAddEnquiryCommandDto>>(user);
+            var mappedLead = _mapper.Map<GstAddEnquiryCommandDto>(user);
             _logger.LogInformation("Hanlde Completed");
-            return new Response<List<GstAddEnquiryCommandDto>>(mappedLead, "success");
+            return new Response<GstAddEnquiryCommandDto>(mappedLead, "success");
         }
     }
 }

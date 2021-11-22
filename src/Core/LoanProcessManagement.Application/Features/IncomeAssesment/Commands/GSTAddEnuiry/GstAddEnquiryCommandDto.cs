@@ -11,7 +11,7 @@ namespace LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GS
         public int MobileNo { get; set; }
         public string Email { get; set; }
         public string GstNo { get; set; }
-        public int EmployementType { get; set; }
+        public string EmployementType { get; set; }
         public string ExcelFilePath { get; set; }
         public string PdfFilePath { get; set; }
     }

@@ -16,7 +16,6 @@ namespace LoanProcessManagement.Api.Controllers.v1
     [ApiController]
     public class LeadListController : Controller
     {
-        #region Lead List Controller API - Saif Khan -02/11/2021
         private readonly IMediator _mediator;
         private readonly ILogger _logger;
 
@@ -59,11 +58,15 @@ namespace LoanProcessManagement.Api.Controllers.v1
         {
             var res = await _mediator.Send(request);
             return Ok(res);
-        } 
+        }
         #endregion
 
-        #endregion
-
+        #region API Which will Find Lead History by ID - Saif khan - 16-11-2021
+        /// <summary>
+        /// API Which will Find Lead History by ID - Saif khan - 16-11-2021
+        /// </summary>
+        /// <param name="LeadId"></param>
+        /// <returns></returns>
         [HttpGet("GetLeadHistory/{LeadId}")]
         public async Task<ActionResult> Index([FromRoute] long LeadId)
         {
@@ -71,6 +74,7 @@ namespace LoanProcessManagement.Api.Controllers.v1
             var dtos = await _mediator.Send(new LeadHistoryQuery(LeadId));
             _logger.LogInformation("GetHistory Completed");
             return Ok(dtos);
-        }
+        } 
+        #endregion
     }
 }
