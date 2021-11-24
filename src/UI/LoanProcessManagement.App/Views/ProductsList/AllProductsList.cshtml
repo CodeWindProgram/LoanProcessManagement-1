@@ -10,6 +10,14 @@
     }
 
 </style>
+<style type='text/css'>
+    table.test {
+        border-collapse: collapse;
+    }
+     table.test td {
+        border-bottom: 1px solid black;
+     }
+</style>
 
 <div class="container app">
     <div class="col-sm-12">
@@ -44,22 +52,37 @@
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.ProductName)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.FormNo)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Amount)
-                                        </td>
-                                        
-                                    </tr>
-                                }
+                            {
+                                <tr class="test">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ProductName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FormNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Amount)
+                                    </td>
+
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.InsuranceName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FormNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.InsuranceAmount)
+                                    </td>
+
+                                </tr>
+                            }
                         </tbody>
+                       
                     </table>
+                    
                 </div>
             </div>
         </div>

@@ -434,27 +434,30 @@ namespace LoanProcessManagement.App.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdatePropertyDetailsUnFreeze(UpdatePropertyDetailsCommand property)
         {
-            if (ModelState.IsValid)
-            {
-                
-                var response = await _accountService.UpdateProperty(property);
-                if (response.Data.Succeeded)
+           
+                if (ModelState.IsValid)
                 {
-                    ViewBag.isSuccess = true;
-                    ViewBag.Message = "Successfully Property Details Updated";
+                    var response = await _accountService.UpdateProperty(property);
+                    if (response.Data.Succeeded)
+                    {
+                        ViewBag.isSuccess = true;
+                        ViewBag.Message = "Successfully Property Details Updated";
+                    }
+                    else {
+                        ViewBag.isSuccess = false;
+                        ViewBag.Message = "Failed to Update Property Details";
+                    }
                 }
-                else {
-                    ViewBag.isSuccess = false;
-                    ViewBag.Message = "Failed to Update Property Details";
-                }
-
-            }
             //var propertyType = await _accountService.GetAllPropertyType();
             //ViewBag.PropertyType = new SelectList(propertyType, "PropertyID", "PropertyType");
 
-           // var sanctionedPlan = await _accountService.GetSanctionedPlan();
-           // ViewBag.sanctionedPlan = new SelectList(sanctionedPlan, "IsSanctionedPlanReceivedID", "IsSanctionedPlanReceivedType");
-            return View("UpdatePropertyDetailsUnFreeze");
+            // var sanctionedPlan = await _accountService.GetSanctionedPlan();
+            // ViewBag.sanctionedPlan = new SelectList(sanctionedPlan, "IsSanctionedPlanReceivedID", "IsSanctionedPlanReceivedType");
+
+            
+            //return View("UpdatePropertyDetails");
+            return RedirectToAction("UpdatePropertyDetails", new { lead_Id = property.lead_Id });
+
         }
         #endregion
     }

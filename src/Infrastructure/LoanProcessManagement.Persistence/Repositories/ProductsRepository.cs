@@ -33,15 +33,18 @@ namespace LoanProcessManagement.Persistence.Repositories
         {
             
             var result = await(from A in _dbContext.LpmLeadMasters
-                               join B in _dbContext.LpmLoanProductMasters on A.ProductID equals B.Id
                                join C in _dbContext.LpmLeadProcessCycles on A.Id equals C.lead_Id
+                               join B in _dbContext.LpmLoanProductMasters on C.LoanProductID equals B.Id
+                               join D in _dbContext.LpmLoanProductMasters on C.InsuranceProductID equals D.Id                               
                                
-                               where A.lead_Id==Lead_Id
+                               where A.lead_Id==Lead_Id && A.CurrentStatus == C.CurrentStatus
                                select new ProductsListModel
                                {
                                    FormNo=A.FormNo,
                                    Amount = (long)C.LoanAmount,
                                    ProductName=B.ProductName,
+                                   InsuranceName=D.ProductName,
+                                   InsuranceAmount=(long)C.InsuranceAmount,
                                    Issuccess=true,
                                    Message="data fetched"
                                    

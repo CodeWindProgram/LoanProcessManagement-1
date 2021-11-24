@@ -9,7 +9,9 @@ namespace LoanProcessManagement.Domain.CustomModels
     {
         public string FormNo { get; set; }
         public string ProductName { get; set; }
+        public string InsuranceName { get; set; }
         public long Amount { get; set; }
+        public long InsuranceAmount { get; set; }
         public bool Issuccess { get; set; }
         public string Message { get; set; }
 

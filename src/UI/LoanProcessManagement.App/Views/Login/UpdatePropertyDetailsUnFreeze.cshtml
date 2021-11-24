@@ -133,7 +133,7 @@
                         <p class="text-danger"><span class="text-danger" style="font-weight:bold;padding-left:10px;">Note: </span>Property Pincode can be entered only once, Please be guided.</p>
                     </div>
                     <div class="button">
-                        <input type="submit" value="Save" id="btnSignIn" Class="btn btn-primary btn-sm" />
+                        <input type="submit" value="Save"  Class="btn btn-primary btn-sm" onClick="hide()"/>
                     </div>
                 </form>
                 </div>
@@ -143,11 +143,14 @@
 </div>
 
 <script>
-    var pincode = document.getElementById("pincode");
-    var errMsg = document.getElementById("error-message");
-    var firstVal = long(pincode[0]);
-    if (firstVal==0) {
-        errMsg.innerText = "Pincode should not start with 0 or alphabet";
+    //var pincode = document.getElementById("pincode");
+    //var errMsg = document.getElementById("error-message");
+    //var firstVal = long(pincode[0]);
+    //if (firstVal==0) {
+    //    errMsg.innerText = "Pincode should not start with 0 or alphabet";
+    //}
+    function hide() {
+       var result = document.getElementById("btnSignIn").disabled = true;
     }
 
 </script>
