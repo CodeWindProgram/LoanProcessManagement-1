@@ -42,13 +42,5 @@ namespace LoanProcessManagement.Persistence.Repositories
                                 }).FirstOrDefaultAsync();
             return result;
         }
-
-        //public async Task<GstCreateEnquiryCommandDto> CreateGstEnquiry(GstCreateEnquiryCommand request)
-        //{
-        //    //await _dbContext.LPMGSTEnquiryDetails.AddAsync(request);
-        //    //await _dbContext.SaveChangesAsync();
-        //    //return request;
-        //    return await _incomeAssesmentRepository.CreateGstEnquiry(request);
-        //}
     }
 }

@@ -14,7 +14,7 @@ namespace LoanProcessManagement.Application.Contracts.Persistence
     public interface ILeadListRepository 
     {
         Task<IEnumerable<LeadListModel>> GetAllLeadList();
-        Task<IEnumerable<LeadHistoryQueryVm>> GetLeadhistory(long LeadId);
+        Task<IEnumerable<LeadHistoryQueryVm>> GetLeadhistory(string lead_id);
         Task<GetLeadByLeadIdDto> GetLeadByLeadId(string lead_id);
         Task<UpdateLeadDto> ModifyLead(UpdateLeadCommand request);
 

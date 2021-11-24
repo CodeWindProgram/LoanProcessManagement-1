@@ -28,6 +28,8 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string MenuCreate = "api/v1/Menu/Create";
         public const string MenuUpdate = "api/v1/Menu/updateMenu";
         public const string MenuDelete = "api/v1/Menu/removeMenu/";
+        public const string MenuList = "api/v1/Menu/MenuList/";
+        public const string MenuById = "api/v1/Menu/MenuById/";
         #endregion
 
         #region Maintaining the Url EndPoint for Users - Saif Khan - 28/10/2021

@@ -8,7 +8,7 @@ namespace LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GS
     public class GstCreateEnquiryCommandDto
     {
         //public long FormNo { get; set; }
-        //public long Lead_Id { get; set; }
+        //public string Lead_Id { get; set; }
         public string CustomerName { get; set; }
         public int MobileNo { get; set; }
         public string Email { get; set; }

@@ -359,7 +359,6 @@ namespace LoanProcessManagement.App.Services.Implementation
         }
         #endregion
 
-
         #region This method will call actual api and return response for getproperty type, sanctioned plans and all property details API - Ramya Guduru - 28/10/2021
         /// <summary>
         /// 2021/10/28 - get property details API call
@@ -464,4 +463,3 @@ namespace LoanProcessManagement.App.Services.Implementation
 
     }
 }
-

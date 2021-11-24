@@ -25,6 +25,9 @@ namespace LoanProcessManagement.Application.Contracts.Persistence
         Task<DeleteMenuCommandDto> DeleteMenu( long Id);
 
         Task<UpdateMenuCommandDto> UpdateMenu(long Id, UpdateMenuCommand request);
+
+        Task<List<LpmMenuMaster>> GetMenuList(long UserRoleId);
+
     }
     #endregion
 }

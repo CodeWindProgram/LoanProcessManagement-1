@@ -2,6 +2,8 @@
 using LoanProcessManagement.Application.Features.Menu.Commands.DeleteCommand;
 using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand;
 using LoanProcessManagement.Application.Features.Menu.Query;
+using LoanProcessManagement.Application.Features.Menu.Query.GetMenuByID;
+using LoanProcessManagement.Application.Features.Menu.Query.MenuList;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -77,7 +79,26 @@ namespace LoanProcessManagement.Api.Controllers.v1
             var dtos = await _mediator.Send(menuCommand);
             _logger.LogInformation("UpdateMenu Completed");
             return Ok(dtos);
-        } 
+        }
         #endregion
+
+        #region Menu List - Saif Khan - 10/11/2021
+        /// <summary>
+        /// Menu List - Saif Khan - 10/11/2021
+        /// </summary>
+        /// <param name="menuList"></param>
+        /// <returns></returns>
+        [HttpGet("MenuList/{UserRoleId}")]
+        public async Task<IActionResult> MenuList([FromRoute] MenuListQuery menuList)
+        {
+            return Ok(await _mediator.Send(menuList));
+        }
+        #endregion
+
+        [HttpGet("MenuById/{Id}")]
+        public async Task<IActionResult> MenuById([FromRoute] GetMenuByIdQuery idQuery)
+        {
+            return Ok(await _mediator.Send(idQuery));
+        }
     }
 }  

@@ -15,6 +15,8 @@ namespace LoanProcessManagement.App.Controllers
         {
             _incomeAssesmentService = incomeAssesmentService;
         }
+
+
         [HttpGet]
         public async Task<IActionResult> AddEnquiry(int applicantType, int lead_Id)
         {
@@ -27,6 +29,8 @@ namespace LoanProcessManagement.App.Controllers
             }
             return View("Error");
         }
+
+
         [HttpPost]
         public async Task<IActionResult> CreateEnquiry(GstCreateEnquiryCommand gstCreateEnquiryCommand )
         {

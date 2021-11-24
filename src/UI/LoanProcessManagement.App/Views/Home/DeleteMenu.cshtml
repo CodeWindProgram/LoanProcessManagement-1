@@ -1,4 +1,4 @@
-﻿@model LoanProcessManagement.App.Models.DeleteMenuVm
+﻿@model LoanProcessManagement.Application.Features.Menu.Query.GetMenuByID.GetMenuByIdQueryVm
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -51,19 +51,10 @@
             </div>
             <div class="panel-body">
                 <div class="border-part">
-                    @*<dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Id)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Id)
-            </dd>
-        </dl>*@
-
-                    <form asp-action="DeleteMenu">
+                    <form method="post" asp-controller="Home" asp-action="DeleteMenu">
                         <div class="form-group">
                             <label asp-for="Id" class="control-label"></label>
-                            <input asp-for="Id" class="form-control" />
+                            <input disabled asp-for="Id" class="form-control" />
                             <span asp-validation-for="Id" class="text-danger"></span>
                         </div>
                         <input type="submit" value="Delete" class="btn btn-default" />

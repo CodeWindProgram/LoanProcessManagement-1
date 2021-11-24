@@ -40,6 +40,8 @@ using LoanProcessManagement.Application.Features.GSTLeadList.Queries;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTAddEnuiry;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTCreateEnquiry;
+using LoanProcessManagement.Application.Features.Menu.Query.MenuList;
+using LoanProcessManagement.Application.Features.Menu.Query.GetMenuByID;
 
 namespace LoanProcessManagement.Application.Profiles
 {
@@ -64,6 +66,9 @@ namespace LoanProcessManagement.Application.Profiles
 
             CreateMap<LpmMenuMaster, CreateMenuCommandDto>().ReverseMap();
             CreateMap<LpmMenuMaster, CreateMenuCommand>().ReverseMap();
+            CreateMap<LpmMenuMaster, MenuListQuery>().ReverseMap();
+            CreateMap<LpmMenuMaster, MenuListQueryVm>().ReverseMap();
+            CreateMap<LpmMenuMaster, GetMenuByIdQueryVm>().ReverseMap();
 
             CreateMap<Category, CategoryDto>();
             CreateMap<Category, CategoryListVm>();

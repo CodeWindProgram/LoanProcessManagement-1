@@ -10,6 +10,8 @@ using LoanProcessManagement.Domain.Entities;
 using LoanProcessManagement.Application.Features.LeadList.Commands.UpdateLead;
 using LoanProcessManagement.Application.Features.LeadList.Queries;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory;
+using System.Text.RegularExpressions;
+using System;
 
 namespace LoanProcessManagement.Persistence.Repositories
 {
@@ -153,29 +155,35 @@ namespace LoanProcessManagement.Persistence.Repositories
                 return response;
 
             }
-
-
         }
 
-        public async Task<IEnumerable<LeadHistoryQueryVm>> GetLeadhistory(long LeadId)
+        #region Lead History - Saif Khan - 12/11/2021
+        /// <summary>
+        /// Lead History - Saif Khan - 12/11/2021
+        /// </summary>
+        /// <param name="lead_id"></param>
+        /// <returns></returns>
+        public async Task<IEnumerable<LeadHistoryQueryVm>> GetLeadhistory(string lead_id)
         {
             var result = await (from A in _dbContext.LpmLeadProcessCycles
                                 join B in _dbContext.LpmLeadStatusMasters on A.CurrentStatus equals B.Id
                                 join C in _dbContext.LpmLoanProductMasters on A.LoanProductID equals C.Id
-                                join D in _dbContext.LpmLeadMasters on A.LeadStatus equals D.LeadStatus
-                                where A.lead_Id == LeadId 
+                                join D in _dbContext.LpmLeadMasters on A.lead_Id equals D.Id
+                                join E in _dbContext.LpmUserMasters on A.CreatedBy equals E.CreatedBy
+                                where A.lead_Id == Int32.Parse(Regex.Match(D.lead_Id, @"\d+").Value)
                                 select new LeadHistoryQueryVm
                                 {
                                     Stage = B.StatusDescription,
                                     StartDate = A.CreatedDate,
-                                    EndDate = A.DateOfAction,
+                                    EndDate = null,
                                     Description = C.ProducDescription,
-                                    UpdatedBy = A.LastModifiedBy,
+                                    UpdatedBy = E.Name,
                                     ReasonForReject = D.RejectedLeadComment + " " + D.LostLeadComment,
-                                    ProductsSold = C.ProductName 
+                                    ProductsSold = C.ProductName
                                 }).ToListAsync();
             return result;
-        }
+        } 
+        #endregion
     } 
     #endregion
 }

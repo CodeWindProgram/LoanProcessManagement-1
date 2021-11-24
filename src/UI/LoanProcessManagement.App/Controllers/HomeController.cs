@@ -4,6 +4,8 @@ using LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands;
 using LoanProcessManagement.Application.Features.Menu.Commands.DeleteCommand;
 using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand;
 using LoanProcessManagement.Application.Features.Menu.Query;
+using LoanProcessManagement.Application.Features.Menu.Query.GetMenuByID;
+using LoanProcessManagement.Application.Features.Menu.Query.MenuList;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -30,7 +32,7 @@ namespace LoanProcessManagement.App.Controllers
         /// <param name="menuProcess">MenuProcess</param>
         /// </summary>
         /// <returns>MenuServiceResponse View</returns>
-        [Authorize(AuthenticationSchemes = "Cookies")]  
+        [Authorize(AuthenticationSchemes = "Cookies")]    
         [Route("/Home")]
         public async Task<IActionResult> Index()
         {
@@ -50,6 +52,33 @@ namespace LoanProcessManagement.App.Controllers
             }
             return View();
         }
+        #endregion
+
+        #region Calling Api for MenuList controller - Saif Khan - 11/11/2021
+        /// <summary>
+        /// Calling Api for Update Menu controller - Saif Khan - 11/11/2021
+        /// </summary>
+        /// <param name="UserroleId"></param>
+        /// <returns></returns>
+        [HttpGet("/Menulist/{UserroleId}")]
+        public async Task<IActionResult> Menulist(long UserroleId)
+        {
+
+            MenuListQuery menuProcess = new MenuListQuery();
+            var roleId = User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value;
+            menuProcess.UserRoleId = long.Parse(roleId);
+
+            var MenuServiceResponse = await _menuService.MenuList(UserroleId);
+
+            //Get the current claims principal
+            var identity = (ClaimsPrincipal)User;
+
+            if (MenuServiceResponse != null && MenuServiceResponse.Succeeded == true && MenuServiceResponse.Data != null)
+            {
+                return View(MenuServiceResponse.Data);
+            }
+            return View();
+        } 
         #endregion
 
         #region Calling the API for the Create Menu - Saif Khan - 11//11/2021
@@ -95,21 +124,31 @@ namespace LoanProcessManagement.App.Controllers
         /// Calling API for Updtae Menu - Saif Khan - 11/11/2021
         /// </summary>
         /// <returns>View</returns>
-        [HttpGet("/MenuUpdate")]
-        public IActionResult UpdateMenu()
+        [HttpGet("/MenuUpdate/{Id}")]
+        public async Task<IActionResult> UpdateMenu(long Id)
         {
-            return View();
+            var res = await _menuService.MenuById(Id);
+            return View(res.Data);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> UpdateMenu(UpdateMenuCommand user)
+        [HttpPost("/MenuUpdate/{Id}")]
+        public async Task<IActionResult> UpdateMenu(GetMenuByIdQueryVm query)
         {
             if (ModelState.IsValid)
             {
-                var response = await _menuService.UpdateMenu(user);
+                var updatemenucommand = new UpdateMenuCommand() { 
+                                                                    Id =query.Id,
+                                                                    Link = query.Link,
+                                                                    Position = query.Position,
+                                                                    MenuName = query.MenuName,
+                                                                    Icon = query.Icon,
+                                                                    IsActive = query.IsActive
+                                                                };                
+                //var map = from e in query join f in updatemenucommand 
+                var response = await _menuService.UpdateMenu(updatemenucommand);
                 ViewBag.isSuccess = response.Succeeded;
                 ViewBag.Message = response.Data.Message;
-
+                return RedirectToAction("Menulist");
             }
             return View();
         }
@@ -119,17 +158,17 @@ namespace LoanProcessManagement.App.Controllers
         /// <summary>
         /// Calling API fro the Delete Menu - Saif Khan - 11/11/2021
         /// </summary>
-        [HttpGet("/MenuDelete")]
-        public IActionResult DeleteMenu()
+        [HttpGet("/MenuDelete/{Id}")]
+        public async Task<IActionResult> DeleteMenu(long Id)
         {
-            return View();
+            var res = await _menuService.MenuById(Id);
+            return View(res.Data);
         }
-        [HttpPost("DeleteMenu")]
-        //[Route("{Id}")]
-        public async Task<IActionResult> DeleteMenu(DeleteMenuVm deleteMenuCommand)
+        [HttpPost("/MenuDelete/{Id}")]
+        public async Task<IActionResult> DeleteMenu(GetMenuByIdQueryVm deleteMenuCommand)
         {
             var response = await _menuService.DeleteMenu(deleteMenuCommand.Id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Menulist");
         } 
         #endregion
     }

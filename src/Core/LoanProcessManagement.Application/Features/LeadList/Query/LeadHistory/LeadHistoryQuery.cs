@@ -8,11 +8,11 @@ namespace LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory
 {
     public class LeadHistoryQuery : IRequest<Response<List<LeadHistoryQueryVm>>>
     {
-        public LeadHistoryQuery(long leadId)
+        public LeadHistoryQuery(string Lead_id)
         {
-            LeadId = leadId;
+            lead_id = Lead_id;
         }
 
-        public long LeadId { get; set; }
+        public string lead_id { get; set; }
     }
 }

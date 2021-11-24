@@ -42,6 +42,29 @@ namespace LoanProcessManagement.Persistence.Repositories
                                     MenuName = B.MenuName,
                                 }).ToListAsync();
             return result;
+        }
+        #endregion
+
+        #region Menu List - Saif Khan - 10 -11 -2021
+        /// <summary>
+        ///  Menu List - Saif Khan - 10 -11 -2021
+        /// </summary>
+        /// <param name="userroleid"></param>
+        /// <returns></returns>
+        public async Task<List<LpmMenuMaster>> GetMenuList(long UserRoleId)
+        {
+            var result = await (from A in _dbContext.LpmUserRoleMenuMaps
+                                join B in _dbContext.LpmMenuMasters on A.MenuId equals B.Id
+                                where A.UserRoleId == UserRoleId && A.IsActive == true
+                                orderby B.Position
+                                select new LpmMenuMaster
+                                {
+                                    Position = B.Position,
+                                    Icon = B.Icon,
+                                    Link = B.Link,
+                                    MenuName = B.MenuName,
+                                }).ToListAsync();
+            return result;
         } 
         #endregion
 
@@ -53,18 +76,8 @@ namespace LoanProcessManagement.Persistence.Repositories
         /// <returns></returns>
         public async Task<LpmMenuMaster> CreateMenu(LpmMenuMaster request)
         {
-            //var user = await _dbContext.LpmMenuMasters.Include(x => x.MenuName).Include(x => x.Link).Include(x => x.Position).Include(x => x.Icon)
-            //            .Where(x => x.Id == request.Id).FirstOrDefaultAsync();
             await _dbContext.LpmMenuMasters.AddAsync(request);
             await _dbContext.SaveChangesAsync();
-            //CreateMenuCommandDto response = new CreateMenuCommandDto();
-
-            //if (user != null)
-            //{
-            //    response.Message = "Menu already exists .";
-            //    //response.Succeeded = false;
-            //    return response;
-            //}
             return request;
         } 
         #endregion

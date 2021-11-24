@@ -28,7 +28,7 @@ namespace LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory
         public async Task<Response<List<LeadHistoryQueryVm>>> Handle(LeadHistoryQuery leadHistoryQuery, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Handle Initiated");
-            var user = await _leadListRepository.GetLeadhistory(leadHistoryQuery.LeadId);
+            var user = await _leadListRepository.GetLeadhistory(leadHistoryQuery.lead_id);
             var mappedLead = _mapper.Map<List<LeadHistoryQueryVm>>(user);
             _logger.LogInformation("Hanlde Completed");
             return new Response<List<LeadHistoryQueryVm>>(mappedLead, "success");

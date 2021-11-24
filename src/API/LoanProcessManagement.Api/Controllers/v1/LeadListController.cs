@@ -68,7 +68,7 @@ namespace LoanProcessManagement.Api.Controllers.v1
         /// <param name="LeadId"></param>
         /// <returns></returns>
         [HttpGet("GetLeadHistory/{LeadId}")]
-        public async Task<ActionResult> Index([FromRoute] long LeadId)
+        public async Task<ActionResult> Index([FromRoute] string LeadId)
         {
             _logger.LogInformation("GetHistory Initiated");
             var dtos = await _mediator.Send(new LeadHistoryQuery(LeadId));
