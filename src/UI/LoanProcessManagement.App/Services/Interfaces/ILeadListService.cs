@@ -13,7 +13,7 @@ namespace LoanProcessManagement.App.Services.Interfaces
     public interface ILeadListService
     {
         Task<Response<IEnumerable<LeadListCommandDto>>> LeadListProcess(LeadListCommand leadListCommand);
-        Task<Response<IEnumerable<LeadHistoryQueryVm>>> LeadHistory(long LeadId); 
+        Task<Response<IEnumerable<LeadHistoryQueryVm>>> LeadHistory(string LeadId); 
         Task<Response<GetLeadByLeadIdDto>> GetLeadByLeadId(string leadId);
         Task<Response<UpdateLeadDto>> ModifyLead(ModifyLeadVM lead);
 

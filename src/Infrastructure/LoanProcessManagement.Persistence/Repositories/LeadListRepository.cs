@@ -165,12 +165,18 @@ namespace LoanProcessManagement.Persistence.Repositories
         /// <returns></returns>
         public async Task<IEnumerable<LeadHistoryQueryVm>> GetLeadhistory(string lead_id)
         {
+            string input = lead_id;
+            int res = 0;
+            bool success = int.TryParse(new string(input
+                                 .SkipWhile(x => !char.IsDigit(x))
+                                 .TakeWhile(x => char.IsDigit(x))
+                                 .ToArray()), out res);
             var result = await (from A in _dbContext.LpmLeadProcessCycles
                                 join B in _dbContext.LpmLeadStatusMasters on A.CurrentStatus equals B.Id
                                 join C in _dbContext.LpmLoanProductMasters on A.LoanProductID equals C.Id
-                                join D in _dbContext.LpmLeadMasters on A.lead_Id equals D.Id
-                                join E in _dbContext.LpmUserMasters on A.CreatedBy equals E.CreatedBy
-                                where A.lead_Id == Int32.Parse(Regex.Match(D.lead_Id, @"\d+").Value)
+                                join D in _dbContext.LpmLeadMasters on A.LeadStatus equals D.LeadStatus
+                                join E in _dbContext.LpmUserMasters on A.CreatedBy equals E.LgId
+                                where A.lead_Id == res
                                 select new LeadHistoryQueryVm
                                 {
                                     Stage = B.StatusDescription,

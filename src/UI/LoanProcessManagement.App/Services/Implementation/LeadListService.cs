@@ -64,7 +64,7 @@ namespace LoanProcessManagement.App.Services.Implementation
         /// </summary>
         /// <param name="LeadId"></param>
         /// <returns></returns>
-        public async Task<Response<IEnumerable<LeadHistoryQueryVm>>> LeadHistory(long LeadId)
+        public async Task<Response<IEnumerable<LeadHistoryQueryVm>>> LeadHistory(string LeadId)
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 

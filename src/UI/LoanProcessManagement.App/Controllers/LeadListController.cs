@@ -77,7 +77,7 @@ namespace LoanProcessManagement.App.Controllers
         /// </summary>
         /// <returns>View</returns>
         [HttpGet("{LeadId}")]
-        public async Task<IActionResult> LeadHistory(long LeadId)
+        public async Task<IActionResult> LeadHistory(string LeadId)
         {
             var LeadHistoryResponse = await _leadListService.LeadHistory(LeadId);
             if (LeadHistoryResponse != null && LeadHistoryResponse.Data != null)
