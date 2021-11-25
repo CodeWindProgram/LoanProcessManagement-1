@@ -31,15 +31,7 @@ namespace LoanProcessManagement.App.Controllers
         ///</summary>
         public async Task<IActionResult> Index(LeadListCommand leadListCommand)
         {
-            //LeadListCommand LeadList = new LeadListCommand();
-            //var LeadListServiceResponse = await _leadListService.LeadListProcess(LeadList);
-            //if (LeadListServiceResponse != null && LeadListServiceResponse.Data != null)
-            //{
-            //    //var users = _mapper.Map<UserMasterListModel>(ListServiceResponse);
-            //    return View(LeadListServiceResponse.Data);
-            //}
-            //return View("Error");
-            var message = "";
+            string message = "";
             if (ModelState.IsValid)
             {
                 LeadListCommand leadlists = new LeadListCommand();
