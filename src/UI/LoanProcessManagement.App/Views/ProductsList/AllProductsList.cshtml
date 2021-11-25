@@ -4,20 +4,7 @@
     ViewData["Title"] = "AllProductsList";
 }
 
-<style>
-    table {
-    font-size:20px;
-    }
 
-</style>
-<style type='text/css'>
-    table.test {
-        border-collapse: collapse;
-    }
-     table.test td {
-        border-bottom: 1px solid black;
-     }
-</style>
 
 <div class="container app">
     <div class="col-sm-12">
@@ -29,89 +16,75 @@
                 <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
                 <div style="margin-bottom: 10px"></div>
             </div>
-            <div class=" card">
-                <div class="card">
-                    <table id="tblProducts" class="table">
-                        <thead>
-                            <tr>
 
-                                <th>
-                                    @*@Html.DisplayNameFor(model => model.ProductName)*@
-                                    Product Sold
-                                </th>
-                                <th>
-                                    @*@Html.DisplayNameFor(model => model.FormNo)*@
-                                    Form No
-                                </th>
-                                <th>
-                                     @*@Html.DisplayNameFor(model => model.Amount)*@ 
-                                    Amount
-                                </th>
+            <table id="AllProductsList" class="display">
+                <thead>
+                    <tr>
+                        <th>
+                            @*@Html.DisplayNameFor(model => model.ProductName)*@
+                            Product Sold
+                        </th>
+                        <th>
+                            @*@Html.DisplayNameFor(model => model.FormNo)*@
+                            Form No
+                        </th>
+                        <th>
+                            @*@Html.DisplayNameFor(model => model.Amount)*@
+                            Amount
+                        </th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProductName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FormNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Amount)
+                            </td>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr class="test">
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.ProductName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.FormNo)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Amount)
-                                    </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.InsuranceName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FormNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.InsuranceAmount)
+                            </td>
 
-                                </tr>
-                                
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.InsuranceName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.FormNo)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.InsuranceAmount)
-                                    </td>
-
-                                </tr>
-                            }
-                        </tbody>
-                       
-                    </table>
-                    
-                </div>
-            </div>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
-    </div>
-    <div class="d-flex flex-row justify-content-around">
-        <button class="btn btn-primary">Summary</button>
-        <button class="btn btn-primary">Modification</button>
-        <button class="btn btn-primary">History</button>
-        <button class="btn btn-primary">Query History</button>
-        <button class="btn btn-primary">Products</button>
-        <button class="btn btn-primary">Property Details</button>
     </div>
 </div>
 <script>
-        $(document).ready(function () {
-            var usrTable = $('#tblProducts').dataTable({
-                "oLanguage": {
-                    "sZeroRecords": "No records to display",
-                    "sSearch": "Search "
-                },
-                "iDisplayLength": 15,
-                "aLengthMenu": [[25, 50, 100, 200, 500], [25, 50, 100, 200, 500]],
-                "bSortClasses": false,
-                "bPaginate": true,
-                "bAutoWidth": false,
-                "bProcessing": true,
-                "bDestroy": true
-		    });
+    $(document).ready(function () {
+
+        var usrTable = $('#AllProductsList').dataTable({
+            "oLanguage": {
+                "sZeroRecords": "No records to display",
+                "sSearch": "Search "
+            },
+            "iDisplayLength": 15,
+            "aLengthMenu": [[25, 50, 100, 200, 500], [25, 50, 100, 200, 500]],
+            "bSortClasses": false,
+            "bPaginate": true,
+            "bAutoWidth": false,
+            "bProcessing": true,
+            "bDestroy": true
         });
+    });
 </script>
 
 

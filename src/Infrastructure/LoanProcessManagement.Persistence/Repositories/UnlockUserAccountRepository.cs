@@ -99,19 +99,41 @@ namespace LoanProcessManagement.Persistence.Repositories
             _logger.LogInformation("Unlock User With Events Initiated");
             var userDetails = _dbContext.LpmUserMasters.Where(x => x.EmployeeId == unlockUserAccount.EmployeeId).FirstOrDefault();
 
-            if (userDetails != null)
-            {
-                userDetails.WrongLoginAttempt = 0;
-                userDetails.IsLocked = false;
-                
-                _dbContext.SaveChanges();
-                unlockUserAccount.Issuccess = true;
-                unlockUserAccount.Message = "User account unlocked successfully";
+            //if (userDetails != null)
+            //{
+            //    userDetails.WrongLoginAttempt = 0;
+            //    userDetails.IsLocked = false;
+
+            //    _dbContext.SaveChanges();
+            //    unlockUserAccount.Issuccess = true;
+            //    unlockUserAccount.Message = "User account unlocked successfully";
+            //}
+            //else {
+            //    unlockUserAccount.Issuccess = false;
+            //    unlockUserAccount.Message = "User does not exist, please try with correct Employee ID.";
+            //}
+
+            if (userDetails != null) {
+                if (userDetails.WrongLoginAttempt == 0 && !userDetails.IsLocked)
+                {
+                    unlockUserAccount.Issuccess = false;
+                    unlockUserAccount.Message = "User has already unlocked.";
+                }
+                else {
+                    userDetails.WrongLoginAttempt = 0;
+                    userDetails.IsLocked = false;
+
+                    _dbContext.SaveChanges();
+                    unlockUserAccount.Issuccess = true;
+                    unlockUserAccount.Message = "User account unlocked successfully";
+                }
             }
-            else {
+            else
+            {
                 unlockUserAccount.Issuccess = false;
                 unlockUserAccount.Message = "User does not exist, please try with correct Employee ID.";
             }
+
             _logger.LogInformation("unlock user account With Events completed");
             return unlockUserAccount;
             
