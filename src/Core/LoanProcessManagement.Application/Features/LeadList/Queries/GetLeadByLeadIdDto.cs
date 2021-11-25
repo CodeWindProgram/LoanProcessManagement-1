@@ -103,5 +103,17 @@ namespace LoanProcessManagement.Application.Features.LeadList.Queries
 
         public string GoggleLongitude { get; set; }
         public bool IsActive { get; set; }
+        public char QueryStatus { get; set; }
+        public string IPSQueryType1 { get; set; }
+        public string IPSQueryType2 { get; set; }
+        public string IPSQueryType3 { get; set; }
+        public string IPSQueryType4 { get; set; }
+        public string IPSQueryType5 { get; set; }
+        public string IPSQueryType_Comment { get; set; }
+        public string IPSResponseType1 { get; set; }
+        public string IPSResponseType2 { get; set; }
+        public string IPSResponseType3 { get; set; }
+        public string IPSResponseType4 { get; set; }
+        public string IPSResponseType5 { get; set; }
     }
 }

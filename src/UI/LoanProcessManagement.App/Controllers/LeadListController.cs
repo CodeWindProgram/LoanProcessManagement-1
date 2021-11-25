@@ -6,13 +6,13 @@ using LoanProcessManagement.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace LoanProcessManagement.App.Controllers
 {
-    [Route("[controller]/[action]")]
     public class LeadListController : Controller
     {
         private ILeadListService _leadListService;
@@ -75,23 +75,19 @@ namespace LoanProcessManagement.App.Controllers
         /// <summary>
         /// Lead History Module Controller - Saif khan - 17/11/2021
         /// </summary>
+        /// Akshay Pawar : I have commented this part because after adding this part it's showing empty leadlist
         /// <returns>View</returns>
-        [HttpGet("{LeadId}")]
-        public async Task<IActionResult> LeadHistory(string LeadId)
-        {
-            var LeadHistoryResponse = await _leadListService.LeadHistory(LeadId);
-            if (LeadHistoryResponse != null && LeadHistoryResponse.Data != null)
-            {
-                return View(LeadHistoryResponse.Data);
-            }
-            return View("Error");
-        }
+        //[HttpGet("{LeadId}")]
+        //public async Task<IActionResult> LeadHistory(string LeadId)
+        //{
+        //    var LeadHistoryResponse = await _leadListService.LeadHistory(LeadId);
+        //    if (LeadHistoryResponse != null && LeadHistoryResponse.Data != null)
+        //    {
+        //        return View(LeadHistoryResponse.Data);
+        //    }
+        //    return View("Error");
+        //}
         #endregion
-
-        public async Task<IActionResult> LeadSummary(LeadListCommand leadListCommand)
-        {
-            return View();
-        }
 
 
         #region Lead Summary functionality by - Akshay Pawar - 18/11/2021
@@ -131,6 +127,7 @@ namespace LoanProcessManagement.App.Controllers
                 lead_Id = leadResponse.Data.lead_Id,
                 login_id = User.Claims.FirstOrDefault(c => c.Type == "LoginId").Value,
                 UserRoleId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value),
+                LgId = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value,
                 CurrentStatus = leadResponse.Data.CurrentStatus,
                 FormNo = leadResponse.Data.FormNo,
                 LoanProductID = leadResponse.Data.LoanProductID,
@@ -138,17 +135,38 @@ namespace LoanProcessManagement.App.Controllers
                 loanAmount = leadResponse.Data.LoanAmount,
                 insuranceAmount = leadResponse.Data.InsuranceAmount,
                 ResidentialStatus = leadResponse.Data.ResidentialStatus,
-                DateOfAction = DateTime.Today
-
+                DateOfAction = DateTime.Today,
+                QueryStatus=leadResponse.Data.QueryStatus,
+                IPSQueryType1=leadResponse.Data.IPSQueryType1,
+                IPSQueryType2=leadResponse.Data.IPSQueryType2,
+                IPSQueryType3=leadResponse.Data.IPSQueryType3,
+                IPSQueryType4=leadResponse.Data.IPSQueryType4,
+                IPSQueryType5=leadResponse.Data.IPSQueryType5,
+                IPSResponseType1=leadResponse.Data.IPSResponseType1,
+                IPSResponseType2=leadResponse.Data.IPSResponseType2,
+                IPSResponseType3=leadResponse.Data.IPSResponseType3,
+                IPSResponseType4=leadResponse.Data.IPSResponseType4,
+                IPSResponseType5=leadResponse.Data.IPSResponseType5
+                
             };
             var role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
             var statusResponse = await _commonService.GetAllStatus(role);
             var loanProductsResponse = await _commonService.GetAllLoanProduct();
             var insuranceProductsResponse = await _commonService.GetAllInsuranceProducts();
+            var queries = new List<QueryDemo>()
+            {
+                new QueryDemo(){id=1,QueryName="APPLICATION FORM NOT UPLOADED"},
+                new QueryDemo(){id=2,QueryName="APPLICATION FORM HAS NO DSA SEAL AND SIGNATURE"},
+                new QueryDemo(){id=3,QueryName="PD SHEET NOT UPLOADED"},
+                new QueryDemo(){id=4,QueryName="PROCESSING FEES NOT ENTERED IN SYSTEM"},
+                new QueryDemo(){id=5,QueryName="DEPENDENT DETAILS NOT UPDATED"},
+            };
 
             ViewBag.leadStatus = new SelectList(statusResponse.Data, "Id", "StatusDescription");
             ViewBag.loanProducts = new SelectList(loanProductsResponse.Data, "Id", "ProductName");
             ViewBag.insuranceProducts = new SelectList(insuranceProductsResponse.Data, "Id", "ProductName");
+            ViewBag.leadQuery = new SelectList(queries, "QueryName", "QueryName");
+
             return View(lead);
         }
         #endregion
@@ -165,19 +183,59 @@ namespace LoanProcessManagement.App.Controllers
         [HttpPost]
         public async Task<IActionResult> LeadModification(ModifyLeadVM lead)
         {
-            var leadResponse = await _leadListService.ModifyLead(lead);
-            ViewBag.isSuccess = leadResponse.Succeeded;
-            ViewBag.Message = leadResponse.Data.Message;
+
+            var modifyLeadResponse = await _leadListService.ModifyLead(lead);
+            ViewBag.isSuccess = modifyLeadResponse.Succeeded;
+            ViewBag.Message = modifyLeadResponse.Data.Message;
+
+            var leadResponse = await _leadListService.GetLeadByLeadId(lead.lead_Id);
+            var currentLead = new ModifyLeadVM()
+            {
+                lead_Id = leadResponse.Data.lead_Id,
+                login_id = User.Claims.FirstOrDefault(c => c.Type == "LoginId").Value,
+                UserRoleId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value),
+                LgId = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value,
+                CurrentStatus = leadResponse.Data.CurrentStatus,
+                FormNo = leadResponse.Data.FormNo,
+                LoanProductID = leadResponse.Data.LoanProductID,
+                InsuranceProductID = leadResponse.Data.InsuranceProductID,
+                loanAmount = leadResponse.Data.LoanAmount,
+                insuranceAmount = leadResponse.Data.InsuranceAmount,
+                ResidentialStatus = leadResponse.Data.ResidentialStatus,
+                DateOfAction = DateTime.Today,
+                QueryStatus = leadResponse.Data.QueryStatus,
+                IPSQueryType1 = leadResponse.Data.IPSQueryType1,
+                IPSQueryType2 = leadResponse.Data.IPSQueryType2,
+                IPSQueryType3 = leadResponse.Data.IPSQueryType3,
+                IPSQueryType4 = leadResponse.Data.IPSQueryType4,
+                IPSQueryType5 = leadResponse.Data.IPSQueryType5,
+                IPSResponseType1 = leadResponse.Data.IPSResponseType1,
+                IPSResponseType2 = leadResponse.Data.IPSResponseType2,
+                IPSResponseType3 = leadResponse.Data.IPSResponseType3,
+                IPSResponseType4 = leadResponse.Data.IPSResponseType4,
+                IPSResponseType5 = leadResponse.Data.IPSResponseType5
+
+            };
 
             var role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
             var statusResponse = await _commonService.GetAllStatus(role);
             var loanProductsResponse = await _commonService.GetAllLoanProduct();
             var insuranceProductsResponse = await _commonService.GetAllInsuranceProducts();
+            var queries = new List<QueryDemo>()
+            {
+                new QueryDemo(){id=1,QueryName="APPLICATION FORM NOT UPLOADED"},
+                new QueryDemo(){id=2,QueryName="APPLICATION FORM HAS NO DSA SEAL AND SIGNATURE"},
+                new QueryDemo(){id=3,QueryName="PD SHEET NOT UPLOADED"},
+                new QueryDemo(){id=4,QueryName="PROCESSING FEES NOT ENTERED IN SYSTEM"},
+                new QueryDemo(){id=5,QueryName="DEPENDENT DETAILS NOT UPDATED"},
+            };
 
             ViewBag.leadStatus = new SelectList(statusResponse.Data, "Id", "StatusDescription");
             ViewBag.loanProducts = new SelectList(loanProductsResponse.Data, "Id", "ProductName");
             ViewBag.insuranceProducts = new SelectList(insuranceProductsResponse.Data, "Id", "ProductName");
-            return View();
+            ViewBag.leadQuery = new SelectList(queries, "QueryName", "QueryName");
+
+            return View(currentLead);
         } 
         #endregion
     }

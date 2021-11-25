@@ -12,6 +12,7 @@ using LoanProcessManagement.Application.Features.LeadList.Queries;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory;
 using System.Text.RegularExpressions;
 using System;
+using System;
 
 namespace LoanProcessManagement.Persistence.Repositories
 {
@@ -60,6 +61,13 @@ namespace LoanProcessManagement.Persistence.Repositories
             var userProcessCycle = await _dbContext.LpmLeadProcessCycles.Include(x => x.lead).Include(x => x.LeadStatus)
                 .Include(x => x.LoanProduct).Include(x => x.InsuranceProduct)
                 .Where(x => x.lead_Id == user.Id && x.CurrentStatus == user.CurrentStatus).FirstOrDefaultAsync();
+
+            var leadQuery= await _dbContext.LpmLeadQuerys.Include(x => x.lead).Where(x => x.lead_Id==user.Id).FirstOrDefaultAsync();
+            if (leadQuery == null)
+            {
+                leadQuery = new LpmLeadQuery();
+            }
+
             if (userProcessCycle != null)
             {
                 return new GetLeadByLeadIdDto()
@@ -78,6 +86,18 @@ namespace LoanProcessManagement.Persistence.Repositories
                     Comment=userProcessCycle.Comment,
                     ResidentialStatus=userProcessCycle.lead.NationalityType,
                     lead_Id=userProcessCycle.lead.lead_Id,
+                    QueryStatus=leadQuery.Query_Status,
+                    IPSQueryType1=leadQuery.IPSQueryType1,
+                    IPSQueryType2=leadQuery.IPSQueryType2,
+                    IPSQueryType3=leadQuery.IPSQueryType3,
+                    IPSQueryType4=leadQuery.IPSQueryType4,
+                    IPSQueryType5=leadQuery.IPSQueryType5,
+                    IPSQueryType_Comment=leadQuery.IPSQueryType_Comment,
+                    IPSResponseType1=leadQuery.IPSResponseType1,
+                    IPSResponseType2=leadQuery.IPSResponseType2,
+                    IPSResponseType3=leadQuery.IPSResponseType3,
+                    IPSResponseType4=leadQuery.IPSResponseType4,
+                    IPSResponseType5=leadQuery.IPSResponseType5
 
                 };
             }
@@ -95,6 +115,18 @@ namespace LoanProcessManagement.Persistence.Repositories
                     LoanProductID = user.ProductID,
                     ResidentialStatus = user.NationalityType,
                     lead_Id=user.lead_Id,
+                    QueryStatus = leadQuery.Query_Status,
+                    IPSQueryType1 = leadQuery.IPSQueryType1,
+                    IPSQueryType2 = leadQuery.IPSQueryType2,
+                    IPSQueryType3 = leadQuery.IPSQueryType3,
+                    IPSQueryType4 = leadQuery.IPSQueryType4,
+                    IPSQueryType5 = leadQuery.IPSQueryType5,
+                    IPSQueryType_Comment = leadQuery.IPSQueryType_Comment,
+                    IPSResponseType1 = leadQuery.IPSResponseType1,
+                    IPSResponseType2 = leadQuery.IPSResponseType2,
+                    IPSResponseType3 = leadQuery.IPSResponseType3,
+                    IPSResponseType4 = leadQuery.IPSResponseType4,
+                    IPSResponseType5 = leadQuery.IPSResponseType5
 
                 };
 
@@ -111,8 +143,80 @@ namespace LoanProcessManagement.Persistence.Repositories
             .Include(x => x.LoanProduct).Include(x => x.InsuranceProduct)
             .Where(x => x.lead_Id == user.Id && x.CurrentStatus == request.CurrentStatus).FirstOrDefaultAsync();
 
-
             var response = new UpdateLeadDto();
+            if ((request.CurrentStatus != user.CurrentStatus + 1 && request.CurrentStatus != user.CurrentStatus) &&
+                (request.CurrentStatus != 11 && request.CurrentStatus != 8))
+            {
+                response.Succeeded = false;
+                //response.Message = "Submitting for in-principle sanction can be done only after data entry.";
+                response.Message = "Can't Process";
+                response.Lead_Id = request.lead_Id;
+                return response;
+
+            }
+            if (user.CurrentStatus == 3)
+            {
+                if (request.UserRoleId == 2 || request.UserRoleId==3)
+                {
+                    var leadQuery = await _dbContext.LpmLeadQuerys.Include(x => x.lead).Where(x => x.lead_Id == user.Id)
+                        .FirstOrDefaultAsync();
+                    if (leadQuery != null && request.UserRoleId==3)
+                    {
+                        leadQuery.Query_Status = request.QueryStatus;
+                        leadQuery.Query_Comment = request.Query_Comment;
+                        leadQuery.IPSQueryType1 = request.IPSQueryType1;
+                        leadQuery.IPSQueryType2 = request.IPSQueryType2;
+                        leadQuery.IPSQueryType3 = request.IPSQueryType3;
+                        leadQuery.IPSQueryType4 = request.IPSQueryType4;
+                        leadQuery.IPSQueryType5 = request.IPSQueryType5;
+                        leadQuery.IPSQueryType_Comment = request.IPSQueryType_Comment;
+                        leadQuery.IPSResponseType1 = request.IPSResponseType1;
+                        leadQuery.IPSResponseType2 = request.IPSResponseType2;
+                        leadQuery.IPSResponseType3 = request.IPSResponseType3;
+                        leadQuery.IPSResponseType4 = request.IPSResponseType4;
+                        leadQuery.IPSResponseType5 = request.IPSResponseType5;
+                        leadQuery.LastModifiedDate = DateTime.Today;
+                        leadQuery.LastModifiedBy = request.LgId;
+                        //await _dbContext.SaveChangesAsync();
+
+                    }
+                    else
+                    {
+                        if (leadQuery == null)
+                        {
+                            leadQuery = new LpmLeadQuery()
+                            {
+                                lead_Id = user.Id,
+                                Query_Status = request.QueryStatus,
+                                FormNo = request.FormNo,
+                                Query_Comment = request.Query_Comment,
+                                IPSQueryType1 = request.IPSQueryType1,
+                                IPSQueryType2 = request.IPSQueryType2,
+                                IPSQueryType3 = request.IPSQueryType3,
+                                IPSQueryType4 = request.IPSQueryType4,
+                                IPSQueryType5 = request.IPSQueryType5,
+                                IPSQueryType_Comment = request.IPSQueryType_Comment,
+                                IPSResponseType1 = request.IPSResponseType1,
+                                IPSResponseType2 = request.IPSResponseType2,
+                                IPSResponseType3 = request.IPSResponseType3,
+                                IPSResponseType4 = request.IPSResponseType4,
+                                IPSResponseType5 = request.IPSResponseType5,
+                                Query_Date = DateTime.Today,
+                                CreatedBy = request.LgId
+                            };
+                            await _dbContext.LpmLeadQuerys.AddAsync(leadQuery);
+                        }
+                        //await _dbContext.SaveChangesAsync();                       
+                    }
+                }
+                else
+                {
+                    response.Succeeded = false;
+                    response.Message = "Application can be moved to Branch for Processing only by HO.";
+                    response.Lead_Id = request.lead_Id;
+                    return response;
+                }
+            }
             if (userProcessCycle!=null)
             {
                 userProcessCycle.InsuranceProductID = request.InsuranceProductID;
@@ -133,6 +237,24 @@ namespace LoanProcessManagement.Persistence.Repositories
             }
             else
             {
+                var leadQ= await _dbContext.LpmLeadQuerys.Include(x => x.lead).Where(x => x.lead_Id == user.Id)
+                   .FirstOrDefaultAsync();
+                if (request.CurrentStatus == 4 && (request.UserRoleId != 2 || leadQ.Query_Status=='Q'))
+                {
+                    if(leadQ.Query_Status == 'Q')
+                    {
+                        response.Message = "Please wait for the branch to resolve the query before moving to submitted for Branch Processing.";
+                    }
+                    else
+                    {
+                        response.Message = "Application can be moved to Branch for Processing only by HO.";
+                    }
+
+                    response.Succeeded = false;
+                    response.Lead_Id = request.lead_Id;
+                    return response;
+
+                }
                 var newLeadEntry = new LpmLeadProcessCycle()
                 {
                     lead_Id = user.Id,
