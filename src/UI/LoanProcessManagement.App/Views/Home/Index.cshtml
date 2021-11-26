@@ -24,8 +24,21 @@
 </div>
 <hr />
 <div class="container report-list" style="margin-top: 40px;" runat="server" id="grid">
-        <ul class="nav tiles nomargin">
-            @foreach (var itm in Model)
+    <ul class="nav tiles nomargin">
+        @foreach (var itm in Model)
+        {
+            if (itm.Id == 44)
+            {
+                <li class='col-lg-3 col-md-4 col-sm-6 col-xs-6'>
+                    <div class="tile bluediv bg-color-blueLight icon">
+                        <a target="_blank" href="@itm.Link@ViewBag.UserId">
+                            <div class="tile-content"><i><img src="@itm.Icon" /></i></div>
+                            <div class="brand">@itm.MenuName</div>
+                        </a>
+                    </div>
+                </li>
+            }
+            else
             {
                 <li class='col-lg-3 col-md-4 col-sm-6 col-xs-6'>
                     <div class="tile bluediv bg-color-blueLight icon">
@@ -36,5 +49,6 @@
                     </div>
                 </li>
             }
-        </ul>
+        }
+    </ul>
     </div>

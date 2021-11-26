@@ -1,4 +1,4 @@
-﻿@model LoanProcessManagement.App.Models.IncomeAssesmentGstVm
+﻿@model LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTAddEnuiry.GstAddEnquiryCommandDto
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -375,7 +375,7 @@
                                     <div class="col-md-5">
                                         <div class="input-control text">
 
-                                            <input name="ctl00$ContentPlaceHolder1$txtCustomerName" type="text" asp-for="PostEnquiry.CustomerName" value=@Model.GetEnquiry.CustomerName readonly="readonly" id="ContentPlaceHolder1_txtCustomerName" class="form-control required" placeholder="XYZ">
+                                            <input name="ctl00$ContentPlaceHolder1$txtCustomerName" type="text" asp-for="CustomerName" value=@Model.CustomerName readonly="readonly" id="ContentPlaceHolder1_txtCustomerName" class="form-control required" placeholder="XYZ">
                                         </div>
                                     </div>
                                     <div class="col-md-2">
@@ -394,7 +394,7 @@
                                     <div class="col-md-5">
                                         <div class="input-control text">
 
-                                            <input name="ctl00$ContentPlaceHolder1$txtEmail" type="text" asp-for="PostEnquiry.Email" value="@Model.GetEnquiry.Email" readonly="readonly" id="ContentPlaceHolder1_txtEmail" class="form-control" placeholder="abc@xyz.com">
+                                            <input name="ctl00$ContentPlaceHolder1$txtEmail" type="text" asp-for="Email" value="@Model.Email" readonly="readonly" id="ContentPlaceHolder1_txtEmail" class="form-control" placeholder="abc@xyz.com">
                                         </div>
                                     </div>
                                     <div class="col-md-2">
@@ -413,7 +413,7 @@
                                     <div class="col-md-5">
                                         <div class="input-control text">
 
-                                            <input name="ctl00$ContentPlaceHolder1$txtMobile" asp-for="PostEnquiry.MobileNo" value="@Model.GetEnquiry.MobileNo" maxlength="10" readonly="readonly" id="ContentPlaceHolder1_txtMobile" type="number" class="form-control" placeholder="Mobile No">
+                                            <input name="ctl00$ContentPlaceHolder1$txtMobile" asp-for="MobileNo" value="@Model.MobileNo" maxlength="10" readonly="readonly" id="ContentPlaceHolder1_txtMobile" type="number" class="form-control" placeholder="Mobile No">
                                         </div>
                                     </div>
                                     <div class="col-md-2">
@@ -433,7 +433,7 @@
                                     <div class="col-md-5">
                                         <div class="input-control text">
 
-                                            <input name="ctl00$ContentPlaceHolder1$txtGstNumber" asp-for="PostEnquiry.GstNo"  type="text" maxlength="15" id="ContentPlaceHolder1_txtGstNumber" class="form-control uppercase" placeholder="GST Number">
+                                            <input name="ctl00$ContentPlaceHolder1$txtGstNumber" asp-for="GstNo"  type="text" maxlength="15" id="ContentPlaceHolder1_txtGstNumber" class="form-control uppercase" placeholder="GST Number">
                                         </div>
                                     </div>
                                 </div>
@@ -448,7 +448,7 @@
                                         <table id="ContentPlaceHolder1_rdbEmployeeType" class="rbl" style="font-weight:normal;width:60%;">
                                             <tbody>
                                                 <tr>
-                                                    <td><input id="ContentPlaceHolder1_rdbEmployeeType_0" type="radio" name="ctl00$ContentPlaceHolder1$rdbEmployeeType" asp-for="PostEnquiry.EmploymentType" value="@Model.GetEnquiry.EmployementType" checked="checked"><label for="ContentPlaceHolder1_rdbEmployeeType_0">Self-Employed</label></td>
+                                                    <td><input id="ContentPlaceHolder1_rdbEmployeeType_0" type="radio" name="ctl00$ContentPlaceHolder1$rdbEmployeeType" asp-for="EmploymentType" value="@Model.EmploymentType" checked="checked"><label for="ContentPlaceHolder1_rdbEmployeeType_0">Self-Employed</label></td>
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
@@ -481,7 +481,7 @@
 
                                     </div>
                                     <div class="col-md-8">
-                                        <input type="file" name="ctl00$ContentPlaceHolder1$fileUploadExcel" asp-for="PostEnquiry.ExcelFilePath" id="ContentPlaceHolder1_fileUploadExcel" accept=".xls,.xlsx" onchange="validate_fileupload(this,&#39;xls,xlsx&#39;);">
+                                        <input type="file" name="ctl00$ContentPlaceHolder1$fileUploadExcel" asp-for="ExcelFilePath" id="ContentPlaceHolder1_fileUploadExcel" accept=".xls,.xlsx" onchange="validate_fileupload(this,&#39;xls,xlsx&#39;);">
                                     </div>
                                 </div>
                                 <div style="height: 5px; display: none;"></div>
@@ -491,7 +491,7 @@
                                         
                                     </div>
                                     <div class="col-md-8">
-                                        <input type="file" name="ctl00$ContentPlaceHolder1$fileUploadPdf" asp-for="PostEnquiry.PdfFilePath" id="ContentPlaceHolder1_fileUploadPdf" accept=".pdf" onchange="validate_fileupload(this,&#39;pdf&#39;);">
+                                        <input type="file" name="ctl00$ContentPlaceHolder1$fileUploadPdf" asp-for="PdfFilePath" id="ContentPlaceHolder1_fileUploadPdf" accept=".pdf" onchange="validate_fileupload(this,&#39;pdf&#39;);">
                                     </div>
                                 </div>
                                 <br>

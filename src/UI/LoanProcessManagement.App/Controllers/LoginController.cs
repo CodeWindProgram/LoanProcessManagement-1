@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Authentication;
 using System.Collections.Generic;
 using System.Threading;
 using LoanProcessManagement.Application.Features.PropertyDetails.Commands.UpdatePropertyDetails;
+using System;
 
 namespace LoanProcessManagement.App.Controllers
 {
@@ -80,6 +81,12 @@ namespace LoanProcessManagement.App.Controllers
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                             principal,
                             new AuthenticationProperties { IsPersistent = true }); //sign in a principal for the default authentication scheme
+                    
+                    //Cookie Generated for UserRoleId to be stored throughout the Session
+                    CookieOptions option = new CookieOptions();
+                    option.Expires = DateTime.Now.AddDays(1);
+
+                    Response.Cookies.Append("Id", authenticateUserResponse.UserRoleId.ToString(), option);
 
                     if (!string.IsNullOrEmpty(ViewBag.ReturnUrl) && Url.IsLocalUrl(ViewBag.ReturnUrl))
                     {
@@ -373,7 +380,10 @@ namespace LoanProcessManagement.App.Controllers
         public async Task<IActionResult> LogOut()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-
+            foreach (var cookie in HttpContext.Request.Cookies)
+            {
+                Response.Cookies.Delete(cookie.Key);
+            }
             return Redirect("/");
         }
         #endregion

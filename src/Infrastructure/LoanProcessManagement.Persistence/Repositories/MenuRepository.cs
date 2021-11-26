@@ -36,6 +36,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                                 orderby B.Position
                                 select new LpmMenuMaster
                                 {
+                                    Id = B.Id,
                                     Position = B.Position,
                                     Icon = B.Icon,
                                     Link = B.Link,
@@ -59,6 +60,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                                 orderby B.Position
                                 select new LpmMenuMaster
                                 {
+                                    Id = B.Id,
                                     Position = B.Position,
                                     Icon = B.Icon,
                                     Link = B.Link,

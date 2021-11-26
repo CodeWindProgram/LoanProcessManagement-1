@@ -47,6 +47,7 @@ namespace LoanProcessManagement.App
                 c.DefaultRequestHeaders.Add("User-Agent", "HttpClientFactory");
             });
             services.AddSingleton<IAccountService, AccountService>();
+            services.AddSingleton<IRoleMasterService, RoleMasterService>();
             services.AddSingleton<IMenuService, MenuService>();
             services.AddScoped<ICommonServices, CommonServices>();
             services.AddSingleton<IUserListService, UserListService>();
@@ -67,12 +68,12 @@ namespace LoanProcessManagement.App
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-            }
+            //else
+            //{
+            //    app.UseExceptionHandler("/Error");
+            //}
 
-            app.UseStaticFiles();
+            //app.UseStaticFiles();
             app.UseSession();
 
             //app.Use(async (context, next) =>
@@ -105,8 +106,8 @@ namespace LoanProcessManagement.App
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseStatusCodePagesWithRedirects("/Error?statuscode=404");
-            app.UseCustomExceptionHandler();
+            //app.UseStatusCodePagesWithRedirects("/Error?statuscode=404");
+            //app.UseCustomExceptionHandler();
 
             //app.UseMvc();
             app.UseEndpoints(endpoints =>

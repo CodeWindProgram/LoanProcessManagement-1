@@ -6,6 +6,7 @@ using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand;
 using LoanProcessManagement.Application.Features.Menu.Query;
 using LoanProcessManagement.Application.Features.Menu.Query.GetMenuByID;
 using LoanProcessManagement.Application.Features.Menu.Query.MenuList;
+using LoanProcessManagement.Application.Features.RoleMaster.Queries.GetRoleMasterList;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -20,11 +21,14 @@ namespace LoanProcessManagement.App.Controllers
     {
         private readonly IAccountService _accountService;
         private readonly IMenuService _menuService;
-        public HomeController(IAccountService accountService, IMenuService menuService)
+        private readonly IRoleMasterService _roleMasterService;
+        public HomeController(IAccountService accountService, IMenuService menuService, IRoleMasterService roleMasterService)
         {
+            _roleMasterService = roleMasterService;
             _accountService = accountService;
             _menuService = menuService;
         }
+
         #region Calling the API for the MenuMaster - Saif Khan - 28/10/2021
         /// <summary>
         /// 28/10/2021-Calling the API for the MenuMaster
@@ -36,7 +40,6 @@ namespace LoanProcessManagement.App.Controllers
         [Route("/Home")]
         public async Task<IActionResult> Index()
         {
-
             GetMenuMasterServicesQuery menuProcess = new GetMenuMasterServicesQuery();
             var roleId= User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value;
             menuProcess.UserRoleId = long.Parse(roleId);
@@ -48,6 +51,7 @@ namespace LoanProcessManagement.App.Controllers
 
             if (MenuServiceResponse != null && MenuServiceResponse.Succeeded == true && MenuServiceResponse.Data != null)
             {
+                ViewBag.UserId = HttpContext.Request.Cookies["Id"];//ViewBag for caling cookies.
                 return View(MenuServiceResponse.Data);
             }
             return View();
@@ -63,7 +67,6 @@ namespace LoanProcessManagement.App.Controllers
         [HttpGet("/Menulist/{UserroleId}")]
         public async Task<IActionResult> Menulist(long UserroleId)
         {
-
             MenuListQuery menuProcess = new MenuListQuery();
             var roleId = User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value;
             menuProcess.UserRoleId = long.Parse(roleId);
@@ -75,6 +78,7 @@ namespace LoanProcessManagement.App.Controllers
 
             if (MenuServiceResponse != null && MenuServiceResponse.Succeeded == true && MenuServiceResponse.Data != null)
             {
+                ViewBag.UserId = HttpContext.Request.Cookies["Id"];//ViewBag for caling cookies.
                 return View(MenuServiceResponse.Data);
             }
             return View();
@@ -88,9 +92,12 @@ namespace LoanProcessManagement.App.Controllers
         /// </summary>
         /// <returns>View</returns>
         [HttpGet("/MenuCreate")]
-        public IActionResult CreateMenu()
+        public async Task<IActionResult> CreateMenu()
         {
-            return View();
+            var checkboxfunctionVm = new CheckboxfunctionVm();
+            var rolelist = await _roleMasterService.RoleListProcess();
+            checkboxfunctionVm.lpmUserRoleMaster = rolelist.Data;
+            return View(checkboxfunctionVm);
         }
 
         [HttpPost("/MenuCreate")]
@@ -101,12 +108,13 @@ namespace LoanProcessManagement.App.Controllers
             if (ModelState.IsValid)
             {
                 var createmenuresponse = await _menuService.CreateMenu(createMenuCommand);
-
+                //ViewBag.UserId = HttpContext.Request.Cookies["Id"];//ViewBag for caling cookies.
                 if (createmenuresponse.Succeeded)
                 {
                     message = createmenuresponse.Message;
                     ViewBag.Issuccesflag = true;
                     ViewBag.Message = message;
+                    return RedirectToAction("CreateMenu");
                 }
                 else
                 {
@@ -115,11 +123,12 @@ namespace LoanProcessManagement.App.Controllers
                     ViewBag.Message = message;
                 }
             }
-            return View();
+            //ViewBag.UserId = HttpContext.Request.Cookies["Id"];//ViewBag for caling cookies.
+            return RedirectToAction("Home","Menulist");
         }
         #endregion
 
-        #region Calling API for Updtae Menu - Saif Khan - 11/11/2021
+        #region Calling API for Update Menu - Saif Khan - 11/11/2021
         /// <summary>
         /// Calling API for Updtae Menu - Saif Khan - 11/11/2021
         /// </summary>
@@ -127,8 +136,13 @@ namespace LoanProcessManagement.App.Controllers
         [HttpGet("/MenuUpdate/{Id}")]
         public async Task<IActionResult> UpdateMenu(long Id)
         {
+            var updateCheckboxfunctionVm = new UpdateCheckboxfunctionVm();
             var res = await _menuService.MenuById(Id);
-            return View(res.Data);
+            var rolelist = await _roleMasterService.RoleListProcess();
+            updateCheckboxfunctionVm.getMenuByIdQueryVm = res.Data;
+            updateCheckboxfunctionVm.lpmUserRoleMaster = rolelist.Data;
+            
+            return View(updateCheckboxfunctionVm);
         }
 
         [HttpPost("/MenuUpdate/{Id}")]
@@ -136,6 +150,7 @@ namespace LoanProcessManagement.App.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 var updatemenucommand = new UpdateMenuCommand() { 
                                                                     Id =query.Id,
                                                                     Link = query.Link,
@@ -143,8 +158,7 @@ namespace LoanProcessManagement.App.Controllers
                                                                     MenuName = query.MenuName,
                                                                     Icon = query.Icon,
                                                                     IsActive = query.IsActive
-                                                                };                
-                //var map = from e in query join f in updatemenucommand 
+                                                                };
                 var response = await _menuService.UpdateMenu(updatemenucommand);
                 ViewBag.isSuccess = response.Succeeded;
                 ViewBag.Message = response.Data.Message;
@@ -154,7 +168,7 @@ namespace LoanProcessManagement.App.Controllers
         }
         #endregion
 
-        #region Calling API fro the Delete Menu - Saif Khan - 11/11/2021
+        #region Calling API for the Delete Menu - Saif Khan - 11/11/2021
         /// <summary>
         /// Calling API fro the Delete Menu - Saif Khan - 11/11/2021
         /// </summary>

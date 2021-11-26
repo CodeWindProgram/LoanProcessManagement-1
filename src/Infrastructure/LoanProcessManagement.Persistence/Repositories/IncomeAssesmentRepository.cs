@@ -36,11 +36,58 @@ namespace LoanProcessManagement.Persistence.Repositories
                                     Email = A.Email,
                                     MobileNo = A.MobileNo,
                                     GstNo = A.GstNo,
-                                    EmployementType = A.EmploymentType,
+                                    EmploymentType = A.EmploymentType,
                                     ExcelFilePath = A.ExcelFilePath,
                                     PdfFilePath = A.PdfFilePath
                                 }).FirstOrDefaultAsync();
             return result;
         }
+
+        //public async Task<GstCreateEnquiryCommandDto> CreateGstEnquiry(GstCreateEnquiryCommand request)
+        //{
+        //    var user = await _dbContext.LpmLeadMasters.Include(x => x.FormNo).Where(x => x.Id == request.FormNo).FirstOrDefaultAsync();
+
+        //    var userProcessCycle = await _dbContext.LPMGSTEnquiryDetails.Include(x => x.FormNo).Where(x => x.ID == user.Id).FirstOrDefaultAsync();
+
+
+        //    var response = new GstCreateEnquiryCommandDto();
+        //    if (userProcessCycle != null)
+        //    {
+        //        userProcessCycle.CustomerName = request.CustomerName;
+        //        userProcessCycle.Email = request.Email;
+        //        userProcessCycle.MobileNo = request.MobileNo;
+        //        userProcessCycle.EmploymentType = request.EmploymentType;
+        //        userProcessCycle.GstNo = request.GstNo;
+        //        userProcessCycle.PdfFilePath = request.PdfFilePath;
+        //        userProcessCycle.ExcelFilePath = request.ExcelFilePath;
+        //        await _dbContext.SaveChangesAsync();
+        //        response.Message = "GST Data Has Been Updated Successfully !!";
+        //        response.FormNo = request.FormNo;
+        //        return response;
+
+        //    }
+        //    else
+        //    {
+                //var newLeadEntry = new LpmLeadProcessCycle()
+                //{
+                //    lead_Id = user.Id,
+                //    CurrentStatus = request.CurrentStatus,
+                //    DateOfAction = request.DateOfAction,
+                //    LoanProductID = request.LoanProductID,
+                //    InsuranceProductID = request.InsuranceProductID,
+                //    LoanAmount = request.loanAmount,
+                //    InsuranceAmount = request.insuranceAmount,
+                //    Comment = request.Comments
+                //};
+                //await _dbContext.LpmLeadProcessCycles.AddAsync(newLeadEntry);
+                //newLeadEntry.lead.NationalityType = request.ResidentialStatus;
+                //newLeadEntry.lead.CurrentStatus = request.CurrentStatus;
+                //newLeadEntry.lead.ProductID = (int)request.LoanProductID;
+                //await _dbContext.SaveChangesAsync();
+                //response.Message = "Lead Data Has Been Added Successfully !!";
+                //response.Succeeded = true;
+                //response.Lead_Id = request.lead_Id;
+                //return response;
+
     }
 }

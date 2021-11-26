@@ -22,11 +22,12 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string GetLoanProducts = "api/v1/Product/GetLoanProducts";
         public const string GetInsuranceProducts = "api/v1/Product/GetInsuranceProducts";
         public const string ModifyLead = "api/v1/LeadList/ModifyLead";
+        public const string RoleList = "api/v1/RoleMaster";
 
         #region Maintaining the Url EndPoint for Menus - Saif Khan - 28/10/2021
         public const string MenuProcess = "api/v1/Menu";
         public const string MenuCreate = "api/v1/Menu/Create";
-        public const string MenuUpdate = "api/v1/Menu/updateMenu";
+        public const string MenuUpdate = "api/v1/Menu/updateMenu/";
         public const string MenuDelete = "api/v1/Menu/removeMenu/";
         public const string MenuList = "api/v1/Menu/MenuList/";
         public const string MenuById = "api/v1/Menu/MenuById/";

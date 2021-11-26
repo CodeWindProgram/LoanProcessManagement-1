@@ -20,19 +20,19 @@ namespace LoanProcessManagement.App.Controllers
         [HttpGet]
         public async Task<IActionResult> AddEnquiry(int applicantType, int lead_Id)
         {
-            var incomeAssesmentGstVm = new IncomeAssesmentGstVm();
+            //var incomeAssesmentGstVm = new IncomeAssesmentGstVm();
             var AddEnquiryServiceResponse = await _incomeAssesmentService.AddEnquiry(applicantType, lead_Id);
             if (AddEnquiryServiceResponse != null && AddEnquiryServiceResponse.Data != null && AddEnquiryServiceResponse.Succeeded)
             {
-                incomeAssesmentGstVm.GetEnquiry = AddEnquiryServiceResponse.Data;
-                return View(incomeAssesmentGstVm);
+                //incomeAssesmentGstVm.GetEnquiry = AddEnquiryServiceResponse.Data;
+                return View(AddEnquiryServiceResponse.Data);
             }
             return View("Error");
         }
 
 
-        [HttpPost]
-        public async Task<IActionResult> CreateEnquiry(GstCreateEnquiryCommand gstCreateEnquiryCommand )
+        [HttpPost("AddEnquiry")]
+        public async Task<IActionResult> CreateEnquiry(GstAddEnquiryCommandDto gstCreateEnquiryCommand )
         {
             var message = "";
 

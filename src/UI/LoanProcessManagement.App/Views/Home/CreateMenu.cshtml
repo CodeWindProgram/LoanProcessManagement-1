@@ -1,4 +1,4 @@
-﻿@model LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands.CreateMenuCommand
+﻿@model LoanProcessManagement.App.Models.CheckboxfunctionVm
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -31,15 +31,38 @@
             text-shadow: none;
             display: block;
         }
-    input[type=submit] {
+
+    input[type=submit], input[type=button] {
         color: white;
         background-color: #191970;
     }
-    .border-part{
-        padding-left:60px;
-        padding-right:60px;
+
+    #para {
+        color: red;
+        text-align: center;
+        font-size: larger;
     }
 
+    #bara {
+        color: #191970;
+    }
+    #txtlab{padding-top:9px;}
+    .border-part {
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+    #inpcheck{
+        margin-left:10px;
+    }
+    #lblcheck{
+        margin-left:2px;
+        font-size:14px;
+        color:#818181;
+        font-family:sans-serif;
+    }
+    #checkboxes{
+        display:flex;
+    }
 </style>
 <div class="container app">
     <div class="col-sm-12 col-lg-12">
@@ -49,42 +72,60 @@
             </div>
             <div class="panel-body">
                 <div class="border-part">
-                    <form asp-action="CreateMenu">
+                    <form asp-action="CreateMenu" method="post">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
-                            <label asp-for="MenuName" class="control-label"></label>
-                            <input asp-for="MenuName" class="form-control" />
-                            <span asp-validation-for="MenuName" class="text-danger"></span>
+                            <label asp-for="createMenuCommand.MenuName" class="control-label"></label>
+                            <input asp-for="createMenuCommand.MenuName" class="form-control" />
+                            <span asp-validation-for="createMenuCommand.MenuName" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Link" class="control-label"></label>
-                            <input asp-for="Link" class="form-control" />
-                            <span asp-validation-for="Link" class="text-danger"></span>
+                            <label asp-for="createMenuCommand.Link" class="control-label"></label>
+                            <input asp-for="createMenuCommand.Link" class="form-control" />
+                            <span asp-validation-for="createMenuCommand.Link" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Icon" class="control-label"></label>
-                            <input asp-for="Icon" class="form-control" />
-                            <span asp-validation-for="Icon" class="text-danger"></span>
+                            <label asp-for="createMenuCommand.Icon" class="control-label"></label>
+                            <input asp-for="createMenuCommand.Icon" class="form-control" />
+                            <span asp-validation-for="createMenuCommand.Icon" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Position" class="control-label"></label>
-                            <input asp-for="Position" class="form-control" />
-                            <span asp-validation-for="Position" class="text-danger"></span>
+                            <label asp-for="createMenuCommand.Position" class="control-label"></label>
+                            <input asp-for="createMenuCommand.Position" class="form-control" />
+                            <span asp-validation-for="createMenuCommand.Position" class="text-danger"></span>
                         </div>
                         <div hidden class="form-group">
-                            <label asp-for="CreatedDate" class="control-label"></label>
-                            <p id="dates" asp-for="CreatedDate" class="form-control" />
-                            <span asp-validation-for="CreatedDate" class="text-danger"></span>
+                            <label asp-for="createMenuCommand.CreatedDate" class="control-label"></label>
+                            <p id="dates" asp-for="createMenuCommand.CreatedDate" class="form-control" />
+                            <span asp-validation-for="createMenuCommand.CreatedDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group" id="checkboxes">
+                            <label id="txtlab">Menu Is Being Created For </label>
+                            @foreach (var role in Model.lpmUserRoleMaster)
+                            {
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label id="lblcheck">
+                                            <input id="inpcheck" type="checkbox" /> @role.RoleName
+                                        </label>
+                                    </div>
+                                </div>
+                            }
                         </div>
                         <div hidden class="form-group">
                             <div class="checkbox">
                                 <label>
-                                    <input asp-for="IsActive" checked/> @Html.DisplayNameFor(model => model.IsActive)
+                                    <input asp-for="createMenuCommand.IsActive" checked /> @Html.DisplayNameFor(model => model.createMenuCommand.IsActive)
                                 </label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="Create" class="btn btn-default" />
+                            <table>
+                                <tr>
+                                    <td><input id="btn1" type="submit" value="Save" class="btn btn-default" /></td>
+                                    <td><a href="http://localhost:14018/MenuList/1"><input id="btn2" type="button" value="Cancel" class="btn btn-default" /></a></td>
+                                </tr>
+                            </table>
                         </div>
                     </form>
                 </div>
