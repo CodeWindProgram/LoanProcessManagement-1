@@ -116,6 +116,6 @@ namespace LoanProcessManagement.Domain.Entities
         public LpmLoanSchemeMaster LoanSchemes { get; set; }
 
         public ICollection<LpmLeadApplicantsDetails> LpmLeadApplicantsDetails { get; set; }
-        public LpmLeadQuery leadquery { get; set; }
+        public ICollection<LpmLeadQuery> leadquery { get; set; }
     }
 }

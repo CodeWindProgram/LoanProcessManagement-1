@@ -13,8 +13,8 @@ namespace LoanProcessManagement.Persistence.Configurations
         {
             builder
             .HasOne(s => s.lead)
-            .WithOne(s => s.leadquery)
-            .HasForeignKey<LpmLeadQuery>(s => s.lead_Id);
+            .WithMany(s => s.leadquery)
+            .HasForeignKey(s => s.lead_Id);
         }
     }
 }
