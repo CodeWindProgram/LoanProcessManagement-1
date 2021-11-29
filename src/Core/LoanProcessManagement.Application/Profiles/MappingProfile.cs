@@ -42,6 +42,9 @@ using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTAdd
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTCreateEnquiry;
 using LoanProcessManagement.Application.Features.Menu.Query.MenuList;
 using LoanProcessManagement.Application.Features.Menu.Query.GetMenuByID;
+using LoanProcessManagement.Application.Features.DSACorner.Query.DSACornerList;
+using LoanProcessManagement.Application.Features.DSACorner.Query.TrainingVideosList;
+using LoanProcessManagement.Application.Features.DSACorner.Query.CircularList;
 
 namespace LoanProcessManagement.Application.Profiles
 {
@@ -145,12 +148,11 @@ namespace LoanProcessManagement.Application.Profiles
             CreateMap<LpmLoanProductMaster, GetLoanProductsDto>().ReverseMap();
             CreateMap<LpmLoanProductMaster, GetInsuranceProductsDto>().ReverseMap();
 
-            
-
-
-
-
-
+            #region added mappers to get all dsa corener list, training videos list and circular list - Ramya Guduru - 25-11-2021
+            CreateMap<LpmMenuMaster, DSACornerListVm>().ReverseMap();
+            CreateMap<LpmMenuMaster, TrainingVideosListVm>().ReverseMap();
+            CreateMap<LpmMenuMaster, CircularListVm>().ReverseMap();
+            #endregion
         }
     }
 }

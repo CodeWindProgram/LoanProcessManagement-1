@@ -155,7 +155,7 @@ namespace LoanProcessManagement.App.Controllers
                     ViewBag.Message = message;
                 }
             }
-
+            ModelState.Clear();
             return View();
         }
 
@@ -200,7 +200,7 @@ namespace LoanProcessManagement.App.Controllers
                     ViewBag.Message = message;
                 }
             }
-
+            ModelState.Clear();
             return View();
         }
         #endregion
@@ -243,6 +243,7 @@ namespace LoanProcessManagement.App.Controllers
                     ViewBag.Message = message;
                 }
             }
+            ModelState.Clear();
             return View("UnlockUserAccount");
         }
         [HttpPost("/UnlockAndResetPassword")]
@@ -268,6 +269,7 @@ namespace LoanProcessManagement.App.Controllers
                     ViewBag.Message = message;
                 }
             }
+            ModelState.Clear();
             return View("UnlockUserAccount");
         }
 
@@ -294,6 +296,7 @@ namespace LoanProcessManagement.App.Controllers
                     ViewBag.Message = message;
                 }
             }
+            ModelState.Clear();
             return View("UnlockUserAccount");
         }
 

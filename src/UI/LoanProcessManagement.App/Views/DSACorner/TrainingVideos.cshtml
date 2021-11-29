@@ -1,0 +1,38 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Training Videos";
+}
+
+<style>
+    .tile .tile-content {
+        margin: 10px auto !important;
+    }
+
+    .tile .brand, .tile .tile-status {
+        min-height: 50px !important;
+        font-size:17px;
+        padding:10px;
+    }
+</style>
+<div class="container">
+    <div class="row text-primary">
+            <div class="col-md-6"><p style="color:black;"> Training Videos</p></div>
+            
+        </div>
+</div>
+<hr />
+<div class="container report-list" style="margin-top: 40px;" runat="server" id="grid">
+    <ul class="nav tiles nomargin">
+        @foreach (var itm in Model)
+        {
+            <li class='col-lg-3 col-md-4 col-sm-6 col-xs-6'>
+                <div class="tile bluediv bg-color-blueLight icon">
+                    <a target="_blank" href="@itm.Link">
+                        <div class="tile-content"><i><img src="@itm.Icon" /></i></div>
+                        <div class="brand">@itm.TrainingVideoName</div>
+                    </a>
+                </div>
+            </li>
+        }
+    </ul>
+</div>

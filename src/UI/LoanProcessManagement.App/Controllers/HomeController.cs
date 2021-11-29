@@ -1,5 +1,6 @@
 ﻿using LoanProcessManagement.App.Models;
 using LoanProcessManagement.App.Services.Interfaces;
+using LoanProcessManagement.Application.Features.DSACorner.Query.DSACornerList;
 using LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands;
 using LoanProcessManagement.Application.Features.Menu.Commands.DeleteCommand;
 using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand;
@@ -18,7 +19,7 @@ namespace LoanProcessManagement.App.Controllers
 {
     [Route("Home")]
     public class HomeController : Controller
-    {
+    {       
         private readonly IAccountService _accountService;
         private readonly IMenuService _menuService;
         private readonly IRoleMasterService _roleMasterService;
@@ -183,7 +184,8 @@ namespace LoanProcessManagement.App.Controllers
         {
             var response = await _menuService.DeleteMenu(deleteMenuCommand.Id);
             return RedirectToAction("Menulist");
-        } 
+        }
         #endregion
+        
     }
 }

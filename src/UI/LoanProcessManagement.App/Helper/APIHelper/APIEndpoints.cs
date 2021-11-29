@@ -53,13 +53,27 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string ForgotPassword = "api/v1/ForgotPassword/ForgotPassword";
         #endregion
 
+        #region added url Endpoints for Update property details - Ramya Guduru -25/11/2021
         public const string GetProperty = "api/v1/PropertyDetails/getProperty/";
         public const string GetPropertyType = "api/v1/PropertyType/GetPropertyTypes";
         public const string GetSanctionedPlan = "api/v1/SanctionedPlanReceived/GetSanctionedPlan";
         public const string UpdateProperties = "api/v1/PropertyDetails/updateProperty";
+        #endregion
 
+        #region added url Endpoints Products List- Ramya Guduru -25/11/2021
         public const string AllProductsList = "api/v1/Products/GetProductsList/";
+        #endregion
+
+        #region added url Endpoints for GST Lead List- Ramya Guduru -25/11/2021
         public const string LeadListing = "api/v1/GSTEnquiryLeadList/LeadListing/";
+        #endregion
+
         public const string AddEnquiry = "api/v1/IncomeAssesment/";
+
+        #region added url Endpoints for DSA corner  - Ramya Guduru -25/11/2021
+        public const string DSACornerList = "api/v1/DSACorner/DSACorner/";   
+        public const string TrainingVideosList = "api/v1/DSACorner/TrainingVideos/";
+        public const string CircularList = "api/v1/DSACorner/Circular/";
+        #endregion
     }
 }

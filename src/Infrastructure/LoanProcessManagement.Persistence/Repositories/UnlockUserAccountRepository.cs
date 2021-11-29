@@ -114,7 +114,7 @@ namespace LoanProcessManagement.Persistence.Repositories
             //}
 
             if (userDetails != null) {
-                if (userDetails.WrongLoginAttempt == 0 && !userDetails.IsLocked)
+                if (!userDetails.IsLocked)
                 {
                     unlockUserAccount.Issuccess = false;
                     unlockUserAccount.Message = "User has already unlocked.";

@@ -59,7 +59,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 else
                 {
                     changePassword.Issuccess = false;
-                    changePassword.Message = "Provided password is invalid, Please retry with correct password.";
+                    changePassword.Message = "Provided old password is invalid, Please retry with correct old password.";
                 }
             }
             else
