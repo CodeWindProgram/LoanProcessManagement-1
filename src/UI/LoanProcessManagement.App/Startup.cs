@@ -73,7 +73,7 @@ namespace LoanProcessManagement.App
             //    app.UseExceptionHandler("/Error");
             //}
 
-            //app.UseStaticFiles();
+            app.UseStaticFiles();
             app.UseSession();
 
             //app.Use(async (context, next) =>
