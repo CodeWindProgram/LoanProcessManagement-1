@@ -9,7 +9,7 @@ namespace LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GS
     {
 
         [DisplayName("Form No")]
-        public string FormNo { get; set; }
+        public long FormNo { get; set; }
         [DisplayName("Customer Name")]
         public string CustomerName { get; set; }
         [DisplayName("Mobile No")]
