@@ -1,0 +1,588 @@
+﻿@model LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTAddEnuiry.GstAddEnquiryCommandDto
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "CreateEnquiry";
+}
+<script src="./GICHFGst_files/jquery-1.10.1.min.js.download"></script>
+<script type="text/javascript"></script>
+
+<style>
+    .uppercase {
+        text-transform: uppercase;
+    }
+
+    #divConverted1 h2 {
+        margin: 0px;
+        padding: 2px;
+        background: rgb(251,251,251); /* Old browsers */
+        /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZiZmJmYiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmMmYyZjIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+        background: -moz-linear-gradient(top, rgba(251,251,251,1) 0%, rgba(242,242,242,1) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(251,251,251,1)), color-stop(100%,rgba(242,242,242,1))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top, rgba(251,251,251,1) 0%,rgba(242,242,242,1) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top, rgba(251,251,251,1) 0%,rgba(242,242,242,1) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top, rgba(251,251,251,1) 0%,rgba(242,242,242,1) 100%); /* IE10+ */
+        background: linear-gradient(to bottom, rgba(251,251,251,1) 0%,rgba(242,242,242,1) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbfbfb', endColorstr='#f2f2f2',GradientType=0 ); /* IE6-8 */
+        font-size: 18px;
+        padding: 5px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        margin: 7px auto;
+        filter: none;
+    }
+
+    #divEmployer h2 {
+        margin: 0px;
+        padding: 2px;
+        background: rgb(251,251,251); /* Old browsers */
+        /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZiZmJmYiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmMmYyZjIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+        background: -moz-linear-gradient(top, rgba(251,251,251,1) 0%, rgba(242,242,242,1) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(251,251,251,1)), color-stop(100%,rgba(242,242,242,1))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top, rgba(251,251,251,1) 0%,rgba(242,242,242,1) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top, rgba(251,251,251,1) 0%,rgba(242,242,242,1) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top, rgba(251,251,251,1) 0%,rgba(242,242,242,1) 100%); /* IE10+ */
+        background: linear-gradient(to bottom, rgba(251,251,251,1) 0%,rgba(242,242,242,1) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbfbfb', endColorstr='#f2f2f2',GradientType=0 ); /* IE6-8 */
+        font-size: 18px;
+        padding: 5px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        margin: 7px auto;
+        filter: none;
+    }
+
+    .tab {
+        padding-left: 15px;
+    }
+
+    .AppTabs {
+        display: inline-block;
+        margin: 3px;
+        padding: 5px 30px;
+        background: #191970;
+        color: #FFF;
+        text-decoration: none;
+    }
+
+        .AppTabs:hover {
+            background-color: #169dd8;
+            text-decoration: none;
+        }
+
+        .AppTabs:visited {
+            text-decoration: none;
+        }
+
+    #divStatementPeriod h2 {
+        margin: 0px;
+        padding: 2px;
+        background: rgb(251,251,251); /* Old browsers */
+        /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZiZmJmYiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmMmYyZjIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+        background: -moz-linear-gradient(top, rgba(251,251,251,1) 0%, rgba(242,242,242,1) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(251,251,251,1)), color-stop(100%,rgba(242,242,242,1))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top, rgba(251,251,251,1) 0%,rgba(242,242,242,1) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top, rgba(251,251,251,1) 0%,rgba(242,242,242,1) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top, rgba(251,251,251,1) 0%,rgba(242,242,242,1) 100%); /* IE10+ */
+        background: linear-gradient(to bottom, rgba(251,251,251,1) 0%,rgba(242,242,242,1) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbfbfb', endColorstr='#f2f2f2',GradientType=0 ); /* IE6-8 */
+        font-size: 18px;
+        padding: 5px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        margin: 7px auto;
+        filter: none;
+    }
+</style>
+<style>
+    .clsHeading {
+        background-color: #191970;
+        color: white;
+    }
+
+    .cal_align {
+        display: inline-block;
+        width: 90%;
+        margin-right: 10px;
+    }
+
+    .TextBoxCalender {
+        font-family: Arial;
+        font-size: 14px;
+        font-weight: normal;
+        color: black;
+        border: 1px solid #ccc;
+        background-color: White;
+        padding-right: 2px;
+    }
+
+    .ui-datepicker-trigger {
+        margin-left: 94%;
+        margin-top: -13%;
+        position: relative;
+    }
+</style>
+
+<script>
+    function validate_fileupload(filename, extvalues) {
+        debugger;
+        var allowedExt = extvalues.split(',');
+        var filearr = filename.value.toLowerCase().split('.');
+        var fileext = filearr[filearr.length - 1];
+        if (allowedExt.includes(fileext)) {
+            return true;
+        }
+        else {
+            alert("Please select file of " + extvalues + " extension format only");
+            filename.value = "";
+            return false;
+        }
+    }
+
+
+
+    $(document).ready(function () {
+        $(".TextFrom").datepicker({
+            dateFormat: 'yy-mm',
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            minDate: "-15m",
+            maxDate: "-12m",
+
+            onClose: function (dateText, inst) {
+                var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                $(this).val($.datepicker.formatDate('yy-mm', new Date(year, month, 1)));
+                var dttod = new Date(year, month, 1);
+                dttod.setMonth(dttod.getMonth() + 11);
+
+                var dtlat = new Date();
+                dtlat.setMonth(dtlat.getMonth() - 1);
+                if (dttod > dtlat) {
+                    $(".TextTo").val($.datepicker.formatDate('yy-mm', dtlat));
+                }
+                else {
+                    $(".TextTo").val($.datepicker.formatDate('yy-mm', dttod));
+                }
+            }
+        });
+
+        $(".TextTo").datepicker({
+            dateFormat: 'yy-mm',
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            minDate: "-15m",
+            maxDate: "-12m",
+        });
+
+        $(".TextBoxCalender").focus(function () {
+            $(".ui-datepicker-calendar").hide();
+            $("#ui-datepicker-div").position({
+                my: "center top",
+                at: "center bottom",
+                of: $(this)
+            });
+        });
+    });
+
+    function fnclearvaluesdate() {
+        $(".TextBoxCalender").val("");
+    }
+</script>
+
+<form method="post" asp-action="CreateEnquiry" id="form1">
+
+    <div style="margin-top: 20px" class="container">
+    <div class="container app">
+        <div class="col-sm-12">
+            <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
+                <div class="panel-heading">Add GST Enquiry</div>
+                <a id="ContentPlaceHolder1_lnkCoApp0" class="AppTabs" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp0&#39;,&#39;&#39;)" style="background:#169dd8;">Applicant</a>
+                <a id="ContentPlaceHolder1_lnkCoApp1" class="AppTabs" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp1&#39;,&#39;&#39;)" style="background:#191970;">Co-Applicant-1</a>
+                <a id="ContentPlaceHolder1_lnkCoApp2" class="AppTabs" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp2&#39;,&#39;&#39;)" style="background:#191970;">Co-Applicant-2</a>
+                <a id="ContentPlaceHolder1_lnkCoApp3" class="AppTabs" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp3&#39;,&#39;&#39;)" style="background:#191970;">Co-Applicant-3</a>
+                <a id="ContentPlaceHolder1_lnkCoApp4" class="AppTabs" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp4&#39;,&#39;&#39;)" style="background:#191970;">Co-Applicant-4</a>
+                <a id="ContentPlaceHolder1_lnkCoApp5" class="AppTabs" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp5&#39;,&#39;&#39;)" style="background:#191970;">Co-Applicant-5</a>
+                <div style="height: 10px;"></div>
+                <span id="ContentPlaceHolder1_spanMessage" style="color: red; font-size: 18px;"></span>
+                <div style="height: 10px;"></div>
+                <div class="frames">
+                    <div class="panel-body">
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div hidden class="form-group">
+                            <div class="col-md-4">
+                                <label asp-for="ID" class="control-label"></label>
+                                <input asp-for="ID" class="form-control" />
+                                <span asp-validation-for="ID" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div id="ContentPlaceHolder1_alertMsg">
+                            <div>
+                                <div class="col-md-4">
+                                    <label class="">Form No</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="input-control text">
+                                        <span id="ContentPlaceHolder1_lblFormNo" style="color: black">@Model.FormNo</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div id="divConverted1">
+                            <h2>Customer Details</h2>
+                        </div>
+                        <div style="height: 5px;"></div>
+                        <div class="row tab">
+                            <div class="col-md-4">
+                                <label class="col-md-4">Customer Name</label>
+
+                            </div>
+                            <div class="col-md-5">
+                                <div class="input-control text">
+
+                                    <input type="text" asp-for="CustomerName" readonly="readonly" id="ContentPlaceHolder1_txtCustomerName" class="form-control required" placeholder="XYZ">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-control">
+                                    <input type="submit" value="Edit" id="ContentPlaceHolder1_btnEditName">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div style="height: 5px;"></div>
+                        <div class="row tab">
+                            <div class="col-md-4">
+                                <label class="col-md-5">Customer Email</label>
+
+                            </div>
+                            <div class="col-md-5">
+                                <div class="input-control text">
+
+                                    <input type="text" asp-for="Email" readonly="readonly" id="ContentPlaceHolder1_txtEmail" class="form-control" placeholder="abc@xyz.com">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-control">
+                                    <input type="submit" value="Edit" id="ContentPlaceHolder1_btnEditEmail">
+                                </div>
+                            </div>
+                        </div>
+                        <div style="height: 5px;"></div>
+                        <div class="row tab">
+                            <div class="col-md-4">
+                                <label class="col-md-5">Customer Mobile</label>
+
+                            </div>
+                            <div class="col-md-5">
+                                <div class="input-control text">
+
+                                    <input asp-for="MobileNo" maxlength="10" readonly="readonly" id="ContentPlaceHolder1_txtMobile" type="number" class="form-control" placeholder="Mobile No">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-control">
+                                    <input type="submit" value="Edit" id="ContentPlaceHolder1_btnEditMobile">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="height: 5px;"></div>
+                        <div class="row tab">
+                            <div class="col-md-4">
+                                <label class="col-md-5">GST Number:</label>
+
+                            </div>
+                            <div class="col-md-5">
+                                <div class="input-control text">
+
+                                    <input asp-for="GstNo" type="text" maxlength="15" id="ContentPlaceHolder1_txtGstNumber" class="form-control uppercase" placeholder="GST Number">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="height: 5px;"></div>
+
+                        <div class="row tab">
+                            <div class="col-md-4">
+                                <label class="col-md-5">Employee Type :</label>
+                            </div>
+                            <div class="col-md-7">
+                                <table id="ContentPlaceHolder1_rdbEmployeeType" class="rbl" style="font-weight:normal;width:60%;">
+                                    <tbody>
+                                        <tr>
+                                            <td><input id="ContentPlaceHolder1_rdbEmployeeType_0" type="radio" asp-for="EmploymentType" value="@Model.EmploymentType" checked="checked"><label for="ContentPlaceHolder1_rdbEmployeeType_0">@Model.EmploymentType</label></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div style="height: 5px;"></div>
+
+
+
+
+                        <div class="row tab">
+
+                            <div class="col-md-7">
+                                <a id="ContentPlaceHolder1_linkGstrptDownload" href="https://google.com" target="_blank">Click here to download GST report</a>
+                            </div>
+                        </div>
+
+
+                        <div style="height: 5px; display: none;"></div>
+                        <div id="divConverted1">
+                            <h2>Upload files</h2>
+                        </div>
+                        <div style="height: 5px; display: none;"></div>
+                        <div class="row tab">
+                            <div class="">
+                                <label class="col-md-4">Excel file</label>
+
+                            </div>
+                            <div class="col-md-8">
+                                <input type="file" asp-for="ExcelFilePath" id="ContentPlaceHolder1_fileUploadExcel" accept=".xls,.xlsx" onchange="validate_fileupload(this,&#39;xls,xlsx&#39;);">
+                            </div>
+                        </div>
+                        <div style="height: 5px; display: none;"></div>
+                        <div class="row tab">
+                            <div class="">
+                                <label class="col-md-4">Pdf file</label>
+
+                            </div>
+                            <div class="col-md-8">
+                                <input type="file" asp-for="PdfFilePath" id="ContentPlaceHolder1_fileUploadPdf" accept=".pdf" onchange="validate_fileupload(this,&#39;pdf&#39;);">
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div hidden class="form-group">
+                            <label asp-for="ApplicantType" class="control-label"></label>
+                            <input asp-for="ApplicantType" class="form-control" />
+                            <span asp-validation-for="ApplicantType" class="text-danger"></span>
+                        </div>
+
+                        <div hidden class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row tab">
+                            <div class="col-md-12">
+                                <center>
+                                    <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="ContentPlaceHolder1_btnAddEnquiry" class="btn btn-danger">
+                                </center>
+                            </div>
+                        </div>
+
+                        <br>
+                        <br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if ($("#ContentPlaceHolder1_btnAddEnquiry").is(":disabled")) {
+                $("#htmlsubmitbtn").prop("disabled", true);
+            }
+        });
+
+        function ValidateUpdate(type) {
+            if (type == 'Name') {
+                if ($("#ContentPlaceHolder1_txtCustomerName").val() == "") {
+                    alert('Customer Name is Mandatory');
+                    return false;
+                }
+                var namefilter = /^[a-z A-Z]+$/;
+                var name = $("#ContentPlaceHolder1_txtCustomerName").val();
+                if (namefilter.test(name) == false) {
+                    //alert(pattern);
+                    alert('Please Enter Name in proper format');
+
+                    return false;
+                }
+            }
+
+            //if (type == 'Email') {
+            //    if ($("#ContentPlaceHolder1_txtEmail").val() == "") {
+            //        {
+            //            alert('Customer Email is Mandatory');
+            //            return false;
+            //        }
+            //    }
+
+            //    var pattern = new RegExp(/^[+a-zA-Z0-9._-]+[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+            //    var emailid = $("#ContentPlaceHolder1_txtEmail").val();
+            //    if (pattern.test(emailid) == false) {
+            //        //alert(pattern);
+            //        alert('Please Enter Email in proper format');
+
+            //        return false;
+            //    }
+            //}
+            if (type == 'Mobile') {
+                if ($("#ContentPlaceHolder1_txtMobile").val() == "") {
+                    alert('Customer Mobile No is Mandatory');
+                    return false;
+                }
+
+                var filter = /^\d{10}$/;
+                var mobile = $("#ContentPlaceHolder1_txtMobile").val();
+                if (filter.test(mobile) == false) {
+                    console.log(filter);
+                    alert('Please Enter Mobile No in proper format');
+
+                    return false;
+                }
+            }
+
+        }
+
+        $(document).ready(function () {
+            debugger;
+            console.log('validate');
+            // GetProductList();
+            //$("#btnAddEnquiry").validate();
+            $("#ContentPlaceHolder1_btnAddEnquiry").click(function (e) {
+                //debugger;
+                if ($("#ContentPlaceHolder1_txtCustomerName").val() == "") {
+                    alert('Customer Name is Mandatory');
+                    e.preventDefault();
+                    return false;
+                }
+                var namefilter = /^[a-z A-Z]+$/;
+                var name = $("#ContentPlaceHolder1_txtCustomerName").val();
+                if (namefilter.test(name) == false) {
+                    //alert(pattern);
+                    alert('Please Enter Name in proper format');
+                    e.preventDefault();
+                    return false;
+                }
+
+
+                //if ($("#ContentPlaceHolder1_txtEmail").val() == "") {
+                //    {
+                //        alert('Customer Email is Mandatory');
+                //        e.preventDefault();
+                //        return false;
+                //    }
+                //}
+
+                //var pattern = new RegExp(/^[+a-zA-Z0-9._-]+[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+                //var emailid = $("#ContentPlaceHolder1_txtEmail").val();
+                //if (pattern.test(emailid) == false) {
+                //    //alert(pattern);
+                //    alert('Please Enter Email in proper format');
+                //    e.preventDefault();
+                //    return false;
+                //}
+
+                var filter = /^\d{10}$/;
+                var mobile = $("#ContentPlaceHolder1_txtMobile").val();
+                if (filter.test(mobile) == false) {
+                    console.log(filter);
+                    alert('Please Enter Mobile No in proper format');
+
+                    return false;
+                }
+                var patterngst = new RegExp("^([0][1-9]|[1-2][0-9]|[3][0-7])([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$");
+                //var patterngst = new RegExp("^([0][1-9]|[1-2][0-9]|[3][0-5])([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$");
+                debugger;
+                var gstno = $("#ContentPlaceHolder1_txtGstNumber").val();
+                if (patterngst.test(gstno) == false) {
+                    //alert(pattern);
+                    alert('Please Enter GST number in proper format');
+                    e.preventDefault();
+                    return false;
+                }
+
+                if ($("#ContentPlaceHolder1_txtMobile").val() == "") {
+                    alert('Customer Mobile No is Mandatory');
+                    e.preventDefault();
+                    return false;
+                }
+
+                var filter = /^\d{10}$/;
+                var mobile = $("#ContentPlaceHolder1_txtMobile").val();
+                if (filter.test(mobile) == false) {
+                    console.log(filter);
+                    alert('Please Enter Mobile No in proper format');
+                    e.preventDefault();
+                    return false;
+                }
+                //excel file validation
+                var fileExcelvalue = $('input[id*="fileUploadExcel"]').val();
+                if (fileExcelvalue == "" || fileExcelvalue == null) {
+                    console.log(fileExcelvalue);
+                    alert('Please select excel file to upload');
+                    e.preventDefault();
+                    return false;
+                }
+            })
+        });
+
+    </script>
+
+
+    <div class="navbar-fixed-bottom">
+        <div class="container">
+            <div id="divLoggedInUser" class="btn-float text-center">
+                <input type="image" name="ctl00$btnUserName" id="btnUserName" formnovalidate="" src="./GICHFGst_files/power-btn.png">
+            </div>
+            <div class="col-lg-12 text-center">
+                <h5>
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="linklastLogin" href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$linklastLogin&quot;, &quot;&quot;, false, &quot;&quot;, &quot;LastLogin.aspx&quot;, false, true))">Last Login</a>
+                </h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Message</h4>
+                </div>
+                <div class="modal-body" id="modalMessage">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="closemodalbutton">Close</button>
+                    <a href="http://1.6.38.247:8090/home.aspx" class="btn btn-primary" role="button" id="redirectbutton">OK</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript">
+        hideshowbackbtn(1)
+    </script>
+</form>
