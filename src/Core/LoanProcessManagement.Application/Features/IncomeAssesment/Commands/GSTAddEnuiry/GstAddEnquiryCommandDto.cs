@@ -7,7 +7,7 @@ namespace LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GS
 {
     public class GstAddEnquiryCommandDto
     {
-
+        public long ID { get; set; }
         [DisplayName("Form No")]
         public long FormNo { get; set; }
         [DisplayName("Customer Name")]
@@ -25,5 +25,6 @@ namespace LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GS
         [DisplayName("Upload PDF File")]
         public string PdfFilePath { get; set; }
         public int ApplicantType { get; set; }
+        public bool IsActive { get; set; }
     }
 }

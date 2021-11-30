@@ -7,6 +7,7 @@ namespace LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GS
 {
     public class GstCreateEnquiryCommandDto
     {
+        public long ID { get; set; }
         public long FormNo { get; set; }
         //public string Lead_Id { get; set; }
         public string CustomerName { get; set; }
@@ -19,5 +20,6 @@ namespace LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GS
         public int ApplicantType { get; set; }
         public bool Succeeded { get; internal set; }
         public string Message { get; set; }
+        public bool IsActive { get; set; }
     }
 }

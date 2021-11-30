@@ -12,6 +12,6 @@ namespace LoanProcessManagement.App.Services.Interfaces
     {
         Task<Response<GstAddEnquiryCommandDto>> AddEnquiry(int applicantType, int lead_Id);
 
-        Task<Response<GstAddEnquiryCommandDto>> CreateEnquiry(GstAddEnquiryCommandDto menuCreate);
+        Task<Response<GstAddEnquiryCommandDto>> CreateEnquiry(GstCreateEnquiryCommand gstCreateEnquiryCommand);
     }
 }

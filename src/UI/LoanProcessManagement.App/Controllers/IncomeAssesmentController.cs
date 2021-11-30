@@ -32,7 +32,7 @@ namespace LoanProcessManagement.App.Controllers
 
 
         [HttpPost("AddEnquiry")]
-        public async Task<IActionResult> CreateEnquiry(GstAddEnquiryCommandDto gstCreateEnquiryCommand )
+        public async Task<IActionResult> CreateEnquiry(GstCreateEnquiryCommand gstCreateEnquiryCommand )
         {
             var message = "";
 

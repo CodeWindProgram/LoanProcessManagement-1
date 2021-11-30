@@ -4,14 +4,16 @@ using LoanProcessManagement.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LoanProcessManagement.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211129130735_gst")]
+    partial class gst
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -319,12 +321,6 @@ namespace LoanProcessManagement.Persistence.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("CustomerEmail")
                         .HasColumnType("nvarchar(max)");
 
@@ -354,12 +350,6 @@ namespace LoanProcessManagement.Persistence.Migrations
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("LastModifiedDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
@@ -704,7 +694,8 @@ namespace LoanProcessManagement.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("lead_Id");
+                    b.HasIndex("lead_Id")
+                        .IsUnique();
 
                     b.ToTable("LpmLeadQuerys");
                 });
@@ -1306,8 +1297,8 @@ namespace LoanProcessManagement.Persistence.Migrations
             modelBuilder.Entity("LoanProcessManagement.Domain.Entities.LpmLeadQuery", b =>
                 {
                     b.HasOne("LoanProcessManagement.Domain.Entities.LpmLeadMaster", "lead")
-                        .WithMany("leadquery")
-                        .HasForeignKey("lead_Id")
+                        .WithOne("leadquery")
+                        .HasForeignKey("LoanProcessManagement.Domain.Entities.LpmLeadQuery", "lead_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

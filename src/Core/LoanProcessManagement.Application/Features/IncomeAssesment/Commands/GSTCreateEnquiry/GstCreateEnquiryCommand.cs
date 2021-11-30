@@ -6,7 +6,8 @@ namespace LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GS
 {
     public class GstCreateEnquiryCommand : IRequest<Response<GstCreateEnquiryCommandDto>>
     {
-        public long FormNo { get; set; }
+        public long ID { get; set; }
+        //public long FormNo { get; set; }
         //public long Lead_Id { get; set; }
         public string CustomerName { get; set; }
         public int MobileNo { get; set; }
@@ -16,5 +17,6 @@ namespace LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GS
         public string PdfFilePath { get; set; }
         public string GstNo { get; set; }
         public int ApplicantType { get; set; }
+        public bool IsActive { get; set; }
     }
 }

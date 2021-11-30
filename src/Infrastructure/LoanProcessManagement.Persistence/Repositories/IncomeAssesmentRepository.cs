@@ -12,25 +12,27 @@ using LoanProcessManagement.Application.Contracts.Infrastructure;
 
 namespace LoanProcessManagement.Persistence.Repositories
 {
-    public class IncomeAssesmentRepository : BaseRepository<LPMGSTEnquiryDetail>,IIncomeAssesmentRepository
+    public class IncomeAssesmentRepository : BaseRepository<LPMGSTEnquiryDetail>, IIncomeAssesmentRepository
     {
         //protected readonly ApplicationDbContext _dbContext;
         private readonly IEmailService emailService;
         private readonly ILogger _logger;
         //private readonly IIncomeAssesmentRepository _incomeAssesmentRepository;
-        public IncomeAssesmentRepository(ApplicationDbContext dbContext, ILogger<LPMGSTEnquiryDetail> logger,IEmailService emailService) : base(dbContext, logger, emailService)
+        public IncomeAssesmentRepository(ApplicationDbContext dbContext, ILogger<LPMGSTEnquiryDetail> logger, IEmailService emailService) : base(dbContext, logger, emailService)
         {
             _logger = logger;
-           
+
         }
 
         public async Task<GstAddEnquiryCommandDto> AddGstEnquiry(int ApplicantType, int Lead_Id)
         {
+
             var result = await (from A in _dbContext.LPMGSTEnquiryDetails
                                 join B in _dbContext.LpmLeadMasters on A.Lead_Id.lead_Id equals B.lead_Id
                                 where A.ApplicantType == ApplicantType && A.Lead_Id.Id == Lead_Id && A.IsActive == true
                                 select new GstAddEnquiryCommandDto
                                 {
+                                    ID = A.ID,
                                     FormNo = B.Id,
                                     CustomerName = A.CustomerName,
                                     Email = A.Email,
@@ -38,7 +40,10 @@ namespace LoanProcessManagement.Persistence.Repositories
                                     GstNo = A.GstNo,
                                     EmploymentType = A.EmploymentType,
                                     ExcelFilePath = A.ExcelFilePath,
-                                    PdfFilePath = A.PdfFilePath
+                                    PdfFilePath = A.PdfFilePath,
+                                    IsActive = A.IsActive,
+                                    ApplicantType = A.ApplicantType
+                                    
                                 }).FirstOrDefaultAsync();
             return result;
         }
@@ -68,26 +73,24 @@ namespace LoanProcessManagement.Persistence.Repositories
         //    }
         //    else
         //    {
-                //var newLeadEntry = new LpmLeadProcessCycle()
-                //{
-                //    lead_Id = user.Id,
-                //    CurrentStatus = request.CurrentStatus,
-                //    DateOfAction = request.DateOfAction,
-                //    LoanProductID = request.LoanProductID,
-                //    InsuranceProductID = request.InsuranceProductID,
-                //    LoanAmount = request.loanAmount,
-                //    InsuranceAmount = request.insuranceAmount,
-                //    Comment = request.Comments
-                //};
-                //await _dbContext.LpmLeadProcessCycles.AddAsync(newLeadEntry);
-                //newLeadEntry.lead.NationalityType = request.ResidentialStatus;
-                //newLeadEntry.lead.CurrentStatus = request.CurrentStatus;
-                //newLeadEntry.lead.ProductID = (int)request.LoanProductID;
-                //await _dbContext.SaveChangesAsync();
-                //response.Message = "Lead Data Has Been Added Successfully !!";
-                //response.Succeeded = true;
-                //response.Lead_Id = request.lead_Id;
-                //return response;
+        //        var newLeadEntry = new LPMGSTEnquiryDetail()
+        //        {
+        //            //FormNo = user.FormNo,
+        //            CustomerName = request.CustomerName,
+        //            Email = request.Email,
+        //            MobileNo = request.MobileNo,
+        //            EmploymentType = request.EmploymentType,
+        //            GstNo = request.GstNo,
+        //            PdfFilePath = request.PdfFilePath,
+        //            ExcelFilePath = request.ExcelFilePath
+        //        };
+        //        await _dbContext.LPMGSTEnquiryDetails.AddAsync(newLeadEntry);
+        //        await _dbContext.SaveChangesAsync();
+        //        response.Message = "Lead Data Has Been Added Successfully !!";
+        //        response.FormNo = request.FormNo;
+        //        return response;
 
+        //    }
+        //}
     }
 }

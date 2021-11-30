@@ -47,11 +47,11 @@ namespace LoanProcessManagement.App.Services.Implementation
             return response;
         }
 
-        public async Task<Response<GstAddEnquiryCommandDto>> CreateEnquiry(GstAddEnquiryCommandDto menuCreate)
+        public async Task<Response<GstAddEnquiryCommandDto>> CreateEnquiry(GstCreateEnquiryCommand gstCreateEnquiryCommand)
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
-            var content = JsonConvert.SerializeObject(menuCreate);
+            var content = JsonConvert.SerializeObject(gstCreateEnquiryCommand);
 
             var _client = clientfact.CreateClient("LoanService");
 
