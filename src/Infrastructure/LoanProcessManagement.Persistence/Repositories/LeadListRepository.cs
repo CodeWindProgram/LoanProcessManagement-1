@@ -60,7 +60,8 @@ namespace LoanProcessManagement.Persistence.Repositories
                 .Include(x => x.LoanProduct).Include(x => x.InsuranceProduct)
                 .Where(x => x.lead_Id == user.Id && x.CurrentStatus == user.CurrentStatus).FirstOrDefaultAsync();
 
-            var leadQuery= await _dbContext.LpmLeadQuerys.Include(x => x.lead).Where(x => x.lead_Id==user.Id).FirstOrDefaultAsync();
+            var leadQuery = await _dbContext.LpmLeadQuerys.Include(x => x.lead).Where(x => x.lead_Id == user.Id)
+                .OrderByDescending(x => x.Id).FirstOrDefaultAsync();
             if (leadQuery == null)
             {
                 leadQuery = new LpmLeadQuery();
@@ -142,23 +143,32 @@ namespace LoanProcessManagement.Persistence.Repositories
             .Where(x => x.lead_Id == user.Id && x.CurrentStatus == request.CurrentStatus).FirstOrDefaultAsync();
 
             var response = new UpdateLeadDto();
+
             if ((request.CurrentStatus != user.CurrentStatus + 1 && request.CurrentStatus != user.CurrentStatus) &&
                 (request.CurrentStatus != 11 && request.CurrentStatus != 8))
             {
+                if (request.CurrentStatus > user.CurrentStatus)
+                {
+                    var requestedStatus = await _dbContext.LpmLeadStatusMasters.Where(x => x.Id == request.CurrentStatus).FirstOrDefaultAsync();
+                    var prevStatus = await _dbContext.LpmLeadStatusMasters.Where(x => x.Id == (request.CurrentStatus - 1)).FirstOrDefaultAsync();
+                    response.Message = $"Submitting for {requestedStatus.StatusDescription} can be done only after {prevStatus.StatusDescription}.";
+                }
+                else
+                {
+                    response.Message = "Status cannot go backwards.";
+                }
                 response.Succeeded = false;
-                //response.Message = "Submitting for in-principle sanction can be done only after data entry.";
-                response.Message = "Can't Process";
                 response.Lead_Id = request.lead_Id;
                 return response;
-
             }
+
             if (user.CurrentStatus == 3)
             {
                 if (request.UserRoleId == 2 || request.UserRoleId==3)
                 {
-                    var leadQuery = await _dbContext.LpmLeadQuerys.Include(x => x.lead).Where(x => x.lead_Id == user.Id)
-                        .FirstOrDefaultAsync();
-                    if (leadQuery != null && request.UserRoleId==3)
+                    var leadQuery = await _dbContext.LpmLeadQuerys.Include(x => x.lead)
+                        .Where(x => x.lead_Id == user.Id).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
+                    if (leadQuery != null && request.UserRoleId==3 && leadQuery.Query_Status=='Q' && request.QueryStatus=='R')
                     {
                         leadQuery.Query_Status = request.QueryStatus;
                         leadQuery.Query_Comment = request.Query_Comment;
@@ -175,36 +185,58 @@ namespace LoanProcessManagement.Persistence.Repositories
                         leadQuery.IPSResponseType5 = request.IPSResponseType5;
                         leadQuery.LastModifiedDate = DateTime.Today;
                         leadQuery.LastModifiedBy = request.LgId;
-                        //await _dbContext.SaveChangesAsync();
 
                     }
                     else
                     {
-                        if (leadQuery == null)
+                        if(request.UserRoleId == 3 && request.QueryStatus == 'Q')
                         {
-                            leadQuery = new LpmLeadQuery()
-                            {
-                                lead_Id = user.Id,
-                                Query_Status = request.QueryStatus,
-                                FormNo = request.FormNo,
-                                Query_Comment = request.Query_Comment,
-                                IPSQueryType1 = request.IPSQueryType1,
-                                IPSQueryType2 = request.IPSQueryType2,
-                                IPSQueryType3 = request.IPSQueryType3,
-                                IPSQueryType4 = request.IPSQueryType4,
-                                IPSQueryType5 = request.IPSQueryType5,
-                                IPSQueryType_Comment = request.IPSQueryType_Comment,
-                                IPSResponseType1 = request.IPSResponseType1,
-                                IPSResponseType2 = request.IPSResponseType2,
-                                IPSResponseType3 = request.IPSResponseType3,
-                                IPSResponseType4 = request.IPSResponseType4,
-                                IPSResponseType5 = request.IPSResponseType5,
-                                Query_Date = DateTime.Today,
-                                CreatedBy = request.LgId
-                            };
-                            await _dbContext.LpmLeadQuerys.AddAsync(leadQuery);
+                            response.Message = "Can't Process";
+                            response.Lead_Id = request.lead_Id;
+                            response.Succeeded = false;
+                            return response;
+
                         }
-                        //await _dbContext.SaveChangesAsync();                       
+
+                        if ((leadQuery==null) || request.UserRoleId == 2 && leadQuery.Query_Status == 'R' && request.CurrentStatus==user.CurrentStatus)
+                        {
+                            if (request.QueryStatus=='R' && leadQuery.Query_Status == 'Q')
+                            {
+                                response.Message = "Can't Process";
+                                response.Lead_Id = request.lead_Id;
+                                response.Succeeded = false;
+                                return response;
+                            }
+                            else if (request.QueryStatus == 'Q')
+                            {
+                                var newLeadQueryEntry = new LpmLeadQuery()
+                                {
+                                    lead_Id = user.Id,
+                                    Query_Status = request.QueryStatus,
+                                    FormNo = request.FormNo,
+                                    Query_Comment = request.Query_Comment,
+                                    IPSQueryType1 = request.IPSQueryType1,
+                                    IPSQueryType2 = request.IPSQueryType2,
+                                    IPSQueryType3 = request.IPSQueryType3,
+                                    IPSQueryType4 = request.IPSQueryType4,
+                                    IPSQueryType5 = request.IPSQueryType5,
+                                    IPSQueryType_Comment = request.IPSQueryType_Comment,
+                                    IPSResponseType1 = request.IPSResponseType1,
+                                    IPSResponseType2 = request.IPSResponseType2,
+                                    IPSResponseType3 = request.IPSResponseType3,
+                                    IPSResponseType4 = request.IPSResponseType4,
+                                    IPSResponseType5 = request.IPSResponseType5,
+                                    Query_Date = DateTime.Today,
+                                    CreatedBy = request.LgId
+                                };
+                                await _dbContext.LpmLeadQuerys.AddAsync(newLeadQueryEntry);
+
+
+                            }
+
+
+                        }
+
                     }
                 }
                 else
@@ -215,6 +247,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                     return response;
                 }
             }
+
             if (userProcessCycle!=null)
             {
                 userProcessCycle.InsuranceProductID = request.InsuranceProductID;
@@ -226,6 +259,8 @@ namespace LoanProcessManagement.Persistence.Repositories
                 userProcessCycle.LoanProductID = request.LoanProductID;
                 userProcessCycle.lead.ProductID = (int)request.LoanProductID;
                 userProcessCycle.lead.CurrentStatus = request.CurrentStatus;
+                userProcessCycle.LastModifiedDate = DateTime.Today;
+                userProcessCycle.LastModifiedBy = request.LgId;
                 await _dbContext.SaveChangesAsync();
                 response.Message = "Lead Data Has Been Updated Successfully !!";
                 response.Succeeded = true;
@@ -235,8 +270,8 @@ namespace LoanProcessManagement.Persistence.Repositories
             }
             else
             {
-                var leadQ= await _dbContext.LpmLeadQuerys.Include(x => x.lead).Where(x => x.lead_Id == user.Id)
-                   .FirstOrDefaultAsync();
+                var leadQ= await _dbContext.LpmLeadQuerys.Include(x => x.lead).
+                    Where(x => x.lead_Id == user.Id).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
                 if (request.CurrentStatus == 4 && (request.UserRoleId != 2 || leadQ.Query_Status=='Q'))
                 {
                     if(leadQ.Query_Status == 'Q')
@@ -262,7 +297,9 @@ namespace LoanProcessManagement.Persistence.Repositories
                     InsuranceProductID=request.InsuranceProductID,
                     LoanAmount=request.loanAmount,
                     InsuranceAmount=request.insuranceAmount,
-                    Comment=request.Comments
+                    Comment=request.Comments,
+                    CreatedDate=DateTime.Today,
+                    CreatedBy=request.LgId
                 };
                 await _dbContext.LpmLeadProcessCycles.AddAsync(newLeadEntry);
                 newLeadEntry.lead.NationalityType = request.ResidentialStatus;

@@ -62,7 +62,10 @@ namespace LoanProcessManagement.App.Controllers
 
             var branches = await _commonService.GetAllBranches();
             ViewBag.branches = new SelectList(branches, "Id", "branchname");
-
+            if (ViewBag.isSuccess)
+            {
+                ModelState.Clear();
+            }
             return View();
         } 
         #endregion

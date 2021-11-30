@@ -137,6 +137,10 @@
     padding-right:8px;
     margin-top:7px;
     }
+    .selected {
+        background: #0d7db5;
+        color: #FFF;
+    }
 
     .QueryInput{
         display:flex;
@@ -157,7 +161,13 @@
     @if (ViewBag.isSuccess == true)
     {
         <div class="alert alert-success" role="alert">
-            @ViewBag.Message <a asp-controller="leadlist" asp-action="index">Go to lead list</a>
+            @ViewBag.Message @*<a asp-controller="leadlist" asp-action="index">Go to lead list</a>*@
+        </div>
+    }
+    else if(ViewBag.isSuccess == false)
+    {
+        <div class="alert alert-danger" role="alert">
+            @ViewBag.Message @*<a asp-controller="leadlist" asp-action="index">Go to lead list</a>*@
         </div>
     }
 <form method="post" action="/leadlist/LeadModification">
@@ -172,9 +182,10 @@
 
 
     <div class="initial1">
-        <div class="group1"><label for="status_lead">Status of Lead</label></div>
+        
+        <div class="group1"><label for="status_lead">Status of Lead<span style="color:red;margin-left: 4px;font-size: 15px;">*</span></label></div>
         <div class="group2">
-            <select id="status_lead" asp-for="CurrentStatus" asp-items="ViewBag.leadStatus">
+            <select id="status_lead" class="form-control" asp-for="CurrentStatus" asp-items="ViewBag.leadStatus">
                 <option value="">Select</option>
             </select>
             <span asp-validation-for="CurrentStatus" class="text-danger"></span>
@@ -182,9 +193,9 @@
     </div><br /><br>
 
     <div class="initial1">
-        <div class="group1"><label for="residential_status">Residential Status</label></div>
+        <div class="group1"><label for="residential_status">Residential Status<span style="color:red;margin-left: 4px;font-size: 15px;">*</span></label></div>
         <div class="group2">
-            <select id="residential_status" asp-for="ResidentialStatus">
+            <select id="residential_status" class="form-control" asp-for="ResidentialStatus">
                 <option value="Resident Indian">Resident Indian</option>
                 <option value="Non-Resident Indian">Non-Resident Indian</option>
 
@@ -195,7 +206,7 @@
     </div><br /><br />
 
     <div class="initial1" id="leadQueryDiv">
-        <div class="group1"><label for="leadQuery">Raise Query</label></div>
+        <div class="group1"><label for="leadQuery" id="QueryText">Raise Query</label></div>
         <div class="group2">
             <div class="" id="divToggleSwitch">
                 <label class="switch">
@@ -216,7 +227,7 @@
             </div>
             <div class="group2">
                 <div class="QueryInput" style="">
-                    <select id="ddl_IPSQueryType" class="QueryType" asp-for="IPSQueryType1" asp-items="ViewBag.leadQuery">
+                    <select id="ddl_IPSQueryType" class="QueryType form-control" asp-for="IPSQueryType1" asp-items="ViewBag.leadQuery">
                         <option value="">Select Query</option>
                     </select>
                     @*<input name="ddl_IPSQueryType" type="text" id="ddl_IPSQueryType" class="form-control">*@
@@ -254,7 +265,7 @@
             </div>
             <div class="group2">
                 <div class="QueryInput" style="">
-                    <select id="ddl_IPSQueryType2" class="QueryType" asp-for="IPSQueryType2" asp-items="ViewBag.leadQuery">
+                    <select id="ddl_IPSQueryType2" class="QueryType form-control" asp-for="IPSQueryType2" asp-items="ViewBag.leadQuery">
                         <option value="">Select Query</option>
                     </select>
 
@@ -278,7 +289,7 @@
             </div>
             <div class="group2">
                 <div class="QueryInput" style="">
-                    <select id="ddl_IPSQueryType3" class="QueryType" asp-for="IPSQueryType3" asp-items="ViewBag.leadQuery">
+                    <select id="ddl_IPSQueryType3" class="QueryType form-control" asp-for="IPSQueryType3" asp-items="ViewBag.leadQuery">
                         <option value="">Select Query</option>
                     </select>
 
@@ -302,7 +313,7 @@
             </div>
             <div class="group2">
                 <div class="QueryInput" style="">
-                    <select id="ddl_IPSQueryType4" class="QueryType" asp-for="IPSQueryType4" asp-items="ViewBag.leadQuery">
+                    <select id="ddl_IPSQueryType4" class="QueryType form-control" asp-for="IPSQueryType4" asp-items="ViewBag.leadQuery">
                         <option value="">Select Query</option>
                     </select>
 
@@ -326,7 +337,7 @@
             </div>
             <div class="group2">
                 <div class="QueryInput" style="">
-                    <select id="ddl_IPSQueryType5" class="QueryType" asp-for="IPSQueryType5" asp-items="ViewBag.leadQuery">
+                    <select id="ddl_IPSQueryType5" class="QueryType form-control" asp-for="IPSQueryType5" asp-items="ViewBag.leadQuery">
                         <option value="">Select Query</option>
                     </select>
                     @*<input name="ddl_IPSQueryType5" type="text" id="ddl_IPSQueryType5" class="form-control">*@
@@ -362,7 +373,7 @@
                     <label>Response to IPS Query - 1</label>
                 </div>
                 <div class="group2">
-                    <select id="ddl_IPSResponsType" asp-for="IPSResponseType1" asp-items="ViewBag.leadQuery">
+                    <select id="ddl_IPSResponsType" class="form-control" asp-for="IPSResponseType1" asp-items="ViewBag.leadQuery">
                         <option value="">Select Response</option>
                     </select>
                 </div>
@@ -380,7 +391,7 @@
                     <label>Response to IPS Query - 2</label>
                 </div>
                 <div class="group2">
-                    <select id="ddl_IPSResponsType2" asp-for="IPSResponseType2" asp-items="ViewBag.leadQuery">
+                    <select id="ddl_IPSResponsType2" class="form-control" asp-for="IPSResponseType2" asp-items="ViewBag.leadQuery">
                         <option value="">Select Response</option>
                     </select>
                 </div>
@@ -398,7 +409,7 @@
                     <label>Response to IPS Query - 3</label>
                 </div>
                 <div class="group2">
-                    <select id="ddl_IPSResponsType3" asp-for="IPSResponseType3" asp-items="ViewBag.leadQuery">
+                    <select id="ddl_IPSResponsType3" class="form-control" asp-for="IPSResponseType3" asp-items="ViewBag.leadQuery">
                         <option value="">Select Response</option>
                     </select>
                 </div>
@@ -417,7 +428,7 @@
                     <label>Response to IPS Query - 4</label>
                 </div>
                 <div class="group2">
-                    <select id="ddl_IPSResponsType4" asp-for="IPSResponseType4" asp-items="ViewBag.leadQuery">
+                    <select id="ddl_IPSResponsType4" class="form-control" asp-for="IPSResponseType4" asp-items="ViewBag.leadQuery">
                         <option value="">Select Response</option>
                     </select>
                 </div>
@@ -435,7 +446,7 @@
                     <label>Response to IPS Query - 5</label>
                 </div>
                 <div class="group2">
-                    <select id="ddl_IPSResponsType5" asp-for="IPSResponseType5" asp-items="ViewBag.leadQuery">
+                    <select id="ddl_IPSResponsType5" class="form-control" asp-for="IPSResponseType5" asp-items="ViewBag.leadQuery">
                         <option value="">Select Response</option>
                     </select>
                 </div>
@@ -490,9 +501,9 @@
     </div>
 
     <div class="initial1">
-        <div class="group1"><label for="property_purchase_loan">Product Sold(if sale made)</label></div>
+        <div class="group1"><label for="property_purchase_loan">Product Sold(if sale made)<span style="color:red;margin-left: 4px;font-size: 15px;">*</span></label></div>
         <div class="group2">
-            <select id="property_purchase_loan" asp-for="LoanProductID" asp-items="ViewBag.loanProducts">
+            <select id="property_purchase_loan" class="form-control" asp-for="LoanProductID" asp-items="ViewBag.loanProducts">
                 <option value="">Select</option>
             </select>
             <span asp-validation-for="LoanProductID" class="text-danger"></span>
@@ -502,13 +513,13 @@
 
     <div class="initial1">
         <div class="group1"><label for="Form_No">Form No:</label></div>
-        <div class="group2"><input type="text" asp-for="FormNo" readonly></div>
+        <div class="group2"><input type="text" class="form-control" asp-for="FormNo" readonly></div>
     </div><br /><br>
 
     <div class="initial1">
-        <div class="group1"><label for="amount">Amount(in INR):</label></div>
+        <div class="group1"><label for="amount">Amount(in INR):<span style="color:red;margin-left: 4px;font-size: 15px;">*</span></label></div>
         <div class="group2">
-            <input type="text" asp-for="loanAmount">
+            <input type="text" class="form-control" asp-for="loanAmount">
             <span asp-validation-for="loanAmount" class="text-danger"></span>
 
         </div>
@@ -523,7 +534,7 @@
     <div class="initial1">
         <div class="group1"><label for="property_purchase_insurance">Product Sold(if sale made)</label></div>
         <div class="group2">
-            <select id="property_purchase_insurance" asp-for="InsuranceProductID" asp-items="ViewBag.insuranceProducts">
+            <select id="property_purchase_insurance" class="form-control" asp-for="InsuranceProductID" asp-items="ViewBag.insuranceProducts">
                 <option value="">Select</option>
             </select>
         </div>
@@ -531,12 +542,16 @@
 
     <div class="initial1">
         <div class="group1"><label for="Form_No_insurance">Form No:</label></div>
-        <div class="group2"><input type="text" asp-for="FormNo" readonly></div>
+        <div class="group2"><input type="text" class="form-control" asp-for="FormNo" readonly></div>
     </div><br /><br>
 
     <div class="initial1">
         <div class="group1"><label for="amount_insurance">Amount(in INR):</label></div>
-        <div class="group2"><input type="text" asp-for="insuranceAmount"></div>
+        <div class="group2">
+            <input type="text" class="form-control" asp-for="insuranceAmount">
+            <span asp-validation-for="insuranceAmount" class="text-danger"></span>
+
+        </div>
     </div><br /><br>
 
     <div class="card initial1">
@@ -545,11 +560,11 @@
 
     <div class="initial1">
         <div class="group1"><label for="date">Date :</label></div>
-        <div class="group2"><input type="date" id="dates" asp-for="DateOfAction" readonly></div>
+        <div class="group2"><input type="date" id="dates" class="form-control" asp-for="DateOfAction" readonly></div>
     </div><br /><br>
     <div class="initial1">
         <div class="group1"><label for="comments">Comments</label></div>
-        <div class="group2"><textarea placeholder="Comments" asp-for="Comments"></textarea></div>
+        <div class="group2"><textarea placeholder="Comments" class="form-control" asp-for="Comments"></textarea></div>
     </div><br /><br /><br>
     <div class="button1 d-flex flex-row justify-content-end">
         <input id="button1" type="submit" value="Submit" class="button" />
@@ -560,7 +575,7 @@
 <div class="container app">
     <div class="buttons">
 
-        <button class="btn btn-primary btn1">Summary</button>
+        <button class="btn btn-primary btn1 selected">Summary</button>
         <button class="btn btn-primary btn1">Modification</button>
         <button class="btn btn-primary btn1">History</button>
         <button class="btn btn-primary btn1">Query History</button>
@@ -570,7 +585,7 @@
  </div>
 
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
         //n = new Date();
         //y = n.getFullYear();
@@ -587,9 +602,14 @@
         //    $("#emp_classification").removeAttr("disabled");
         //}
 
+        $('.btn1').click(function (e) {
+            $(".btn1").removeClass("selected");
+            $(e.target).addClass("selected");
+        });
+
         if (statusValue != 3) {
             $("#leadQueryDiv").css("display", "none");
-            $("#divQueryType").css("display", "none");  
+            $("#divQueryType").css("display", "none");
         }
 
         function show_IPSQueryType_ForBtn(QueryNumber,currenInputId){
@@ -601,8 +621,16 @@
             else {
                 $(divId).css("display", "block");
             }
-            
+
         }
+
+        @*$(document).ready(function () {
+            if (@ViewBag.Message == 'Lead Data Has Been Added Successfully !!') {
+                setTimeout(function () {
+                    location.href = "/home";
+                }, 5000);
+            }
+        })*@
 
         $("#chkQuery").click(function (e) {
             var isChecked = $(this).is(":checked");
@@ -620,6 +648,8 @@
             else {
                 if (UserRole == 3) {
                     $("#QueryStatusHidden").val('R');
+                    $("#lblSwitchName").css("display", "none");
+
                 }
                 else {
                     alert("only Branch can resolve a query");
@@ -628,13 +658,19 @@
                 }
             }
         })
-        
-        if ($("#userRole").val() == 3) {
+
+        if($("#userRole").val() == 3) {
             $("#divQueryResponseType").css("display", "block");
+            $("#QueryText").text('Resolve Query');
+            if ($("#QueryStatusHidden").val() == 'R') {
+                $("#divQueryType").css("display", "none");
+
+            }
+
         }
 
 
-        if ($("#QueryStatusHidden").val() == 'Q') {
+        if($("#QueryStatusHidden").val() == 'Q') {
             $("#chkQuery").prop("checked", true);
             $("#lblSwitchName").css("display", "inline-block");
             $(".btnForQuery").css("display", "none");
@@ -642,7 +678,32 @@
             $('.QueryType option:not(:selected)').prop('disabled', true);
 
         }
-        else if ($("#QueryStatusHidden").val() == 'R') {
+        else if($("#QueryStatusHidden").val() == 'R') {
             $("#chkQuery").prop("checked", false);
         }
-    </script>
+
+
+
+    $(document).ready(function () {
+
+        if ('@ViewBag.Message' == 'Lead Data Has Been Added Successfully !!' || '@ViewBag.Message'=='Lead Data Has Been Updated Successfully !!') {
+            setTimeout(function () {
+                location.href = "/LeadList/LeadSummary/@Model.lead_Id";
+            }, 5000);
+        }
+
+        @*if ('@ViewBag.isSuccess' == 'true') {
+            setTimeout(function () {
+                location.href = "/LeadList/LeadSummary/@Model.lead_Id";
+            }, 5000);
+        }
+        else if('@ViewBag.isSuccess' == 'false'){
+             setTimeout(function () {
+                location.href = "/LeadList/LeadModification/@Model.lead_Id";
+            }, 5000);
+
+        }*@
+
+        })
+
+</script>

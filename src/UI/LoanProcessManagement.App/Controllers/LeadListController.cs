@@ -110,33 +110,60 @@ namespace LoanProcessManagement.App.Controllers
         public async Task<IActionResult> LeadModification(string lead_Id)
         {
             var leadResponse = await _leadListService.GetLeadByLeadId(lead_Id);
-            var lead = new ModifyLeadVM()
+            ModifyLeadVM lead = null;
+            if (leadResponse.Data.QueryStatus == 'R')
             {
-                lead_Id = leadResponse.Data.lead_Id,
-                login_id = User.Claims.FirstOrDefault(c => c.Type == "LoginId").Value,
-                UserRoleId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value),
-                LgId = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value,
-                CurrentStatus = leadResponse.Data.CurrentStatus,
-                FormNo = leadResponse.Data.FormNo,
-                LoanProductID = leadResponse.Data.LoanProductID,
-                InsuranceProductID = leadResponse.Data.InsuranceProductID,
-                loanAmount = leadResponse.Data.LoanAmount,
-                insuranceAmount = leadResponse.Data.InsuranceAmount,
-                ResidentialStatus = leadResponse.Data.ResidentialStatus,
-                DateOfAction = DateTime.Today,
-                QueryStatus=leadResponse.Data.QueryStatus,
-                IPSQueryType1=leadResponse.Data.IPSQueryType1,
-                IPSQueryType2=leadResponse.Data.IPSQueryType2,
-                IPSQueryType3=leadResponse.Data.IPSQueryType3,
-                IPSQueryType4=leadResponse.Data.IPSQueryType4,
-                IPSQueryType5=leadResponse.Data.IPSQueryType5,
-                IPSResponseType1=leadResponse.Data.IPSResponseType1,
-                IPSResponseType2=leadResponse.Data.IPSResponseType2,
-                IPSResponseType3=leadResponse.Data.IPSResponseType3,
-                IPSResponseType4=leadResponse.Data.IPSResponseType4,
-                IPSResponseType5=leadResponse.Data.IPSResponseType5
-                
-            };
+                lead = new ModifyLeadVM()
+                {
+                    lead_Id = leadResponse.Data.lead_Id,
+                    login_id = User.Claims.FirstOrDefault(c => c.Type == "LoginId").Value,
+                    UserRoleId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value),
+                    LgId = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value,
+                    CurrentStatus = leadResponse.Data.CurrentStatus,
+                    FormNo = leadResponse.Data.FormNo,
+                    LoanProductID = leadResponse.Data.LoanProductID,
+                    InsuranceProductID = leadResponse.Data.InsuranceProductID,
+                    loanAmount = leadResponse.Data.LoanAmount,
+                    insuranceAmount = leadResponse.Data.InsuranceAmount,
+                    ResidentialStatus = leadResponse.Data.ResidentialStatus,
+                    DateOfAction = DateTime.Today,
+                    QueryStatus = leadResponse.Data.QueryStatus,
+
+                };
+
+            }
+            else
+            {
+                lead = new ModifyLeadVM()
+                {
+                    lead_Id = leadResponse.Data.lead_Id,
+                    login_id = User.Claims.FirstOrDefault(c => c.Type == "LoginId").Value,
+                    UserRoleId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value),
+                    LgId = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value,
+                    CurrentStatus = leadResponse.Data.CurrentStatus,
+                    FormNo = leadResponse.Data.FormNo,
+                    LoanProductID = leadResponse.Data.LoanProductID,
+                    InsuranceProductID = leadResponse.Data.InsuranceProductID,
+                    loanAmount = leadResponse.Data.LoanAmount,
+                    insuranceAmount = leadResponse.Data.InsuranceAmount,
+                    ResidentialStatus = leadResponse.Data.ResidentialStatus,
+                    DateOfAction = DateTime.Today,
+                    QueryStatus = leadResponse.Data.QueryStatus,
+                    IPSQueryType1 = leadResponse.Data.IPSQueryType1,
+                    IPSQueryType2 = leadResponse.Data.IPSQueryType2,
+                    IPSQueryType3 = leadResponse.Data.IPSQueryType3,
+                    IPSQueryType4 = leadResponse.Data.IPSQueryType4,
+                    IPSQueryType5 = leadResponse.Data.IPSQueryType5,
+                    IPSResponseType1 = leadResponse.Data.IPSResponseType1,
+                    IPSResponseType2 = leadResponse.Data.IPSResponseType2,
+                    IPSResponseType3 = leadResponse.Data.IPSResponseType3,
+                    IPSResponseType4 = leadResponse.Data.IPSResponseType4,
+                    IPSResponseType5 = leadResponse.Data.IPSResponseType5
+
+                };
+
+            }
+  
             var role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
             var statusResponse = await _commonService.GetAllStatus(role);
             var loanProductsResponse = await _commonService.GetAllLoanProduct();
@@ -173,37 +200,65 @@ namespace LoanProcessManagement.App.Controllers
         {
 
             var modifyLeadResponse = await _leadListService.ModifyLead(lead);
+            ModifyLeadVM currentLead = null;
+
             ViewBag.isSuccess = modifyLeadResponse.Succeeded;
             ViewBag.Message = modifyLeadResponse.Data.Message;
 
             var leadResponse = await _leadListService.GetLeadByLeadId(lead.lead_Id);
-            var currentLead = new ModifyLeadVM()
+            if(leadResponse.Data.QueryStatus == 'R')
             {
-                lead_Id = leadResponse.Data.lead_Id,
-                login_id = User.Claims.FirstOrDefault(c => c.Type == "LoginId").Value,
-                UserRoleId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value),
-                LgId = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value,
-                CurrentStatus = leadResponse.Data.CurrentStatus,
-                FormNo = leadResponse.Data.FormNo,
-                LoanProductID = leadResponse.Data.LoanProductID,
-                InsuranceProductID = leadResponse.Data.InsuranceProductID,
-                loanAmount = leadResponse.Data.LoanAmount,
-                insuranceAmount = leadResponse.Data.InsuranceAmount,
-                ResidentialStatus = leadResponse.Data.ResidentialStatus,
-                DateOfAction = DateTime.Today,
-                QueryStatus = leadResponse.Data.QueryStatus,
-                IPSQueryType1 = leadResponse.Data.IPSQueryType1,
-                IPSQueryType2 = leadResponse.Data.IPSQueryType2,
-                IPSQueryType3 = leadResponse.Data.IPSQueryType3,
-                IPSQueryType4 = leadResponse.Data.IPSQueryType4,
-                IPSQueryType5 = leadResponse.Data.IPSQueryType5,
-                IPSResponseType1 = leadResponse.Data.IPSResponseType1,
-                IPSResponseType2 = leadResponse.Data.IPSResponseType2,
-                IPSResponseType3 = leadResponse.Data.IPSResponseType3,
-                IPSResponseType4 = leadResponse.Data.IPSResponseType4,
-                IPSResponseType5 = leadResponse.Data.IPSResponseType5
+                currentLead = new ModifyLeadVM()
+                {
+                    lead_Id = leadResponse.Data.lead_Id,
+                    login_id = User.Claims.FirstOrDefault(c => c.Type == "LoginId").Value,
+                    UserRoleId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value),
+                    LgId = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value,
+                    CurrentStatus = leadResponse.Data.CurrentStatus,
+                    FormNo = leadResponse.Data.FormNo,
+                    LoanProductID = leadResponse.Data.LoanProductID,
+                    InsuranceProductID = leadResponse.Data.InsuranceProductID,
+                    loanAmount = leadResponse.Data.LoanAmount,
+                    insuranceAmount = leadResponse.Data.InsuranceAmount,
+                    ResidentialStatus = leadResponse.Data.ResidentialStatus,
+                    DateOfAction = DateTime.Today,
+                    QueryStatus = leadResponse.Data.QueryStatus,
+                };
 
-            };
+
+            }
+            else
+            {
+                currentLead = new ModifyLeadVM()
+                {
+                    lead_Id = leadResponse.Data.lead_Id,
+                    login_id = User.Claims.FirstOrDefault(c => c.Type == "LoginId").Value,
+                    UserRoleId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value),
+                    LgId = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value,
+                    CurrentStatus = leadResponse.Data.CurrentStatus,
+                    FormNo = leadResponse.Data.FormNo,
+                    LoanProductID = leadResponse.Data.LoanProductID,
+                    InsuranceProductID = leadResponse.Data.InsuranceProductID,
+                    loanAmount = leadResponse.Data.LoanAmount,
+                    insuranceAmount = leadResponse.Data.InsuranceAmount,
+                    ResidentialStatus = leadResponse.Data.ResidentialStatus,
+                    DateOfAction = DateTime.Today,
+                    QueryStatus = leadResponse.Data.QueryStatus,
+                    IPSQueryType1 = leadResponse.Data.IPSQueryType1,
+                    IPSQueryType2 = leadResponse.Data.IPSQueryType2,
+                    IPSQueryType3 = leadResponse.Data.IPSQueryType3,
+                    IPSQueryType4 = leadResponse.Data.IPSQueryType4,
+                    IPSQueryType5 = leadResponse.Data.IPSQueryType5,
+                    IPSResponseType1 = leadResponse.Data.IPSResponseType1,
+                    IPSResponseType2 = leadResponse.Data.IPSResponseType2,
+                    IPSResponseType3 = leadResponse.Data.IPSResponseType3,
+                    IPSResponseType4 = leadResponse.Data.IPSResponseType4,
+                    IPSResponseType5 = leadResponse.Data.IPSResponseType5
+
+                };
+
+            }
+            
 
             var role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
             var statusResponse = await _commonService.GetAllStatus(role);
@@ -222,6 +277,7 @@ namespace LoanProcessManagement.App.Controllers
             ViewBag.loanProducts = new SelectList(loanProductsResponse.Data, "Id", "ProductName");
             ViewBag.insuranceProducts = new SelectList(insuranceProductsResponse.Data, "Id", "ProductName");
             ViewBag.leadQuery = new SelectList(queries, "QueryName", "QueryName");
+            ModelState.Clear();
 
             return View(currentLead);
         } 

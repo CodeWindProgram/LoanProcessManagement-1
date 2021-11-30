@@ -44,6 +44,10 @@
     .card > * {
         padding:8px 0px;
     }
+    .selected {
+        background: #0d7db5;
+        color: #FFF;
+    }
 </style>
 <div class="container app">
     <div class="col-sm-12">
@@ -69,7 +73,7 @@
                     </div>
                     <div class="d-flex flex-row justify-content-around row">
                         <p class="padding-1">Appointment Date</p>
-                        <p class="padding-5">@Model.Appointment_Date</p>
+                        <p class="padding-5">@Model.Appointment_Date.ToShortDateString()</p>
                     </div>
                     <div class="d-flex flex-row justify-content-around row">
                         <p class="padding-1">Current Status</p>
@@ -84,16 +88,24 @@
         </div>
 
         <div class="d-flex flex-row justify-content-around">
-            <button class="btn btn-primary">Summary</button>
+            <button class="btn btn-primary btn1 selected">Summary</button>
             @*<button type="submit" class="btn btn-primary" asp-action="LeadModification" asp-route-lead_Id="@Model.lead_Id">Modification</button>*@
-            <a class="btn btn-primary" asp-action="LeadModification" asp-route-lead_Id="@Model.lead_Id">Modification</a>
-            <button class="btn btn-primary">History</button>
-            <button class="btn btn-primary">Query History</button>
-            <button class="btn btn-primary">Products</button>
-            <button class="btn btn-primary">Property Details</button>
+            <a class="btn btn-primary btn1" asp-action="LeadModification" asp-route-lead_Id="@Model.lead_Id">Modification</a>
+            <button class="btn btn-primary btn1">History</button>
+            <button class="btn btn-primary btn1">Query History</button>
+            <button class="btn btn-primary btn1">Products</button>
+            <button class="btn btn-primary btn1">Property Details</button>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $('.btn1').click(function (e) {
+            $('.btn1').removeClass("selected");
+            $(e.target).addClass("selected");
+        });
+    });
 
+</script>
 
 

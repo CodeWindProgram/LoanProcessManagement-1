@@ -13,7 +13,7 @@ namespace LoanProcessManagement.App.Models
         public string LgId { get; set; }
 
         [Display(Name="Login Id")]
-        [Required(ErrorMessage = "Employee Id is required .")]
+        [Required(ErrorMessage = "Login Id is required .")]
         public string EmployeeId { get; set; }
 
         [Required(ErrorMessage = "Name is required .")]
@@ -21,7 +21,8 @@ namespace LoanProcessManagement.App.Models
 
         [Display(Name = "E-Mail")]
         [Required(ErrorMessage = "Email is required .")]
-        [EmailAddress]
+        [RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$",
+        ErrorMessage = "Invalid email format")]
         public string Email { get; set; }
 
         [Display(Name = "Branch")]
@@ -29,11 +30,11 @@ namespace LoanProcessManagement.App.Models
         public long BranchId { get; set; }
 
         [Display(Name = "Phone Number")]
-        [RegularExpression(@"^(\d{10})$", ErrorMessage = "Phone should contain 10 digits .")]
+        [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone number must contain 10 digits .")]
         [Required(ErrorMessage = "Phone Number is required .")]
         public string PhoneNumber { get; set; }
 
-        [Display(Name = "Login Type")]
+        [Display(Name = "Role")]
         [Required(ErrorMessage = "Role is required .")]
         public long UserRoleId { get; set; }
     }

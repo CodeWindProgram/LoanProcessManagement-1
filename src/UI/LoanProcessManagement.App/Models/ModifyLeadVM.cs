@@ -29,10 +29,15 @@ namespace LoanProcessManagement.App.Models
         [Required(ErrorMessage = "Status is required")]
         public long CurrentStatus { get; set; }
         public string Comments { get; set; }
+
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Invalid amount")]
         [Required(ErrorMessage = "Amount is required")]
         [Range(100000,9999999999999,ErrorMessage ="Loan amount should be greater than 1 Lakh")]
         public long? loanAmount { get; set; }
+
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Invalid amount")]
         public long? insuranceAmount { get; set; }
+
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime DateOfAction { get; set; }

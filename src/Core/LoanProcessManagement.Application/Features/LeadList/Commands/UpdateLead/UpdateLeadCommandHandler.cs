@@ -29,7 +29,16 @@ namespace LoanProcessManagement.Application.Features.LeadList.Commands.UpdateLea
         public async Task<Response<UpdateLeadDto>> Handle(UpdateLeadCommand request, CancellationToken cancellationToken)
         {
             var leadDto = await _leadListRepository.ModifyLead(request);
-            return new Response<UpdateLeadDto>(leadDto, "Success");
+            if (leadDto.Succeeded)
+            {
+                return new Response<UpdateLeadDto>(leadDto, "Success");
+            }
+            else
+            {
+                var res=new Response<UpdateLeadDto>(leadDto, "failure");
+                res.Succeeded = false;
+                return res;
+            }
         } 
         #endregion
     }
