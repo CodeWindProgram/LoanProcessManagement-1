@@ -1,4 +1,5 @@
-﻿@*
+﻿@model LoanProcessManagement.App.Models.AddLeadCommandVM
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -6,260 +7,386 @@
     ViewData["Title"] = "AddLead";
 }
 <style>
-    #maindiv,p{
-        border:1px solid grey;
+    #maindiv, p {
+        border: 1px solid grey;
     }
-    h4{
-        color:white;
-        text-align:center;
+
+    h4 {
+        color: white;
+        text-align: center;
     }
-    .group1{
-        padding-left:4px;
-        float:left;
+
+    .group1 {
+        padding-left: 4px;
+        float: left;
     }
+
     .group2 {
         float: right;
-        width:65%;
-        padding-right:4px;
+        width: 65%;
+        padding-right: 4px;
     }
-    .button1{
-        padding-left:5px;
-        padding-bottom:5px;
+
+    .button1 {
+        padding-left: 5px;
+        padding-bottom: 5px;
     }
-    #button1{
-        background-color:darkblue;
-        color:white;
+
+    #button1 {
+        background-color: darkblue;
+        color: white;
     }
-    input[type=text],textarea,select{
-        width:100%;
+
+    input[type=text], textarea, select {
+        width: 100%;
+    }
+
+    .row {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    #btnSignIn {
+        margin-left: 5px;
+    }
+
+    .div {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-content: end;
+        align-self: end;
     }
 </style>
 
 <div class="container" id="maindiv">
-    <div class="container" id="adduplead"  style="background-color:darkblue">
+    <div class="container" id="adduplead" style="background-color:darkblue">
         <h4>New Lead Details</h4>
     </div>
-    <form method="post" action="#">
-        <br /><br />
-        <div class="initial1">
-            <div class="group1"><label for="Formno">Form Number:</label></div>
-            <div class="group2"><input type="text" name="Formno" placeholder="Form Number" value="" /></div>
-        </div><br /><hr />
-        <div class="initial1">
-            <div class="group1"><label for="Empid">Employee Id:</label></div>
-            <div class="group2"><input type="text" name="Empid" placeholder="Employee Id" value="" /></div>
-        </div><br /><hr />
-        <div class="initial1">
-            <div class="group1"><label for="DDL_PropId">Property Identified:</label></div>
-            <div class="group2"><select id="DDL_PropId" name="PropertyIdentified">
-                <option value="-1">Select</option>
-                <option value="YES">Yes</option>
-                <option value="NO">No</option>
-            </select></div>
-        </div><br /><hr />
-        <div class="initial1">
-            <div class="group1"><label for="customername">Customer Name:</label></div>
-            <div class="group2"><input type="text" name="customername" placeholder="Customer Name" value="" /></div>
-        </div><br /><hr />
-        <div class="initial1">
-            <div class="group1"><label for="employmentType">Employment Type:</label></div>
-            <div class="group2"><input type="radio" name="employmentType" value="Sal" checked="checked">
-            Salaried
-            &nbsp;&nbsp;&nbsp;
-            <input type="radio" name="employmentType" value="NotSal">
-            Self Employed</div>
-        </div><br /><hr />
-        <div class="initial1">
-            <div class="group1"><label for="annualIncome">Annual turnover in Last FY (Applicant only) :</label></div>
-            <div class="group2"><input type="text" name="annualIncome" maxlength="10" placeholder="0.00"></div>
-        </div><br /><hr />
-        <div class="initial1">
-            <div class="group1"><label for="typeoffirms">Type Of Firms:</label></div>
-            <div class="group2"><select id="DDL_typeoffirms" name="typeoffirms">
-                <option value="-1">Select</option>
-                <option value="1">Sole Proprietorship</option>
-                <option value="2">Partnership</option>
-                <option value="3">Private Limited</option>
-            </select></div>
-        </div><br /><hr />
-        <div class="initial1">
-            <div class="group1"><label for="gst">Is applicant exempted from GST? (> 40L turnover) :</label></div>
-            <div class="group2"><input type="radio" name="IsExempted" value="1">
-            Yes
-            &nbsp;&nbsp;&nbsp;
-            <input type="radio" name="IsExempted" id="no_IsExempted" value="0" checked="checked">
-            No
-            <div><span style="color: red; font-weight: bold;">[ Please note that misreporting of GST exemption will be penalized. ]</span></div></div>
-        </div><br /><br /><hr />
-        <div class="initial1">
-            <div class="group1"><label for="phno1">Phone Number 1 :</label></div>
-            <div class="group2"><input type="text" placeholder="Phone No 1(Should be 10 digits)" maxlength="10" required=""></div>
-        </div><br /><hr />
-        <div class="initial1">
-            <div class="group1"><label for="phno2">Phone Number 2 :</label></div>
-            <div class="group2"><input type="text" placeholder="Phone No 2(Should be 10 digits)" maxlength="10" required=""></div>
-        </div><br /><hr />
-        <div class="initial1">
-            <div class="group1"><label for="email">Email Address :</label></div>
-            <div class="group2"><input type="text" maxlength="300" placeholder="Customer Email Address"></div>
-        </div><br /><hr />
-        <div class="initial1">
-            <div class="group1"><label for="residentalstatus">Residental Status :</label></div>
-            <div class="group2"><select id="DDL_ResidentialStatus">
-                <option value="Resident Indian">Resident Indian</option>
-                <option value="Non-Resident Indian">Non-Resident Indian</option>
-            </select></div>
-        </div><br /><hr />
-        <div class="initial1">
-            <div class="group1"><label for="residenceAddress"> Residence Address :</label></div>
-            <div class="group2"><input type="text" placeholder="Residence Address" name="residenceAddress" maxlength="300" /></div>
-        </div><br /><hr />
-        <div class="initial1">
-            <div class="group1"><label for="business/emp"> Business/Employee Address :</label></div>
-            <div class="group2"><input type="text" placeholder=" Business/Employee Address" name="residenceAddress" maxlength="300" /></div>
-        </div><br /><hr />
-        <div class="initial1">
-            <div class="group1"><label for="productchosen">Product Chosen :</label></div>
-                <div class="group2"><select id="DDL_ProductInterest">
-                    <option value="1">Purchase of New Property from Builder</option>
-                    <option value="2">Purchase in Co-operative Society</option>
-                    <option value="3">Purchase on Second Sale</option>
-                    <option value="4">Construction on Plot by Govt Bodies</option>
-                    <option value="5">Construction on Plot by Pvt Bodies</option>
-                    <option value="6">Repairs/ Extensions</option>
-                    <option value="7">Commercial Loans</option>
-                    <option value="9">Takeover</option>
-                    <option value="10">Takeover + Construction</option>
-                    <option value="11">Takeover of HSG Loan + Renovation</option>
-                    <option value="12">Takeover of HSG Loan + Mortgage</option>
-                    <option value="13">Home Improvement Loan</option>
-                    <option value="23">Purchase of Land + Construction on the same Land (Composite Loan)</option>
-                    <option value="24">LAP  VALUE OFFER - 2019</option>
-                    <option value="25">HOME IMPROVEMENT LOAN- LOYALTY SCHEME 2019</option>
-                    <option value="26">Repairs &amp; Renovation</option>
-                    <option value="27">Takeover of Repair Renovation Loan</option>
-                    <option value="28">Takeover of Mortgage Loan</option>
-                    <option value="29">Top-up</option>
-                </select></div>
-        </div><br /><hr />
-        <div class="initial1">
-            <div class="group1"><label for="schemechosen">Scheme Chosen :</label></div>
-            <div class="group2"><select id="ddl_Scheme">
-                <option value="0">Select</option>
-                <option value="1">Affordable Housing Loan - Urban &amp; Rural 2019</option>
-                <option value="3">COVID SAVIOUR SCHEME 2020</option>
-                <option value="4">DEFENCE PLUS SCHEME 2020-21 - FLOATING</option>
-                <option value="5">DELHI AGRANTE KAVYAM&nbsp;2019 -&nbsp;FLOATING&nbsp;OFFER</option>
-                <option value="6">DELHI ANDROMIDA PLANET ONE 2019</option>
-                <option value="7">DOCTOR PLUS SCHEME 2020-21 - FLOATING</option>
-                <option value="9">FLOATING RATE OFFER 2020-21</option>
-                <option value="15">GIC RE SPECIAL OFFER - 2017</option>
-                <option value="16">GICHFL EMPLOYEES SCHEME - NEW YEAR 2017&nbsp;</option>
-                <option value="17">HYDERABAD LAKE SIDE ENCLAVE 2020 - FLOATING OFFER</option>
-                <option value="18">LOCKDOWN VALUE&nbsp;OFFER&nbsp;2020 (Q2 &amp; Q3)&nbsp;</option>
-                <option value="19">NAGPUR HIMALAYA SUNSHINE APT - II 2020 - FLOATING OFFER</option>
-                <option value="20">Online Scheme 2020</option>
-                <option value="21">PALGHAR PARSHV GLORY 2020 - FLOATING</option>
-                <option value="24">PRIME CUSTOMER HOUSING SCHEME (SALARIED, SALARIED WOMEN)</option>
-                <option value="25">PUNE SARA CITY 2019 -&nbsp;FLOATING&nbsp;OFFER</option>
-                <option value="26">RENT PLUS SCHEME</option>
-                <option value="27">Sampoorna Scheme</option>
-                <option value="28">SARAL SELF EMPLOYED SCHEME</option>
-                <option value="29">SPECIAL GOVT. EMPLOYEE SCHEME 2020-21 - FLOATING</option>
-                <option value="31">Vinay Niwas Yojana</option>
-            </select></div>
-        </div><br /><hr />
-        <div class="initial1">
-            <div class="group1"><label for="branchname">Branch Name :</label></div>
-            <div class="group2"><select id="DDL_Branch">
-            <option value="-1">Select</option>
-            <option value="2">Bangalore</option>
-            <option value="3">Mumbai</option>
-            <option value="4">Navi Mumbai</option>
-            <option value="5">Chennai</option>
-            <option value="6">Hyderabad</option>
-            <option value="7">Kolkata</option>
-            <option value="8">Coimbatore</option>
-            <option value="9">Kochi</option>
-            <option value="10">Lucknow</option>
-            <option value="11">Delhi</option>
-            <option value="12">Panaji</option>
-            <option value="13">Pune</option>
-            <option value="14">Trivandrum</option>
-            <option value="15">Vizag</option>
-            <option value="17">Panvel</option>
-            <option value="18">Madurai</option>
-            <option value="19">Trichy</option>
-            <option value="21">Noida</option>
-            <option value="23">Thane</option>
-            <option value="27">Chinchwad</option>
-            <option value="29">Chandigarh</option>
-            <option value="30">Bhubaneshwar</option>
-            <option value="31">Jaipur</option>
-            <option value="34">Virar</option>
-            <option value="36">Ludhiana</option>
-            <option value="37">Patiala</option>
-            <option value="41">Nagpur</option>
-            <option value="43">Vadodara</option>
-            <option value="45">Nashik</option>
-            <option value="46">Durgapur</option>
-            <option value="47">Kolhapur</option>
-            <option value="48">Jodhpur</option>
-            <option value="49">Nere Panvel</option>
-            <option value="51">Gurgaon</option>
-            <option value="52">Indore</option>
-            <option value="53">Tambaram</option>
-            <option value="54">Patna</option>
-            <option value="55">Ahmedabad</option>
-            <option value="56">Kalyan</option>
-            <option value="57">Dehradun</option>
-            <option value="58">Borivali</option>
-            <option value="59">Yelahanka</option>
-            <option value="60">Chandanagar</option>
-            <option value="61">Meerut</option>
-            <option value="62">Ghaziabad</option>
-            <option value="63">Boisar</option>
-            <option value="64">Porur</option>
-            <option value="65">MARGAO</option>
-            <option value="66">Dwarka</option>
-            <option value="67">Electronic City</option>
-            <option value="68">Hadapsar</option>
-            <option value="69">LB Nagar</option>
-            <option value="70">Garia</option>
-            <option value="71">Greater Noida</option>
-            <option value="72">Raipur</option>
-            <option value="73">Vijayawada</option>
-            <option value="74">Vasai</option>
-            <option value="75">Pitampura</option>
-            <option value="76">Hinjewadi</option>
-            <option value="77">Barasat</option>
-            <option value="78">Mangalore</option>
-            <option value="79">Guwahati</option>
-            <option value="80">Kozhikode</option>
-            <option value="81">Nellore</option>
-            <option value="82">White field</option>
-            <option value="83">Hubli</option>
-            <option value="84">Siliguri</option>
-            <option value="85">Thrissur</option>
-            <option value="86">Surat</option>
-            <option value="88">Suchitra</option>
-            <option value="89">Kengeri</option>
-            <option value="90">Varanasi</option>
-            <option value="91">OnlineBranch</option>
-                </select></div>
-        </div><br /><hr />
-        <div class="initial1">
-            <div class="group1"><label for="date">Date :</label></div>
-            <div class="group2">@*<input type="text" id="dates" name="date" />*@<p id="dates"></p></div>
-        </div><br /><hr />
-        <div class="initial1">
-            <div class="group1"><label for="comments">Comments :</label></div>
-            <div class="group2"><textarea placeholder="Comments"></textarea></div>
-        </div><br /><br /><hr />
-        <div class="button1">
-            <input id="button1" type="submit" value="Add Lead" onsubmit="#"/>
+    <div class="panel-body">
+        <div class="border-part">
+            @if (ViewBag.isSuccess == true)
+            {
+                <div class="alert alert-success" role="alert">
+                    @ViewBag.Message
+                </div>
+            }
+            else if (ViewBag.isSuccess == false)
+            {
+                <div class="alert alert-danger" role="alert">
+                    <strong>Error!</strong> @ViewBag.Message
+                </div>
+
+            }
+            <form asp-controller="LeadList" asp-action="AddLead" method="post">
+                <br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for="FormNo">Form Number:</label></div>
+                    <div class="group2">
+                        <input asp-for="FormNo" type="text" name="FormNo" placeholder="Form Number" value="" />
+                    </div>
+                    <span asp-validation-for="FormNo" class="text-danger"></span>
+                </div><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for="CreatedBy">Employee Name:</label></div>
+                    <div class="group2">
+                        <input id="empId" type="text" placeholder="Employee Id" value=@User.Identity.Name disabled />
+                        <input type="hidden" asp-for="CreatedBy" value=@User.FindFirst("lg_id").Value />
+                        <input type="hidden" asp-for="LastModifiedBy" value=@User.FindFirst("lg_id").Value />
+                        <input type="hidden" asp-for="Lead_assignee_Id" value=@User.FindFirst("lg_id").Value />
+                    </div>
+                </div><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for="IsPropertyIdentified">Property Identified:</label></div>
+                    <div class="group2">
+                        <select asp-for="IsPropertyIdentified" id="DDL_PropId">
+                            <option value="">Select</option>
+                            <option value="YES">Yes</option>
+                            <option value="NO">No</option>
+                        </select>
+                    </div>
+                    <span asp-validation-for="IsPropertyIdentified" class="text-danger"></span>
+
+                </div><br /><br />
+                <div id="PropertyDiv" style="display: none">
+                    <div class="initial1">
+                        <div class="group1"><label asp-for="PropertyID">Property Type</label></div>
+                        <div class="group2">
+                            <select asp-for="PropertyID" class="form-control" id="val_PropertyID" required>
+                                <option value="">Select Role</option>
+                                <option value="2">Plot</option>
+                                <option value="3">Flat</option>
+                                <option value="4">Independent House</option>
+                            </select>
+                        </div>
+                        <span asp-validation-for="PropertyID" class="text-danger"></span>
+
+                    </div><br /><br />
+                    <div class="initial1">
+                        <div class="group1"><label asp-for="PropertyPincode">Pincode of identified property</label></div>
+                        <div class="group2">
+                            <input asp-for="PropertyPincode" type="text" placeholder="" autofocus />
+                        </div>
+                        <span asp-validation-for="PropertyPincode" id="val_PropertyPincode" class="text-danger"></span>
+                    </div><br /><br />
+                    <div class="initial1">
+                        <div class="group1"><label asp-for="PropertyUnderConstruction">a.Under-Construction</label></div>
+                        <div class="group2">
+                            <input asp-for="PropertyUnderConstruction" type="radio" autofocus value="Yes" id="yes" required />
+                            Yes
+                        </div>
+                        <div class="group2">
+                            <input asp-for="PropertyUnderConstruction" type="radio" value="No" id="No" />
+                            No
+                        </div>
+                        <span asp-validation-for="PropertyUnderConstruction" id="val_PropertyUnderConstruction" class="text-danger"></span>
+                    </div><br /><br /><br />
+                    <div class="initial1">
+                        <div class="group1"><label asp-for="ProjectName">b.Project Name</label></div>
+                        <div class="group2">
+                            <input asp-for="ProjectName" class="form-control" placeholder="" id="val_ProjectName" autofocus required />
+                        </div>
+                        <span asp-validation-for="ProjectName" class="text-danger"></span>
+
+                    </div><br /><br />
+                    <div class="initial1">
+                        <div class="group1"><label asp-for="UnitName">c.Unit Name</label></div>
+                        <div class="group2">
+                            <input asp-for="UnitName" class="form-control" type="text" placeholder="" id="val_UnitName" autofocus required />
+                        </div>
+                        <span asp-validation-for="UnitName" class="text-danger"></span>
+
+                    </div><br /><br />
+                    <div class="initial1">
+                        <div class="group1"><label asp-for="ProjectAddress">d.Project Address<span style="color: red; width: 10%;">*</span></label></div>
+                        <div class="group2">
+                            <textarea asp-for="ProjectAddress" placeholder="" id="val_ProjectAddress" required autofocus></textarea>
+                        </div>
+                        <span asp-validation-for="ProjectAddress" class="text-danger"></span>
+
+                    </div><br /><br /><br />
+
+                    <div class="initial1">
+                        <div class="group1"><label asp-for="IsSanctionedPlanReceivedID">e.Does the property have a sanctioned/approved plan ?<span style="color: red; width: 10%;">*</span></label></div>
+                        <div class="group2">
+                            <select asp-for="IsSanctionedPlanReceivedID" id="val_IsSanctionedPlanReceivedID" required>
+                                <option value="">Select Role</option>
+                                <option value="1">NO- < 120 Sq.mt. (For Delhi NCR only)</option>
+                                <option value="4">NO- < 300 Sq.mt. (For Delhi NCR only)</option>
+                                <option value="5">YES</option>
+                            </select>
+                        </div>
+                        <span asp-validation-for = "IsSanctionedPlanReceivedID" class="text-danger"></span>
+
+                    </div><br /><br />
+                </div>
+                <div class="initial1">
+                    <div class="group1"><label asp-for=" FirstName">First Name</label></div>
+                    <div class="group2">
+                        <input asp-for=" FirstName" class="form-control" type="text" placeholder="Customer First Name" value="" />
+                    </div>
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+
+                </div><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for = "MiddleName">Middle Name:</label></div>
+                    <div class="group2">
+                        <input asp-for = "MiddleName" type="text" placeholder="Customer Middle Name" value="" />
+                    </div>
+                    <span asp-validation-for="MiddleName" class="text-danger"></span>
+                </div><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for= "LastName">Last Name:</label></div>
+                    <div class="group2">
+                        <input asp-for= "LastName" type="text" placeholder="Customer Last Name" value="" />
+                    </div>
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+
+                </div><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for = "EmploymentType">Employment Type:</label></div>
+                    <div class="group2">
+                        <input id="chkSalaried" asp-for = "EmploymentType" type="radio" name="employmentType" value="Salaried" checked="checked">
+                        Salaried
+                        &nbsp;&nbsp;&nbsp;
+                        <input id="chkSelfEmployment" asp-for= "EmploymentType" type="radio" name="employmentType" value="SelfEmployment">
+                        Self Employed
+                    </div>
+                    <span asp-validation-for="EmploymentType" class="text-danger"></span>
+
+                </div><br /><br />
+                <div id="enableOnSlfEmployment1" style="display : none">
+                    <div class="initial1">
+                        <div class="group1"><label asp-for= "AnnualTurnOverInLastFy">Annual turnover in Last FY (Applicant only) :</label></div>
+                        <div class="group2">
+                            <input asp-for= "AnnualTurnOverInLastFy" id="annualIncomeFy" type="text" maxlength="10" placeholder="0.00">
+                        </div>
+                        <span asp-validation-for="AnnualTurnOverInLastFy" class="text-danger"></span>
+
+                    </div><br /><br />
+                </div>
+                <div class="initial1">
+                    <div class="group1"><label asp-for= "TypeOfFirms">Type Of Firms:</label></div>
+                    <div class="group2">
+                        <select id="DDL_typeoffirms" asp-for= "TypeOfFirms">
+                            <option value="">Select</option>
+                            <option value="1">Sole Proprietorship</option>
+                            <option value="2">Partnership</option>
+                            <option value="3">Private Limited</option>
+                        </select>
+                    </div>
+                    <span asp-validation-for= "TypeOfFirms" class="text-danger"></span>
+                </div><br /><br />
+                <div id="enableOnSlfEmployment2" style="display : none">
+                    <div class="initial1">
+                        <div class="group1"><label asp-for= "IsApplicantExemptedFromGst">Is applicant exempted from GST? (> 40L turnover) :</label></div>
+                        <div class="group2">
+                            <input type="radio" asp-for= "IsApplicantExemptedFromGst" name="IsApplicantExemptedFromGst" id="yes_IsExempted" value="Yes">
+                            Yes
+                            &nbsp;&nbsp;&nbsp;
+                            <input type="radio" asp-for= "IsApplicantExemptedFromGst" name="IsApplicantExemptedFromGst" id="no_IsExempted" value="No" checked="checked">
+                            No
+                            <div><span style="color: red; font-weight: bold;">[ Please note that misreporting of GST exemption will be penalized. ]</span></div>
+                        </div>
+                        <span asp-validation-for= "IsApplicantExemptedFromGst" class="text-danger"></span>
+
+                    </div><br /><br /><br />
+                </div>
+                <div id="enableOnYes" style="display : none">
+                    <div class="initial1">
+                        <div class="group1"><label asp-for= "ExemptedCategory">Exempted Category :</label></div>
+                        <div class="group2">
+                            <input asp-for= "ExemptedCategory" type="text" maxlength="300" placeholder="Write your reason">
+                        </div>
+                        <span asp-validation-for= "ExemptedCategory" class="text-danger"></span>
+                    </div><br /><br />
+                </div>
+                <div class="initial1">
+                    <div class="group1"><label asp-for= "CustomerPhone">Phone Number 1 :</label></div>
+                    <div class="group2">
+                        <input asp-for= "CustomerPhone" type="text" placeholder="Phone No 1(Should be 10 digits)" maxlength="10" required="">
+                    </div>
+                    <span asp-validation-for="CustomerPhone" class="text-danger"></span>
+                </div><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for= "CustomerPhone_Alternate">Phone Number 2 :</label></div>
+                    <div class="group2">
+                        <input asp-for= "CustomerPhone_Alternate" type="text" placeholder="Phone No 2(Should be 10 digits)" maxlength="10">
+                    </div>
+                    <span asp-validation-for="CustomerPhone_Alternate" class="text-danger"></span>
+                </div><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for= "CustomerEmail">Email Address :</label></div>
+                    <div class="group2">
+                        <input asp-for= "CustomerEmail" type="text" maxlength="300" placeholder="Customer Email Address">
+                    </div>
+                    <span asp-validation-for="CustomerEmail" class="text-danger"></span>
+                </div><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for= "NationalityType">Residental Status :</label></div>
+                    <div class="group2">
+                        <select id="DDL_ResidentialStatus" asp-for= "NationalityType">
+                            <option value="Resident Indian">Resident Indian</option>
+                            <option value="Non-Resident Indian">Non-Resident Indian</option>
+                        </select>
+                    </div>
+                    <span asp-validation-for="NationalityType" class="text-danger"></span>
+                </div><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for= "CustomerResidenceaddress"> Residence Address :</label></div>
+                    <div class="group2">
+                        <input asp-for= "CustomerResidenceaddress" type="text" placeholder="Residence Address" maxlength="300" />
+                    </div>
+                    <span asp-validation-for="CustomerResidenceaddress" class="text-danger"></span>
+                </div><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for= "CustomerResidencePincode"> Residence Pincode :</label></div>
+                    <div class="group2">
+                        <input asp-for= "CustomerResidencePincode" type="text" placeholder="Residence Pincode" maxlength="6" />
+                    </div>
+                    <span asp-validation-for="CustomerResidencePincode" class="text-danger"></span>
+                </div><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for= "CustomerOfficeaddress"> Business/Employee Address :</label></div>
+                    <div class="group2">
+                        <input asp-for= "CustomerOfficeaddress" type="text" placeholder=" Business/Employee Address" maxlength="300" />
+                    </div>
+                    <span asp-validation-for="CustomerOfficeaddress" class="text-danger"></span>
+                </div><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for= "CustomerOfficePincode"> Business/Employee Pincode :</label></div>
+                    <div class="group2">
+                        <input asp-for= "CustomerOfficePincode" type="text" placeholder=" Business/Employee Pincode" maxlength="6" />
+                    </div>
+                    <span asp-validation-for="CustomerOfficePincode" class="text-danger"></span>
+                </div><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for=" ProductID">Product Chosen :</label></div>
+                    <div class="group2">
+                        <select id="DDL_ProductInterest" asp-for=" ProductID" asp-items="ViewBag.loanProducts">
+                            <option value="">Select Property</option>
+                        </select>
+                    </div>
+                    <span asp-validation-for="ProductID" class="text-danger"></span>
+
+                </div><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for= "SchemeID">Scheme Chosen :</label></div>
+                    <div class="group2">
+                        <select id="ddl_Scheme" asp-for= "SchemeID">
+                            <option value="">Select</option>
+                            <option value="3">Affordable Housing Loan - Urban &amp; Rural 2019</option>
+                            <option value="4">COVID SAVIOUR SCHEME 2020</option>
+                            <option value="1">DEFENCE PLUS SCHEME 2020-21 - FLOATING</option>
+                            <option value="1">DELHI AGRANTE KAVYAM&nbsp;2019 -&nbsp;FLOATING&nbsp;OFFER</option>
+                            <option value="2">DELHI ANDROMIDA PLANET ONE 2019</option>
+                            <option value="2">DOCTOR PLUS SCHEME 2020-21 - FLOATING</option>
+                            <option value="3">FLOATING RATE OFFER 2020-21</option>
+                            <option value="3">GIC RE SPECIAL OFFER - 2017</option>
+                            <option value="3">GICHFL EMPLOYEES SCHEME - NEW YEAR 2017&nbsp;</option>
+                            <option value="4">HYDERABAD LAKE SIDE ENCLAVE 2020 - FLOATING OFFER</option>
+                            <option value="4">LOCKDOWN VALUE&nbsp;OFFER&nbsp;2020 (Q2 &amp; Q3)&nbsp;</option>
+                            <option value="5">NAGPUR HIMALAYA SUNSHINE APT - II 2020 - FLOATING OFFER</option>
+                            <option value="5">Online Scheme 2020</option>
+                            <option value="5">PALGHAR PARSHV GLORY 2020 - FLOATING</option>
+                            <option value="6">PRIME CUSTOMER HOUSING SCHEME (SALARIED, SALARIED WOMEN)</option>
+                            <option value="6">PUNE SARA CITY 2019 -&nbsp;FLOATING&nbsp;OFFER</option>
+                            <option value="6">RENT PLUS SCHEME</option>
+                            <option value="7">Sampoorna Scheme</option>
+                            <option value="8">SARAL SELF EMPLOYED SCHEME</option>
+                            <option value="9">SPECIAL GOVT. EMPLOYEE SCHEME 2020-21 - FLOATING</option>
+                            <option value="10">Vinay Niwas Yojana</option>
+                        </select>
+                    </div>
+                    <span asp-validation-for="SchemeID" class="text-danger"></span>
+
+                </div><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for= "BranchID">Branch Name :</label></div>
+                    <div class="group2">
+                        <input id="empId" type="text" placeholder="Employee Id" value=@User.FindFirst("Branch" ).Value disabled />
+                    </div>
+                    <input type="hidden" asp-for =" BranchID" value="@User.FindFirst("BranchID").Value" />
+
+                </div><br /><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label for="dates">Date :</label></div>
+                    <div class="group2"><p id="dates"></p></div>
+                </div><br /><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for="Comment">Comments :</label></div>
+                    <div class="group2">
+                        <textarea asp-for="Comment" placeholder="Comments"></textarea>
+                    </div>
+                    <span asp-validation-for="Comment" class="text-danger"></span>
+
+                </div><br /><br /><br />
+                <div class="button1 d-flex flex-row justify-content-end">
+                    <input id="button1" type="submit" value="Add Lead" />
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
 <script type="text/javascript">
 
@@ -267,5 +394,72 @@
     y = n.getFullYear();
     m = n.getMonth() + 1;
     d = n.getDate();
-    document.getElementById("dates").innerHTML = m + "/" + d + "/" + y;
+    document.getElementById("dates").innerHTML = d + "/" + m + "/" + y;
+</script>
+
+<script type="text/javascript">
+
+    $(function () {
+        $("input[name='employmentType']").click(function () {
+            if ($("#chkSelfEmployment").is(":checked")) {
+                $("#enableOnSlfEmployment1").show();
+                $("#enableOnSlfEmployment2").show();
+            } else {
+                $("#enableOnSlfEmployment1").hide();
+                $("#enableOnSlfEmployment2").hide();
+                $("#yes_IsExempted").prop("checked", false);
+                $("#no_IsExempted").prop("checked", true);
+                $("input[name='IsApplicantExemptedFromGst']").trigger("change");
+            }
+        });
+    });
+
+    $(function () {
+        $("input[name='IsApplicantExemptedFromGst']").change(function () {
+            if ($("#yes_IsExempted").is(":checked")) {
+                $("#enableOnYes").show();
+            } else {
+                $("#enableOnYes").hide();
+            }
+        });
+    });
+
+    $(function () {
+        $("#DDL_PropId").change(function () {
+            if ($(this).val() == "YES") {
+                $("#PropertyDiv").show();
+                $("#val_PropertyID").rules("remove", "required")
+                $("#val_PropertyPincode").rules("remove", "required")
+                $("#val_PropertyUnderConstruction").rules("remove", "required")
+                $("#val_ProjectName").rules("remove", "required")
+                $("#val_IsSanctionedPlanReceivedID").rules("remove", "required")
+                $("#val_ProjectAddress").rules("remove", "required")
+                //$("#val_PropertyID").removeAttr("data-val-required");
+                //ValidatorEnable($("#<%=val_PropertyID.ClientID%>")[0], false);
+            } else {
+                $("#PropertyDiv").hide();
+
+            }
+        });
+    });
+
+
+    $(function () {
+        $("#DDL_ProductInterest").change(function () {
+            if ($(this).data('options') === undefined) {
+                $(this).data('options', $('#ddl_Scheme option').clone());
+            }
+            var id = $(this).val();
+            var options = $(this).data('options').filter('[value=' + id + ']');
+            $('#ddl_Scheme').html(options);
+        });
+    });
+
+    $(function () {
+        $("form").submit(function () {
+            if ($('form').valid()) {
+                $("#button1").prop('disabled', true);
+            }
+        });
+    });
 </script>

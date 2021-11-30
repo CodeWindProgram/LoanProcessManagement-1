@@ -3,6 +3,7 @@ using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.LeadList.Commands;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory;
 using LoanProcessManagement.Application.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -15,9 +16,8 @@ namespace LoanProcessManagement.App.Controllers
 {
     public class LeadListController : Controller
     {
-        private ILeadListService _leadListService;
+        private readonly ILeadListService _leadListService;
         private readonly ICommonServices _commonService;
-
         public LeadListController(ILeadListService leadListService, ICommonServices commonService)
         {
             _leadListService = leadListService;
@@ -58,11 +58,7 @@ namespace LoanProcessManagement.App.Controllers
             return View();
         }
         #endregion
-        public async Task<IActionResult> AddLead()
-        {
-            return View();
-        }
-
+        
         #region Lead History Module Controller - Saif khan - 17/11/2021
         /// <summary>
         /// Lead History Module Controller - Saif khan - 17/11/2021
@@ -229,6 +225,70 @@ namespace LoanProcessManagement.App.Controllers
 
             return View(currentLead);
         } 
+        #endregion
+
+        #region This action method will internally call add lead api by - Pratiksha Poshe 10/11/2021
+        /// <summary>
+        /// 10/11/2021 - This action method will internally call add lead api by - Pratiksha Poshe 
+        /// commented by Pratiksha
+        /// </summary>
+        /// <returns>Add Lead View</returns>
+        //[Route("[controller]/[action]")]
+        //[Route("/AddLead")]
+        //[Authorize(Roles = "DSA")]
+        //[Authorize(Roles = "Branch")]
+        public async Task<IActionResult> AddLead()
+        {
+            var loanProducts = await _commonService.GetAllLoanProducts();
+            ViewBag.loanProducts = new SelectList(loanProducts, "Id", "ProductName");
+            return View();
+        }
+        #endregion
+
+        #region This action method will internally call add lead api by - Pratiksha Poshe 10/11/2021
+        /// <summary>
+        /// 31/10/2021 - This action method will internally call add lead api by
+        //	commented by Pratiksha
+        /// </summary>
+        /// <param name="leadCommandVM">lead object </param>
+        /// <returns>Add lead view</returns>
+        [Route("[controller]/[action]")]
+        [HttpPost]
+        public async Task<IActionResult> AddLead(AddLeadCommandVM leadCommandVM)
+        {
+            if(leadCommandVM != null && leadCommandVM.IsPropertyIdentified.ToLower() == "NO".ToLower())
+            {
+                ModelState.Remove("PropertyID");
+                ModelState.Remove("PropertyPincode");
+                ModelState.Remove("PropertyUnderConstruction");
+                ModelState.Remove("ProjectName");
+                ModelState.Remove("UnitName");
+                ModelState.Remove("ProjectAddress");
+                ModelState.Remove("IsSanctionedPlanReceivedID");
+            }
+
+            if(leadCommandVM != null && leadCommandVM.EmploymentType.ToLower() == "Salaried".ToLower())
+            {
+                ModelState.Remove("AnnualTurnOverInLastFy");
+            }
+
+            if (leadCommandVM != null && leadCommandVM.IsApplicantExemptedFromGst.ToLower() == "No".ToLower())
+            {
+                ModelState.Remove("ExemptedCategory");
+            }
+
+            if (ModelState.IsValid)
+            {
+                var response = await _leadListService.AddLead(leadCommandVM);
+                ViewBag.isSuccess = response.Succeeded;
+                ViewBag.Message = response.Data.Message;
+                ModelState.Clear();
+            }
+            var loanProducts = await _commonService.GetAllLoanProducts();
+            ViewBag.loanProducts = new SelectList(loanProducts, "Id", "ProductName");
+
+            return View();
+        }
         #endregion
     }
 }

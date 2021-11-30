@@ -2,6 +2,7 @@
 using LoanProcessManagement.App.Models;
 using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.LeadList.Commands;
+using LoanProcessManagement.Application.Features.LeadList.Commands.AddLead;
 using LoanProcessManagement.Application.Features.LeadList.Commands.UpdateLead;
 using LoanProcessManagement.Application.Features.LeadList.Queries;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory;
@@ -141,7 +142,39 @@ namespace LoanProcessManagement.App.Services.Implementation
             var response = System.Text.Json.JsonSerializer.Deserialize<Response<UpdateLeadDto>>(jsonString, options);
 
             return response;
-        } 
+        }
+        #endregion
+
+        #region This action method will internally call add lead api by - Pratiksha Poshe 10/11/2021
+        /// <summary>
+        /// This action method will internally call add lead api by - Pratiksha Poshe 10/11/2021
+        /// commented by Pratiksha
+        /// </summary>
+        /// <param name="leadCommandVm"></param>
+        /// <returns>response from Api</returns>
+        public async Task<Response<AddLeadDto>> AddLead(AddLeadCommandVM leadCommandVm)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var content = JsonConvert.SerializeObject(leadCommandVm);
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.PostAsync
+                (
+                    BaseUrl + APIEndpoints.AddLead,
+                    new StringContent(content, Encoding.Default,
+                    "application/json")
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var response = System.Text.Json.JsonSerializer.Deserialize<Response<AddLeadDto>>(jsonString, options);
+
+            return response;
+        }
         #endregion
     }
 }

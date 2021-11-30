@@ -41,6 +41,7 @@ namespace LoanProcessManagement.Persistence
         public DbSet<LpmLeadProcessCycle> LpmLeadProcessCycles { get; set; }
         public DbSet<LPMGSTEnquiryDetail> LPMGSTEnquiryDetails { get; set; }
         public DbSet<LpmLeadQuery> LpmLeadQuerys { get; set; }
+        public DbSet<LpmLeadApplicantsDetails> LpmLeadApplicantsDetails { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -218,11 +219,11 @@ namespace LoanProcessManagement.Persistence
                 {
                     case EntityState.Added:
                         entry.Entity.CreatedDate = DateTime.Now;
-                        entry.Entity.CreatedBy = _loggedInUserService.UserId;
+                        //entry.Entity.CreatedBy = _loggedInUserService.UserId;
                         break;
                     case EntityState.Modified:
                         entry.Entity.LastModifiedDate = DateTime.Now;
-                        entry.Entity.LastModifiedBy = _loggedInUserService.UserId;
+                        //entry.Entity.LastModifiedBy = _loggedInUserService.UserId;
                         break;
                 }
             }

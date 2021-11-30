@@ -2,6 +2,7 @@
 using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.Branch.Queries;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries;
+using LoanProcessManagement.Application.Features.LoanProducts.Queries;
 using LoanProcessManagement.Application.Features.Product.Queries;
 using LoanProcessManagement.Application.Features.Roles.Queries;
 using LoanProcessManagement.Application.Responses;
@@ -162,7 +163,35 @@ namespace LoanProcessManagement.App.Services.Implementation
             var response = System.Text.Json.JsonSerializer.Deserialize<Response<IEnumerable<GetInsuranceProductsDto>>>(jsonString, options);
 
             return response;
-        } 
+        }
         #endregion
+
+        #region This action method will internally call get all Loan Products api by - Pratiksha Poshe 10/11/2021
+        /// <summary>
+        /// 10/11/2021 - This action method will internally call get all Loan Products api by - Pratiksha Poshe 
+        /// Commented by Pratiksha
+        /// </summary>
+        /// <returns>response from Api</returns>
+        public async Task<IEnumerable<GetAllLoanProductsDto>> GetAllLoanProducts()
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.GetAsync
+                (
+                    BaseUrl + APIEndpoints.GetAllLoanProducts
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var response = System.Text.Json.JsonSerializer.Deserialize<IEnumerable<GetAllLoanProductsDto>>(jsonString, options);
+
+            return response;
+        }
+        #endregion
+
     }
 }

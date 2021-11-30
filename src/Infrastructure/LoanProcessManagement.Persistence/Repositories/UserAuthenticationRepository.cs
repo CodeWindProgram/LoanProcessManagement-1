@@ -92,6 +92,7 @@ namespace LoanProcessManagement.Persistence.Repositories
             response.Lg_id = result.LgId;
             response.Email = result.Email;
             response.Name = result.Name;
+            response.BranchID = result.BranchId;
             response.Branch = result.Branch.branchname;
             response.Role = result.UserRole.Rolename;
             response.UserRoleId = result.UserRoleId;

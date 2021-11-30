@@ -1,0 +1,528 @@
+﻿@model LoanProcessManagement.App.Models.AddApplicantDetailsCommandVM
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Add Applicant Details";
+}
+
+<style>
+    .tab {
+        padding-left: 15px;
+    }
+
+    .AppTabs {
+        display: inline-block;
+        margin: 3px;
+        padding: 5px 30px;
+        background: #191970;
+        color: #FFF;
+        text-decoration: none;
+    }
+
+        .AppTabs:hover {
+            background-color: #169dd8;
+            text-decoration: none;
+        }
+
+        .AppTabs:visited {
+            text-decoration: none;
+        } 
+</style>
+<div style="margin-top: 20px" class="container">
+    <div class="container app">
+        <div class="col-sm-12 col-lg-12">
+            <div data-effect="helix" id="panels" class="panel panel-info effect-helix in">
+                <div class="panel-heading">
+                    Add Customer Enquiry
+                </div>
+                <form method="post" action="/applicantdetails/index">
+                    @*<input type="hidden" name="ctl00$ContentPlaceHolder1$hdnEmpId" id="hdnEmpId" value="">*@
+                    <input type="hidden" asp-for="lead_Id" id="hdnLeadId">
+                    <input type="hidden" asp-for="ApplicantType" id="hdnApplicantType">
+                    <input type="hidden" asp-for="CreatedBy" value=@User.FindFirst("lg_id").Value />
+                    <input type="hidden" asp-for="LastModifiedBy" value=@User.FindFirst("lg_id").Value />
+                    <div style="height: 15px;"></div>
+                    <a href="/ApplicantDetails/Index?lead_Id=@Model.lead_Id&applicantType=0" class="AppTabs" id="tabProcess0" style="background: #169dd8;">Applicant</a>
+                    <a id="ContentPlaceHolder1_lnkCoApp1" class="AppTabs" href="/ApplicantDetails/Index?lead_Id=@Model.lead_Id&applicantType=1">Co-Applicant-1</a>
+                    <a id="ContentPlaceHolder1_lnkCoApp2" class="AppTabs" href="/ApplicantDetails/Index?lead_Id=@Model.lead_Id&applicantType=2">Co-Applicant-2</a>
+                    <a id="ContentPlaceHolder1_lnkCoApp3" class="AppTabs" href="/ApplicantDetails/Index?lead_Id=@Model.lead_Id&applicantType=3">Co-Applicant-3</a>
+                    <a id="ContentPlaceHolder1_lnkCoApp4" class="AppTabs" href="/ApplicantDetails/Index?lead_Id=@Model.lead_Id&applicantType=4">Co-Applicant-4</a>
+                    <a id="ContentPlaceHolder1_lnkCoApp5" class="AppTabs" href="/ApplicantDetails/Index?lead_Id=@Model.lead_Id&applicantType=5">Co-Applicant-5</a>
+                    <div style="height: 10px;"></div>
+                    <span id="ContentPlaceHolder1_spanMessage" style="color: red;"></span>
+                    <div style="height: 10px;"></div>
+                    <div class="frames">
+                        <div class="panel-body">
+                            @if (ViewBag.isSuccess == true)
+                            {
+                                <div class="alert alert-success" role="alert">
+                                    @ViewBag.Message
+                                </div>
+                            }
+                            else if (ViewBag.isSuccess == false)
+                            {
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>Error!</strong> @ViewBag.Message
+                                </div>
+
+                            }
+                            <div id="ContentPlaceHolder1_alertMsg">
+                                <div>
+                                    <div class="col-md-5">
+                                        <label class="h4">Form No</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="input-control text">
+                                            <span id="ContentPlaceHolder1_lblFormNo" class="h4" style="color: black; border:none">
+                                                <label>@Model.FormNo</label>
+                                                <input type="hidden" asp-for="FormNo" />
+                                                @*<label asp-for="FormNo">@Model.FormNo</label>*@
+                                                @*<input type="text" asp-for="FormNo" disabled="disabled">*@
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="height: 5px;"></div>
+                            <div style="height: 5px;"></div>
+                            <br>
+                            <div id="divConverted3PC">
+                                <h2>Customer Details</h2>
+                            </div>
+                            <div style="height: 5px;"></div>
+                            <div class="row tab">
+                                <div class="col-md-5">
+                                    <label class="">First Name</label>
+                                    <span style="color: Red">&nbsp;*</span>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="input-control text">
+                                        <input asp-for="FirstName" type="text" maxlength="26" id="ContentPlaceHolder1_txtCustomerName" class="form-control required" placeholder="XYZ">
+                                        @*<span id="ContentPlaceHolder1_RequiredFieldValidator14" style="color:Red;display:none;">Customer name is mandatory.</span>
+                            <span id="ContentPlaceHolder1_RegularExpressionValidator7" style="color:Red;display:none;">Invalid Customer Name.</span>*@
+                                        <span asp-validation-for="FirstName" style="color:Red;display:block;"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="height: 5px;"></div>
+                            <div class="row tab">
+                                <div class="col-md-5">
+                                    <label class="">Middle Name</label>
+                                    <span style="color: Red">&nbsp;*</span>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="input-control text">
+                                        <input asp-for="MiddleName" type="text" maxlength="26" id="ContentPlaceHolder1_txtCustomerMiddleName" class="form-control required" placeholder="XYZ">
+                                        @*<span id="ContentPlaceHolder1_RequiredFieldValidator14" style="color:Red;display:none;">Customer name is mandatory.</span>
+                            <span id="ContentPlaceHolder1_RegularExpressionValidator7" style="color:Red;display:none;">Invalid Customer Name.</span>*@
+                                        <span asp-validation-for="MiddleName" style="color:Red;display:block;"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="height: 5px;"></div>
+                            <div class="row tab">
+                                <div class="col-md-5">
+                                    <label class="">Last Name</label>
+                                    <span style="color: Red">&nbsp;*</span>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="input-control text">
+                                        <input asp-for="LastName" type="text" maxlength="26" id="ContentPlaceHolder1_txtCustomerLastName" class="form-control required" placeholder="XYZ">
+                                        @*<span id="ContentPlaceHolder1_RequiredFieldValidator14" style="color:Red;display:none;">Customer name is mandatory.</span>
+                            <span id="ContentPlaceHolder1_RegularExpressionValidator7" style="color:Red;display:none;">Invalid Customer Name.</span>*@
+                                        <span asp-validation-for="LastName" style="color:Red;display:block;"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="height: 5px;"></div>
+                            <div class="row tab">
+                                <div class="col-md-5">
+                                    <label class="">Customer Email</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="input-control text">
+                                        <input asp-for="CustomerEmail" type="text" id="ContentPlaceHolder1_txtCustomerEmail" class="form-control" placeholder="abc@xyz.com">
+                                        @*<span id="ContentPlaceHolder1_RegularExpressionValidator4" style="color:Red;display:none;">Invalid Email Address.</span>*@
+                                        <span asp-validation-for="CustomerEmail" style="color:Red;display:block;"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="height: 5px;"></div>
+                            <div class="row tab">
+                                <div class="col-md-5">
+                                    <label class="">Customer Mobile</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="input-control text">
+                                        <input asp-for="CustomerPhone" type="text" maxlength="10" id="ContentPlaceHolder1_txtCustomerMobile" class="form-control" placeholder="Mobile No">
+                                        <span asp-validation-for="CustomerPhone" style="color:Red;display:block;"></span>
+                                        @*<span id="ContentPlaceHolder1_RegularExpressionValidator3" style="color:Red;display:none;">Invalid Mobile No.</span>*@
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="height: 5px;"></div>
+                            <div class="row tab">
+                                <div class="col-md-5">
+                                    <label class="">Date of Birth</label><span style="color: Red">&nbsp;*</span>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="input-control text">
+                                        <input asp-for="DateOfBirth" type="text" id="ContentPlaceHolder1_txtDOB" placeholder="dd/mm/yyyy" class="form-control TextBoxCalender" style="width: 92%; display: inline-block; margin-right: 10px;"> @*<img class="ui-datepicker-trigger" src="../css/Images/sort_asc.png" alt="..." title="...">*@
+                                        @*<span id="ContentPlaceHolder1_RequiredFieldValidator2" style="color:Red;display:none;">Date of Birth is mandatory.</span>*@
+                                        <span asp-validation-for="DateOfBirth" style="color:Red;display:block;"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="height: 5px;"></div>
+                            <div class="row tab">
+                                <div class="col-md-5">
+                                    <label class="">Gender</label><span style="color: Red">&nbsp;*</span>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="input-control text">
+                                        <select asp-for="Gender" id="ContentPlaceHolder1_ddlGender" class="form-control">
+                                            <option value="">Select</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Transgender">Transgender</option>
+
+                                        </select>
+                                        @*<span id="ContentPlaceHolder1_RequiredFieldValidator3" style="color:Red;display:none;">Please select gender.</span>*@
+                                        <span asp-validation-for="Gender" style="color:Red;display:block;"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="height: 5px;"></div>
+                            <div id="IdentificationDv">
+                                <div style="height: 5px;"></div>
+                                <div class="divsubheader" id="divIdentification">
+                                    <h2>Identification <span style="color: Red">&nbsp;*</span></h2>
+                                    <p><span style="color: red; font-style: italic">NOTE : Atleast one ID proof is required.</span></p>
+                                </div>
+                                <div style="height: 5px;"></div>
+                                <div class="row tab">
+                                    <div class="col-md-2">
+                                        <label class="">PAN</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="input-control text">
+                                            <input asp-for="PanCardNo" type="text" maxlength="10" id="ContentPlaceHolder1_txtPAN" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <label class="">Passport</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="input-control text">
+                                            <input asp-for="PassportNo" type="text" maxlength="30" id="ContentPlaceHolder1_txtPassport" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="height: 5px;"></div>
+                                <div style="height: 5px;"></div>
+                                <div class="row tab">
+                                    <div class="col-md-2">
+                                        <label class="">Voter ID</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="input-control text">
+                                            <input asp-for="VoterId" type="text" maxlength="30" id="ContentPlaceHolder1_txtVoterId" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <label class="">Driver's Licence</label>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="input-control text">
+                                            <input asp-for="DrivingLiscenceNo" type="text" maxlength="30" id="ContentPlaceHolder1_txtDriverLicense" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="height: 5px;"></div>
+                                <div class="row tab">
+                                    <div class="col-md-2">
+                                        <label class="">Ration Card</label>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="input-control text">
+                                            <input asp-for="RationCardNo" type="text" maxlength="30" id="ContentPlaceHolder1_txtrationCard" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <label class="">Universal ID</label>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="input-control text">
+                                            <input asp-for="AadharId" type="text" maxlength="30" id="ContentPlaceHolder1_txtUniversalId" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="height: 5px;"></div>
+                                <div class="row tab">
+                                    <div class="col-md-2">
+                                        <label class="">GST No</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="input-control text">
+                                            <input asp-for="GstNo" type="text" maxlength="10" id="ContentPlaceHolder1_txtGSTNo" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="PhoneDV">
+                                <div style="height: 5px;"></div>
+                                <div class="divsubheader">
+                                    <h2>Phone</h2>
+                                </div>
+                                <div class="row tab">
+                                    <div class="col-md-5">
+                                        <label class="">Phone 1</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="input-control text">
+                                            <input asp-for="CustomerPhone" type="text" maxlength="10" id="ContentPlaceHolder1_txtPhone" class="form-control">
+                                            <span asp-validation-for="CustomerPhone" style="color:Red;display:block;"></span>
+                                            @*<span id="ContentPlaceHolder1_RegularExpressionValidator5" style="color:Red;display:none;">Invalid Phone No.</span>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="currentAddr">
+                                <div id="divConverted4" class="divsubheader">
+                                    <h2>Address</h2>
+                                </div>
+                                <div style="height: 5px;"></div>
+                                <div class="row tab">
+                                    <div class="col-md-5">
+                                        <label class="">Address Line 1</label><span style="color: Red">&nbsp;*</span>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="input-control text">
+                                            <input asp-for="AddressLine1" type="text" maxlength="40" id="ContentPlaceHolder1_txtCurrentAddress1" class="form-control">
+                                            <span asp-validation-for="AddressLine1" style="color:Red;display:block;"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="height: 5px;"></div>
+                                <div class="row tab">
+                                    <div class="col-md-5">
+                                        <label class="">Address Line 2</label><span style="color: Red">&nbsp;*</span>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="input-control text">
+                                            <input asp-for="AddressLine2" type="text" maxlength="40" id="ContentPlaceHolder1_txtCurrentAddress2" class="form-control">
+                                            @*<span id="ContentPlaceHolder1_RequiredFieldValidator6" style="color:Red;display:none;">Current Address is mandatory.</span>*@
+                                            <span asp-validation-for="AddressLine2" style="color:Red;display:block;"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="height: 5px;"></div>
+                                <div class="row tab">
+                                    <div class="col-md-5">
+                                        <label class="">Address Line 1</label><span style="color: Red">&nbsp;*</span>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="input-control text">
+                                            <input asp-for="AddressLine3" type="text" maxlength="40" id="ContentPlaceHolder1_txtCurrentAddress3" class="form-control">
+                                            @*<span id="ContentPlaceHolder1_RequiredFieldValidator6" style="color:Red;display:none;">Current Address is mandatory.</span>*@
+                                            <span asp-validation-for="AddressLine3" style="color:Red;display:block;"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="height: 5px;"></div>
+                                <div class="row tab" id="dvStateCurrent">
+                                    <div class="col-md-5">
+                                        <label class="">State</label><span style="color: Red">&nbsp;*</span>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="input-control text">
+                                            <select asp-for="State" id="ContentPlaceHolder1_ddlStateCurrent" class="form-control">
+                                                <option value="">----Select----</option>
+                                                <option value="35">ANDAMAN &amp; NICOBAR ISLANDS</option>
+                                                <option value="28">ANDHRA PRADESH</option>
+                                                <option value="12">ARUNACHAL PRADESH</option>
+                                                <option value="18">ASSAM</option>
+                                                <option value="10">BIHAR</option>
+                                                <option value="4">CHANDIGARH</option>
+                                                <option value="22">CHATTISGARH</option>
+                                                <option value="22">CHHATTISGARH</option>
+                                                <option value="26">DADRA &amp; NAGAR HAVELI</option>
+                                                <option value="25">DAMAN &amp; DIU</option>
+                                                <option value="7">DELHI</option>
+                                                <option value="30">GOA</option>
+                                                <option value="24">GUJARAT</option>
+                                                <option value="6">HARYANA</option>
+                                                <option value="2">HIMACHAL PRADESH</option>
+                                                <option value="1">JAMMU &amp; KASHMIR</option>
+                                                <option value="20">JHARKHAND</option>
+                                                <option value="29">KARNATAKA</option>
+                                                <option value="32">KERALA</option>
+                                                <option value="31">LAKSHADWEEP</option>
+                                                <option value="23">MADHYA PRADESH</option>
+                                                <option value="27">MAHARASHTRA</option>
+                                                <option value="14">MANIPUR</option>
+                                                <option value="17">MEGHALAYA</option>
+                                                <option value="15">MIZORAM</option>
+                                                <option value="13">NAGALAND</option>
+                                                <option value="21">ORISSA</option>
+                                                <option value="34">PONDICHERRY</option>
+                                                <option value="3">PUNJAB</option>
+                                                <option value="8">RAJASTHAN</option>
+                                                <option value="11">SIKKIM</option>
+                                                <option value="33">TAMIL NADU</option>
+                                                <option value="36">TELANGANA</option>
+                                                <option value="16">TRIPURA</option>
+                                                <option value="9">UTTAR PRADESH</option>
+                                                <option value="5">UTTARANCHAL</option>
+                                                <option value="19">WEST BENGAL</option>
+
+                                            </select>
+                                            @*<span id="ContentPlaceHolder1_RequiredFieldValidator7" style="color:Red;display:none;">Please select state.</span>*@
+                                            <span asp-validation-for="State" style="color:Red;display:block;"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="height: 5px;"></div>
+                                <div class="row tab" id="dvCityCurrent">
+                                    <div class="col-md-5">
+                                        <label class="">City</label><span style="color: Red">&nbsp;*</span>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="input-control text">
+                                            <input asp-for="City" type="text" maxlength="30" id="ContentPlaceHolder1_txtCityCurrent" class="form-control">
+                                            @*<span id="ContentPlaceHolder1_RequiredFieldValidator8" style="color:Red;display:none;">City is mandatory.</span>*@
+                                            <span asp-validation-for="City" style="color:Red;display:block;"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="height: 5px;"></div>
+                                <div class="row tab">
+                                    <div class="col-md-5">
+                                        <label class="">Pin Code</label><span style="color: Red">&nbsp;*</span>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="input-control text">
+                                            <input asp-for="Pincode" type="text" maxlength="6" id="ContentPlaceHolder1_txtPinCodeCurrent" class="form-control">
+                                            @*<span id="ContentPlaceHolder1_RequiredFieldValidator9" style="color:Red;display:none;">Pincode is mandatory.</span>
+                                <span id="ContentPlaceHolder1_RegularExpressionValidator1" style="color:Red;display:none;">Invalid Pincode.</span>*@
+                                            <span asp-validation-for="Pincode" style="color:Red;display:block;"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="height: 5px;"></div>
+                            </div>
+
+                            <div id="accountDv">
+                                <div id="divConverted5" class="divsubheader">
+                                    <h2>Accounts</h2>
+                                </div>
+                                <div style="height: 5px;"></div>
+                                <div class="row tab">
+                                    <div class="col-md-5">
+                                        <div class="full">
+                                            <label class="">No of Bank Accounts</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="input-control text">
+                                            <input asp-for="NoOfBankAccounts" type="text" maxlength="25" id="ContentPlaceHolder1_txtAccount1" class="form-control">
+                                            <span asp-validation-for="NoOfBankAccounts" style="color:Red;display:block;"></span>
+                                        </div>
+                                    </div>
+                                    <div style="height: 5px;"></div>
+                                </div>
+                                <div style="height: 5px;"></div>
+
+                                <div class="row tab">
+                                    <div class="col-md-12">
+                                        <center>
+                                            <input type="submit" name="ctl00$ContentPlaceHolder1$btnClearEnquiry" value="Clear" id="ContentPlaceHolder1_btnClearEnquiry" class="btn btn-danger" onclick="this.form.reset();">
+                                            <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" @*onclick=""*@ id="ContentPlaceHolder1_btnAddEnquiry" class="btn btn-success">
+                                            <input type="submit" name="ctl00$ContentPlaceHolder1$btnExit" value="Exit" id="ContentPlaceHolder1_btnExit" class="btn btn-danger">
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('form').submit(function () {
+            //debugger;
+            var flagavail = fnCheckValidateIDs();
+            if (flagavail) {
+                return flagavail;
+            }
+        });
+    });
+    function fnCheckValidateIDs() {
+        //debugger;
+        var flag = false;
+
+        var PAN = document.getElementById('ContentPlaceHolder1_txtPAN').value;//$('input[name=txtPAN]').val();
+        var Passport = document.getElementById('ContentPlaceHolder1_txtPassport').value;//$('input[name=txtPassport]').val();
+        var VoterId = document.getElementById('ContentPlaceHolder1_txtVoterId').value;//$('input[name=txtVoterId]').val();
+        var DriverLicense = document.getElementById('ContentPlaceHolder1_txtDriverLicense').value;//$('input[name=txtDriverLicense]').val();
+        var rationCard = document.getElementById('ContentPlaceHolder1_txtrationCard').value;//$('input[name=txtrationCard]').val();
+        var UniversalId = document.getElementById('ContentPlaceHolder1_txtUniversalId').value;//$('input[name=txtUniversalId]').val();
+        var GstNo = document.getElementById('ContentPlaceHolder1_txtGSTNo').value;
+        if ((PAN != "" && PAN != 'undefined' && PAN != undefined) ||
+            (Passport != "" && Passport != 'undefined' && Passport != undefined) ||
+            (VoterId != "" && VoterId != 'undefined' && VoterId != undefined) ||
+            (DriverLicense != "" && DriverLicense != 'undefined' && DriverLicense != undefined) ||
+            (rationCard != "" && rationCard != 'undefined' && rationCard != undefined) ||
+            (UniversalId != "" && UniversalId != 'undefined' && UniversalId != undefined) ||
+            (GstNo != "" && GstNo != 'undefined' && GstNo != undefined)) {
+
+            flag = true;
+        }
+        if (!flag) {
+            alert("Atleast one ID proof is required");
+            var txtControl = document.getElementById('ContentPlaceHolder1_txtPAN');
+            txtControl.focus();
+        }
+        return flag;
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $(".TextBoxCalender").datepicker({
+            showOn: "button",
+            buttonImage: "../css/Images/sort_asc.png",
+            buttonImageOnly: true,
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'dd/mm/yy',
+            yearRange: "-100:+0"
+            //dateFormat: 'yy-MM-dd'
+        });
+    });
+</script>
+
+
+

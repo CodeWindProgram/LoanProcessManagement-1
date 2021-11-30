@@ -1,18 +1,17 @@
-﻿using LoanProcessManagement.Domain.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace LoanProcessManagement.Domain.Entities
+namespace LoanProcessManagement.Application.Features.ApplicantDetails.Queries.AddApplicantDetails
 {
-    public class LpmLeadApplicantsDetails : AuditableEntity
+    public class GetApplicantDetailsByIdDto
     {
+        public string CreatedBy { get; set; }
+        public string LastModifiedBy { get; set; }
         public long Id { get; set; }
         public string FormNo { get; set; }
         public long lead_Id { get; set; }
-        public LpmLeadMaster LpmLeadMaster { get;set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
@@ -25,21 +24,22 @@ namespace LoanProcessManagement.Domain.Entities
         public string Gender { get; set; } //
 
         [DataType(DataType.Date)]
-        [Column(TypeName = "Date")] //
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateOfBirth { get; set; }
         public string CustomerEmail { get; set; }
         public string CustomerPhone { get; set; }
         public string EmploymentType { get; set; }
         public string GstNo { get; set; }
-        public string PanCardNo { get; set; }    
-        public string PassportNo { get; set; }    
-        public string VoterId { get; set; }    
-        public string RationCardNo { get; set; }    
-        public string DrivingLiscenceNo { get; set; }    
-        public string AadharId { get; set; }    
+        public string PanCardNo { get; set; }
+        public string PassportNo { get; set; }
+        public string VoterId { get; set; }
+        public string RationCardNo { get; set; }
+        public string DrivingLiscenceNo { get; set; }
+        public string AadharId { get; set; }
         public int ApplicantType { get; set; }  //  
         //public string Qualification { get; set; } //
         public int NoOfBankAccounts { get; set; }
-        public bool IsActive { get; set; }
+        public string Message { get; set; }
+        public bool Succeeded { get; set; }
     }
 }

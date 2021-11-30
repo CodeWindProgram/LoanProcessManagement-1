@@ -1,6 +1,7 @@
 ﻿using LoanProcessManagement.Application.Features.Branch.Queries;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries;
 using LoanProcessManagement.Application.Features.Product.Queries;
+using LoanProcessManagement.Application.Features.LoanProducts.Queries;
 using LoanProcessManagement.Application.Features.Roles.Queries;
 using LoanProcessManagement.Application.Responses;
 using System;
@@ -14,6 +15,7 @@ namespace LoanProcessManagement.App.Services.Interfaces
     {
         Task<IEnumerable<GetAllRolesDto>> GetAllRoles();
         Task<IEnumerable<GetAllBranchesDto>> GetAllBranches();
+        Task<IEnumerable<GetAllLoanProductsDto>> GetAllLoanProducts();
         Task<Response<IEnumerable<GetLeadStatusDto>>> GetAllStatus(string role);
         Task<Response<IEnumerable<GetLoanProductsDto>>> GetAllLoanProduct();
         Task<Response<IEnumerable<GetInsuranceProductsDto>>> GetAllInsuranceProducts();

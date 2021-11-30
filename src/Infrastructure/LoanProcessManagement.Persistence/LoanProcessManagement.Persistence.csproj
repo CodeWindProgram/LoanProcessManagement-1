@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
 	  <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -21,6 +21,38 @@
     <Compile Remove="Migrations\20211021195044_Initial7.Designer.cs" />
     <Compile Remove="Migrations\20211021195622_Initial4.cs" />
     <Compile Remove="Migrations\20211021195622_Initial4.Designer.cs" />
+    <Compile Remove="Migrations\20211111101520_Initial_06.cs" />
+    <Compile Remove="Migrations\20211111101520_Initial_06.Designer.cs" />
+    <Compile Remove="Migrations\20211111110116_Initial_06.cs" />
+    <Compile Remove="Migrations\20211111110116_Initial_06.Designer.cs" />
+    <Compile Remove="Migrations\20211111110854_Initial_06.cs" />
+    <Compile Remove="Migrations\20211111110854_Initial_06.Designer.cs" />
+    <Compile Remove="Migrations\20211111111555_Initial_06.cs" />
+    <Compile Remove="Migrations\20211111111555_Initial_06.Designer.cs" />
+    <Compile Remove="Migrations\20211111111823_Initial_06.cs" />
+    <Compile Remove="Migrations\20211111111823_Initial_06.Designer.cs" />
+    <Compile Remove="Migrations\20211111113312_Initial_06.cs" />
+    <Compile Remove="Migrations\20211111113312_Initial_06.Designer.cs" />
+    <Compile Remove="Migrations\20211115051025_Initial_08.cs" />
+    <Compile Remove="Migrations\20211115051025_Initial_08.Designer.cs" />
+    <Compile Remove="Migrations\20211115131657_Initial_08.cs" />
+    <Compile Remove="Migrations\20211115131657_Initial_08.Designer.cs" />
+    <Compile Remove="Migrations\20211116062159_Intial_09_01.cs" />
+    <Compile Remove="Migrations\20211116062159_Intial_09_01.Designer.cs" />
+    <Compile Remove="Migrations\20211116062819_Initial_09_02.cs" />
+    <Compile Remove="Migrations\20211116062819_Initial_09_02.Designer.cs" />
+    <Compile Remove="Migrations\20211116064032_Initial_09.cs" />
+    <Compile Remove="Migrations\20211116064032_Initial_09.Designer.cs" />
+    <Compile Remove="Migrations\20211117132652_Initial_10.cs" />
+    <Compile Remove="Migrations\20211117132652_Initial_10.Designer.cs" />
+    <Compile Remove="Migrations\20211117133404_Initial_10.cs" />
+    <Compile Remove="Migrations\20211117133404_Initial_10.Designer.cs" />
+    <Compile Remove="Migrations\20211117140114_Initial_10.cs" />
+    <Compile Remove="Migrations\20211117140114_Initial_10.Designer.cs" />
+    <Compile Remove="Migrations\20211117140733_Initial_10.cs" />
+    <Compile Remove="Migrations\20211117140733_Initial_10.Designer.cs" />
+    <Compile Remove="Migrations\20211117142044_Initial_10.cs" />
+    <Compile Remove="Migrations\20211117142044_Initial_10.Designer.cs" />
     <Compile Remove="Migrations\20211115114526_initial_08.cs" />
     <Compile Remove="Migrations\20211115114526_initial_08.Designer.cs" />
     <Compile Remove="Migrations\20211115122629_Initial_08.cs" />

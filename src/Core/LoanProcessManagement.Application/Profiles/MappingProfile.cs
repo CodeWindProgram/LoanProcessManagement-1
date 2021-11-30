@@ -24,6 +24,8 @@ using LoanProcessManagement.Domain.Entities;
 using System.Collections.Generic;
 using LoanProcessManagement.Application.Features.LeadList.Commands;
 using LoanProcessManagement.Application.Features.User.Queries;
+using LoanProcessManagement.Application.Features.LeadList.Commands.AddLead;
+using LoanProcessManagement.Application.Features.LoanProducts.Queries;
 using LoanProcessManagement.Application.Features.RoleMaster.Commands.CreateRoleMaster;
 using LoanProcessManagement.Application.Features.RoleMaster.Commands.UpdateRoleMaster;
 using LoanProcessManagement.Application.Features.RoleMaster.Commands.DeleteRoleMaster;
@@ -45,6 +47,7 @@ using LoanProcessManagement.Application.Features.Menu.Query.GetMenuByID;
 using LoanProcessManagement.Application.Features.DSACorner.Query.DSACornerList;
 using LoanProcessManagement.Application.Features.DSACorner.Query.TrainingVideosList;
 using LoanProcessManagement.Application.Features.DSACorner.Query.CircularList;
+using LoanProcessManagement.Application.Features.ApplicantDetails.Command;
 
 namespace LoanProcessManagement.Application.Profiles
 {
@@ -102,6 +105,15 @@ namespace LoanProcessManagement.Application.Profiles
             CreateMap<LpmLeadStatusMaster, LeadHistoryQuery>().ReverseMap();
             CreateMap<LpmLeadMaster, LeadHistoryQuery>().ReverseMap();
             CreateMap<LPMGSTEnquiryDetail, GstAddEnquiryCommandDto>().ReverseMap();
+            #region GetAllLoanProducts mapping has created by - Pratiksha Poshe - 10/11/2021
+            CreateMap<LpmLoanProductMaster, GetAllLoanProductsDto>().ReverseMap();
+            #endregion
+            #region AddApplicantDetails mapping has created by - Pratiksha Poshe - 19/11/2021
+            CreateMap<AddApplicantDetailsCommand, LpmLeadApplicantsDetails>().ReverseMap();
+            #endregion
+            #region Add mapping has created by - Pratiksha Poshe - 09/11/2021
+            CreateMap<AddLeadCommand, LpmLeadMaster>().ReverseMap();
+            #endregion
 
             CreateMap<LPMGSTEnquiryDetail, GstCreateEnquiryCommand>().ReverseMap();
             CreateMap<LPMGSTEnquiryDetail, GstCreateEnquiryCommandDto>().ReverseMap();

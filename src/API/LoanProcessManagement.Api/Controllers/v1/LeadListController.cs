@@ -3,6 +3,7 @@ using LoanProcessManagement.Application.Features.LeadList.Commands;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory;
 using LoanProcessManagement.Application.Features.LeadList.Commands.UpdateLead;
 using LoanProcessManagement.Application.Features.LeadList.Queries;
+using LoanProcessManagement.Application.Features.LeadList.Commands.AddLead;
 using LoanProcessManagement.Domain.CustomModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -74,7 +75,24 @@ namespace LoanProcessManagement.Api.Controllers.v1
             var dtos = await _mediator.Send(new LeadHistoryQuery(LeadId));
             _logger.LogInformation("GetHistory Completed");
             return Ok(dtos);
-        } 
+        }
+        #endregion
+
+        #region Api to add lead in db by - Pratiksha Poshe - 10/11/2021
+        /// <summary>
+        /// 31/10/2021 - Api to add lead in db
+        //	commented by Pratiksha Poshe
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>Response</returns>
+        [HttpPost("AddLead")]
+        public async Task<ActionResult> AddLeadAsync([FromBody] AddLeadCommand request)
+        {
+            _logger.LogInformation("AddLeadAsync Initiated");
+            var dtos = await _mediator.Send(request);
+            _logger.LogInformation("AddLeadAsync Completed");
+            return Ok(dtos);
+        }
         #endregion
     }
 }

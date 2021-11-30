@@ -15,6 +15,7 @@ namespace LoanProcessManagement.Application.Models.Authentication
         public long UserRoleId { get; set; }
         public string Email { get; set; }
         public string Name { get; set; }
+        public long BranchID { get; set; }
         public string Branch { get; set; }
         public string Token { get; set; }
         public string RefreshToken { get; set; }

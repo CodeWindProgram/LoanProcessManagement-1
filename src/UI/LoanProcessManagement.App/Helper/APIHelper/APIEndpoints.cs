@@ -24,7 +24,14 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string ModifyLead = "api/v1/LeadList/ModifyLead";
         public const string RoleList = "api/v1/RoleMaster";
 
-        #region Maintaining the Url EndPoint for Menus - Saif Khan - 28/10/2021
+        #region Maintaining the Url EndPoint - Pratiksha Poshe - 10/11/2021
+        public const string GetAllLoanProducts = "api/v1/LoanProducts/GetAllLoanProducts";
+        public const string AddLead = "api/v1/LeadList/AddLead";
+        public const string AddApplicantDetails = "api/v1/ApplicantDetails/AddApplicantDetails";
+        public const string GetApplicantDetailsByLeadId = "api/v1/ApplicantDetails/GetApplicantDetailsByLeadId?lead_Id={0}&applicantType={1}";
+        #endregion
+
+        #region Maintaining the Url EndPoint - Saif Khan - 28/10/2021
         public const string MenuProcess = "api/v1/Menu";
         public const string MenuCreate = "api/v1/Menu/Create";
         public const string MenuUpdate = "api/v1/Menu/updateMenu/";

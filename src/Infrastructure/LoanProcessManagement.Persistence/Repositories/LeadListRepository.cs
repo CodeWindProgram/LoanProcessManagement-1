@@ -11,7 +11,7 @@ using LoanProcessManagement.Application.Features.LeadList.Commands.UpdateLead;
 using LoanProcessManagement.Application.Features.LeadList.Queries;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory;
 using System.Text.RegularExpressions;
-using System;
+using LoanProcessManagement.Application.Features.LeadList.Commands.AddLead;
 using System;
 
 namespace LoanProcessManagement.Persistence.Repositories
@@ -50,13 +50,11 @@ namespace LoanProcessManagement.Persistence.Repositories
                                 }).ToListAsync();
             return result;
         }
-
         #endregion
-
         public async Task<GetLeadByLeadIdDto> GetLeadByLeadId(string lead_id)
-        {
-            var user = await _dbContext.LpmLeadMasters.Include(x => x.Product).Include(x => x.LeadStatus).Include(z=>z.Branch)
-            .Where(x => x.lead_Id==lead_id).FirstOrDefaultAsync();
+            {
+                var user = await _dbContext.LpmLeadMasters.Include(x => x.Product).Include(x => x.LeadStatus).Include(z=>z.Branch)
+                .Where(x => x.lead_Id==lead_id).FirstOrDefaultAsync();
 
             var userProcessCycle = await _dbContext.LpmLeadProcessCycles.Include(x => x.lead).Include(x => x.LeadStatus)
                 .Include(x => x.LoanProduct).Include(x => x.InsuranceProduct)
@@ -128,11 +126,11 @@ namespace LoanProcessManagement.Persistence.Repositories
                     IPSResponseType4 = leadQuery.IPSResponseType4,
                     IPSResponseType5 = leadQuery.IPSResponseType5
 
-                };
+                    };
 
-            }
+                }
        
-        }
+            }
 
         public async Task<UpdateLeadDto> ModifyLead(UpdateLeadCommand request)
         {
@@ -310,8 +308,111 @@ namespace LoanProcessManagement.Persistence.Repositories
                                     ProductsSold = C.ProductName
                                 }).ToListAsync();
             return result;
-        } 
+        }
         #endregion
-    } 
+
+
+        #region This method will add new lead to the db by - Pratiksha - 10/11/2021
+        /// <summary>
+        /// 10/11/2021 - This method will add new lead to the db
+        /// Commented by Pratiksha
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public async Task<AddLeadDto> AddLeadAsync(LpmLeadMaster request)
+        {
+            _logger.LogInformation("Add Lead Initiated");
+
+            var result = await _dbContext.LpmLeadMasters.Include(x => x.Branch).Include(x => x.LoanSchemes).Include(x => x.Product).Include(x => x.PropertyTypes).Include(x => x.SanctionedPlans)
+                .Where(x => x.FormNo == request.FormNo).FirstOrDefaultAsync();
+
+            AddLeadDto response = new AddLeadDto();
+
+            if (result != null)
+            {
+                response.Message = "Form number is already exists. Please enter correct form number.";
+                response.Succeeded = false;
+                return response;
+            }
+
+            response.CreatedBy = request.CreatedBy;
+            //response.CreatedDate = request.CreatedDate;
+            response.FormNo = request.FormNo;
+            response.FirstName = request.FirstName;
+            response.MiddleName = request.MiddleName;
+            response.LastName = request.LastName;
+            response.CustomerResidenceaddress = request.CustomerResidenceaddress;
+            response.CustomerResidencePincode = request.CustomerResidencePincode;
+            response.CustomerOfficeaddress = request.CustomerOfficeaddress;
+            response.CustomerOfficePincode = request.CustomerOfficePincode;
+            response.CustomerPhone = request.CustomerPhone;
+            response.CustomerPhone_Alternate = request.CustomerPhone_Alternate;
+            response.CustomerEmail = request.CustomerEmail;
+            response.EmploymentType = request.EmploymentType;
+            response.ProductID = request.ProductID;
+            request.CurrentStatus = 1;
+            response.CustomerType = request.CustomerType;
+            response.BranchID = request.BranchID;
+            response.Lead_assignee_Id = request.Lead_assignee_Id;
+            request.Appointment_Date = DateTime.Now;
+            request.Conversion_date = DateTime.Now;
+            response.NationalityType = request.NationalityType;
+            response.IsPropertyIdentified = request.IsPropertyIdentified;
+            response.PropertyPincode = request.PropertyPincode;
+            response.PropertyUnderConstruction = request.PropertyUnderConstruction;
+            response.ProjectName = request.ProjectName;
+            response.UnitName = request.UnitName;
+            response.ProjectAddress = request.ProjectAddress;
+            request.CustomerType = "Individual";
+            response.LastModifiedBy = request.LastModifiedBy;
+            request.LastModifiedDate = DateTime.Now;
+            response.Lead_assignee_Id = request.Lead_assignee_Id;
+            response.IsSanctionedPlanReceivedID = request.IsSanctionedPlanReceivedID;
+            response.PropertyID = request.PropertyID;
+            response.AnnualTurnOverInLastFy = request.AnnualTurnOverInLastFy;
+            response.IsApplicantExemptedFromGst = request.IsApplicantExemptedFromGst;
+            response.ExemptedCategory = request.ExemptedCategory;
+            response.TypeOfFirms = request.TypeOfFirms;
+            response.Comment = request.Comment;
+            request.IsActive = true;
+            response.SchemeID = request.SchemeID;
+            await _dbContext.LpmLeadMasters.AddAsync(request);
+            await _dbContext.SaveChangesAsync();
+            request.lead_Id = "Lead_" + request.Id;
+            await _dbContext.SaveChangesAsync();
+
+            LpmLeadProcessCycle lpmLeadProcessCycle = new LpmLeadProcessCycle();
+            lpmLeadProcessCycle.lead_Id = request.Id;
+            lpmLeadProcessCycle.Comment = request.Comment;
+            lpmLeadProcessCycle.CreatedBy = request.CreatedBy;
+            lpmLeadProcessCycle.CurrentStatus = request.CurrentStatus;
+            lpmLeadProcessCycle.LoanProductID = request.ProductID;
+            lpmLeadProcessCycle.DateOfAction = DateTime.Now;
+            lpmLeadProcessCycle.LastModifiedBy = request.CreatedBy;
+            lpmLeadProcessCycle.LastModifiedDate = DateTime.Now;
+            await _dbContext.LpmLeadProcessCycles.AddAsync(lpmLeadProcessCycle);
+            await _dbContext.SaveChangesAsync();
+
+            LpmLeadApplicantsDetails lpmLeadApplicantsDetails = new LpmLeadApplicantsDetails();
+            lpmLeadApplicantsDetails.lead_Id = request.Id;
+            lpmLeadApplicantsDetails.FormNo = request.FormNo;
+            lpmLeadApplicantsDetails.FirstName = request.FirstName;
+            lpmLeadApplicantsDetails.MiddleName = request.MiddleName;
+            lpmLeadApplicantsDetails.LastName = request.LastName;
+            lpmLeadApplicantsDetails.CustomerPhone = request.CustomerPhone;
+            lpmLeadApplicantsDetails.EmploymentType = request.EmploymentType;
+            lpmLeadApplicantsDetails.IsActive = request.IsActive;
+            await _dbContext.LpmLeadApplicantsDetails.AddAsync(lpmLeadApplicantsDetails);
+            await _dbContext.SaveChangesAsync();
+
+            response.Message = "Lead added successfully .";
+            response.Succeeded = true;
+
+            _logger.LogInformation("Add Lead succeeded");
+            return response;
+        }
+
+        #endregion
+    }
     #endregion
 }
