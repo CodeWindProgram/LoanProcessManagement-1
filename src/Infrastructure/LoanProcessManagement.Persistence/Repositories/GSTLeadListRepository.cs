@@ -49,11 +49,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                                     Message = "lead list data fetched",
                                     CustomerName = A.FirstName,
                                     DSAName = B.Name
-                                }).ToListAsync();
-
-            //var userProcessCycle = await _dbContext.LpmLeadProcessCycles.Include(x => x.lead).Include(x => x.LeadStatus)
-            //    .Include(x => x.LoanProduct).Include(x => x.InsuranceProduct)
-            //    .Where(x => x.lead_Id == ).FirstOrDefaultAsync();
+                                }).ToListAsync();           
             return result;
         }
         #endregion

@@ -35,6 +35,7 @@ namespace LoanProcessManagement.Api.Controllers.v1
         [HttpGet("DSACorner/{ParentId}")]
         public async Task<IActionResult> DSACornerList([FromRoute] DSACornerListQuery dsaCornerList)
         {
+
             return Ok(await _mediator.Send(dsaCornerList));
         }
         #endregion
