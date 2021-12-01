@@ -30,11 +30,7 @@ namespace LoanProcessManagement.App.Controllers
         [HttpGet("/DSACorner/{ParentId}")]
         public async Task<IActionResult> DSACorner(long ParentId)
         {
-            
-            //DSACornerListQuery dsaCornerProcess = new DSACornerListQuery();
-            //var roleId = User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value;
-            //dsaCornerProcess.UserRoleId = long.Parse(roleId);
-
+           
             var dsaServiceResponse = await _dsaCornerService.DSACornerList(ParentId);
 
             if (dsaServiceResponse != null && dsaServiceResponse.Succeeded && dsaServiceResponse.Data != null)

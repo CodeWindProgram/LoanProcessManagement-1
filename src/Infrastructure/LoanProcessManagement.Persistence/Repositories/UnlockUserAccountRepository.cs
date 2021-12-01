@@ -20,6 +20,7 @@ namespace LoanProcessManagement.Persistence.Repositories
 
         public UnlockUserAccountRepository(ApplicationDbContext dbContext, ILogger<UnlockUserAccountModel> logger, IEmailService emailService) : base(dbContext, logger, emailService)
         {
+
             _logger = logger;
             _emailService = emailService;
         }
