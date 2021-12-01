@@ -338,7 +338,10 @@ namespace LoanProcessManagement.App.Controllers
                 var response = await _leadListService.AddLead(leadCommandVM);
                 ViewBag.isSuccess = response.Succeeded;
                 ViewBag.Message = response.Data.Message;
-                ModelState.Clear();
+                if(response.Succeeded)
+                {
+                    ModelState.Clear();
+                }
             }
             var loanProducts = await _commonService.GetAllLoanProducts();
             ViewBag.loanProducts = new SelectList(loanProducts, "Id", "ProductName");
