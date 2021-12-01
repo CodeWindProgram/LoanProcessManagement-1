@@ -44,36 +44,47 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Stage)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.StartDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.EndDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Description)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.UpdatedBy)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ReasonForReject)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ProductsSold)
-                            </td>
-                        </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Stage)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.StartDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EndDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UpdatedBy)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ReasonForReject)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ProductsSold)
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        <ul class="tabs">
+        @*<partial name="_Tabs" />*@
+    <div class="d-flex flex-row justify-content-around">
+        <a class="btn btn-primary btn1 selected" asp-controller="LeadList" asp-action="LeadSummary">Summary</a>
+        <a class="btn btn-primary btn1" asp-controller="LeadList" asp-action="LeadModification" target="_blank">Modification</a>
+        <a class="btn btn-primary btn1" asp-controller="LeadList" asp-action="LeadHistory" target="_blank">History</a>
+        @*<button class="btn btn-primary btn1">Query History</button>*@
+        <a class="btn btn-primary btn1" asp-controller="ProductsList" asp-action="AllProductsList" target="_blank">Products</a>
+        <a class="btn btn-primary btn1" asp-controller="Login" asp-action="UpdatePropertyDetails" target="_blank">Property Details</a>
+
+    </div>
+
+        @*<ul class="tabs">
             <li class="active"><a href="#" id="tabDetails" class="">Summary</a></li>
 
             <li><a href="#" id="tabProcess" class="">Modification</a></li>
@@ -85,7 +96,7 @@
             <li><a href="#" id="tabProduct" class="">Products</a></li>
 
             <li id="ContentPlaceHolder1_tab_PropPincode"><a href="#Property_Pincode" id="btn_Property_Pincode">Property Details</a></li>
-        </ul>
+        </ul>*@
     </div>
 </div>
 <script>
@@ -103,5 +114,11 @@
             "bProcessing": true,
             "bDestroy": true
         });
+        $('.btn1').click(function (e) {
+            $('.btn1').removeClass("selected");
+            $(e.target).addClass("selected");
+        });
+
     });
+
 </script>

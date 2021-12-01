@@ -519,7 +519,7 @@
     <div class="initial1">
         <div class="group1"><label for="amount">Amount(in INR):<span style="color:red;margin-left: 4px;font-size: 15px;">*</span></label></div>
         <div class="group2">
-            <input type="text" class="form-control" asp-for="loanAmount">
+            <input type="text" class="form-control amt" asp-for="loanAmount">
             <span asp-validation-for="loanAmount" class="text-danger"></span>
 
         </div>
@@ -548,7 +548,7 @@
     <div class="initial1">
         <div class="group1"><label for="amount_insurance">Amount(in INR):</label></div>
         <div class="group2">
-            <input type="text" class="form-control" asp-for="insuranceAmount">
+            <input type="text" class="form-control amt" asp-for="insuranceAmount">
             <span asp-validation-for="insuranceAmount" class="text-danger"></span>
 
         </div>
@@ -573,16 +573,15 @@
 
 </div>
 <div class="container app">
-    <div class="buttons">
-
-        <button class="btn btn-primary btn1 selected">Summary</button>
-        <button class="btn btn-primary btn1">Modification</button>
-        <button class="btn btn-primary btn1">History</button>
-        <button class="btn btn-primary btn1">Query History</button>
-        <button class="btn btn-primary btn1">Products</button>
-        <button class="btn btn-primary btn1">Property Details</button>
+    <div class="d-flex flex-row justify-content-around">
+        <a class="btn btn-primary btn1 selected" asp-controller="leadlist" asp-action="LeadSummary" asp-route-lead_Id="@Model.lead_Id">Summary</a>
+        <a class="btn btn-primary btn1" asp-controller="leadlist" asp-action="LeadModification" asp-route-lead_Id="@Model.lead_Id" target="_blank">Modification</a>
+        <a class="btn btn-primary btn1" asp-controller="leadlist" asp-action="LeadHistory" asp-route-LeadId="@Model.lead_Id" target="_blank">History</a>
+        @*<button class="btn btn-primary btn1">Query History</button>*@
+        <a class="btn btn-primary btn1" asp-controller="ProductsList" asp-action="AllProductsList" asp-route-lead_Id="@Model.lead_Id" target="_blank">Products</a>
+        <a class="btn btn-primary btn1" asp-controller="Login" asp-action="UpdatePropertyDetails" asp-route-lead_Id="@Model.lead_Id" target="_blank">Property Details</a>
     </div>
- </div>
+</div>
 
 
 <script type="text/javascript">
@@ -686,24 +685,34 @@
 
     $(document).ready(function () {
 
-        if ('@ViewBag.Message' == 'Lead Data Has Been Added Successfully !!' || '@ViewBag.Message'=='Lead Data Has Been Updated Successfully !!') {
+        @*if ('@ViewBag.Message' == 'Lead Data Has Been Added Successfully !!' || '@ViewBag.Message'=='Lead Data Has Been Updated Successfully !!') {
             setTimeout(function () {
                 location.href = "/LeadList/LeadSummary/@Model.lead_Id";
             }, 5000);
-        }
-
-        @*if ('@ViewBag.isSuccess' == 'true') {
-            setTimeout(function () {
-                location.href = "/LeadList/LeadSummary/@Model.lead_Id";
-            }, 5000);
-        }
-        else if('@ViewBag.isSuccess' == 'false'){
-             setTimeout(function () {
-                location.href = "/LeadList/LeadModification/@Model.lead_Id";
-            }, 5000);
-
         }*@
 
-        })
+        if ('@ViewBag.isSuccess' == 'True') {
+            setTimeout(function () {
+                location.href = "/LeadList/LeadSummary/@Model.lead_Id";
+            }, 3000);
+        }
+        else if('@ViewBag.isSuccess' == 'False'){
+             setTimeout(function () {
+                location.href = "/LeadList/LeadModification/@Model.lead_Id";
+            }, 3000);
+
+        }
+
+    })
+    $(function () {
+        $(".amt").keypress(function (e) {
+            var keyCode = e.which;
+            / 8 - (backspace), 32 - (space), 48-57 - (0-9) - Numbers /
+            if ((keyCode != 8 || keyCode == 32) && (keyCode < 48 || keyCode > 57)) {
+                return false;
+            }
+        });
+    });
+
 
 </script>

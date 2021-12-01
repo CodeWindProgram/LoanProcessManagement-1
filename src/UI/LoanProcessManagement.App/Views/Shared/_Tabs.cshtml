@@ -1,0 +1,18 @@
+﻿<div class="d-flex flex-row justify-content-around">
+    <button class="btn btn-primary btn1 selected">Summary</button>
+    <a class="btn btn-primary btn1" asp-action="LeadModification" asp-route-lead_Id="@Model.lead_Id">Modification</a>
+    <a class="btn btn-primary btn1" asp-action="LeadHistory" asp-route-LeadId="@Model.lead_Id">History</a>
+    <button class="btn btn-primary btn1">Query History</button>
+    <button class="btn btn-primary btn1">Products</button>
+    <button class="btn btn-primary btn1">Property Details</button>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.btn1').click(function (e) {
+            $('.btn1').removeClass("selected");
+            $(e.target).addClass("selected");
+        });
+    });
+
+</script>
