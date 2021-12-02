@@ -123,9 +123,9 @@
 
                     </div><br /><br />
                     <div class="initial1">
-                        <div class="group1"><label asp-for="PropertyPincode">Pincode of identified property<span style="color: red; width: 10%;">*</span></label></div>
+                        <div class="group1"><label asp-for="PropertyPincode">Pincode of Identified Property<span style="color: red; width: 10%;">*</span></label></div>
                         <div class="group2">
-                            <input asp-for="PropertyPincode" class="form-control" type="text" placeholder="" autofocus />
+                            <input asp-for="PropertyPincode" class="form-control noTxtInput" type="text" placeholder="" maxlength="6" />
                         </div>
                         <span asp-validation-for="PropertyPincode" id="val_PropertyPincode" class="text-danger"></span>
                     </div><br /><br />
@@ -219,7 +219,7 @@
                     <div class="initial1">
                         <div class="group1"><label asp-for= "AnnualTurnOverInLastFy">Annual turnover in Last FY (Applicant only) : <span style="color: red; width: 10%;">*</span></label></div>
                         <div class="group2">
-                            <input asp-for= "AnnualTurnOverInLastFy" class="form-control" id="annualIncomeFy" type="text" maxlength="10" placeholder="0.00">
+                            <input asp-for= "AnnualTurnOverInLastFy" class="form-control noTxtInput" id="annualIncomeFy" type="text" maxlength="10" placeholder="0.00">
                         </div>
                         <span asp-validation-for="AnnualTurnOverInLastFy" class="text-danger"></span>
 
@@ -264,14 +264,14 @@
                 <div class="initial1">
                     <div class="group1"><label asp-for= "CustomerPhone">Phone Number 1 : <span style="color: red; width: 10%;">*</span></label></div>
                     <div class="group2">
-                        <input asp-for= "CustomerPhone" class="form-control" type="text" placeholder="Phone No 1(Should be 10 digits)" maxlength="10" inputmode="numeric" required="">
+                        <input asp-for= "CustomerPhone" class="form-control noTxtInput" type="text" placeholder="Phone No 1(Should be 10 digits)" maxlength="10" required="">
                     </div>
                     <span asp-validation-for="CustomerPhone" class="text-danger"></span>
                 </div><br /><br />
                 <div class="initial1">
                     <div class="group1"><label asp-for= "CustomerPhone_Alternate">Phone Number 2 :</label></div>
                     <div class="group2">
-                        <input asp-for= "CustomerPhone_Alternate" class="form-control" type="text" placeholder="Phone No 2(Should be 10 digits)" maxlength="10" inputmode="numeric">
+                        <input asp-for= "CustomerPhone_Alternate" class="form-control noTxtInput" type="text" placeholder="Phone No 2(Should be 10 digits)" maxlength="10">
                     </div>
                     <span asp-validation-for="CustomerPhone_Alternate" class="text-danger"></span>
                 </div><br /><br />
@@ -302,7 +302,7 @@
                 <div class="initial1">
                     <div class="group1"><label asp-for= "CustomerResidencePincode"> Residence Pincode : <span style="color: red; width: 10%;">*</span></label></div>
                     <div class="group2">
-                        <input asp-for= "CustomerResidencePincode" class="form-control" type="text" placeholder="Residence Pincode" maxlength="6" />
+                        <input asp-for= "CustomerResidencePincode" class="form-control noTxtInput" type="text" placeholder="Residence Pincode" maxlength="6" />
                     </div>
                     <span asp-validation-for="CustomerResidencePincode" class="text-danger"></span>
                 </div><br /><br />
@@ -316,7 +316,7 @@
                 <div class="initial1">
                     <div class="group1"><label asp-for= "CustomerOfficePincode"> Business/Employee Pincode : <span style="color: red; width: 10%;">*</span></label></div>
                     <div class="group2">
-                        <input asp-for= "CustomerOfficePincode" class="form-control" type="text" placeholder=" Business/Employee Pincode" maxlength="6" />
+                        <input asp-for= "CustomerOfficePincode" class="form-control noTxtInput" type="text" placeholder=" Business/Employee Pincode" maxlength="6" />
                     </div>
                     <span asp-validation-for="CustomerOfficePincode" class="text-danger"></span>
                 </div><br /><br />
@@ -334,28 +334,28 @@
                     <div class="group1"><label asp-for= "SchemeID">Scheme Chosen : <span style="color: red; width: 10%;">*</span></label></div>
                     <div class="group2">
                         <select id="ddl_Scheme" asp-for= "SchemeID" class="form-control">
-                            <option value="">Select</option>
+                            <option value="">Select Scheme</option>
                             <option value="3">Affordable Housing Loan - Urban &amp; Rural 2019</option>
                             <option value="4">COVID SAVIOUR SCHEME 2020</option>
-                            <option value="1">DEFENCE PLUS SCHEME 2020-21 - FLOATING</option>
-                            <option value="1">DELHI AGRANTE KAVYAM&nbsp;2019 -&nbsp;FLOATING&nbsp;OFFER</option>
-                            <option value="2">DELHI ANDROMIDA PLANET ONE 2019</option>
-                            <option value="2">DOCTOR PLUS SCHEME 2020-21 - FLOATING</option>
-                            <option value="3">FLOATING RATE OFFER 2020-21</option>
-                            <option value="3">GIC RE SPECIAL OFFER - 2017</option>
-                            <option value="3">GICHFL EMPLOYEES SCHEME - NEW YEAR 2017&nbsp;</option>
-                            <option value="4">HYDERABAD LAKE SIDE ENCLAVE 2020 - FLOATING OFFER</option>
-                            <option value="4">LOCKDOWN VALUE&nbsp;OFFER&nbsp;2020 (Q2 &amp; Q3)&nbsp;</option>
-                            <option value="5">NAGPUR HIMALAYA SUNSHINE APT - II 2020 - FLOATING OFFER</option>
-                            <option value="5">Online Scheme 2020</option>
-                            <option value="5">PALGHAR PARSHV GLORY 2020 - FLOATING</option>
-                            <option value="6">PRIME CUSTOMER HOUSING SCHEME (SALARIED, SALARIED WOMEN)</option>
-                            <option value="6">PUNE SARA CITY 2019 -&nbsp;FLOATING&nbsp;OFFER</option>
-                            <option value="6">RENT PLUS SCHEME</option>
-                            <option value="7">Sampoorna Scheme</option>
-                            <option value="8">SARAL SELF EMPLOYED SCHEME</option>
-                            <option value="9">SPECIAL GOVT. EMPLOYEE SCHEME 2020-21 - FLOATING</option>
-                            <option value="10">Vinay Niwas Yojana</option>
+                            <option value="7">DEFENCE PLUS SCHEME 2020-21 - FLOATING</option>
+                            <option value="12">DELHI AGRANTE KAVYAM & 2019 - FLOATING & OFFER</option>
+                            <option value="13">DELHI ANDROMIDA PLANET ONE 2019</option>
+                            <option value="15">DOCTOR PLUS SCHEME 2020-21 - FLOATING</option>
+                            <option value="16">FLOATING RATE OFFER 2020-21</option>
+                            <option value="17">GIC RE SPECIAL OFFER - 2017</option>
+                            <option value="18">GICHFL EMPLOYEES SCHEME - NEW YEAR 2017</option>
+                            <option value="19">HYDERABAD LAKE SIDE ENCLAVE 2020 - FLOATING OFFER</option>
+                            <option value="20">LOCKDOWN VALUE OFFER 2020 (Q2, Q3)</option>
+                            <option value="21">NAGPUR HIMALAYA SUNSHINE APT - II 2020 - FLOATING OFFER</option>
+                            <option value="22">Online Scheme 2020</option>
+                            <option value="23">PALGHAR PARSHV GLORY 2020 - FLOATING</option>
+                            <option value="24">PRIME CUSTOMER HOUSING SCHEME (SALARIED, SALARIED WOMEN)</option>
+                            <option value="25">PUNE SARA CITY 2019 - FLOATING & OFFER</option>
+                            <option value="26">RENT PLUS SCHEME</option>
+                            <option value="27">Sampoorna Scheme</option>
+                            <option value="28">SARAL SELF EMPLOYED SCHEME</option>
+                            <option value="29">SPECIAL GOVT. EMPLOYEE SCHEME 2020-21 - FLOATING</option>
+                            <option value="30">Vinay Niwas Yojana</option>
                         </select>
                     </div>
                     <span asp-validation-for="SchemeID" class="text-danger"></span>
@@ -428,12 +428,12 @@
         $("#DDL_PropId").change(function () {
             if ($(this).val() == "YES") {
                 $("#PropertyDiv").show();
-                $("#val_PropertyID").rules("remove", "required")
-                $("#val_PropertyPincode").rules("remove", "required")
-                $("#val_PropertyUnderConstruction").rules("remove", "required")
-                $("#val_ProjectName").rules("remove", "required")
-                $("#val_IsSanctionedPlanReceivedID").rules("remove", "required")
-                $("#val_ProjectAddress").rules("remove", "required")
+                //$("#val_PropertyID").rules("remove", "required")
+                //$("#val_PropertyPincode").rules("remove", "required")
+                //$("#val_PropertyUnderConstruction").rules("remove", "required")
+                //$("#val_ProjectName").rules("remove", "required")
+                //$("#val_IsSanctionedPlanReceivedID").rules("remove", "required")
+                //$("#val_ProjectAddress").rules("remove", "required")
                 //$("#val_PropertyID").removeAttr("data-val-required");
                 //ValidatorEnable($("#<%=val_PropertyID.ClientID%>")[0], false);
             } else {
@@ -459,6 +459,16 @@
         $("form").submit(function () {
             if ($('form').valid()) {
                 $("#button1").prop('disabled', true);
+            }
+        });
+    });
+
+    $(function () {
+        $(".noTxtInput").keypress(function (e) {
+            var keyCode = e.which;
+            /* 8 - (backspace), 32 - (space), 48-57 - (0-9) - Numbers */
+            if ((keyCode != 8 || keyCode == 32) && (keyCode < 48 || keyCode > 57)) {
+                return false;
             }
         });
     });

@@ -38,7 +38,7 @@ namespace LoanProcessManagement.App.Controllers
                 var applicantResponse = await _applicantDetailsService.GetApplicantDetailsByLeadId(lead_Id, applicantType);
                 var applicant = new AddApplicantDetailsCommandVM()
                 {
-                    lead_Id = applicantResponse.Data.lead_Id,
+                    lead_Id = lead_Id,
                     FormNo = applicantResponse.Data.FormNo,
                     FirstName = applicantResponse.Data.FirstName,
                     MiddleName = applicantResponse.Data.MiddleName,
