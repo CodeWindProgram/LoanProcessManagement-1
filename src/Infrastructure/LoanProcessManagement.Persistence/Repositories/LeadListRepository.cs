@@ -96,7 +96,9 @@ namespace LoanProcessManagement.Persistence.Repositories
                     IPSResponseType2=leadQuery.IPSResponseType2,
                     IPSResponseType3=leadQuery.IPSResponseType3,
                     IPSResponseType4=leadQuery.IPSResponseType4,
-                    IPSResponseType5=leadQuery.IPSResponseType5
+                    IPSResponseType5=leadQuery.IPSResponseType5,
+                    Id=userProcessCycle.lead.Id
+                    
 
                 };
             }
@@ -125,7 +127,8 @@ namespace LoanProcessManagement.Persistence.Repositories
                     IPSResponseType2 = leadQuery.IPSResponseType2,
                     IPSResponseType3 = leadQuery.IPSResponseType3,
                     IPSResponseType4 = leadQuery.IPSResponseType4,
-                    IPSResponseType5 = leadQuery.IPSResponseType5
+                    IPSResponseType5 = leadQuery.IPSResponseType5,
+                    Id=user.Id
 
                     };
 
