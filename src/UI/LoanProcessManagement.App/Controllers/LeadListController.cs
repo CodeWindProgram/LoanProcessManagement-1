@@ -58,23 +58,24 @@ namespace LoanProcessManagement.App.Controllers
             return View();
         }
         #endregion
-        
+
         #region Lead History Module Controller - Saif khan - 17/11/2021
         /// <summary>
         /// Lead History Module Controller - Saif khan - 17/11/2021
         /// </summary>
         /// Akshay Pawar : I have commented this part because after adding this part it's showing empty leadlist
         /// <returns>View</returns>
-        //[HttpGet("{LeadId}")]
-        //public async Task<IActionResult> LeadHistory(string LeadId)
-        //{
-        //    var LeadHistoryResponse = await _leadListService.LeadHistory(LeadId);
-        //    if (LeadHistoryResponse != null && LeadHistoryResponse.Data != null)
-        //    {
-        //        return View(LeadHistoryResponse.Data);
-        //    }
-        //    return View("Error");
-        //}
+        [Route("[controller]/[action]/{LeadId}")]
+        [HttpGet]
+        public async Task<IActionResult> LeadHistory(string LeadId)
+        {
+            var LeadHistoryResponse = await _leadListService.LeadHistory(LeadId);
+            if (LeadHistoryResponse != null && LeadHistoryResponse.Data != null)
+            {
+                return View(LeadHistoryResponse.Data);
+            }
+            return View("Error");
+        }
         #endregion
 
 

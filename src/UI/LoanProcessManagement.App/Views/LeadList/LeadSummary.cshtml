@@ -86,15 +86,16 @@
                 </div>
             </div>
         </div>
-
+        @*<partial name="_Tabs" />*@
         <div class="d-flex flex-row justify-content-around">
-            <button class="btn btn-primary btn1 selected">Summary</button>
-            @*<button type="submit" class="btn btn-primary" asp-action="LeadModification" asp-route-lead_Id="@Model.lead_Id">Modification</button>*@
-            <a class="btn btn-primary btn1" asp-action="LeadModification" asp-route-lead_Id="@Model.lead_Id">Modification</a>
-            <button class="btn btn-primary btn1">History</button>
-            <button class="btn btn-primary btn1">Query History</button>
-            <button class="btn btn-primary btn1">Products</button>
-            <button class="btn btn-primary btn1">Property Details</button>
+            <a class="btn btn-primary btn1 selected" asp-action="LeadSummary" asp-route-lead_Id="@Model.lead_Id">Summary</a>
+            <a class="btn btn-primary btn1" asp-action="LeadModification" asp-route-lead_Id="@Model.lead_Id" target="_blank">Modification</a>
+            <a class="btn btn-primary btn1" asp-action="LeadHistory" asp-route-LeadId="@Model.lead_Id" target="_blank">History</a>
+            @*<button class="btn btn-primary btn1">Query History</button>*@
+            <a class="btn btn-primary btn1" asp-controller="ProductsList" asp-action="AllProductsList" asp-route-lead_Id="@Model.lead_Id" target="_blank">Products</a>
+            <a class="btn btn-primary btn1" asp-controller="Login" asp-action="UpdatePropertyDetails" asp-route-lead_Id="@Model.lead_Id" target="_blank">Property Details</a>
+
+
         </div>
     </div>
 </div>
