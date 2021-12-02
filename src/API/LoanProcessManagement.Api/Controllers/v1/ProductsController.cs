@@ -38,7 +38,5 @@ namespace LoanProcessManagement.Api.Controllers.v1
             return Ok(res);
         }
         #endregion
-
-
     }
 }

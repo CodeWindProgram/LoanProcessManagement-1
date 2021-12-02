@@ -58,6 +58,7 @@ namespace LoanProcessManagement.App
             services.AddSingleton<IIncomeAssesmentService, IncomeAssesmentService>();
             services.AddSingleton<IDSACornerService, DSACornerService>();
             services.AddScoped<IApplicantDetailsService, ApplicantDetailsService>();
+            services.AddScoped<IReportsService, ReportsService>();
 
             services.Configure<APIConfiguration>(Configuration.GetSection("APIConfiguration"));
             services.AddSession();

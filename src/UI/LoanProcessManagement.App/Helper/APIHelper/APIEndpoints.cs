@@ -82,5 +82,10 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string TrainingVideosList = "api/v1/DSACorner/TrainingVideos/";
         public const string CircularList = "api/v1/DSACorner/Circular/";
         #endregion
+
+        #region added url Endpoints for GST Lead List- Ramya Guduru -25/11/2021
+        public const string ReportsLeadListing = "api/v1/Reports/ReportsLeadListing/";
+        public const string ReportsList = "api/v1/Reports/Reports/";
+        #endregion
     }
 }

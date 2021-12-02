@@ -48,6 +48,7 @@ using LoanProcessManagement.Application.Features.DSACorner.Query.DSACornerList;
 using LoanProcessManagement.Application.Features.DSACorner.Query.TrainingVideosList;
 using LoanProcessManagement.Application.Features.DSACorner.Query.CircularList;
 using LoanProcessManagement.Application.Features.ApplicantDetails.Command;
+using LoanProcessManagement.Application.Features.ReportsLeadList.Queries;
 
 namespace LoanProcessManagement.Application.Profiles
 {
@@ -159,6 +160,7 @@ namespace LoanProcessManagement.Application.Profiles
             CreateMap<LpmLeadStatusMaster, GetLeadStatusDto>().ReverseMap();
             CreateMap<LpmLoanProductMaster, GetLoanProductsDto>().ReverseMap();
             CreateMap<LpmLoanProductMaster, GetInsuranceProductsDto>().ReverseMap();
+            CreateMap<ReportsLeadListModel, GetReportsLeadListQueryVm>().ReverseMap();
 
             #region added mappers to get all dsa corener list, training videos list and circular list - Ramya Guduru - 25-11-2021
             CreateMap<LpmMenuMaster, DSACornerListVm>().ReverseMap();
