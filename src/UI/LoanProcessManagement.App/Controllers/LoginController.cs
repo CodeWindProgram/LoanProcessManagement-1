@@ -94,7 +94,7 @@ namespace LoanProcessManagement.App.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Dashboard", "Home");
                     }
                 }
                 else

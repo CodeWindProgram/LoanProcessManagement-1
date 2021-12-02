@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace LoanProcessManagement.App.Controllers
 {
-    [Route("Home")]
+    //[Route("Home")]
     public class HomeController : Controller
     {       
         private readonly IAccountService _accountService;
@@ -38,7 +38,6 @@ namespace LoanProcessManagement.App.Controllers
         /// </summary>
         /// <returns>MenuServiceResponse View</returns>
         [Authorize(AuthenticationSchemes = "Cookies")]    
-        [Route("/Home")]
         public async Task<IActionResult> Index()
         {
             GetMenuMasterServicesQuery menuProcess = new GetMenuMasterServicesQuery();
@@ -57,6 +56,17 @@ namespace LoanProcessManagement.App.Controllers
             }
             return View();
         }
+
+        //[Route("Home")]
+        [Authorize(AuthenticationSchemes = "Cookies")]
+
+        public async Task<IActionResult> Dashboard()
+        {
+            return View("~/Views/Shared/_NewLayout.cshtml");
+        }
+
+
+
         #endregion
 
         #region Calling Api for MenuList controller - Saif Khan - 11/11/2021
@@ -65,7 +75,7 @@ namespace LoanProcessManagement.App.Controllers
         /// </summary>
         /// <param name="UserroleId"></param>
         /// <returns></returns>
-        [HttpGet("/Menulist/{UserroleId}")]
+        [HttpGet("Menulist/{UserroleId}")]
         public async Task<IActionResult> Menulist(long UserroleId)
         {
             MenuListQuery menuProcess = new MenuListQuery();
