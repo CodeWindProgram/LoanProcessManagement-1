@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace LoanProcessManagement.Application.Features.LeadList.Commands
@@ -10,36 +11,37 @@ namespace LoanProcessManagement.Application.Features.LeadList.Commands
         public long Id { get; set; }
 
         public string lead_Id { get; set; }
-
+        [DisplayName("Form Number")]
         public string FormNo { get; set; }
+        [DisplayName("Customer Name")]
         public string CustomerName { get; set; }
-
+        [DisplayName("First Name")]
         public string FirstName { get; set; }
-
+        [DisplayName("Middle Name")]
         public string MiddleName { get; set; }
-
+        [DisplayName("Last Name")]
         public string LastName { get; set; }
-
+        [DisplayName("Residence Address")]
         public string CustomerResidenceaddress { get; set; }
-
+        [DisplayName("Residence Pincode")]
         public string CustomerResidencePincode { get; set; }
-
+        [DisplayName("Office Address")]
         public string CustomerOfficeaddress { get; set; }
-
+        [DisplayName("Office Pincode")]
         public string CustomerOfficePincode { get; set; }
-
+        [DisplayName("Phone Number 1")]
         public string CustomerPhone { get; set; }
-
+        [DisplayName("Phone Number 2")]
         public string CustomerPhone_Alternate { get; set; }
-
+        [DisplayName("Email Address")]
         public string CustomerEmail { get; set; }
 
         public long ProductID { get; set; }
-
+        [DisplayName("Product")]
         public string Product { get; set; }
 
         public long CurrentStatus { get; set; }
-
+        [DisplayName("Lead Status")]
         public string LeadStatus { get; set; }
 
         public string CustomerType { get; set; }
@@ -53,7 +55,7 @@ namespace LoanProcessManagement.Application.Features.LeadList.Commands
         public string Customer_longitude { get; set; }
 
         public string Lead_assignee_Id { get; set; }
-
+        [DisplayName("Appointment Date")]
         public DateTime Appointment_Date { get; set; }
 
         public DateTime Conversion_date { get; set; }

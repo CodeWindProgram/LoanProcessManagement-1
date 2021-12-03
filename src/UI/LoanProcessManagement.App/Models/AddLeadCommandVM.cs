@@ -17,7 +17,6 @@ namespace LoanProcessManagement.App.Models
         [Required(ErrorMessage ="First Name is required")]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Middle Name is required")]
         public string MiddleName { get; set; }
 
         [Required(ErrorMessage = "Last Name is required")]
@@ -93,7 +92,9 @@ namespace LoanProcessManagement.App.Models
 
         [Required(ErrorMessage = "Please select Property Type")]
         public long? PropertyID { get; set; }
-
+        
+        [RegularExpression(@"^[1-9][0-9]*$", ErrorMessage =" Annual Turnover amount cannot start with 0")]
+        [Range(1, 50000000, ErrorMessage = "Annual turnover should be less than 5 Crore")]
         [Required(ErrorMessage = "Annual Turnover is required")]
         public string AnnualTurnOverInLastFy { get; set; }
 

@@ -2,6 +2,7 @@
 using MediatR;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
@@ -9,6 +10,7 @@ namespace LoanProcessManagement.Application.Features.Menu.Commands.CreateCommand
 {
     public class CreateMenuCommand : IRequest<Response<CreateMenuCommandDto>>
     {
+        [DisplayName("Menu Name")]
         [Required]
         public string MenuName { get; set; }
         [Required]
@@ -17,6 +19,7 @@ namespace LoanProcessManagement.Application.Features.Menu.Commands.CreateCommand
         public string Icon { get; set; }
         [Required]
         public int? Position { get; set; }
+        [DisplayName("Created Date")]
         public DateTime? CreatedDate { get; set; }
         public bool IsActive { get; set; }
     }

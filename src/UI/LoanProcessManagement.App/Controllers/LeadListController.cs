@@ -292,12 +292,12 @@ namespace LoanProcessManagement.App.Controllers
         /// <returns>Add Lead View</returns>
         //[Route("[controller]/[action]")]
         //[Route("/AddLead")]
-        //[Authorize(Roles = "DSA")]
-        //[Authorize(Roles = "Branch")]
+        [Authorize(Roles = "DSA, Branch")]
         public async Task<IActionResult> AddLead()
         {
-            var loanProducts = await _commonService.GetAllLoanProducts();
-            ViewBag.loanProducts = new SelectList(loanProducts, "Id", "ProductName");
+            //var loanProducts = await _commonService.GetAllLoanProducts();
+            var loanProducts = await _commonService.GetAllLoanProduct();
+            ViewBag.loanProducts = new SelectList(loanProducts.Data, "Id", "ProductName");
             return View();
         }
         #endregion
