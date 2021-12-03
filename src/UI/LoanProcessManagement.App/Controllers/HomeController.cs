@@ -66,7 +66,9 @@ namespace LoanProcessManagement.App.Controllers
 
         public async Task<IActionResult> Dashboard()
         {
-            return View("~/Views/Shared/_NewLayout.cshtml");
+            //return View("~/Views/Shared/_NewLayout.cshtml");
+
+            return View();
         }
 
 
