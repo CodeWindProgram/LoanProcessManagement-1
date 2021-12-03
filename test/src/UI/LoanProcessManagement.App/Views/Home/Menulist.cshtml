@@ -1,0 +1,94 @@
+﻿@model IEnumerable<LoanProcessManagement.Application.Features.Menu.Query.MenuList.MenuListQueryVm>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Menulist";
+}
+<style>
+    #btn1{
+        margin-left:8px;
+        background-color:#191970;
+    }
+    #act1{
+        color:white;
+    }
+</style>
+<div class="container app">
+    <div class="col-sm-12">
+        <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
+            <div class="panel-heading">Menu List</div>
+            <div class="panel-body">
+            </div>
+            <div>
+                <button id="btn1">
+                <a id="act1" asp-action="CreateMenu">Create Menu</a>
+                    </button>
+            </div>
+            <div id="alertMsg" visible="false" runat="server">
+                <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
+                <div style="margin-bottom: 10px"></div>
+            </div>
+
+            <table id="tblMenuList" class="display">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MenuName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Link)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Icon)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Position)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                           
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MenuName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Link)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Icon)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Position)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Modify", "UpdateMenu", new { id = item.Id })
+                                @Html.ActionLink("Remove", "DeleteMenu", new { id=item.Id })
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var usrTable = $('#tblMenuList').dataTable({
+            "oLanguage": {
+                "sZeroRecords": "No records to display",
+                "sSearch": "Search "
+            },
+            "iDisplayLength": 15,
+            "aLengthMenu": [[25, 50, 100, 200, 500], [25, 50, 100, 200, 500]],
+            "bSortClasses": false,
+            "bPaginate": true,
+            "bAutoWidth": false,
+            "bProcessing": true,
+            "bDestroy": true
+        });
+    });
+</script>

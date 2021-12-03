@@ -30,21 +30,10 @@ namespace LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GS
         public async Task<Response<GstCreateEnquiryCommandDto>> Handle(GstCreateEnquiryCommand request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Handle Initiated");
-            var user = _mapper.Map<LPMGSTEnquiryDetail >(request);
+            var user = _mapper.Map<LPMGSTEnquiryDetail>(request);
             await _incomeAssesmentRepository.UpdateAsync(user);
-            //var forumMastreResponse = _mapper.Map<GstCreateEnquiryCommandDto>(userDto);
-            //_logger.LogInformation("Hanlde Completed");
-            //if (forumMastreResponse.Succeeded)
-            //{
-            //    return new Response<GstCreateEnquiryCommandDto>(forumMastreResponse, "success");
-            //}
-            //else
-            //{
-            //    var res = new Response<GstCreateEnquiryCommandDto>(forumMastreResponse, "Failed");
-            //    res.Succeeded = false;
             var user2 = _mapper.Map<GstCreateEnquiryCommandDto>(user);
-                return new Response<GstCreateEnquiryCommandDto>(user2);
-            //}
+            return new Response<GstCreateEnquiryCommandDto>(user2);
         }
     }
 }

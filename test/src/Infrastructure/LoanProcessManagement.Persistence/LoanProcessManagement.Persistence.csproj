@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20210826051409_initial.cs" />
+    <Compile Remove="Migrations\20210826051409_initial.Designer.cs" />
+    <Compile Remove="Migrations\20211020200251_Initial.cs" />
+    <Compile Remove="Migrations\20211020200251_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20211021142506_Initial2.cs" />
+    <Compile Remove="Migrations\20211021142506_Initial2.Designer.cs" />
+    <Compile Remove="Migrations\20211021143206_Initial3.cs" />
+    <Compile Remove="Migrations\20211021143206_Initial3.Designer.cs" />
+    <Compile Remove="Migrations\20211021184148_Initial4.cs" />
+    <Compile Remove="Migrations\20211021184148_Initial4.Designer.cs" />
+    <Compile Remove="Migrations\20211021184604_Initial5.cs" />
+    <Compile Remove="Migrations\20211021184604_Initial5.Designer.cs" />
+    <Compile Remove="Migrations\20211021195044_Initial7.cs" />
+    <Compile Remove="Migrations\20211021195044_Initial7.Designer.cs" />
+    <Compile Remove="Migrations\20211021195622_Initial4.cs" />
+    <Compile Remove="Migrations\20211021195622_Initial4.Designer.cs" />
+    <Compile Remove="Migrations\20211115114526_initial_08.cs" />
+    <Compile Remove="Migrations\20211115114526_initial_08.Designer.cs" />
+    <Compile Remove="Migrations\20211115122629_Initial_08.cs" />
+    <Compile Remove="Migrations\20211115122629_Initial_08.Designer.cs" />
+    <Compile Remove="Migrations\20211115124334_Initial_08.cs" />
+    <Compile Remove="Migrations\20211115124334_Initial_08.Designer.cs" />
+    <Compile Remove="Migrations\20211115125327_Initial_08.cs" />
+    <Compile Remove="Migrations\20211115125327_Initial_08.Designer.cs" />
+    <Compile Remove="Migrations\20211115140253_Initial_10.cs" />
+    <Compile Remove="Migrations\20211115140253_Initial_10.Designer.cs" />
+    <Compile Remove="Migrations\20211116081700_Initial_09.cs" />
+    <Compile Remove="Migrations\20211116081700_Initial_09.Designer.cs" />
+    <Compile Remove="Migrations\20211119081538_Initial_12.cs" />
+    <Compile Remove="Migrations\20211119081538_Initial_12.Designer.cs" />
+    <Compile Remove="Migrations\GloboTicketDbContextModelSnapshot.cs" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.10" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.10" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.10" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.10" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Core\LoanProcessManagement.Application\LoanProcessManagement.Application.csproj" />
+	</ItemGroup>
+	
+</Project>

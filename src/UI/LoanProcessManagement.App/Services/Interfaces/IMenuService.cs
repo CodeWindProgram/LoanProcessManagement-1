@@ -3,6 +3,7 @@ using LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands;
 using LoanProcessManagement.Application.Features.Menu.Commands.DeleteCommand;
 using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand;
 using LoanProcessManagement.Application.Features.Menu.Query;
+using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenuMaps.Query;
 using LoanProcessManagement.Application.Features.Menu.Query.GetMenuByID;
 using LoanProcessManagement.Application.Features.Menu.Query.MenuList;
 using LoanProcessManagement.Application.Responses;
@@ -18,6 +19,8 @@ namespace LoanProcessManagement.App.Services.Interfaces
         public Task<Response<IEnumerable<GetMenuMasterServicesVm>>> MenuProcess(GetMenuMasterServicesQuery menuProcess);
 
         public Task<Response<CreateMenuCommandDto>> CreateMenu(CreateMenuCommand menuCreate);
+
+        //public Task<Response<GetAllMenuMapsQueryVm>> CreateMaps(GetAllMenuMapsQuery listCreate);
 
         public Task<Response<UpdateMenuCommandDto>> UpdateMenu(UpdateMenuCommand menuUpdate);
 

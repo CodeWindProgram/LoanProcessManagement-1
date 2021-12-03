@@ -46,22 +46,32 @@
     #bara {
         color: #191970;
     }
-    #txtlab{padding-top:9px;}
+
+    #txtlab {
+        padding-top: 9px;
+    }
+
     .border-part {
         padding-left: 60px;
         padding-right: 60px;
     }
-    #inpcheck{
-        margin-left:10px;
+
+    #inpcheck {
+        margin-left: 10px;
     }
-    #lblcheck{
-        margin-left:2px;
-        font-size:14px;
-        color:#818181;
-        font-family:sans-serif;
+
+    #lblcheck {
+        margin-left: 2px;
+        font-size: 14px;
+        color: #818181;
+        font-family: sans-serif;
     }
-    #checkboxes{
-        display:flex;
+    #trtablecheck {
+        margin-top: 10px;
+        margin-left: 30px;
+    }
+    #checkboxes {
+        display: flex;
     }
 </style>
 <div class="container app">
@@ -101,16 +111,29 @@
                         </div>
                         <div class="form-group" id="checkboxes">
                             <label id="txtlab">Menu Is Being Created For </label>
-                            @foreach (var role in Model.lpmUserRoleMaster)
-                            {
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <label id="lblcheck">
-                                            <input id="inpcheck" type="checkbox" value="true" /> @role.RoleName
-                                            <input hidden id="inpcheck" type="checkbox" value="false" />
-                                        </label>
+                            @*@foreach (var role in Model.ListVms)
+                                {
+                                    <div class="form-group">
+                                        <div class="checkbox">
+                                            <label id="lblcheck">
+                                                <input asp-for="@role.Checkbox" id="inpcheck" type="checkbox" value="true" /> @role.Name
+                                                <input asp-for="@role.Id" hidden />
+
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
+                                }*@
+                            @{
+                                for (int i = 0; i < Model.ListVms.Count(); i++)
+                                {
+                                    <div id="trtablecheck">
+                                        <td>
+                                            <input asp-for="@Model.ListVms[i].Checkbox" type="checkbox" />
+                                            @Model.ListVms[i].Name
+                                        </td>
+                                        <td><input asp-for="@Model.ListVms[i].Id" hidden /></td>
+                                    </div>
+                                }
                             }
                         </div>
                         <div hidden class="form-group">

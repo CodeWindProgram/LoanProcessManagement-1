@@ -80,7 +80,7 @@
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div hidden class="form-group">
                             <label asp-for="getMenuByIdQueryVm.Id" class="control-label"></label>
-                            <input disabled asp-for="getMenuByIdQueryVm.Id" class="form-control" />
+                            <input readonly asp-for="getMenuByIdQueryVm.Id" class="form-control" />
                             <span asp-validation-for="getMenuByIdQueryVm.Id" class="text-danger"></span>
                         </div>
                         <div class="form-group">
@@ -105,12 +105,23 @@
                         </div>
                         <div class="form-group" id="checkboxes">
                             <label id="txtlab">Menu Is Being Updated For </label>
-                            @foreach (var role in Model.lpmUserRoleMaster)
+                            @*@foreach (var role in Model.RoleList)
                             {
                                 <div class="form-group">
                                     <div class="checkbox">
                                         <label id="lblcheck">
-                                            <input id="inpcheck" type="checkbox" /> @role.RoleName
+                                            <input asp-for="@role.Checkbox" id="inpcheck" type="checkbox" /> @role.Name
+                                        </label>
+                                    </div>
+                                </div>
+                            }*@
+                            @for (int i = 0; i < Model.RoleList.Count(); i++)
+                            {
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label id="lblcheck">
+                                            <input asp-for="@Model.RoleList[i].Id" hidden/>
+                                            <input asp-for="@Model.RoleList[i].Checkbox" id="inpcheck" type="checkbox" />@Model.RoleList[i].Name
                                         </label>
                                     </div>
                                 </div>

@@ -1,7 +1,10 @@
 ﻿using LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands;
 using LoanProcessManagement.Application.Features.Menu.Commands.DeleteCommand;
+using LoanProcessManagement.Application.Features.Menu.Commands.DeleteMenuMapById;
 using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand;
 using LoanProcessManagement.Application.Features.Menu.Query;
+using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenuMaps.GetAllMenuMaps;
+using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenuMaps.Query;
 using LoanProcessManagement.Application.Features.Menu.Query.GetMenuByID;
 using LoanProcessManagement.Application.Features.Menu.Query.MenuList;
 using MediatR;
@@ -99,6 +102,25 @@ namespace LoanProcessManagement.Api.Controllers.v1
         public async Task<IActionResult> MenuById([FromRoute] GetMenuByIdQuery idQuery)
         {
             return Ok(await _mediator.Send(idQuery));
+        }
+
+        [HttpPost("CreateMenuMaps", Name = "CreateMenuMaps")]
+        public async Task<IActionResult> CreateMenuMaps([FromBody] GetAllMenuMapsQuery getAllMenuMapsQuery)
+        {
+            return Ok(await _mediator.Send(getAllMenuMapsQuery));
+        }
+
+        [HttpGet("GetAllMenuMaps", Name = "GetAllMenuMaps")]
+        public async Task<IActionResult> GetAllMenuMaps( )
+        {
+            return Ok(await _mediator.Send(new GetTheMenuMapsCommand()));
+        }
+
+
+        [HttpDelete("DeleteMenuMapsById/{Id}", Name = "DeleteMenuMapsById")]
+        public async Task<IActionResult> DeleteMenuMapsById(long Id)
+        {
+            return Ok(await _mediator.Send(new DeleteMenuMapByIdCommand() {Id=Id }));
         }
     }
 }  

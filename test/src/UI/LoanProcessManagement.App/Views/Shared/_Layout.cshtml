@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/title.css" rel="stylesheet" />
+    <link href="~/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+    <link href="~/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="~/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="~/css/jquery.dataTables.css" rel="stylesheet" />
+    <link href="~/css/dataTables.jqueryui.css" rel="stylesheet" />
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/css/jquery-ui.css" rel="stylesheet" />
+    <link href="~/css/dataTables.tableTools.css" rel="stylesheet" />
+
+    <script src="~/js/jquery/jquery-1.10.1.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/respond.js"></script>
+    <script src="~/js/moment.min.js"></script>
+    <script src="~/js/bootstrap-datetimepicker.js"></script>
+
+    @*<script src="~/js/jquery/fnSetFilteringDelay.js"></script>*@
+    @*<script src="~/js/jquery/dataTables.tableTools.js"></script>*@
+    <script src="~/js/jquery/jquery.dataTables.js"></script>
+</head>
+<body>
+    <div>
+        <div role="banner" class="navbar navbar-fixed-top bs-docs-nav">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3" id="dv_SankalpUI" style="display: flex; align-items: center; min-height: 60px;">
+                        <a href="#" class="logo-left btn btn-primary btn-sm" id="anchBackbtn"
+                           onclick="JavaScript: window.history.back(1); return false;" style="width: 35px; display:none;">
+                            <img style="max-width: 25px; width: 100%; margin: 0; padding: 0;" src="~/css/images/backbutton.png" />
+                        </a>
+                    </div>
+                    <div class="col-lg-6" id="sankalplogo" style="text-align: center;">
+                        <a href="@Url.ActionLink("")">
+                            <img style="max-height: 60px; max-width: 130px;" src="~/css/images/LPM-logo.png" />
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; padding-bottom: 15px; margin-top: -20px;">
+            <img id="imgStar" width="180" runat="server" />
+        </div>
+
+        @RenderBody()
+
+        <div class="navbar-fixed-bottom">
+            <div class="container">
+                <div class="btn-float text-center" runat="server" visible="false" id="divLoggedInUser">
+                    <a asp-controller="Login" asp-action="LogOut">
+                    <img src="~/css/images/images/power-btn.png" />
+                    </a>
+                </div>
+                <div class="col-lg-12 text-center">
+                    <h5>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a id="linklastLogin" href="~/LastLogin.aspx" runat="server">Last Login</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Message</h4>
+                    </div>
+                    <div class="modal-body" id="modalMessage">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="closemodalbutton">Close</button>
+                        <a href="home.aspx" class="btn btn-primary" role="button" id="redirectbutton">OK</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

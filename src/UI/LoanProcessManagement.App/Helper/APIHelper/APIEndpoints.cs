@@ -23,6 +23,9 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string GetInsuranceProducts = "api/v1/Product/GetInsuranceProducts";
         public const string ModifyLead = "api/v1/LeadList/ModifyLead";
         public const string RoleList = "api/v1/RoleMaster";
+        public const string GetAllMenuMaps = "api/v1/Menu/GetAllMenuMaps";
+        public const string RoleMap = "api/v1/Menu/CreateMenuMaps";
+        public const string DeleteRoleMapById = "api/v1/Menu/DeleteMenuMapsById/";
 
         #region Maintaining the Url EndPoint - Pratiksha Poshe - 10/11/2021
         public const string GetAllLoanProducts = "api/v1/LoanProducts/GetAllLoanProducts";
@@ -76,6 +79,7 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         #endregion
 
         public const string AddEnquiry = "api/v1/IncomeAssesment/";
+        public const string CreateEnquiry = "api/v1/IncomeAssesment";
 
         #region added url Endpoints for DSA corner  - Ramya Guduru -25/11/2021
         public const string DSACornerList = "api/v1/DSACorner/DSACorner/";   

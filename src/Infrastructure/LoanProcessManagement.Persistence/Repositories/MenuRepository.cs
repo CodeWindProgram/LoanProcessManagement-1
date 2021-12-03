@@ -3,6 +3,8 @@ using LoanProcessManagement.Application.Contracts.Persistence;
 using LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands;
 using LoanProcessManagement.Application.Features.Menu.Commands.DeleteCommand;
 using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand;
+using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenuMaps.GetAllMenuMaps;
+using LoanProcessManagement.Application.Responses;
 using LoanProcessManagement.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -147,8 +149,34 @@ namespace LoanProcessManagement.Persistence.Repositories
                 response.Id = menuToUpdate.Id;
                 return response;
             }
-        } 
+        }
         #endregion
+
+        public async Task<Response<LpmUserRoleMenuMap>> RoleList(LpmUserRoleMenuMap request)
+        {
+            await _dbContext.LpmUserRoleMenuMaps.AddAsync(request);
+            await _dbContext.SaveChangesAsync();
+            return new Response<LpmUserRoleMenuMap>(request);
+        }
+
+        //public async Task<Response<IEnumerable<LpmUserRoleMenuMap>>> ListAllMenuMaps(GetTheMenuMapsCommand request)
+        //{
+        //    await _dbContext.LpmUserRoleMenuMaps.ToListAsync();
+        //    await _dbContext.SaveChangesAsync();
+        //    return new Response<IEnumerable<LpmUserRoleMenuMap>>(request);
+        //}
+
+        public async Task<LpmUserRoleMenuMap> DeleteMenumapById(long Id)
+        {
+            var result = _dbContext.LpmUserRoleMenuMaps.FirstOrDefault(e => e.Id == Id);
+            if(result != null)
+            {
+                _dbContext.LpmUserRoleMenuMaps.Remove(result);
+                await _dbContext.SaveChangesAsync();
+                return result;
+            }
+            return null;
+        }
     }
 }
 

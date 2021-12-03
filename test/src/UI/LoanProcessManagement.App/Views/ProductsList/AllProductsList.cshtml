@@ -1,0 +1,90 @@
+﻿@model IEnumerable<LoanProcessManagement.Application.Features.ProductsList.Queries.GetProductsListQueryVm>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "AllProductsList";
+}
+
+
+
+<div class="container app">
+    <div class="col-sm-12">
+        <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
+            <div class="panel-heading">Products</div>
+            <div class="panel-body">
+            </div>
+            <div id="alertMsg" visible="false" runat="server">
+                <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
+                <div style="margin-bottom: 10px"></div>
+            </div>
+
+            <table id="AllProductsList" class="display">
+                <thead>
+                    <tr>
+                        <th>
+                            @*@Html.DisplayNameFor(model => model.ProductName)*@
+                            Product Sold
+                        </th>
+                        <th>
+                            @*@Html.DisplayNameFor(model => model.FormNo)*@
+                            Form No
+                        </th>
+                        <th>
+                            @*@Html.DisplayNameFor(model => model.Amount)*@
+                            Amount
+                        </th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProductName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FormNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Amount)
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.InsuranceName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FormNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.InsuranceAmount)
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        var usrTable = $('#AllProductsList').dataTable({
+            "oLanguage": {
+                "sZeroRecords": "No records to display",
+                "sSearch": "Search "
+            },
+            "iDisplayLength": 15,
+            "aLengthMenu": [[25, 50, 100, 200, 500], [25, 50, 100, 200, 500]],
+            "bSortClasses": false,
+            "bPaginate": true,
+            "bAutoWidth": false,
+            "bProcessing": true,
+            "bDestroy": true
+        });
+    });
+</script>
+
+

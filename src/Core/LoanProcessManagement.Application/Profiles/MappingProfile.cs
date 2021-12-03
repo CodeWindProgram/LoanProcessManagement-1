@@ -48,6 +48,9 @@ using LoanProcessManagement.Application.Features.DSACorner.Query.DSACornerList;
 using LoanProcessManagement.Application.Features.DSACorner.Query.TrainingVideosList;
 using LoanProcessManagement.Application.Features.DSACorner.Query.CircularList;
 using LoanProcessManagement.Application.Features.ApplicantDetails.Command;
+using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenuMaps.Query;
+using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenuMaps.GetAllMenuMaps;
+using LoanProcessManagement.Application.Features.Menu.Commands.DeleteMenuMapById;
 using LoanProcessManagement.Application.Features.ReportsLeadList.Queries;
 
 namespace LoanProcessManagement.Application.Profiles
@@ -124,6 +127,11 @@ namespace LoanProcessManagement.Application.Profiles
             #endregion
 
             CreateMap<UserMasterListModel, GetUserListQueryVm>().ReverseMap();
+            CreateMap<LpmUserRoleMenuMap, GetAllMenuMapsQueryVm>().ReverseMap();
+            CreateMap<LpmUserRoleMenuMap, GetAllMenuMapsQuery>().ReverseMap();
+            CreateMap<LpmUserRoleMenuMap, GetTheMenuMapsCommand>().ReverseMap();
+            CreateMap<LpmUserRoleMenuMap, GetTheMenuMapsCommandDto>().ReverseMap();
+            CreateMap<LpmUserRoleMenuMap, DeleteMenuMapByIdCommandDto>().ReverseMap();
 
 
             #region UnlockUserAccount mapping has created by-Ramya Guduru-29-10-2021

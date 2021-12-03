@@ -5,12 +5,16 @@ using LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands;
 using LoanProcessManagement.Application.Features.Menu.Commands.DeleteCommand;
 using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand;
 using LoanProcessManagement.Application.Features.Menu.Query;
+using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenuMaps.GetAllMenuMaps;
+using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenuMaps.Query;
 using LoanProcessManagement.Application.Features.Menu.Query.GetMenuByID;
 using LoanProcessManagement.Application.Features.Menu.Query.MenuList;
 using LoanProcessManagement.Application.Features.RoleMaster.Queries.GetRoleMasterList;
+using LoanProcessManagement.Application.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -93,7 +97,7 @@ namespace LoanProcessManagement.App.Controllers
                 return View(MenuServiceResponse.Data);
             }
             return View();
-        } 
+        }
         #endregion
 
         #region Calling the API for the Create Menu - Saif Khan - 11//11/2021
@@ -107,21 +111,29 @@ namespace LoanProcessManagement.App.Controllers
         {
             var checkboxfunctionVm = new CheckboxfunctionVm();
             var rolelist = await _roleMasterService.RoleListProcess();
-            checkboxfunctionVm.lpmUserRoleMaster = rolelist.Data;
+            var newList = (from e in rolelist.Data select new MenuCheckListVm { Id = e.Id, Name = e.RoleName }).ToList();
+            checkboxfunctionVm.ListVms = newList;
             return View(checkboxfunctionVm);
         }
 
         [HttpPost("/MenuCreate")]
-        public async Task<IActionResult> CreateMenu(CreateMenuCommand createMenuCommand)
+        public async Task<IActionResult> CreateMenu(CheckboxfunctionVm checkboxfunctionVm)
         {
             var message = "";
 
             if (ModelState.IsValid)
             {
-                var createmenuresponse = await _menuService.CreateMenu(createMenuCommand);
-                //ViewBag.UserId = HttpContext.Request.Cookies["Id"];//ViewBag for caling cookies.
+                var createmenuresponse = await _menuService.CreateMenu(checkboxfunctionVm.createMenuCommand);
                 if (createmenuresponse.Succeeded)
                 {
+                    foreach (var checkfunc in checkboxfunctionVm.ListVms)
+                    {
+                        if (checkfunc.Checkbox == true)
+                        {
+                            var menuCheckListVm = new GetAllMenuMapsQuery() {UserRoleId=checkfunc.Id,MenuId=createmenuresponse.Data.Id,IsActive = true};
+                            await _roleMasterService.CreateChecklist(menuCheckListVm);
+                        }
+                    }
                     message = createmenuresponse.Message;
                     ViewBag.Issuccesflag = true;
                     ViewBag.Message = message;
@@ -134,8 +146,7 @@ namespace LoanProcessManagement.App.Controllers
                     ViewBag.Message = message;
                 }
             }
-            //ViewBag.UserId = HttpContext.Request.Cookies["Id"];//ViewBag for caling cookies.
-            return RedirectToAction("Home","Menulist");
+            return RedirectToAction("Home", "Menulist");
         }
         #endregion
 
@@ -148,29 +159,68 @@ namespace LoanProcessManagement.App.Controllers
         public async Task<IActionResult> UpdateMenu(long Id)
         {
             var updateCheckboxfunctionVm = new UpdateCheckboxfunctionVm();
+            var menuCheckListVm = new List<MenuCheckListVm>();
             var res = await _menuService.MenuById(Id);
             var rolelist = await _roleMasterService.RoleListProcess();
+            var newrolelist = rolelist.Data.ToList();
+            var menumaps = await _roleMasterService.GetCheckList();
+            for (var i= 0;i< rolelist.Data.Count();i++)
+            {
+                var data = menumaps.Data.Where(m => m.MenuId == res.Data.Id && m.UserRoleId == newrolelist[i].Id).FirstOrDefault();
+                if (data != null)
+                {
+                    //var navin = new MenuCheckListVm() { Id=data.UserRoleId,Checkbox = true, Name = newrolelist[i].RoleName };
+                    menuCheckListVm.Add(new MenuCheckListVm() { Id = newrolelist[i].Id, Checkbox = true, Name = newrolelist[i].RoleName });
+                }
+                else{
+                    menuCheckListVm.Add(new MenuCheckListVm() { Id = newrolelist[i].Id, Checkbox = false, Name = newrolelist[i].RoleName });
+                }
+}
+            //var newlist = updateCheckboxfunctionVm.RoleList(){ }
+            //var roleMaps = await _roleMasterService.GetCheckList();
             updateCheckboxfunctionVm.getMenuByIdQueryVm = res.Data;
-            updateCheckboxfunctionVm.lpmUserRoleMaster = rolelist.Data;
+            updateCheckboxfunctionVm.RoleList = menuCheckListVm;
+            //updateCheckboxfunctionVm.lpmUserRoleMaster = rolelist.Data;
+            //updateCheckboxfunctionVm.getAllMenuMapsQueryVm = roleMaps.Data;
             
             return View(updateCheckboxfunctionVm);
         }
 
         [HttpPost("/MenuUpdate/{Id}")]
-        public async Task<IActionResult> UpdateMenu(GetMenuByIdQueryVm query)
+        public async Task<IActionResult> UpdateMenu(UpdateCheckboxfunctionVm updateCheckboxfunctionVm)
         {
             if (ModelState.IsValid)
             {
-
                 var updatemenucommand = new UpdateMenuCommand() { 
-                                                                    Id =query.Id,
-                                                                    Link = query.Link,
-                                                                    Position = query.Position,
-                                                                    MenuName = query.MenuName,
-                                                                    Icon = query.Icon,
-                                                                    IsActive = query.IsActive
+                                                                    Id = updateCheckboxfunctionVm.getMenuByIdQueryVm.Id,
+                                                                    Link = updateCheckboxfunctionVm.getMenuByIdQueryVm.Link,
+                                                                    Position = updateCheckboxfunctionVm.getMenuByIdQueryVm.Position,
+                                                                    MenuName = updateCheckboxfunctionVm.getMenuByIdQueryVm.MenuName,
+                                                                    Icon = updateCheckboxfunctionVm.getMenuByIdQueryVm.Icon,
+                                                                    IsActive = updateCheckboxfunctionVm.getMenuByIdQueryVm.IsActive
                                                                 };
                 var response = await _menuService.UpdateMenu(updatemenucommand);
+
+                var menumaps = await _roleMasterService.GetCheckList();
+
+                //for deleting existing entries from database 
+                var listForDelete = (from s in menumaps.Data where s.MenuId == updatemenucommand.Id select s.Id).ToList();
+                foreach(var del in listForDelete)
+                {
+                    await _roleMasterService.DeleteMenuMapById(del);
+                }
+
+                //for creating new entries in database
+                foreach (var checkfunc in updateCheckboxfunctionVm.RoleList)
+                {
+                    if (checkfunc.Checkbox)
+                    {
+                        var menuCheckListVm = new GetAllMenuMapsQuery() { UserRoleId = checkfunc.Id, MenuId = updatemenucommand.Id, IsActive = true };
+                        await _roleMasterService.CreateChecklist(menuCheckListVm);
+                    }
+                }
+
+
                 ViewBag.isSuccess = response.Succeeded;
                 ViewBag.Message = response.Data.Message;
                 return RedirectToAction("Menulist");
