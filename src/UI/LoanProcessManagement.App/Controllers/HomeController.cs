@@ -139,7 +139,8 @@ namespace LoanProcessManagement.App.Controllers
                     message = createmenuresponse.Message;
                     ViewBag.Issuccesflag = true;
                     ViewBag.Message = message;
-                    return RedirectToAction("CreateMenu");
+                    var ReturnsTomenulist = ViewBag.UserId = HttpContext.Request.Cookies["Id"];
+                    return RedirectToAction(ReturnsTomenulist, "Menulist");
                 }
                 else
                 {
@@ -148,7 +149,7 @@ namespace LoanProcessManagement.App.Controllers
                     ViewBag.Message = message;
                 }
             }
-            return RedirectToAction("Home", "Menulist");
+            return View("CreateMenu");
         }
         #endregion
 
@@ -222,10 +223,10 @@ namespace LoanProcessManagement.App.Controllers
                     }
                 }
 
-
+                var ReturnsTo = ViewBag.UserId = HttpContext.Request.Cookies["Id"];
                 ViewBag.isSuccess = response.Succeeded;
                 ViewBag.Message = response.Data.Message;
-                return RedirectToAction("Menulist");
+                return RedirectToAction(ReturnsTo,"Menulist");
             }
             return View();
         }
@@ -245,7 +246,8 @@ namespace LoanProcessManagement.App.Controllers
         public async Task<IActionResult> DeleteMenu(GetMenuByIdQueryVm deleteMenuCommand)
         {
             var response = await _menuService.DeleteMenu(deleteMenuCommand.Id);
-            return RedirectToAction("Menulist");
+            var ReturnsTo = ViewBag.UserId = HttpContext.Request.Cookies["Id"];
+            return RedirectToAction(ReturnsTo, "Menulist");
         }
         #endregion
         
