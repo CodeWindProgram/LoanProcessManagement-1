@@ -37,7 +37,9 @@ namespace LoanProcessManagement.App.Components
                 return await Task.Run(() => View(MenuServiceResponse)); //View(MenuServiceResponse);//.Data
             }
             return View();
-        } 
+
+            //return View(model);
+        }
         #endregion
     }
 }
