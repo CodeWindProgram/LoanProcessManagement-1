@@ -34,6 +34,7 @@ namespace LoanProcessManagement.App.Components
 
             if (MenuServiceResponse != null && MenuServiceResponse.Succeeded && MenuServiceResponse.Data != null)
             {
+                ViewBag.UserId = menuProcess.UserRoleId;
                 return await Task.Run(() => View(MenuServiceResponse)); //View(MenuServiceResponse);//.Data
             }
             return View();

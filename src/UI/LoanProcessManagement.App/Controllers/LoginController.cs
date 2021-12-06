@@ -40,6 +40,11 @@ namespace LoanProcessManagement.App.Controllers
         [Route("~/")]
         public IActionResult Index(string returnUrl = null)
         {
+            bool isAuthenticated = User.Identity.IsAuthenticated;
+            if (isAuthenticated)
+            {
+                return View("~/Views/home/dashboard.cshtml");
+            }
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }

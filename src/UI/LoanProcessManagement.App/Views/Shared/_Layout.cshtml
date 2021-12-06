@@ -110,16 +110,17 @@
                         My Profile <i class="fa fa-angle-down ml-2 opacity-8"></i>
                     </a>
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"
-                        style="left: 0px; right: inherit;">
+                        style="margin: 0.125rem 0 0 -55%">
                         <li class="dropdown-item">Name : Rahul Patil</li>
                         <li class="dropdown-item">Branch Name : Mumbai</li>
                         <li class="dropdown-divider"></li>
-                        <li class="dropdown-item"><a href="/ChangePasswordUI">Change Password</a></li>
+                        <li class="nav-item d-sm-inline-block">
+                            <a href="/login/logout" class="nav-link">Logout</a>
+                        </li>
+
                     </ul>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="/login/logout" class="nav-link">Logout</a>
-                </li>
+            
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -135,12 +136,12 @@
             </span>
         </a>*@
 
-            <a href="index3.html" class="brand-link">
+            <a href="/home/dashboard" class="brand-link">
                 <img src="~/css/images/LPM-logo.png"
                      alt="LPM"
                      class="brand-image img-circle elevation-3"
-                     style="opacity: 1" />
-                <span class="brand-text font-weight-light">GIC</span>
+                     style="opacity: 1 ; margin-top:0px" />
+                <span class="brand-text font-weight-light">LOS</span>
             </a>
 
             <!-- Sidebar -->
@@ -155,7 +156,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Dashboard</h1>
+                            @*<h1 class="m-0">Dashboard</h1>*@
                         </div>
                         <!-- /.col -->
                         <div class="col-sm-6">
@@ -176,7 +177,7 @@
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2021 <a href="#">LPM</a>.</strong>
+            <strong>Copyright &copy; 2014-2021 <a href="/home/dashboard">LOS</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block"></div>
         </footer>
@@ -212,13 +213,20 @@
                 ]
             }
             // Get context with jQuery - using jQuery's .get() method.
-            var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+            var pieChartCanvas1 = $('#pieChart1').get(0).getContext('2d')
+            var pieChartCanvas2 = $('#pieChart2').get(0).getContext('2d')
+
             var pieData = donutData;
             var pieOptions = {
                 maintainAspectRatio: false,
                 responsive: true,
             }
-            new Chart(pieChartCanvas, {
+            new Chart(pieChartCanvas1, {
+                type: 'pie',
+                data: pieData,
+                options: pieOptions
+            })
+            new Chart(pieChartCanvas2, {
                 type: 'pie',
                 data: pieData,
                 options: pieOptions
