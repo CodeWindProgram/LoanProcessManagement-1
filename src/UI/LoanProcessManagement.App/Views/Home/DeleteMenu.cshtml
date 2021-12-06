@@ -73,14 +73,11 @@
                     <form method="post" asp-controller="Home" asp-action="DeleteMenu">
                         <div class="form-group">
                             <p id="para">Are you sure you want to remove the <b id="bara">@Model.MenuName</b> Menu ?</p>
-                            @*<label hidden asp-for="Id" class="control-label"></label>
-                            <input hidden disabled asp-for="Id" class="form-control" />
-                            <span asp-validation-for="Id" class="text-danger"></span>*@
                         </div>
                         <table>
                             <tr>
                                 <td><input id="btn1" type="submit" value="Confirm" class="btn btn-default" /></td>
-                                <td><a href="http://localhost:14018/MenuList/1"><input id="btn2" type="submit" value="Cancel" class="btn btn-default" /></a></td>
+                                <td><a href="#"><input id="btn2" type="submit" value="Cancel" class="btn btn-default" /></a></td>
                             </tr>
                         </table>
                     </form>

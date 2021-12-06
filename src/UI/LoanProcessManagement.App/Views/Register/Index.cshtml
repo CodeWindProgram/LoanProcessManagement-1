@@ -41,57 +41,57 @@
                         </div>
 
                     }
-                    <form asp-action="Index" method="post">
-                        @*<div asp-validation-summary="ModelOnly" class="text-danger font-italic"></div>*@
-                        <div class="form-group row">
-                            <label asp-for="EmployeeId" class="col-sm-2 col-form-label"></label>
-                            <div class="col-sm-10">
-                                <input asp-for="EmployeeId" class="form-control" type="text" placeholder="Login Id" autofocus />
-                                <span asp-validation-for="EmployeeId" class="text-danger"></span>
-                            </div>
+                <form asp-action="Index" method="post">
+                    @*<div asp-validation-summary="ModelOnly" class="text-danger font-italic"></div>*@
+                    <div class="form-group row">
+                        <label asp-for="EmployeeId" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <input asp-for="EmployeeId" class="form-control" type="text" placeholder="Login Id" autofocus />
+                            <span asp-validation-for="EmployeeId" class="text-danger"></span>
                         </div>
-                        <div class="form-group row">
-                            <label asp-for="UserRoleId" class="col-sm-2 col-form-label"></label>
-                            <div class="col-sm-10">
-                                <select asp-for="UserRoleId" class="form-control" asp-items="ViewBag.roles">
-                                    <option value="">Select Role</option>
-                                </select>
-                                <span asp-validation-for="UserRoleId" class="text-danger"></span>
-                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="UserRoleId" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <select asp-for="UserRoleId" class="form-control" asp-items="ViewBag.roles">
+                                <option value="">Select Role</option>
+                            </select>
+                            <span asp-validation-for="UserRoleId" class="text-danger"></span>
                         </div>
-                        <div class="form-group row">
-                            <label asp-for="BranchId" class="col-sm-2 col-form-label"></label>
-                            <div class="col-sm-10">
-                                <select asp-for="BranchId" class="form-control" asp-items="ViewBag.branches">
-                                    <option value="">Select Branch</option>
-                                </select>
-                                <span asp-validation-for="BranchId" class="text-danger"></span>
-                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="BranchId" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <select asp-for="BranchId" class="form-control" asp-items="ViewBag.branches">
+                                <option value="">Select Branch</option>
+                            </select>
+                            <span asp-validation-for="BranchId" class="text-danger"></span>
                         </div>
-                        <div class="form-group row">
-                            <label asp-for="Name" class="col-sm-2 col-form-label"></label>
-                            <div class="col-sm-10">
-                                <input asp-for="Name" class="form-control" type="text" placeholder="Name" autofocus />
-                                <span asp-validation-for="Name" class="text-danger"></span>
-                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <input asp-for="Name" class="form-control" type="text" placeholder="Name" autofocus />
+                            <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
-                        <div class="form-group row">
-                            <label asp-for="Email" class="col-sm-2 col-form-label"></label>
-                            <div class="col-sm-10">
-                                <input asp-for="Email" class="form-control" type="email" placeholder="Email" autofocus />
-                                <span asp-validation-for="Email" class="text-danger"></span>
-                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="Email" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <input asp-for="Email" class="form-control" type="email" placeholder="Email" autofocus />
+                            <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
-                        <div class="form-group row">
-                            <label asp-for="PhoneNumber" class="col-sm-2 col-form-label"></label>
-                            <div class="col-sm-10">
-                                <input asp-for="PhoneNumber" class="form-control" placeholder="Phone number" autofocus />
-                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="PhoneNumber" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <input asp-for="PhoneNumber" class="form-control" placeholder="Phone number" autofocus />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                         </div>
-                        <input type="submit" value="Create User" id="btnSignIn" Class="btn btn-primary btn-sm" />
-
-                    </form>
+                    </div>
+                    <input type="submit" value="Create User" id="btnSignIn" Class="btn btn-primary btn-sm" />
+                    <a id="cancelbutton" class="btn btn-primary btn-sm" asp-controller="Home" asp-action="Index">Cancel</a>
+                </form>
 
 
                 </div>

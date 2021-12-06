@@ -134,7 +134,7 @@
 
 <script>
     function validate_fileupload(filename, extvalues) {
-        debugger;
+        //debugger;
         var allowedExt = extvalues.split(',');
         var filearr = filename.value.toLowerCase().split('.');
         var fileext = filearr[filearr.length - 1];
@@ -230,12 +230,12 @@
                         </div>
 
                         <div id="ContentPlaceHolder1_alertMsg">
-                            <div>
+                            <div style="display:flex">
                                 <div class="col-md-4">
                                     <label class="">Form No</label>
                                 </div>
                                 <div class="col-md-5">
-                                    <div class="input-control text">
+                                    <div class="input-control text" style="display:inline-flex">
                                         <span id="ContentPlaceHolder1_lblFormNo" style="color: black">@Model.FormNo</span>
                                     </div>
                                 </div>
@@ -354,7 +354,7 @@
                         </div>
                         <div style="height: 5px; display: none;"></div>
                         <div class="row tab">
-                            <div class="">
+                            <div class="col-md-4">
                                 <label class="col-md-4">Excel file</label>
 
                             </div>
@@ -364,7 +364,7 @@
                         </div>
                         <div style="height: 5px; display: none;"></div>
                         <div class="row tab">
-                            <div class="">
+                            <div class="col-md-4">
                                 <label class="col-md-4">Pdf file</label>
 
                             </div>
@@ -387,14 +387,22 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="row tab">
-                            <div class="col-md-12">
-                                <center>
-                                    <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="ContentPlaceHolder1_btnAddEnquiry" class="btn btn-danger">
-                                </center>
+                        <div style="justify-content:center;display:flex" >
+                            <div class="row tab">
+                                <div style="display:inline-flex" class="col-md-12">
+                                    <center>
+                                        <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="ContentPlaceHolder1_btnAddEnquiry" class="btn btn-danger">
+                                    </center>
+                                </div>
+                            </div>
+                            <div class="row tab">
+                                <div style="display:inline-flex" class="col-md-12">
+                                    <center>
+                                        <a type="button" asp-controller="Home" asp-action="Index" value="Cancel" id="cancelbutton" class="btn btn-danger">Cancel</a>
+                                    </center>
+                                </div>
                             </div>
                         </div>
-
                         <br>
                         <br>
 
@@ -464,7 +472,7 @@
         }
 
         $(document).ready(function () {
-            debugger;
+            //debugger;
             console.log('validate');
             // GetProductList();
             //$("#btnAddEnquiry").validate();
@@ -512,7 +520,7 @@
                 }
                 var patterngst = new RegExp("^([0][1-9]|[1-2][0-9]|[3][0-7])([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$");
                 //var patterngst = new RegExp("^([0][1-9]|[1-2][0-9]|[3][0-5])([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$");
-                debugger;
+                //debugger;
                 var gstno = $("#ContentPlaceHolder1_txtGstNumber").val();
                 if (patterngst.test(gstno) == false) {
                     //alert(pattern);
@@ -551,9 +559,9 @@
 
     <div class="navbar-fixed-bottom">
         <div class="container">
-            <div id="divLoggedInUser" class="btn-float text-center">
+            @*<div id="divLoggedInUser" class="btn-float text-center">
                 <input type="image" name="ctl00$btnUserName" id="btnUserName" formnovalidate="" src="./GICHFGst_files/power-btn.png">
-            </div>
+            </div>*@
             <div class="col-lg-12 text-center">
                 <h5>
 

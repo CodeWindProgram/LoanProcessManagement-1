@@ -84,23 +84,24 @@
                 <div class="border-part">
                     <form asp-action="CreateMenu" method="post">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
                         <div class="form-group">
-                            <label asp-for="createMenuCommand.MenuName" class="control-label"></label>
-                            <input asp-for="createMenuCommand.MenuName" class="form-control" />
+                            <label asp-for="createMenuCommand.MenuName" class="control-label">Menu Name<span style="color: Red">&nbsp;*</span></label>
+                            <input asp-for="createMenuCommand.MenuName" class="form-control" maxlength="50"/>
                             <span asp-validation-for="createMenuCommand.MenuName" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="createMenuCommand.Link" class="control-label"></label>
-                            <input asp-for="createMenuCommand.Link" class="form-control" />
+                            <label asp-for="createMenuCommand.Link" class="control-label">Link<span style="color: Red">&nbsp;*</span></label>
+                            <input asp-for="createMenuCommand.Link" class="form-control" maxlength="200" />
                             <span asp-validation-for="createMenuCommand.Link" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="createMenuCommand.Icon" class="control-label"></label>
-                            <input asp-for="createMenuCommand.Icon" class="form-control" />
+                            <label asp-for="createMenuCommand.Icon" class="control-label">Icon<span style="color: Red">&nbsp;*</span></label>
+                            <input asp-for="createMenuCommand.Icon" class="form-control" maxlength="200" />
                             <span asp-validation-for="createMenuCommand.Icon" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="createMenuCommand.Position" class="control-label"></label>
+                            <label asp-for="createMenuCommand.Position" class="control-label">Position<span style="color: Red">&nbsp;*</span></label>
                             <input asp-for="createMenuCommand.Position" class="form-control" />
                             <span asp-validation-for="createMenuCommand.Position" class="text-danger"></span>
                         </div>
@@ -110,24 +111,12 @@
                             <span asp-validation-for="createMenuCommand.CreatedDate" class="text-danger"></span>
                         </div>
                         <div class="form-group" id="checkboxes">
-                            <label id="txtlab">Menu Is Being Created For </label>
-                            @*@foreach (var role in Model.ListVms)
-                                {
-                                    <div class="form-group">
-                                        <div class="checkbox">
-                                            <label id="lblcheck">
-                                                <input asp-for="@role.Checkbox" id="inpcheck" type="checkbox" value="true" /> @role.Name
-                                                <input asp-for="@role.Id" hidden />
-
-                                            </label>
-                                        </div>
-                                    </div>
-                                }*@
+                            <label id="txtlab">Menu Is Being Created For <span style="color: Red">&nbsp;*</span></label>
                             @{
                                 for (int i = 0; i < Model.ListVms.Count(); i++)
                                 {
                                     <div id="trtablecheck">
-                                        <td>
+                                        <td >
                                             <input asp-for="@Model.ListVms[i].Checkbox" type="checkbox" />
                                             @Model.ListVms[i].Name
                                         </td>

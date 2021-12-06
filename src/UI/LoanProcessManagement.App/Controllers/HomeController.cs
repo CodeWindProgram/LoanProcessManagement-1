@@ -240,6 +240,7 @@ namespace LoanProcessManagement.App.Controllers
         public async Task<IActionResult> DeleteMenu(long Id)
         {
             var res = await _menuService.MenuById(Id);
+
             return View(res.Data);
         }
         [HttpPost("/MenuDelete/{Id}")]

@@ -58,12 +58,15 @@
         padding-top: 9px;
     }
     #lblcheck {
-        margin-left: 2px;
         font-size: 14px;
         color: #818181;
         font-family: sans-serif;
     }
-
+    #checkings{
+        display:inline-flex;
+        margin-left:30px;
+        margin-top:10px;
+    }
     #checkboxes {
         display: flex;
     }
@@ -78,54 +81,57 @@
                 <div class="border-part">
                     <form method="post" asp-controller="Home">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
                         <div hidden class="form-group">
                             <label asp-for="getMenuByIdQueryVm.Id" class="control-label"></label>
                             <input readonly asp-for="getMenuByIdQueryVm.Id" class="form-control" />
                             <span asp-validation-for="getMenuByIdQueryVm.Id" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="getMenuByIdQueryVm.MenuName" class="control-label"></label>
-                            <input asp-for="getMenuByIdQueryVm.MenuName" class="form-control" />
+                            <label asp-for="getMenuByIdQueryVm.MenuName" class="control-label">Menu Name<span style="color: Red">&nbsp;*</span></label>
+                            <input asp-for="getMenuByIdQueryVm.MenuName" class="form-control" maxlength="50" />
                             <span asp-validation-for="getMenuByIdQueryVm.MenuName" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="getMenuByIdQueryVm.Link" class="control-label"></label>
-                            <input asp-for="getMenuByIdQueryVm.Link" class="form-control" />
+                            <label asp-for="getMenuByIdQueryVm.Link" class="control-label">Link<span style="color: Red">&nbsp;*</span></label>
+                            <input asp-for="getMenuByIdQueryVm.Link" class="form-control" maxlength="200" />
                             <span asp-validation-for="getMenuByIdQueryVm.Link" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="getMenuByIdQueryVm.Icon" class="control-label"></label>
-                            <input asp-for="getMenuByIdQueryVm.Icon" class="form-control" />
+                            <label asp-for="getMenuByIdQueryVm.Icon" class="control-label">Icon<span style="color: Red">&nbsp;*</span></label>
+                            <input asp-for="getMenuByIdQueryVm.Icon" class="form-control" maxlength="200"/>
                             <span asp-validation-for="getMenuByIdQueryVm.Icon" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="getMenuByIdQueryVm.Position" class="control-label"></label>
+                            <label asp-for="getMenuByIdQueryVm.Position" class="control-label">Position<span style="color: Red">&nbsp;*</span></label>
                             <input asp-for="getMenuByIdQueryVm.Position" class="form-control" />
                             <span asp-validation-for="getMenuByIdQueryVm.Position" class="text-danger"></span>
                         </div>
                         <div class="form-group" id="checkboxes">
-                            <label id="txtlab">Menu Is Being Updated For </label>
+                            <label id="txtlab">Menu Is Being Updated For<span style="color: Red">&nbsp;*</span> </label>
                             @*@foreach (var role in Model.RoleList)
-                            {
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <label id="lblcheck">
-                                            <input asp-for="@role.Checkbox" id="inpcheck" type="checkbox" /> @role.Name
-                                        </label>
+            {
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label id="lblcheck">
+                            <input asp-for="@role.Checkbox" id="inpcheck" type="checkbox" /> @role.Name
+                        </label>
+                    </div>
+                </div>
+            }*@
+                            <div id="checkings">
+                                @for (int i = 0; i < Model.RoleList.Count(); i++)
+                                {
+                                    <div class="form-group">
+                                        <div>
+                                            <tr id="lblcheck">
+                                                <td><input asp-for="@Model.RoleList[i].Id" hidden /></td>
+                                                <td><input asp-for="@Model.RoleList[i].Checkbox" id="inpcheck" type="checkbox" />@Model.RoleList[i].Name</td>
+                                            </tr>
+                                        </div>
                                     </div>
-                                </div>
-                            }*@
-                            @for (int i = 0; i < Model.RoleList.Count(); i++)
-                            {
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <label id="lblcheck">
-                                            <input asp-for="@Model.RoleList[i].Id" hidden/>
-                                            <input asp-for="@Model.RoleList[i].Checkbox" id="inpcheck" type="checkbox" />@Model.RoleList[i].Name
-                                        </label>
-                                    </div>
-                                </div>
-                            }
+                                }
+                            </div>
                         </div>
                         <div hidden class="form-group">
                             <div class="checkbox">
