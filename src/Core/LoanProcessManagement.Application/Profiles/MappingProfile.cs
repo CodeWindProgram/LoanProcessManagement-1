@@ -52,6 +52,7 @@ using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenuMaps.Query
 using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenuMaps.GetAllMenuMaps;
 using LoanProcessManagement.Application.Features.Menu.Commands.DeleteMenuMapById;
 using LoanProcessManagement.Application.Features.ReportsLeadList.Queries;
+using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Queries.UnlockedAndLockedUsers;
 
 namespace LoanProcessManagement.Application.Profiles
 {
@@ -175,6 +176,8 @@ namespace LoanProcessManagement.Application.Profiles
             CreateMap<LpmMenuMaster, TrainingVideosListVm>().ReverseMap();
             CreateMap<LpmMenuMaster, CircularListVm>().ReverseMap();
             #endregion
+
+            CreateMap<LpmUserMaster, GetAllUsersQueryVm>().ReverseMap();
         }
     }
 }

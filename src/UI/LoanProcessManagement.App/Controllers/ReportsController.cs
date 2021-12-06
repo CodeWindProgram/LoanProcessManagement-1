@@ -30,7 +30,7 @@ namespace LoanProcessManagement.App.Controllers
         /// <param name="LgId,BranchID">LgId,BranchID</param>
         /// <returns>view</returns>
         /// 
-        [HttpGet("/ReportsLeadList/{LgId}/{BranchID}")]
+        [HttpGet("ReportsLeadList/{LgId}/{BranchID}")]
         public async Task<IActionResult> ReportsLeadList(string LgId,long BranchID)
         {
             var leadListingServiceResponse = await _reportsService.GetReportsLeadList(LgId,BranchID);

@@ -13,44 +13,44 @@ namespace LoanProcessManagement.App.Models
         public string FormNo { get; set; }
         public long lead_Id { get; set; }
 
-        [Required(ErrorMessage = "First Name is required")]
+        [Required(ErrorMessage = "First Name is Required")]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Middle Name is required")]
+        [Required(ErrorMessage = "Middle Name is Required")]
         public string MiddleName { get; set; }
-        [Required(ErrorMessage = "Last Name is required")]
+        [Required(ErrorMessage = "Last Name is Required")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "AddressLine1 is required")]
+        [Required(ErrorMessage = "AddressLine1 is Required")]
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
         public string AddressLine3 { get; set; }
 
-        [Required(ErrorMessage = "City is required")]
+        [Required(ErrorMessage = "City is Required")]
         public string City { get; set; }
 
         [RegularExpression(@"[1-9]{1}[0-9]{5}|[1-9]{1}[0-9]{3}\\s[0-9]{3}", ErrorMessage = "Please Enter Valid Pincode.")]
-        [Required(ErrorMessage = "Pincode is required")]
+        [Required(ErrorMessage = "Pincode is Required")]
         public string Pincode { get; set; }
 
         [Required(ErrorMessage = "Please select State")]
         public string State { get; set; }
 
-        [Required(ErrorMessage = "Please select Gender")]
+        [Required(ErrorMessage = "Please Select Gender")]
         public string Gender { get; set; } 
 
-        [Required(ErrorMessage = "Date of Birth is required")]
+        [Required(ErrorMessage = "Date of Birth is Required")]
 
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateOfBirth { get; set; }
 
-        [EmailAddress(ErrorMessage = "Please Provide valid Email Id")]
-        [Required(ErrorMessage = "Email ID is required")]
+        [EmailAddress(ErrorMessage = "Please Provide Valid Email Id")]
+        [Required(ErrorMessage = "Email ID is Required")]
         public string CustomerEmail { get; set; }
 
-        [RegularExpression(@"^[6-9]\d{9}$", ErrorMessage = "Please enter valid phone number.")]
-        [Required(ErrorMessage = "Phone no is required")]
+        [RegularExpression(@"^[6-9]\d{9}$", ErrorMessage = "Please Enter Valid Phone Number.")]
+        [Required(ErrorMessage = "Phone No is Required")]
         public string CustomerPhone { get; set; }
         public string EmploymentType { get; set; }
 
@@ -77,7 +77,7 @@ namespace LoanProcessManagement.App.Models
 
         public int ApplicantType { get; set; }  
         
-        [Required(ErrorMessage = "No of Bank Accounts is required")]
+        [Required(ErrorMessage = "No of Bank Accounts is Required")]
         public int NoOfBankAccounts { get; set; }
     }
 }

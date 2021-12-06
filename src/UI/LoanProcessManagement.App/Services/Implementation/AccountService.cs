@@ -11,6 +11,7 @@ using LoanProcessManagement.Application.Features.SanctionedPlanReceived.Queries;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.ActivateUserAccount;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockAndResetPassword;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockUserAccount;
+using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Queries.UnlockedAndLockedUsers;
 using LoanProcessManagement.Application.Features.User.Commands.CreateUser;
 using LoanProcessManagement.Application.Features.User.Commands.RemoveUser;
 using LoanProcessManagement.Application.Features.User.Commands.UpdateUser;
@@ -199,6 +200,9 @@ namespace LoanProcessManagement.App.Services.Implementation
             return model;
 
         }
+
+
+        
         #endregion
 
         #region This method will call actual api and return response for UnlockAndResetPassword account API - Ramya Guduru - 29/10/2021
@@ -458,6 +462,27 @@ namespace LoanProcessManagement.App.Services.Implementation
             var model = System.Text.Json.JsonSerializer.Deserialize<Response<UpdatePropertyDetailsDto>>(jsonString, options);
 
             return model;
+        }
+
+        public async Task<Response<IEnumerable<GetAllUsersQueryVm>>> UsersList( )
+        {
+            //throw new System.NotImplementedException();
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.GetAsync
+                (
+                    BaseUrl + APIEndpoints.UnlockAccountUsersList
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var response = System.Text.Json.JsonSerializer.Deserialize<Response<IEnumerable<GetAllUsersQueryVm>>>(jsonString, options);
+
+            return response;
         }
         #endregion
 

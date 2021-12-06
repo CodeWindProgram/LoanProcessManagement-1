@@ -187,25 +187,26 @@
 
                         </div><br /><br /><br /><br />
 
-                        <div class="initial1">
-                            <div class="group1"><label>e.Does the property have <br> a sanctioned/approved plan ?<span style="color: red; width: 10%;">*</span></label></div>
-                            <div class="group2">
-                                <select asp-for="IsSanctionedPlanReceivedID" id="val_IsSanctionedPlanReceivedID" class="form-control" required>
-                                    <option value="">Select Plan</option>
-                                    <option value="1">NO- < 120 Sq.mt. (For Delhi NCR only)</option>
-                                    <option value="4">NO- < 300 Sq.mt. (For Delhi NCR only)</option>
-                                    <option value="5">YES</option>
-                                </select>
-                                <span asp-validation-for = "IsSanctionedPlanReceivedID" class="text-danger"></span>
-                            </div>
-                        </div><br /><br /><br />
-                    </div>
                     <div class="initial1">
-                        <div class="group1"><label asp-for=" FirstName">First Name<span style="color: red; width: 10%;">*</span></label></div>
+                        <div class="group1"><label asp-for="IsSanctionedPlanReceivedID">e.Does The Property Have a Sanctioned/Approved Plan ?<span style="color: red; width: 10%;">*</span></label></div>
                         <div class="group2">
-                            <input asp-for=" FirstName" class="form-control" type="text" placeholder="Enter First Name" />
-                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                            <select asp-for="IsSanctionedPlanReceivedID" id="val_IsSanctionedPlanReceivedID" class="form-control" required>
+                                <option value="">Select Role</option>
+                                <option value="1">NO- < 120 Sq.mt. (For Delhi NCR only)</option>
+                                <option value="4">NO- < 300 Sq.mt. (For Delhi NCR only)</option>
+                                <option value="5">YES</option>
+                            </select>
                         </div>
+                        <span asp-validation-for = "IsSanctionedPlanReceivedID" class="text-danger"></span>
+
+                    </div><br /><br />
+                </div>
+                <div class="initial1">
+                    <div class="group1"><label asp-for=" FirstName">First Name<span style="color: red; width: 10%;">*</span></label></div>
+                    <div class="group2">
+                        <input asp-for=" FirstName" class="form-control" type="text" placeholder="Customer First Name" />
+                    </div>
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
 
                     </div><br /><br /><br />
                     <div class="initial1">
@@ -222,146 +223,132 @@
                             <span asp-validation-for="LastName" class="text-danger"></span>
                         </div>
 
+                </div><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for = "EmploymentType">Employment Type:</label></div>
+                    <div class="group2">
+                        <input id="chkSalaried" asp-for = "EmploymentType" type="radio" name="employmentType" value="Salaried" checked="checked">
+                        Salaried
+                        &nbsp;&nbsp;&nbsp;
+                        <input id="chkSelfEmployment" asp-for= "EmploymentType" type="radio" name="employmentType" value="SelfEmployment">
+                        Self Employed
+                    </div>
+                    <span asp-validation-for="EmploymentType" class="text-danger"></span>
 
-                    </div><br /><br /><br />
+                </div><br /><br />
+                <div id="enableOnSlfEmployment1" style="display : none">
                     <div class="initial1">
-                        <div class="group1"><label asp-for = "EmploymentType">Employment Type: <span style="color: red; width: 10%;">*</span></label></div>
+                        <div class="group1"><label asp-for= "AnnualTurnOverInLastFy">Annual Turnover In Last FY (Applicant Only) : <span style="color: red; width: 10%;">*</span></label></div>
                         <div class="group2">
-                            <input id="chkSalaried" asp-for = "EmploymentType" type="radio" name="employmentType" value="Salaried" checked="checked">
-                            Salaried
+                            <input asp-for= "AnnualTurnOverInLastFy" class="form-control noTxtInput" id="annualIncomeFy" type="text" maxlength="10" placeholder="0.00">
+                        </div>
+                        <span asp-validation-for="AnnualTurnOverInLastFy" class="text-danger"></span>
+
+                    </div><br /><br />
+                </div>
+                <div class="initial1">
+                    <div class="group1"><label asp-for= "TypeOfFirms">Type Of Firms: <span style="color: red; width: 10%;">*</span></label></div>
+                    <div class="group2" >
+                        <select id="DDL_typeoffirms" class="form-control" asp-for= "TypeOfFirms">
+                            <option value="">Select</option>
+                            <option value="1">Sole Proprietorship</option>
+                            <option value="2">Partnership</option>
+                            <option value="3">Private Limited</option>
+                        </select>
+                    </div>
+                    <span asp-validation-for= "TypeOfFirms" class="text-danger"></span>
+                </div><br /><br />
+                <div id="enableOnSlfEmployment2" style="display : none">
+                    <div class="initial1">
+                        <div class="group1"><label asp-for= "IsApplicantExemptedFromGst">Is Applicant Exempted From GST? (> 40L Turnover) :</label></div>
+                        <div class="group2">
+                            <input type="radio" asp-for= "IsApplicantExemptedFromGst" name="IsApplicantExemptedFromGst" id="yes_IsExempted" value="Yes">
+                            Yes
                             &nbsp;&nbsp;&nbsp;
-                            <input id="chkSelfEmployment" asp-for= "EmploymentType" type="radio" name="employmentType" value="SelfEmployment">
-                            Self Employed
+                            <input type="radio" asp-for= "IsApplicantExemptedFromGst" name="IsApplicantExemptedFromGst" id="no_IsExempted" value="No" checked="checked">
+                            No
+                            <div><span style="color: red; font-weight: bold;">[ Please Note That Misreporting Of GST Exemption will be Penalized. ]</span></div>
                         </div>
-                        <div class="group2">
-                            <span asp-validation-for="EmploymentType" class="text-danger"></span>
-                        </div>
-                    </div><br /><br /><br />
-                    <div id="enableOnSlfEmployment1" style="display : none">
-                        <div class="initial1">
-                            <div class="group1"><label asp-for= "AnnualTurnOverInLastFy">Annual turnover in Last FY <br /> (Applicant only) : <span style="color: red; width: 10%;">*</span></label></div>
-                            <div class="group2">
-                                <input asp-for= "AnnualTurnOverInLastFy" class="form-control noTxtInput" id="annualIncomeFy" type="text" maxlength="8" placeholder="Enter amount">
-                                <span asp-validation-for="AnnualTurnOverInLastFy" class="text-danger"></span>
-                            </div>
+                        <span asp-validation-for= "IsApplicantExemptedFromGst" class="text-danger"></span>
 
-                        </div><br /><br /><br />
+                    </div><br /><br /><br />
+                </div>
+                <div id="enableOnYes" style="display : none">
+                    <div class="initial1">
+                        <div class="group1"><label asp-for= "ExemptedCategory">Exempted Category : <span style="color: red; width: 10%;">*</span></label></div>
+                        <div class="group2">
+                            <input asp-for= "ExemptedCategory" class="form-control" type="text" maxlength="300" placeholder="Write your reason">
+                        </div>
+                        <span asp-validation-for= "ExemptedCategory" class="text-danger"></span>
+                    </div><br /><br />
+                </div>
+                <div class="initial1">
+                    <div class="group1"><label asp-for= "CustomerPhone">Phone Number 1 : <span style="color: red; width: 10%;">*</span></label></div>
+                    <div class="group2">
+                        <input asp-for= "CustomerPhone" class="form-control noTxtInput" type="text" placeholder="Phone No 1(Should be 10 digits)" maxlength="10" required="">
                     </div>
-                    <div class="initial1">
-                        <div class="group1"><label asp-for= "TypeOfFirms">Type Of Firms: <span style="color: red; width: 10%;">*</span></label></div>
-                        <div class="group2">
-                            <select id="DDL_typeoffirms" class="form-control" asp-for= "TypeOfFirms">
-                                <option value="">Select</option>
-                                <option value="1">Sole Proprietorship</option>
-                                <option value="2">Partnership</option>
-                                <option value="3">Private Limited</option>
-                            </select>
-                            <span asp-validation-for= "TypeOfFirms" class="text-danger"></span>
-                        </div>
-
-                    </div><br /><br /><br />
-                    <div id="enableOnSlfEmployment2" style="display : none">
-                        <div class="initial1">
-                            <div class="group1"><label asp-for= "IsApplicantExemptedFromGst">Is applicant exempted from GST? <br /> (> 40L turnover) : <span style="color: red; width: 10%;">*</span></label></div>
-                            <div class="group2">
-                                <input type="radio" asp-for= "IsApplicantExemptedFromGst" name="IsApplicantExemptedFromGst" id="yes_IsExempted" value="Yes">
-                                Yes
-                                &nbsp;&nbsp;&nbsp;
-                                <input type="radio" asp-for= "IsApplicantExemptedFromGst" name="IsApplicantExemptedFromGst" id="no_IsExempted" value="No" checked="checked">
-                                No
-                                <div><span style="color: red; font-weight: bold;">[ Please note that misreporting of GST exemption will be penalized. ]</span></div>
-                            </div>
-                            <div class="group2">
-                                <span asp-validation-for= "IsApplicantExemptedFromGst" class="text-danger"></span>
-                            </div>
-                        </div><br /><br /><br />
+                    <span asp-validation-for="CustomerPhone" class="text-danger"></span>
+                </div><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for= "CustomerPhone_Alternate">Phone Number 2 :</label></div>
+                    <div class="group2">
+                        <input asp-for= "CustomerPhone_Alternate" class="form-control noTxtInput" type="text" placeholder="Phone No 2(Should be 10 digits)" maxlength="10">
                     </div>
-                    <div id="enableOnYes" style="display : none">
-                        <div class="initial1">
-                            <div class="group1"><label asp-for= "ExemptedCategory">Exempted Category : <span style="color: red; width: 10%;">*</span></label></div>
-                            <div class="group2">
-                                <input asp-for= "ExemptedCategory" class="form-control" type="text" maxlength="300" placeholder="Write your reason">
-                                <span asp-validation-for= "ExemptedCategory" class="text-danger"></span>
-                            </div>
-
-                        </div><br /><br /><br />
+                    <span asp-validation-for="CustomerPhone_Alternate" class="text-danger"></span>
+                </div><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for= "CustomerEmail">Email Address : <span style="color: red; width: 10%;">*</span></label></div>
+                    <div class="group2">
+                        <input asp-for= "CustomerEmail" class="form-control" type="text" maxlength="300" placeholder="Customer Email Address">
                     </div>
-                    <div class="initial1">
-                        <div class="group1"><label asp-for= "CustomerPhone">Phone Number 1 : <span style="color: red; width: 10%;">*</span></label></div>
-                        <div class="group2">
-                            <input asp-for= "CustomerPhone" class="form-control noTxtInput" type="text" placeholder="Phone No 1(Should be 10 digits)" maxlength="10" required="">
-                            <span asp-validation-for="CustomerPhone" class="text-danger"></span>
-                        </div>
-
-                    </div><br /><br /><br />
-                    <div class="initial1">
-                        <div class="group1"><label asp-for= "CustomerPhone_Alternate">Phone Number 2 :</label></div>
-                        <div class="group2">
-                            <input asp-for= "CustomerPhone_Alternate" class="form-control noTxtInput" type="text" placeholder="Phone No 2(Should be 10 digits)" maxlength="10">
-                            <span asp-validation-for="CustomerPhone_Alternate" class="text-danger"></span>
-                        </div>
-
-                    </div><br /><br /><br />
-                    <div class="initial1">
-                        <div class="group1"><label asp-for= "CustomerEmail">Email Address : <span style="color: red; width: 10%;">*</span></label></div>
-                        <div class="group2">
-                            <input asp-for= "CustomerEmail" class="form-control" type="text" maxlength="300" placeholder="Enter Email Address">
-                            <span asp-validation-for="CustomerEmail" class="text-danger"></span>
-                        </div>
-
-                    </div><br /><br /><br />
-                    <div class="initial1">
-                        <div class="group1"><label asp-for= "NationalityType">Residental Status : <span style="color: red; width: 10%;">*</span></label></div>
-                        <div class="group2">
-                            <select id="DDL_ResidentialStatus" class="form-control" asp-for= "NationalityType">
-                                <option value="Resident Indian">Resident Indian</option>
-                                <option value="Non-Resident Indian">Non-Resident Indian</option>
-                            </select>
-                            <span asp-validation-for="NationalityType" class="text-danger"></span>
-                        </div>
-
-                    </div><br /><br /><br />
-                    <div class="initial1">
-                        <div class="group1"><label asp-for= "CustomerResidenceaddress"> Residence Address : <span style="color: red; width: 10%;">*</span></label></div>
-                        <div class="group2">
-                            <input asp-for= "CustomerResidenceaddress" class="form-control" type="text" placeholder="Residence Address" maxlength="300" />
-                            <span asp-validation-for="CustomerResidenceaddress" class="text-danger"></span>
-                        </div>
-
-                    </div><br /><br /><br />
-                    <div class="initial1">
-                        <div class="group1"><label asp-for= "CustomerResidencePincode"> Residence Pincode : <span style="color: red; width: 10%;">*</span></label></div>
-                        <div class="group2">
-                            <input asp-for= "CustomerResidencePincode" class="form-control noTxtInput" type="text" placeholder="Enter Residence Pincode" maxlength="6" />
-                            <span asp-validation-for="CustomerResidencePincode" class="text-danger"></span>
-                        </div>
-
-                    </div><br /><br /><br />
-                    <div class="initial1">
-                        <div class="group1"><label asp-for= "CustomerOfficeaddress"> Business/Employee Address : <span style="color: red; width: 10%;">*</span></label></div>
-                        <div class="group2">
-                            <input asp-for= "CustomerOfficeaddress" class="form-control" type="text" placeholder="Enter Business/Employee Address" maxlength="300" />
-                            <span asp-validation-for="CustomerOfficeaddress" class="text-danger"></span>
-                        </div>
-
-                    </div><br /><br /><br />
-                    <div class="initial1">
-                        <div class="group1"><label asp-for= "CustomerOfficePincode"> Business/Employee Pincode : <span style="color: red; width: 10%;">*</span></label></div>
-                        <div class="group2">
-                            <input asp-for= "CustomerOfficePincode" class="form-control noTxtInput" type="text" placeholder="Enter Business/Employee Pincode" maxlength="6" />
-                            <span asp-validation-for="CustomerOfficePincode" class="text-danger"></span>
-                        </div>
-
-                    </div><br /><br /><br />
-                    <div class="initial1">
-                        <div class="group1"><label asp-for=" ProductID">Product Chosen : <span style="color: red; width: 10%;">*</span></label></div>
-                        <div class="group2">
-                            <select id="DDL_ProductInterest" class="form-control" asp-for=" ProductID" asp-items="ViewBag.loanProducts">
-                                <option value="">Select Property</option>
-                            </select>
-                            <span asp-validation-for="ProductID" class="text-danger"></span>
-                        </div>
-
+                    <span asp-validation-for="CustomerEmail" class="text-danger"></span>
+                </div><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for= "NationalityType">Residental Status : <span style="color: red; width: 10%;">*</span></label></div>
+                    <div class="group2">
+                        <select id="DDL_ResidentialStatus" class="form-control" asp-for= "NationalityType">
+                            <option value="Resident Indian">Resident Indian</option>
+                            <option value="Non-Resident Indian">Non-Resident Indian</option>
+                        </select>
+                    </div>
+                    <span asp-validation-for="NationalityType" class="text-danger"></span>
+                </div><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for= "CustomerResidenceaddress"> Residence Address : <span style="color: red; width: 10%;">*</span></label></div>
+                    <div class="group2">
+                        <input asp-for= "CustomerResidenceaddress" class="form-control" type="text" placeholder="Residence Address" maxlength="300" />
+                    </div>
+                    <span asp-validation-for="CustomerResidenceaddress" class="text-danger"></span>
+                </div><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for= "CustomerResidencePincode"> Residence Pincode : <span style="color: red; width: 10%;">*</span></label></div>
+                    <div class="group2">
+                        <input asp-for= "CustomerResidencePincode" class="form-control noTxtInput" type="text" placeholder="Residence Pincode" maxlength="6" />
+                    </div>
+                    <span asp-validation-for="CustomerResidencePincode" class="text-danger"></span>
+                </div><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for= "CustomerOfficeaddress"> Business/Employee Address : <span style="color: red; width: 10%;">*</span></label></div>
+                    <div class="group2">
+                        <input asp-for= "CustomerOfficeaddress" class="form-control" type="text" placeholder=" Business/Employee Address" maxlength="300" />
+                    </div>
+                    <span asp-validation-for="CustomerOfficeaddress" class="text-danger"></span>
+                </div><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for= "CustomerOfficePincode"> Business/Employee Pincode : <span style="color: red; width: 10%;">*</span></label></div>
+                    <div class="group2">
+                        <input asp-for= "CustomerOfficePincode" class="form-control noTxtInput" type="text" placeholder=" Business/Employee Pincode" maxlength="6" />
+                    </div>
+                    <span asp-validation-for="CustomerOfficePincode" class="text-danger"></span>
+                </div><br /><br />
+                <div class="initial1">
+                    <div class="group1"><label asp-for=" ProductID">Product Chosen : <span style="color: red; width: 10%;">*</span></label></div>
+                    <div class="group2">
+                        <select id="DDL_ProductInterest" class="form-control" asp-for=" ProductID" asp-items="ViewBag.loanProducts">
+                            <option value="">Select Property</option>
+                        </select>
+                    </div>
+                    <span asp-validation-for="ProductID" class="text-danger"></span>
 
                     </div><br /><br /><br />
                     <div class="initial1">

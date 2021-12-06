@@ -9,10 +9,10 @@ namespace LoanProcessManagement.App.Models
 {
     public class UserAuthenticationRequestVM
     {
-        [Required(ErrorMessage = "Username is required .")]
+        [Required(ErrorMessage = "UserName is Required .")]
         public string EmployeeId { get; set; }
 
-        [Required(ErrorMessage = "Password is required.")]
+        [Required(ErrorMessage = "Password is Required.")]
         public string Password { get; set; }
     }
 }

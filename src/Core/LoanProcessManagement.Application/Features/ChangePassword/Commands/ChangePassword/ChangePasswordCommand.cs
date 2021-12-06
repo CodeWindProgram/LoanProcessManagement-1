@@ -12,15 +12,15 @@ namespace LoanProcessManagement.Application.Features.ChangePassword.Commands.Cha
         public string lg_id { get; set; }
         //public string OldPassword { get; set; }
         //public string NewPassword { get; set; }
-        [Required(ErrorMessage = "Please enter password")]
+        [Required(ErrorMessage = "Please Enter Password")]
         public string OldPassword { get; set; }
 
-        [Required(ErrorMessage = "Please enter New password")]
+        [Required(ErrorMessage = "Please Enter New Password")]
         [RegularExpression(@"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$",
             ErrorMessage = "Password must contain: Minimum 8 characters atleast 1 UpperCase Alphabet, 1 LowerCase Alphabet and 1 digit.")]
         public string NewPassword { get; set; }
 
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Compare("NewPassword", ErrorMessage = "The New Password and Confirmation Password Do Not Match.")]
         public string ConfirmPassword { get; set; }
         public string ModifiedBy { get; set; }
     }

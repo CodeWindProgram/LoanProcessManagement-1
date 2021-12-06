@@ -9,49 +9,50 @@ namespace LoanProcessManagement.App.Models
     public class AddLeadCommandVM
     {
         [StringLength(6)]
-        [Required(ErrorMessage = "Form No is required")]
+        [Required(ErrorMessage = "Form No is Required")]
         public string FormNo { get; set; }
         public string CreatedBy { get; set; }
         public string LastModifiedBy { get; set; }
 
-        [Required(ErrorMessage ="First Name is required")]
+        [Required(ErrorMessage ="First Name is Required")]
         public string FirstName { get; set; }
 
+        [Required(ErrorMessage = "Middle Name is Required")]
         public string MiddleName { get; set; }
 
-        [Required(ErrorMessage = "Last Name is required")]
+        [Required(ErrorMessage = "Last Name is Required")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Residence Address is required")]
+        [Required(ErrorMessage = "Residence Address is Required")]
         public string CustomerResidenceaddress { get; set; }
 
         [RegularExpression(@"[1-9]{1}[0-9]{5}|[1-9]{1}[0-9]{3}\\s[0-9]{3}", ErrorMessage = "Please Enter Valid Pincode.")]
-        [Required(ErrorMessage = "Residence Pincode is required")]
+        [Required(ErrorMessage = "Residence Pincode is Required")]
         public string CustomerResidencePincode { get; set; }
 
-        [Required(ErrorMessage = "Office Address is required")]
+        [Required(ErrorMessage = "Office Address is Required")]
         public string CustomerOfficeaddress { get; set; }
 
         [RegularExpression(@"[1-9]{1}[0-9]{5}|[1-9]{1}[0-9]{3}\\s[0-9]{3}", ErrorMessage = "Please Enter Valid Pincode.")]
-        [Required(ErrorMessage = "Office Pincode is required")]
+        [Required(ErrorMessage = "Office Pincode is Required")]
         public string CustomerOfficePincode { get; set; }
 
         //[RegularExpression(@"^(\d{10})$", ErrorMessage = "Phone number should contain 10 digits .")]
-        [RegularExpression(@"^[6-9]\d{9}$", ErrorMessage = "Please enter valid phone number.")]
-        [Required(ErrorMessage = "Phone number is required")]
+        [RegularExpression(@"^[6-9]\d{9}$", ErrorMessage = "Please Enter Valid Phone Number.")]
+        [Required(ErrorMessage = "Phone Number is Required")]
         public string CustomerPhone { get; set; }
 
-        [RegularExpression(@"^[6-9]\d{9}$", ErrorMessage = "Please enter valid phone number.")]
+        [RegularExpression(@"^[6-9]\d{9}$", ErrorMessage = "Please Enter Valid Phone Number.")]
         public string CustomerPhone_Alternate { get; set; }
 
-        [EmailAddress(ErrorMessage = "Please Provide valid Email Id")]
-        [Required(ErrorMessage = "Email Address is required")]
+        [EmailAddress(ErrorMessage = "Please Provide Valid Email Id")]
+        [Required(ErrorMessage = "Email Address is Required")]
         public string CustomerEmail { get; set; }
 
-        [Required(ErrorMessage = "Employment Type is required")]
+        [Required(ErrorMessage = "Employment Type is Required")]
         public string EmploymentType { get; set; }
 
-        [Required(ErrorMessage = "Please select a Product")]
+        [Required(ErrorMessage = "Please Select a Product")]
         public long ProductID { get; set; }
 
         public long BranchID { get; set; }
@@ -62,35 +63,35 @@ namespace LoanProcessManagement.App.Models
 
         public DateTime Conversion_date { get; set; }
 
-        [Required(ErrorMessage = "Please select your Nationality Type")]
+        [Required(ErrorMessage = "Please Select Your Nationality Type")]
         public string NationalityType { get; set; }
 
-        [Required(ErrorMessage = "Please select Yes/No")]
+        [Required(ErrorMessage = "Please Select Yes/No")]
         public string IsPropertyIdentified { get; set; }
 
-        [Required(ErrorMessage = "Comment is required")]
+        [Required(ErrorMessage = "Comment is Required")]
         public string Comment { get; set; }
 
         [RegularExpression(@"[1-9]{1}[0-9]{5}|[1-9]{1}[0-9]{3}\\s[0-9]{3}", ErrorMessage = "Please Enter Valid Pincode.")]
-        [Required(ErrorMessage = "Property Pincode is required")]
+        [Required(ErrorMessage = "Property Pincode is Required")]
         public string PropertyPincode { get; set; }
 
-        [Required(ErrorMessage = "Please select Yes/No")]
+        [Required(ErrorMessage = "Please Select Yes/No")]
         public string PropertyUnderConstruction { get; set; }
 
-        [Required(ErrorMessage = "Project Name is required")]
+        [Required(ErrorMessage = "Project Name is Required")]
         public string ProjectName { get; set; }
 
-        [Required(ErrorMessage = "Unit Name is required")]
+        [Required(ErrorMessage = "Unit Name is Required")]
         public string UnitName { get; set; }
 
-        [Required(ErrorMessage = "Project Address is required")]
+        [Required(ErrorMessage = "Project Address is Required")]
         public string ProjectAddress { get; set; }
 
-        [Required(ErrorMessage = "Please select appropriate option")]
+        [Required(ErrorMessage = "Please Select Appropriate Option")]
         public long? IsSanctionedPlanReceivedID { get; set; }
 
-        [Required(ErrorMessage = "Please select Property Type")]
+        [Required(ErrorMessage = "Please Select Property Type")]
         public long? PropertyID { get; set; }
         
         [RegularExpression(@"^[1-9][0-9]*$", ErrorMessage =" Annual Turnover amount cannot start with 0")]
@@ -98,15 +99,15 @@ namespace LoanProcessManagement.App.Models
         [Required(ErrorMessage = "Annual Turnover is required")]
         public string AnnualTurnOverInLastFy { get; set; }
 
-        [Required(ErrorMessage = "Please select Yes/No")]
+        [Required(ErrorMessage = "Please Select Yes/No")]
         public string IsApplicantExemptedFromGst { get; set; }
-        [Required(ErrorMessage = "Please Provide your reason")]
+        [Required(ErrorMessage = "Please Provide Your Reason")]
         public string ExemptedCategory { get; set; }
 
-        [Required(ErrorMessage = "Please select appropriate option")]
+        [Required(ErrorMessage = "Please Select Appropriate Option")]
         public string TypeOfFirms { get; set; }
 
-        [Required(ErrorMessage = "Please select a Scheme")]
+        [Required(ErrorMessage = "Please Select a Scheme")]
         public long? SchemeID { get; set; }
 
     }

@@ -45,7 +45,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                                    FormNo = A.FormNo,
                                    CustomerName=B.Name,
                                    PhoneNo=A.CustomerPhone,
-                                   FirstMeeting=(C.CreatedDate).Date,
+                                   FirstMeeting=C.CreatedDate,
                                    Status=C.StatusDescription,
 
                                    Issuccess = true,

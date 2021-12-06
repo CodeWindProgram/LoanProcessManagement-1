@@ -91,5 +91,11 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string ReportsLeadListing = "api/v1/Reports/ReportsLeadListing/";
         public const string ReportsList = "api/v1/Reports/Reports/";
         #endregion
+
+
+
+        //UnlockAndLockedUsersList
+
+        public const string UnlockAccountUsersList = "api/v1/UnlockUserAccount";
     }
 }

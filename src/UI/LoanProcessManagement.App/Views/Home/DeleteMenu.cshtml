@@ -72,7 +72,10 @@
                 <div class="border-part">
                     <form method="post" asp-controller="Home" asp-action="DeleteMenu">
                         <div class="form-group">
-                            <p id="para">Are you sure you want to remove the <b id="bara">@Model.MenuName</b> Menu ?</p>
+                            <p id="para">Are You Sure You Want to Remove the <b id="bara">@Model.MenuName</b> Menu ?</p>
+                            @*<label hidden asp-for="Id" class="control-label"></label>
+                            <input hidden disabled asp-for="Id" class="form-control" />
+                            <span asp-validation-for="Id" class="text-danger"></span>*@
                         </div>
                         <table>
                             <tr>

@@ -1,6 +1,7 @@
 ﻿using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.ActivateUserAccount;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockAndResetPassword;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockUserAccount;
+using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Queries.UnlockedAndLockedUsers;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -79,6 +80,17 @@ namespace LoanProcessManagement.Api.Controllers.v1
             _logger.LogInformation("ActivateUser Completed");
             return Ok(response);
         }
+        #endregion
+
+
+        #region Fetch user List - Ramya Guduru - 03/12/2021
+
+        [HttpGet(Name = "UnlockAndLockedUsersList")]
+        public async Task<IActionResult> UnlockAndLockedUsersList()
+        {
+            return Ok(await _mediator.Send(new GetAllUsersQuery()));
+        }
+
         #endregion
     }
 }

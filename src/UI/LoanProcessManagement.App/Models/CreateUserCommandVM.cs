@@ -13,29 +13,29 @@ namespace LoanProcessManagement.App.Models
         public string LgId { get; set; }
 
         [Display(Name="Login Id")]
-        [Required(ErrorMessage = "Login Id is required .")]
+        [Required(ErrorMessage = "Login Id is Required.")]
         public string EmployeeId { get; set; }
 
-        [Required(ErrorMessage = "Name is required .")]
+        [Required(ErrorMessage = "Name is Required.")]
         public string Name { get; set; }
 
         [Display(Name = "E-Mail")]
-        [Required(ErrorMessage = "Email is required .")]
+        [Required(ErrorMessage = "Email is Required .")]
         [RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$",
-        ErrorMessage = "Invalid email format")]
+        ErrorMessage = "Invalid Email Format")]
         public string Email { get; set; }
 
         [Display(Name = "Branch")]
-        [Required(ErrorMessage = "Branch is required .")]
+        [Required(ErrorMessage = "Branch is Required .")]
         public long BranchId { get; set; }
 
         [Display(Name = "Phone Number")]
-        [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone number must contain 10 digits .")]
-        [Required(ErrorMessage = "Phone Number is required .")]
+        [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone Number Must Contain 10 digits .")]
+        [Required(ErrorMessage = "Phone Number is Required .")]
         public string PhoneNumber { get; set; }
 
         [Display(Name = "Role")]
-        [Required(ErrorMessage = "Role is required .")]
+        [Required(ErrorMessage = "Role is Required .")]
         public long UserRoleId { get; set; }
     }
 }

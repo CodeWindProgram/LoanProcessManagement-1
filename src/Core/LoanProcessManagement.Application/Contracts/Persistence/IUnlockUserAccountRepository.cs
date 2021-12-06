@@ -19,6 +19,7 @@ namespace LoanProcessManagement.Application.Contracts.Persistence
         Task<UnlockUserAccountModel> UnlockAndResetPasswordWithEvents(UnlockUserAccountModel unlockUserAccount);
 
         Task<UnlockUserAccountModel> ActivateUserAccountWithEvents(UnlockUserAccountModel unlockUserAccount);
+
     }
     #endregion
 }

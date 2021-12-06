@@ -1,4 +1,7 @@
-﻿@model LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockUserAccount.UnlockUserAccountCommand
+﻿@*@model LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockUserAccount.UnlockUserAccountCommand*@
+
+
+@model LoanProcessManagement.App.Models.UnlockedAndLockedUsersVm
 @*@{
         ViewData["Title"] = "UnlockUserAccount";
     }
@@ -99,21 +102,21 @@
 
                     @if (ViewBag.Issuccesflag == true)
                     {
-                        <span class="text-success">@ViewBag.Message</span>
+                        <span class="text-success">@ViewBag.IsLocked</span>
                     }
                     else
                     {
-                        <span class="text-danger">@ViewBag.Message</span>
+                        <span class="text-danger">@ViewBag.IsLocked</span>
                     }
 
                     <form asp-action="UnlockUserAccount" method="post">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group label-text-border">
                             <div class="d-flex flex-row justify-content-center flex-container ">
-                                <label asp-for="EmployeeId" class="control-label ml-3 label-padding">Employee Id<span style="color: red; width: 10%;">*</span></label>
+                                <label asp-for="unlockUserAccountCommand.EmployeeId" class="control-label ml-3 label-padding">Employee Id<span style="color: red; width: 10%;">*</span></label>
                                 <div>
-                                    <input asp-for="EmployeeId" class="form-control m-1 text-box " placeholder="Employee Id" />
-                                    <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                                    <input asp-for="unlockUserAccountCommand.EmployeeId" class="form-control m-1 text-box " placeholder="Employee Id" />
+                                    <span asp-validation-for="unlockUserAccountCommand.EmployeeId" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
@@ -124,6 +127,46 @@
                             <a id="cancelbutton" class="btn btn-primary btn-sm" asp-controller="Home" asp-action="Index">Cancel</a>
                         </div>
                     </form>
+
+                    <div>
+                        <table id="" class="display">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @*@Html.DisplayNameFor(model => model.getAllUsersQueryVm.EmployeeId)*@
+                                        Employee Id
+                                    </th>
+                                    <th>
+                                        @*@Html.DisplayNameFor(model => model.getAllUsersQueryVm.Email)*@
+                                        Email
+                                    </th>
+                                    <th>
+                                        @*@Html.DisplayNameFor(model => model.getAllUsersQueryVm.IsLocked)*@
+                                        Is Locked
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.getAllUsersQueryVm)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.EmployeeId)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Email)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.IsLocked)
+                                        </td>
+
+                                    </tr>
+                                    
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

@@ -142,7 +142,7 @@
             return true;
         }
         else {
-            alert("Please select file of " + extvalues + " extension format only");
+            alert("Please Select File of " + extvalues + " Extension Format Only");
             filename.value = "";
             return false;
         }
@@ -350,12 +350,12 @@
 
                         <div style="height: 5px; display: none;"></div>
                         <div id="divConverted1">
-                            <h2>Upload files</h2>
+                            <h2>Upload Files</h2>
                         </div>
                         <div style="height: 5px; display: none;"></div>
                         <div class="row tab">
-                            <div class="col-md-4">
-                                <label class="col-md-4">Excel file</label>
+                            <div class="">
+                                <label class="col-md-4">Excel File</label>
 
                             </div>
                             <div class="col-md-8">
@@ -430,7 +430,7 @@
                 var name = $("#ContentPlaceHolder1_txtCustomerName").val();
                 if (namefilter.test(name) == false) {
                     //alert(pattern);
-                    alert('Please Enter Name in proper format');
+                    alert('Please Enter Name in Proper Format');
 
                     return false;
                 }
@@ -463,7 +463,7 @@
                 var mobile = $("#ContentPlaceHolder1_txtMobile").val();
                 if (filter.test(mobile) == false) {
                     console.log(filter);
-                    alert('Please Enter Mobile No in proper format');
+                    alert('Please Enter Mobile No in Proper Format');
 
                     return false;
                 }
@@ -487,7 +487,7 @@
                 var name = $("#ContentPlaceHolder1_txtCustomerName").val();
                 if (namefilter.test(name) == false) {
                     //alert(pattern);
-                    alert('Please Enter Name in proper format');
+                    alert('Please Enter Name in Proper Format');
                     e.preventDefault();
                     return false;
                 }
@@ -514,7 +514,7 @@
                 var mobile = $("#ContentPlaceHolder1_txtMobile").val();
                 if (filter.test(mobile) == false) {
                     console.log(filter);
-                    alert('Please Enter Mobile No in proper format');
+                    alert('Please Enter Mobile No in Proper Format');
 
                     return false;
                 }
@@ -524,7 +524,7 @@
                 var gstno = $("#ContentPlaceHolder1_txtGstNumber").val();
                 if (patterngst.test(gstno) == false) {
                     //alert(pattern);
-                    alert('Please Enter GST number in proper format');
+                    alert('Please Enter GST Number in Proper Format');
                     e.preventDefault();
                     return false;
                 }
@@ -539,7 +539,7 @@
                 var mobile = $("#ContentPlaceHolder1_txtMobile").val();
                 if (filter.test(mobile) == false) {
                     console.log(filter);
-                    alert('Please Enter Mobile No in proper format');
+                    alert('Please Enter Mobile No in Proper Format');
                     e.preventDefault();
                     return false;
                 }
@@ -547,7 +547,7 @@
                 var fileExcelvalue = $('input[id*="fileUploadExcel"]').val();
                 if (fileExcelvalue == "" || fileExcelvalue == null) {
                     console.log(fileExcelvalue);
-                    alert('Please select excel file to upload');
+                    alert('Please Select Excel File to Upload');
                     e.preventDefault();
                     return false;
                 }

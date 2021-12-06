@@ -9,6 +9,7 @@ using LoanProcessManagement.Application.Features.SanctionedPlanReceived.Queries;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.ActivateUserAccount;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockAndResetPassword;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockUserAccount;
+using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Queries.UnlockedAndLockedUsers;
 using LoanProcessManagement.Application.Features.User.Commands.CreateUser;
 using LoanProcessManagement.Application.Features.User.Commands.RemoveUser;
 using LoanProcessManagement.Application.Features.User.Commands.UpdateUser;
@@ -55,5 +56,6 @@ namespace LoanProcessManagement.App.Services.Interfaces
         Task<Response<UpdatePropertyDetailsDto>> UpdateProperty(UpdatePropertyDetailsCommand property);
         #endregion
 
+        Task<Response<IEnumerable<GetAllUsersQueryVm>>> UsersList();
     }
 }

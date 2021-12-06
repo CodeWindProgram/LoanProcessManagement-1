@@ -21,18 +21,18 @@ namespace LoanProcessManagement.App.Models
         public string LgId { get; set; }
 
         public string FormNo { get; set; }
-        [Required(ErrorMessage = "Residential Status is required")]
+        [Required(ErrorMessage = "Residential Status is Required")]
         public string ResidentialStatus { get; set; }
-        [Required(ErrorMessage="Loan Product is required")]
+        [Required(ErrorMessage="Loan Product is Required")]
         public long? LoanProductID { get; set; }
         public long? InsuranceProductID { get; set; }
-        [Required(ErrorMessage = "Status is required")]
+        [Required(ErrorMessage = "Status is Required")]
         public long CurrentStatus { get; set; }
         public string Comments { get; set; }
 
         //[RegularExpression("^[0-9]*$", ErrorMessage = "Invalid amount")]
-        [Required(ErrorMessage = "Amount is required")]
-        [Range(100000,9999999999999,ErrorMessage ="Loan amount should be greater than 1 Lakh")]
+        [Required(ErrorMessage = "Amount is Required")]
+        [Range(100000,9999999999999,ErrorMessage ="Loan Amount Should be Greater than 1 Lakh")]
         public long? loanAmount { get; set; }
 
         //[RegularExpression("^[0-9]*$", ErrorMessage = "Invalid amount")]

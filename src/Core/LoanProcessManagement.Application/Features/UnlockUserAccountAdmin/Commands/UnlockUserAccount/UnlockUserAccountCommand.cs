@@ -10,7 +10,7 @@ namespace LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Comm
     #region UnlockUserAccount class - Ramya Guduru - 29/10/2021
     public class UnlockUserAccountCommand:IRequest<Response<UnlockUserAccountDto>>
     {
-        [Required(ErrorMessage = "Please enter Employee Id")]
+        [Required(ErrorMessage = "Please Enter Employee Id")]
         public string EmployeeId { get; set; }
     }
     #endregion

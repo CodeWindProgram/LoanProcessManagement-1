@@ -139,6 +139,8 @@ namespace LoanProcessManagement.Persistence.Repositories
             return unlockUserAccount;
             
         }
+
+        }
         #endregion
     }
-}
+
