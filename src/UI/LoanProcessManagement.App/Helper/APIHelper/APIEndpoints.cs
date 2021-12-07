@@ -32,6 +32,8 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string AddLead = "api/v1/LeadList/AddLead";
         public const string AddApplicantDetails = "api/v1/ApplicantDetails/AddApplicantDetails";
         public const string GetApplicantDetailsByLeadId = "api/v1/ApplicantDetails/GetApplicantDetailsByLeadId?lead_Id={0}&applicantType={1}";
+        public const string GetQueryHistoryByLeadId = "api/v1/QueryHistory/GetQueryHistoryByLeadId?lead_Id={0}";
+        public const string GetAllLoanSchemes = "api/v1/LoanSchemes/GetAllLoanSchemes";
         #endregion
 
         #region Maintaining the Url EndPoint - Saif Khan - 28/10/2021

@@ -91,6 +91,7 @@ namespace LoanProcessManagement.App.Controllers
         public async Task<IActionResult> LeadSummary(string lead_Id)
         {
             var leadResponse = await _leadListService.GetLeadByLeadId(lead_Id);
+            ViewBag.lead_Id = lead_Id;
             return View(leadResponse.Data);
         } 
         #endregion
@@ -129,7 +130,7 @@ namespace LoanProcessManagement.App.Controllers
                     ResidentialStatus = leadResponse.Data.ResidentialStatus,
                     DateOfAction = DateTime.Today,
                     QueryStatus = leadResponse.Data.QueryStatus,
-
+                    
                 };
 
             }
