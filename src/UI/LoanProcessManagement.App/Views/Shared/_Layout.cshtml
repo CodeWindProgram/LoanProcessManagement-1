@@ -111,8 +111,9 @@
                     </a>
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"
                         style="margin: 0.125rem 0 0 -55%">
-                        <li class="dropdown-item">Name : Rahul Patil</li>
-                        <li class="dropdown-item">Branch Name : Mumbai</li>
+                        <li class="dropdown-item"><b>Name:</b> @User.Identities.FirstOrDefault().Name</li>
+                        @*(@User.Claims.FirstOrDefault(c => c.Type == "Role").Value)*@
+                        <li class="dropdown-item"><b>Branch Name:</b> @User.Identities.FirstOrDefault().FindFirst("Branch").Value</li>
                         <li class="dropdown-divider"></li>
                         <li class="nav-item d-sm-inline-block">
                             <a href="/login/logout" class="nav-link">Logout</a>
@@ -128,13 +129,13 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             @*<a href="index3.html" class="brand-link">
-            <span class="brand-text font-weight-light">
-                <img src="~/css/images/LPM-logo.png"
-                     alt="LPM"
-                     class="brand-image img-circle elevation-3"
-                     style="opacity: 0.8" />
-            </span>
-        </a>*@
+                    <span class="brand-text font-weight-light">
+                        <img src="~/css/images/LPM-logo.png"
+                             alt="LPM"
+                             class="brand-image img-circle elevation-3"
+                             style="opacity: 0.8" />
+                    </span>
+                </a>*@
 
             <a href="/home/dashboard" class="brand-link">
                 <img src="~/css/images/LPM-logo.png"
@@ -143,10 +144,12 @@
                      style="opacity: 1 ; margin-top:0px" />
                 <span class="brand-text font-weight-light">LOS</span>
             </a>
-
-            <!-- Sidebar -->
-            @await Component.InvokeAsync("Navigation")
-            <!-- /.sidebar -->
+            @if (User != null)
+            {
+                <!-- Sidebar -->
+                @await Component.InvokeAsync("Navigation")
+                <!-- sidebar -->
+            }
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
@@ -191,7 +194,7 @@
     <!-- ./wrapper -->
     <!-- jQuery -->
     <!-- jQuery -->
-    
+
 
 
     <script>
