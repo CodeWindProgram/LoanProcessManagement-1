@@ -78,7 +78,7 @@
         <a class="btn btn-primary btn1 selected" asp-controller="LeadList" asp-action="LeadSummary">Summary</a>
         <a class="btn btn-primary btn1" asp-controller="LeadList" asp-action="LeadModification" target="_blank">Modification</a>
         <a class="btn btn-primary btn1" asp-controller="LeadList" asp-action="LeadHistory" target="_blank">History</a>
-        @*<button class="btn btn-primary btn1">Query History</button>*@
+        <a class="btn btn-primary btn1" href="/QueryHistory/Index?lead_Id=@ViewBag.lead_Id">Query History</a>
         <a class="btn btn-primary btn1" asp-controller="ProductsList" asp-action="AllProductsList" target="_blank">Products</a>
         <a class="btn btn-primary btn1" asp-controller="Login" asp-action="UpdatePropertyDetails" target="_blank">Property Details</a>
 

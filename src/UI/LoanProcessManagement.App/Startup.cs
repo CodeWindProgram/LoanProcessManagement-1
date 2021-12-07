@@ -59,7 +59,7 @@ namespace LoanProcessManagement.App
             services.AddSingleton<IDSACornerService, DSACornerService>();
             services.AddScoped<IApplicantDetailsService, ApplicantDetailsService>();
             services.AddScoped<IReportsService, ReportsService>();
-
+            services.AddScoped<IQueryHistoryService, QueryHistoryService>();
             services.Configure<APIConfiguration>(Configuration.GetSection("APIConfiguration"));
             services.AddSession();
         }

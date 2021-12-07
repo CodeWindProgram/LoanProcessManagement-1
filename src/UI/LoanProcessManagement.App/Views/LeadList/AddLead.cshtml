@@ -351,7 +351,7 @@
                     <span asp-validation-for="ProductID" class="text-danger"></span>
 
                     </div><br /><br /><br />
-                    <div class="initial1">
+                    @*<div class="initial1">
                         <div class="group1"><label asp-for= "SchemeID">Scheme Chosen : <span style="color: red; width: 10%;">*</span></label></div>
                         <div class="group2">
                             <select id="ddl_Scheme" asp-for= "SchemeID" class="form-control">
@@ -381,19 +381,31 @@
                             <span asp-validation-for="SchemeID" class="text-danger"></span>
                         </div>
 
-                    </div><br /><br /><br />
-                        <div class="initial1">
-                            <div class="group1"><label asp-for="Comment">Comments : <span style="color: red; width: 10%;">*</span></label></div>
-                            <div class="group2">
-                                <textarea asp-for="Comment" class="form-control" placeholder="Comments"></textarea>
-                                <span asp-validation-for="Comment" class="text-danger"></span>
-                            </div>
-
-                        </div><br /><br /><br />
-                        <div class="button1">
-                            <input id="button1" type="submit" value="Add Lead" />
+                    </div><br /><br /><br />*@
+                    <div class="initial1">
+                        <div class="group1"><label asp-for= "SchemeID">Scheme Chosen : <span style="color: red; width: 10%;">*</span></label></div>
+                        <div class="group2">
+                            <select id="ddl_Scheme" asp-for= "SchemeID" asp-items= "ViewBag.loanSchemes" class="form-control">
+                                <option value="">Select Scheme</option>
+                          
+                            </select>
+                            <span asp-validation-for="SchemeID" class="text-danger"></span>
                         </div>
-                    </form>
+
+                    </div><br /><br /><br />
+
+                    <div class="initial1">
+                        <div class="group1"><label asp-for="Comment">Comments : <span style="color: red; width: 10%;">*</span></label></div>
+                        <div class="group2">
+                            <textarea asp-for="Comment" class="form-control" placeholder="Comments"></textarea>
+                            <span asp-validation-for="Comment" class="text-danger"></span>
+                        </div>
+
+                    </div><br /><br /><br />
+                    <div class="button1">
+                        <input id="button1" type="submit" value="Add Lead" />
+                    </div>
+                </form>
                 </div>
             </div>
         </div>

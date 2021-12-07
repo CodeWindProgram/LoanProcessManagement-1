@@ -36,7 +36,7 @@ namespace LoanProcessManagement.Persistence
             services.AddScoped<IDSACornerRepository, DSACornerRepository>();
             services.AddScoped<IApplicantDetailsRepository, ApplicantDetailsRepository>();
             services.AddScoped<IReportsLeadListRepository, ReportsLeadListRepository>();
-
+            services.AddScoped<IQueryHistoryRepository, QueryHistoryRepository>();
 
 
             services.AddScoped<IRoleMasterRepository, RoleMasterRepository>();

@@ -44,7 +44,8 @@ namespace LoanProcessManagement.Persistence.Repositories
                                     BranchName = B.branchname,
                                     PhoneNumber = A.PhoneNumber,
                                     StaffType = A.StaffType,
-                                    IsActive = A.IsActive
+                                    IsActive = A.IsActive,
+                                    IsLocked = A.IsLocked
                                 }).ToListAsync();
             return result;
         }

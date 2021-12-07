@@ -8,6 +8,8 @@ namespace LoanProcessManagement.Application.Features.UserList.Query
 {
     public class GetUserListQueryVm
     {
+        [DisplayName("Serial No")]
+        public long SerialNumber { get; set; }
         public long Id { get; set; }
         [DisplayName("Employee Name")]
         public string EmployeeId { get; set; }

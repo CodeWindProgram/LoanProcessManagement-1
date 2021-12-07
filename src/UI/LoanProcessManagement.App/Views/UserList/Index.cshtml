@@ -4,6 +4,67 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Index";
 }
+<style>
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+    input:checked + .slider {
+        background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+</style>
 <div class="container app">
     <div class="col-sm-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
@@ -19,6 +80,9 @@
                 <thead>
                     <tr>
                         <th>
+                            @Html.DisplayNameFor(model => model.SerialNumber)
+                        </th>
+                        <th style="display : none">
                             @Html.DisplayNameFor(model => model.LgId)
                         </th>
                         <th>
@@ -37,6 +101,12 @@
                             @Html.DisplayNameFor(model => model.PhoneNumber)
                         </th>
                         <th>
+                            @Html.DisplayNameFor(model => model.IsLocked)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IsActive)
+                        </th>
+                        <th style="display : none">
                             @Html.DisplayNameFor(model => model.StaffType)
                         </th>
                         <th>Action</th>
@@ -45,36 +115,72 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.LgId)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.EmployeeId)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Email)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.BranchName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.PhoneNumber)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.StaffType)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Modify", "UpdateUser", "Login", new { lgid = item.LgId })
-                                @Html.ActionLink("Delete", "RemoveUser", "Login", new { lgid = item.LgId },
-                               new { onclick = "return confirm('Are you sure you want to delete ?');" })
-                                @*<a asp-action="RemoveUser" id="deleteBtn" asp-route-lgid="item.LgId">Delete</a>*@
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SerialNumber)
+                        </td>
+                        <td style="display : none">
+                            @Html.DisplayFor(modelItem => item.LgId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BranchName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.IsActive)*@
+                            @*@Html.CheckBoxFor(modelItem => item.IsActive)*@
+                            <label class="switch">
+                                <input type="checkbox" id="chkQuery" checked="@item.IsLocked">
+                                <span class="slider round"></span>
+                            </label>
+                            @*<script>
+                                if ('@item.IsLocked' == 'True') {
+                                    $("#chkQuery").prop("checked", true);
+                                }
+                                else
+                                {
+                                    $("#chkQuery").prop("checked", false);
+                                }
+                            </script>*@
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.IsLocked)*@
+                            <label class="switch">
+                                <input type="checkbox" id="chkQuery">
+                                <span class="slider round"></span>
+                            </label>
+                            <script>
+                                if ('@item.IsActive' == 'True') {
+                                    $("#chkQuery").prop("checked", true);
+                                }
+                                else {
+                                    $("#chkQuery").prop("checked", false);
+                                }
+                            </script>
+                            @* @Html.CheckBoxFor(modelItem => item.IsActive)*@
+                        </td>
+                        <td style="display : none">
+                            @Html.DisplayFor(modelItem => item.StaffType)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Modify", "UpdateUser", "Login", new { lgid = item.LgId }, new { @Class = "btn btn-primary btn-sm" })
+                            @Html.ActionLink("Delete", "RemoveUser", "Login", new { lgid = item.LgId },
+                           new { onclick = "return confirm('Are you sure you want to delete ?');", @Class = "btn btn-danger btn-sm" })
+                            @*<a asp-action="RemoveUser" id="deleteBtn" asp-route-lgid="item.LgId">Delete</a>*@
 
-                            </td>
-                        </tr>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>
@@ -95,9 +201,39 @@
             "bPaginate": true,
             "bAutoWidth": false,
             "bProcessing": true,
-            "bDestroy": true
+            "bDestroy": true,
+            "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+                $("td:first", nRow).html(iDisplayIndex + 1);
+                return nRow;
+            },
         });
 
+        //$("#chkQuery").click(function (e) {
+        //    var isChecked = $(this).is(":checked");
+        //    var UserRole = $("#userRole").val();
+        //    if (isChecked) {
+        //        if (UserRole == 2) {
+        //            $("#lblSwitchName").css("display", "inline-block");
+        //            $("#QueryStatusHidden").val('Q');
+
+        //        } else {
+        //            alert("only Ho can raise a query");
+        //            $("#chkQuery").prop("checked", false);
+        //        }
+        //    }
+        //    else {
+        //        if (UserRole == 3) {
+        //            $("#QueryStatusHidden").val('R');
+        //            $("#lblSwitchName").css("display", "none");
+
+        //        }
+        //        else {
+        //            alert("only Branch can resolve a query");
+        //            $("#chkQuery").prop("checked", true);
+
+        //        }
+        //    }
+        //})
         //$("#deleteBtn").click(function () {
         //    var response = confirm('Are you sure you want to delete ?');
         //    if (response) {
