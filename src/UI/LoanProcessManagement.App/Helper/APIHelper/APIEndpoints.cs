@@ -57,6 +57,7 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string UnlockUserAccount = "api/v1/UnlockUserAccount/UnlockUserAccount";
         public const string UnlockAndResetPassword = "api/v1/UnlockUserAccount/UnlockUserAndReset";
         public const string ActivateUserAccount = "api/v1/UnlockUserAccount/ActivateUser";
+        public const string UnlockAccountUsersList = "api/v1/UnlockUserAccount";
         #endregion
 
         #region added url Endpoints - Ramya Guduru -01/11/2021
@@ -92,10 +93,5 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string ReportsList = "api/v1/Reports/Reports/";
         #endregion
 
-
-
-        //UnlockAndLockedUsersList
-
-        public const string UnlockAccountUsersList = "api/v1/UnlockUserAccount";
     }
 }

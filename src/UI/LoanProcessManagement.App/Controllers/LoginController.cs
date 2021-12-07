@@ -225,8 +225,8 @@ namespace LoanProcessManagement.App.Controllers
         {
             var newuserlocklist = new UnlockedAndLockedUsersVm();
 
-            var productListServiceResponse = await _accountService.UsersList();
-            newuserlocklist.getAllUsersQueryVm = productListServiceResponse.Data;
+            var usersListServiceResponse = await _accountService.UsersList();
+            newuserlocklist.getAllUsersQueryVm = usersListServiceResponse.Data;
             return View(newuserlocklist);
         }
 
@@ -240,25 +240,25 @@ namespace LoanProcessManagement.App.Controllers
                 var UnlockUserAccountResponse = await _accountService.UnlockUserAccount(unlockedAndLockedUsersVm.unlockUserAccountCommand);
 
                 var newuserlocklist = new UnlockedAndLockedUsersVm();
-                var productListServiceResponse = await _accountService.UsersList();
-                newuserlocklist.getAllUsersQueryVm = productListServiceResponse.Data;
+                var usersListServiceResponse = await _accountService.UsersList();
+                newuserlocklist.getAllUsersQueryVm = usersListServiceResponse.Data;
                 if (UnlockUserAccountResponse.Succeeded)
                 {
                     message = UnlockUserAccountResponse.Message;
                     ViewBag.Issuccesflag = true;
                     ViewBag.Message = message;
-                    ViewBag.IsLocked = message;
-                    return View(newuserlocklist);
+                    //ViewBag.IsLocked = message;
+                    return View("UnlockUserAccount", newuserlocklist);
                 }
                 else
                 {
                     message = UnlockUserAccountResponse.Message;
                     ViewBag.Issuccesflag = false;
                     ViewBag.Message = message;
-                    ViewBag.IsLocked = message;
+                    //ViewBag.IsLocked = message;
                    
-                    return View(newuserlocklist);
-                    // return View("UnlockUserAccount",);
+                    return View("UnlockUserAccount", newuserlocklist);
+                    
                 }
             }
             ModelState.Clear();
@@ -274,23 +274,24 @@ namespace LoanProcessManagement.App.Controllers
                 var UnlockUserAccountResponse = await _accountService.UnlockAndResetPassword(unlockUserAccountCommand);
 
                 var newuserlocklist = new UnlockedAndLockedUsersVm();
-                var productListServiceResponse = await _accountService.UsersList();
-                newuserlocklist.getAllUsersQueryVm = productListServiceResponse.Data;
+                var usersListServiceResponse = await _accountService.UsersList();
+                newuserlocklist.getAllUsersQueryVm = usersListServiceResponse.Data;
 
                 if (UnlockUserAccountResponse.Succeeded)
                 {
                     message = UnlockUserAccountResponse.Message;
                     ViewBag.Issuccesflag = true;
                     ViewBag.Message = message;
-                    ViewBag.IsLocked = message;
-                    return View(newuserlocklist);
+                    //ViewBag.IsLocked = message;
+                    return View("UnlockUserAccount", newuserlocklist);
                 }
                 else
                 {
                     message = UnlockUserAccountResponse.Message;
                     ViewBag.Issuccesflag = false;
                     ViewBag.Message = message;
-
+                   // ViewBag.IsLocked = message;
+                    return View("UnlockUserAccount", newuserlocklist);
                 }
             }
             ModelState.Clear();
@@ -306,18 +307,26 @@ namespace LoanProcessManagement.App.Controllers
             {
                 var UnlockUserAccountResponse = await _accountService.ActivateUserAccount(unlockUserAccountCommand);
 
+                var newuserlocklist = new UnlockedAndLockedUsersVm();
+                var usersListServiceResponse = await _accountService.UsersList();
+                newuserlocklist.getAllUsersQueryVm = usersListServiceResponse.Data;
+
 
                 if (UnlockUserAccountResponse.Succeeded)
                 {
                     message = UnlockUserAccountResponse.Message;
                     ViewBag.Issuccesflag = true;
                     ViewBag.Message = message;
+                    //ViewBag.IsLocked = message;
+                    return View("UnlockUserAccount", newuserlocklist);
                 }
                 else
                 {
                     message = UnlockUserAccountResponse.Message;
                     ViewBag.Issuccesflag = false;
                     ViewBag.Message = message;
+                    //ViewBag.IsLocked = message;
+                    return View("UnlockUserAccount", newuserlocklist);
                 }
             }
             ModelState.Clear();
