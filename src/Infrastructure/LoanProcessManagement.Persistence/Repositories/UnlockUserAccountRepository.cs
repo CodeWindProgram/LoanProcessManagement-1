@@ -31,13 +31,30 @@ namespace LoanProcessManagement.Persistence.Repositories
             var userDetails = _dbContext.LpmUserMasters.Where(x => x.EmployeeId == unlockUserAccount.EmployeeId).FirstOrDefault();
 
             if (userDetails != null)
-            { 
-                userDetails.IsActive = true;
-                userDetails.ActivatedOn = DateTime.Now;
+            {
+                //userDetails.IsActive = true;
+                //userDetails.ActivatedOn = DateTime.Now;
 
-                _dbContext.SaveChanges();
-                unlockUserAccount.Issuccess = true;
-                unlockUserAccount.Message = "User account have been Activated Successfully";
+                //_dbContext.SaveChanges();
+                //unlockUserAccount.Issuccess = true;
+                //unlockUserAccount.Message = "User account have been Activated Successfully";
+
+
+                if (userDetails.IsActive)
+                {
+                    unlockUserAccount.Issuccess = false;
+                    unlockUserAccount.Message = "User has already Activated.";
+                }
+                else
+                {
+                    userDetails.IsActive = true;
+                    userDetails.ActivatedOn = DateTime.Now;
+
+                    _dbContext.SaveChanges();
+                    unlockUserAccount.Issuccess = true;
+                    unlockUserAccount.Message = "User account have been Activated Successfully";
+
+                }
             }
             else
             {
@@ -55,36 +72,44 @@ namespace LoanProcessManagement.Persistence.Repositories
 
             if (userDetails != null)
             {
-                var dynamicPassword = DynamicCodeGeneration.GeneratePassword();
-                var encryptPassword = EncryptionDecryption.EncryptString(dynamicPassword);
-                userDetails.Password = encryptPassword;
-
-                userDetails.WrongLoginAttempt = 0;
-                userDetails.IsLocked = false;
-
-                _dbContext.SaveChanges();
-
-                var emailSecretPassCode = EncryptionDecryption.DecryptString(userDetails.Password);
-
-                var SendEmail = new Email()
+                if (!userDetails.IsLocked)
                 {
-                    To = userDetails.Email,
-                    Subject = "Your reset password Code is",
-                    //Body = emailSecretPassCode,
-                    //Name=userDetails.Name
-                    Body = "Dear User <br><br> Your Loan system Login Password has been Reset Successfully. Please try to Login with Updated Password. <br><br> Password: " + emailSecretPassCode + "<br><br>Thanks, <br> Loan Process Team."
-                };
-
-                var email = _emailService.SendEmail(SendEmail);
-                if (email.Result == true)
-                {
-                    unlockUserAccount.Issuccess = true;
-                    unlockUserAccount.Message = "Successfully unlocked account And check your Registered Email Address to Reset your Password.";
+                    unlockUserAccount.Issuccess = false;
+                    unlockUserAccount.Message = "User has already unlocked.";
                 }
                 else
                 {
-                    unlockUserAccount.Issuccess = false;
-                    unlockUserAccount.Message = "User does not exist, please try with correct Employee ID.";
+                    var dynamicPassword = DynamicCodeGeneration.GeneratePassword();
+                    var encryptPassword = EncryptionDecryption.EncryptString(dynamicPassword);
+                    userDetails.Password = encryptPassword;
+
+                    userDetails.WrongLoginAttempt = 0;
+                    userDetails.IsLocked = false;
+
+                    _dbContext.SaveChanges();
+
+                    var emailSecretPassCode = EncryptionDecryption.DecryptString(userDetails.Password);
+
+                    var SendEmail = new Email()
+                    {
+                        To = userDetails.Email,
+                        Subject = "Your reset password Code is",
+                        //Body = emailSecretPassCode,
+                        //Name=userDetails.Name
+                        Body = "Dear User <br><br> Your Loan system Login Password has been Reset Successfully. Please try to Login with Updated Password. <br><br> Password: " + emailSecretPassCode + "<br><br>Thanks, <br> Loan Process Team."
+                    };
+
+                    var email = _emailService.SendEmail(SendEmail);
+                    if (email.Result == true)
+                    {
+                        unlockUserAccount.Issuccess = true;
+                        unlockUserAccount.Message = "Successfully unlocked account And check your Registered Email Address to Reset your Password.";
+                    }
+                    else
+                    {
+                        unlockUserAccount.Issuccess = false;
+                        unlockUserAccount.Message = "User does not exist, please try with correct Employee ID.";
+                    }
                 }
             }
             else

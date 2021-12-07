@@ -2,27 +2,7 @@
 
 
 @model LoanProcessManagement.App.Models.UnlockedAndLockedUsersVm
-@*@{
-        ViewData["Title"] = "UnlockUserAccount";
-    }
 
-    <h2>UnlockUserAccount</h2>
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="UnlockUserAccount">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="EmployeeId" class="control-label"></label>
-                    <input asp-for="EmployeeId" class="form-control" />
-                    <span asp-validation-for="EmployeeId" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
-            </form>
-        </div>
-    </div>*@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -44,7 +24,11 @@
         box-shadow: 0 1px 3px #ccc;
         border: 1px solid #ddd;
     }
-
+    .heading {
+    font-size:20px;
+    font-weight:bold;
+    
+    }
         #pswd_info h4 {
             margin: 0 0 10px 0;
             padding: 0;
@@ -62,9 +46,11 @@
             text-shadow: none;
             display: block;
         }
-    input[type=submit],#cancelbutton{
-        margin-left:5px;
+
+    input[type=submit], #cancelbutton {
+        margin-left: 5px;
     }
+
     .invalid {
         background: url(Content/images/invalid.png) no-repeat 0 50%;
         padding-left: 22px;
@@ -88,25 +74,29 @@
         padding: 0;
         list-style-type: none;
     }
+
+    .note {
+        font-weight: bold;
+    }
 </style>
 
-<hr />
+
 <div class="container app">
     <div class="col-sm-12 col-lg-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in">
             <div class="panel-heading">
-               Unlock Account
+                Unlock Account
             </div>
             <div class="panel-body">
                 <div class="border-part">
 
                     @if (ViewBag.Issuccesflag == true)
                     {
-                        <span class="text-success">@ViewBag.IsLocked</span>
+                        <span class="text-success">@ViewBag.Message</span>
                     }
                     else
                     {
-                        <span class="text-danger">@ViewBag.IsLocked</span>
+                        <span class="text-danger">@ViewBag.Message</span>
                     }
 
                     <form asp-action="UnlockUserAccount" method="post">
@@ -126,49 +116,242 @@
                             <input type="submit" value="Activate User Account" class="btn btn-primary btn-sm" asp-action="ActivateUserAccount" />
                             <a id="cancelbutton" class="btn btn-primary btn-sm" asp-controller="Home" asp-action="Index">Cancel</a>
                         </div>
+                        <div class="text-center">
+                            <p class="text-danger"><span class="text-danger  note">Note: </span>All * Marked Fields Are Mandatory</p>
+                        </div>
                     </form>
-
-                    <div>
-                        <table id="" class="display">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        @*@Html.DisplayNameFor(model => model.getAllUsersQueryVm.EmployeeId)*@
-                                        Employee Id
-                                    </th>
-                                    <th>
-                                        @*@Html.DisplayNameFor(model => model.getAllUsersQueryVm.Email)*@
-                                        Email
-                                    </th>
-                                    <th>
-                                        @*@Html.DisplayNameFor(model => model.getAllUsersQueryVm.IsLocked)*@
-                                        Is Locked
-                                    </th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.getAllUsersQueryVm)
-                                {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.EmployeeId)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Email)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.IsLocked)
-                                        </td>
-
-                                    </tr>
-                                    
-                                }
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
+<hr>
+@*<div class="row">
+    <div class="col-sm-5 align-self-sm-center">
+      <select class="form-control" id="sections" name="sections" onchange="categoriesCriteres()">
+          <option value="choisir" selected >Select</option>
+          <option id="LockedUsers" value="LockedUsers">Locked Users</option>
+          <option id="DeActivatedUsers" value="DeActivatedUsers">DeActivated Users</option>    
+      </select>
+    </div>
+</div>*@
+<div id="TableLockedUsers">
+    <div class="container app" >
+        <div class="col-sm-12">
+            <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
+                <div class="panel-heading heading">Locked Users</div>
+                <div class="panel-body">
+                </div>
+                <div id="alertMsg" visible="false" runat="server">
+                    <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
+                    <div style="margin-bottom: 10px"></div>
+                </div>
+
+                <table id="tbllockedUser" class="display">
+                    <thead>
+                        <tr>
+                            <th>
+                                Employee Id
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.getAllUsersQueryVm.IsLocked)*@
+                                Is Locked
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.getAllUsersQueryVm)
+                        {
+                            if (item.IsLocked)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EmployeeId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IsLocked)
+                                    </td>
+
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+<hr>
+<div id="TableDeActivatedUsers">
+    <div class="container app">
+        <div class="col-sm-12">
+            <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
+                <div class="panel-heading heading">DeActivated Users</div>
+                <div class="panel-body">
+                </div>
+                <div id="alertMsg" visible="false" runat="server">
+                    <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
+                    <div style="margin-bottom: 10px"></div>
+                </div>
+
+                <table id="tblDeActivatedUser" class="display">
+                    <thead>
+                        <tr>
+                            <th>
+                                Employee Id
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                 DeActivated
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.getAllUsersQueryVm)
+                        {
+                            if (!item.IsActive)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EmployeeId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IsActive)
+                                    </td>
+
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container app" style="display:none">
+    <div class="col-sm-12">
+        <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
+            <div class="panel-heading text-center w-25">UnLocked Users</div>
+            <div class="panel-body">
+            </div>
+            <div id="alertMsg" visible="false" runat="server">
+                <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
+                <div style="margin-bottom: 10px"></div>
+            </div>
+
+            <table id="" class="display">
+                <thead>
+                    <tr>
+                        <th>
+                            Employee Id
+                        </th>
+                        <th>
+                            @*@Html.DisplayNameFor(model => model.getAllUsersQueryVm.Email)*@
+                            Email
+                        </th>
+                        <th>
+                            @*@Html.DisplayNameFor(model => model.getAllUsersQueryVm.IsLocked)*@
+                            Is Locked
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.getAllUsersQueryVm)
+                    {
+                        if (item.IsLocked == false)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EmployeeId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IsLocked)
+                                </td>
+
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+
+        var usrTable = $('#tbllockedUser').dataTable({
+            "oLanguage": {
+                "sZeroRecords": "No Records to Display",
+                "sSearch": "Search "
+            },
+            "iDisplayLength": 15,
+            "aLengthMenu": [[25, 50, 100, 200, 500], [25, 50, 100, 200, 500]],
+            "bSortClasses": false,
+            "bPaginate": true,
+            "bAutoWidth": false,
+            "bProcessing": true,
+            "bDestroy": true
+        });
+    });
+    $(document).ready(function () {
+
+        var usrTable = $('#tblDeActivatedUser').dataTable({
+            "oLanguage": {
+                "sZeroRecords": "No Records to Display",
+                "sSearch": "Search "
+            },
+            "iDisplayLength": 15,
+            "aLengthMenu": [[25, 50, 100, 200, 500], [25, 50, 100, 200, 500]],
+            "bSortClasses": false,
+            "bPaginate": true,
+            "bAutoWidth": false,
+            "bProcessing": true,
+            "bDestroy": true
+        });
+    });
+
+    $(document).ready(function () {                                                   //TableDeActivatedUsers   TableLockedUsers
+        $('#sections').on('change', function () {
+            if (this.value == 'LockedUsers')
+            {
+                $("#TableLockedUsers").show();
+                $("#TableDeActivatedUsers").hide();
+            }
+        });
+    });
+    $(document).ready(function () {
+        $('#sections').on('change', function () {
+            if (this.value == 'DeActivatedUsers')
+            {
+                $("#TableDeActivatedUsers").show();
+                $("#TableLockedUsers").hide();
+            }
+        });
+    });
+</script>
+

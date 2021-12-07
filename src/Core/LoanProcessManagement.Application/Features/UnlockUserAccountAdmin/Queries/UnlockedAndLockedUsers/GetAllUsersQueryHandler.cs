@@ -23,6 +23,7 @@ namespace LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Quer
             _userMaster = userMaster;
         }
 
+        #region added GetAllUsersQueryHandler to get All locked and unlocked users from database - Ramya Guduru - 06/12/2021
         public async Task<Response<IEnumerable<GetAllUsersQueryVm>>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
             var allUsers = (await _userMaster.ListAllAsync()).OrderBy(x => x.Id);
@@ -30,5 +31,6 @@ namespace LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Quer
             var response = new Response<IEnumerable<GetAllUsersQueryVm>>(usersList);
             return response;
         }
+        #endregion
     }
 }

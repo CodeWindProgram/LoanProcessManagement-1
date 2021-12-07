@@ -6,12 +6,11 @@ using System.Text;
 
 namespace LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Queries.UnlockedAndLockedUsers
 {
+
+    #region added GetAllUsersQuery to get All locked and unlocked users from database - Ramya Guduru - 06/12/2021
     public class GetAllUsersQuery : IRequest<Response<IEnumerable<GetAllUsersQueryVm>>>
     {
-        //public GetAllUsersQuery(string lead_Id)
-        //{
-        //    Lead_Id = lead_Id;
-        //}
-        //public string Lead_Id { get; set; }
+        
     }
+    #endregion
 }

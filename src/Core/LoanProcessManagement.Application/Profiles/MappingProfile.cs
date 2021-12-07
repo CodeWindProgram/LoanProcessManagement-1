@@ -177,7 +177,9 @@ namespace LoanProcessManagement.Application.Profiles
             CreateMap<LpmMenuMaster, CircularListVm>().ReverseMap();
             #endregion
 
+            #region added mapper to get All users from database - Ramya Guduru - 06/12/2021
             CreateMap<LpmUserMaster, GetAllUsersQueryVm>().ReverseMap();
+            #endregion
         }
     }
 }
