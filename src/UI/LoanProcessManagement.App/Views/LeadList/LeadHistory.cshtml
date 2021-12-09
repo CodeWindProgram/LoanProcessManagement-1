@@ -3,18 +3,41 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "LeadHistory";
 }
+<style>
+    .panel-heading {
+        color: white;
+        background-color: #343a40;
+        border-bottom: 1px solid rgba(0,0,0,.125);
+        padding: 0.75rem 1.25rem;
+        position: relative;
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+    }
+    .btn {
+        background-color: #343a40;
+        color: white;
+        margin-bottom: 5px;
+    }
+    .btn:hover {
+        background-color: #adb5bd;
+        color: black;
+        margin-bottom: 5px;
+    }
+    .selected {
+        background: #adb5bd;
+        color: #FFF;
+    }
+</style>
 <div class="container app">
     <div class="col-sm-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
-            <div class="panel-heading">History</div>
+            <div class="panel-heading"><h3>History</h3></div>
             <div class="panel-body">
-            </div>
-            <div id="alertMsg" visible="false" runat="server">
-                <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
-                <div style="margin-bottom: 10px"></div>
-            </div>
-            <div class=" card">
-                <div class="card">
+                <div class="card" style="padding:5px;">
+                    <div id="alertMsg" visible="false" runat="server">
+                        <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
+                        <div style="margin-bottom: 10px"></div>
+                    </div>
                     <table id="History" class="table">
                         <thead>
                             <tr>
@@ -73,30 +96,14 @@
                 </div>
             </div>
         </div>
-        @*<partial name="_Tabs" />*@
-    <div class="d-flex flex-row justify-content-around">
-        <a class="btn btn-primary btn1 selected" asp-controller="LeadList" asp-action="LeadSummary">Summary</a>
-        <a class="btn btn-primary btn1" asp-controller="LeadList" asp-action="LeadModification" target="_blank">Modification</a>
-        <a class="btn btn-primary btn1" asp-controller="LeadList" asp-action="LeadHistory" target="_blank">History</a>
-        <a class="btn btn-primary btn1" href="/QueryHistory/Index?lead_Id=@ViewBag.lead_Id">Query History</a>
-        <a class="btn btn-primary btn1" asp-controller="ProductsList" asp-action="AllProductsList" target="_blank">Products</a>
-        <a class="btn btn-primary btn1" asp-controller="Login" asp-action="UpdatePropertyDetails" target="_blank">Property Details</a>
+        <div class="d-flex flex-row justify-content-around">
+            <a class="btn " asp-controller="LeadList" asp-action="LeadSummary">Summary</a>
+            <a class="btn " asp-controller="LeadList" asp-action="LeadModification" target="_blank">Modification</a>
+            <a class="btn selected" asp-controller="LeadList" asp-action="LeadHistory" target="_blank">History</a>
+            <a class="btn " asp-controller="ProductsList" asp-action="AllProductsList" target="_blank">Products</a>
+            <a class="btn " asp-controller="Login" asp-action="UpdatePropertyDetails" target="_blank">Property Details</a>
 
-    </div>
-
-        @*<ul class="tabs">
-            <li class="active"><a href="#" id="tabDetails" class="">Summary</a></li>
-
-            <li><a href="#" id="tabProcess" class="">Modification</a></li>
-
-            <li><a href="#LeadHistory" id="tabFeed" class="selected">History</a></li>
-
-            <li><a href="#" id="tabQueryStatus" class="">Query History</a></li>
-
-            <li><a href="#" id="tabProduct" class="">Products</a></li>
-
-            <li id="ContentPlaceHolder1_tab_PropPincode"><a href="#Property_Pincode" id="btn_Property_Pincode">Property Details</a></li>
-        </ul>*@
+        </div>
     </div>
 </div>
 <script>
@@ -118,7 +125,6 @@
             $('.btn1').removeClass("selected");
             $(e.target).addClass("selected");
         });
-
     });
 
 </script>

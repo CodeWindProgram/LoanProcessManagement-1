@@ -9,97 +9,93 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>*@
 <style>
+    .panel-heading {
+        color: white;
+        background-color: #343a40;
+        border-bottom: 1px solid rgba(0,0,0,.125);
+        padding: 0.75rem 1.25rem;
+        position: relative;
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+    }
+    p{
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size:larger;
+    }
     .row {
         display: flex;
-        flex-direction: row;
-             
+        flex-direction: row;  
     }
+    .btn {
+        background-color: #343a40;
+        color:white;
+        margin-bottom:5px;
+    }
+        .btn:hover {
+            background-color: #adb5bd;
+            color: black;
+            margin-bottom: 5px;
+        }
     .app {
-       width:60%;
-    }
-    .padding-1 {
-        margin-left: 120px;       
-    }
-    .padding-0 {
-        padding-left: 220px;        
-    }
-    .padding-2 {
-        padding-left: 220px;
-    }
-    .padding-3 {
-        padding-left: 230px;
-    }
-    .padding-4 {
-        padding-left: 170px;
-    }
-    .padding-5 {
-        padding-left: 160px;
-    }
-    .padding-6 {
-        padding-left: 180px;
-    }
-    .padding-7 {
-        padding-left: 80px;
+       width:80%;
     }
     .card > * {
         padding:8px 0px;
     }
     .selected {
-        background: #0d7db5;
+        background: #adb5bd;
         color: #FFF;
     }
 </style>
 <div class="container app">
     <div class="col-sm-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
-            <div class="panel-heading">Lead Summary</div>
-            <div class="card">
-                <div class="card">
+            <div style="border: 1px solid #343a40" class="border">
+                <div class="panel-heading"><h3>Lead Summary</h3></div>
+                <div class="card-body">
                     <div class="d-flex flex-row justify-content-around row ">
-                        <p class="padding-1">Form No.</p>
-                        <p class="padding-0">@Model.FormNo</p>
+                        <div class="col-sm-6"><div class="form-group"><p>Form No.</p></div></div>
+                        <div class="col-sm-6"><div class="form-group"><p>@Model.FormNo</p></div></div>
                     </div>
                     <div class="d-flex flex-row justify-content-around row ">
-                        <p class="padding-1">Full Name</p>
-                        <p class="padding-2">@Model.CustomerName</p>
+                        <div class="col-sm-6"><div class="form-group"><p>Full Name</p></div></div>
+                        <div class="col-sm-6"><div class="form-group"><p>@Model.CustomerName</p></div></div>
                     </div>
                     <div class="d-flex flex-row justify-content-around row">
-                        <p class="padding-1">Phone</p>
-                        <p class="padding-3">@Model.CustomerPhone</p>
+                        <div class="col-sm-6"><div class="form-group"><p>Phone</p></div></div>
+                        <div class="col-sm-6"><div class="form-group"><p>@Model.CustomerPhone</p></div></div>
                     </div>
                     <div class="d-flex flex-row justify-content-around row">
-                        <p class="padding-1">Product Chosen</p>
-                        <p class="padding-4">@Model.Product</p>
+                        <div class="col-sm-6"><div class="form-group"><p>Product Chosen</p></div></div>
+                        <div class="col-sm-6"><div class="form-group"><p>@Model.Product</p></div></div>
                     </div>
                     <div class="d-flex flex-row justify-content-around row">
-                        <p class="padding-1">Appointment Date</p>
-                        <p class="padding-5">@Model.Appointment_Date.ToShortDateString()</p>
+                        <div class="col-sm-6"><div class="form-group"><p>Appointment Date</p></div></div>
+                        <div class="col-sm-6"><div class="form-group"><p>@Model.Appointment_Date.ToShortDateString()</p></div></div>
                     </div>
                     <div class="d-flex flex-row justify-content-around row">
-                        <p class="padding-1">Current Status</p>
-                        <p class="padding-6">@Model.LeadStatus</p>
+                        <div class="col-sm-6"><div class="form-group"><p>Current Status</p></div></div>
+                        <div class="col-sm-6"><div class="form-group"><p>@Model.LeadStatus</p></div></div>
                     </div>
                     <div class="d-flex flex-row justify-content-around row">
-                        <p class="padding-1">Is Exempted from GST? (> 40L turnover)</p>
-                        <p class="padding-7">NA</p>
+                        <div class="col-sm-6"><div class="form-group"><p>Is Exempted from GST? (> 40L turnover)</p></div></div>
+                        <div class="col-sm-6"><div class="form-group"><p>NA</p></div></div>
                     </div>
                     <div class="d-flex flex-row justify-content-around row">
-                        <p class="padding-1">Applicant Details</p>
-                        <p class="padding-4"><a href="/ApplicantDetails/Index?lead_Id=@Model.Id&applicantType=0">Click here</a></p>
+                        <div class="col-sm-6"><div class="form-group"><p>Applicant Details</p></div></div>
+                        <div class="col-sm-6"><div class="form-group"><p><a href="/ApplicantDetails/Index?lead_Id=@Model.Id&applicantType=0">Click here</a></p></div></div>
                     </div>
                 </div>
+                @*<partial name="_Tabs" />*@
+                <div class="d-flex flex-row justify-content-around">
+                    <a class="btn selected" asp-action="LeadSummary" asp-route-lead_Id="@Model.lead_Id">Summary</a>
+                    <a class="btn " asp-action="LeadModification" asp-route-lead_Id="@Model.lead_Id" target="_blank">Modification</a>
+                    <a class="btn " asp-action="LeadHistory" asp-route-LeadId="@Model.lead_Id" target="_blank">History</a>
+                    <a class="btn " asp-controller="ProductsList" asp-action="AllProductsList" asp-route-lead_Id="@Model.lead_Id" target="_blank">Products</a>
+                    <a class="btn " asp-controller="Login" asp-action="UpdatePropertyDetails" asp-route-lead_Id="@Model.lead_Id" target="_blank">Property Details</a>
+
+                </div>
             </div>
-        </div>
-        @*<partial name="_Tabs" />*@
-        <div class="d-flex flex-row justify-content-around">
-            <a class="btn btn-primary btn1 selected" asp-action="LeadSummary" asp-route-lead_Id="@Model.lead_Id">Summary</a>
-            <a class="btn btn-primary btn1" asp-action="LeadModification" asp-route-lead_Id="@Model.lead_Id" target="_blank">Modification</a>
-            <a class="btn btn-primary btn1" asp-action="LeadHistory" asp-route-LeadId="@Model.lead_Id" target="_blank">History</a>
-            <a class="btn btn-primary btn1" href="/QueryHistory/Index?lead_Id=@Model.lead_Id">Query History</a>
-            <a class="btn btn-primary btn1" asp-controller="ProductsList" asp-action="AllProductsList" asp-route-lead_Id="@Model.lead_Id" target="_blank">Products</a>
-            <a class="btn btn-primary btn1" asp-controller="Login" asp-action="UpdatePropertyDetails" asp-route-lead_Id="@Model.lead_Id" target="_blank">Property Details</a>
-
-
         </div>
     </div>
 </div>
@@ -112,5 +108,3 @@
     });
 
 </script>
-
-

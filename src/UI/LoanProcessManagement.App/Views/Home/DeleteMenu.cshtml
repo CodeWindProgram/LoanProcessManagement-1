@@ -32,19 +32,18 @@
             display: block;
         }
 
-    input[type=submit] {
+    #btn1 {
         color: white;
-        background-color: #191970;
-        text-align:center;
-        margin : auto;
-       /* position:relative;*/
-    }
-    /*#btn2 {
-        color: white;
-        background-color: #191970;
+        background-color: #343a40;
         text-align: center;
-        margin-left: 55%;
-    }*/
+        margin: auto;
+    }
+    #btn1:hover {
+        color: black;
+        background-color: lightgray;
+        text-align: center;
+        margin: auto;
+    }
     table{
         margin:auto;
     }
@@ -61,29 +60,41 @@
         padding-left: 60px;
         padding-right: 60px;
     }
+    .panel-heading {
+        color: white;
+        background-color: #343a40;
+        border-bottom: 1px solid rgba(0,0,0,.125);
+        padding: 0.75rem 1.25rem;
+        position: relative;
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+    }
 </style>
 <div class="container app">
     <div class="col-sm-12 col-lg-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in">
-            <div class="panel-heading">
-                Delete Menu
-            </div>
-            <div class="panel-body">
-                <div class="border-part">
-                    <form method="post" asp-controller="Home" asp-action="DeleteMenu">
-                        <div class="form-group">
-                            <p id="para">Are You Sure You Want to Remove the <b id="bara">@Model.MenuName</b> Menu ?</p>
-                            @*<label hidden asp-for="Id" class="control-label"></label>
-                            <input hidden disabled asp-for="Id" class="form-control" />
-                            <span asp-validation-for="Id" class="text-danger"></span>*@
-                        </div>
-                        <table>
-                            <tr>
-                                <td><input id="btn1" type="submit" value="Confirm" class="btn btn-default" /></td>
-                                <td><a href="#"><input id="btn2" type="submit" value="Cancel" class="btn btn-default" /></a></td>
-                            </tr>
-                        </table>
-                    </form>
+            <div style="border: 1px solid #191970" class="border">
+                <div class="panel-heading">
+                    <h3>Delete Menu</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="border-part">
+                        <form method="post" asp-controller="Home" asp-action="DeleteMenu">
+                            <br />
+                            <div class="form-group">
+                                <p id="para">Are You Sure You Want to Remove the <b id="bara">@Model.MenuName</b> Menu ?</p>
+                                @*<label hidden asp-for="Id" class="control-label"></label>
+                        <input hidden disabled asp-for="Id" class="form-control" />
+                        <span asp-validation-for="Id" class="text-danger"></span>*@
+                            </div>
+                            <table>
+                                <tr>
+                                    <td><input id="btn1" type="submit" value="Confirm" class="btn btn-default" /></td>
+                                    <td><a href="#"><input id="btn2" type="submit" value="Cancel" class="btn btn-danger" /></a></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

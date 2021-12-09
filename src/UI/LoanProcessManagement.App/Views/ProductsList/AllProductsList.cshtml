@@ -4,75 +4,102 @@
     ViewData["Title"] = "AllProductsList";
 }
 
+<style>
+    .panel-heading {
+        color: white;
+        background-color: #343a40;
+        border-bottom: 1px solid rgba(0,0,0,.125);
+        padding: 0.75rem 1.25rem;
+        position: relative;
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+    }
 
+    .btn {
+        background-color: #343a40;
+        color: white;
+        margin-bottom: 5px;
+    }
+
+        .btn:hover {
+            background-color: #adb5bd;
+            color: black;
+            margin-bottom: 5px;
+        }
+
+    .selected {
+        background: #adb5bd;
+        color: #FFF;
+    }
+</style>
 
 <div class="container app">
     <div class="col-sm-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
-            <div class="panel-heading">Products</div>
+            <div class="panel-heading"><h3>Products</h3></div>
             <div class="panel-body">
+                <div id="alertMsg" visible="false" runat="server">
+                    <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
+                    <div style="margin-bottom: 10px"></div>
+                </div>
+                <div class="card" style="padding:5px;">
+                    <table id="AllProductsList" class="display">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @*@Html.DisplayNameFor(model => model.ProductName)*@
+                                    Product Sold
+                                </th>
+                                <th>
+                                    @*@Html.DisplayNameFor(model => model.FormNo)*@
+                                    Form No
+                                </th>
+                                <th>
+                                    @*@Html.DisplayNameFor(model => model.Amount)*@
+                                    Amount
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ProductName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FormNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Amount)
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.InsuranceName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FormNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.InsuranceAmount)
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div id="alertMsg" visible="false" runat="server">
-                <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
-                <div style="margin-bottom: 10px"></div>
-            </div>
-
-            <table id="AllProductsList" class="display">
-                <thead>
-                    <tr>
-                        <th>
-                            @*@Html.DisplayNameFor(model => model.ProductName)*@
-                            Product Sold
-                        </th>
-                        <th>
-                            @*@Html.DisplayNameFor(model => model.FormNo)*@
-                            Form No
-                        </th>
-                        <th>
-                            @*@Html.DisplayNameFor(model => model.Amount)*@
-                            Amount
-                        </th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ProductName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.FormNo)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Amount)
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.InsuranceName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.FormNo)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.InsuranceAmount)
-                            </td>
-
-                        </tr>
-                    }
-                </tbody>
-            </table>
         </div>
         <div class="d-flex flex-row justify-content-around">
-            <a class="btn btn-primary btn1 selected" asp-controller="LeadList" asp-action="LeadSummary">Summary</a>
-            <a class="btn btn-primary btn1" asp-controller="LeadList" asp-action="LeadModification" target="_blank">Modification</a>
-            <a class="btn btn-primary btn1" asp-controller="LeadList" asp-action="LeadHistory" target="_blank">History</a>
-            @*<button class="btn btn-primary btn1">Query History</button>*@
-            <a class="btn btn-primary btn1" asp-controller="ProductsList" asp-action="AllProductsList" target="_blank">Products</a>
-            <a class="btn btn-primary btn1" asp-controller="Login" asp-action="UpdatePropertyDetails" target="_blank">Property Details</a>
+            <a class="btn" asp-controller="LeadList" asp-action="LeadSummary">Summary</a>
+            <a class="btn" asp-controller="LeadList" asp-action="LeadModification" target="_blank">Modification</a>
+            <a class="btn" asp-controller="LeadList" asp-action="LeadHistory" target="_blank">History</a>
+            <a class="btn selected" asp-controller="ProductsList" asp-action="AllProductsList" target="_blank">Products</a>
+            <a class="btn" asp-controller="Login" asp-action="UpdatePropertyDetails" target="_blank">Property Details</a>
 
 
         </div>

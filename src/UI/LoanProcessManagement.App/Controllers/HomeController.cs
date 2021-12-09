@@ -115,6 +115,7 @@ namespace LoanProcessManagement.App.Controllers
             var rolelist = await _roleMasterService.RoleListProcess();
             var newList = (from e in rolelist.Data select new MenuCheckListVm { Id = e.Id, Name = e.RoleName }).ToList();
             checkboxfunctionVm.ListVms = newList;
+            ViewBag.UserId = HttpContext.Request.Cookies["Id"];
             return View(checkboxfunctionVm);
         }
 
@@ -123,6 +124,7 @@ namespace LoanProcessManagement.App.Controllers
         {
             var message = "";
 
+            var ReturnsTomenulist = ViewBag.UserId = HttpContext.Request.Cookies["Id"];
             if (ModelState.IsValid)
             {
                 var createmenuresponse = await _menuService.CreateMenu(checkboxfunctionVm.createMenuCommand);
@@ -139,8 +141,8 @@ namespace LoanProcessManagement.App.Controllers
                     message = createmenuresponse.Message;
                     ViewBag.Issuccesflag = true;
                     ViewBag.Message = message;
-                    var ReturnsTomenulist = ViewBag.UserId = HttpContext.Request.Cookies["Id"];
-                    return RedirectToAction(ReturnsTomenulist, "Menulist");
+                    var ReturnsTomenulists = ViewBag.UserId = HttpContext.Request.Cookies["Id"];
+                    return RedirectToAction(ReturnsTomenulists, "Menulist");
                 }
                 else
                 {
@@ -149,9 +151,15 @@ namespace LoanProcessManagement.App.Controllers
                     ViewBag.Message = message;
                 }
             }
-            return View("CreateMenu");
+            return RedirectToAction(ReturnsTomenulist, "Menulist");
         }
         #endregion
+        
+        public async Task<IActionResult> ReturnToMenuList()
+        {
+            var ReturnsTomenulists = ViewBag.UserId = HttpContext.Request.Cookies["Id"];
+            return RedirectToAction(ReturnsTomenulists, "Menulist");
+        }
 
         #region Calling API for Update Menu - Saif Khan - 11/11/2021
         /// <summary>

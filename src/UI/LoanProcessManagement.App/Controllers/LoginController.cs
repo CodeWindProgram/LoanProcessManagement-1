@@ -424,7 +424,6 @@ namespace LoanProcessManagement.App.Controllers
         }
         #endregion
 
-
         #region This method will call get property api by - Ramya Guduru - 12/11/2021
         /// <summary>
         /// 12/11/2021 - This method will call get property api
@@ -468,7 +467,6 @@ namespace LoanProcessManagement.App.Controllers
 
         }
         #endregion
-
 
         #region This method will call update property details api by - Ramya Guduru - 15/11/2021
         /// <summary>

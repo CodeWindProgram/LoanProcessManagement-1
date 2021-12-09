@@ -3,19 +3,27 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "LeadProducts";
 }
-
+<style>
+    .panel-heading {
+        color: white;
+        background-color: #343a40;
+        border-bottom: 1px solid rgba(0,0,0,.125);
+        padding: 0.75rem 1.25rem;
+        position: relative;
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+    }
+</style>
 <div class="container app">
     <div class="col-sm-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
-            <div class="panel-heading">Products</div>
+            <div class="panel-heading"><h3>Products</h3></div>
             <div class="panel-body">
-            </div>
             <div id="alertMsg" visible="false" runat="server">
                 <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
                 <div style="margin-bottom: 10px"></div>
             </div>
-            <div class=" card">
-                <div class="card">
+            <div class="card">
                     <table id="tblLeadProducts" class="table">
                         <thead>
                             <tr>
@@ -36,31 +44,31 @@
                         </thead>
                         <tbody>
                             @*@foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.FormNo)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.CustomerName)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.CustomerPhone)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Product)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.LeadStatus)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Appointment_Date)
-                                        </td>
-                                        <td>
-                                            @Html.ActionLink("EditLead", "EditLead", new { /* id=item.PrimaryKey */ })
-                                        </td>
-                                    </tr>
-                                }*@
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FormNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CustomerName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CustomerPhone)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LeadStatus)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Appointment_Date)
+                            </td>
+                            <td>
+                                @Html.ActionLink("EditLead", "EditLead", new { /* id=item.PrimaryKey */ })
+                            </td>
+                        </tr>
+                    }*@
                         </tbody>
                     </table>
                 </div>

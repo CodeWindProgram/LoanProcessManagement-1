@@ -207,14 +207,16 @@
     <div class="container app">
         <div class="col-sm-12">
             <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
-                <div class="panel-heading">Add GST Enquiry</div>
-                <a id="ContentPlaceHolder1_lnkCoApp0" class="AppTabs" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp0&#39;,&#39;&#39;)" style="background:#169dd8;">Applicant</a>
-                <a id="ContentPlaceHolder1_lnkCoApp1" class="AppTabs" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp1&#39;,&#39;&#39;)" style="background:#191970;">Co-Applicant-1</a>
-                <a id="ContentPlaceHolder1_lnkCoApp2" class="AppTabs" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp2&#39;,&#39;&#39;)" style="background:#191970;">Co-Applicant-2</a>
-                <a id="ContentPlaceHolder1_lnkCoApp3" class="AppTabs" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp3&#39;,&#39;&#39;)" style="background:#191970;">Co-Applicant-3</a>
-                <a id="ContentPlaceHolder1_lnkCoApp4" class="AppTabs" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp4&#39;,&#39;&#39;)" style="background:#191970;">Co-Applicant-4</a>
-                <a id="ContentPlaceHolder1_lnkCoApp5" class="AppTabs" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp5&#39;,&#39;&#39;)" style="background:#191970;">Co-Applicant-5</a>
-                <div style="height: 10px;"></div>
+                <div class="panel-heading"><h3>Add GST Enquiry</h3></div>
+                <div class="btn">
+                    <a id="ContentPlaceHolder1_lnkCoApp0" class="AppTabs btn-sm" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp0&#39;,&#39;&#39;)" style="background: #adb5bd;">Applicant</a>
+                    <a id="ContentPlaceHolder1_lnkCoApp1" class="AppTabs btn-sm" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp1&#39;,&#39;&#39;)" style="background: #343a40;">Co-Applicant-1</a>
+                    <a id="ContentPlaceHolder1_lnkCoApp2" class="AppTabs btn-sm" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp2&#39;,&#39;&#39;)" style="background: #343a40;">Co-Applicant-2</a>
+                    <a id="ContentPlaceHolder1_lnkCoApp3" class="AppTabs btn-sm" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp3&#39;,&#39;&#39;)" style="background: #343a40;">Co-Applicant-3</a>
+                    <a id="ContentPlaceHolder1_lnkCoApp4" class="AppTabs btn-sm" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp4&#39;,&#39;&#39;)" style="background: #343a40;">Co-Applicant-4</a>
+                    <a id="ContentPlaceHolder1_lnkCoApp5" class="AppTabs btn-sm" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp5&#39;,&#39;&#39;)" style="background: #343a40;">Co-Applicant-5</a>
+                </div>
+                    <div style="height: 10px;"></div>
                 <span id="ContentPlaceHolder1_spanMessage" style="color: red; font-size: 18px;"></span>
                 <div style="height: 10px;"></div>
                 <div class="frames">
@@ -232,23 +234,35 @@
                         <div id="ContentPlaceHolder1_alertMsg">
                             <div style="display:flex">
                                 <div class="col-md-4">
-                                    <label class="">Form No</label>
+                                    <label class="col-md-5">Form No</label>
                                 </div>
                                 <div class="col-md-5">
                                     <div class="input-control text" style="display:inline-flex">
-                                        <span id="ContentPlaceHolder1_lblFormNo" style="color: black">@Model.FormNo</span>
+                                        <span id="ContentPlaceHolder1_lblFormNo" style="color: black"><b>@Model.FormNo</b></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <br>
-                        <div id="divConverted1">
-                            <h2>Customer Details</h2>
+
+
+                        <div style="display:flex;">
+                            <div class="col-md-4">
+
+                            </div>
+                            <div style="padding-left:13rem; text-align:end;display:inline-flex;" class="col-md-5"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
                         </div>
+
+
+                        <div id="divConverted1">
+                            <h2><b>Customer Details</b></h2>
+                        </div>
+                        <br />
+
                         <div style="height: 5px;"></div>
+
                         <div class="row tab">
                             <div class="col-md-4">
-                                <label class="col-md-4">Customer Name</label>
+                                <label class="col-md-5">Customer Name<span style="color: Red">&nbsp;*</span></label>
 
                             </div>
                             <div class="col-md-5">
@@ -264,10 +278,13 @@
                                 </div>
                             </div>
                         </div>
+                        <br />
+
                         <div style="height: 5px;"></div>
+
                         <div class="row tab">
                             <div class="col-md-4">
-                                <label class="col-md-5">Customer Email</label>
+                                <label class="col-md-5">Customer Email<span style="color: Red">&nbsp;*</span></label>
 
                             </div>
                             <div class="col-md-5">
@@ -282,10 +299,13 @@
                                 </div>
                             </div>
                         </div>
+                        <br />
+
                         <div style="height: 5px;"></div>
+
                         <div class="row tab">
                             <div class="col-md-4">
-                                <label class="col-md-5">Customer Mobile</label>
+                                <label class="col-md-5">Customer Mobile<span style="color: Red">&nbsp;*</span></label>
 
                             </div>
                             <div class="col-md-5">
@@ -301,11 +321,13 @@
                                 </div>
                             </div>
                         </div>
+                        <br />
 
                         <div style="height: 5px;"></div>
+
                         <div class="row tab">
                             <div class="col-md-4">
-                                <label class="col-md-5">GST Number:</label>
+                                <label class="col-md-5">GST Number<span style="color: Red">&nbsp;*</span></label>
 
                             </div>
                             <div class="col-md-5">
@@ -315,12 +337,13 @@
                                 </div>
                             </div>
                         </div>
+                        <br />
 
                         <div style="height: 5px;"></div>
 
                         <div class="row tab">
                             <div class="col-md-4">
-                                <label class="col-md-5">Employee Type :</label>
+                                <label class="col-md-5">Employee Type<span style="color: Red">&nbsp;*</span></label>
                             </div>
                             <div class="col-md-7">
                                 <table id="ContentPlaceHolder1_rdbEmployeeType" class="rbl" style="font-weight:normal;width:60%;">
@@ -335,10 +358,9 @@
                                 </table>
                             </div>
                         </div>
+                        <br />
+
                         <div style="height: 5px;"></div>
-
-
-
 
                         <div class="row tab">
 
@@ -350,28 +372,34 @@
 
                         <div style="height: 5px; display: none;"></div>
                         <div id="divConverted1">
-                            <h2>Upload Files</h2>
+                            <h2><b>Upload Files</b></h2>
                         </div>
+                        <br />
+
                         <div style="height: 5px; display: none;"></div>
+
                         <div class="row tab">
-                            <div class="">
-                                <label class="col-md-4">Excel File</label>
+                            <div class="col-md-4">
+                                <label class="col-md-4">Excel File<span style="color: Red">&nbsp;*</span></label>
 
                             </div>
                             <div class="col-md-8">
                                 <input type="file" asp-for="ExcelFilePath" id="ContentPlaceHolder1_fileUploadExcel" accept=".xls,.xlsx" onchange="validate_fileupload(this,&#39;xls,xlsx&#39;);">
                             </div>
                         </div>
+                        <br />
+
                         <div style="height: 5px; display: none;"></div>
                         <div class="row tab">
                             <div class="col-md-4">
-                                <label class="col-md-4">Pdf file</label>
+                                <label class="col-md-4">Pdf file<span style="color: Red">&nbsp;*</span></label>
 
                             </div>
                             <div class="col-md-8">
                                 <input type="file" asp-for="PdfFilePath" id="ContentPlaceHolder1_fileUploadPdf" accept=".pdf" onchange="validate_fileupload(this,&#39;pdf&#39;);">
                             </div>
                         </div>
+
                         <br>
                         <br>
                         <div hidden class="form-group">
@@ -387,18 +415,18 @@
                                 </label>
                             </div>
                         </div>
-                        <div style="justify-content:center;display:flex" >
+                        <div style="justify-content:center;display:flex">
                             <div class="row tab">
                                 <div style="display:inline-flex" class="col-md-12">
                                     <center>
-                                        <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="ContentPlaceHolder1_btnAddEnquiry" class="btn btn-danger">
+                                        <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="ContentPlaceHolder1_btnAddEnquiry" style="background-color: #343a40;color:white;" class="btn btn-lg">
                                     </center>
                                 </div>
                             </div>
                             <div class="row tab">
                                 <div style="display:inline-flex" class="col-md-12">
                                     <center>
-                                        <a type="button" asp-controller="Home" asp-action="Index" value="Cancel" id="cancelbutton" class="btn btn-danger">Cancel</a>
+                                        <a type="button" asp-controller="Home" asp-action="Index" value="Cancel" id="cancelbutton" class="btn btn-lg btn-danger">Cancel</a>
                                     </center>
                                 </div>
                             </div>

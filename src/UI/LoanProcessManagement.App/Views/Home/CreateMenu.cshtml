@@ -32,9 +32,9 @@
             display: block;
         }
 
-    input[type=submit], input[type=button] {
+    button{
         color: white;
-        background-color: #191970;
+        background-color: #343a40;
     }
 
     #para {
@@ -55,7 +55,15 @@
         padding-left: 60px;
         padding-right: 60px;
     }
-
+    .panel-heading {
+        color: white;
+        background-color: #343a40;
+        border-bottom: 1px solid rgba(0,0,0,.125);
+        padding: 0.75rem 1.25rem;
+        position: relative;
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+    }
     #inpcheck {
         margin-left: 10px;
     }
@@ -76,15 +84,16 @@
 </style>
 <div class="container app">
     <div class="col-sm-12 col-lg-12">
-        <div data-effect="helix" id="panels" class="panel panel-info effect-helix in">
-            <div class="panel-heading">
-                Create Menu
+        <div data-effect="helix" id="panels" class="panel panel-info effect-helix in ">
+            <div style="border: 1px solid #343a40" class="border">
+            <div class="panel-heading" >
+                <h3>Create Menu</h3>
             </div>
             <div class="panel-body">
                 <div class="border-part">
                     <form asp-action="CreateMenu" method="post">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-group"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div><br />
+                        <div style="text-align:end" class="form-group"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
                         <div class="form-group">
                             <label asp-for="createMenuCommand.MenuName" class="control-label">Menu Name<span style="color: Red">&nbsp;*</span></label>
                             <input asp-for="createMenuCommand.MenuName" class="form-control" maxlength="50"/>
@@ -135,15 +144,16 @@
                         <div class="form-group">
                             <table>
                                 <tr>
-                                    <td><input id="btn1" type="submit" value="Save" class="btn btn-default" /></td>
-                                    <td><a href="http://localhost:14018/MenuList/1"><input id="btn2" type="button" value="Cancel" class="btn btn-default" /></a></td>
+                                    <td><button type="submit" class="btn-lg">Create</button></td>
+                                    <td><a asp-action="ReturnToMenuList" id="btn2" type="button" value="Cancel" class="btn btn-danger btn-lg">Cancel</a></td>
                                 </tr>
-                            </table>
+                            </table>    
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+            </div>
     </div>
 </div>
 <script type="text/javascript">
