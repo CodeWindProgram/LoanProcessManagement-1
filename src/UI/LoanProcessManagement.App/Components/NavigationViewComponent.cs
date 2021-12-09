@@ -17,7 +17,6 @@ namespace LoanProcessManagement.App.Components
             _menuService = menuService;
         }
 
-
         #region Invoke Async
         public async Task<IViewComponentResult> InvokeAsync()
         {
@@ -38,8 +37,6 @@ namespace LoanProcessManagement.App.Components
                 return await Task.Run(() => View(MenuServiceResponse)); //View(MenuServiceResponse);//.Data
             }
             return View();
-
-            //return View(model);
         }
         #endregion
     }
