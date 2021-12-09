@@ -49,6 +49,7 @@ namespace LoanProcessManagement.App.Controllers
             return View();
         }
 
+
         #region This action method will authenticate user and return view by - Akshay Pawar - 28/10/2021, User login using Cookie Authentication Added by - Pratiksha, Akshay - 05/11/2021
         /// <summary>
         /// 2021/10/28 - This action method will call api and check whether user is authenticated or not
@@ -247,7 +248,7 @@ namespace LoanProcessManagement.App.Controllers
                     message = UnlockUserAccountResponse.Message;
                     ViewBag.Issuccesflag = true;
                     ViewBag.Message = message;
-                    //ViewBag.IsLocked = message;
+                    ModelState.Clear();
                     return View("UnlockUserAccount", newuserlocklist);
                 }
                 else
@@ -282,7 +283,7 @@ namespace LoanProcessManagement.App.Controllers
                     message = UnlockUserAccountResponse.Message;
                     ViewBag.Issuccesflag = true;
                     ViewBag.Message = message;
-                    //ViewBag.IsLocked = message;
+                    ModelState.Clear();
                     return View("UnlockUserAccount", newuserlocklist);
                 }
                 else
@@ -317,7 +318,7 @@ namespace LoanProcessManagement.App.Controllers
                     message = UnlockUserAccountResponse.Message;
                     ViewBag.Issuccesflag = true;
                     ViewBag.Message = message;
-                    //ViewBag.IsLocked = message;
+                    ModelState.Clear();
                     return View("UnlockUserAccount", newuserlocklist);
                 }
                 else

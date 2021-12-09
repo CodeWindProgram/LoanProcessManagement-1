@@ -10,6 +10,7 @@ namespace LoanProcessManagement.App.Models
 {
 
     #region added model to get locked and unlocked users from database - Ramya Guduru - 06/12/2021
+
     public class UnlockedAndLockedUsersVm
     {
         public UnlockUserAccountCommand unlockUserAccountCommand { get; set; }

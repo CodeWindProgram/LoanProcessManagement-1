@@ -18,6 +18,7 @@ namespace LoanProcessManagement.Persistence.Repositories
         private readonly ILogger _logger;
         private readonly IEmailService _emailService;
 
+
         public UnlockUserAccountRepository(ApplicationDbContext dbContext, ILogger<UnlockUserAccountModel> logger, IEmailService emailService) : base(dbContext, logger, emailService)
         {
 
