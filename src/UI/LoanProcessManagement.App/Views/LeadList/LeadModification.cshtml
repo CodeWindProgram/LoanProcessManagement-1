@@ -180,17 +180,16 @@
 
 
 
+    <div class="initial1">
 
-            <div class="initial1">
-
-                <div class="group1"><label for="status_lead">Status Of Lead<span style="color:red;margin-left: 4px;font-size: 15px;">*</span></label></div>
-                <div class="group2">
-                    <select id="status_lead" class="form-control" asp-for="CurrentStatus" asp-items="ViewBag.leadStatus">
-                        <option value="">Select</option>
-                    </select>
-                    <span asp-validation-for="CurrentStatus" class="text-danger"></span>
-                </div>
-            </div><br /><br>
+        <div class="group1"><label for="status_lead">Status of Lead<span style="color:red;margin-left: 4px;font-size: 15px;">*</span></label></div>
+        <div class="group2">
+            <select id="status_lead" class="form-control" asp-for="CurrentStatus" asp-items="ViewBag.leadStatus">
+                <option value="">Select</option>
+            </select>
+            <span asp-validation-for="CurrentStatus" class="text-danger"></span>
+        </div>
+    </div><br /><br>
 
             <div class="initial1">
                 <div class="group1"><label for="residential_status">Residential Status<span style="color:red;margin-left: 4px;font-size: 15px;">*</span></label></div>
@@ -205,33 +204,47 @@
                 </div>
             </div><br /><br />
 
-            <div class="initial1" id="leadQueryDiv">
-                <div class="group1"><label for="leadQuery" id="QueryText">Raise Query</label></div>
-                <div class="group2">
-                    <div class="" id="divToggleSwitch">
-                        <label class="switch">
-                            <input type="checkbox" id="chkQuery">
-                            <span class="slider round"></span>
-                        </label>
-                        <label id="lblSwitchName" class="label label-default" style="display: none;">Query Raised</label>
+    <div class="initial1" id="leadQueryDiv" style="display:none">
+        <div class="group1"><label for="leadQuery" id="QueryText">Raise Query</label></div>
+        <div class="group2">
+            <div class="" id="divToggleSwitch">
+                <label class="switch">
+                    <input type="checkbox" id="chkQuery">
+                    <span class="slider round"></span>
+                </label>
+                <label id="lblSwitchName" class="label label-default" style="display: none;">Query Raised</label>
 
                     </div>
                 </div>
                 <br /><br />
             </div>
 
-            <div id="divQueryType">
-                <div class="initial1" id="div_IPSQueryType">
-                    <div class="group1">
-                        <label>IPS Query - 1</label>
-                    </div>
-                    <div class="group2">
-                        <div class="QueryInput" style="">
-                            <select id="ddl_IPSQueryType" class="QueryType form-control" asp-for="IPSQueryType1" asp-items="ViewBag.leadQuery">
-                                <option value="">Select Query</option>
-                            </select>
-                            @*<input name="ddl_IPSQueryType" type="text" id="ddl_IPSQueryType" class="form-control">*@
-                            <input type="button" class="btn btn-primary btnForQuery" value="Add another Query Type" onclick="show_IPSQueryType_ForBtn('2','#ddl_IPSQueryType');">
+    <div class="initial1" id="hoSanctionCommentDiv" style="display:none">
+        <div class="group1">
+            <label>HO Sanction Query Comment</label>
+        </div>
+        <div class="group2">
+            <div class="" style="">
+                <input type="text" class="form-control">
+
+            </div>
+        </div>
+        <br /><br />
+
+    </div>
+
+    <div id="divQueryType" style="display:none">
+        <div class="initial1" id="div_IPSQueryType">
+            <div class="group1">
+                <label>IPS Query - 1</label>
+            </div>
+            <div class="group2">
+                <div class="QueryInput" style="">
+                    <select id="ddl_IPSQueryType" class="QueryType form-control" asp-for="IPSQueryType1" asp-items="ViewBag.leadQuery">
+                        <option value="">Select Query</option>
+                    </select>
+                    @*<input name="ddl_IPSQueryType" type="text" id="ddl_IPSQueryType" class="form-control">*@
+                    <input type="button" class="btn btn-primary btnForQuery" value="Add another Query Type" onclick="show_IPSQueryType_ForBtn('2','#ddl_IPSQueryType');">
 
                         </div>
                     </div>
@@ -558,19 +571,84 @@
                 <h5>Date of Action</h5>
             </div>
 
-            <div class="initial1">
-                <div class="group1"><label for="date">Date :<span style="color: Red">&nbsp;*</span></label></div>
-                <div class="group2"><input type="date" id="dates" class="form-control" asp-for="DateOfAction" readonly></div>
-            </div><br /><br>
-            <div class="initial1">
-                <div class="group1"><label for="comments">Comments</label></div>
-                <div class="group2"><textarea placeholder="Comments" class="form-control" asp-for="Comments"></textarea></div>
-            </div><br /><br /><br>
-            <div class="button1 d-flex flex-row justify-content-center">
-                <input style="background-color: #343a40" id="button1" type="submit" value="Submit" class="btn btn-lg" />
+    <div class="initial1">
+        <div class="group1"><label for="date">Date :</label></div>
+        <div class="group2"><input type="date" id="dates" class="form-control" asp-for="DateOfAction" readonly></div>
+    </div><br /><br>
+    <div class="initial1">
+        <div class="group1"><label for="comments">Comments</label></div>
+        <div class="group2"><textarea placeholder="Comments" class="form-control" asp-for="Comments"></textarea></div>
+    </div><br /><br /><br>
+
+    <div class="rejectLead" style="display:none">
+        <div class="card initial1">
+            <h5>Reason for Reject Lead</h5>
+        </div>
+        <div class="initial1">
+            <div class="group1"><label>Select Reason :</label></div>
+            <div class="group2">
+                <select id="RejectReasonList" asp-for="RejectLeadReasonID" class="form-control">
+                    <option selected="selected" value="0">Select</option>
+                    <option value="1">Delinquency in CIBIL report</option>
+                    <option value="2">Existing GICHFL Housing loan track irregular</option>
+                    <option value="3">Fraud documents detected</option>
+                    <option value="4">Income not sufficient</option>
+                    <option value="5">ITR rejected/invalid as per income tax dept.</option>
+                    <option value="6">ITRs being irregularly filed</option>
+                    <option value="7">No plan approval for proposed property </option>
+                    <option value="8">The income combination of applicant and co-applicant being considered like (cousins/ brother -in -law/sister-in -law)</option>
+                    <option value="9">Title of the property not clear</option>
+                    <option value="10">Other</option>
+                </select>
+
             </div>
-        </form>
+        </div>
+        <div class="initial1" id="rejectLeadComment" style="display:none">
+            <br /><br /><br />
+            <div class="group1"><label>Comment : </label></div>
+            <div class="group2">
+                <textarea placeholder="Comments" class="form-control" asp-for="RejectedLeadComment"></textarea>
+            </div>
+        </div>
+        <br /><br /><br />
     </div>
+    <div class="lostLead" style="display:none">
+        <div class="card initial1">
+            <h5>Reason for Lost Lead</h5>
+        </div>
+        <div class="initial1">
+            <div class="group1"><label>Select Reason :</label></div>
+            <div class="group2">
+                <select id="LostReasonList" class="form-control" asp-for="LostLeadReasonID">
+                    <option selected="selected" value="0">Select</option>
+                    <option value="1">Customer has availed loan from other institutions</option>
+                    <option value="2">Customer not interested in availing loan and did not revert</option>
+                    <option value="3">Loan eligibility not being fulfilled by applicant</option>
+                    <option value="4">Manual ITRs/Irregular ITRs</option>
+                    <option value="5">NRIs with business income</option>
+                    <option value="6">Property not being identified/customer has deferred the purchase</option>
+                    <option value="7">Required documents unavailable with the customer</option>
+                    <option value="8">Tie up of builder for certain projects with other NBFCs and banks</option>
+                    <option value="9">Other</option>
+                </select>
+            </div>
+        </div>
+        <div class="initial1" id="lostLeadComment" style="display:none">
+            <br /><br /><br />
+            <div class="group1"><label>Comment : </label></div>
+            <div class="group2">
+                <textarea placeholder="Comments" class="form-control" asp-for="LostLeadComment"></textarea>
+            </div>
+        </div>
+        <br /><br /><br />
+    </div>
+
+
+    <div class="button1 d-flex flex-row justify-content-end">
+        <input id="button1" type="submit" value="Submit" class="button" />
+    </div>
+</form>
+
 </div>
 <div class="row justify-content-center">
     <div class="col-md-7 fit-width">
@@ -600,15 +678,90 @@
         //    $("#emp_classification").removeAttr("disabled");
         //}
 
+        $('#status_lead').change(function () {
+            var currentStatusValue = $('#status_lead').val();
+            if (currentStatusValue == 8) {
+                $(".rejectLead").css("display", "block");
+                $(".lostLead").css("display", "none");
+                $("#LostReasonList").val(0);
+                $("#lostLeadComment").val("");
+
+            }
+            else if (currentStatusValue == 11) {
+                $(".lostLead").css("display", "block");
+                $(".rejectLead").css("display", "none");
+                $("#RejectReasonList").val(0);
+                $("#rejectLeadComment").val("");
+
+            }
+            else {
+                $(".rejectLead").css("display", "none");
+                $(".lostLead").css("display", "none");
+
+            }
+                
+        });
+
+        $("#RejectReasonList").change(function () {
+            var currentReason = $("#RejectReasonList").val();
+            if (currentReason == 10) {
+                $("#rejectLeadComment").css("display", "block");
+            }
+            else {
+                $("#rejectLeadComment").css("display", "none");
+            }
+        })
+
+        $("#LostReasonList").change(function () {
+            var currentReason = $("#LostReasonList").val();
+            if (currentReason == 9) {
+                $("#lostLeadComment").css("display", "block");
+            }
+            else {
+                $("#lostLeadComment").css("display", "none");
+            }
+        })
+
+        if (statusValue == 8) {
+            $(".rejectLead").css("display", "block");
+
+        }
+        else if (statusValue == 11) {
+            $(".lostLead").css("display", "block");
+        }
+
+        
+
         $('.btn1').click(function (e) {
             $(".btn1").removeClass("selected");
             $(e.target).addClass("selected");
         });
 
-        if (statusValue != 3) {
-            $("#leadQueryDiv").css("display", "none");
-            $("#divQueryType").css("display", "none");
-        }
+        //if (statusValue == 3 || statusValue==7) {
+        //    $("#leadQueryDiv").css("display", "block");
+        //    if (statusValue == 3) {
+        //        $("#divQueryType").css("display", "block");
+
+        //    }
+        //    if (statusValue == 7) {
+        //        $("#hoSanctionCommentDiv").css("display", "block");
+        //    }
+        //}
+          if (statusValue == 3) {
+            $("#leadQueryDiv").css("display", "block");
+            $("#divQueryType").css("display", "block");
+          }
+          if (statusValue == 8 || statusValue == 11 || statusValue == 10) {
+              $('#status_lead option:not(:selected)').prop('disabled', true);
+          }
+          
+
+    
+
+        //if (statusValue != 7) {
+        //    $("#leadQueryDiv").css("display", "none");
+        //    $("#divQueryType").css("display", "none");
+        //}
 
         function show_IPSQueryType_ForBtn(QueryNumber,currenInputId){
             let divFormat = "#div_IPSQueryType";
@@ -621,6 +774,9 @@
             }
 
         }
+
+    
+
 
         @*$(document).ready(function () {
             if (@ViewBag.Message == 'Lead Data Has Been Added Successfully !!') {

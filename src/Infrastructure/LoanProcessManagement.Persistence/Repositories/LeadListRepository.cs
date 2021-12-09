@@ -148,7 +148,7 @@ namespace LoanProcessManagement.Persistence.Repositories
             var response = new UpdateLeadDto();
 
             if ((request.CurrentStatus != user.CurrentStatus + 1 && request.CurrentStatus != user.CurrentStatus) &&
-                (request.CurrentStatus != 11 && request.CurrentStatus != 8))
+                (request.CurrentStatus != 11 && request.CurrentStatus != 8 && request.CurrentStatus!=9))
             {
                 if (request.CurrentStatus > user.CurrentStatus)
                 {
@@ -163,6 +163,14 @@ namespace LoanProcessManagement.Persistence.Repositories
                 response.Succeeded = false;
                 response.Lead_Id = request.lead_Id;
                 return response;
+            }
+            if(request.CurrentStatus==9 && user.CurrentStatus != 7)
+            {
+                response.Message = "Submitting for Sanctioned can be done only after HO (Sanction)";
+                response.Succeeded = false;
+                response.Lead_Id = request.lead_Id;
+                return response;
+
             }
 
             if (user.CurrentStatus == 3)
@@ -275,6 +283,11 @@ namespace LoanProcessManagement.Persistence.Repositories
             {
                 var leadQ= await _dbContext.LpmLeadQuerys.Include(x => x.lead).
                     Where(x => x.lead_Id == user.Id).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
+                if (leadQ == null)
+                {
+                    leadQ = new LpmLeadQuery();
+                }
+                var ThirdPartyStatus = true;
                 if (request.CurrentStatus == 4 && (request.UserRoleId != 2 || leadQ.Query_Status=='Q'))
                 {
                     if(leadQ.Query_Status == 'Q')
@@ -291,6 +304,41 @@ namespace LoanProcessManagement.Persistence.Repositories
                     return response;
 
                 }
+                if (request.CurrentStatus == 5 && (request.UserRoleId != 2 && request.UserRoleId != 3))
+                {
+                 
+                    response.Message = "Application can be moved to Branch(3rd Party Check) only by HO and Branch .";
+                    response.Succeeded = false;
+                    response.Lead_Id = request.lead_Id;
+                    return response;
+
+                }
+                if (request.CurrentStatus == 6 && (request.UserRoleId != 3 || ThirdPartyStatus==false))
+                {
+                    if(ThirdPartyStatus == false)
+                    {
+                        response.Message = "Third party check is remaining";
+
+                    }
+                    else
+                    {
+                        response.Message = "Application can be moved to Branch Reco only by Branch .";
+
+                    }
+                    response.Succeeded = false;
+                    response.Lead_Id = request.lead_Id;
+                    return response;
+
+                }
+                if (request.CurrentStatus == 7 && request.UserRoleId != 3)
+                {      
+                    response.Message = "Application can be moved to HO (Sanction) only by Branch .";
+                    response.Succeeded = false;
+                    response.Lead_Id = request.lead_Id;
+                    return response;
+
+                }
+
                 var newLeadEntry = new LpmLeadProcessCycle()
                 {
                     lead_Id = user.Id,

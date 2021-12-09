@@ -52,6 +52,13 @@ namespace LoanProcessManagement.App.Models
         public string IPSResponseType3 { get; set; }
         public string IPSResponseType4 { get; set; }
         public string IPSResponseType5 { get; set; }
+        public long LostLeadReasonID { get; set; }
+
+        public string LostLeadComment { get; set; }
+
+        public long RejectLeadReasonID { get; set; }
+
+        public string RejectedLeadComment { get; set; }
 
 
 
