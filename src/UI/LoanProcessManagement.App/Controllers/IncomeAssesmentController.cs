@@ -43,7 +43,7 @@ namespace LoanProcessManagement.App.Controllers
                 ExcelFilePath = gstCreateEnquiryCommand.ExcelFilePath,
                 IsActive = gstCreateEnquiryCommand.IsActive,
                 EmploymentType = gstCreateEnquiryCommand.EmploymentType,
-                //FormNo = gstCreateEnquiryCommand.FormNo
+                FormNo = gstCreateEnquiryCommand.FormNo
             };
             var createmenuresponse = await _incomeAssesmentService.CreateEnquiry(gstCreateEnquiryCommandDto);
             return View(createmenuresponse);

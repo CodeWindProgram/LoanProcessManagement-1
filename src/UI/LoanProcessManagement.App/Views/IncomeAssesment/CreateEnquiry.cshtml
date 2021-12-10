@@ -11,7 +11,15 @@
     .uppercase {
         text-transform: uppercase;
     }
-
+    .panel-heading {
+        color: white;
+        background-color: #343a40;
+        border-bottom: 1px solid rgba(0,0,0,.125);
+        padding: 0.75rem 1.25rem;
+        position: relative;
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+    }
     #divConverted1 h2 {
         margin: 0px;
         padding: 2px;
@@ -208,200 +216,206 @@
         <div class="col-sm-12">
             <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
                 <div class="panel-heading"><h3>Add GST Enquiry</h3></div>
-                <div class="btn">
-                    <a id="ContentPlaceHolder1_lnkCoApp0" class="AppTabs btn-sm" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp0&#39;,&#39;&#39;)" style="background: #adb5bd;">Applicant</a>
-                    <a id="ContentPlaceHolder1_lnkCoApp1" class="AppTabs btn-sm" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp1&#39;,&#39;&#39;)" style="background: #343a40;">Co-Applicant-1</a>
-                    <a id="ContentPlaceHolder1_lnkCoApp2" class="AppTabs btn-sm" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp2&#39;,&#39;&#39;)" style="background: #343a40;">Co-Applicant-2</a>
-                    <a id="ContentPlaceHolder1_lnkCoApp3" class="AppTabs btn-sm" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp3&#39;,&#39;&#39;)" style="background: #343a40;">Co-Applicant-3</a>
-                    <a id="ContentPlaceHolder1_lnkCoApp4" class="AppTabs btn-sm" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp4&#39;,&#39;&#39;)" style="background: #343a40;">Co-Applicant-4</a>
-                    <a id="ContentPlaceHolder1_lnkCoApp5" class="AppTabs btn-sm" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp5&#39;,&#39;&#39;)" style="background: #343a40;">Co-Applicant-5</a>
-                </div>
+                <div style="border: 1px solid #343a40;" class="border">
+                    <div class="btn" style="padding-left: 8%;">
+                        <a id="ContentPlaceHolder1_lnkCoApp0" class="AppTabs btn-sm" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp0&#39;,&#39;&#39;)" style="background: #adb5bd;">Applicant</a>
+                        <a id="ContentPlaceHolder1_lnkCoApp1" class="AppTabs btn-sm" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp1&#39;,&#39;&#39;)" style="background: #343a40;">Co-Applicant-1</a>
+                        <a id="ContentPlaceHolder1_lnkCoApp2" class="AppTabs btn-sm" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp2&#39;,&#39;&#39;)" style="background: #343a40;">Co-Applicant-2</a>
+                        <a id="ContentPlaceHolder1_lnkCoApp3" class="AppTabs btn-sm" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp3&#39;,&#39;&#39;)" style="background: #343a40;">Co-Applicant-3</a>
+                        <a id="ContentPlaceHolder1_lnkCoApp4" class="AppTabs btn-sm" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp4&#39;,&#39;&#39;)" style="background: #343a40;">Co-Applicant-4</a>
+                        <a id="ContentPlaceHolder1_lnkCoApp5" class="AppTabs btn-sm" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp5&#39;,&#39;&#39;)" style="background: #343a40;">Co-Applicant-5</a>
+                    </div>
                     <div style="height: 10px;"></div>
-                <span id="ContentPlaceHolder1_spanMessage" style="color: red; font-size: 18px;"></span>
-                <div style="height: 10px;"></div>
-                <div class="frames">
-                    <div class="panel-body">
+                    <span id="ContentPlaceHolder1_spanMessage" style="color: red; font-size: 18px;"></span>
+                    <div style="height: 10px;"></div>
+                    <div class="frames">
+                        <div class="panel-body">
 
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div hidden class="form-group">
-                            <div class="col-md-4">
-                                <label asp-for="ID" class="control-label"></label>
-                                <input asp-for="ID" class="form-control" />
-                                <span asp-validation-for="ID" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <div id="ContentPlaceHolder1_alertMsg">
-                            <div style="display:flex">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div hidden class="form-group">
                                 <div class="col-md-4">
-                                    <label class="col-md-5">Form No</label>
+                                    <label asp-for="ID" class="control-label"></label>
+                                    <input asp-for="ID" class="form-control" />
+                                    <span asp-validation-for="ID" class="text-danger"></span>
                                 </div>
-                                <div class="col-md-5">
-                                    <div class="input-control text" style="display:inline-flex">
-                                        <span id="ContentPlaceHolder1_lblFormNo" style="color: black"><b>@Model.FormNo</b></span>
+                            </div>
+
+                            <div id="ContentPlaceHolder1_alertMsg" style="padding-left: 8%;">
+                                <div style="display:flex">
+                                    <div class="col-md-4">
+                                        <label class="col-md-5">Form No</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="input-control text" style="display:inline-flex">
+                                            <span id="ContentPlaceHolder1_lblFormNo" style="color: black"><b>@Model.FormNo</b></span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
 
-                        <div style="display:flex;">
-                            <div class="col-md-4">
-
-                            </div>
-                            <div style="padding-left:13rem; text-align:end;display:inline-flex;" class="col-md-5"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
-                        </div>
-
-
-                        <div id="divConverted1">
-                            <h2><b>Customer Details</b></h2>
-                        </div>
-                        <br />
-
-                        <div style="height: 5px;"></div>
-
-                        <div class="row tab">
-                            <div class="col-md-4">
-                                <label class="col-md-5">Customer Name<span style="color: Red">&nbsp;*</span></label>
-
-                            </div>
-                            <div class="col-md-5">
-                                <div class="input-control text">
-
-                                    <input type="text" asp-for="CustomerName" readonly="readonly" id="ContentPlaceHolder1_txtCustomerName" class="form-control required" placeholder="XYZ">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="input-control">
-                                    <input type="submit" value="Edit" id="ContentPlaceHolder1_btnEditName">
+                            <div style="display:flex;">
+                                <div class="col-md-4">
 
                                 </div>
+                                <div style="width:100%; text-align:center;"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
                             </div>
-                        </div>
-                        <br />
 
-                        <div style="height: 5px;"></div>
 
-                        <div class="row tab">
-                            <div class="col-md-4">
-                                <label class="col-md-5">Customer Email<span style="color: Red">&nbsp;*</span></label>
-
+                            <div id="divConverted1">
+                                <h2><b style="padding-left: 8%;">Customer Details</b></h2>
                             </div>
-                            <div class="col-md-5">
-                                <div class="input-control text">
+                            <br />
 
-                                    <input type="text" asp-for="Email" readonly="readonly" id="ContentPlaceHolder1_txtEmail" class="form-control" placeholder="abc@xyz.com">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="input-control">
-                                    <input type="submit" value="Edit" id="ContentPlaceHolder1_btnEditEmail">
-                                </div>
-                            </div>
-                        </div>
-                        <br />
+                            <div style="height: 5px;"></div>
 
-                        <div style="height: 5px;"></div>
-
-                        <div class="row tab">
-                            <div class="col-md-4">
-                                <label class="col-md-5">Customer Mobile<span style="color: Red">&nbsp;*</span></label>
-
-                            </div>
-                            <div class="col-md-5">
-                                <div class="input-control text">
-
-                                    <input asp-for="MobileNo" maxlength="10" readonly="readonly" id="ContentPlaceHolder1_txtMobile" type="number" class="form-control" placeholder="Mobile No">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="input-control">
-                                    <input type="submit" value="Edit" id="ContentPlaceHolder1_btnEditMobile">
+                            <div class="row tab" style="padding-left: 8%;">
+                                <div class="col-md-6">
+                                    <label class="col-md-5">Customer Name<span style="color: Red">&nbsp;*</span></label>
 
                                 </div>
-                            </div>
-                        </div>
-                        <br />
+                                <div class="col-md-4">
+                                    <div class="input-control text">
 
-                        <div style="height: 5px;"></div>
+                                        <input type="text" asp-for="CustomerName" readonly="readonly" id="ContentPlaceHolder1_txtCustomerName" class="form-control required" placeholder="XYZ">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="input-control">
+                                        <input type="submit" value="Edit" id="ContentPlaceHolder1_btnEditName">
 
-                        <div class="row tab">
-                            <div class="col-md-4">
-                                <label class="col-md-5">GST Number<span style="color: Red">&nbsp;*</span></label>
-
-                            </div>
-                            <div class="col-md-5">
-                                <div class="input-control text">
-
-                                    <input asp-for="GstNo" type="text" maxlength="15" id="ContentPlaceHolder1_txtGstNumber" class="form-control uppercase" placeholder="GST Number">
+                                    </div>
                                 </div>
                             </div>
+                            <br />
+
+                            <div style="height: 5px;"></div>
+
+                            <div class="row tab" style="padding-left: 8%;">
+                                <div class="col-md-6">
+                                    <label class="col-md-5">Customer Email<span style="color: Red">&nbsp;*</span></label>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-control text">
+
+                                        <input type="text" asp-for="Email" readonly="readonly" id="ContentPlaceHolder1_txtEmail" class="form-control" placeholder="abc@xyz.com">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="input-control">
+                                        <input type="submit" value="Edit" id="ContentPlaceHolder1_btnEditEmail">
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+
+                            <div style="height: 5px;"></div>
+
+                            <div class="row tab" style="padding-left: 8%;">
+                                <div class="col-md-6">
+                                    <label class="col-md-5">Customer Mobile<span style="color: Red">&nbsp;*</span></label>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-control text">
+
+                                        <input asp-for="MobileNo" maxlength="10" readonly="readonly" id="ContentPlaceHolder1_txtMobile" type="number" class="form-control" placeholder="Mobile No">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="input-control">
+                                        <input type="submit" value="Edit" id="ContentPlaceHolder1_btnEditMobile">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+
+                            <div style="height: 5px;"></div>
+
+                            <div class="row tab" style="padding-left: 8%;">
+                                <div class="col-md-6">
+                                    <label class="col-md-5">GST Number<span style="color: Red">&nbsp;*</span></label>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-control text">
+
+                                        <input asp-for="GstNo" type="text" maxlength="15" id="ContentPlaceHolder1_txtGstNumber" class="form-control uppercase" placeholder="GST Number">
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+
+                            <div style="height: 5px;"></div>
+
+                            <div class="row tab" style="padding-left: 8%;">
+                                <div class="col-md-6">
+                                    <label class="col-md-5">Employee Type<span style="color: Red">&nbsp;*</span></label>
+                                </div>
+                                <div class="col-md-4">
+                                    <table id="ContentPlaceHolder1_rdbEmployeeType" class="rbl" style="font-weight:normal;width:60%;">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <input id="ContentPlaceHolder1_rdbEmployeeType_0" type="radio" asp-for="EmploymentType" value="@Model.EmploymentType" checked="checked">
+                                                    &nbsp<label for="ContentPlaceHolder1_rdbEmployeeType_0">@Model.EmploymentType</label>
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <br />
+
+                            <div style="height: 5px;"></div>
+
+                            <div class="row tab">
+
+                                <div class="col-md-7">
+                                    <a id="ContentPlaceHolder1_linkGstrptDownload" href="https://google.com" target="_blank">Click here to download GST report</a>
+                                </div>
+                            </div>
+
+
+                            <div style="height: 5px; display: none;"></div>
+                            <div id="divConverted1">
+                                <h2><b style="padding-left: 8%;">Upload Files</b></h2>
+                            </div>
+                            <br />
+
+                            <div style="height: 5px; display: none;"></div>
+
+                            <div class="row tab" style="padding-left: 8%;">
+                                <div class="col-md-4">
+                                    <label class="col-md-4">Excel File<span style="color: Red">&nbsp;*</span></label>
+
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="file" asp-for="ExcelFilePath" id="ContentPlaceHolder1_fileUploadExcel" accept=".xls,.xlsx" onchange="validate_fileupload(this,&#39;xls,xlsx&#39;);">
+                                </div>
+                            </div>
+                            <br />
+
+                            <div style="height: 5px; display: none;"></div>
+
+                            <div class="row tab" style="padding-left: 8%;">
+                                <div class="col-md-4">
+                                    <label class="col-md-6">Pdf file<span style="color: Red">&nbsp;*</span></label>
+
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="file" asp-for="PdfFilePath" id="ContentPlaceHolder1_fileUploadPdf" accept=".pdf" onchange="validate_fileupload(this,&#39;pdf&#39;);">
+                                </div>
+                            </div>
+
+                            <br>
+                            <br>
                         </div>
-                        <br />
-
-                        <div style="height: 5px;"></div>
-
-                        <div class="row tab">
-                            <div class="col-md-4">
-                                <label class="col-md-5">Employee Type<span style="color: Red">&nbsp;*</span></label>
-                            </div>
-                            <div class="col-md-7">
-                                <table id="ContentPlaceHolder1_rdbEmployeeType" class="rbl" style="font-weight:normal;width:60%;">
-                                    <tbody>
-                                        <tr>
-                                            <td><input id="ContentPlaceHolder1_rdbEmployeeType_0" type="radio" asp-for="EmploymentType" value="@Model.EmploymentType" checked="checked"><label for="ContentPlaceHolder1_rdbEmployeeType_0">@Model.EmploymentType</label></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <br />
-
-                        <div style="height: 5px;"></div>
-
-                        <div class="row tab">
-
-                            <div class="col-md-7">
-                                <a id="ContentPlaceHolder1_linkGstrptDownload" href="https://google.com" target="_blank">Click here to download GST report</a>
-                            </div>
-                        </div>
-
-
-                        <div style="height: 5px; display: none;"></div>
-                        <div id="divConverted1">
-                            <h2><b>Upload Files</b></h2>
-                        </div>
-                        <br />
-
-                        <div style="height: 5px; display: none;"></div>
-
-                        <div class="row tab">
-                            <div class="col-md-4">
-                                <label class="col-md-4">Excel File<span style="color: Red">&nbsp;*</span></label>
-
-                            </div>
-                            <div class="col-md-8">
-                                <input type="file" asp-for="ExcelFilePath" id="ContentPlaceHolder1_fileUploadExcel" accept=".xls,.xlsx" onchange="validate_fileupload(this,&#39;xls,xlsx&#39;);">
-                            </div>
-                        </div>
-                        <br />
-
-                        <div style="height: 5px; display: none;"></div>
-                        <div class="row tab">
-                            <div class="col-md-4">
-                                <label class="col-md-4">Pdf file<span style="color: Red">&nbsp;*</span></label>
-
-                            </div>
-                            <div class="col-md-8">
-                                <input type="file" asp-for="PdfFilePath" id="ContentPlaceHolder1_fileUploadPdf" accept=".pdf" onchange="validate_fileupload(this,&#39;pdf&#39;);">
-                            </div>
-                        </div>
-
-                        <br>
-                        <br>
                         <div hidden class="form-group">
                             <label asp-for="ApplicantType" class="control-label"></label>
                             <input asp-for="ApplicantType" class="form-control" />
@@ -433,11 +447,10 @@
                         </div>
                         <br>
                         <br>
-
                     </div>
                 </div>
             </div>
-        </div>
+            </div>
     </div>
     </div>
 

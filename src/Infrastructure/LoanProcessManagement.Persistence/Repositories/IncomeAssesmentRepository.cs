@@ -33,7 +33,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                                 select new GstAddEnquiryCommandDto
                                 {
                                     ID = A.ID,
-                                    FormNo = B.Id,
+                                    FormNo = int.Parse(B.FormNo),
                                     CustomerName = A.CustomerName,
                                     Email = A.Email,
                                     MobileNo = A.MobileNo,

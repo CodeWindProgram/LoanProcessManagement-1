@@ -6,75 +6,78 @@
 }
 
 <style>
-    table {
-        font-size: 20px;
+    .panel-heading {
+        color: white;
+        background-color: #343a40;
+        border-bottom: 1px solid rgba(0,0,0,.125);
+        padding: 0.75rem 1.25rem;
+        position: relative;
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
     }
 </style>
 
 <div class="container app">
     <div class="col-sm-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
-            <div class="panel-heading">Lead List</div>
+            <div class="panel-heading"><h3>Lead List</h3></div>
             <div class="panel-body">
-            </div>
-            <div id="alertMsg" visible="false" runat="server">
-                <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
-                <div style="margin-bottom: 10px"></div>
-            </div>
-            <div class=" card">
-                <div class="card">
-                    <table id="GSTLeadListing" class="table">
-                        <thead>
+            <div class=" card" style="padding:5px;">
+                <div id="alertMsg" visible="false" runat="server">
+                    <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
+                    <div style="margin-bottom: 10px"></div>
+                </div>
+                <table id="GSTLeadListing" class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.FormNo)*@
+                                Form No
+
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.CustomerName)*@
+                                Customer Name
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.DSAName)*@
+                                DSA Name
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.ProductName)*@
+                                Product
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.Amount)*@
+                                Loan Amount
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
                             <tr>
 
-                                <th>
-                                    @*@Html.DisplayNameFor(model => model.FormNo)*@
-                                    Form No
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FormNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CustomerName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DSAName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProductName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Amount)
+                                </td>
 
-                                </th>
-                                <th>
-                                    @*@Html.DisplayNameFor(model => model.CustomerName)*@
-                                    Customer Name
-                                </th>
-                                <th>
-                                    @*@Html.DisplayNameFor(model => model.DSAName)*@
-                                    DSA Name
-                                </th>
-                                <th>
-                                    @*@Html.DisplayNameFor(model => model.ProductName)*@
-                                    Product 
-                                </th>
-                                <th>
-                                    @*@Html.DisplayNameFor(model => model.Amount)*@
-                                    Loan Amount
-                                </th>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.FormNo)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.CustomerName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.DSAName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.ProductName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Amount)
-                                    </td>
-
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+                        }
+                    </tbody>
+                </table>
                 </div>
             </div>
         </div>
