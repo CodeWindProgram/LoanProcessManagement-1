@@ -219,6 +219,10 @@
             var pieChartCanvas1 = $('#pieChart1').get(0).getContext('2d')
             var pieChartCanvas2 = $('#pieChart2').get(0).getContext('2d')
 
+            //var pieColor2 = document.getElementById("pieColor");
+            //var pieColorName2 = document.getElementById("pieColorName");
+            //var pieColorValue2 = document.getElementById("pieColorValue");
+
             var pieData = donutData;
             var pieOptions = {
                 maintainAspectRatio: false,
@@ -235,7 +239,18 @@
                 options: pieOptions
             })
 
-        });
+            //var lengthValue = 5; //length(donutData.labels);
+
+            //for (let i = 0; i < lengthValue; i++) {
+            //    pieColor2.backgroundColor = donutData.datasets.backgroundColor[i];
+            //    pieColorName2.textContent = donutData.labels[i];
+            //    pieColorValue2.textContent = donutData.labels.data[i];
+
+            //    pieChartValues2.textContent = pieColor2 + pieColorName2 + pieColorValue2;
+            //    <br/>
+            //}
+            
+        }); 
     </script>
 </body>
 
