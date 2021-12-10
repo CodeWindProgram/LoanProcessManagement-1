@@ -41,5 +41,7 @@ namespace LoanProcessManagement.Domain.Entities
         //public string Qualification { get; set; } //
         public int NoOfBankAccounts { get; set; }
         public bool IsActive { get; set; }
+
+        public ICollection<LpmLeadITRDetails> LpmLeadITRDetails { get; set; }
     }
 }
