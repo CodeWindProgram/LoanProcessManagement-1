@@ -41,7 +41,7 @@
                 <div class="panel-body">
                     <div class="card" style="padding:5px;">
                         <div>
-                            <button id="btn1" class="btn-lg">
+                            <button id="btn1" class="btn">
                                 <a id="act1" asp-action="CreateMenu">Create Menu</a>
                             </button>
                         </div>
@@ -86,8 +86,8 @@
                                             @Html.DisplayFor(modelItem => item.Position)
                                         </td>
                                         <td>
-                                            @Html.ActionLink("Modify", "UpdateMenu", new { id = item.Id })
-                                            @Html.ActionLink("Remove", "DeleteMenu", new { id = item.Id })
+                                            @Html.ActionLink("Modify", "UpdateMenu", new { id = item.Id }, new { @Class = "btn btn-primary btn-sm" })
+                                            @Html.ActionLink("Remove", "DeleteMenu", new { id = item.Id }, new { @Class = "btn btn-danger btn-sm" })
                                         </td>
                                     </tr>
                                 }

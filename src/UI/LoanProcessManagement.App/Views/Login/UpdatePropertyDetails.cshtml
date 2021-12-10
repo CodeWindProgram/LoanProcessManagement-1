@@ -107,15 +107,29 @@
                             </div>
 
 
-                            <div class="initial1">
-                                <div class="row">
+                            <div class="initial1" style="padding-left:1%;">
+                                <div class="form-group row">
 
-                                    <label asp-for="PropertyUnderConstruction" class="col-sm-4 col-form-label">a.Under-Construction<span style="color: red; width: 10%;">*</span></label>
-                                    <div class="col-sm-2">
-                                        <input asp-for="PropertyUnderConstruction" class="form-control" type="radio" style="pointer-events: none;" autofocus value="YES" id="Yes" readonly /><span class="radio-button">YES</span>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <input asp-for="PropertyUnderConstruction" class="form-control" type="radio" style="pointer-events: none;" value="NO" id="No" readonly />NO
+                                    @*<label asp-for="PropertyUnderConstruction" class="col-sm-4 col-form-label">a.Under-Construction<span style="color: red; width: 10%;">*</span></label>
+        <div class="col-sm-2">
+            <input asp-for="PropertyUnderConstruction" class="form-control" type="radio" style="pointer-events: none;" autofocus value="YES" id="Yes" readonly /><span class="radio-button">YES</span>
+        </div>
+        <div class="col-sm-2">
+            <input asp-for="PropertyUnderConstruction" class="form-control" type="radio" style="pointer-events: none;" value="NO" id="No" readonly />NO
+        </div>*@
+
+
+                                    <label asp-for="PropertyUnderConstruction">a.Under-Construction<span style="color: red; width: 10%;">*</span></label>
+                                    <div class="form-group row" style="justify-content: center; margin-left: 16%;">
+                                        <div class="col-sm-4">
+                                            <input asp-for="PropertyUnderConstruction" type="radio" autofocus value="Yes" id="yes" readonly />
+                                            Yes
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input asp-for="PropertyUnderConstruction" type="radio" value="No" id="No" checked readonly />
+                                            No
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
