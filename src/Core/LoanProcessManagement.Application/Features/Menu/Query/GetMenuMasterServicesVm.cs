@@ -12,6 +12,9 @@ namespace LoanProcessManagement.Application.Features.Menu.Query
         public string Link { get; set; }
         public string Icon { get; set; }
         public int? Position { get; set; }
+
+
+        public int? ParentID { get; set; }
     } 
     #endregion
 }

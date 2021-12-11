@@ -43,6 +43,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                                     Icon = B.Icon,
                                     Link = B.Link,
                                     MenuName = B.MenuName,
+                                    ParentId = B.ParentId
                                 }).ToListAsync();
             return result;
         }
