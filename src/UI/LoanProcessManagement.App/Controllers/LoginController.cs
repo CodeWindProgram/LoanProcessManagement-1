@@ -437,7 +437,7 @@ namespace LoanProcessManagement.App.Controllers
         {
             var response = await _accountService.GetProperty(lead_Id);
             var flag = 0;
-
+            ViewBag.lead_Id = lead_Id;
             if (response.Data.PropertyID != 0 && response.Data.PropertyPincode != null && response.Data.PropertyUnderConstruction != null && response.Data.ProjectName != null && response.Data.ProjectAddress != null && response.Data.IsSanctionedPlanReceivedID != null) {
                 flag = 1;
             }

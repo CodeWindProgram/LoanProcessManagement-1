@@ -110,7 +110,7 @@
                         My Profile <i class="fa fa-angle-down ml-2 opacity-8"></i>
                     </a>
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"
-                        style="margin: 0.125rem 0 0 -55%">
+                        style="margin: 0.125rem 0 0 -76%">
                         <li class="dropdown-item"><b>Name:</b> @User.Identities.FirstOrDefault().Name</li>
                         @*(@User.Claims.FirstOrDefault(c => c.Type == "Role").Value)*@
                         <li class="dropdown-item"><b>Branch Name:</b> @User.Identities.FirstOrDefault().FindFirst("Branch").Value</li>
@@ -202,11 +202,11 @@
         $(function () {
             var donutData = {
                 labels: [
-                    'Branch Data Entry',
-                    'HO(In-Principal Sanction)',
-                    'Branch Processing',
-                    'Lost Lead/Reject Lead',
-                    'Disbursement',
+                    'Branch Data Entry (7)',
+                    'HO(In-Principal Sanction) (5)',
+                    'Branch Processing (4)',
+                    'Lost Lead/Reject Lead (6)',
+                    'Disbursement (3)',
                 ],
                 datasets: [
                     {
