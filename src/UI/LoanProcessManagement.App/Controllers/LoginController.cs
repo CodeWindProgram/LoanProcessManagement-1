@@ -43,7 +43,8 @@ namespace LoanProcessManagement.App.Controllers
             bool isAuthenticated = User.Identity.IsAuthenticated;
             if (isAuthenticated)
             {
-                return View("~/Views/home/dashboard.cshtml");
+                return RedirectToAction("dashboard", "home");
+                //return View("~/Views/home/dashboard.cshtml");
             }
             ViewBag.ReturnUrl = returnUrl;
             return View();
@@ -563,8 +564,7 @@ namespace LoanProcessManagement.App.Controllers
                 TempData["Issuccesflag"] = activeUserAccountResponse != null && activeUserAccountResponse.Data != null ? activeUserAccountResponse.Data.Succeeded : false;
                 TempData["Message"] = activeUserAccountResponse != null && activeUserAccountResponse.Data != null ? activeUserAccountResponse.Data.Message : "Failed to update status";
             }
-            TempData["Issuccesflag"] = false;
-            return RedirectToAction("Index", "UserList");
+            return Json(activeUserAccountResponse);
         } 
         #endregion
     }

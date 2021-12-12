@@ -19,6 +19,8 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string UpdateUser = "api/v1/User/updateUser";
         public const string GetLeadByLeadId = "api/v1/LeadList/GetLeadById/";
         public const string GetStatus = "api/v1/LeadStatus/getLeadStatus/";
+        public const string GetStatusCount = "api/v1/LeadStatus/GetStatusCount";
+
         public const string GetLoanProducts = "api/v1/Product/GetLoanProducts";
         public const string GetInsuranceProducts = "api/v1/Product/GetInsuranceProducts";
         public const string ModifyLead = "api/v1/LeadList/ModifyLead";
@@ -34,6 +36,7 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string GetApplicantDetailsByLeadId = "api/v1/ApplicantDetails/GetApplicantDetailsByLeadId?lead_Id={0}&applicantType={1}";
         public const string GetQueryHistoryByLeadId = "api/v1/QueryHistory/GetQueryHistoryByLeadId?lead_Id={0}";
         public const string GetAllLoanSchemes = "api/v1/LoanSchemes/GetAllLoanSchemes";
+        public const string GetAllLoanSchemesByProductId = "api/v1/LoanSchemes/GetLoanSchemesByProductId";
         public const string UnlockUserAccountOnToggleSwitch = "api/v1/UnlockUserAccount/UnlockUserAccountOnToggleSwitch";
         public const string ActivateUserAccountOnToggleSwitch = "api/v1/UnlockUserAccount/ActivateUserAccountOnToggleSwitch";
         public const string LockedUserList = "api/v1/UserList/GetLockedUserList";

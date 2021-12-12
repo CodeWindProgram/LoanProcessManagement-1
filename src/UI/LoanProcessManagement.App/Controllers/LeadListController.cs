@@ -301,6 +301,8 @@ namespace LoanProcessManagement.App.Controllers
             //var loanProducts = await _commonService.GetAllLoanProducts();
             var loanProducts = await _commonService.GetAllLoanProduct();
             ViewBag.loanProducts = new SelectList(loanProducts.Data, "Id", "ProductName");
+            var loanSchemes = await _commonService.GetAllLoanScheme();
+            ViewBag.loanSchemes = new SelectList(loanSchemes.Data, "Id", "SchemeName");
             return View();
         }
         #endregion
@@ -351,6 +353,22 @@ namespace LoanProcessManagement.App.Controllers
             ViewBag.loanProducts = new SelectList(loanProducts, "Id", "ProductName");
 
             return View();
+        }
+        #endregion
+
+        #region LoanSchemeByProductId functionality by - Pratiksha Poshe - 12/12/2021
+        /// <summary>
+        /// 12/12/2021 - LoanSchemeByProductId functionality
+        //	commented by Pratiksha Poshe
+        /// </summary>
+        /// <param name="Product_Id">Product_Id</param>
+        /// <returns>View</returns>
+        [Route("[controller]/[action]/{Product_Id}")]
+        [HttpGet("LoanSchemeByProductId")]
+        public async Task<IActionResult> LoanSchemeByProductId(long Product_Id)
+        {
+            var loanSchemesByProductId = await _commonService.GetAllLoanSchemeByProductId(Product_Id);
+            return Json(loanSchemesByProductId);
         }
         #endregion
     }

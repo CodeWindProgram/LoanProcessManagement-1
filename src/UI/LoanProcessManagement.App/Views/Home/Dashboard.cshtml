@@ -1,6 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model LoanProcessManagement.Application.Features.LeadStatus.Queries.GetLeadStatusCountDto
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Home";
@@ -25,7 +23,7 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>150</h3>
+                        <h3>@Model.ConvertedLeadCount</h3>
                         <p>Converted Lead</p>
                     </div>
                     @*<div class="icon">
@@ -39,8 +37,7 @@
                 <!-- small box -->
                 <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3>100</h3>
-
+                        <h3>@Model.SanctionedCount</h3>
                         <p>Final Sanction</p>
                     </div>
                     @*<div class="icon">
@@ -54,7 +51,7 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3>50</h3>
+                        <h3>@Model.DisbursedCount</h3>
                         <p>Disbursement</p>
                     </div>
                     @*<div class="icon">
@@ -68,7 +65,7 @@
                 <!-- small box -->
                 <div class="small-box bg-danger">
                     <div class="inner">
-                        <h3>25</h3>
+                        <h3>@Model.LostAndRejectCount</h3>
                         <p>Lost/Rejected</p>
                     </div>
                     @*<div class="icon">
@@ -299,58 +296,56 @@
 <script>
 
     $(function () {
-        var donutData = {
-            labels: [
-                'Branch Data Entry (7)',
-                'HO(In-Principal Sanction) (5)',
-                'Branch Processing (4)',
-                'Lost Lead/Reject Lead (6)',
-                'Disbursement (3)',
-            ],
-            datasets: [
-                {
-                    data: [7, 5, 4, 6, 3],
-                    backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc'],
-                }
-            ]
-        }
-        // Get context with jQuery - using jQuery's .get() method.
-        var pieChartCanvas1 = $('#pieChart1').get(0).getContext('2d')
-        var pieChartCanvas2 = $('#pieChart2').get(0).getContext('2d')
+            var donutData = {
+                labels: [
+                    "Branch Data Entry (@Model.BranchDataEntryCount)",
+                    "HO(In-Principal Sanction (@Model.HOInPrinSanCount)",
+                    "Branch Processing (@Model.BranchProcessingCount)",
+                    "Lost Lead/Reject Lead (@Model.LostAndRejectCount)",
+                    "Disbursement (@Model.DisbursedCount)",
+                ],
+                datasets: [
+                    {
+                        data: ['@Model.BranchDataEntryCount', '@Model.HOInPrinSanCount',
+                            '@Model.BranchProcessingCount', '@Model.LostAndRejectCount', '@Model.DisbursedCount'],
+                        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc'],
+                    }
+                ]
+            }
+            // Get context with jQuery - using jQuery's .get() method.
+            var pieChartCanvas1 = $('#pieChart1').get(0).getContext('2d')
+            var pieChartCanvas2 = $('#pieChart2').get(0).getContext('2d')
 
-        //var pieColor2 = document.getElementById("pieColor");
-        //var pieColorName2 = document.getElementById("pieColorName");
-        //var pieColorValue2 = document.getElementById("pieColorValue");
+            //var pieColor2 = document.getElementById("pieColor");
+            //var pieColorName2 = document.getElementById("pieColorName");
+            //var pieColorValue2 = document.getElementById("pieColorValue");
 
-        var pieData = donutData;
-        var pieOptions = {
-            maintainAspectRatio: false,
-            responsive: true,
-        }
-        new Chart(pieChartCanvas1, {
-            type: 'pie',
-            data: pieData,
-            options: pieOptions
-        })
-        new Chart(pieChartCanvas2, {
-            type: 'pie',
-            data: pieData,
-            options: pieOptions
-        })
+            var pieData = donutData;
+            var pieOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+            }
+            new Chart(pieChartCanvas1, {
+                type: 'pie',
+                data: pieData,
+                options: pieOptions
+            })
+            new Chart(pieChartCanvas2, {
+                type: 'pie',
+                data: pieData,
+                options: pieOptions
+            })
 
-        //var lengthValue = 5; //length(donutData.labels);
+            //var lengthValue = 5; //length(donutData.labels);
 
-        //for (let i = 0; i < lengthValue; i++) {
-        //    pieColor2.backgroundColor = donutData.datasets.backgroundColor[i];
-        //    pieColorName2.textContent = donutData.labels[i];
-        //    pieColorValue2.textContent = donutData.labels.data[i];
+            //for (let i = 0; i < lengthValue; i++) {
+            //    pieColor2.backgroundColor = donutData.datasets.backgroundColor[i];
+            //    pieColorName2.textContent = donutData.labels[i];
+            //    pieColorValue2.textContent = donutData.labels.data[i];
 
-        //    pieChartValues2.textContent = pieColor2 + pieColorName2 + pieColorValue2;
-        //    <br/>
-        //}
+            //    pieChartValues2.textContent = pieColor2 + pieColorName2 + pieColorValue2;
+            //    <br/>
+            //}
 
-    });
+        });
 </script>
-
-
-

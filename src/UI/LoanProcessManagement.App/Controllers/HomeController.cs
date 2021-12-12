@@ -1,6 +1,7 @@
 ﻿using LoanProcessManagement.App.Models;
 using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.DSACorner.Query.DSACornerList;
+using LoanProcessManagement.Application.Features.LeadStatus.Queries;
 using LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands;
 using LoanProcessManagement.Application.Features.Menu.Commands.DeleteCommand;
 using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand;
@@ -25,12 +26,14 @@ namespace LoanProcessManagement.App.Controllers
     public class HomeController : Controller
     {       
         private readonly IAccountService _accountService;
+        private readonly ICommonServices _commonService;
         private readonly IMenuService _menuService;
         private readonly IRoleMasterService _roleMasterService;
-        public HomeController(IAccountService accountService, IMenuService menuService, IRoleMasterService roleMasterService)
+        public HomeController(IAccountService accountService, ICommonServices commonService, IMenuService menuService, IRoleMasterService roleMasterService)
         {
             _roleMasterService = roleMasterService;
             _accountService = accountService;
+            _commonService = commonService;
             _menuService = menuService;
         }
 
@@ -66,9 +69,18 @@ namespace LoanProcessManagement.App.Controllers
 
         public async Task<IActionResult> Dashboard()
         {
-            //return View("~/Views/Shared/_NewLayout.cshtml");
-
-            return View();
+            var userRoleId=User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value;
+            var userBranchId = User.Claims.FirstOrDefault(c => c.Type == "BranchID").Value;
+            var userLgId = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value;
+            GetLeadStatusCountQuery req = new GetLeadStatusCountQuery()
+            {
+                UserRoleId = long.Parse(userRoleId),
+                BranchId = long.Parse(userBranchId),
+                LgId = userLgId
+            };
+            var res=await _commonService.GetAllStatusCount(req);
+            res.Data.LostAndRejectCount = res.Data.LostLeadCount + res.Data.RejectedCount;
+            return View(res.Data);
         }
 
 
