@@ -1,4 +1,7 @@
-﻿using LoanProcessManagement.Domain.CustomModels;
+﻿using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.ActivateUserAccountToggleSwitch;
+using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockUserAccountToggleSwitch;
+using LoanProcessManagement.Domain.CustomModels;
+using LoanProcessManagement.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,6 +23,9 @@ namespace LoanProcessManagement.Application.Contracts.Persistence
 
         Task<UnlockUserAccountModel> ActivateUserAccountWithEvents(UnlockUserAccountModel unlockUserAccount);
 
+        Task<UnlockUserAccountToggleSwitchDto> UpdateUnlockStatus(string EmployeeID, bool IsLocked);
+
+        Task<ActivateUserAccountToggleSwitchDto> UpdateActivatedStatus(string EmployeeID, bool IsActive);
     }
     #endregion
 }

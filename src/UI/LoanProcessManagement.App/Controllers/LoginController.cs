@@ -505,5 +505,58 @@ namespace LoanProcessManagement.App.Controllers
 
         }
         #endregion
+
+        #region Method For Unlock/Lock User on Toggle Switch - Pratiksha Poshe - 11/12/2021 
+        /// <summary>
+        /// 11/12/2021 -  Method For Unlock/Lock User on Toggle Switch
+        ///  Commented by Pratiksha Poshe
+        /// </summary>
+        /// <param name="EmployeeId"></param>
+        /// <param name="IsLocked"></param>
+        /// <returns></returns>
+        [HttpPost("/UnlockUserAccountOnToggleSwitch")]
+        public async Task<IActionResult> UnlockUserAccountOnToggleSwitch(string EmployeeId, bool IsLocked)
+        {
+            UnlockUserAccountOnToggleSwitchVm unlockUserAccount = new UnlockUserAccountOnToggleSwitchVm();
+            unlockUserAccount.EmployeeId = EmployeeId;
+            unlockUserAccount.IsLocked = IsLocked;
+            var unlockUserAccountResponse = await _accountService.UnlockUserAccountOnToggleSwitches(unlockUserAccount);
+            if (unlockUserAccountResponse.Succeeded)
+            {
+                TempData["Issuccesflag"] = unlockUserAccountResponse.Data.Succeeded;
+                TempData["Message"] = unlockUserAccountResponse.Data.Message;
+                return RedirectToAction("Index", "UserList");
+            }
+
+            TempData["Issuccesflag"] = false;
+            return RedirectToAction("Index", "UserList");
+        }
+        #endregion
+
+        #region Method For Activate/Deactivate User on Toggle Switch - Pratiksha Poshe - 11/12/2021 
+        /// <summary>
+        ///  11/12/2021 -  Method For Activate/Deactivate User on Toggle Switch
+        ///  Commented by Pratiksha Poshe
+        /// </summary>
+        /// <param name="EmployeeId"></param>
+        /// <param name="IsActive"></param>
+        /// <returns></returns>
+        [HttpPost("/ActivateUserAccountOnToggleSwitch")]
+        public async Task<IActionResult> ActivateUserAccountOnToggleSwitch(string EmployeeId, bool IsActive)
+        {
+            ActivateUserAccountOnToggleSwitchVm activeUserAccount = new ActivateUserAccountOnToggleSwitchVm();
+            activeUserAccount.EmployeeId = EmployeeId;
+            activeUserAccount.IsActive = IsActive;
+            var activeUserAccountResponse = await _accountService.ActivateUserAccountOnToggleSwitches(activeUserAccount);
+            if (activeUserAccountResponse.Succeeded)
+            {
+                TempData["Issuccesflag"] = activeUserAccountResponse.Data.Succeeded;
+                TempData["Message"] = activeUserAccountResponse.Data.Message;
+                return RedirectToAction("Index", "UserList");
+            }
+            TempData["Issuccesflag"] = false;
+            return RedirectToAction("Index", "UserList");
+        } 
+        #endregion
     }
 }

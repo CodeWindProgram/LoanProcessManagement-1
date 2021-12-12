@@ -53,6 +53,8 @@ using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenuMaps.GetAl
 using LoanProcessManagement.Application.Features.Menu.Commands.DeleteMenuMapById;
 using LoanProcessManagement.Application.Features.ReportsLeadList.Queries;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Queries.UnlockedAndLockedUsers;
+using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenus;
+using LoanProcessManagement.Application.Features.UserList.Query.GetLockedUserList;
 
 namespace LoanProcessManagement.Application.Profiles
 {
@@ -80,6 +82,8 @@ namespace LoanProcessManagement.Application.Profiles
             CreateMap<LpmMenuMaster, MenuListQuery>().ReverseMap();
             CreateMap<LpmMenuMaster, MenuListQueryVm>().ReverseMap();
             CreateMap<LpmMenuMaster, GetMenuByIdQueryVm>().ReverseMap();
+            CreateMap<LpmMenuMaster, GetAllMenusQueryVm>().ReverseMap();
+            CreateMap<LpmMenuMaster, GetAllMenusQuery>().ReverseMap();
 
             CreateMap<Category, CategoryDto>();
             CreateMap<Category, CategoryListVm>();
@@ -118,6 +122,10 @@ namespace LoanProcessManagement.Application.Profiles
             #endregion
             #region Add mapping has created by - Pratiksha Poshe - 09/11/2021
             CreateMap<AddLeadCommand, LpmLeadMaster>().ReverseMap();
+            #endregion
+            #region GetLockedUserList mapping has created by - Pratiksha Poshe - 12/12/2021
+            CreateMap<LpmUserMaster, GetLockedUserListQueryVm>().ReverseMap();
+            CreateMap<UserMasterListModel, GetLockedUserListQueryVm>().ReverseMap();
             #endregion
 
             CreateMap<LPMGSTEnquiryDetail, GstCreateEnquiryCommand>().ReverseMap();

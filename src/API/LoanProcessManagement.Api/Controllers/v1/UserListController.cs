@@ -1,4 +1,5 @@
 ﻿using LoanProcessManagement.Application.Features.UserList.Query;
+using LoanProcessManagement.Application.Features.UserList.Query.GetLockedUserList;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -33,10 +34,23 @@ namespace LoanProcessManagement.Api.Controllers.v1
         {
             var res = await _mediator.Send(new GetUserListQuery());
             return Ok(res);
-        } 
+        }
         #endregion
 
-
+        #region Get All Locked User List - Pratiksha Poshe - 12/12/2021
+        /// <summary>
+        /// 2021/12/12 -  Get All Locked User List API Call  
+        /// Commented By Pratiksha Poshe
+        /// </summary>
+        /// <returns>LockedUserListResponse</returns>
+        [HttpGet("GetLockedUserList")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult> GetLockedUserList()
+        {
+            var res = await _mediator.Send(new GetLockedUserListQuery());
+            return Ok(res);
+        }
+        #endregion
 
     }
 }

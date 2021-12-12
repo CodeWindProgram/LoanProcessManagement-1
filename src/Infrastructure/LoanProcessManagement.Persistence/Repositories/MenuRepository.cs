@@ -153,31 +153,38 @@ namespace LoanProcessManagement.Persistence.Repositories
         }
         #endregion
 
+        #region RoleList - Saif Khan - 19/11/2021
+        /// <summary>
+        /// RoleList - Saif Khan - 19/11/2021
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<Response<LpmUserRoleMenuMap>> RoleList(LpmUserRoleMenuMap request)
         {
             await _dbContext.LpmUserRoleMenuMaps.AddAsync(request);
             await _dbContext.SaveChangesAsync();
             return new Response<LpmUserRoleMenuMap>(request);
         }
+        #endregion
 
-        //public async Task<Response<IEnumerable<LpmUserRoleMenuMap>>> ListAllMenuMaps(GetTheMenuMapsCommand request)
-        //{
-        //    await _dbContext.LpmUserRoleMenuMaps.ToListAsync();
-        //    await _dbContext.SaveChangesAsync();
-        //    return new Response<IEnumerable<LpmUserRoleMenuMap>>(request);
-        //}
-
+        #region Delete Menu By Id - Saif Khan - 19/11/2021
+        /// <summary>
+        /// Delete Menu By Id - Saif Khan - 19/11/2021
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public async Task<LpmUserRoleMenuMap> DeleteMenumapById(long Id)
         {
             var result = _dbContext.LpmUserRoleMenuMaps.FirstOrDefault(e => e.Id == Id);
-            if(result != null)
+            if (result != null)
             {
                 _dbContext.LpmUserRoleMenuMaps.Remove(result);
                 await _dbContext.SaveChangesAsync();
                 return result;
             }
             return null;
-        }
+        } 
+        #endregion
     }
 }
 

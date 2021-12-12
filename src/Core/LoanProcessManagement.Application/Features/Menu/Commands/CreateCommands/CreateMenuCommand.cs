@@ -21,6 +21,7 @@ namespace LoanProcessManagement.Application.Features.Menu.Commands.CreateCommand
         public int? Position { get; set; }
         [DisplayName("Created Date")]
         public DateTime? CreatedDate { get; set; }
+        public int ParentId { get; set; }
         public bool IsActive { get; set; }
     }
 }

@@ -7,8 +7,10 @@ using LoanProcessManagement.Application.Features.PropertyDetails.Queries;
 using LoanProcessManagement.Application.Features.PropertyType.Queries;
 using LoanProcessManagement.Application.Features.SanctionedPlanReceived.Queries;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.ActivateUserAccount;
+using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.ActivateUserAccountToggleSwitch;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockAndResetPassword;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockUserAccount;
+using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockUserAccountToggleSwitch;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Queries.UnlockedAndLockedUsers;
 using LoanProcessManagement.Application.Features.User.Commands.CreateUser;
 using LoanProcessManagement.Application.Features.User.Commands.RemoveUser;
@@ -57,5 +59,9 @@ namespace LoanProcessManagement.App.Services.Interfaces
         #endregion
 
         Task<Response<IEnumerable<GetAllUsersQueryVm>>> UsersList();
+        #region added account service for Unlock/Lock and Activate/Deactivate user Account on toggle switch - Pratiksha Poshe -10/12/2021
+        Task<Response<UnlockUserAccountToggleSwitchDto>> UnlockUserAccountOnToggleSwitches(UnlockUserAccountOnToggleSwitchVm unlockUserAccount);
+        Task<Response<ActivateUserAccountToggleSwitchDto>> ActivateUserAccountOnToggleSwitches(ActivateUserAccountOnToggleSwitchVm activateUserAccount);
+        #endregion
     }
 }

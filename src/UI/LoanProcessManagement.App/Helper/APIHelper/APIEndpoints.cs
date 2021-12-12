@@ -34,6 +34,9 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string GetApplicantDetailsByLeadId = "api/v1/ApplicantDetails/GetApplicantDetailsByLeadId?lead_Id={0}&applicantType={1}";
         public const string GetQueryHistoryByLeadId = "api/v1/QueryHistory/GetQueryHistoryByLeadId?lead_Id={0}";
         public const string GetAllLoanSchemes = "api/v1/LoanSchemes/GetAllLoanSchemes";
+        public const string UnlockUserAccountOnToggleSwitch = "api/v1/UnlockUserAccount/UnlockUserAccountOnToggleSwitch";
+        public const string ActivateUserAccountOnToggleSwitch = "api/v1/UnlockUserAccount/ActivateUserAccountOnToggleSwitch";
+        public const string LockedUserList = "api/v1/UserList/GetLockedUserList";
         #endregion
 
         #region Maintaining the Url EndPoint - Saif Khan - 28/10/2021
@@ -43,6 +46,7 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string MenuDelete = "api/v1/Menu/removeMenu/";
         public const string MenuList = "api/v1/Menu/MenuList/";
         public const string MenuById = "api/v1/Menu/MenuById/";
+        public const string ParentMenu = "api/v1/Menu/GetAllMenus";
         #endregion
 
         #region Maintaining the Url EndPoint for Users - Saif Khan - 28/10/2021

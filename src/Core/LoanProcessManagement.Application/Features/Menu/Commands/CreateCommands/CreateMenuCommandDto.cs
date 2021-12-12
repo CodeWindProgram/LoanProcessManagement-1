@@ -15,6 +15,7 @@ namespace LoanProcessManagement.Application.Features.Menu.Commands.CreateCommand
         public string Icon { get; set; }
         public int? Position { get; set; }
         public DateTime? CreatedDate { get; set; }
+        public int ParentId { get; set; }
         public bool IsActive { get; set; }
         public bool Succeeded { get; internal set; }
         public string Message { get; set; }

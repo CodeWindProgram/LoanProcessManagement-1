@@ -1,12 +1,11 @@
-﻿using LoanProcessManagement.Domain.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
-namespace LoanProcessManagement.Application.Features.UserList.Query
+namespace LoanProcessManagement.Application.Features.UserList.Query.GetLockedUserList
 {
-    public class GetUserListQueryVm
+    public class GetLockedUserListQueryVm
     {
         [DisplayName("Serial No")]
         public long SerialNumber { get; set; }
