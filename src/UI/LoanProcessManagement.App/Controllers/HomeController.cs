@@ -113,7 +113,8 @@ namespace LoanProcessManagement.App.Controllers
         {
             var checkboxfunctionVm = new CheckboxfunctionVm();
             var rolelist = await _roleMasterService.RoleListProcess();
-            var newList = (from e in rolelist.Data select new MenuCheckListVm { Id = e.Id, Name = e.RoleName }).ToList();
+            //var parentlist = await _menuService.ParentList();
+            var newList = (from e in rolelist.Data select new MenuCheckListVm { Id = e.Id, Name = e.RoleName}).ToList();
             checkboxfunctionVm.ListVms = newList;
             ViewBag.UserId = HttpContext.Request.Cookies["Id"];
             return View(checkboxfunctionVm);
@@ -154,12 +155,14 @@ namespace LoanProcessManagement.App.Controllers
             return RedirectToAction(ReturnsTomenulist, "Menulist");
         }
         #endregion
-        
+
+        #region Return Method - Saif Khan - 11/11/2021
         public async Task<IActionResult> ReturnToMenuList()
         {
             var ReturnsTomenulists = ViewBag.UserId = HttpContext.Request.Cookies["Id"];
             return RedirectToAction(ReturnsTomenulists, "Menulist");
-        }
+        } 
+        #endregion
 
         #region Calling API for Update Menu - Saif Khan - 11/11/2021
         /// <summary>
@@ -259,6 +262,5 @@ namespace LoanProcessManagement.App.Controllers
             return RedirectToAction(ReturnsTo, "Menulist");
         }
         #endregion
-        
     }
 }

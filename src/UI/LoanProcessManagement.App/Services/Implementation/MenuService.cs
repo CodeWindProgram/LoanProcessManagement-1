@@ -6,6 +6,7 @@ using LoanProcessManagement.Application.Features.Menu.Commands.DeleteCommand;
 using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand;
 using LoanProcessManagement.Application.Features.Menu.Query;
 using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenuMaps.Query;
+using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenus;
 using LoanProcessManagement.Application.Features.Menu.Query.GetMenuByID;
 using LoanProcessManagement.Application.Features.Menu.Query.MenuList;
 using LoanProcessManagement.Application.Responses;
@@ -206,9 +207,28 @@ namespace LoanProcessManagement.App.Services.Implementation
             var response = System.Text.Json.JsonSerializer.Deserialize<Response<GetMenuByIdQueryVm>>(jsonString, options);
 
             return response;
-        } 
+        }
         #endregion
 
+        public async Task<List<GetAllMenusQueryVm>> ParentList()
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.GetAsync
+                (
+                    BaseUrl + APIEndpoints.ParentMenu
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var response = System.Text.Json.JsonSerializer.Deserialize<List<GetAllMenusQueryVm>>(jsonString, options);
+
+            return response;
+        }
     }
     #endregion
 }

@@ -13,6 +13,7 @@ namespace LoanProcessManagement.Domain.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
         public int? ParentId { get; set; }
+        public bool IsParent { get; set; }
         public string MenuName { get; set; }
         public string Link { get; set; }
         public string Icon { get; set; }
