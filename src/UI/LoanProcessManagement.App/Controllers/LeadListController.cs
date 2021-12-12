@@ -70,6 +70,7 @@ namespace LoanProcessManagement.App.Controllers
         public async Task<IActionResult> LeadHistory(string LeadId)
         {
             var LeadHistoryResponse = await _leadListService.LeadHistory(LeadId);
+            ViewBag.lead_Id = LeadId;
             if (LeadHistoryResponse != null && LeadHistoryResponse.Data != null)
             {
                 return View(LeadHistoryResponse.Data);
@@ -112,6 +113,7 @@ namespace LoanProcessManagement.App.Controllers
         public async Task<IActionResult> LeadModification(string lead_Id)
         {
             var leadResponse = await _leadListService.GetLeadByLeadId(lead_Id);
+            ViewBag.lead_Id = lead_Id;
             ModifyLeadVM lead = null;
             if (leadResponse.Data.QueryStatus == 'R')
             {

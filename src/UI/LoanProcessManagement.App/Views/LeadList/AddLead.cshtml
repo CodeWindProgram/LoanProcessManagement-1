@@ -187,7 +187,7 @@
                                             <option value="5">YES</option>
                                         </select>
                                     </div>
-                                    <span asp-validation-for = "IsSanctionedPlanReceivedID" class="text-danger"></span>
+                                    <span asp-validation-for="IsSanctionedPlanReceivedID" class="text-danger"></span>
 
                                 </div><br /><br /><br />
                             </div>
@@ -195,8 +195,9 @@
                                 <div class="group1"><label asp-for=" FirstName">First Name<span style="color: red; width: 10%;">*</span></label></div>
                                 <div class="group2">
                                     <input asp-for=" FirstName" class="form-control" type="text" placeholder="Customer First Name" />
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
                                 </div>
-                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                                
 
                             </div><br /><br /><br />
                             <div class="initial1">
@@ -245,8 +246,9 @@
                                         <option value="2">Partnership</option>
                                         <option value="3">Private Limited</option>
                                     </select>
+                                    <span asp-validation-for= "TypeOfFirms" class="text-danger"></span>
                                 </div>
-                                <span asp-validation-for= "TypeOfFirms" class="text-danger"></span>
+                                
                             </div><br /><br /><br />
                             <div id="enableOnSlfEmployment2" style="display : none">
                                 <div class="initial1">
@@ -276,8 +278,9 @@
                                 <div class="group1"><label asp-for= "CustomerPhone">Phone Number 1 : <span style="color: red; width: 10%;">*</span></label></div>
                                 <div class="group2">
                                     <input asp-for= "CustomerPhone" class="form-control noTxtInput" type="text" placeholder="Phone No 1(Should be 10 digits)" maxlength="10" required="">
+                                    <span asp-validation-for="CustomerPhone" class="text-danger"></span>
                                 </div>
-                                <span asp-validation-for="CustomerPhone" class="text-danger"></span>
+                                
                             </div><br /><br /><br />
                             <div class="initial1">
                                 <div class="group1"><label asp-for= "CustomerPhone_Alternate">Phone Number 2 :</label></div>
@@ -290,8 +293,9 @@
                                 <div class="group1"><label asp-for= "CustomerEmail">Email Address : <span style="color: red; width: 10%;">*</span></label></div>
                                 <div class="group2">
                                     <input asp-for= "CustomerEmail" class="form-control" type="text" maxlength="300" placeholder="Customer Email Address">
+                                    <span asp-validation-for="CustomerEmail" class="text-danger"></span>
                                 </div>
-                                <span asp-validation-for="CustomerEmail" class="text-danger"></span>
+                                
                             </div><br /><br /><br />
                             <div class="initial1">
                                 <div class="group1"><label asp-for= "NationalityType">Residental Status : <span style="color: red; width: 10%;">*</span></label></div>
@@ -307,29 +311,33 @@
                                 <div class="group1"><label asp-for= "CustomerResidenceaddress"> Residence Address : <span style="color: red; width: 10%;">*</span></label></div>
                                 <div class="group2">
                                     <input asp-for= "CustomerResidenceaddress" class="form-control" type="text" placeholder="Residence Address" maxlength="300" />
+                                    <span asp-validation-for="CustomerResidenceaddress" class="text-danger"></span>
                                 </div>
-                                <span asp-validation-for="CustomerResidenceaddress" class="text-danger"></span>
+                                
                             </div><br /><br /><br />
                             <div class="initial1">
                                 <div class="group1"><label asp-for= "CustomerResidencePincode"> Residence Pincode : <span style="color: red; width: 10%;">*</span></label></div>
                                 <div class="group2">
                                     <input asp-for= "CustomerResidencePincode" class="form-control noTxtInput" type="text" placeholder="Residence Pincode" maxlength="6" />
+                                    <span asp-validation-for="CustomerResidencePincode" class="text-danger"></span>
                                 </div>
-                                <span asp-validation-for="CustomerResidencePincode" class="text-danger"></span>
+                                
                             </div><br /><br /><br />
                             <div class="initial1">
                                 <div class="group1"><label asp-for= "CustomerOfficeaddress"> Business/Employee Address : <span style="color: red; width: 10%;">*</span></label></div>
                                 <div class="group2">
                                     <input asp-for= "CustomerOfficeaddress" class="form-control" type="text" placeholder=" Business/Employee Address" maxlength="300" />
+                                    <span asp-validation-for="CustomerOfficeaddress" class="text-danger"></span>
                                 </div>
-                                <span asp-validation-for="CustomerOfficeaddress" class="text-danger"></span>
+                                
                             </div><br /><br /><br />
                             <div class="initial1">
                                 <div class="group1"><label asp-for= "CustomerOfficePincode"> Business/Employee Pincode : <span style="color: red; width: 10%;">*</span></label></div>
                                 <div class="group2">
                                     <input asp-for= "CustomerOfficePincode" class="form-control noTxtInput" type="text" placeholder=" Business/Employee Pincode" maxlength="6" />
+                                    <span asp-validation-for="CustomerOfficePincode" class="text-danger"></span>
                                 </div>
-                                <span asp-validation-for="CustomerOfficePincode" class="text-danger"></span>
+                                
                             </div><br /><br /><br />
                             <div class="initial1">
                                 <div class="group1"><label asp-for=" ProductID">Product Chosen : <span style="color: red; width: 10%;">*</span></label></div>
@@ -337,8 +345,9 @@
                                     <select id="DDL_ProductInterest" class="form-control" asp-for=" ProductID" asp-items="ViewBag.loanProducts">
                                         <option value="">Select Property</option>
                                     </select>
+                                    <span asp-validation-for="ProductID" class="text-danger"></span>
                                 </div>
-                                <span asp-validation-for="ProductID" class="text-danger"></span>
+                                
 
                             </div><br /><br /><br />
                                      @*<div class="initial1">

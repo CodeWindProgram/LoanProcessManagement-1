@@ -146,520 +146,522 @@
 </style>
 
 <div class="container app" id="maindiv">
-    <div class="panel-heading"><h3>Lead Modification</h3></div>
-    <div style="border-left: 1px solid #343a40; border-right: 1px solid #343a40; border-bottom-left-radius: 0.25rem; border-bottom-right-radius: 0.25rem; padding: 10px;" class="border">
-
-        <div style="display:flex;">
-            <div class="col-md-4">
-
+    <div class="col-sm-12 col-lg-12">
+        <div data-effect="helix" id="panels" class="panel panel-info effect-helix in">
+            <div class="panel-heading">
+                <h3>Lead Modification</h3>
             </div>
-            <div style="width:100%; text-align:end;"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
-        </div>
+            <div style="border-left: 1px solid #343a40; border-right: 1px solid #343a40; border-bottom-left-radius: 0.25rem; border-bottom-right-radius: 0.25rem; padding: 10px;" class="border">
 
-        @if (ViewBag.isSuccess == true)
-        {
-            <div class="alert alert-success" role="alert">
-                @ViewBag.Message
-            </div>
-        }
-        else if (ViewBag.isSuccess == false)
-        {
-            <div class="alert alert-danger" role="alert">
-                @ViewBag.Message
-            </div>
-        }
-        <form method="post" action="/leadlist/LeadModification">
-            
-
-            <input type="hidden" asp-for="lead_Id" />
-            <input type="hidden" asp-for="login_id" />
-            <input type="hidden" asp-for="UserRoleId" id="userRole" />
-            <input type="hidden" asp-for="QueryStatus" id="QueryStatusHidden" />
-            <input type="hidden" asp-for="LgId" />
-
-
-
-
-    <div class="initial1">
-
-        <div class="group1"><label for="status_lead">Status of Lead<span style="color:red;margin-left: 4px;font-size: 15px;">*</span></label></div>
-        <div class="group2">
-            <select id="status_lead" class="form-control" asp-for="CurrentStatus" asp-items="ViewBag.leadStatus">
-                <option value="">Select</option>
-            </select>
-            <span asp-validation-for="CurrentStatus" class="text-danger"></span>
-        </div>
-    </div><br /><br>
-
-            <div class="initial1">
-                <div class="group1"><label for="residential_status">Residential Status<span style="color:red;margin-left: 4px;font-size: 15px;">*</span></label></div>
-                <div class="group2">
-                    <select id="residential_status" class="form-control" asp-for="ResidentialStatus">
-                        <option value="Resident Indian">Resident Indian</option>
-                        <option value="Non-Resident Indian">Non-Resident Indian</option>
-
-                    </select>
-                    <span asp-validation-for="ResidentialStatus" class="text-danger"></span>
-
-                </div>
-            </div><br /><br />
-
-    <div class="initial1" id="leadQueryDiv" style="display:none">
-        <div class="group1"><label for="leadQuery" id="QueryText">Raise Query</label></div>
-        <div class="group2">
-            <div class="" id="divToggleSwitch">
-                <label class="switch">
-                    <input type="checkbox" id="chkQuery">
-                    <span class="slider round"></span>
-                </label>
-                <label id="lblSwitchName" class="label label-default" style="display: none;">Query Raised</label>
-
+                <div>
+                    <div style="text-align:end;">
+                    <label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label>
                     </div>
                 </div>
-                <br /><br />
-            </div>
 
-    <div class="initial1" id="hoSanctionCommentDiv" style="display:none">
-        <div class="group1">
-            <label>HO Sanction Query Comment</label>
-        </div>
-        <div class="group2">
-            <div class="" style="">
-                <input type="text" class="form-control">
+                @if (ViewBag.isSuccess == true)
+                {
+                    <div class="alert alert-success" role="alert">
+                        @ViewBag.Message
+                    </div>
+                }
+                else if (ViewBag.isSuccess == false)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @ViewBag.Message
+                    </div>
+                }
+                <form method="post" action="/leadlist/LeadModification">
 
-            </div>
-        </div>
-        <br /><br />
 
-    </div>
+                    <input type="hidden" asp-for="lead_Id" />
+                    <input type="hidden" asp-for="login_id" />
+                    <input type="hidden" asp-for="UserRoleId" id="userRole" />
+                    <input type="hidden" asp-for="QueryStatus" id="QueryStatusHidden" />
+                    <input type="hidden" asp-for="LgId" />
 
-    <div id="divQueryType" style="display:none">
-        <div class="initial1" id="div_IPSQueryType">
-            <div class="group1">
-                <label>IPS Query - 1</label>
-            </div>
-            <div class="group2">
-                <div class="QueryInput" style="">
-                    <select id="ddl_IPSQueryType" class="QueryType form-control" asp-for="IPSQueryType1" asp-items="ViewBag.leadQuery">
-                        <option value="">Select Query</option>
-                    </select>
-                    @*<input name="ddl_IPSQueryType" type="text" id="ddl_IPSQueryType" class="form-control">*@
-                    <input type="button" class="btn btn-primary btnForQuery" value="Add another Query Type" onclick="show_IPSQueryType_ForBtn('2','#ddl_IPSQueryType');">
+
+
+
+                    <div class="initial1">
+
+                        <div class="group1"><label for="status_lead">Status of Lead<span style="color:red;margin-left: 4px;font-size: 15px;">*</span></label></div>
+                        <div class="group2">
+                            <select id="status_lead" class="form-control" asp-for="CurrentStatus" asp-items="ViewBag.leadStatus">
+                                <option value="">Select</option>
+                            </select>
+                            <span asp-validation-for="CurrentStatus" class="text-danger"></span>
+                        </div>
+                    </div><br /><br>
+
+                    <div class="initial1">
+                        <div class="group1"><label for="residential_status">Residential Status<span style="color:red;margin-left: 4px;font-size: 15px;">*</span></label></div>
+                        <div class="group2">
+                            <select id="residential_status" class="form-control" asp-for="ResidentialStatus">
+                                <option value="Resident Indian">Resident Indian</option>
+                                <option value="Non-Resident Indian">Non-Resident Indian</option>
+
+                            </select>
+                            <span asp-validation-for="ResidentialStatus" class="text-danger"></span>
 
                         </div>
-                    </div>
-                    <br /><br />
+                    </div><br /><br />
 
-                </div>
+                    <div class="initial1" id="leadQueryDiv" style="display:none">
+                        <div class="group1"><label for="leadQuery" id="QueryText">Raise Query</label></div>
+                        <div class="group2">
+                            <div class="" id="divToggleSwitch">
+                                <label class="switch">
+                                    <input type="checkbox" id="chkQuery">
+                                    <span class="slider round"></span>
+                                </label>
+                                <label id="lblSwitchName" class="label label-default" style="display: none;">Query Raised</label>
 
-
-                @*<div class="row" id="div_IPSQueryType">
-                    <div class="col-sm-3">
-                        <label>IPS Query - 1</label>
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="input-control select" style="">
-
-                            <input name="ddl_IPSQueryType" type="text" id="ddl_IPSQueryType" autocomplete="off" class="form-control ui-autocomplete-input" style="width: 75%">
-                            &nbsp;<input id="btnAddMore1" type="button" class="info smtBtn" value="Add another Query Type" onclick="show_IPSQueryType_ForBtn('2');" style="margin: 0px; padding: 5px 10px;">
+                            </div>
                         </div>
+                        <br /><br />
+                    </div>
+
+                    <div class="initial1" id="hoSanctionCommentDiv" style="display:none">
+                        <div class="group1">
+                            <label>HO Sanction Query Comment</label>
+                        </div>
+                        <div class="group2">
+                            <div class="" style="">
+                                <input type="text" class="form-control">
+
+                            </div>
+                        </div>
+                        <br /><br />
+
+                    </div>
+
+                    <div id="divQueryType" style="display:none">
+                        <div class="initial1" id="div_IPSQueryType">
+                            <div class="group1">
+                                <label>IPS Query - 1</label>
+                            </div>
+                            <div class="group2">
+                                <div class="QueryInput" style="">
+                                    <select id="ddl_IPSQueryType" class="QueryType form-control" asp-for="IPSQueryType1" asp-items="ViewBag.leadQuery">
+                                        <option value="">Select Query</option>
+                                    </select>
+                                    @*<input name="ddl_IPSQueryType" type="text" id="ddl_IPSQueryType" class="form-control">*@
+                                    <input type="button" class="btn btn-primary btnForQuery" value="Add another Query Type" onclick="show_IPSQueryType_ForBtn('2','#ddl_IPSQueryType');">
+
+                                </div>
+                            </div>
+                            <br /><br />
+
+                        </div>
+
+
+                        @*<div class="row" id="div_IPSQueryType">
+                                <div class="col-sm-3">
+                                    <label>IPS Query - 1</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="input-control select" style="">
+
+                                        <input name="ddl_IPSQueryType" type="text" id="ddl_IPSQueryType" autocomplete="off" class="form-control ui-autocomplete-input" style="width: 75%">
+                                        &nbsp;<input id="btnAddMore1" type="button" class="info smtBtn" value="Add another Query Type" onclick="show_IPSQueryType_ForBtn('2');" style="margin: 0px; padding: 5px 10px;">
+                                    </div>
+                                </div>
+                            </div>*@
+                        @{
+                            var displayProp2 = "display:none";
+                            if (Model.IPSQueryType2 != null)
+                            {
+                                displayProp2 = "display:block";
+                            }
+                        }
+                        <div class="initial1" id="div_IPSQueryType2" style=@displayProp2>
+                            <div class="group1">
+                                <label>IPS Query - 2</label>
+                            </div>
+                            <div class="group2">
+                                <div class="QueryInput" style="">
+                                    <select id="ddl_IPSQueryType2" class="QueryType form-control" asp-for="IPSQueryType2" asp-items="ViewBag.leadQuery">
+                                        <option value="">Select Query</option>
+                                    </select>
+
+                                    @*<input name="ddl_IPSQueryType2" type="text" id="ddl_IPSQueryType2" class="form-control">*@
+                                    <input type="button" class="btn" value="Add another Query Type" onclick="show_IPSQueryType_ForBtn('3','#ddl_IPSQueryType2');">
+                                </div>
+                            </div>
+                            <br /><br />
+
+                        </div>
+                        @{
+                            var displayProp3 = "display:none";
+                            if (Model.IPSQueryType3 != null)
+                            {
+                                displayProp3 = "display:block";
+                            }
+                        }
+                        <div class="initial1" id="div_IPSQueryType3" style=@displayProp3>
+                            <div class="group1">
+                                <label>IPS Query - 3</label>
+                            </div>
+                            <div class="group2">
+                                <div class="QueryInput" style="">
+                                    <select id="ddl_IPSQueryType3" class="QueryType form-control" asp-for="IPSQueryType3" asp-items="ViewBag.leadQuery">
+                                        <option value="">Select Query</option>
+                                    </select>
+
+                                    @*<input name="ddl_IPSQueryType3" type="text" id="ddl_IPSQueryType3" class="form-control">*@
+                                    <input type="button" class="btn btn-primary btnForQuery" value="Add another Query Type" onclick="show_IPSQueryType_ForBtn('4','#ddl_IPSQueryType3');">
+                                </div>
+                            </div>
+                            <br /><br />
+
+                        </div>
+                        @{
+                            var displayProp4 = "display:none";
+                            if (Model.IPSQueryType4 != null)
+                            {
+                                displayProp4 = "display:block";
+                            }
+                        }
+                        <div class="initial1" id="div_IPSQueryType4" style=@displayProp4>
+                            <div class="group1">
+                                <label>IPS Query - 4</label>
+                            </div>
+                            <div class="group2">
+                                <div class="QueryInput" style="">
+                                    <select id="ddl_IPSQueryType4" class="QueryType form-control" asp-for="IPSQueryType4" asp-items="ViewBag.leadQuery">
+                                        <option value="">Select Query</option>
+                                    </select>
+
+                                    @*<input name="ddl_IPSQueryType4" type="text" id="ddl_IPSQueryType4" class="form-control">*@
+                                    <input id="btnAddMore4" type="button" class="btn btn-primary btnForQuery" value="Add another Query Type" onclick="show_IPSQueryType_ForBtn('5','#ddl_IPSQueryType4');">
+                                </div>
+                            </div>
+                            <br /><br />
+
+                        </div>
+                        @{
+                            var displayProp5 = "display:none";
+                            if (Model.IPSQueryType5 != null)
+                            {
+                                displayProp5 = "display:block";
+                            }
+                        }
+                        <div class="initial1" id="div_IPSQueryType5" style=@displayProp5>
+                            <div class="group1">
+                                <label>IPS Query - 5</label>
+                            </div>
+                            <div class="group2">
+                                <div class="QueryInput" style="">
+                                    <select id="ddl_IPSQueryType5" class="QueryType form-control" asp-for="IPSQueryType5" asp-items="ViewBag.leadQuery">
+                                        <option value="">Select Query</option>
+                                    </select>
+                                    @*<input name="ddl_IPSQueryType5" type="text" id="ddl_IPSQueryType5" class="form-control">*@
+                                    @*<input type="hidden" name="ctl00$ContentPlaceHolder1$hdn_QueryType_5" id="hdn_QueryType_5" value="0">*@
+
+                                </div>
+                            </div>
+                            <br /><br />
+                        </div>
+
+                        <div class="row" id="div_IPSQueryTypeComment" style="display: none;">
+                            <div class="col-sm-3">
+                                <label>Others</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="input-control text">
+                                    <textarea id="txt_IPSQueryType_Others" placeholder="Comments"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div id="divQueryResponseType" style="display:none;">
+                            @{
+                                var displayPropResponse1 = "display:none";
+                                if (Model.IPSQueryType1 != null)
+                                {
+                                    displayPropResponse1 = "display:block";
+                                }
+                            }
+                            <div class="initial1" id="div_IPSResponseType" style=@displayPropResponse1>
+                                <div class="group1">
+                                    <label>Response to IPS Query - 1</label>
+                                </div>
+                                <div class="group2">
+                                    <select id="ddl_IPSResponsType" class="form-control" asp-for="IPSResponseType1" asp-items="ViewBag.leadQuery">
+                                        <option value="">Select Response</option>
+                                    </select>
+                                </div>
+                                <br /><br />
+                            </div>
+                            @{
+                                var displayPropResponse2 = "display:none";
+                                if (Model.IPSQueryType2 != null)
+                                {
+                                    displayPropResponse2 = "display:block";
+                                }
+                            }
+                            <div class="initial1" id="div_IPSResponseType2" style=@displayPropResponse2>
+                                <div class="group1">
+                                    <label>Response to IPS Query - 2</label>
+                                </div>
+                                <div class="group2">
+                                    <select id="ddl_IPSResponsType2" class="form-control" asp-for="IPSResponseType2" asp-items="ViewBag.leadQuery">
+                                        <option value="">Select Response</option>
+                                    </select>
+                                </div>
+                                <br /><br />
+                            </div>
+                            @{
+                                var displayPropResponse3 = "display:none";
+                                if (Model.IPSQueryType3 != null)
+                                {
+                                    displayPropResponse3 = "display:block";
+                                }
+                            }
+                            <div class="initial1" id="div_IPSResponseType3" style=@displayPropResponse3>
+                                <div class="group1">
+                                    <label>Response to IPS Query - 3</label>
+                                </div>
+                                <div class="group2">
+                                    <select id="ddl_IPSResponsType3" class="form-control" asp-for="IPSResponseType3" asp-items="ViewBag.leadQuery">
+                                        <option value="">Select Response</option>
+                                    </select>
+                                </div>
+                                <br /><br />
+
+                            </div>
+                            @{
+                                var displayPropResponse4 = "display:none";
+                                if (Model.IPSQueryType4 != null)
+                                {
+                                    displayPropResponse4 = "display:block";
+                                }
+                            }
+                            <div class="initial1" id="div_IPSResponseType4" style=@displayPropResponse4>
+                                <div class="group1">
+                                    <label>Response to IPS Query - 4</label>
+                                </div>
+                                <div class="group2">
+                                    <select id="ddl_IPSResponsType4" class="form-control" asp-for="IPSResponseType4" asp-items="ViewBag.leadQuery">
+                                        <option value="">Select Response</option>
+                                    </select>
+                                </div>
+                                <br /><br />
+                            </div>
+                            @{
+                                var displayPropResponse5 = "display:none";
+                                if (Model.IPSQueryType5 != null)
+                                {
+                                    displayPropResponse5 = "display:block";
+                                }
+                            }
+                            <div class="initial1" id="div_IPSResponseType5" style=@displayPropResponse5>
+                                <div class="group1">
+                                    <label>Response to IPS Query - 5</label>
+                                </div>
+                                <div class="group2">
+                                    <select id="ddl_IPSResponsType5" class="form-control" asp-for="IPSResponseType5" asp-items="ViewBag.leadQuery">
+                                        <option value="">Select Response</option>
+                                    </select>
+                                </div>
+                                <br /><br />
+
+                            </div>
+                        </div>
+                    </div>
+
+                    @*after query response*@
+                    @*<div class="initial1">
+                            <div class="group1"><label for="employement">Employment / Business classification:</label></div>
+                            <div class="group2"><input type="text" id="emp_classification" placeholder="Please enter and select employement/Business classification" value="" disabled /></div>
+                        </div><br /><br />*@
+
+                    @*<div class="card initial1">
+                            <h5>Freedom Logsheet</h5>
+                        </div>
+
+                        <div class="initial1">
+                            <div class="group1">
+                                <label for="request_edit_sanction" style="margin-right:250px">Request edit sanction:</label>
+                            </div>
+                            <label class="switch ml-4">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+
+                        <div class="initial1">
+                            <div class="group1"><label for="comments">Comments:</label></div>
+                            <div class="group2"><input type="text" name="comments" placeholder="Comments"></div>
+                        </div><br /><br>
+
+                        <div class="initial1">
+                            <div class="group1"><label for="Status">Status</label></div>
+                            <div class="group2">
+                                <select id="Status" name="Status">
+                                    <option value="-1">Select</option>
+                                </select>
+                            </div>
+                        </div><br />*@
+
+                    <div class="card initial1">
+                        <h5>Loan Product</h5>
+                    </div>
+
+                    <div class="initial1">
+                        <div class="group1"><label for="property_purchase_loan">Product Sold(if sale made)<span style="color:red;margin-left: 4px;font-size: 15px;">*</span></label></div>
+                        <div class="group2">
+                            <select id="property_purchase_loan" class="form-control" asp-for="LoanProductID" asp-items="ViewBag.loanProducts">
+                                <option value="">Select</option>
+                            </select>
+                            <span asp-validation-for="LoanProductID" class="text-danger"></span>
+
+                        </div>
+                    </div><br /><br>
+
+                    <div class="initial1">
+                        <div class="group1"><label for="Form_No">Form No:<span style="color: Red">&nbsp;*</span></label></div>
+                        <div class="group2"><input type="text" class="form-control" asp-for="FormNo" readonly></div>
+                    </div><br /><br>
+
+                    <div class="initial1">
+                        <div class="group1"><label for="amount">Amount(in INR):<span style="color:red;margin-left: 4px;font-size: 15px;">*</span></label></div>
+                        <div class="group2">
+                            <input type="text" class="form-control amt" asp-for="loanAmount">
+                            <span asp-validation-for="loanAmount" class="text-danger"></span>
+
+                        </div>
+
+                    </div><br /><br>
+
+
+                    <div class="card initial1">
+                        <h5>Insurance Product</h5>
+                    </div>
+
+                    <div class="initial1">
+                        <div class="group1"><label for="property_purchase_insurance">Product Sold(if sale made)<span style="color: Red">&nbsp;*</span></label></div>
+                        <div class="group2">
+                            <select id="property_purchase_insurance" class="form-control" asp-for="InsuranceProductID" asp-items="ViewBag.insuranceProducts">
+                                <option value="">Select</option>
+                            </select>
+                        </div>
+                    </div><br /><br>
+
+                    <div class="initial1">
+                        <div class="group1"><label for="Form_No_insurance">Form No:<span style="color: Red">&nbsp;*</span></label></div>
+                        <div class="group2"><input type="text" class="form-control" asp-for="FormNo" readonly></div>
+                    </div><br /><br>
+
+                    <div class="initial1">
+                        <div class="group1"><label for="amount_insurance">Amount(in INR):</label></div>
+                        <div class="group2">
+                            <input type="text" class="form-control amt" asp-for="insuranceAmount">
+                            <span asp-validation-for="insuranceAmount" class="text-danger"></span>
+
+                        </div>
+                    </div><br /><br>
+
+                    <div class="card initial1">
+                        <h5>Date of Action</h5>
+                    </div>
+
+                    <div class="initial1">
+                        <div class="group1"><label for="date">Date :</label></div>
+                        <div class="group2"><input type="date" id="dates" class="form-control" asp-for="DateOfAction" readonly></div>
+                    </div><br /><br>
+                    <div class="initial1">
+                        <div class="group1"><label for="comments">Comments</label></div>
+                        <div class="group2"><textarea placeholder="Comments" class="form-control" asp-for="Comments"></textarea></div>
+                    </div><br /><br /><br>
+
+                    <div class="rejectLead" style="display:none">
+                        <div class="card initial1">
+                            <h5>Reason for Reject Lead</h5>
+                        </div>
+                        <div class="initial1">
+                            <div class="group1"><label>Select Reason :</label></div>
+                            <div class="group2">
+                                <select id="RejectReasonList" asp-for="RejectLeadReasonID" class="form-control">
+                                    <option selected="selected" value="0">Select</option>
+                                    <option value="1">Delinquency in CIBIL report</option>
+                                    <option value="2">Existing GICHFL Housing loan track irregular</option>
+                                    <option value="3">Fraud documents detected</option>
+                                    <option value="4">Income not sufficient</option>
+                                    <option value="5">ITR rejected/invalid as per income tax dept.</option>
+                                    <option value="6">ITRs being irregularly filed</option>
+                                    <option value="7">No plan approval for proposed property </option>
+                                    <option value="8">The income combination of applicant and co-applicant being considered like (cousins/ brother -in -law/sister-in -law)</option>
+                                    <option value="9">Title of the property not clear</option>
+                                    <option value="10">Other</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="initial1" id="rejectLeadComment" style="display:none">
+                            <br /><br /><br />
+                            <div class="group1"><label>Comment : </label></div>
+                            <div class="group2">
+                                <textarea placeholder="Comments" class="form-control" asp-for="RejectedLeadComment"></textarea>
+                            </div>
+                        </div>
+                        <br /><br /><br />
+                    </div>
+                    <div class="lostLead" style="display:none">
+                        <div class="card initial1">
+                            <h5>Reason for Lost Lead</h5>
+                        </div>
+                        <div class="initial1">
+                            <div class="group1"><label>Select Reason :</label></div>
+                            <div class="group2">
+                                <select id="LostReasonList" class="form-control" asp-for="LostLeadReasonID">
+                                    <option selected="selected" value="0">Select</option>
+                                    <option value="1">Customer has availed loan from other institutions</option>
+                                    <option value="2">Customer not interested in availing loan and did not revert</option>
+                                    <option value="3">Loan eligibility not being fulfilled by applicant</option>
+                                    <option value="4">Manual ITRs/Irregular ITRs</option>
+                                    <option value="5">NRIs with business income</option>
+                                    <option value="6">Property not being identified/customer has deferred the purchase</option>
+                                    <option value="7">Required documents unavailable with the customer</option>
+                                    <option value="8">Tie up of builder for certain projects with other NBFCs and banks</option>
+                                    <option value="9">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="initial1" id="lostLeadComment" style="display:none">
+                            <br /><br /><br />
+                            <div class="group1"><label>Comment : </label></div>
+                            <div class="group2">
+                                <textarea placeholder="Comments" class="form-control" asp-for="LostLeadComment"></textarea>
+                            </div>
+                        </div>
+                        <br /><br /><br />
+                    </div>
+
+
+                    <div class="button1 d-flex flex-row justify-content-end">
+                        <input id="button1" type="submit" value="Submit" class="button" />
+                    </div>
+                </form>
+
+            </div>
+            @*<partial name="_Tabs.cshtml" />*@
+            @await Html.PartialAsync("~/Views/Shared/_Tabs.cshtml", (string)@ViewBag.lead_Id)
+
+            @*<div class="row justify-content-center">
+                    <div class="col-md-7 fit-width">
+                        <a class="btn btn-lg" asp-controller="leadlist" asp-action="LeadSummary" asp-route-lead_Id="@Model.lead_Id">Summary</a>&nbsp;&nbsp;
+                        <a class="btn btn-lg selected" asp-controller="leadlist" asp-action="LeadModification" asp-route-lead_Id="@Model.lead_Id" target="_blank">Modification</a>&nbsp;&nbsp;
+                        <a class="btn btn-lg" asp-controller="leadlist" asp-action="LeadHistory" asp-route-LeadId="@Model.lead_Id" target="_blank">History</a>&nbsp;&nbsp;
+                        <a class="btn btn-lg" asp-controller="ProductsList" asp-action="AllProductsList" asp-route-lead_Id="@Model.lead_Id" target="_blank">Products</a>&nbsp;&nbsp;
+                        <a class="btn btn-lg" asp-controller="Login" asp-action="UpdatePropertyDetails" asp-route-lead_Id="@Model.lead_Id" target="_blank">Property Details</a>
                     </div>
                 </div>*@
-                @{
-                    var displayProp2 = "display:none";
-                    if (Model.IPSQueryType2 != null)
-                    {
-                        displayProp2 = "display:block";
-                    }
-                }
-                <div class="initial1" id="div_IPSQueryType2" style=@displayProp2>
-                    <div class="group1">
-                        <label>IPS Query - 2</label>
-                    </div>
-                    <div class="group2">
-                        <div class="QueryInput" style="">
-                            <select id="ddl_IPSQueryType2" class="QueryType form-control" asp-for="IPSQueryType2" asp-items="ViewBag.leadQuery">
-                                <option value="">Select Query</option>
-                            </select>
-
-                            @*<input name="ddl_IPSQueryType2" type="text" id="ddl_IPSQueryType2" class="form-control">*@
-                            <input type="button" class="btn" value="Add another Query Type" onclick="show_IPSQueryType_ForBtn('3','#ddl_IPSQueryType2');">
-                        </div>
-                    </div>
-                    <br /><br />
-
-                </div>
-                @{
-                    var displayProp3 = "display:none";
-                    if (Model.IPSQueryType3 != null)
-                    {
-                        displayProp3 = "display:block";
-                    }
-                }
-                <div class="initial1" id="div_IPSQueryType3" style=@displayProp3>
-                    <div class="group1">
-                        <label>IPS Query - 3</label>
-                    </div>
-                    <div class="group2">
-                        <div class="QueryInput" style="">
-                            <select id="ddl_IPSQueryType3" class="QueryType form-control" asp-for="IPSQueryType3" asp-items="ViewBag.leadQuery">
-                                <option value="">Select Query</option>
-                            </select>
-
-                            @*<input name="ddl_IPSQueryType3" type="text" id="ddl_IPSQueryType3" class="form-control">*@
-                            <input type="button" class="btn btn-primary btnForQuery" value="Add another Query Type" onclick="show_IPSQueryType_ForBtn('4','#ddl_IPSQueryType3');">
-                        </div>
-                    </div>
-                    <br /><br />
-
-                </div>
-                @{
-                    var displayProp4 = "display:none";
-                    if (Model.IPSQueryType4 != null)
-                    {
-                        displayProp4 = "display:block";
-                    }
-                }
-                <div class="initial1" id="div_IPSQueryType4" style=@displayProp4>
-                    <div class="group1">
-                        <label>IPS Query - 4</label>
-                    </div>
-                    <div class="group2">
-                        <div class="QueryInput" style="">
-                            <select id="ddl_IPSQueryType4" class="QueryType form-control" asp-for="IPSQueryType4" asp-items="ViewBag.leadQuery">
-                                <option value="">Select Query</option>
-                            </select>
-
-                            @*<input name="ddl_IPSQueryType4" type="text" id="ddl_IPSQueryType4" class="form-control">*@
-                            <input id="btnAddMore4" type="button" class="btn btn-primary btnForQuery" value="Add another Query Type" onclick="show_IPSQueryType_ForBtn('5','#ddl_IPSQueryType4');">
-                        </div>
-                    </div>
-                    <br /><br />
-
-                </div>
-                @{
-                    var displayProp5 = "display:none";
-                    if (Model.IPSQueryType5 != null)
-                    {
-                        displayProp5 = "display:block";
-                    }
-                }
-                <div class="initial1" id="div_IPSQueryType5" style=@displayProp5>
-                    <div class="group1">
-                        <label>IPS Query - 5</label>
-                    </div>
-                    <div class="group2">
-                        <div class="QueryInput" style="">
-                            <select id="ddl_IPSQueryType5" class="QueryType form-control" asp-for="IPSQueryType5" asp-items="ViewBag.leadQuery">
-                                <option value="">Select Query</option>
-                            </select>
-                            @*<input name="ddl_IPSQueryType5" type="text" id="ddl_IPSQueryType5" class="form-control">*@
-                            @*<input type="hidden" name="ctl00$ContentPlaceHolder1$hdn_QueryType_5" id="hdn_QueryType_5" value="0">*@
-
-                        </div>
-                    </div>
-                    <br /><br />
-                </div>
-
-                <div class="row" id="div_IPSQueryTypeComment" style="display: none;">
-                    <div class="col-sm-3">
-                        <label>Others</label>
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="input-control text">
-                            <textarea id="txt_IPSQueryType_Others" placeholder="Comments"></textarea>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div id="divQueryResponseType" style="display:none;">
-                    @{
-                        var displayPropResponse1 = "display:none";
-                        if (Model.IPSQueryType1 != null)
-                        {
-                            displayPropResponse1 = "display:block";
-                        }
-                    }
-                    <div class="initial1" id="div_IPSResponseType" style=@displayPropResponse1>
-                        <div class="group1">
-                            <label>Response to IPS Query - 1</label>
-                        </div>
-                        <div class="group2">
-                            <select id="ddl_IPSResponsType" class="form-control" asp-for="IPSResponseType1" asp-items="ViewBag.leadQuery">
-                                <option value="">Select Response</option>
-                            </select>
-                        </div>
-                        <br /><br />
-                    </div>
-                    @{
-                        var displayPropResponse2 = "display:none";
-                        if (Model.IPSQueryType2 != null)
-                        {
-                            displayPropResponse2 = "display:block";
-                        }
-                    }
-                    <div class="initial1" id="div_IPSResponseType2" style=@displayPropResponse2>
-                        <div class="group1">
-                            <label>Response to IPS Query - 2</label>
-                        </div>
-                        <div class="group2">
-                            <select id="ddl_IPSResponsType2" class="form-control" asp-for="IPSResponseType2" asp-items="ViewBag.leadQuery">
-                                <option value="">Select Response</option>
-                            </select>
-                        </div>
-                        <br /><br />
-                    </div>
-                    @{
-                        var displayPropResponse3 = "display:none";
-                        if (Model.IPSQueryType3 != null)
-                        {
-                            displayPropResponse3 = "display:block";
-                        }
-                    }
-                    <div class="initial1" id="div_IPSResponseType3" style=@displayPropResponse3>
-                        <div class="group1">
-                            <label>Response to IPS Query - 3</label>
-                        </div>
-                        <div class="group2">
-                            <select id="ddl_IPSResponsType3" class="form-control" asp-for="IPSResponseType3" asp-items="ViewBag.leadQuery">
-                                <option value="">Select Response</option>
-                            </select>
-                        </div>
-                        <br /><br />
-
-                    </div>
-                    @{
-                        var displayPropResponse4 = "display:none";
-                        if (Model.IPSQueryType4 != null)
-                        {
-                            displayPropResponse4 = "display:block";
-                        }
-                    }
-                    <div class="initial1" id="div_IPSResponseType4" style=@displayPropResponse4>
-                        <div class="group1">
-                            <label>Response to IPS Query - 4</label>
-                        </div>
-                        <div class="group2">
-                            <select id="ddl_IPSResponsType4" class="form-control" asp-for="IPSResponseType4" asp-items="ViewBag.leadQuery">
-                                <option value="">Select Response</option>
-                            </select>
-                        </div>
-                        <br /><br />
-                    </div>
-                    @{
-                        var displayPropResponse5 = "display:none";
-                        if (Model.IPSQueryType5 != null)
-                        {
-                            displayPropResponse5 = "display:block";
-                        }
-                    }
-                    <div class="initial1" id="div_IPSResponseType5" style=@displayPropResponse5>
-                        <div class="group1">
-                            <label>Response to IPS Query - 5</label>
-                        </div>
-                        <div class="group2">
-                            <select id="ddl_IPSResponsType5" class="form-control" asp-for="IPSResponseType5" asp-items="ViewBag.leadQuery">
-                                <option value="">Select Response</option>
-                            </select>
-                        </div>
-                        <br /><br />
-
-                    </div>
-                </div>
-            </div>
-
-
-
-            @*after query response*@
-
-
-
-
-            @*<div class="initial1">
-                <div class="group1"><label for="employement">Employment / Business classification:</label></div>
-                <div class="group2"><input type="text" id="emp_classification" placeholder="Please enter and select employement/Business classification" value="" disabled /></div>
-            </div><br /><br />*@
-
-            @*<div class="card initial1">
-                <h5>Freedom Logsheet</h5>
-            </div>
-
-            <div class="initial1">
-                <div class="group1">
-                    <label for="request_edit_sanction" style="margin-right:250px">Request edit sanction:</label>
-                </div>
-                <label class="switch ml-4">
-                    <input type="checkbox">
-                    <span class="slider round"></span>
-                </label>
-            </div>
-
-            <div class="initial1">
-                <div class="group1"><label for="comments">Comments:</label></div>
-                <div class="group2"><input type="text" name="comments" placeholder="Comments"></div>
-            </div><br /><br>
-
-            <div class="initial1">
-                <div class="group1"><label for="Status">Status</label></div>
-                <div class="group2">
-                    <select id="Status" name="Status">
-                        <option value="-1">Select</option>
-                    </select>
-                </div>
-            </div><br />*@
-
-            <div class="card initial1">
-                <h5>Loan Product</h5>
-            </div>
-
-            <div class="initial1">
-                <div class="group1"><label for="property_purchase_loan">Product Sold(if sale made)<span style="color:red;margin-left: 4px;font-size: 15px;">*</span></label></div>
-                <div class="group2">
-                    <select id="property_purchase_loan" class="form-control" asp-for="LoanProductID" asp-items="ViewBag.loanProducts">
-                        <option value="">Select</option>
-                    </select>
-                    <span asp-validation-for="LoanProductID" class="text-danger"></span>
-
-                </div>
-            </div><br /><br>
-
-            <div class="initial1">
-                <div class="group1"><label for="Form_No">Form No:<span style="color: Red">&nbsp;*</span></label></div>
-                <div class="group2"><input type="text" class="form-control" asp-for="FormNo" readonly></div>
-            </div><br /><br>
-
-            <div class="initial1">
-                <div class="group1"><label for="amount">Amount(in INR):<span style="color:red;margin-left: 4px;font-size: 15px;">*</span></label></div>
-                <div class="group2">
-                    <input type="text" class="form-control amt" asp-for="loanAmount">
-                    <span asp-validation-for="loanAmount" class="text-danger"></span>
-
-                </div>
-
-            </div><br /><br>
-
-
-            <div class="card initial1">
-                <h5>Insurance Product</h5>
-            </div>
-
-            <div class="initial1">
-                <div class="group1"><label for="property_purchase_insurance">Product Sold(if sale made)<span style="color: Red">&nbsp;*</span></label></div>
-                <div class="group2">
-                    <select id="property_purchase_insurance" class="form-control" asp-for="InsuranceProductID" asp-items="ViewBag.insuranceProducts">
-                        <option value="">Select</option>
-                    </select>
-                </div>
-            </div><br /><br>
-
-            <div class="initial1">
-                <div class="group1"><label for="Form_No_insurance">Form No:<span style="color: Red">&nbsp;*</span></label></div>
-                <div class="group2"><input type="text" class="form-control" asp-for="FormNo" readonly></div>
-            </div><br /><br>
-
-            <div class="initial1">
-                <div class="group1"><label for="amount_insurance">Amount(in INR):<span style="color: Red">&nbsp;*</span></label></div>
-                <div class="group2">
-                    <input type="text" class="form-control amt" asp-for="insuranceAmount">
-                    <span asp-validation-for="insuranceAmount" class="text-danger"></span>
-
-                </div>
-            </div><br /><br>
-
-            <div class="card initial1">
-                <h5>Date of Action</h5>
-            </div>
-
-    <div class="initial1">
-        <div class="group1"><label for="date">Date :</label></div>
-        <div class="group2"><input type="date" id="dates" class="form-control" asp-for="DateOfAction" readonly></div>
-    </div><br /><br>
-    <div class="initial1">
-        <div class="group1"><label for="comments">Comments</label></div>
-        <div class="group2"><textarea placeholder="Comments" class="form-control" asp-for="Comments"></textarea></div>
-    </div><br /><br /><br>
-
-    <div class="rejectLead" style="display:none">
-        <div class="card initial1">
-            <h5>Reason for Reject Lead</h5>
         </div>
-        <div class="initial1">
-            <div class="group1"><label>Select Reason :</label></div>
-            <div class="group2">
-                <select id="RejectReasonList" asp-for="RejectLeadReasonID" class="form-control">
-                    <option selected="selected" value="0">Select</option>
-                    <option value="1">Delinquency in CIBIL report</option>
-                    <option value="2">Existing GICHFL Housing loan track irregular</option>
-                    <option value="3">Fraud documents detected</option>
-                    <option value="4">Income not sufficient</option>
-                    <option value="5">ITR rejected/invalid as per income tax dept.</option>
-                    <option value="6">ITRs being irregularly filed</option>
-                    <option value="7">No plan approval for proposed property </option>
-                    <option value="8">The income combination of applicant and co-applicant being considered like (cousins/ brother -in -law/sister-in -law)</option>
-                    <option value="9">Title of the property not clear</option>
-                    <option value="10">Other</option>
-                </select>
-
-            </div>
-        </div>
-        <div class="initial1" id="rejectLeadComment" style="display:none">
-            <br /><br /><br />
-            <div class="group1"><label>Comment : </label></div>
-            <div class="group2">
-                <textarea placeholder="Comments" class="form-control" asp-for="RejectedLeadComment"></textarea>
-            </div>
-        </div>
-        <br /><br /><br />
-    </div>
-    <div class="lostLead" style="display:none">
-        <div class="card initial1">
-            <h5>Reason for Lost Lead</h5>
-        </div>
-        <div class="initial1">
-            <div class="group1"><label>Select Reason :</label></div>
-            <div class="group2">
-                <select id="LostReasonList" class="form-control" asp-for="LostLeadReasonID">
-                    <option selected="selected" value="0">Select</option>
-                    <option value="1">Customer has availed loan from other institutions</option>
-                    <option value="2">Customer not interested in availing loan and did not revert</option>
-                    <option value="3">Loan eligibility not being fulfilled by applicant</option>
-                    <option value="4">Manual ITRs/Irregular ITRs</option>
-                    <option value="5">NRIs with business income</option>
-                    <option value="6">Property not being identified/customer has deferred the purchase</option>
-                    <option value="7">Required documents unavailable with the customer</option>
-                    <option value="8">Tie up of builder for certain projects with other NBFCs and banks</option>
-                    <option value="9">Other</option>
-                </select>
-            </div>
-        </div>
-        <div class="initial1" id="lostLeadComment" style="display:none">
-            <br /><br /><br />
-            <div class="group1"><label>Comment : </label></div>
-            <div class="group2">
-                <textarea placeholder="Comments" class="form-control" asp-for="LostLeadComment"></textarea>
-            </div>
-        </div>
-        <br /><br /><br />
-    </div>
-
-
-    <div style="text-align:center">
-        <input id="button1" type="submit" value="Submit" class="btn" />
-    </div>
-</form>
-       </div>
-</div>
-<div class="row justify-content-center">
-    <div class="col-md-7 fit-width">
-        <a class="btn " asp-controller="leadlist" asp-action="LeadSummary" asp-route-lead_Id="@Model.lead_Id">Summary</a>&nbsp;&nbsp;
-        <a class="btn selected" asp-controller="leadlist" asp-action="LeadModification" asp-route-lead_Id="@Model.lead_Id" target="_blank">Modification</a>&nbsp;&nbsp;
-        <a class="btn " asp-controller="leadlist" asp-action="LeadHistory" asp-route-LeadId="@Model.lead_Id" target="_blank">History</a>&nbsp;&nbsp;
-        <a class="btn " asp-controller="ProductsList" asp-action="AllProductsList" asp-route-lead_Id="@Model.lead_Id" target="_blank">Products</a>&nbsp;&nbsp;
-        <a class="btn " asp-controller="Login" asp-action="UpdatePropertyDetails" asp-route-lead_Id="@Model.lead_Id" target="_blank">Property Details</a>
     </div>
 </div>
-
 
 <script type="text/javascript">
 
@@ -699,7 +701,7 @@
                 $(".lostLead").css("display", "none");
 
             }
-                
+
         });
 
         $("#RejectReasonList").change(function () {
@@ -730,7 +732,7 @@
             $(".lostLead").css("display", "block");
         }
 
-        
+
 
         $('.btn1').click(function (e) {
             $(".btn1").removeClass("selected");
@@ -754,9 +756,9 @@
           if (statusValue == 8 || statusValue == 11 || statusValue == 10) {
               $('#status_lead option:not(:selected)').prop('disabled', true);
           }
-          
 
-    
+
+
 
         //if (statusValue != 7) {
         //    $("#leadQueryDiv").css("display", "none");
@@ -775,7 +777,7 @@
 
         }
 
-    
+
 
 
         @*$(document).ready(function () {

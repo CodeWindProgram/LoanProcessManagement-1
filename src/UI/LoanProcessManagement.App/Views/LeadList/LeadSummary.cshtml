@@ -86,20 +86,24 @@
                         <div class="col-sm-6"><div class="form-group"><p><a href="/ApplicantDetails/Index?lead_Id=@Model.Id&applicantType=0">Click here</a></p></div></div>
                     </div>
                 </div>
-                @*<partial name="_Tabs" />*@
-                <div class="d-flex flex-row justify-content-around">
-                    <a class="btn selected" asp-action="LeadSummary" asp-route-lead_Id="@Model.lead_Id">Summary</a>
-                    <a class="btn " asp-action="LeadModification" asp-route-lead_Id="@Model.lead_Id" target="_blank">Modification</a>
-                    <a class="btn " asp-action="LeadHistory" asp-route-LeadId="@Model.lead_Id" target="_blank">History</a>
-                    <a class="btn " asp-controller="ProductsList" asp-action="AllProductsList" asp-route-lead_Id="@Model.lead_Id" target="_blank">Products</a>
-                    <a class="btn " asp-controller="Login" asp-action="UpdatePropertyDetails" asp-route-lead_Id="@Model.lead_Id" target="_blank">Property Details</a>
+                @*<partial name="_Tabs" model="@ViewBag.lead_Id" />*@
+                @await Html.PartialAsync("~/Views/Shared/_Tabs.cshtml", (string)@ViewBag.lead_Id)
 
-                </div>
+                @*@Html.PartialAsync("_Tabs.cshtml", (string)@ViewBag.lead_Id)*@
+
+                @*<div class="d-flex flex-row justify-content-around">
+            <a class="btn selected" asp-action="LeadSummary" asp-route-lead_Id="@Model.lead_Id">Summary</a>
+            <a class="btn " asp-action="LeadModification" asp-route-lead_Id="@Model.lead_Id" target="_blank">Modification</a>
+            <a class="btn " asp-action="LeadHistory" asp-route-LeadId="@Model.lead_Id" target="_blank">History</a>
+            <a class="btn " asp-controller="ProductsList" asp-action="AllProductsList" asp-route-lead_Id="@Model.lead_Id" target="_blank">Products</a>
+            <a class="btn " asp-controller="Login" asp-action="UpdatePropertyDetails" asp-route-lead_Id="@Model.lead_Id" target="_blank">Property Details</a>
+
+        </div>*@
             </div>
         </div>
     </div>
 </div>
-<script>
+@*<script>
     $(document).ready(function () {
         $('.btn1').click(function (e) {
             $('.btn1').removeClass("selected");
@@ -112,6 +116,6 @@
 
     }
 
-</script>
+</script>*@
 
 
