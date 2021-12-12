@@ -4,7 +4,7 @@
 *@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-ViewData["Title"] = "Login Page";
+    ViewData["Title"] = "Login Page";
 }
 
 <style>
@@ -73,26 +73,68 @@ ViewData["Title"] = "Login Page";
         <h2 class="form-signin-heading text-center">Sign in</h2>
 
         <form asp-action="Index" method="post" asp-route-returnurl="@ViewBag.ReturnUrl">
-            <div asp-validation-summary="ModelOnly" class="text-danger font-italic"></div>
-            @*<input type="text" id="txtEmpId" placeholder="Enter Login Id" class="form-control" autofocus required />*@
-            <input asp-for="EmployeeId" class="form-control" id="txtEmpId" type="text" placeholder="Enter Login Id" autofocus />
-            <span asp-validation-for="EmployeeId" class="text-danger"></span>
 
-            @*<input type="Password" id="txtPassword" class="form-control" placeholder="Password" autofocus required />*@
-            <input asp-for="Password" class="form-control" id="txtPassword" type="password" placeholder="Password" autofocus />
-            <span asp-validation-for="Password" class="text-danger"></span>
 
-            <label class="checkbox">
-                <input type="checkbox" id="chkPersistCookie" />Remember me<br />
-            </label>
-
-            <div id="alertMsg" style="display:none;">
-                <label id="lblAlert" Style="color: red"></label>
-                <div style="margin-bottom: 10px"></div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-12">
+                        <div asp-validation-summary="ModelOnly" class="text-danger font-italic"></div>
+                    </div>
+                </div>
             </div>
 
-            @*<input type="button" " value="Login" id="btnSignIn" onclick="EncryptPassword();" Class="btn btn-lg btn-primary btn-block" />*@
-            <input type="submit" value="Login" id="btnSignIn" Class="btn btn-lg btn-primary btn-block" />
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-12">
+                        <input asp-for="EmployeeId" class="form-control" id="txtEmpId" type="text" placeholder="Enter Login Id" autofocus />
+                        <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-12">
+                        <input asp-for="Password" class="form-control" id="txtPassword" type="password" placeholder="Password" autofocus />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-12">
+                        <label class="checkbox">
+                            <input type="checkbox" id="chkPersistCookie" />Remember me<br />
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-12">
+                        <div id="alertMsg" style="display:none;">
+                            <label id="lblAlert" Style="color: red"></label>
+                            <div style="margin-bottom: 10px"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        @*<input type="button" " value="Login" id="btnSignIn" onclick="EncryptPassword();" Class="btn btn-lg btn-primary btn-block" />*@
+                        <input type="submit" value="Login" id="btnSignIn" Class="btn btn-lg btn-primary btn-block" />
+                    </div>
+                </div>
+            </div>
+
+            @*<input type="text" id="txtEmpId" placeholder="Enter Login Id" class="form-control" autofocus required />*@
+
+
+
+            @*<input type="Password" id="txtPassword" class="form-control" placeholder="Password" autofocus required />*@
+
+
 
             <center>@*<asp:Label runat="server" ID="lblStatus" style="color:red;text-align:center;font-weight:bold;font-size:large;" Visible="false">UAT Version</asp:Label>*@</center>
             <center><a class="forgot" id="ancForgotPassword" href="/ForgotPasswordUI" runat="server">Forgot Password</a></center>
