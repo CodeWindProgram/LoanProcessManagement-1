@@ -42,7 +42,7 @@
 
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-        //$.widget.bridge('uibutton', $.ui.button)
+            //$.widget.bridge('uibutton', $.ui.button)
     </script>
     <!-- Bootstrap 4 -->
     <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -100,27 +100,30 @@
                 </li> -->
             </ul>
 
-            <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-                <!-- Navbar Search -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        My Profile <i class="fa fa-angle-down ml-2 opacity-8"></i>
-                    </a>
-                    <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"
-                        style="margin: 0.125rem 0 0 -76%">
-                        <li class="dropdown-item"><b>Name:</b> @User.Identities.FirstOrDefault().Name</li>
-                        @*(@User.Claims.FirstOrDefault(c => c.Type == "Role").Value)*@
-                        <li class="dropdown-item"><b>Branch Name:</b> @User.Identities.FirstOrDefault().FindFirst("Branch").Value</li>
-                        <li class="dropdown-divider"></li>
-                        <li class="nav-item d-sm-inline-block">
-                            <a href="/login/logout" class="nav-link">Logout</a>
-                        </li>
+            @if (User != null && User.Identity.IsAuthenticated)
+            {
+                <!-- Right navbar links -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Navbar Search -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#">
+                            My Profile <i class="fa fa-angle-down ml-2 opacity-8"></i>
+                        </a>
+                        <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"
+                            style="margin: 0.125rem 0 0 -76%">
+                            <li class="dropdown-item"><b>Name:</b> @User.Identities.FirstOrDefault().Name</li>
+                            @*(@User.Claims.FirstOrDefault(c => c.Type == "Role").Value)*@
+                            <li class="dropdown-item"><b>Branch Name:</b> @User.Identities.FirstOrDefault().FindFirst("Branch").Value</li>
+                            <li class="dropdown-divider"></li>
+                            <li class="nav-item d-sm-inline-block">
+                                <a href="/login/logout" class="nav-link">Logout</a>
+                            </li>
 
-                    </ul>
-                </li>
-            
-            </ul>
+                        </ul>
+                    </li>
+
+                </ul>
+            }
         </nav>
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
@@ -142,7 +145,7 @@
                      style="opacity: 1 ; margin-top:0px" />
                 <span class="brand-text font-weight-light">LOS</span>
             </a>
-            @if (User != null)
+            @if (User != null && User.Identity.IsAuthenticated)
             {
                 <!-- Sidebar -->
                 @await Component.InvokeAsync("Navigation")
@@ -178,7 +181,7 @@
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2021 <a href="/home/dashboard">LOS</a>.</strong>
+            <strong>Copyright &copy; 2021 Loan Oriented System.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block"></div>
         </footer>

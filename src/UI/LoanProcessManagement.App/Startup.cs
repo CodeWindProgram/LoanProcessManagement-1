@@ -38,10 +38,13 @@ namespace LoanProcessManagement.App
             services.AddControllersWithViews();
             services.AddRazorPages();
 
+            var mvcBuilder = services.AddControllersWithViews();
+            mvcBuilder.AddRazorRuntimeCompilation();
+
             services.AddHttpClient("LoanService", c =>
             {
                 c.BaseAddress = new Uri(Configuration["APIConfiguration:LoanProcessAPIUrl"].ToString());
-                c.Timeout = TimeSpan.FromSeconds(Configuration["APIConfiguration:Timeout"] != null 
+                c.Timeout = TimeSpan.FromSeconds(Configuration["APIConfiguration:Timeout"] != null
                     ? Convert.ToDouble(Configuration["APIConfiguration:Timeout"]) : 1000);
                 c.DefaultRequestHeaders.Add("Accept", "application/json");
                 c.DefaultRequestHeaders.Add("User-Agent", "HttpClientFactory");
