@@ -38,7 +38,16 @@ namespace LoanProcessManagement.Api.Controllers.v1
             var dtos = await _mediator.Send(new GetLeadStatusQuery(role));
             _logger.LogInformation("GetStatus Completed");
             return Ok(dtos);
-        } 
+        }
         #endregion
+
+        [HttpPost("GetStatusCount")]
+        public async Task<ActionResult> GetStatusCount([FromBody] GetLeadStatusCountQuery req)
+        {
+            _logger.LogInformation("GetStatusCount Initiated");
+            var dtos = await _mediator.Send(req);
+            _logger.LogInformation("GetStatusCount Completed");
+            return Ok(dtos);
+        }
     }
 }

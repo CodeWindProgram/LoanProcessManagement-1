@@ -19,6 +19,8 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string UpdateUser = "api/v1/User/updateUser";
         public const string GetLeadByLeadId = "api/v1/LeadList/GetLeadById/";
         public const string GetStatus = "api/v1/LeadStatus/getLeadStatus/";
+        public const string GetStatusCount = "api/v1/LeadStatus/GetStatusCount";
+
         public const string GetLoanProducts = "api/v1/Product/GetLoanProducts";
         public const string GetInsuranceProducts = "api/v1/Product/GetInsuranceProducts";
         public const string ModifyLead = "api/v1/LeadList/ModifyLead";

@@ -19,6 +19,7 @@ namespace LoanProcessManagement.App.Services.Interfaces
         Task<IEnumerable<GetAllBranchesDto>> GetAllBranches();
         Task<IEnumerable<GetAllLoanProductsDto>> GetAllLoanProducts();
         Task<Response<IEnumerable<GetLeadStatusDto>>> GetAllStatus(string role);
+        Task<Response<GetLeadStatusCountDto>> GetAllStatusCount(GetLeadStatusCountQuery req);
         Task<Response<IEnumerable<GetLoanProductsDto>>> GetAllLoanProduct();
         Task<Response<IEnumerable<GetInsuranceProductsDto>>> GetAllInsuranceProducts();
         Task<Response<IEnumerable<GetAllLoanSchemeDto>>> GetAllLoanScheme();

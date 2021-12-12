@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -193,7 +194,32 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             return response;
         }
+
+
         #endregion
+        public async Task<Response<GetLeadStatusCountDto>> GetAllStatusCount(GetLeadStatusCountQuery req)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var content = JsonConvert.SerializeObject(req);
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.PostAsync
+                (
+                    BaseUrl + APIEndpoints.GetStatusCount,
+                     new StringContent(content, Encoding.Default,
+                    "application/json")
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var response = System.Text.Json.JsonSerializer.Deserialize<Response<GetLeadStatusCountDto>>(jsonString, options);
+
+            return response;
+        }
 
         #region This action method will internally call get all Loan Scheme api by - Pratiksha Poshe 05/12/2021
         /// <summary>

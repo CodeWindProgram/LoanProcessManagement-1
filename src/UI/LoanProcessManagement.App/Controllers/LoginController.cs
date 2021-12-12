@@ -43,7 +43,8 @@ namespace LoanProcessManagement.App.Controllers
             bool isAuthenticated = User.Identity.IsAuthenticated;
             if (isAuthenticated)
             {
-                return View("~/Views/home/dashboard.cshtml");
+                return RedirectToAction("dashboard", "home");
+                //return View("~/Views/home/dashboard.cshtml");
             }
             ViewBag.ReturnUrl = returnUrl;
             return View();
