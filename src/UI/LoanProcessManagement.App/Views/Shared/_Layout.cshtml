@@ -6,11 +6,10 @@
     <title>LPM</title>
 
     <!-- Google Font: Source Sans Pro -->
-    @*<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">*@
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link href="~/lib/NewLib/fonts.googleapi.css" rel="stylesheet" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
-
     <!-- Ionicons -->
     @*<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">*@
     <link href="~/lib/NewLib/codeIconicFramework.css" rel="stylesheet" />
@@ -28,23 +27,22 @@
     <link rel="stylesheet" href="~/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="~/plugins/summernote/summernote-bs4.min.css">
-
     <link href="~/css/jquery.dataTables.css" rel="stylesheet" />
     <link href="~/css/dataTables.jqueryui.css" rel="stylesheet" />
     <link href="~/css/dataTables.tableTools.css" rel="stylesheet" />
 
+    <!-- jQuery UI 1.11.4 -->
+    <script src="~/js/jquery/jquery-1.10.1.min.js"></script>
+    <script src="~/plugins/jquery-ui/jquery-ui.min.js"></script>
     <script src="~/plugins/jquery/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-
-    <!-- jQuery UI 1.11.4 -->
-    @*<script src="~/js/jquery/jquery-1.10.1.min.js"></script>*@
-    <script src="~/plugins/jquery-ui/jquery-ui.min.js"></script>
     <script src="~/js/jquery/jquery.dataTables.js"></script>
+
 
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-        $.widget.bridge('uibutton', $.ui.button)
+        //$.widget.bridge('uibutton', $.ui.button)
     </script>
     <!-- Bootstrap 4 -->
     <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -69,9 +67,9 @@
     <!-- AdminLTE App -->
     <script src="~/dist/js/adminlte.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="~/dist/js/demo.js"></script>
+    @*<script src="~/dist/js/demo.js"></script>*@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="~/dist/js/pages/dashboard.js"></script>
+    @*<script src="~/dist/js/pages/dashboard.js"></script>*@
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -192,66 +190,9 @@
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
-    <!-- jQuery -->
-    <!-- jQuery -->
 
 
 
-    <script>
-
-        $(function () {
-            var donutData = {
-                labels: [
-                    'Branch Data Entry (7)',
-                    'HO(In-Principal Sanction) (5)',
-                    'Branch Processing (4)',
-                    'Lost Lead/Reject Lead (6)',
-                    'Disbursement (3)',
-                ],
-                datasets: [
-                    {
-                        data: [7, 5, 4, 6, 3],
-                        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc'],
-                    }
-                ]
-            }
-            // Get context with jQuery - using jQuery's .get() method.
-            var pieChartCanvas1 = $('#pieChart1').get(0).getContext('2d')
-            var pieChartCanvas2 = $('#pieChart2').get(0).getContext('2d')
-
-            //var pieColor2 = document.getElementById("pieColor");
-            //var pieColorName2 = document.getElementById("pieColorName");
-            //var pieColorValue2 = document.getElementById("pieColorValue");
-
-            var pieData = donutData;
-            var pieOptions = {
-                maintainAspectRatio: false,
-                responsive: true,
-            }
-            new Chart(pieChartCanvas1, {
-                type: 'pie',
-                data: pieData,
-                options: pieOptions
-            })
-            new Chart(pieChartCanvas2, {
-                type: 'pie',
-                data: pieData,
-                options: pieOptions
-            })
-
-            //var lengthValue = 5; //length(donutData.labels);
-
-            //for (let i = 0; i < lengthValue; i++) {
-            //    pieColor2.backgroundColor = donutData.datasets.backgroundColor[i];
-            //    pieColorName2.textContent = donutData.labels[i];
-            //    pieColorValue2.textContent = donutData.labels.data[i];
-
-            //    pieChartValues2.textContent = pieColor2 + pieColorName2 + pieColorValue2;
-            //    <br/>
-            //}
-            
-        }); 
-    </script>
 </body>
 
 </html>
