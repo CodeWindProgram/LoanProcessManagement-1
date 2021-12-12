@@ -350,7 +350,7 @@
                                 
 
                             </div><br /><br /><br />
-                                     @*<div class="initial1">
+                            <div class="initial1">
                             <div class="group1"><label asp-for= "SchemeID">Scheme Chosen : <span style="color: red; width: 10%;">*</span></label></div>
                             <div class="group2">
                                 <select id="ddl_Scheme" asp-for= "SchemeID" class="form-control">
@@ -380,46 +380,46 @@
                                 <span asp-validation-for="SchemeID" class="text-danger"></span>
                             </div>
 
-                        </div><br /><br /><br />*@
-                                    <div class="initial1">
-                                        <div class="group1"><label asp-for= "SchemeID">Scheme Chosen : <span style="color: red; width: 10%;">*</span></label></div>
-                                        <div class="group2">
-                                            <select id="ddl_Scheme" asp-for= "SchemeID" asp-items= "ViewBag.loanSchemes" class="form-control">
-                                                <option value="">Select Scheme</option>
+                        </div><br /><br /><br />
+                            @*<div class="initial1">
+                                <div class="group1"><label asp-for= "SchemeID">Scheme Chosen : <span style="color: red; width: 10%;">*</span></label></div>
+                                <div class="group2">
+                                    <select id="ddl_Scheme" asp-for= "SchemeID" asp-items= "ViewBag.loanSchemes" class="form-control">
+                                        <option value="">Select Scheme</option>
 
-                                            </select>
-                                            <span asp-validation-for="SchemeID" class="text-danger"></span>
-                                        </div>
+                                    </select>
+                                    <span asp-validation-for="SchemeID" class="text-danger"></span>
+                                </div>
 
-                                    </div><br /><br /><br />
+                            </div><br /><br /><br />*@
 
-                                    <div class="initial1">
-                                        <div class="group1"><label asp-for="Comment">Comments : <span style="color: red; width: 10%;">*</span></label></div>
-                                        <div class="group2">
-                                            <textarea asp-for="Comment" class="form-control" placeholder="Comments"></textarea>
-                                            <span asp-validation-for="Comment" class="text-danger"></span>
-                                        </div>
+                            <div class="initial1">
+                                <div class="group1"><label asp-for="Comment">Comments : <span style="color: red; width: 10%;">*</span></label></div>
+                                <div class="group2">
+                                    <textarea asp-for="Comment" class="form-control" placeholder="Comments"></textarea>
+                                    <span asp-validation-for="Comment" class="text-danger"></span>
+                                </div>
 
-                                    </div><br /><br /><br />
-                                                          <div style="justify-content:center;display:flex">
-                                                              <div class="row-tab">
-                                                                  <div style="display:inline-flex" class="col-md-12">
-                                                                      <center>
-                                                                          <input id="button1" type="submit" value="Add Lead" class="btn">
-                                                                      </center>
-                                                                  </div>
-                                                              </div>
-                                                              <div class="row-tab">
-                                                                  <div style="display:inline-flex" class="col-md-12">
-                                                                      <center><a href="http://localhost:14018/home/dashboard" type="button" value="Cancel" id="btnSignIn" class="btn btn-danger">Cancel</a></center>
-                                                                  </div>
-                                                              </div>
-                                                          </div>
-                                </form>
+                            </div><br /><br /><br />
+                            <div style="justify-content:center;display:flex">
+                                <div class="row-tab">
+                                    <div style="display:inline-flex" class="col-md-12">
+                                        <center>
+                                            <input id="button1" type="submit" value="Add Lead" class="btn">
+                                        </center>
+                                    </div>
+                                </div>
+                                <div class="row-tab">
+                                    <div style="display:inline-flex" class="col-md-12">
+                                        <center><a href="http://localhost:14018/home/dashboard" type="button" value="Cancel" id="btnSignIn" class="btn btn-danger">Cancel</a></center>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
+            </div>
+        </div>
     </div>
 </div>
     <script type="text/javascript">

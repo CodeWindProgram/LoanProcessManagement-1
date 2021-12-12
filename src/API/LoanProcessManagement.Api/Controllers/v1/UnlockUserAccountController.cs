@@ -2,6 +2,7 @@
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockAndResetPassword;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockUserAccount;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Queries.UnlockedAndLockedUsers;
+using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockUserAccountToggleSwitch;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.ActivateUserAccountToggleSwitch;
 
 namespace LoanProcessManagement.Api.Controllers.v1
 {
@@ -92,5 +94,40 @@ namespace LoanProcessManagement.Api.Controllers.v1
         }
 
         #endregion
+
+        #region Unlock/Lock UserAccount functionality - Pratiksha Poshe - 09/12/2021
+        /// <summary>
+        /// 2021/12/09 - UnlockUserAccount functionality
+        //	commented by Pratiksha Poshe
+        /// </summary>
+        /// <param name="unlockUserAccount"></param>
+        /// <returns></returns>
+        [HttpPost("UnlockUserAccountOnToggleSwitch")]
+        public async Task<IActionResult> Index(UnlockUserAccountToggleSwitchCommand unlockUserAccount)
+        {
+            _logger.LogInformation("UnlockUserAccount Initiated");
+            var response = await _mediator.Send(unlockUserAccount);
+            _logger.LogInformation("UnlockUserAccount Completed");
+            return Ok(response);
+        }
+        #endregion
+
+        #region ActivateUserAccount functionality - Pratiksha Poshe - 09/12/2021
+        /// <summary>
+        /// 2021/12/09 - activate UserAccount functionality
+        //	commented by Pratiksha Poshe
+        /// </summary>
+        /// <param name="activateUserAccount"></param>
+        /// <returns></returns>
+        [HttpPost("ActivateUserAccountOnToggleSwitch")]
+        public async Task<IActionResult> Index(ActivateUserAccountToggleSwitchCommand activateUserAccount)
+        {
+            _logger.LogInformation("ActivateUserAccount Initiated");
+            var response = await _mediator.Send(activateUserAccount);
+            _logger.LogInformation("ActivateUserAccount Completed");
+            return Ok(response);
+        }
+        #endregion
+
     }
 }

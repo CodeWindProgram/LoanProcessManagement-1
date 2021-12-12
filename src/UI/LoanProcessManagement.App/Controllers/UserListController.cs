@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.UserList.Query;
+using LoanProcessManagement.Application.Features.UserList.Query.GetLockedUserList;
 using LoanProcessManagement.Domain.CustomModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -34,7 +35,25 @@ namespace LoanProcessManagement.App.Controllers
                 return View(UserListServiceResponse.Data);
             }
             return View("Error");
-        } 
+        }
+        #endregion
+
+        #region Locked User List Controller Created on UI part - Pratiksha Poshe - 12/12/2021
+        /// <summary>
+        /// 12/12/2021 - Locked User List Controller Created on UI part
+        /// Commented By Pratiksha Poshe
+        /// </summary>
+        /// <returns>UserListServiceResponse</returns>
+        public async Task<IActionResult> GetLockedUserList()
+        {
+            GetLockedUserListQuery UserList = new GetLockedUserListQuery();
+            var UserListServiceResponse = await _userListService.LockedUserListProcess(UserList);
+            if (UserListServiceResponse != null && UserListServiceResponse.Data != null)
+            {
+                return View(UserListServiceResponse.Data);
+            }
+            return View("Error");
+        }
         #endregion
     }
 }

@@ -2,7 +2,9 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Index";
+    TempData["Title"] = "Index";
+    bool Issuccesflag = (TempData["Issuccesflag"]) !=null ? Convert.ToBoolean(TempData["Issuccesflag"]) : false;
+    string Message = TempData["Message"] != null ? TempData["Message"].ToString() : TempData["Message"] + "";
 }
 <style>
     .panel-heading {
@@ -20,7 +22,6 @@
         position: relative;
         display: inline-block;
         width: 60px;
-        /*height: 34px;*/
         vertical-align: middle;
         margin-block: 6px !important;
     }
@@ -44,20 +45,10 @@
     }
 
         .slider:before {
-            /*position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            -webkit-transition: .4s;
-            transition: .4s;*/
+
             position: absolute;
             content: "";
             height: 15px;
-            /*height: 18px;*/
-            /*width: 17px;*/
             width: 15px;
             left: 0px;
             bottom: 2px;
@@ -83,10 +74,6 @@
 
     /* Rounded sliders */
     .slider.round {
-        /*border-radius: 34px;*/
-        /*width: 75px;*/
-        /*width: 41px;
-        height: 25px;*/
         border-radius: 15px;
         width: 40px;
         height: 18px;
@@ -102,127 +89,151 @@
 </style>
 <div class="container app">
     <div class="col-sm-12">
-        <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
+        <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s">
             <div class="panel-heading"><h3>User List</h3></div>
             <div class="panel-body">
-            </div>
-            <div id="alertMsg" visible="false" runat="server">
-                <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
-                <div style="margin-bottom: 10px"></div>
-            </div>
-            <table id="tblUserList" class="display">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.SerialNumber)
-                        </th>
-                        <th style="display : none">
-                            @Html.DisplayNameFor(model => model.LgId)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.EmployeeId)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Name)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Email)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.BranchName)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.PhoneNumber)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.IsLocked)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.IsActive)
-                        </th>
-                        <th style="display : none">
-                            @Html.DisplayNameFor(model => model.StaffType)
-                        </th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
+      
+                <div class="border-part">
+                    @if(Issuccesflag)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.SerialNumber)
-                            </td>
-                            <td style="display : none">
-                                @Html.DisplayFor(modelItem => item.LgId)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.EmployeeId)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Email)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.BranchName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.PhoneNumber)
-                            </td>
-                            <td>
+                        <div class="alert alert-success" role="alert">
+                            <p>@Message</p>
+                        </div>
+                    }
+                    @*else
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            <strong>Error!</strong>
+                        </div>
 
-                                @{
-                                    if (item.IsLocked == true)
-                                    {
-                                        <label class="switch">
-                                            <input type="checkbox" id="chkQuery" checked>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    }
-                                    else
-                                    {
-                                        <label class="switch">
-                                            <input type="checkbox" id="chkQuery">
-                                            <span class="slider round"></span>
-                                        </label>
-                                    }
+                    }*@
+                    <div id="alertMsg" visible="false" runat="server">
+                        <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
+                        <div style="margin-bottom: 10px"></div>
+                    </div>
+                    <div>
+                         <select id="ddl_Filter" class="form-control col-sm-2">
+                             <option value="">Select</option>
+                             <option value="All">All</option>
+                             <option value="Locked">Locked Users</option>
+                             <option value="Deactivated">Deactivated Users</option>
+                         </select>
+                    </div><br />
+                    <table id="tblUserList" class="display">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.SerialNumber)
+                                </th>
+                                <th style="display : none">
+                                    @Html.DisplayNameFor(model => model.LgId)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.EmployeeId)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.BranchName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IsLocked)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IsActive)
+                                </th>
+                                <th style="display : none">
+                                    @Html.DisplayNameFor(model => model.StaffType)
+                                </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SerialNumber)
+                                    </td>
+                                    <td style="display : none">
+                                        @Html.DisplayFor(modelItem => item.LgId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EmployeeId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.BranchName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                    </td>
+                                    <td>
 
-                                }
-                            </td>
-                            <td>
-                                @{
-                                    if (item.IsActive == true)
-                                    {
-                                        <label class="switch">
-                                            <input type="checkbox" id="chkQuery" checked>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    }
-                                    else
-                                    {
-                                        <label class="switch">
-                                            <input type="checkbox" id="chkQuery">
-                                            <span class="slider round"></span>
-                                        </label>
-                                    }
-                                }
-                            </td>
-                            <td style="display : none">
-                                @Html.DisplayFor(modelItem => item.StaffType)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Modify", "UpdateUser", "Login", new { lgid = item.LgId }, new { @Class = "btn btn-primary btn-sm" })
-                                @Html.ActionLink("Delete", "RemoveUser", "Login", new { lgid = item.LgId },
-                               new { onclick = "return confirm('Are you sure you want to delete ?');", @Class = "btn btn-danger btn-sm" })
-                                @*<a asp-action="RemoveUser" id="deleteBtn" asp-route-lgid="item.LgId">Delete</a>*@
+                                        @{
+                                            if (item.IsLocked == true)
+                                            {
+                                                <label class="switch">
+                                                    <input type="checkbox" id="chkQuery" checked onchange="checkUncheckUnlockUser(this, '@item.EmployeeId')">
+                                                    <span class="slider round" data-on="Yes" data-off="No"></span>
+                                                </label>
+                                            }
+                                            else
+                                            {
+                                                <label class="switch">
+                                                    <input type="checkbox" id="chkQuery" onchange="checkUncheckUnlockUser(this, '@item.EmployeeId')">
+                                                    <span class="slider round" data-on="Yes" data-off="No"></span>
+                                                </label>
+                                            }
+
+                                        }
+                                    </td>
+                                    <td>
+                                        @{
+                                            if (item.IsActive == true)
+                                            {
+                                                <label class="switch">
+                                                    <input type="checkbox" id="chkQuery" checked onchange="checkUncheckActiveUser(this, '@item.EmployeeId')">
+                                                    <span class="slider round" data-on="Yes" data-off="No"></span>
+                                                </label>
+                                            }
+                                            else
+                                            {
+                                                <label class="switch">
+                                                    <input type="checkbox" id="chkQuery" onchange="checkUncheckActiveUser(this, '@item.EmployeeId')">
+                                                    <span class="slider round" data-on="Yes" data-off="No"></span>
+                                                </label>
+                                            }
+                                        }
+                                    </td>
+                                    <td style="display : none">
+                                        @Html.DisplayFor(modelItem => item.StaffType)
+                                    </td>
+                                    <td class="text-nowrap">
+                                        @Html.ActionLink("Modify", "UpdateUser", "Login", new { lgid = item.LgId }, new { @Class = "btn btn-primary btn-sm" })
+                                        @Html.ActionLink("Delete", "RemoveUser", "Login", new { lgid = item.LgId },
+                                       new { onclick = "return confirm('Are you sure you want to delete ?');", @Class = "btn btn-danger btn-sm" })
+                                        @*<a asp-action="RemoveUser" id="deleteBtn" asp-route-lgid="item.LgId">Delete</a>*@
 
                                     </td>
                                 </tr>
                             }
                         </tbody>
                     </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -245,6 +256,94 @@
                 $("td:first", nRow).html(iDisplayIndex + 1);
                 return nRow;
             },
+        });
+    });
+
+    function checkUncheckUnlockUser(r, empId) {
+        //debugger
+        var checkStatus = $(r).prop("checked") ? 'True' : 'False';
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("UnlockUserAccountOnToggleSwitch", "Login")',
+            data: {
+                EmployeeId: empId,
+                IsLocked: checkStatus
+            },
+            dataType: 'json',
+            success: function (result) {
+                if (result) {
+                    console.log("Ok");
+                } else {
+                    console.log("error");
+                }
+            },
+            error: function () {
+                console.log('something went wrong - debug it!');
+            }
+        })
+    }
+
+    function checkUncheckActiveUser(r, empId) {
+        //debugger
+        var checkStatus = $(r).prop("checked") ? 'True' : 'False';
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ActivateUserAccountOnToggleSwitch", "Login")',
+            data: {
+                EmployeeId: empId,
+                IsActive: checkStatus
+            },
+            dataType: 'json',
+            success: function (result) {
+                if (result) {
+                    console.log("Ok");
+                } else {
+                    console.log("error");
+                }
+            },
+            error: function () {
+                console.log('something went wrong - debug it!');
+            }
+        })
+    }
+
+    $(document).ready(function () {
+        debugger
+        $("#ddl_Filter").change(function () {
+            var selectedFilter = $(this).children("option:selected").val();
+            if (selectedFilter == 'All') {
+                $.ajax({
+                type: "GET",
+                url: '@Url.Action("Index", "UserList")',
+                dataType: 'json',
+                success: function (result) {
+                    if (result) {
+                        console.log("Ok");
+                    } else {
+                        console.log("error");
+                    }
+                },
+                error: function () {
+                    console.log('something went wrong - debug it!');
+                }
+                })
+            } @*else if (selectedFilter == 'Locked') {
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("GetLockedUserList", "UserList")',
+                    dataType: 'json',
+                    success: function (result) {
+                        if (result) {
+                            console.log("Ok");
+                        } else {
+                            console.log("error");
+                        }
+                    },
+                    error: function () {
+                        console.log('something went wrong - debug it!');
+                    }
+                })
+            }*@
         });
     });
 </script>

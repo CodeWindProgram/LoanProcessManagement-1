@@ -1,4 +1,5 @@
 ﻿using LoanProcessManagement.Application.Features.UserList.Query;
+using LoanProcessManagement.Application.Features.UserList.Query.GetLockedUserList;
 using LoanProcessManagement.Application.Responses;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace LoanProcessManagement.App.Services.Interfaces
     public interface IUserListService
     {
        Task<Response<IEnumerable<GetUserListQueryVm>>> UserListProcess(GetUserListQuery userListProcess);
+       Task<Response<IEnumerable<GetLockedUserListQueryVm>>> LockedUserListProcess(GetLockedUserListQuery userListProcess);
 
     }
     #endregion

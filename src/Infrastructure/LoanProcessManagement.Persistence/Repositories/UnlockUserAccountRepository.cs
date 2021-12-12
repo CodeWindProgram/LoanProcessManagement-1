@@ -1,9 +1,13 @@
 ﻿using LoanProcessManagement.Application.Contracts.Infrastructure;
 using LoanProcessManagement.Application.Contracts.Persistence;
+using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.ActivateUserAccountToggleSwitch;
+using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockUserAccountToggleSwitch;
 using LoanProcessManagement.Application.Helper;
 using LoanProcessManagement.Application.Models.Mail;
 using LoanProcessManagement.Domain.CustomModels;
+using LoanProcessManagement.Domain.Entities;
 using LoanProcessManagement.Infrastructure.EncryptDecrypt;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -163,10 +167,77 @@ namespace LoanProcessManagement.Persistence.Repositories
 
             _logger.LogInformation("unlock user account With Events completed");
             return unlockUserAccount;
-            
-        }
 
+        }
+        #endregion 
+
+        #region This method will update status as Unlock/Lock for user - Pratiksha Poshe - 11/12/2021
+        /// <summary>
+        /// 11/12/2021 - This method will update status as Unlock/Lock for user
+        /// Commented by Pratiksha Poshe
+        /// </summary>
+        /// <param name="EmployeeID"></param>
+        /// <param name="IsLocked"></param>
+        /// <returns></returns>
+        public async Task<UnlockUserAccountToggleSwitchDto> UpdateUnlockStatus(string EmployeeID, bool IsLocked)
+        {
+            var userDetails = _dbContext.LpmUserMasters.Where(x => x.EmployeeId == EmployeeID).FirstOrDefault();
+            if (userDetails != null)
+            {
+                userDetails.IsLocked = IsLocked;
+                await _dbContext.SaveChangesAsync();
+                return new UnlockUserAccountToggleSwitchDto()
+                {
+                    EmployeeId = userDetails.EmployeeId,
+                    IsLocked = userDetails.IsLocked,
+                    Succeeded = true,
+                    Message = "User unlocked successfully"
+                };
+            }
+            else
+            {
+                return new UnlockUserAccountToggleSwitchDto()
+                {
+                    Succeeded = false,
+                    Message = "Error"
+                };
+            }
+        } 
+        #endregion
+
+        #region This method will update status as Activate/Deactivated - Pratiksha Poshe - 11/12/2021
+        /// <summary>
+        /// 11/12/2021 - This method will update status as Activate/Deactivated
+        /// Commented by Pratiksha Poshe
+        /// </summary>
+        /// <param name="EmployeeID"></param>
+        /// <param name="IsActive"></param>
+        /// <returns></returns>
+        public async Task<ActivateUserAccountToggleSwitchDto> UpdateActivatedStatus(string EmployeeID, bool IsActive)
+        {
+            var userDetails = _dbContext.LpmUserMasters.Where(x => x.EmployeeId == EmployeeID).FirstOrDefault();
+            if (userDetails != null)
+            {
+                userDetails.IsActive = IsActive;
+                await _dbContext.SaveChangesAsync();
+                return new ActivateUserAccountToggleSwitchDto()
+                {
+                    EmployeeId = userDetails.EmployeeId,
+                    IsActive = userDetails.IsActive,
+                    Succeeded = true,
+                    Message = "User activated successfully"
+                };
+            }
+            else
+            {
+                return new ActivateUserAccountToggleSwitchDto()
+                {
+                    Succeeded = false,
+                    Message = "Error"
+                };
+            }
         }
         #endregion
     }
+}
 

@@ -32,7 +32,36 @@ namespace LoanProcessManagement.Persistence.Repositories
         {
             var result = await (from A in _dbContext.LpmUserMasters
                                 join B in _dbContext.LpmBranchMasters on A.BranchId equals B.Id
-                                where A.IsActive == true
+                                
+                                select new UserMasterListModel
+                                {
+                                    Id = A.Id,
+                                    BranchId = A.BranchId,
+                                    LgId = A.LgId,
+                                    EmployeeId = A.EmployeeId,
+                                    Name = A.Name,
+                                    Email = A.Email,
+                                    BranchName = B.branchname,
+                                    PhoneNumber = A.PhoneNumber,
+                                    StaffType = A.StaffType,
+                                    IsActive = A.IsActive,
+                                    IsLocked = A.IsLocked
+                                }).ToListAsync();
+            return result;
+        }
+        #endregion
+
+        #region Get All Locked User List - Pratiksha Poshe - 12/12/2021
+        /// <summary>
+        /// 12/12/2021 -  Get All Locked User List
+        /// Commented By Pratiksha Poshe
+        /// </summary>
+        /// <returns>Locked User List Response</returns>
+        public async Task<IEnumerable<UserMasterListModel>> GetLockedUserList()
+        {
+            var result = await (from A in _dbContext.LpmUserMasters
+                                join B in _dbContext.LpmBranchMasters on A.BranchId equals B.Id
+                                where A.IsLocked
                                 select new UserMasterListModel
                                 {
                                     Id = A.Id,

@@ -9,8 +9,10 @@ using LoanProcessManagement.Application.Features.PropertyDetails.Queries;
 using LoanProcessManagement.Application.Features.PropertyType.Queries;
 using LoanProcessManagement.Application.Features.SanctionedPlanReceived.Queries;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.ActivateUserAccount;
+using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.ActivateUserAccountToggleSwitch;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockAndResetPassword;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockUserAccount;
+using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Commands.UnlockUserAccountToggleSwitch;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Queries.UnlockedAndLockedUsers;
 using LoanProcessManagement.Application.Features.User.Commands.CreateUser;
 using LoanProcessManagement.Application.Features.User.Commands.RemoveUser;
@@ -483,6 +485,70 @@ namespace LoanProcessManagement.App.Services.Implementation
             var response = System.Text.Json.JsonSerializer.Deserialize<Response<IEnumerable<GetAllUsersQueryVm>>>(jsonString, options);
 
             return response;
+        }
+        #endregion
+
+        #region this method will call api for Unlock/Lock User - Pratiksha Poshe - 11/12/2021
+        /// <summary>
+        ///  11/12/2021 - this method will call api for Unlock/Lock User
+        ///  Commented by Pratiksha Poshe 
+        /// </summary>
+        /// <param name="unlockUserAccount"></param>
+        /// <returns></returns>
+        public async Task<Response<UnlockUserAccountToggleSwitchDto>> UnlockUserAccountOnToggleSwitches(UnlockUserAccountOnToggleSwitchVm unlockUserAccount )
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var content = JsonConvert.SerializeObject(unlockUserAccount);
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.PostAsync
+                (
+                    BaseUrl + APIEndpoints.UnlockUserAccountOnToggleSwitch,
+                    new StringContent(content, Encoding.Default,
+                    "application/json")
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<Response<UnlockUserAccountToggleSwitchDto>>(jsonString, options);
+
+            return model;
+        }
+        #endregion
+
+        #region this method will call api for Activate/Deactivate User - Pratiksha Poshe - 11/12/2021
+        /// <summary>
+        ///  11/12/2021 - this method will call api for Activate/Deactivate User
+        ///  Commented by Pratiksha Poshe 
+        /// </summary>
+        /// <param name="activateUserAccount"></param>
+        /// <returns></returns>
+        public async Task<Response<ActivateUserAccountToggleSwitchDto>> ActivateUserAccountOnToggleSwitches(ActivateUserAccountOnToggleSwitchVm activateUserAccount)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var content = JsonConvert.SerializeObject(activateUserAccount);
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.PostAsync
+                (
+                    BaseUrl + APIEndpoints.ActivateUserAccountOnToggleSwitch,
+                    new StringContent(content, Encoding.Default,
+                    "application/json")
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<Response<ActivateUserAccountToggleSwitchDto>>(jsonString, options);
+
+            return model;
         }
         #endregion
 
