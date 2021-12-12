@@ -34,6 +34,7 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string GetApplicantDetailsByLeadId = "api/v1/ApplicantDetails/GetApplicantDetailsByLeadId?lead_Id={0}&applicantType={1}";
         public const string GetQueryHistoryByLeadId = "api/v1/QueryHistory/GetQueryHistoryByLeadId?lead_Id={0}";
         public const string GetAllLoanSchemes = "api/v1/LoanSchemes/GetAllLoanSchemes";
+        public const string GetAllLoanSchemesByProductId = "api/v1/LoanSchemes/GetLoanSchemesByProductId";
         public const string UnlockUserAccountOnToggleSwitch = "api/v1/UnlockUserAccount/UnlockUserAccountOnToggleSwitch";
         public const string ActivateUserAccountOnToggleSwitch = "api/v1/UnlockUserAccount/ActivateUserAccountOnToggleSwitch";
         public const string LockedUserList = "api/v1/UserList/GetLockedUserList";

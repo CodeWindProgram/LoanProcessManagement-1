@@ -55,6 +55,7 @@ using LoanProcessManagement.Application.Features.ReportsLeadList.Queries;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Queries.UnlockedAndLockedUsers;
 using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenus;
 using LoanProcessManagement.Application.Features.UserList.Query.GetLockedUserList;
+using LoanProcessManagement.Application.Features.LoanSchemes;
 
 namespace LoanProcessManagement.Application.Profiles
 {
@@ -117,10 +118,13 @@ namespace LoanProcessManagement.Application.Profiles
             #region GetAllLoanProducts mapping has created by - Pratiksha Poshe - 10/11/2021
             CreateMap<LpmLoanProductMaster, GetAllLoanProductsDto>().ReverseMap();
             #endregion
+            #region GetAllLoanSchemes mapping has created by - Pratiksha Poshe - 10/11/2021
+            CreateMap<LpmLoanSchemeMaster, GetAllLoanSchemeDto>().ReverseMap();
+            #endregion
             #region AddApplicantDetails mapping has created by - Pratiksha Poshe - 19/11/2021
             CreateMap<AddApplicantDetailsCommand, LpmLeadApplicantsDetails>().ReverseMap();
             #endregion
-            #region Add mapping has created by - Pratiksha Poshe - 09/11/2021
+            #region Add Lead mapping has created by - Pratiksha Poshe - 09/11/2021
             CreateMap<AddLeadCommand, LpmLeadMaster>().ReverseMap();
             #endregion
             #region GetLockedUserList mapping has created by - Pratiksha Poshe - 12/12/2021

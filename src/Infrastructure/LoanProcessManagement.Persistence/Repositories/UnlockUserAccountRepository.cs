@@ -186,13 +186,26 @@ namespace LoanProcessManagement.Persistence.Repositories
             {
                 userDetails.IsLocked = IsLocked;
                 await _dbContext.SaveChangesAsync();
-                return new UnlockUserAccountToggleSwitchDto()
+                if (userDetails.IsLocked)
                 {
-                    EmployeeId = userDetails.EmployeeId,
-                    IsLocked = userDetails.IsLocked,
-                    Succeeded = true,
-                    Message = "User unlocked successfully"
-                };
+                    return new UnlockUserAccountToggleSwitchDto()
+                    {
+                        EmployeeId = userDetails.EmployeeId,
+                        IsLocked = userDetails.IsLocked,
+                        Succeeded = true,
+                        Message = "User locked successfully"
+                    };
+                }
+                else
+                {
+                    return new UnlockUserAccountToggleSwitchDto()
+                    {
+                        EmployeeId = userDetails.EmployeeId,
+                        IsLocked = userDetails.IsLocked,
+                        Succeeded = true,
+                        Message = "User unlocked successfully"
+                    };
+                }
             }
             else
             {
@@ -220,13 +233,26 @@ namespace LoanProcessManagement.Persistence.Repositories
             {
                 userDetails.IsActive = IsActive;
                 await _dbContext.SaveChangesAsync();
-                return new ActivateUserAccountToggleSwitchDto()
+                if (userDetails.IsActive)
                 {
-                    EmployeeId = userDetails.EmployeeId,
-                    IsActive = userDetails.IsActive,
-                    Succeeded = true,
-                    Message = "User activated successfully"
-                };
+                    return new ActivateUserAccountToggleSwitchDto()
+                    {
+                        EmployeeId = userDetails.EmployeeId,
+                        IsActive = userDetails.IsActive,
+                        Succeeded = true,
+                        Message = "User activated successfully"
+                    };
+                }
+                else
+                {
+                    return new ActivateUserAccountToggleSwitchDto()
+                    {
+                        EmployeeId = userDetails.EmployeeId,
+                        IsActive = userDetails.IsActive,
+                        Succeeded = true,
+                        Message = "User Deactivated successfully"
+                    };
+                }
             }
             else
             {
