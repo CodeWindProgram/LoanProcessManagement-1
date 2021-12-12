@@ -521,15 +521,18 @@ namespace LoanProcessManagement.App.Controllers
             unlockUserAccount.EmployeeId = EmployeeId;
             unlockUserAccount.IsLocked = IsLocked;
             var unlockUserAccountResponse = await _accountService.UnlockUserAccountOnToggleSwitches(unlockUserAccount);
-            if (unlockUserAccountResponse.Succeeded)
+            if (unlockUserAccountResponse != null && unlockUserAccountResponse.Succeeded)
             {
                 TempData["Issuccesflag"] = unlockUserAccountResponse.Data.Succeeded;
                 TempData["Message"] = unlockUserAccountResponse.Data.Message;
-                return RedirectToAction("Index", "UserList");
-            }
 
-            TempData["Issuccesflag"] = false;
-            return RedirectToAction("Index", "UserList");
+            }
+            else
+            {
+                TempData["Issuccesflag"] = unlockUserAccountResponse != null && unlockUserAccountResponse.Data != null ? unlockUserAccountResponse.Data.Succeeded : false;
+                TempData["Message"] = unlockUserAccountResponse != null && unlockUserAccountResponse.Data != null ? unlockUserAccountResponse.Data.Message : "Failed to update status";
+            }
+            return Json(unlockUserAccountResponse);
         }
         #endregion
 
@@ -548,11 +551,17 @@ namespace LoanProcessManagement.App.Controllers
             activeUserAccount.EmployeeId = EmployeeId;
             activeUserAccount.IsActive = IsActive;
             var activeUserAccountResponse = await _accountService.ActivateUserAccountOnToggleSwitches(activeUserAccount);
-            if (activeUserAccountResponse.Succeeded)
+
+            if (activeUserAccountResponse != null && activeUserAccountResponse.Succeeded)
             {
                 TempData["Issuccesflag"] = activeUserAccountResponse.Data.Succeeded;
                 TempData["Message"] = activeUserAccountResponse.Data.Message;
-                return RedirectToAction("Index", "UserList");
+
+            }
+            else
+            {
+                TempData["Issuccesflag"] = activeUserAccountResponse != null && activeUserAccountResponse.Data != null ? activeUserAccountResponse.Data.Succeeded : false;
+                TempData["Message"] = activeUserAccountResponse != null && activeUserAccountResponse.Data != null ? activeUserAccountResponse.Data.Message : "Failed to update status";
             }
             TempData["Issuccesflag"] = false;
             return RedirectToAction("Index", "UserList");

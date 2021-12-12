@@ -31,6 +31,11 @@ namespace LoanProcessManagement.App.Controllers
             var UserListServiceResponse = await _userListService.UserListProcess(UserList);
             if (UserListServiceResponse != null && UserListServiceResponse.Data != null)
             {
+
+                ViewBag.Issuccesflag = TempData["Issuccesflag"] != null ? Convert.ToBoolean(TempData["Issuccesflag"]) : false;
+                ViewBag.Message = TempData["Message"] != null ? TempData["Message"].ToString() : string.Empty;
+
+
                 //var users = _mapper.Map<UserMasterListModel>(UserListServiceResponse);
                 return View(UserListServiceResponse.Data);
             }
