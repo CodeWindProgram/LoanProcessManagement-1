@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="~/plugins/summernote/summernote-bs4.min.css">
     <link href="~/css/jquery.dataTables.css" rel="stylesheet" />
     <link href="~/css/dataTables.jqueryui.css" rel="stylesheet" />
-    <link href="~/css/dataTables.tableTools.css" rel="stylesheet" />
+    @*<link href="~/css/dataTables.tableTools.css" rel="stylesheet" />*@
 
     <!-- jQuery UI 1.11.4 -->
     <script src="~/js/jquery/jquery-1.10.1.min.js"></script>
@@ -70,7 +70,12 @@
     @*<script src="~/dist/js/demo.js"></script>*@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     @*<script src="~/dist/js/pages/dashboard.js"></script>*@
-
+    <style>
+        table.dataTable tbody th, table.dataTable tbody td {
+          /*   padding: 1px; 
+             text-align:center;*/
+        }
+    </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
