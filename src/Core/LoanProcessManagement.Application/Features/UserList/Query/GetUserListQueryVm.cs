@@ -36,7 +36,7 @@ namespace LoanProcessManagement.Application.Features.UserList.Query
         public int? WrongLoginAttempt { get; set; }
         [DisplayName("Locked")]
         public bool IsLocked { get; set; }
-        [DisplayName("activated")]
+        [DisplayName("Activated")]
         public bool IsActive { get; set; }
         public DateTime? LastLogin { get; set; }
         public DateTime? ActivatedOn { get; set; }

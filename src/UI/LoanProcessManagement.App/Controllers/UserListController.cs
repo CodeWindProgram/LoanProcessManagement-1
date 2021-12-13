@@ -25,12 +25,22 @@ namespace LoanProcessManagement.App.Controllers
         /// Commented By Saif Khan
         /// </summary>
         /// <returns>UserListServiceResponse</returns>
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string flag = "1")
         {
             GetUserListQuery UserList = new GetUserListQuery();
             var UserListServiceResponse = await _userListService.UserListProcess(UserList);
             if (UserListServiceResponse != null && UserListServiceResponse.Data != null)
             {
+                if (flag == "3")
+                {
+                    UserListServiceResponse.Data = UserListServiceResponse.Data.Where(x => x.IsActive == false).ToList();
+                    ViewBag.Deactivated = flag;
+                }
+                else if (flag == "2")
+                {
+                    UserListServiceResponse.Data = UserListServiceResponse.Data.Where(x => x.IsLocked == true).ToList();
+                    ViewBag.Locked = flag;
+                }
 
                 ViewBag.Issuccesflag = TempData["Issuccesflag"] != null ? Convert.ToBoolean(TempData["Issuccesflag"]) : false;
                 ViewBag.Message = TempData["Message"] != null ? TempData["Message"].ToString() : string.Empty;
@@ -55,9 +65,9 @@ namespace LoanProcessManagement.App.Controllers
             var UserListServiceResponse = await _userListService.LockedUserListProcess(UserList);
             if (UserListServiceResponse != null && UserListServiceResponse.Data != null)
             {
-                return View(UserListServiceResponse.Data);
+                return Json(UserListServiceResponse.Data);
             }
-            return View("Error");
+            return Json("Error");
         }
         #endregion
     }

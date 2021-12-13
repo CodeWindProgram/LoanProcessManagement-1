@@ -6,7 +6,6 @@
 }
 <style>
     .panel-heading {
-
         color: white;
         background-color: #343a40;
         border-bottom: 1px solid rgba(0,0,0,.125);
@@ -24,11 +23,11 @@
         margin-block: 6px !important;
     }
 
-    .switch input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
 
     .slider {
         position: absolute;
@@ -43,7 +42,6 @@
     }
 
         .slider:before {
-
             position: absolute;
             content: "";
             height: 15px;
@@ -77,9 +75,9 @@
         height: 18px;
     }
 
-    .slider.round:before {
-        border-radius: 50%;
-    }
+        .slider.round:before {
+            border-radius: 50%;
+        }
 
     table.dataTable tbody th, table.dataTable tbody td {
         padding: 0px 1px;
@@ -90,15 +88,15 @@
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s">
             <div class="panel-heading"><h3>User List</h3></div>
             <div class="panel-body">
-      
+
                 <div class="border-part">
-                    @if(ViewBag.Issuccesflag)
+                    @if (ViewBag.Issuccesflag)
                     {
                         <div class="alert alert-success" role="alert">
                             <p>@ViewBag.Message</p>
                         </div>
                     }
-                    else if(!string.IsNullOrEmpty(ViewBag.Message))
+                    else if (!string.IsNullOrEmpty(ViewBag.Message))
                     {
                         <div class="alert alert-danger" role="alert">
                             <strong>Error! @ViewBag.Message</strong>
@@ -110,12 +108,11 @@
                         <div style="margin-bottom: 10px"></div>
                     </div>
                     <div>
-                         <select id="ddl_Filter" class="form-control col-sm-2">
-                             <option value="">Select</option>
-                             <option value="All">All</option>
-                             <option value="Locked">Locked Users</option>
-                             <option value="Deactivated">Deactivated Users</option>
-                         </select>
+                        <select id="ddl_Filter" class="form-control col-sm-2">
+                            <option value="All">All</option>
+                            <option value="Locked">Locked Users</option>
+                            <option value="Deactivated">Deactivated Users</option>
+                        </select>
                     </div><br />
                     <table id="tblUserList" class="display">
                         <thead>
@@ -307,43 +304,27 @@
         })
     }
 
-    $(document).ready(function () {
-        //debugger
-        $("#ddl_Filter").change(function () {
-            var selectedFilter = $(this).children("option:selected").val();
-            if (selectedFilter == 'All') {
-                $.ajax({
-                type: "GET",
-                url: '@Url.Action("Index", "UserList")',
-                dataType: 'json',
-                success: function (result) {
-                    if (result) {
-                        console.log("Ok");
-                    } else {
-                        console.log("error");
-                    }
-                },
-                error: function () {
-                    console.log('something went wrong - debug it!');
-                }
-                })
-            } @*else if (selectedFilter == 'Locked') {
-                $.ajax({
-                    type: "GET",
-                    url: '@Url.Action("GetLockedUserList", "UserList")',
-                    dataType: 'json',
-                    success: function (result) {
-                        if (result) {
-                            console.log("Ok");
-                        } else {
-                            console.log("error");
-                        }
-                    },
-                    error: function () {
-                        console.log('something went wrong - debug it!');
-                    }
-                })
-            }*@
-        });
+
+    $("#ddl_Filter").change(function () {
+        debugger;
+        var selectedFilter = $("#ddl_Filter").val();
+        sessionStorage.setItem("selectVal", selectedFilter);
+        if (selectedFilter == 'Locked') {
+            location.href = "/UserList/Index?flag=2";
+        }
+        else if (selectedFilter == 'Deactivated') {
+            location.href = "/UserList/Index?flag=3";
+        }
+        else {
+            location.href = '/UserList/Index';
+        }
+        
     });
+
+    $(document).ready(function () {
+        if (sessionStorage.selectVal) {
+            $('#ddl_Filter').val(sessionStorage.selectVal);
+        }
+    });
+
 </script>
