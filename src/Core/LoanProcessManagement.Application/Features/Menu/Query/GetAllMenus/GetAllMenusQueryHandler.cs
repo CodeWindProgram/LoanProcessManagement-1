@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace LoanProcessManagement.Application.Features.Menu.Query.GetAllMenus
 {
-    public class GetAllMenusQueryHandler : IRequestHandler<GetAllMenusQuery, List<GetAllMenusQueryVm>>
+    public class GetAllMenusQueryHandler : IRequestHandler<GetAllMenusQuery, Response<List<GetAllMenusQueryVm>>>
     {
         private readonly IAsyncRepository<LpmMenuMaster> _asyncRepository;
         private readonly IMapper _mapper;
@@ -23,11 +23,11 @@ namespace LoanProcessManagement.Application.Features.Menu.Query.GetAllMenus
             _asyncRepository = asyncRepository;
         }
 
-        public async Task<List<GetAllMenusQueryVm>> Handle(GetAllMenusQuery request, CancellationToken cancellationToken)
+        public async Task<Response<List<GetAllMenusQueryVm>>> Handle(GetAllMenusQuery request, CancellationToken cancellationToken)
         {
             var roles =await _asyncRepository.ListAllAsync();
             var mappedRoles = _mapper.Map<List<GetAllMenusQueryVm>>(roles);
-            return new List<GetAllMenusQueryVm>(mappedRoles);
+            return new Response<List<GetAllMenusQueryVm>>(mappedRoles);
         }
     }
 }

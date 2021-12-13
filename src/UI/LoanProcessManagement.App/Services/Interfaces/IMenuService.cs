@@ -27,7 +27,7 @@ namespace LoanProcessManagement.App.Services.Interfaces
 
         public Task<Response<IEnumerable<MenuListQueryVm>>> MenuList(long UserRoleId);
 
-        public Task<List<GetAllMenusQueryVm>> ParentList();
+        public Task<Response<List<GetAllMenusQueryVm>>> ParentList();
 
         public Task<Response<GetMenuByIdQueryVm>> MenuById(long Id);
 

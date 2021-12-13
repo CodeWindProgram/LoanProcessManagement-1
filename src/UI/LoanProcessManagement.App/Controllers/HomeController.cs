@@ -8,12 +8,14 @@ using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand;
 using LoanProcessManagement.Application.Features.Menu.Query;
 using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenuMaps.GetAllMenuMaps;
 using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenuMaps.Query;
+using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenus;
 using LoanProcessManagement.Application.Features.Menu.Query.GetMenuByID;
 using LoanProcessManagement.Application.Features.Menu.Query.MenuList;
 using LoanProcessManagement.Application.Features.RoleMaster.Queries.GetRoleMasterList;
 using LoanProcessManagement.Application.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -125,10 +127,15 @@ namespace LoanProcessManagement.App.Controllers
         {
             var checkboxfunctionVm = new CheckboxfunctionVm();
             var rolelist = await _roleMasterService.RoleListProcess();
-            //var parentlist = await _menuService.ParentList();
+            var parentlist = await _menuService.ParentList();
+            var list = new SelectList(parentlist.Data, "Id", "MenuName");
+            //var dataitemlist = (from a in parentlist.Data select new GetAllMenusQueryVm {Id= a.Id, MenuName= a.MenuName }).ToList();
+            //var test = dataitemlist.All(dataitemlist);
             var newList = (from e in rolelist.Data select new MenuCheckListVm { Id = e.Id, Name = e.RoleName}).ToList();
             checkboxfunctionVm.ListVms = newList;
+            //checkboxfunctionVm.getWithParentId = dataitemlist;
             ViewBag.UserId = HttpContext.Request.Cookies["Id"];
+            ViewBag.ParentId = list;
             return View(checkboxfunctionVm);
         }
 

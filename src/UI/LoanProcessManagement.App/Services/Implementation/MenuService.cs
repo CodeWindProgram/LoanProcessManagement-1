@@ -210,7 +210,7 @@ namespace LoanProcessManagement.App.Services.Implementation
         }
         #endregion
 
-        public async Task<List<GetAllMenusQueryVm>> ParentList()
+        public async Task<Response<List<GetAllMenusQueryVm>>> ParentList()
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
@@ -225,7 +225,7 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             var options = new JsonSerializerOptions();
 
-            var response = System.Text.Json.JsonSerializer.Deserialize<List<GetAllMenusQueryVm>>(jsonString, options);
+            var response = System.Text.Json.JsonSerializer.Deserialize<Response<List<GetAllMenusQueryVm>>>(jsonString, options);
 
             return response;
         }

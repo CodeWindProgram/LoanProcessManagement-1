@@ -6,7 +6,7 @@ using System.Text;
 
 namespace LoanProcessManagement.Application.Features.Menu.Query.GetAllMenus
 {
-    public class GetAllMenusQuery : IRequest<List<GetAllMenusQueryVm>>
+    public class GetAllMenusQuery : IRequest<Response<List<GetAllMenusQueryVm>>>
     {
 
     }
