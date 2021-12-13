@@ -42,7 +42,7 @@
 
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-            //$.widget.bridge('uibutton', $.ui.button)
+                //$.widget.bridge('uibutton', $.ui.button)
     </script>
     <!-- Bootstrap 4 -->
     <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -70,10 +70,14 @@
     @*<script src="~/dist/js/demo.js"></script>*@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     @*<script src="~/dist/js/pages/dashboard.js"></script>*@
+
     <style>
-        table.dataTable tbody th, table.dataTable tbody td {
-          /*   padding: 1px; 
-             text-align:center;*/
+        .main-footer {
+            text-align: center;
+        }
+        .btn-default-submit {
+            background-color: #343a40;
+            color: white;
         }
     </style>
 </head>
@@ -184,6 +188,7 @@
             @RenderBody()
 
         </div>
+
         <!-- /.content-wrapper -->
         <footer class="main-footer">
             <strong>Copyright &copy; 2021 Loan Oriented System.</strong>
@@ -200,7 +205,7 @@
     <!-- ./wrapper -->
 
 
-    
+
 </body>
 
 </html>
