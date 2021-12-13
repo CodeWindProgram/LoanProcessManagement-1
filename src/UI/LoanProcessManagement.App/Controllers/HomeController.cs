@@ -82,6 +82,9 @@ namespace LoanProcessManagement.App.Controllers
             };
             var res=await _commonService.GetAllStatusCount(req);
             res.Data.LostAndRejectCount = res.Data.LostLeadCount + res.Data.RejectedCount;
+            ViewBag.lastSixMonths = Enumerable.Range(0, 6)
+                              .Select(i => DateTime.Now.AddMonths(i - 6))
+                              .Select(date => date.ToString("MMMM")).ToList();
             return View(res.Data);
         }
 
