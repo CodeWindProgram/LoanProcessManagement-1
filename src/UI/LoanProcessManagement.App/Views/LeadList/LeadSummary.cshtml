@@ -4,10 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "LeadSummary";
 }
-@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>*@
+
 <style>
     .panel-heading {
         color: white;
@@ -18,30 +15,32 @@
         border-top-left-radius: 0.25rem;
         border-top-right-radius: 0.25rem;
     }
-    p{
-        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        font-size:larger;
-    }
+
     .row {
         display: flex;
-        flex-direction: row;  
+        flex-direction: row;
     }
+
     .btn {
         background-color: #343a40;
-        color:white;
-        margin-bottom:5px;
+        color: white;
+        margin-bottom: 5px;
     }
+
         .btn:hover {
             background-color: #adb5bd;
             color: black;
             margin-bottom: 5px;
         }
+
     .app {
-       width:80%;
+        width: 90%;
     }
+
     .card > * {
-        padding:8px 0px;
+        padding: 8px 0px;
     }
+
     .selected {
         background: #adb5bd;
         color: #FFF;
@@ -51,7 +50,7 @@
     <div class="col-sm-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
             <div style="border: 1px solid #343a40" class="border">
-                <div class="panel-heading"><h3>Lead Summary</h3></div>
+                <div class="panel-heading"><h5>Lead Summary</h5></div>
                 <div class="card-body">
                     <div class="d-flex flex-row justify-content-around row ">
                         <div class="col-sm-6"><div class="form-group"><p>Form No.</p></div></div>
@@ -86,36 +85,13 @@
                         <div class="col-sm-6"><div class="form-group"><p><a href="/ApplicantDetails/Index?lead_Id=@Model.Id&applicantType=0">Click here</a></p></div></div>
                     </div>
                 </div>
-                @*<partial name="_Tabs" model="@ViewBag.lead_Id" />*@
                 @await Html.PartialAsync("~/Views/Shared/_Tabs.cshtml", (string)@ViewBag.lead_Id)
-
-                @*@Html.PartialAsync("_Tabs.cshtml", (string)@ViewBag.lead_Id)*@
-
-                @*<div class="d-flex flex-row justify-content-around">
-            <a class="btn selected" asp-action="LeadSummary" asp-route-lead_Id="@Model.lead_Id">Summary</a>
-            <a class="btn " asp-action="LeadModification" asp-route-lead_Id="@Model.lead_Id" target="_blank">Modification</a>
-            <a class="btn " asp-action="LeadHistory" asp-route-LeadId="@Model.lead_Id" target="_blank">History</a>
-            <a class="btn " asp-controller="ProductsList" asp-action="AllProductsList" asp-route-lead_Id="@Model.lead_Id" target="_blank">Products</a>
-            <a class="btn " asp-controller="Login" asp-action="UpdatePropertyDetails" asp-route-lead_Id="@Model.lead_Id" target="_blank">Property Details</a>
-
-        </div>*@
             </div>
         </div>
     </div>
 </div>
-@*<script>
+<script type="text/javascript">
     $(document).ready(function () {
-        $('.btn1').click(function (e) {
-            $('.btn1').removeClass("selected");
-            $(e.target).addClass("selected");
-        });
-    });
-
-    if ('@Model.CurrentStatus' == 5) {
-        $(".BranchBtn").css("display", "inline-block");
-
-    }
-
-</script>*@
-
-
+        $("#anch_summary").addClass("selected");
+    })
+</script>

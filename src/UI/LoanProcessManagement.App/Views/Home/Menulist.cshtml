@@ -11,18 +11,22 @@
         color: white;
         background-color: #343a40;
     }
-    #btn1:hover {
-        margin-top: 1rem;
-        margin-left: 8px;
-        color: black;
-        background-color: lightgray;
+
+        #btn1:hover {
+            margin-top: 1rem;
+            margin-left: 8px;
+            color: black;
+            background-color: lightgray;
+        }
+
+    #act1 {
+        color: white;
     }
-    #act1{
-        color:white;
-    }
-    #act1:hover {
-        color: black;
-    }
+
+        #act1:hover {
+            color: black;
+        }
+
     .panel-heading {
         color: white;
         background-color: #343a40;
@@ -36,66 +40,66 @@
 <div class="container app">
     <div class="col-sm-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
-            
-                <div class="panel-heading"><h3>Menu List</h3></div>
-                <div class="panel-body">
-                    <div class="card" style="padding:5px;">
-                        <div>
-                            <button id="btn1" class="btn">
-                                <a id="act1" asp-action="CreateMenu">Create Menu</a>
-                            </button>
-                        </div>
-                        <div id="alertMsg" visible="false" runat="server">
-                            <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
-                            <div style="margin-bottom: 10px"></div>
-                        </div>
 
-                        <table id="tblMenuList" class="display">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.MenuName)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Link)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Icon)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Position)
-                                    </th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
-                                    <tr>
-
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.MenuName)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Link)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Icon)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Position)
-                                        </td>
-                                        <td>
-                                            @Html.ActionLink("Modify", "UpdateMenu", new { id = item.Id }, new { @Class = "btn btn-primary btn-sm" })
-                                            @Html.ActionLink("Remove", "DeleteMenu", new { id = item.Id }, new { @Class = "btn btn-danger btn-sm" })
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+            <div class="panel-heading"><h5>Menu List</h5></div>
+            <div class="panel-body">
+                <div class="card" style="padding:5px;">
+                    <div>
+                        <button id="btn1" class="btn">
+                            <a id="act1" asp-action="CreateMenu">Create Menu</a>
+                        </button>
                     </div>
+                    <div id="alertMsg" visible="false" runat="server">
+                        <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
+                        <div style="margin-bottom: 10px"></div>
+                    </div>
+
+                    <table id="tblMenuList" class="display">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.MenuName)
+                                </th>
+                                @*<th>
+                                        @Html.DisplayNameFor(model => model.Link)
+                                    </th>*@
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Icon)
+                                </th>
+                                @*<th>
+                                        @Html.DisplayNameFor(model => model.Position)
+                                    </th>*@
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MenuName)
+                                    </td>
+                                    @*<td>
+                                            @Html.DisplayFor(modelItem => item.Link)
+                                        </td>*@
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Icon)
+                                    </td>
+                                    @*<td>
+                                            @Html.DisplayFor(modelItem => item.Position)
+                                        </td>*@
+                                    <td>
+                                        @Html.ActionLink("Modify", "UpdateMenu", new { id = item.Id }, new { @Class = "btn btn-primary btn-sm" })
+                                        @Html.ActionLink("Remove", "DeleteMenu", new { id = item.Id }, new { @Class = "btn btn-danger btn-sm" })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
+        </div>
     </div>
 </div>
 <script>

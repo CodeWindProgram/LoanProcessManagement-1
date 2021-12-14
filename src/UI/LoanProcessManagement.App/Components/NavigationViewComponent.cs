@@ -1,5 +1,6 @@
 ﻿using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.Menu.Query;
+using LoanProcessManagement.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace LoanProcessManagement.App.Components
         }
 
         #region Invoke Async
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(int ParentID = 0)
         {
             GetMenuMasterServicesQuery menuProcess = new GetMenuMasterServicesQuery();
 
@@ -29,7 +30,15 @@ namespace LoanProcessManagement.App.Components
 
             menuProcess.UserRoleId = long.Parse(roleId);
 
-            var MenuServiceResponse = await _menuService.MenuProcess(menuProcess);
+            var MenuServiceResponse = new Response<IEnumerable<GetMenuMasterServicesVm>>();
+            if (ParentID == 0)
+            {
+                MenuServiceResponse = await _menuService.MenuProcess(menuProcess);
+            }
+            else
+            {
+                 //= _dsaCornerService.DSACornerList(ParentID);
+            }
 
             if (MenuServiceResponse != null && MenuServiceResponse.Succeeded && MenuServiceResponse.Data != null)
             {
