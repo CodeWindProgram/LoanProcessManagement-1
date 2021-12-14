@@ -5,15 +5,7 @@
     TempData["Title"] = "Index";
 }
 <style>
-    .panel-heading {
-        color: white;
-        background-color: #343a40;
-        border-bottom: 1px solid rgba(0,0,0,.125);
-        padding: 0.75rem 1.25rem;
-        position: relative;
-        border-top-left-radius: 0.25rem;
-        border-top-right-radius: 0.25rem;
-    }
+
 
     .switch {
         position: relative;
@@ -78,15 +70,15 @@
         .slider.round:before {
             border-radius: 50%;
         }
-
+    /*
     table.dataTable tbody th, table.dataTable tbody td {
         padding: 0px 1px;
-    }
+    }*/
 </style>
 <div class="container app">
     <div class="col-sm-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s">
-            <div class="panel-heading"><h3>User List</h3></div>
+            <div class="panel-heading"><h5>User List</h5></div>
             <div class="panel-body">
 
                 <div class="border-part">
@@ -108,12 +100,21 @@
                         <div style="margin-bottom: 10px"></div>
                     </div>
                     <div>
-                        <select id="ddl_Filter" class="form-control col-sm-2">
-                            <option value="All">All</option>
-                            <option value="Locked">Locked Users</option>
-                            <option value="Deactivated">Deactivated Users</option>
-                        </select>
-                    </div><br />
+                        <div class="row">
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-1">
+                                <label>Filter:</label>
+                            </div>
+                            <div class="col-lg-5">
+                                <select id="ddl_Filter" class="form-control">
+                                    <option value="All">All</option>
+                                    <option value="Locked">Locked Users</option>
+                                    <option value="Deactivated">Deactivated Users</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
                     <table id="tblUserList" class="display">
                         <thead>
                             <tr>
@@ -240,8 +241,8 @@
                 "sZeroRecords": "No Records to Display",
                 "sSearch": "Search "
             },
-            "iDisplayLength": 15,
-            "aLengthMenu": [[25, 50, 100, 200, 500], [25, 50, 100, 200, 500]],
+            "iDisplayLength": 10,
+            "aLengthMenu": [[10, 50, 100, 200, 500], [10, 50, 100, 200, 500]],
             "bSortClasses": false,
             "bPaginate": true,
             "bAutoWidth": false,
@@ -318,7 +319,7 @@
         else {
             location.href = '/UserList/Index';
         }
-        
+
     });
 
     $(document).ready(function () {
