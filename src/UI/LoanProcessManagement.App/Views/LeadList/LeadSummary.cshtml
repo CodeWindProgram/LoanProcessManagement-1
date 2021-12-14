@@ -84,6 +84,11 @@
                         <div class="col-sm-6"><div class="form-group"><p>Applicant Details</p></div></div>
                         <div class="col-sm-6"><div class="form-group"><p><a href="/ApplicantDetails/Index?lead_Id=@Model.Id&applicantType=0">Click here</a></p></div></div>
                     </div>
+
+                    <div class="d-flex flex-row justify-content-around row">
+                        <div class="col-sm-6"><div class="form-group"><p>Lead ITR Details</p></div></div>
+                        <div class="col-sm-6"><div class="form-group"><p><a href="/LeadITRDetails/Index?lead_Id=@Model.Id&applicantType=0">Click here</a></p></div></div>
+                    </div>
                 </div>
                 @await Html.PartialAsync("~/Views/Shared/_Tabs.cshtml", (string)@ViewBag.lead_Id)
             </div>

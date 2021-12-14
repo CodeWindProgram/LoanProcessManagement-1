@@ -56,6 +56,7 @@ using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Queries.
 using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenus;
 using LoanProcessManagement.Application.Features.UserList.Query.GetLockedUserList;
 using LoanProcessManagement.Application.Features.LoanSchemes;
+using LoanProcessManagement.Application.Features.LeadITRDetails.Command;
 
 namespace LoanProcessManagement.Application.Profiles
 {
@@ -191,7 +192,11 @@ namespace LoanProcessManagement.Application.Profiles
 
             #region added mapper to get All users from database - Ramya Guduru - 06/12/2021
             CreateMap<LpmUserMaster, GetAllUsersQueryVm>().ReverseMap();
-            #endregion
+            #endregion   
+
+
+
+            CreateMap<LeadITRDetailsCommand, LpmLeadITRDetails>().ReverseMap();
         }
     }
 }

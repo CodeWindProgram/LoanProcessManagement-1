@@ -104,5 +104,7 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string ReportsList = "api/v1/Reports/Reports/";
         #endregion
 
+        public const string GetLeadITRDetails = "api/v1/LeadITRDetails/GetLeadITRDetails?lead_Id={0}&applicantType={1}";
+        public const string AddITRDetails = "api/v1/LeadITRDetails/AddLeadITRDetails";
     }
 }
