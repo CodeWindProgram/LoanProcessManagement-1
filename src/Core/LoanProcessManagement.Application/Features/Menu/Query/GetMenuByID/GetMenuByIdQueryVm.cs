@@ -20,6 +20,7 @@ namespace LoanProcessManagement.Application.Features.Menu.Query.GetMenuByID
         [Required]
         public int? Position { get; set; }
         public int ParentId { get; set; }
+        public bool IsParent { get; set; }
         public bool IsActive { get; set; }
     }
 }

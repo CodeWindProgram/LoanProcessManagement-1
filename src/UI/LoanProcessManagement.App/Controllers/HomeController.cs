@@ -158,6 +158,26 @@ namespace LoanProcessManagement.App.Controllers
                             await _roleMasterService.CreateChecklist(menuCheckListVm);
                         }
                     }
+                    if (checkboxfunctionVm.Childlist != null)
+                    {
+                        foreach (var i in checkboxfunctionVm.Childlist)
+                        {
+                            var servicecall = await _menuService.MenuById(i);
+                            servicecall.Data.ParentId = (int)createmenuresponse.Data.Id;
+                            var updatemenucommand = new UpdateMenuCommand()
+                            {
+                                Id = servicecall.Data.Id,
+                                Link = servicecall.Data.Link,
+                                Position = servicecall.Data.Position,
+                                MenuName = servicecall.Data.MenuName,
+                                Icon = servicecall.Data.Icon,
+                                IsActive = servicecall.Data.IsActive,
+                                ParentId = servicecall.Data.ParentId,
+                                IsParent = servicecall.Data.IsParent
+                            };
+                            var response = await _menuService.UpdateMenu(updatemenucommand);
+                        }
+                    }
                     message = createmenuresponse.Message;
                     ViewBag.Issuccesflag = true;
                     ViewBag.Message = message;
@@ -195,7 +215,9 @@ namespace LoanProcessManagement.App.Controllers
             var menuCheckListVm = new List<MenuCheckListVm>();
             var res = await _menuService.MenuById(Id);
             var parentlist = await _menuService.ParentList();
+            var getallparId = parentlist.Data.Where(m => m.ParentId == Id);
             var list = new SelectList(parentlist.Data, "Id", "MenuName");
+            parentlist.Data.RemoveAll((x) => x.Id == Id);
             ViewBag.ParentId = list;
             var rolelist = await _roleMasterService.RoleListProcess();
             var newrolelist = rolelist.Data.ToList();
@@ -213,7 +235,7 @@ namespace LoanProcessManagement.App.Controllers
             }
             updateCheckboxfunctionVm.getMenuByIdQueryVm = res.Data;
             updateCheckboxfunctionVm.RoleList = menuCheckListVm;
-            
+            ViewBag.CheckedIds = getallparId;
             return View(updateCheckboxfunctionVm);
         }
 
@@ -228,13 +250,32 @@ namespace LoanProcessManagement.App.Controllers
                                                                     Position = updateCheckboxfunctionVm.getMenuByIdQueryVm.Position,
                                                                     MenuName = updateCheckboxfunctionVm.getMenuByIdQueryVm.MenuName,
                                                                     Icon = updateCheckboxfunctionVm.getMenuByIdQueryVm.Icon,
-                                                                    IsActive = updateCheckboxfunctionVm.getMenuByIdQueryVm.IsActive,
-                                                                    ParentId = updateCheckboxfunctionVm.getMenuByIdQueryVm.ParentId
+                                                                    IsActive = updateCheckboxfunctionVm.getMenuByIdQueryVm.IsActive
                                                                 };
                 var response = await _menuService.UpdateMenu(updatemenucommand);
 
                 var menumaps = await _roleMasterService.GetCheckList();
 
+                if (updateCheckboxfunctionVm.Parlist != null)
+                {
+                    foreach (var i in updateCheckboxfunctionVm.Parlist)
+                    {
+                        var servicecall = await _menuService.MenuById(i);
+                        servicecall.Data.ParentId = (int)updateCheckboxfunctionVm.getMenuByIdQueryVm.Id;
+                        var updatemenucommands = new UpdateMenuCommand()
+                        {
+                            Id = servicecall.Data.Id,
+                            Link = servicecall.Data.Link,
+                            Position = servicecall.Data.Position,
+                            MenuName = servicecall.Data.MenuName,
+                            Icon = servicecall.Data.Icon,
+                            IsActive = servicecall.Data.IsActive,
+                            ParentId = servicecall.Data.ParentId,
+                            IsParent = servicecall.Data.IsParent
+                        };
+                        var res = await _menuService.UpdateMenu(updatemenucommands);
+                    }
+                }
                 //for deleting existing entries from database 
                 var listForDelete = (from s in menumaps.Data where s.MenuId == updatemenucommand.Id select s.Id).ToList();
                 foreach(var del in listForDelete)

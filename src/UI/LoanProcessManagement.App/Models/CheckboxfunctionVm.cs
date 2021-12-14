@@ -11,6 +11,7 @@ namespace LoanProcessManagement.App.Models
         public CreateMenuCommand createMenuCommand { get; set; }
         public IEnumerable<RoleMasterListVm> lpmUserRoleMaster { get; set; }
         public List<MenuCheckListVm> ListVms { get; set; }
+        public List<long> Childlist { get; set; }
         public List<GetAllMenusQueryVm> getWithParentId { get; set; }
     }
 }
