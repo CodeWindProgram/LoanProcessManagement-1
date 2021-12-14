@@ -6,6 +6,7 @@ using LoanProcessManagement.Application.Features.Menu.Query;
 using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenuMaps.GetAllMenuMaps;
 using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenuMaps.Query;
 using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenus;
+using LoanProcessManagement.Application.Features.Menu.Query.GetChildMenus;
 using LoanProcessManagement.Application.Features.Menu.Query.GetMenuByID;
 using LoanProcessManagement.Application.Features.Menu.Query.MenuList;
 using MediatR;
@@ -129,5 +130,14 @@ namespace LoanProcessManagement.Api.Controllers.v1
         {
             return Ok(await _mediator.Send(new GetAllMenusQuery()));
         }
+
+        [HttpGet("GetChildMenu/{parentId}")]
+        public async Task<IActionResult> GetChildMenuById(long parentId)
+        {
+            return Ok(await _mediator.Send(new GetChildMenuQuery(parentId)));
+        }
+
+
+
     }
 }  

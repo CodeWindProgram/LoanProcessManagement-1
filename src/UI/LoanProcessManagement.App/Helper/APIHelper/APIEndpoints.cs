@@ -50,10 +50,12 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string MenuList = "api/v1/Menu/MenuList/";
         public const string MenuById = "api/v1/Menu/MenuById/";
         public const string ParentMenu = "api/v1/Menu/GetAllMenus";
-        #endregion
+        public const string ChildMenu = "api/v1/Menu/GetChildMenu/";
 
-        #region Maintaining the Url EndPoint for Users - Saif Khan - 28/10/2021
-        public const string UserList = "api/v1/UserList";
+    #endregion
+
+    #region Maintaining the Url EndPoint for Users - Saif Khan - 28/10/2021
+    public const string UserList = "api/v1/UserList";
         public const string AuthenticateUser = "api/v1/User/authenticateUser";
         #endregion
 

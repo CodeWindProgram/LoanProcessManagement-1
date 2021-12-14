@@ -2,6 +2,7 @@
 using LoanProcessManagement.Application.Features.Menu.Commands.DeleteCommand;
 using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand;
 using LoanProcessManagement.Application.Features.Menu.Query;
+using LoanProcessManagement.Application.Features.Menu.Query.MenuList;
 using LoanProcessManagement.Domain.CustomModels;
 using LoanProcessManagement.Domain.Entities;
 using System.Collections.Generic;
@@ -29,6 +30,8 @@ namespace LoanProcessManagement.Application.Contracts.Persistence
         Task<List<LpmMenuMaster>> GetMenuList(long UserRoleId);
 
         Task<LpmUserRoleMenuMap> DeleteMenumapById(long Id);
+        Task<IEnumerable<MenuListQueryVm>> GetChildMenuyById(long ParentId);
+
 
     }
     #endregion

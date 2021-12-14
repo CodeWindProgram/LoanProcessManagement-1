@@ -229,6 +229,26 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             return response;
         }
+
+        public async Task<Response<IEnumerable<MenuListQueryVm>>> GetChildMenuById(long Id)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.GetAsync
+                (
+                    BaseUrl + APIEndpoints.ChildMenu + Id
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var response = System.Text.Json.JsonSerializer.Deserialize<Response<IEnumerable<MenuListQueryVm>>>(jsonString, options);
+
+            return response;
+        }
     }
     #endregion
 }

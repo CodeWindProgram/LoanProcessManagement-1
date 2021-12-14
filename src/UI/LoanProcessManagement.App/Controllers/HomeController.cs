@@ -85,6 +85,7 @@ namespace LoanProcessManagement.App.Controllers
             ViewBag.lastSixMonths = Enumerable.Range(0, 6)
                               .Select(i => DateTime.Now.AddMonths(i - 6))
                               .Select(date => date.ToString("MMMM")).ToList();
+            var menu =await _menuService.GetChildMenuById(53);
             return View(res.Data);
         }
 

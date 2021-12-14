@@ -157,7 +157,7 @@
             @if (User != null && User.Identity.IsAuthenticated)
             {
                 <!-- Sidebar -->
-                @await Component.InvokeAsync("Navigation")
+                @await Component.InvokeAsync("Navigation",new { parentId = 0})
                 <!-- sidebar -->
             }
         </aside>

@@ -647,33 +647,14 @@
                 </form>
 
             </div>
-            @*<partial name="_Tabs.cshtml" />*@
             @await Html.PartialAsync("~/Views/Shared/_Tabs.cshtml", (string)@ViewBag.lead_Id)
 
-            @*<div class="row justify-content-center">
-                    <div class="col-md-7 fit-width">
-                        <a class="btn btn-lg" asp-controller="leadlist" asp-action="LeadSummary" asp-route-lead_Id="@Model.lead_Id">Summary</a>&nbsp;&nbsp;
-                        <a class="btn btn-lg selected" asp-controller="leadlist" asp-action="LeadModification" asp-route-lead_Id="@Model.lead_Id" target="_blank">Modification</a>&nbsp;&nbsp;
-                        <a class="btn btn-lg" asp-controller="leadlist" asp-action="LeadHistory" asp-route-LeadId="@Model.lead_Id" target="_blank">History</a>&nbsp;&nbsp;
-                        <a class="btn btn-lg" asp-controller="ProductsList" asp-action="AllProductsList" asp-route-lead_Id="@Model.lead_Id" target="_blank">Products</a>&nbsp;&nbsp;
-                        <a class="btn btn-lg" asp-controller="Login" asp-action="UpdatePropertyDetails" asp-route-lead_Id="@Model.lead_Id" target="_blank">Property Details</a>
-                    </div>
-                </div>*@
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
 
-        //n = new Date();
-        //y = n.getFullYear();
-        //m = n.getMonth() + 1;
-        //d = n.getDate();
-        //document.getElementById("dates").value = m + "/" + d + "/" + y;
-
-        // Data Picker Initialization
-        // $('.datepicker').datepicker();
-        //$('#dates').val(new Date().toDateInputValue());
 
         var statusValue = $('#status_lead').val();
         //if (statusValue == 2) {

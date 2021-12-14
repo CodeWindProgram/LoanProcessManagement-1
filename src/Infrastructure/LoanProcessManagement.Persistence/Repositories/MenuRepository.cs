@@ -4,6 +4,7 @@ using LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands;
 using LoanProcessManagement.Application.Features.Menu.Commands.DeleteCommand;
 using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand;
 using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenuMaps.GetAllMenuMaps;
+using LoanProcessManagement.Application.Features.Menu.Query.MenuList;
 using LoanProcessManagement.Application.Responses;
 using LoanProcessManagement.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -185,8 +186,25 @@ namespace LoanProcessManagement.Persistence.Repositories
                 return result;
             }
             return null;
-        } 
+        }
+
         #endregion
+
+        public async Task<IEnumerable<MenuListQueryVm>> GetChildMenuyById(long ParentId)
+        {
+            var result = await(from A in _dbContext.LpmUserRoleMenuMaps
+                               join B in _dbContext.LpmMenuMasters on A.MenuId equals B.Id
+                               where B.ParentId == ParentId && A.IsActive == true
+                               orderby B.Position
+                               select new MenuListQueryVm
+                               {
+                                   MenuName=B.MenuName,
+                                   Position = B.Position,
+                                   Icon = B.Icon,
+                                   Link = B.Link
+                               }).ToListAsync();
+            return result;
+        }
     }
 }
 
