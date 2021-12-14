@@ -74,6 +74,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                                 }).ToListAsync();
             return result;
         } 
+
         #endregion
 
         #region Create Menu - Saif Khan - 10-11-2021
