@@ -136,6 +136,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 menuToUpdate.Icon = request.Icon;
                 menuToUpdate.Position = request.Position;
                 menuToUpdate.IsActive = request.IsActive;
+                menuToUpdate.ParentId = request.ParentId;
                 await _dbContext.SaveChangesAsync();
                 response.Message = "Menu details Updated Successfully";
                 response.Succeeded = true;

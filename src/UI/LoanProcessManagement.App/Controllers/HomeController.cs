@@ -132,11 +132,8 @@ namespace LoanProcessManagement.App.Controllers
             var rolelist = await _roleMasterService.RoleListProcess();
             var parentlist = await _menuService.ParentList();
             var list = new SelectList(parentlist.Data, "Id", "MenuName");
-            //var dataitemlist = (from a in parentlist.Data select new GetAllMenusQueryVm {Id= a.Id, MenuName= a.MenuName }).ToList();
-            //var test = dataitemlist.All(dataitemlist);
             var newList = (from e in rolelist.Data select new MenuCheckListVm { Id = e.Id, Name = e.RoleName}).ToList();
             checkboxfunctionVm.ListVms = newList;
-            //checkboxfunctionVm.getWithParentId = dataitemlist;
             ViewBag.UserId = HttpContext.Request.Cookies["Id"];
             ViewBag.ParentId = list;
             return View(checkboxfunctionVm);
@@ -197,6 +194,9 @@ namespace LoanProcessManagement.App.Controllers
             var updateCheckboxfunctionVm = new UpdateCheckboxfunctionVm();
             var menuCheckListVm = new List<MenuCheckListVm>();
             var res = await _menuService.MenuById(Id);
+            var parentlist = await _menuService.ParentList();
+            var list = new SelectList(parentlist.Data, "Id", "MenuName");
+            ViewBag.ParentId = list;
             var rolelist = await _roleMasterService.RoleListProcess();
             var newrolelist = rolelist.Data.ToList();
             var menumaps = await _roleMasterService.GetCheckList();
@@ -205,19 +205,14 @@ namespace LoanProcessManagement.App.Controllers
                 var data = menumaps.Data.Where(m => m.MenuId == res.Data.Id && m.UserRoleId == newrolelist[i].Id).FirstOrDefault();
                 if (data != null)
                 {
-                    //var navin = new MenuCheckListVm() { Id=data.UserRoleId,Checkbox = true, Name = newrolelist[i].RoleName };
                     menuCheckListVm.Add(new MenuCheckListVm() { Id = newrolelist[i].Id, Checkbox = true, Name = newrolelist[i].RoleName });
                 }
                 else{
                     menuCheckListVm.Add(new MenuCheckListVm() { Id = newrolelist[i].Id, Checkbox = false, Name = newrolelist[i].RoleName });
                 }
-}
-            //var newlist = updateCheckboxfunctionVm.RoleList(){ }
-            //var roleMaps = await _roleMasterService.GetCheckList();
+            }
             updateCheckboxfunctionVm.getMenuByIdQueryVm = res.Data;
             updateCheckboxfunctionVm.RoleList = menuCheckListVm;
-            //updateCheckboxfunctionVm.lpmUserRoleMaster = rolelist.Data;
-            //updateCheckboxfunctionVm.getAllMenuMapsQueryVm = roleMaps.Data;
             
             return View(updateCheckboxfunctionVm);
         }
@@ -233,7 +228,8 @@ namespace LoanProcessManagement.App.Controllers
                                                                     Position = updateCheckboxfunctionVm.getMenuByIdQueryVm.Position,
                                                                     MenuName = updateCheckboxfunctionVm.getMenuByIdQueryVm.MenuName,
                                                                     Icon = updateCheckboxfunctionVm.getMenuByIdQueryVm.Icon,
-                                                                    IsActive = updateCheckboxfunctionVm.getMenuByIdQueryVm.IsActive
+                                                                    IsActive = updateCheckboxfunctionVm.getMenuByIdQueryVm.IsActive,
+                                                                    ParentId = updateCheckboxfunctionVm.getMenuByIdQueryVm.ParentId
                                                                 };
                 var response = await _menuService.UpdateMenu(updatemenucommand);
 
