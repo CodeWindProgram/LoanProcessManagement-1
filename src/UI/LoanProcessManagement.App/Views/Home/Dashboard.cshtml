@@ -339,7 +339,7 @@
                         '@ViewBag.lastSixMonths[3]', '@ViewBag.lastSixMonths[4]', '@ViewBag.lastSixMonths[5]'],
                     datasets: [{
                         label: 'Disbursement', // Name the series
-                        data: [20,33,34,55,60,55], // Specify the data values array
+                        data: [12000000,9800000,10000000,5500000,6700000,4500000], // Specify the data values array
                         fill: false,
                         borderColor: '#2196f3', // Add custom color border (Line)
                         backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
@@ -349,8 +349,21 @@
                 options: {
                     responsive: true, // Instruct chart js to respond nicely.
                     maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                callback: function (val, index, array) {
+                                    if (val >= 10000000) val = (val / 10000000).toFixed(2) + ' Cr';
+                                    else if (val >= 100000) val = (val / 100000).toFixed(2) + ' Lac';
+                                    else if (val >= 1000) val = (val / 1000).toFixed(2) + ' K';
+                                    return val;
+                                }
+                            }
+                        }]
+                    }
                 }
             });
+       
 
 
 
