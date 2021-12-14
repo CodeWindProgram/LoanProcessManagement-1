@@ -5,9 +5,9 @@
     ViewData["Title"] = "CreateMenu";
 }
 <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
-<link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css"rel="stylesheet" type="text/css" />
+<link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
 <script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"></script>
-<link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css"rel="stylesheet" type="text/css" />
+<link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
 <style type="text/css">
@@ -173,11 +173,11 @@
                                         <label>Parent Id<span style="color: Red">&nbsp;*</span></label>
                                     </div>
                                     <div class="col-md-6">
+                                        <input hidden id="confirming" asp-for="createMenuCommand.IsParent" />
                                         <input type="radio" name="Married" id="Yes" value="Yes" onclick="hideStudentChildren()" required>YES &nbsp&nbsp&nbsp&nbsp
                                         <input type="radio" name="Married" id="No" value="No" onclick="hideStudentChildren()" checked>NO &nbsp&nbsp&nbsp&nbsp
 
-                                        <select multiple="multiple" asp-for="createMenuCommand.ParentId" asp-items="@ViewBag.ParentId" id="selectChildren" class="required" disabled required>
-                                            <option value="">---Select Children---</option>
+                                        <select multiple="multiple" asp-for="Childlist" asp-items="@ViewBag.ParentId" id="selectChildren" class="required" disabled required>
                                         </select>
 
                                     </div>
@@ -244,25 +244,24 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-
-    n = new Date();
-    y = n.getFullYear();
-    m = n.getMonth() + 1;
-    d = n.getDate();
-    document.getElementById("dates").innerHTML = m + "/" + d + "/" + y;
-</script>
-
 <script>
-   
-
-        function hideStudentChildren() {
-            if ($("#Yes").is(":checked")) {
-                $("#selectChildren").removeAttr("disabled");
-            }
-            if ($("#No").is(":checked")) {
-                console.log('nomaan');
-                $("#selectChildren").attr("disabled", "disabled");
-            }
+    function hideStudentChildren() {
+        if ($("#Yes").is(":checked")) {
+            check();
+            $("#selectChildren").removeAttr("disabled");
         }
+        if ($("#No").is(":checked")) {
+            uncheck();
+            $("#selectChildren").attr("disabled", "disabled");
+        }
+    }
+
+
+    function check() {
+        document.getElementById("confirming").checked = true;
+    }
+
+    function uncheck() {
+        document.getElementById("confirming").checked = false;
+    }
 </script>

@@ -15,6 +15,7 @@ namespace LoanProcessManagement.App.Models
         public GetMenuByIdQueryVm getMenuByIdQueryVm { get; set; }
         public GetAllMenuMapsQueryVm getAllMenuMapsQueryVm { get; set; }
         public List<MenuCheckListVm> RoleList {get;set;}
+        public List<long> Parlist {get;set;}
         public GetTheMenuMapsCommandDto getTheMenuMapsCommandDto { get; set; }
     }
 }

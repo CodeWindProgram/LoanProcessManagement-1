@@ -12,5 +12,6 @@ namespace LoanProcessManagement.Application.Features.Menu.Query.GetAllMenus
         public string Icon { get; set; }
         public int? Position { get; set; }
         public int ParentId { get; set; }
+        public bool IsParent { get; set; }
     }
 }
