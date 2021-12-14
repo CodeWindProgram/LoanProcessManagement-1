@@ -42,7 +42,7 @@
 
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-                    //$.widget.bridge('uibutton', $.ui.button)
+        //$.widget.bridge('uibutton', $.ui.button)
     </script>
     <!-- Bootstrap 4 -->
     <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -81,7 +81,39 @@
             background-color: #343a40;
             color: white;
         }
+
+        .nav {
+            font-size: small;
+        }
+
+        .panel-heading {
+            color: white;
+            background-color: #343a40;
+            border-bottom: 1px solid rgba(0,0,0,.125);
+            padding: 0.75rem 1.25rem;
+            position: relative;
+            border-top-left-radius: 0.25rem;
+            border-top-right-radius: 0.25rem;
+        }
     </style>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("table").dataTable({
+                "oLanguage": {
+                    "sZeroRecords": "No Records to Display",
+                    "sSearch": "Search "
+                },
+                "iDisplayLength": 10,
+                "aLengthMenu": [[10, 50, 100, 200, 500], [10, 50, 100, 200, 500]],
+                "bSortClasses": false,
+                "bPaginate": true,
+                "bAutoWidth": false,
+                "bProcessing": true,
+                "bDestroy": true
+            });
+        });
+    </script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -140,15 +172,6 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            @*<a href="index3.html" class="brand-link">
-                    <span class="brand-text font-weight-light">
-                        <img src="~/css/images/LPM-logo.png"
-                             alt="LPM"
-                             class="brand-image img-circle elevation-3"
-                             style="opacity: 0.8" />
-                    </span>
-                </a>*@
-
             <a href="/home/dashboard" class="brand-link">
                 <img src="~/css/images/LPM-logo.png"
                      alt="LPM"
@@ -156,10 +179,11 @@
                      style="opacity: 1 ; margin-top:0px" />
                 <span class="brand-text font-weight-light">LOS</span>
             </a>
+
             @if (User != null && User.Identity.IsAuthenticated)
             {
                 <!-- Sidebar -->
-                @await Component.InvokeAsync("Navigation",new { parentId = 0})
+                @await Component.InvokeAsync("Navigation")
                 <!-- sidebar -->
             }
         </aside>

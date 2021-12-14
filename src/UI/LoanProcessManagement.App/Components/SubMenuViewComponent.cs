@@ -1,5 +1,6 @@
 ﻿using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.Menu.Query;
+using LoanProcessManagement.Application.Features.Menu.Query.MenuList;
 using LoanProcessManagement.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace LoanProcessManagement.App.Components
 {
-    public class NavigationViewComponent : ViewComponent
+    public class SubMenuViewComponent : ViewComponent
     {
         private readonly IMenuService _menuService;
-        public NavigationViewComponent(IMenuService menuService)
+        public SubMenuViewComponent(IMenuService menuService)
         {
             _menuService = menuService;
         }
@@ -31,14 +32,8 @@ namespace LoanProcessManagement.App.Components
             menuProcess.UserRoleId = long.Parse(roleId);
 
             var MenuServiceResponse = new Response<IEnumerable<GetMenuMasterServicesVm>>();
-            if (ParentID == 0)
-            {
-                MenuServiceResponse = await _menuService.MenuProcess(menuProcess);
-            }
-            else
-            {
-                MenuServiceResponse = await _menuService.GetChildMenuById(ParentID);
-            }
+
+            MenuServiceResponse = await _menuService.GetChildMenuById(ParentID);
 
             if (MenuServiceResponse != null && MenuServiceResponse.Succeeded && MenuServiceResponse.Data != null)
             {

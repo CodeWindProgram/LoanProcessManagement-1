@@ -4,18 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Index";
 }
-<style>
-    .panel-heading {
-        color: white;
-        background-color: #343a40;
-        border-bottom: 1px solid rgba(0,0,0,.125);
-        padding: 0.75rem 1.25rem;
-        position: relative;
-        border-top-left-radius: 0.25rem;
-        border-top-right-radius: 0.25rem;
-    }
-
-</style>
 <div class="container app">
     <div class="col-sm-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
@@ -85,20 +73,3 @@
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function () {
-        var usrTable = $('#tblLeadList').dataTable({
-            "oLanguage": {
-                "sZeroRecords": "No Records to Display",
-                "sSearch": "Search "
-            },
-            "iDisplayLength": 15,
-            "aLengthMenu": [[25, 50, 100, 200, 500], [25, 50, 100, 200, 500]],
-            "bSortClasses": false,
-            "bPaginate": true,
-            "bAutoWidth": false,
-            "bProcessing": true,
-            "bDestroy": true
-        });
-    });
-</script>

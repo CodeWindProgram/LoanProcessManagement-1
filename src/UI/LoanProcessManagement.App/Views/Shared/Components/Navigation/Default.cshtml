@@ -25,10 +25,11 @@
                             <img src="@itm.Icon" style="width: auto; max-height: 33px; opacity: 1" />
                             <p>
                                 @itm.MenuName
+                                <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
-                        @*@await Component.InvokeAsync("Navigation", new { ParentID = itm.ParentID })*@
-                        @*jnknknkjnkjnknnkk*@
+                        @await Component.InvokeAsync("SubMenu", new { parentId = itm.Id })
+                        @*@await Component.InvokeAsync("SubMenu", new { ParentID = itm.ParentID })*@
                     </li>
                 }
                 else

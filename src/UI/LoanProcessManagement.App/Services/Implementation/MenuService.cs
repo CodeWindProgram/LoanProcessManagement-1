@@ -230,7 +230,7 @@ namespace LoanProcessManagement.App.Services.Implementation
             return response;
         }
 
-        public async Task<Response<IEnumerable<MenuListQueryVm>>> GetChildMenuById(long Id)
+        public async Task<Response<IEnumerable<GetMenuMasterServicesVm>>> GetChildMenuById(long Id)
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
@@ -245,7 +245,7 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             var options = new JsonSerializerOptions();
 
-            var response = System.Text.Json.JsonSerializer.Deserialize<Response<IEnumerable<MenuListQueryVm>>>(jsonString, options);
+            var response = System.Text.Json.JsonSerializer.Deserialize<Response<IEnumerable<GetMenuMasterServicesVm>>>(jsonString, options);
 
             return response;
         }
