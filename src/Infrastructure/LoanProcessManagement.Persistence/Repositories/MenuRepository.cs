@@ -35,7 +35,7 @@ namespace LoanProcessManagement.Persistence.Repositories
         {
             var result = await (from A in _dbContext.LpmUserRoleMenuMaps
                                 join B in _dbContext.LpmMenuMasters on A.MenuId equals B.Id
-                                where A.UserRoleId == userroleid && A.IsActive && B.ParentId == null
+                                where A.UserRoleId == userroleid && A.IsActive && (B.ParentId == null || B.ParentId == 0)
                                 orderby B.Position
                                 select new LpmMenuMaster
                                 {
