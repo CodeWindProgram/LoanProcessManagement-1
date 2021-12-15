@@ -28,9 +28,15 @@ namespace LoanProcessManagement.App.Services.Implementation
             _apiDetails = apiDetails;
         }
 
+        #region This method will get Lead ITR  details api by - Ramya Guduru - 15/12/2021
+        /// <summary>
+        /// 15/12/2021 - This method will get Lead ITR  details api
+        //	commented by Ramya Guduru
+        /// </summary>
+        /// <param name="leadId">leadId</param>
+        /// <returns>response</returns>
         public async Task<Response<GetLeadITRDetailsDto>> GetLeadITRDetails(long lead_Id, int applicantType)
         {
-            //throw new NotImplementedException();
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
             var _client = clientfact.CreateClient("LoanService");
@@ -49,9 +55,17 @@ namespace LoanProcessManagement.App.Services.Implementation
             return response;
         }
 
+        #endregion
+
+        #region This method will call get add Lead ITR  details api by - Ramya Guduru - 15/12/2021
+        /// <summary>
+        ///  15/12/2021 - This method will call get add Lead ITR  details api
+        ///  Commented by Ramya Guduru
+        /// </summary>
+        /// <param name="LeadITRDetailsVm"></param>
+        /// <returns>Api response</returns>
         public async Task<Response<LeadITRDetailsDto>> UpdateLeadITRDetails(LeadITRDetailsVm leadITRDetailsVm)
         {
-            //throw new NotImplementedException();
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
             var content = JsonConvert.SerializeObject(leadITRDetailsVm);
@@ -73,5 +87,6 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             return response;
         }
+        #endregion
     }
 }

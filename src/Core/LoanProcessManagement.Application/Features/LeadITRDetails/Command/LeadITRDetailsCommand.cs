@@ -6,7 +6,8 @@ using System.Text;
 
 namespace LoanProcessManagement.Application.Features.LeadITRDetails.Command
 {
-   public class LeadITRDetailsCommand : IRequest<Response<LeadITRDetailsDto>>
+    #region added LeadITRDetailsCommand  - Ramya Guduru - 15-12-2021
+    public class LeadITRDetailsCommand : IRequest<Response<LeadITRDetailsDto>>
     {
         public string Password { get; set; }
         public string FormNo { get; set; }
@@ -15,4 +16,5 @@ namespace LoanProcessManagement.Application.Features.LeadITRDetails.Command
         public string CreatedBy { get; set; }
         public string LastModifiedBy { get; set; }
     }
+    #endregion
 }

@@ -79,6 +79,7 @@ namespace LoanProcessManagement.Persistence.Repositories
         {
            
             var applicant = _dbContext.LpmLeadITRDetails.Where(x => x.FormNo == request.FormNo && x.lead_Id==request.lead_Id && x.ApplicantType==request.ApplicantType).FirstOrDefault();
+            
             var encryptPassword = EncryptionDecryption.EncryptString(request.Password);
 
             LeadITRDetailsDto response = new LeadITRDetailsDto();
@@ -92,12 +93,12 @@ namespace LoanProcessManagement.Persistence.Repositories
 
                 await _dbContext.SaveChangesAsync();
 
-                response.Message = "password updated successfully";
+                response.Message = "Password Updated Successfully";
                 response.Succeeded = true;
                 
             }
             else {
-                response.Message = "Failed to Update";
+                response.Message = "Failed to Update Password";
                 response.Succeeded = false;
             }
 

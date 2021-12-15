@@ -9,10 +9,13 @@ using System.Threading.Tasks;
 
 namespace LoanProcessManagement.App.Services.Interfaces
 {
+
+    #region added services for getting Lead ITR details and Updating Applicant Password - Ramya Guduru - 15/12/2021
     public interface ILeadITRDetailsService
     {
         Task<Response<GetLeadITRDetailsDto>> GetLeadITRDetails(long lead_Id, int applicantType);
 
         Task<Response<LeadITRDetailsDto>> UpdateLeadITRDetails(LeadITRDetailsVm leadITRDetailsVm);
     }
+    #endregion
 }

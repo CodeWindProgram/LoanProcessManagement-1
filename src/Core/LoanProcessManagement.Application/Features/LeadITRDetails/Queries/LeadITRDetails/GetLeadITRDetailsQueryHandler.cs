@@ -29,9 +29,8 @@ namespace LoanProcessManagement.Application.Features.LeadITRDetails.Queries.Lead
         /// <returns>Response</returns>
         public async Task<Response<GetLeadITRDetailsDto>> Handle(GetLeadITRDetailsQuery request, CancellationToken cancellationToken)
         {
-            // throw new NotImplementedException();
             var lead = await _DetailsRepository.GetLeadITRDetailsAsync(request.lead_Id, request.ApplicantType);
-            return new Response<GetLeadITRDetailsDto>(lead, "success");
+            return new Response<GetLeadITRDetailsDto>(lead, "Success");
         }
         #endregion
     }

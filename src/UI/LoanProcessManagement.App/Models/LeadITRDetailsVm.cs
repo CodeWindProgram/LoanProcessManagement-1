@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace LoanProcessManagement.App.Models
 {
+    #region added LeadITRDetailsVm - Ramya Guduru - 15-12-2021
     public class LeadITRDetailsVm
     {
         public string CreatedBy { get; set; }
@@ -27,4 +28,5 @@ namespace LoanProcessManagement.App.Models
         public string Message { get; set; }
         public bool Succeeded { get; set; }
     }
+    #endregion
 }

@@ -4,6 +4,7 @@ using System.Text;
 
 namespace LoanProcessManagement.Application.Features.LeadITRDetails.Command
 {
+    #region added LeadITRDetailsDto  - Ramya Guduru - 15-12-2021
     public class LeadITRDetailsDto
     {
         public string Password { get; set; }
@@ -15,4 +16,5 @@ namespace LoanProcessManagement.Application.Features.LeadITRDetails.Command
         public string Message { get; set; }
         public bool Succeeded { get; set; }
     }
+    #endregion
 }
