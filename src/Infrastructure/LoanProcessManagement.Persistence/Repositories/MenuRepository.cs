@@ -60,8 +60,9 @@ namespace LoanProcessManagement.Persistence.Repositories
         /// <returns></returns>
         public async Task<List<LpmMenuMaster>> GetMenuList(long UserRoleId)
         {
-            var result = await (from B in _dbContext.LpmMenuMasters
-                                where B.IsActive
+            var result = await (from A in _dbContext.LpmUserRoleMenuMaps
+                                join B in _dbContext.LpmMenuMasters on A.MenuId equals B.Id
+                                where A.UserRoleId == UserRoleId && A.IsActive == true
                                 orderby B.Position
                                 select new LpmMenuMaster
                                 {
@@ -70,8 +71,6 @@ namespace LoanProcessManagement.Persistence.Repositories
                                     Icon = B.Icon,
                                     Link = B.Link,
                                     MenuName = B.MenuName,
-                                    ParentId = B.ParentId,
-                                    IsParent = B.IsParent
                                 }).ToListAsync();
             return result;
         } 

@@ -251,7 +251,8 @@ namespace LoanProcessManagement.App.Controllers
                                                                     Position = updateCheckboxfunctionVm.getMenuByIdQueryVm.Position,
                                                                     MenuName = updateCheckboxfunctionVm.getMenuByIdQueryVm.MenuName,
                                                                     Icon = updateCheckboxfunctionVm.getMenuByIdQueryVm.Icon,
-                                                                    IsActive = updateCheckboxfunctionVm.getMenuByIdQueryVm.IsActive
+                                                                    IsActive = updateCheckboxfunctionVm.getMenuByIdQueryVm.IsActive,
+                                                                    IsParent = updateCheckboxfunctionVm.getMenuByIdQueryVm.IsParent
                                                                 };
                 var response = await _menuService.UpdateMenu(updatemenucommand);
 
