@@ -175,8 +175,7 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-                                            <input asp-for="CustomerEmail" type="text" id="ContentPlaceHolder1_txtCustomerEmail" class="form-control" placeholder="abc@xyz.com">
-                                            @*<span id="ContentPlaceHolder1_RegularExpressionValidator4" style="color:Red;display:none;">Invalid Email Address.</span>*@
+                                            <input asp-for="CustomerEmail" type="text" id="ContentPlaceHolder1_txtCustomerEmail" class="form-control" placeholder="abc@xyz.com" maxlength="25">
                                             <span asp-validation-for="CustomerEmail" style="color:Red;display:block;"></span>
                                         </div>
                                     </div>
@@ -191,7 +190,6 @@
                                         <div class="input-control text">
                                             <input asp-for="CustomerPhone" type="text" maxlength="10" id="ContentPlaceHolder1_txtCustomerMobile" class="form-control noTxtInput" placeholder="Mobile No">
                                             <span asp-validation-for="CustomerPhone" style="color:Red;display:block;"></span>
-                                            @*<span id="ContentPlaceHolder1_RegularExpressionValidator3" style="color:Red;display:none;">Invalid Mobile No.</span>*@
                                         </div>
                                     </div>
                                 </div>
@@ -228,13 +226,12 @@
                                     <div class="col-md-5">
                                         <div class="input-control text">
                                             <select asp-for="Gender" id="ContentPlaceHolder1_ddlGender" class="form-control">
-                                                <option value="">Select</option>
+                                                <option value="">Select Gender</option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
                                                 <option value="Transgender">Transgender</option>
 
                                             </select>
-                                            @*<span id="ContentPlaceHolder1_RequiredFieldValidator3" style="color:Red;display:none;">Please select gender.</span>*@
                                             <span asp-validation-for="Gender" style="color:Red;display:block;"></span>
                                         </div>
                                     </div>
@@ -505,9 +502,8 @@
                                     <div class="row tab">
                                         <div class="col-md-12">
                                             <center>
-                                                <input type="submit" name="ctl00$ContentPlaceHolder1$btnClearEnquiry" value="Clear" id="ContentPlaceHolder1_btnClearEnquiry" class="btn btn-success" onclick="this.form.reset();">&nbsp
                                                 <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="ContentPlaceHolder1_btnAddEnquiry" class="btn" style="background-color: #343a40; color:white;">&nbsp
-                                                <input type="submit" name="ctl00$ContentPlaceHolder1$btnExit" value="Exit" id="ContentPlaceHolder1_btnExit" class="btn btn-danger" asp-controller="Home" asp-action="Index">
+                                                <input type="submit" name="ctl00$ContentPlaceHolder1$btnExit" value="Cancel" id="ContentPlaceHolder1_btnExit" class="btn btn-danger" onclick="window.location= '@Url.Action( "Index","Home")'" @*asp-controller="Home" asp-action="Index"*@>
                                             </center>
                                         </div>
                                     </div>

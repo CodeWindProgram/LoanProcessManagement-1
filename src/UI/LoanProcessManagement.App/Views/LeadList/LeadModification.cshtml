@@ -529,7 +529,7 @@
                     <div class="initial1">
                         <div class="group1"><label for="amount">Amount(in INR):<span style="color:red;margin-left: 4px;font-size: 15px;">*</span></label></div>
                         <div class="group2">
-                            <input type="text" class="form-control amt" asp-for="loanAmount">
+                            <input type="text" class="form-control amt" asp-for="loanAmount" maxlength="8">
                             <span asp-validation-for="loanAmount" class="text-danger"></span>
 
                         </div>
@@ -558,7 +558,7 @@
                     <div class="initial1">
                         <div class="group1"><label for="amount_insurance">Amount(in INR):</label></div>
                         <div class="group2">
-                            <input type="text" class="form-control amt" asp-for="insuranceAmount">
+                            <input type="text" class="form-control amt" asp-for="insuranceAmount" maxlength="6">
                             <span asp-validation-for="insuranceAmount" class="text-danger"></span>
 
                         </div>

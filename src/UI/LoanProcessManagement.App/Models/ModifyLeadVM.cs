@@ -32,10 +32,11 @@ namespace LoanProcessManagement.App.Models
 
         //[RegularExpression("^[0-9]*$", ErrorMessage = "Invalid amount")]
         [Required(ErrorMessage = "Amount is Required")]
-        [Range(100000,9999999999999,ErrorMessage ="Loan Amount Should be Greater than 1 Lakh")]
+        [Range(100000,50000000,ErrorMessage ="Loan Amount Should be Greater than 1 Lakh")]
         public long? loanAmount { get; set; }
 
         //[RegularExpression("^[0-9]*$", ErrorMessage = "Invalid amount")]
+        [Range(0, 999999, ErrorMessage = "Insurance Amount Should be Greater than 1 Lakh")]
         public long? insuranceAmount { get; set; }
 
         [DataType(DataType.Date)]

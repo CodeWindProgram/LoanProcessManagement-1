@@ -109,7 +109,7 @@
                                 <div class="row">
                                     <div class="col-1"></div>
                                     <div class="col-3">
-                                        <label asp-for="CreatedBy">Employee Name:</label>
+                                        <label asp-for="CreatedBy">Employee Name :</label>
                                     </div>
                                     <div class="col-6">
                                         <label id="empId" value=@User.Identity.Name>@User.Identity.Name </label>
@@ -124,7 +124,7 @@
                                 <div class="row">
                                     <div class="col-1"></div>
                                     <div class="col-3">
-                                        <label asp-for="FormNo">Form Number:<span style="color: red; width: 10%;">*</span></label>
+                                        <label asp-for="FormNo">Form Number :<span style="color: red; width: 10%;">*</span></label>
                                     </div>
                                     <div class="col-6">
                                         <input asp-for="FormNo" class="form-control" type="text" name="FormNo" placeholder="Enter Form Number" />
@@ -137,7 +137,7 @@
                                 <div class="row">
                                     <div class="col-1"></div>
                                     <div class="col-3">
-                                        <label asp-for="IsPropertyIdentified">Property Identified:<span style="color: red; width: 10%;">*</span></label>
+                                        <label asp-for="IsPropertyIdentified">Property Identified :<span style="color: red; width: 10%;">*</span></label>
                                     </div>
                                     <div class="col-6">
                                         <select asp-for="IsPropertyIdentified" id="DDL_PropId" class="form-control">
@@ -158,7 +158,7 @@
                                     <div class="row">
                                         <div class="col-1"></div>
                                         <div class="col-3">
-                                            <label asp-for="PropertyID">Property Type<span style="color: red; width: 10%;">*</span></label>
+                                            <label asp-for="PropertyID">Property Type :<span style="color: red; width: 10%;">*</span></label>
                                         </div>
                                         <div class="col-6">
                                             <select asp-for="PropertyID" class="form-control" id="val_PropertyID" required>
@@ -176,7 +176,7 @@
                                     <div class="row">
                                         <div class="col-1"></div>
                                         <div class="col-3">
-                                            <label asp-for="PropertyPincode">Pincode of Identified Property<span style="color: red; width: 10%;">*</span></label>
+                                            <label asp-for="PropertyPincode">Pincode of Identified Property : <span style="color: red; width: 10%;">*</span></label>
                                         </div>
                                         <div class="col-6">
                                             <input asp-for="PropertyPincode" class="form-control noTxtInput" type="text" placeholder="Enter Pincode" maxlength="6" />
@@ -189,7 +189,7 @@
                                     <div class="row">
                                         <div class="col-1"></div>
                                         <div class="col-3">
-                                            <label asp-for="PropertyUnderConstruction">a.Under-Construction<span style="color: red; width: 10%;">*</span></label>
+                                            <label asp-for="PropertyUnderConstruction">a.Under-Construction : <span style="color: red; width: 10%;">*</span></label>
                                         </div>
                                         <div class="col-6">
                                             <div>
@@ -208,10 +208,10 @@
                                     <div class="row">
                                         <div class="col-1"></div>
                                         <div class="col-3">
-                                            <label asp-for="ProjectName">b.Project Name<span style="color: red; width: 10%;">*</span></label>
+                                            <label asp-for="ProjectName">b.Project Name : <span style="color: red; width: 10%;">*</span></label>
                                         </div>
                                         <div class="col-6">
-                                            <input asp-for="ProjectName" class="form-control" placeholder="Enter Project Name" id="val_ProjectName" autofocus required />
+                                            <input asp-for="ProjectName" class="form-control" placeholder="Enter Project Name" id="val_ProjectName" maxlength="50" autofocus required />
                                             <span asp-validation-for="ProjectName" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -221,10 +221,10 @@
                                     <div class="row">
                                         <div class="col-1"></div>
                                         <div class="col-3">
-                                            <label asp-for="UnitName">c.Unit Name<span style="color: red; width: 10%;">*</span></label>
+                                            <label asp-for="UnitName">c.Unit Name : <span style="color: red; width: 10%;">*</span></label>
                                         </div>
                                         <div class="col-6">
-                                            <input asp-for="UnitName" class="form-control" type="text" placeholder="Enter Unit Name" id="val_UnitName" autofocus required />
+                                            <input asp-for="UnitName" class="form-control" type="text" placeholder="Enter Unit Name" id="val_UnitName" maxlength="30" autofocus required />
                                             <span asp-validation-for="UnitName" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -234,10 +234,10 @@
                                     <div class="row">
                                         <div class="col-1"></div>
                                         <div class="col-3">
-                                            <label asp-for="ProjectAddress">d.Project Address<span style="color: red; width: 10%;">*</span></label>
+                                            <label asp-for="ProjectAddress">d.Project Address : <span style="color: red; width: 10%;">*</span></label>
                                         </div>
                                         <div class="col-6">
-                                            <textarea asp-for="ProjectAddress" placeholder="Enter Project Address" id="val_ProjectAddress" class="form-control" required autofocus></textarea>
+                                            <textarea asp-for="ProjectAddress" placeholder="Enter Project Address" id="val_ProjectAddress" class="form-control" maxlength="120" autofocus></textarea>
                                             <span asp-validation-for="ProjectAddress" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -247,7 +247,7 @@
                                     <div class="row">
                                         <div class="col-1"></div>
                                         <div class="col-3">
-                                            <label asp-for="IsSanctionedPlanReceivedID">e.Does The Property Have a Sanctioned/Approved Plan ?<span style="color: red; width: 10%;">*</span></label>
+                                            <label asp-for="IsSanctionedPlanReceivedID">e.Does The Property Have a Sanctioned/Approved Plan ? <span style="color: red; width: 10%;">*</span></label>
                                         </div>
                                         <div class="col-6">
                                             <select asp-for="IsSanctionedPlanReceivedID" id="val_IsSanctionedPlanReceivedID" class="form-control" required>
@@ -267,10 +267,10 @@
                                 <div class="row">
                                     <div class="col-1"></div>
                                     <div class="col-3">
-                                        <label asp-for="FirstName">First Name<span style="color: red; width: 10%;">*</span></label>
+                                        <label asp-for="FirstName">First Name :<span style="color: red; width: 10%;">*</span></label>
                                     </div>
                                     <div class="col-6">
-                                        <input asp-for="FirstName" class="form-control" type="text" placeholder="Enter First Name" />
+                                        <input asp-for="FirstName" class="form-control" type="text" placeholder="Enter First Name" maxlength="25"/>
                                         <span asp-validation-for="FirstName" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -281,10 +281,10 @@
                                 <div class="row">
                                     <div class="col-1"></div>
                                     <div class="col-3">
-                                        <label asp-for="MiddleName">Middle Name</label>
+                                        <label asp-for="MiddleName">Middle Name :</label>
                                     </div>
                                     <div class="col-6">
-                                        <input asp-for="MiddleName" class="form-control" type="text" placeholder="Enter Middle Name" />
+                                        <input asp-for="MiddleName" class="form-control" type="text" placeholder="Enter Middle Name" maxlength="25"/>
                                     </div>
                                 </div>
                             </div>
@@ -293,10 +293,10 @@
                                 <div class="row">
                                     <div class="col-1"></div>
                                     <div class="col-3">
-                                        <label asp-for="LastName">Last Name<span style="color: red; width: 10%;">*</span></label>
+                                        <label asp-for="LastName">Last Name :<span style="color: red; width: 10%;">*</span></label>
                                     </div>
                                     <div class="col-6">
-                                        <input asp-for="LastName" class="form-control" type="text" placeholder="Enter Last Name" />
+                                        <input asp-for="LastName" class="form-control" type="text" placeholder="Enter Last Name" maxlength="25"/>
                                         <span asp-validation-for="LastName" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -306,7 +306,7 @@
                                 <div class="row">
                                     <div class="col-1"></div>
                                     <div class="col-3">
-                                        <label asp-for="EmploymentType">Employment Type:</label>
+                                        <label asp-for="EmploymentType">Employment Type :</label>
                                     </div>
                                     <div class="col-6">
                                         <div>
@@ -340,7 +340,7 @@
                                 <div class="row">
                                     <div class="col-1"></div>
                                     <div class="col-3">
-                                        <label asp-for="TypeOfFirms">Type Of Firms: <span style="color: red; width: 10%;">*</span></label>
+                                        <label asp-for="TypeOfFirms">Type Of Firms :<span style="color: red; width: 10%;">*</span></label>
                                     </div>
                                     <div class="col-6">
                                         <select id="DDL_typeoffirms" class="form-control" asp-for="TypeOfFirms">
@@ -424,7 +424,7 @@
                                         <label asp-for="CustomerEmail">Email Address : <span style="color: red; width: 10%;">*</span></label>
                                     </div>
                                     <div class="col-6">
-                                        <input asp-for="CustomerEmail" class="form-control" type="text" maxlength="300" placeholder="Enter Email Address" />
+                                        <input asp-for="CustomerEmail" class="form-control" type="text" maxlength="30" placeholder="Enter Email Address" />
                                         <span asp-validation-for="CustomerEmail" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -520,7 +520,7 @@
                                     </div>
                                     <div class="col-6">
                                         <select id="ddl_Scheme" asp-for="SchemeID" asp-items="ViewBag.loanSchemes" class="form-control">
-                                            <option value="0">Select Scheme</option>
+                                            <option value="">Select Scheme</option>
                                         </select>
                                         <span asp-validation-for="SchemeID" class="text-danger"></span>
                                     </div>
@@ -534,7 +534,7 @@
                                         <label asp-for="Comment">Comments : <span style="color: red; width: 10%;">*</span></label>
                                     </div>
                                     <div class="col-6">
-                                        <textarea asp-for="Comment" class="form-control" placeholder="Enter Comments"></textarea>
+                                        <textarea asp-for="Comment" class="form-control" placeholder="Enter Comments" maxlength="300"></textarea>
                                         <span asp-validation-for="Comment" class="text-danger"></span>
                                     </div>
                                 </div>
