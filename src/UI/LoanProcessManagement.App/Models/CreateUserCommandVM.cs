@@ -13,16 +13,19 @@ namespace LoanProcessManagement.App.Models
         public string LgId { get; set; }
 
         [Display(Name="Login Id")]
-        [Required(ErrorMessage = "Login Id is Required.")]
+        [Required(ErrorMessage = "Username is Required.")]
+        [StringLength(25, MinimumLength = 8 , ErrorMessage="Username Should Atleast Contain 8 Character")]
         public string EmployeeId { get; set; }
 
         [Required(ErrorMessage = "Name is Required.")]
+        [StringLength(25)]
         public string Name { get; set; }
 
         [Display(Name = "E-Mail")]
         [Required(ErrorMessage = "Email is Required .")]
         [RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$",
         ErrorMessage = "Invalid Email Format")]
+        [StringLength(30)]
         public string Email { get; set; }
 
         [Display(Name = "Branch")]
