@@ -21,23 +21,26 @@
         background: #191970;
         color: #FFF;
     }
-    .btn{
-        width:inherit;
-        justify-content:center;
-    }
-        .AppTabs:hover {
-            background: #adb5bd;
-            color: black;
-        }
 
-        .AppTabs:visited {
-            text-decoration: none;
-        }
+    .btn {
+        width: inherit;
+        justify-content: center;
+    }
+
+    .AppTabs:hover {
+        background: #adb5bd;
+        color: black;
+    }
+
+    .AppTabs:visited {
+        text-decoration: none;
+    }
 
     .selected {
         background: #0d7db5;
         color: #FFF;
     }
+
     .panel-heading {
         color: white;
         background-color: #343a40;
@@ -127,7 +130,7 @@
                                         <div class="input-control text">
                                             <input asp-for="FirstName" type="text" maxlength="26" id="ContentPlaceHolder1_txtCustomerName" class="form-control required" placeholder="XYZ">
                                             @*<span id="ContentPlaceHolder1_RequiredFieldValidator14" style="color:Red;display:none;">Customer name is mandatory.</span>
-                    <span id="ContentPlaceHolder1_RegularExpressionValidator7" style="color:Red;display:none;">Invalid Customer Name.</span>*@
+                                                <span id="ContentPlaceHolder1_RegularExpressionValidator7" style="color:Red;display:none;">Invalid Customer Name.</span>*@
                                             <span asp-validation-for="FirstName" style="color:Red;display:block;"></span>
                                         </div>
                                     </div>
@@ -143,7 +146,7 @@
                                         <div class="input-control text">
                                             <input asp-for="MiddleName" type="text" maxlength="26" id="ContentPlaceHolder1_txtCustomerMiddleName" class="form-control required" placeholder="XYZ">
                                             @*<span id="ContentPlaceHolder1_RequiredFieldValidator14" style="color:Red;display:none;">Customer name is mandatory.</span>
-                    <span id="ContentPlaceHolder1_RegularExpressionValidator7" style="color:Red;display:none;">Invalid Customer Name.</span>*@
+                                                <span id="ContentPlaceHolder1_RegularExpressionValidator7" style="color:Red;display:none;">Invalid Customer Name.</span>*@
                                             <span asp-validation-for="MiddleName" style="color:Red;display:block;"></span>
                                         </div>
                                     </div>
@@ -159,7 +162,7 @@
                                         <div class="input-control text">
                                             <input asp-for="LastName" type="text" maxlength="26" id="ContentPlaceHolder1_txtCustomerLastName" class="form-control required" placeholder="XYZ">
                                             @*<span id="ContentPlaceHolder1_RequiredFieldValidator14" style="color:Red;display:none;">Customer name is mandatory.</span>
-                    <span id="ContentPlaceHolder1_RegularExpressionValidator7" style="color:Red;display:none;">Invalid Customer Name.</span>*@
+                                                <span id="ContentPlaceHolder1_RegularExpressionValidator7" style="color:Red;display:none;">Invalid Customer Name.</span>*@
                                             <span asp-validation-for="LastName" style="color:Red;display:block;"></span>
                                         </div>
                                     </div>
@@ -199,19 +202,21 @@
                                         <label class="">Date of Birth</label><span style="color: Red">&nbsp;*</span>
                                     </div>
                                     <div class="col-md-5">
-                                        <!--<div class="input-control text">
-                                            <input asp-for="DateOfBirth" asp-format="{0:dd/MM/yyyy}" type="text" id="ContentPlaceHolder1_txtDOB" placeholder="dd/mm/yyyy" class="form-control datetimepicker-input" data-target="TextBoxCalender" style="width: 92%; display: inline-block; margin-right: 10px;">--> @*<img class="ui-datepicker-trigger" src="../css/Images/sort_asc.png" alt="..." title="...">*@
-                                            @*<span id="ContentPlaceHolder1_RequiredFieldValidator2" style="color:Red;display:none;">Date of Birth is mandatory.</span>*@
-                                            <!--<span asp-validation-for="DateOfBirth" style="color:Red;display:block;"></span>
-                                        </div>-->
-                                        <div class="input-group date" id="TextBoxCalendar" data-target-input="nearest">
-                                            <input asp-for="DateOfBirth" asp-format="{0:dd/MM/yyyy}" type="text" placeholder="dd/mm/yyyy" class="form-control datetimepicker-input" data-target="#TextBoxCalender" style="width: 92%; display: inline-block; margin-right: 10px;"> @*<img class="ui-datepicker-trigger" src="../css/Images/sort_asc.png" alt="..." title="...">*@
-                                            <div class="input-group-append" data-target="#TextBoxCalender" data-toggle="datetimepicker">
-                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                            </div>
-                                            @*<span id="ContentPlaceHolder1_RequiredFieldValidator2" style="color:Red;display:none;">Date of Birth is mandatory.</span>*@
+                                        <div class="input-control text">
+                                            <input asp-for="DateOfBirth" asp-format="{0:dd/MM/yyyy}" type="text" id="ContentPlaceHolder1txtDOB" placeholder="dd/mm/yyyy"
+                                                   class="form-control" />
+                                            <span id="ContentPlaceHolder1_RequiredFieldValidator2" style="color:Red;display:none;">Date of Birth is mandatory.</span>
                                             <span asp-validation-for="DateOfBirth" style="color:Red;display:block;"></span>
                                         </div>
+                                        <!--<div class="input-group date" id="TextBoxCalendar" data-target-input="nearest">
+                                            <input asp-for="DateOfBirth" asp-format="{0:dd/MM/yyyy}" type="text" placeholder="dd/mm/yyyy" class="form-control datetimepicker-input" data-target="#TextBoxCalender" style="width: 92%; display: inline-block; margin-right: 10px;">-->
+                                        @*<img class="ui-datepicker-trigger" src="../css/Images/sort_asc.png" alt="..." title="...">*@
+                                        <!--<div class="input-group-append" data-target="#TextBoxCalender" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div>-->
+                                        @*<span id="ContentPlaceHolder1_RequiredFieldValidator2" style="color:Red;display:none;">Date of Birth is mandatory.</span>*@
+                                        <!--<span asp-validation-for="DateOfBirth" style="color:Red;display:block;"></span>
+                                        </div>-->
                                     </div>
                                 </div>
 
@@ -325,23 +330,23 @@
                                 </div>
 
                                 <!--<div id="PhoneDV">
-    <div style="height: 5px;"></div>
-    <div class="divsubheader">
-        <h2>Phone</h2>
-    </div>
-    <div class="row tab">
-        <div class="col-md-5">
-            <label class="">Phone 1</label>
-        </div>
-        <div class="col-md-3">
-            <div class="input-control text">
-                <input asp-for="CustomerPhone" type="text" maxlength="10" id="ContentPlaceHolder1_txtPhone" class="form-control">
-                <span asp-validation-for="CustomerPhone" style="color:Red;display:block;"></span>-->
+                                <div style="height: 5px;"></div>
+                                <div class="divsubheader">
+                                    <h2>Phone</h2>
+                                </div>
+                                <div class="row tab">
+                                    <div class="col-md-5">
+                                        <label class="">Phone 1</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="input-control text">
+                                            <input asp-for="CustomerPhone" type="text" maxlength="10" id="ContentPlaceHolder1_txtPhone" class="form-control">
+                                            <span asp-validation-for="CustomerPhone" style="color:Red;display:block;"></span>-->
                                 @*<span id="ContentPlaceHolder1_RegularExpressionValidator5" style="color:Red;display:none;">Invalid Phone No.</span>*@
                                 <!--</div>
-            </div>
-        </div>
-    </div>-->
+                                        </div>
+                                    </div>
+                                </div>-->
 
                                 <div id="currentAddr">
                                     <div id="divConverted4" class="divsubheader">
@@ -367,7 +372,7 @@
                                         <div class="col-md-5">
                                             <div class="input-control text">
                                                 <input asp-for="AddressLine2" type="text" maxlength="40" id="ContentPlaceHolder1_txtCurrentAddress2" class="form-control">
-                                                @*<span id="ContentPlaceHolder1_RequiredFieldValidator6" style="color:Red;display:none;">Current Address is mandatory.</span>*@                              
+                                                @*<span id="ContentPlaceHolder1_RequiredFieldValidator6" style="color:Red;display:none;">Current Address is mandatory.</span>*@
                                             </div>
                                         </div>
                                     </div>
@@ -458,7 +463,7 @@
                                             <div class="input-control text">
                                                 <input asp-for="Pincode" type="text" maxlength="6" id="ContentPlaceHolder1_txtPinCodeCurrent" class="form-control noTxtInput">
                                                 @*<span id="ContentPlaceHolder1_RequiredFieldValidator9" style="color:Red;display:none;">Pincode is mandatory.</span>
-                        <span id="ContentPlaceHolder1_RegularExpressionValidator1" style="color:Red;display:none;">Invalid Pincode.</span>*@
+                                                    <span id="ContentPlaceHolder1_RegularExpressionValidator1" style="color:Red;display:none;">Invalid Pincode.</span>*@
                                                 <span asp-validation-for="Pincode" style="color:Red;display:block;"></span>
                                             </div>
                                         </div>
@@ -558,22 +563,21 @@
 
 <script>
     $(document).ready(function () {
-        debugger
-        //Date picker
-        $('#TextBoxCalender').datetimepicker({
-            format: 'L'
-        });
-
-        //$("#TextBoxCalender").datepicker({
-        //    showOn: "button",
-        //    buttonImage: "../css/Images/sort_asc.png",
-        //    buttonImageOnly: true,
-        //    changeMonth: true,
-        //    changeYear: true,
-        //    dateFormat: 'dd-mm-yy',
-        //    yearRange: "-100:+0"
-        //    //dateFormat: 'yy-MM-dd'
+        //debugger
+        ////Date picker
+        //$('#TextBoxCalender').datetimepicker({
+        //    format: 'L'
         //});
+
+        $("#ContentPlaceHolder1txtDOB").datepicker({
+            showOn: "button",
+            //buttonImage: "../css/Images/sort_asc.png",
+            //buttonImageOnly: true,
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'dd/mm/yyyy',
+            yearRange: "-100:+0"
+        });
     });
 
     $(function () {
