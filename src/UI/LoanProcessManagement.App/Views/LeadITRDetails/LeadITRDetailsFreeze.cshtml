@@ -126,10 +126,8 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-                                            <input asp-for="CustomerName" type="text" maxlength="26" id="ContentPlaceHolder1_txtCustomerName" class="form-control required" placeholder="XYZ">
-                                            @*<span id="ContentPlaceHolder1_RequiredFieldValidator14" style="color:Red;display:none;">Customer name is mandatory.</span>
-                    <span id="ContentPlaceHolder1_RegularExpressionValidator7" style="color:Red;display:none;">Invalid Customer Name.</span>*@
-                                            <span asp-validation-for="CustomerName" style="color:Red;display:block;"></span>
+                                            @*<input asp-for="CustomerName" type="text" maxlength="26" id="ContentPlaceHolder1_txtCustomerName" class="form-control required" placeholder="XYZ">*@
+                                            <label>@Model.CustomerName</label>
                                         </div>
                                     </div>
                                 </div>
@@ -141,9 +139,8 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-                                            <input asp-for="CustomerEmail" type="text" id="ContentPlaceHolder1_txtCustomerEmail" class="form-control" placeholder="abc@xyz.com">
-                                            @*<span id="ContentPlaceHolder1_RegularExpressionValidator4" style="color:Red;display:none;">Invalid Email Address.</span>*@
-                                            <span asp-validation-for="CustomerEmail" style="color:Red;display:block;"></span>
+                                            @*<input asp-for="CustomerEmail" type="text" id="ContentPlaceHolder1_txtCustomerEmail" class="form-control" placeholder="abc@xyz.com">*@
+                                            <label>@Model.CustomerEmail</label>
                                         </div>
                                     </div>
                                 </div>
@@ -155,9 +152,8 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-                                            <input asp-for="CustomerPhone" type="text" maxlength="10" id="ContentPlaceHolder1_txtCustomerMobile" class="form-control noTxtInput" placeholder="Mobile No">
-                                            <span asp-validation-for="CustomerPhone" style="color:Red;display:block;"></span>
-                                            @*<span id="ContentPlaceHolder1_RegularExpressionValidator3" style="color:Red;display:none;">Invalid Mobile No.</span>*@
+                                            @*<input asp-for="CustomerPhone" type="text" maxlength="10" id="ContentPlaceHolder1_txtCustomerMobile" class="form-control noTxtInput" placeholder="Mobile No">*@
+                                            <label>@Model.CustomerPhone</label>
                                         </div>
                                     </div>
                                 </div>
@@ -204,7 +200,8 @@
                                         </div>
                                         <div class="col-md-5">
                                             <div class="input-control text">
-                                                <input asp-for="PanCardNo" type="text" maxlength="10" id="ContentPlaceHolder1_txtPAN" class="form-control">
+                                                @*<input asp-for="PanCardNo" type="text" maxlength="10" id="ContentPlaceHolder1_txtPAN" class="form-control">*@
+                                                <label>@Model.PanCardNo</label>
                                             </div>
                                         </div>
 
@@ -217,7 +214,8 @@
                                         </div>
                                         <div class="col-md-5">
                                             <div class="input-control text">
-                                                <input asp-for="UserName" type="text" maxlength="10" id="ContentPlaceHolder1_txtPAN" class="form-control">
+                                                @*<input asp-for="UserName" type="text" maxlength="10" id="ContentPlaceHolder1_txtPAN" class="form-control">*@
+                                                <label>@Model.UserName</label>
                                             </div>
                                         </div>
 
@@ -230,7 +228,8 @@
                                         </div>
                                         <div class="col-md-5">
                                             <div class="input-control text">
-                                                <input asp-for="Password" type="text" maxlength="10" id="ContentPlaceHolder1_txtPAN" class="form-control">
+                                                @*<input asp-for="Password" type="text" maxlength="10" id="ContentPlaceHolder1_txtPAN" class="form-control">*@
+                                                <label>@Model.Password</label>
                                             </div>
                                         </div>
 
@@ -238,20 +237,7 @@
 
                                 </div>
 
-                                @*<div id="accountDv">
-
-
-            <br />
-            <div class="row tab">
-                <div class="col-md-12">
-                    <center>
-                        <input type="submit" name="ctl00$ContentPlaceHolder1$btnClearEnquiry" value="Clear" id="ContentPlaceHolder1_btnClearEnquiry" class="btn btn-success" onclick="this.form.reset();">&nbsp
-                        <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="ContentPlaceHolder1_btnAddEnquiry" class="btn" style="background-color: #343a40; color:white;">&nbsp
-                        <input type="submit" name="ctl00$ContentPlaceHolder1$btnExit" value="Exit" id="ContentPlaceHolder1_btnExit" class="btn btn-danger" asp-controller="Home" asp-action="Index">
-                    </center>
-                </div>
-            </div>
-        </div>*@
+                                
                             </div>
                         </div>
                     </form>
