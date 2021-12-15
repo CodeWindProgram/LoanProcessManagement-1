@@ -530,11 +530,12 @@
                         <div class="group1"><label for="amount">Amount(in INR):<span style="color:red;margin-left: 4px;font-size: 15px;">*</span></label></div>
                         <div class="group2">
                             <input type="text" class="form-control amt" asp-for="loanAmount" maxlength="8">
+                            <div><i style="color : red">(Note : Loan Amount Should be Greater than 1 Lakh and less than 5 Crore)</i></div>
                             <span asp-validation-for="loanAmount" class="text-danger"></span>
 
                         </div>
 
-                    </div><br /><br>
+                    </div><br /><br><br />
 
 
                     <div class="card initial1">

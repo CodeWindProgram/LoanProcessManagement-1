@@ -39,6 +39,7 @@ namespace LoanProcessManagement.App.Controllers
                 var applicant = new AddApplicantDetailsCommandVM()
                 {
                     lead_Id = lead_Id,
+                    LeadID = applicantResponse.Data.LeadID,
                     FormNo = applicantResponse.Data.FormNo,
                     FirstName = applicantResponse.Data.FirstName,
                     MiddleName = applicantResponse.Data.MiddleName,

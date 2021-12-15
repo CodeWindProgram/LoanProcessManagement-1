@@ -12,6 +12,7 @@ namespace LoanProcessManagement.App.Models
         public string LastModifiedBy { get; set; }
         public string FormNo { get; set; }
         public long lead_Id { get; set; }
+        public string LeadID { get; set; }
 
         [Required(ErrorMessage = "First Name is Required")]
         public string FirstName { get; set; }

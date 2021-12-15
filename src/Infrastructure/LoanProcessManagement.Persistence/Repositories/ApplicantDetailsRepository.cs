@@ -68,11 +68,13 @@ namespace LoanProcessManagement.Persistence.Repositories
                 response.Pincode = applicant.Pincode;
                 response.State = applicant.State;
                 response.NoOfBankAccounts = applicant.NoOfBankAccounts;
+                response.LeadID = lead.lead_Id;
                 return response;
             }
             else
             {
                 response.FormNo = lead.FormNo;
+                response.LeadID = lead.lead_Id;
                 //response.Succeeded = false;
                 //response.Message = $"Co-Applicant{ApplicantType} does not exist";
                 return response;
@@ -129,7 +131,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 applicant.IsActive = true;
                 applicant.CreatedBy = request.CreatedBy;
                 applicant.LastModifiedBy = request.LastModifiedBy;
-
+                
                 await _dbContext.SaveChangesAsync();
 
                 response.Message = "Applicant details Updated Successfully";

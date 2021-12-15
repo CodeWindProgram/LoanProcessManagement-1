@@ -12,6 +12,7 @@ namespace LoanProcessManagement.Application.Features.ApplicantDetails.Queries.Ad
         public long Id { get; set; }
         public string FormNo { get; set; }
         public long lead_Id { get; set; }
+        public string LeadID { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
