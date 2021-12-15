@@ -127,7 +127,7 @@
                                         <label asp-for="FormNo">Form Number:<span style="color: red; width: 10%;">*</span></label>
                                     </div>
                                     <div class="col-6">
-                                        <input asp-for="FormNo" class="form-control" type="text" name="FormNo" placeholder="Form Number" />
+                                        <input asp-for="FormNo" class="form-control" type="text" name="FormNo" placeholder="Enter Form Number" />
                                         <span asp-validation-for="FormNo" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -162,7 +162,7 @@
                                         </div>
                                         <div class="col-6">
                                             <select asp-for="PropertyID" class="form-control" id="val_PropertyID" required>
-                                                <option value="">Select Role</option>
+                                                <option value="">Select Property Type</option>
                                                 <option value="2">Plot</option>
                                                 <option value="3">Flat</option>
                                                 <option value="4">Independent House</option>
@@ -179,7 +179,7 @@
                                             <label asp-for="PropertyPincode">Pincode of Identified Property<span style="color: red; width: 10%;">*</span></label>
                                         </div>
                                         <div class="col-6">
-                                            <input asp-for="PropertyPincode" class="form-control noTxtInput" type="text" placeholder="" maxlength="6" />
+                                            <input asp-for="PropertyPincode" class="form-control noTxtInput" type="text" placeholder="Enter Pincode" maxlength="6" />
                                             <span asp-validation-for="PropertyPincode" id="val_PropertyPincode" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -211,7 +211,7 @@
                                             <label asp-for="ProjectName">b.Project Name<span style="color: red; width: 10%;">*</span></label>
                                         </div>
                                         <div class="col-6">
-                                            <input asp-for="ProjectName" class="form-control" placeholder="" id="val_ProjectName" autofocus required />
+                                            <input asp-for="ProjectName" class="form-control" placeholder="Enter Project Name" id="val_ProjectName" autofocus required />
                                             <span asp-validation-for="ProjectName" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -224,7 +224,7 @@
                                             <label asp-for="UnitName">c.Unit Name<span style="color: red; width: 10%;">*</span></label>
                                         </div>
                                         <div class="col-6">
-                                            <input asp-for="UnitName" class="form-control" type="text" placeholder="" id="val_UnitName" autofocus required />
+                                            <input asp-for="UnitName" class="form-control" type="text" placeholder="Enter Unit Name" id="val_UnitName" autofocus required />
                                             <span asp-validation-for="UnitName" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -237,7 +237,7 @@
                                             <label asp-for="ProjectAddress">d.Project Address<span style="color: red; width: 10%;">*</span></label>
                                         </div>
                                         <div class="col-6">
-                                            <textarea asp-for="ProjectAddress" placeholder="" id="val_ProjectAddress" class="form-control" required autofocus></textarea>
+                                            <textarea asp-for="ProjectAddress" placeholder="Enter Project Address" id="val_ProjectAddress" class="form-control" required autofocus></textarea>
                                             <span asp-validation-for="ProjectAddress" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -251,7 +251,7 @@
                                         </div>
                                         <div class="col-6">
                                             <select asp-for="IsSanctionedPlanReceivedID" id="val_IsSanctionedPlanReceivedID" class="form-control" required>
-                                                <option value="">Select Role</option>
+                                                <option value="">Select Plan</option>
                                                 <option value="1">NO - Less than 120 Sq.mt. (For Delhi NCR only)</option>
                                                 <option value="4">NO - Greater than 300 Sq.mt. (For Delhi NCR only)</option>
                                                 <option value="5">YES</option>
@@ -270,7 +270,7 @@
                                         <label asp-for="FirstName">First Name<span style="color: red; width: 10%;">*</span></label>
                                     </div>
                                     <div class="col-6">
-                                        <input asp-for="FirstName" class="form-control" type="text" placeholder="Customer First Name" />
+                                        <input asp-for="FirstName" class="form-control" type="text" placeholder="Enter First Name" />
                                         <span asp-validation-for="FirstName" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -329,7 +329,7 @@
                                             <label asp-for="AnnualTurnOverInLastFy">Annual Turnover In Last FY (Applicant Only) : <span style="color: red; width: 10%;">*</span></label>
                                         </div>
                                         <div class="col-6">
-                                            <input asp-for="AnnualTurnOverInLastFy" class="form-control noTxtInput" id="annualIncomeFy" type="text" maxlength="10" placeholder="0.00" />
+                                            <input asp-for="AnnualTurnOverInLastFy" class="form-control noTxtInput" id="annualIncomeFy" type="text" maxlength="10" placeholder="Enter Annual Turnover" />
                                             <span asp-validation-for="AnnualTurnOverInLastFy" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -344,7 +344,7 @@
                                     </div>
                                     <div class="col-6">
                                         <select id="DDL_typeoffirms" class="form-control" asp-for="TypeOfFirms">
-                                            <option value="">Select</option>
+                                            <option value="">Select Firm</option>
                                             <option value="1">Sole Proprietorship</option>
                                             <option value="2">Partnership</option>
                                             <option value="3">Private Limited</option>
@@ -424,7 +424,7 @@
                                         <label asp-for="CustomerEmail">Email Address : <span style="color: red; width: 10%;">*</span></label>
                                     </div>
                                     <div class="col-6">
-                                        <input asp-for="CustomerEmail" class="form-control" type="text" maxlength="300" placeholder="Customer Email Address" />
+                                        <input asp-for="CustomerEmail" class="form-control" type="text" maxlength="300" placeholder="Enter Email Address" />
                                         <span asp-validation-for="CustomerEmail" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -453,7 +453,7 @@
                                         <label asp-for="CustomerResidenceaddress"> Residence Address : <span style="color: red; width: 10%;">*</span></label>
                                     </div>
                                     <div class="col-6">
-                                        <input asp-for="CustomerResidenceaddress" class="form-control" type="text" placeholder="Residence Address" maxlength="300" />
+                                        <input asp-for="CustomerResidenceaddress" class="form-control" type="text" placeholder="Enter Residence Address" maxlength="300" />
                                         <span asp-validation-for="CustomerResidenceaddress" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -466,7 +466,7 @@
                                         <label asp-for="CustomerResidencePincode"> Residence Pincode : <span style="color: red; width: 10%;">*</span></label>
                                     </div>
                                     <div class="col-6">
-                                        <input asp-for="CustomerResidencePincode" class="form-control noTxtInput" type="text" placeholder="Residence Pincode" maxlength="6" />
+                                        <input asp-for="CustomerResidencePincode" class="form-control noTxtInput" type="text" placeholder="Enter Residence Pincode" maxlength="6" />
                                         <span asp-validation-for="CustomerResidencePincode" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -479,7 +479,7 @@
                                         <label asp-for="CustomerOfficeaddress"> Business/Employee Address : <span style="color: red; width: 10%;">*</span></label>
                                     </div>
                                     <div class="col-6">
-                                        <input asp-for="CustomerOfficeaddress" class="form-control" type="text" placeholder="Business/Employee Address" maxlength="300" />
+                                        <input asp-for="CustomerOfficeaddress" class="form-control" type="text" placeholder="Enter Business/Employee Address" maxlength="300" />
                                         <span asp-validation-for="CustomerOfficeaddress" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -492,7 +492,7 @@
                                         <label asp-for="CustomerOfficePincode">Business/Employee Pincode : <span style="color: red; width: 10%;">*</span></label>
                                     </div>
                                     <div class="col-6">
-                                        <input asp-for="CustomerOfficePincode" class="form-control noTxtInput" type="text" placeholder="Business/Employee Pincode" maxlength="6" />
+                                        <input asp-for="CustomerOfficePincode" class="form-control noTxtInput" type="text" placeholder="Enter Business/Employee Pincode" maxlength="6" />
                                         <span asp-validation-for="CustomerOfficePincode" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -534,7 +534,7 @@
                                         <label asp-for="Comment">Comments : <span style="color: red; width: 10%;">*</span></label>
                                     </div>
                                     <div class="col-6">
-                                        <textarea asp-for="Comment" class="form-control" placeholder="Comments"></textarea>
+                                        <textarea asp-for="Comment" class="form-control" placeholder="Enter Comments"></textarea>
                                         <span asp-validation-for="Comment" class="text-danger"></span>
                                     </div>
                                 </div>
