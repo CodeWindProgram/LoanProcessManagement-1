@@ -31,19 +31,6 @@
             text-shadow: none;
             display: block;
         }
-
-    #btn1 {
-        color: white;
-        background-color: #343a40;
-        text-align: center;
-        margin: auto;
-    }
-    #btn1:hover {
-        color: black;
-        background-color: lightgray;
-        text-align: center;
-        margin: auto;
-    }
     table{
         margin:auto;
     }
@@ -84,15 +71,20 @@
                             <div class="form-group">
                                 <p id="para">Are You Sure You Want to Remove the <b id="bara">@Model.MenuName</b> Menu ?</p>
                                 @*<label hidden asp-for="Id" class="control-label"></label>
-                        <input hidden disabled asp-for="Id" class="form-control" />
-                        <span asp-validation-for="Id" class="text-danger"></span>*@
+            <input hidden disabled asp-for="Id" class="form-control" />
+            <span asp-validation-for="Id" class="text-danger"></span>*@
                             </div>
-                            <table>
-                                <tr>
-                                    <td><input id="btn1" type="submit" value="Confirm" class="btn btn-default" /></td>
-                                    <td><a href="#"><input id="btn2" type="submit" value="Cancel" class="btn btn-danger" /></a></td>
-                                </tr>
-                            </table>
+                            <div class="form-group justify-content-center">
+                                <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1"><button type="submit" style="background-color: #343a40;color:white" class="btn">Remove</button></div>
+                                    <div class="col-md-2"><a asp-action="Menulist" id="btn2" type="button" value="Cancel" class="btn btn-danger">Cancel</a></div>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>

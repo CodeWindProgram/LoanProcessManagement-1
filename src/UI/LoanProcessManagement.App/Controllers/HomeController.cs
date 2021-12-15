@@ -99,14 +99,12 @@ namespace LoanProcessManagement.App.Controllers
         /// </summary>
         /// <param name="UserroleId"></param>
         /// <returns></returns>
-        [HttpGet("Menulist/{UserroleId}")]
-        public async Task<IActionResult> Menulist(long UserroleId)
+        [HttpGet("Menulist")]
+        public async Task<IActionResult> Menulist()
         {
             MenuListQuery menuProcess = new MenuListQuery();
-            var roleId = User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value;
-            menuProcess.UserRoleId = long.Parse(roleId);
 
-            var MenuServiceResponse = await _menuService.MenuList(UserroleId);
+            var MenuServiceResponse = await _menuService.ParentList();
 
             //Get the current claims principal
             var identity = (ClaimsPrincipal)User;
@@ -135,7 +133,7 @@ namespace LoanProcessManagement.App.Controllers
             var list = new SelectList(parentlist.Data, "Id", "MenuName");
             var newList = (from e in rolelist.Data select new MenuCheckListVm { Id = e.Id, Name = e.RoleName}).ToList();
             checkboxfunctionVm.ListVms = newList;
-            ViewBag.UserId = HttpContext.Request.Cookies["Id"];
+            //ViewBag.UserId = HttpContext.Request.Cookies["Id"];
             ViewBag.ParentId = list;
             return View(checkboxfunctionVm);
         }
@@ -182,8 +180,8 @@ namespace LoanProcessManagement.App.Controllers
                     message = createmenuresponse.Message;
                     ViewBag.Issuccesflag = true;
                     ViewBag.Message = message;
-                    var ReturnsTomenulists = ViewBag.UserId = HttpContext.Request.Cookies["Id"];
-                    return RedirectToAction(ReturnsTomenulists, "Menulist");
+                    //var ReturnsTomenulists = ViewBag.UserId = HttpContext.Request.Cookies["Id"];
+                    return RedirectToAction("Menulist");
                 }
                 else
                 {
@@ -192,7 +190,7 @@ namespace LoanProcessManagement.App.Controllers
                     ViewBag.Message = message;
                 }
             }
-            return RedirectToAction(ReturnsTomenulist, "Menulist");
+            return RedirectToAction("Menulist");
         }
         #endregion
 
@@ -295,10 +293,10 @@ namespace LoanProcessManagement.App.Controllers
                     }
                 }
 
-                var ReturnsTo = ViewBag.UserId = HttpContext.Request.Cookies["Id"];
+                //var ReturnsTo = ViewBag.UserId = HttpContext.Request.Cookies["Id"];
                 ViewBag.isSuccess = response.Succeeded;
                 ViewBag.Message = response.Data.Message;
-                return RedirectToAction(ReturnsTo,"Menulist");
+                return RedirectToAction("Menulist");
             }
             return View();
         }
@@ -319,8 +317,8 @@ namespace LoanProcessManagement.App.Controllers
         public async Task<IActionResult> DeleteMenu(GetMenuByIdQueryVm deleteMenuCommand)
         {
             var response = await _menuService.DeleteMenu(deleteMenuCommand.Id);
-            var ReturnsTo = ViewBag.UserId = HttpContext.Request.Cookies["Id"];
-            return RedirectToAction(ReturnsTo, "Menulist");
+            //var ReturnsTo = ViewBag.UserId = HttpContext.Request.Cookies["Id"];
+            return RedirectToAction("Menulist");
         }
         #endregion
     }
