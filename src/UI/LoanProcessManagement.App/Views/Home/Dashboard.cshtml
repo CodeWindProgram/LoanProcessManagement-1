@@ -326,7 +326,13 @@
             var pieData = donutData;
             var pieOptions = {
                 maintainAspectRatio: false,
+                animationEnabled: true,
+                exportEnabled: true,
+                theme: "light2",
                 responsive: true,
+                legend: {
+                    position: 'bottom',
+                },
             }
             new Chart(pieChartCanvas, {
                 type: 'pie',
