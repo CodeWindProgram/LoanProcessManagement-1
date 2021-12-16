@@ -193,11 +193,12 @@ namespace LoanProcessManagement.Persistence.Repositories
 
         #endregion
 
-        public async Task<IEnumerable<MenuListQueryVm>> GetChildMenuyById(long ParentId)
+        public async Task<IEnumerable<MenuListQueryVm>> GetChildMenuyById(long ParentId ,long UserRoleId)
         {
             var result = await(from A in _dbContext.LpmUserRoleMenuMaps
                                join B in _dbContext.LpmMenuMasters on A.MenuId equals B.Id
-                               where B.ParentId == ParentId && A.IsActive
+                               join C in _dbContext.LpmUserRoleMasters on A.UserRoleId equals C.Id
+                               where B.ParentId == ParentId && C.Id == UserRoleId  && A.IsActive
                                orderby B.Position
                                select new MenuListQueryVm
                                {

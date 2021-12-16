@@ -54,8 +54,8 @@ namespace LoanProcessManagement.App.Helper.APIHelper
 
     #endregion
 
-    #region Maintaining the Url EndPoint for Users - Saif Khan - 28/10/2021
-    public const string UserList = "api/v1/UserList";
+        #region Maintaining the Url EndPoint for Users - Saif Khan - 28/10/2021
+        public const string UserList = "api/v1/UserList";
         public const string AuthenticateUser = "api/v1/User/authenticateUser";
         #endregion
 

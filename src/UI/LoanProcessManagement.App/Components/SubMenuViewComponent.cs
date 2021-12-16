@@ -20,7 +20,7 @@ namespace LoanProcessManagement.App.Components
         }
 
         #region Invoke Async
-        public async Task<IViewComponentResult> InvokeAsync(long ParentID = 0)
+        public async Task<IViewComponentResult> InvokeAsync(long ParentID = 0 , long userRoleId = 1)
         {
             GetMenuMasterServicesQuery menuProcess = new GetMenuMasterServicesQuery();
 
@@ -33,7 +33,7 @@ namespace LoanProcessManagement.App.Components
 
             var MenuServiceResponse = new Response<IEnumerable<GetMenuMasterServicesVm>>();
 
-            MenuServiceResponse = await _menuService.GetChildMenuById(ParentID);
+            MenuServiceResponse = await _menuService.GetChildMenuById(ParentID,userRoleId);
 
             if (MenuServiceResponse != null && MenuServiceResponse.Succeeded && MenuServiceResponse.Data != null)
             {

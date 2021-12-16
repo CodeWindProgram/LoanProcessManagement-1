@@ -24,7 +24,7 @@ namespace LoanProcessManagement.Application.Features.Menu.Query.GetChildMenus
         }
         public async Task<Response<IEnumerable<MenuListQueryVm>>> Handle(GetChildMenuQuery request, CancellationToken cancellationToken)
         {
-            var Menu = await _menuRepository.GetChildMenuyById(request.parentId);
+            var Menu = await _menuRepository.GetChildMenuyById(request.parentId,request.UserRoleId);
             var response = new Response<IEnumerable<MenuListQueryVm>>(Menu,"Success");
             return response;
         }

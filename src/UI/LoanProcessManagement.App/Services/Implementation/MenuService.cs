@@ -230,7 +230,7 @@ namespace LoanProcessManagement.App.Services.Implementation
             return response;
         }
 
-        public async Task<Response<IEnumerable<GetMenuMasterServicesVm>>> GetChildMenuById(long Id)
+        public async Task<Response<IEnumerable<GetMenuMasterServicesVm>>> GetChildMenuById(long Id ,long userRoleId)
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
@@ -238,7 +238,7 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             var httpResponse = await _client.GetAsync
                 (
-                    BaseUrl + APIEndpoints.ChildMenu + Id
+                    BaseUrl + APIEndpoints.ChildMenu + Id +"/"+ userRoleId
                 );
 
             var jsonString = httpResponse.Content.ReadAsStringAsync().Result;

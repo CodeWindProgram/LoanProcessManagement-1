@@ -131,10 +131,10 @@ namespace LoanProcessManagement.Api.Controllers.v1
             return Ok(await _mediator.Send(new GetAllMenusQuery()));
         }
 
-        [HttpGet("GetChildMenu/{parentId}")]
-        public async Task<IActionResult> GetChildMenuById(long parentId)
+        [HttpGet("GetChildMenu/{parentId}/{userRoleId}")]
+        public async Task<IActionResult> GetChildMenuById(long parentId,long userRoleId)
         {
-            return Ok(await _mediator.Send(new GetChildMenuQuery(parentId)));
+            return Ok(await _mediator.Send(new GetChildMenuQuery(parentId,userRoleId)));
         }
 
 

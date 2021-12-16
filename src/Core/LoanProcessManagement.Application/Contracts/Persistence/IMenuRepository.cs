@@ -30,7 +30,7 @@ namespace LoanProcessManagement.Application.Contracts.Persistence
         Task<List<LpmMenuMaster>> GetMenuList(long UserRoleId);
 
         Task<LpmUserRoleMenuMap> DeleteMenumapById(long Id);
-        Task<IEnumerable<MenuListQueryVm>> GetChildMenuyById(long ParentId);
+        Task<IEnumerable<MenuListQueryVm>> GetChildMenuyById(long ParentId,long UserRoleId);
 
 
     }
