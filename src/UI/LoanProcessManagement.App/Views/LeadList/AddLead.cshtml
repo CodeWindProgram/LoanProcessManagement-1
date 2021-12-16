@@ -58,7 +58,7 @@
             <div style="border: 1px solid #343a40; padding-left: 2%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;">
                 <div class="panel-body">
                     <div class="border-part">
-                        @if (ViewBag.isSuccess == true)
+                        @*@if (ViewBag.isSuccess == true)
                         {
                             <div class="alert alert-success" role="alert">
                                 @ViewBag.Message
@@ -70,7 +70,7 @@
                                 <strong>Error!</strong> @ViewBag.Message
                             </div>
 
-                        }
+                        }*@
                         <div style="text-align:end" class="form-group">
                             <div class="row">
                                 <div class="col-12">
@@ -568,6 +568,14 @@
         d = n.getDate();
         document.getElementById("dates").innerHTML = d + "/" + m + "/" + y;
     });
+
+        if ('@ViewBag.isSuccess' == 'True') {
+            toastr.success('@ViewBag.Message', "Success");
+        }
+        else if ('@ViewBag.isSuccess' == 'False') {
+            toastr.error('@ViewBag.Message', "Error");
+
+        }
 
     $(function () {
         $("input[name='employmentType']").click(function () {

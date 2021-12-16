@@ -34,7 +34,7 @@
             <div class="panel-body">
                 <div style="border: 1px solid #343a40;padding-right:5px;padding-bottom:5px;" class="border">
                     <div class="border-part">
-                        @if (ViewBag.isSuccess == true)
+                        @*@if (ViewBag.isSuccess == true)
                         {
                             <div class="alert alert-success" role="alert">
                                 @ViewBag.Message
@@ -46,7 +46,7 @@
                                 <strong>Error!</strong> @ViewBag.Message
                             </div>
 
-                        }
+                        }*@
                         <form action="/login/updateuser" method="post">
                             <br />
                             @*<div asp-validation-summary="ModelOnly" class="text-danger font-italic"></div>*@
@@ -118,3 +118,17 @@
         </div>
     </div>
 </div>
+
+
+<script>
+        $(document).ready(function () {
+        if ('@ViewBag.isSuccess' == 'True') {
+            toastr.success('@ViewBag.Message', "Success");
+        }
+        else if ('@ViewBag.isSuccess' == 'False') {
+            toastr.error('@ViewBag.Message', "Error");
+
+        }
+
+    })
+</script>

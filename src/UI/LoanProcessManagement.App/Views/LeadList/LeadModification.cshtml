@@ -159,7 +159,7 @@
                     </div>
                 </div>
 
-                @if (ViewBag.isSuccess == true)
+                @*@if (ViewBag.isSuccess == true)
                 {
                     <div class="alert alert-success" role="alert">
                         @ViewBag.Message
@@ -170,7 +170,7 @@
                     <div class="alert alert-danger" role="alert">
                         @ViewBag.Message
                     </div>
-                }
+                }*@
                 <form method="post" action="/leadlist/LeadModification">
 
 
@@ -830,22 +830,17 @@
 
 
     $(document).ready(function () {
-
-        @*if ('@ViewBag.Message' == 'Lead Data Has Been Added Successfully !!' || '@ViewBag.Message'=='Lead Data Has Been Updated Successfully !!') {
-            setTimeout(function () {
-                location.href = "/LeadList/LeadSummary/@Model.lead_Id";
-            }, 5000);
-        }*@
-
         if ('@ViewBag.isSuccess' == 'True') {
+            toastr.success('@ViewBag.Message', "Success");
             setTimeout(function () {
                 location.href = "/LeadList/LeadSummary/@Model.lead_Id";
-            }, 3000);
+            }, 4000);
         }
-        else if('@ViewBag.isSuccess' == 'False'){
+        else if ('@ViewBag.isSuccess' == 'False') {
+            toastr.error('@ViewBag.Message', "Error");
              setTimeout(function () {
                 location.href = "/LeadList/LeadModification/@Model.lead_Id";
-            }, 3000);
+            }, 4000);
 
         }
 

@@ -30,7 +30,7 @@
                     <br />
                     <div style="text-align:end" class="form-group"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
                     <div class="border-part">
-                        @if (ViewBag.isSuccess == true)
+                        @*@if (ViewBag.isSuccess == true)
                         {
                             <div class="alert alert-success" role="alert">
                                 @ViewBag.Message
@@ -41,7 +41,7 @@
                             <div class="alert alert-danger" role="alert">
                                 <strong>Error!</strong> @ViewBag.Message
                             </div>
-                        }
+                        }*@
 
                     <form asp-action="Index" method="post">
                         <div class="form-group row">
@@ -125,4 +125,15 @@
             }
         });
     });
+    $(document).ready(function () {
+        if ('@ViewBag.isSuccess' == 'True') {
+            toastr.success('@ViewBag.Message', "Success");
+        }
+        else if ('@ViewBag.isSuccess' == 'False') {
+            toastr.error('@ViewBag.Message', "Error");
+
+        }
+
+    })
+
 </script>
