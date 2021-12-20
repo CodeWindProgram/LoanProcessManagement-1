@@ -37,7 +37,7 @@ namespace LoanProcessManagement.App.Components
             }
             else
             {
-                MenuServiceResponse = await _menuService.GetChildMenuById(ParentID, userRoleId);
+                MenuServiceResponse = await _menuService.GetChildMenuById(ParentID, menuProcess.UserRoleId);
             }
 
             if (MenuServiceResponse != null && MenuServiceResponse.Succeeded && MenuServiceResponse.Data != null)
