@@ -68,6 +68,12 @@
     .btnDiv{
         text-align : center;
     }
+    .formDiv {
+        border: 1px solid #343a40;
+        padding-bottom: 5px;
+        padding-left: 1%;
+        padding-right: 1%;
+    }
 </style>
 <div style="margin-top: 20px" class="container">
     <div class="container app">
@@ -76,7 +82,7 @@
                 <div class="panel-heading">
                     <h3>Add Customer Enquiry</h3>
                 </div>
-                <div style="border: 1px solid #343a40; padding-bottom: 5px; padding-left: 1%; padding-right: 1%;">
+                <div class="formDiv">
                     <form method="post" action="/applicantdetails/index">
                         @*<input type="hidden" name="ctl00$ContentPlaceHolder1$hdnEmpId" id="hdnEmpId" value="">*@
                         <input type="hidden" asp-for="lead_Id" id="hdnLeadId">
@@ -117,7 +123,7 @@
                                         </div>
                                         <div class="col-md-5">
                                             <div class="input-control text">
-                                                <span id="ContentPlaceHolder1_lblFormNo" class="h4" style="color: black; border:none">
+                                                <span id="ContentPlaceHolder1_lblFormNo" class="h5" style="color: black; border:none">
                                                     <label>@Model.FormNo</label>
                                                     <input type="hidden" asp-for="FormNo" />
                                                     @*<label asp-for="FormNo">@Model.FormNo</label>*@

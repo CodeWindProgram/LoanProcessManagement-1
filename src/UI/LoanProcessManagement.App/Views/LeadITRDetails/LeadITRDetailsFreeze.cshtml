@@ -46,6 +46,30 @@
         border-top-left-radius: 0.25rem;
         border-top-right-radius: 0.25rem;
     }
+    .card {
+        /*background-color:slategray;*/
+        background: linear-gradient(to bottom, rgba(251,251,251,10) 0%,rgba(242,242,242,10) 100%);
+        font-family: sans-serif;
+        font-size: 18px;
+        border: 1px solid;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    h5 {
+        font-size: 1.25rem;
+        margin-left: 1rem;
+        padding-top: 5px;
+        font-weight: 600;
+    }
+    .btnDiv {
+        text-align: center;
+    }
+    .formDiv {      
+        border: 1px solid #343a40; 
+        padding-bottom: 5px; 
+        padding-left: 1%; 
+        padding-right: 1%;
+    }
 </style>
 
 
@@ -56,7 +80,7 @@
                 <div class="panel-heading">
                     <h3>Add ITR Enquiry</h3>
                 </div>
-                <div style="border: 1px solid #343a40;padding-bottom:5px;padding-left:8%" class="border">
+                <div class="formDiv">
                     <form method="post" action="/applicantdetails/index">
                         @*<input type="hidden" name="ctl00$ContentPlaceHolder1$hdnEmpId" id="hdnEmpId" value="">*@
                         <input type="hidden" asp-for="lead_Id" id="hdnLeadId">
@@ -64,7 +88,7 @@
                         <input type="hidden" asp-for="CreatedBy" value=@User.FindFirst("lg_id").Value />
                         <input type="hidden" asp-for="LastModifiedBy" value=@User.FindFirst("lg_id").Value />
                         <div style="height: 15px;"></div>
-                        <div class="btn">
+                        <div class="btnDiv">
                             <a href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=0" class="AppTabs btn-sm selected" id="tabProcess0" style="background: #adb5bd;">Applicant</a>
                             <a id="ContentPlaceHolder1_lnkCoApp1" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=1" style="background: #343a40;">Co-Applicant-1</a>
                             <a id="ContentPlaceHolder1_lnkCoApp2" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=2" style="background: #343a40;">Co-Applicant-2</a>
@@ -91,13 +115,13 @@
 
                                 }
                                 <div id="ContentPlaceHolder1_alertMsg">
-                                    <div>
+                                    <div class="row tab">
                                         <div class="col-md-5">
-                                            <label class="h4">Form No</label>
+                                            <label class="h5">Form No</label>
                                         </div>
                                         <div class="col-md-5">
                                             <div class="input-control text">
-                                                <span id="ContentPlaceHolder1_lblFormNo" class="h4" style="color: black; border:none">
+                                                <span id="ContentPlaceHolder1_lblFormNo" class="h5" style="color: black; border:none">
                                                     <label>@Model.FormNo</label>
                                                     <input type="hidden" asp-for="FormNo" />
                                                     @*<label asp-for="FormNo">@Model.FormNo</label>*@
@@ -115,8 +139,8 @@
                                 </div>
                                 <div style="height: 5px;"></div>
 
-                                <div id="divConverted3PC">
-                                    <h2>Customer Details</h2>
+                                <div class="card initial1">
+                                    <h5>Customer Details</h5>
                                 </div>
                                 <div style="height: 5px;"></div>
                                 <div class="row tab">
@@ -189,8 +213,8 @@
                                 <div style="height: 5px;"></div>
                                 <div id="IdentificationDv">
                                     <div style="height: 5px;"></div>
-                                    <div class="divsubheader" id="divIdentification">
-                                        <h2>ITR Details </h2>
+                                    <div class="card initial1" id="divIdentification">
+                                        <h5>ITR Details </h5>
 
                                     </div>
                                     <div style="height: 5px;"></div>

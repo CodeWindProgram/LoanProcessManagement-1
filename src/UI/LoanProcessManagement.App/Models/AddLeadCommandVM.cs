@@ -69,7 +69,6 @@ namespace LoanProcessManagement.App.Models
         [Required(ErrorMessage = "Please Select Yes/No")]
         public string IsPropertyIdentified { get; set; }
 
-        [Required(ErrorMessage = "Comment is Required")]
         public string Comment { get; set; }
 
         [RegularExpression(@"[1-9]{1}[0-9]{5}|[1-9]{1}[0-9]{3}\\s[0-9]{3}", ErrorMessage = "Please Enter Valid Pincode.")]
