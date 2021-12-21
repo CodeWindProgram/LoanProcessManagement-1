@@ -114,6 +114,7 @@ namespace LoanProcessManagement.App.Controllers
         /// <returns>Index view</returns>
         [Route("[controller]/[action]")]
         [HttpPost]
+
         public async Task<IActionResult> Index(LeadITRDetailsVm leadITRDetailsVm)
         {
             if (ModelState.IsValid)

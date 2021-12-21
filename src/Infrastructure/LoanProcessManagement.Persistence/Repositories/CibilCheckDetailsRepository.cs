@@ -39,8 +39,8 @@ namespace LoanProcessManagement.Persistence.Repositories
             var applicant = await _dbContext.LpmLeadApplicantsDetails.Include(x => x.LpmLeadMaster)
                 .Where(x => x.lead_Id == lead_id && x.ApplicantType == ApplicantType).FirstOrDefaultAsync();
 
-            var details = _dbContext.LpmCibilCheckDetails.Where(x => x.ApplicantType == ApplicantType && x.lead_Id==(lead_id) /*&& applicant.FormNo == x.FormNo && applicant.Id==x.ApplicantDetailId*/).FirstOrDefault();
-
+            var details = _dbContext.LpmCibilCheckDetails.Where(x => x.ApplicantType == ApplicantType && x.lead_Id==lead_id).FirstOrDefault();
+            ///*&& applicant.FormNo == x.FormNo && applicant.Id==x.ApplicantDetailId*/
             GetCibilCheckDetailsDto response = new GetCibilCheckDetailsDto();
 
             if (applicant != null)

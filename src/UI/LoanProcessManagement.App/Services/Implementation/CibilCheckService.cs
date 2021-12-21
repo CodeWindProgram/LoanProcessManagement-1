@@ -27,7 +27,12 @@ namespace LoanProcessManagement.App.Services.Implementation
             clientfact = client;
             _apiDetails = apiDetails;
         }
-
+        #region Calling Cibil check details and updating Cibil check details api - Ramya Guduru - 21/12/2021
+        /// <summary>
+        /// Calling Cibil check details api - Ramya Guduru - 21/12/2021
+        /// </summary>
+        /// <param name="cibilCheckDetailsVm"></param>
+        /// <returns></returns>
         public async Task<Response<AddCibilDetailsDto>> UpdateCibilCheckDetailsDetails(CibilCheckDetailsVm cibilCheckDetailsVm)
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
@@ -71,5 +76,6 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             return response;
         }
+        #endregion
     }
 }

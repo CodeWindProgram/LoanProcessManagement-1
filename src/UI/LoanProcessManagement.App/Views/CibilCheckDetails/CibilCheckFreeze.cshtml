@@ -152,8 +152,7 @@
                                     <div class="col-md-5">
                                         <div class="input-control text">
                                             <input asp-for="CustomerName" type="text" maxlength="26" id="ContentPlaceHolder1_txtCustomerName" class="form-control required" placeholder="XYZ">
-                                            @*<span id="ContentPlaceHolder1_RequiredFieldValidator14" style="color:Red;display:none;">Customer name is mandatory.</span>
-                                                <span id="ContentPlaceHolder1_RegularExpressionValidator7" style="color:Red;display:none;">Invalid Customer Name.</span>*@
+                                           
                                             <span asp-validation-for="CustomerName" style="color:Red;display:block;"></span>
                                         </div>
                                     </div>
@@ -223,7 +222,7 @@
                                                 <option value="Transgender">Transgender</option>
 
                                             </select>
-                                            <span asp-validation-for="Gender" style="color:Red;display:block;"></span>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -362,7 +361,7 @@
                                     <div class="col-md-5">
                                         <div class="input-control text">
                                             <input asp-for="AddressLine2" type="text" maxlength="40" id="ContentPlaceHolder1_txtCurrentAddress2" class="form-control">
-                                            @*<span id="ContentPlaceHolder1_RequiredFieldValidator6" style="color:Red;display:none;">Current Address is mandatory.</span>*@
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -374,7 +373,7 @@
                                     <div class="col-md-5">
                                         <div class="input-control text">
                                             <input asp-for="AddressLine3" type="text" maxlength="40" id="ContentPlaceHolder1_txtCurrentAddress3" class="form-control">
-                                            @*<span id="ContentPlaceHolder1_RequiredFieldValidator6" style="color:Red;display:none;">Current Address is mandatory.</span>*@
+                                           
                                         </div>
                                     </div>
                                 </div>
