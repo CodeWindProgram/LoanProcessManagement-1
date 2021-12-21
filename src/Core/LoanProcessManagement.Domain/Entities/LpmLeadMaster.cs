@@ -117,5 +117,9 @@ namespace LoanProcessManagement.Domain.Entities
 
         public ICollection<LpmLeadApplicantsDetails> LpmLeadApplicantsDetails { get; set; }
         public ICollection<LpmLeadQuery> leadquery { get; set; }
+        public ICollection<LpmLeadHoSanctionQuery> hoLeadQuery { get; set; }
+        public LpmThirdPartyCheckDetails ThirdPartyCheck { get; set; }
+
+        
     }
 }
