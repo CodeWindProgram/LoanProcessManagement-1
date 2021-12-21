@@ -32,6 +32,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                                 where A.ApplicantType == ApplicantType && A.Lead_Id.Id == Lead_Id && A.IsActive == true
                                 select new GstAddEnquiryCommandDto
                                 {
+                                    Lead_Id = Lead_Id,
                                     ID = A.ID,
                                     FormNo = int.Parse(B.FormNo),
                                     CustomerName = A.CustomerName,

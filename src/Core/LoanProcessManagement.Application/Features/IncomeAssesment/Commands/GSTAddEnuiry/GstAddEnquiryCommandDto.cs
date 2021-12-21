@@ -7,6 +7,7 @@ namespace LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GS
 {
     public class GstAddEnquiryCommandDto
     {
+        public int Lead_Id { get; set; }
         public long ID { get; set; }
         [DisplayName("Form No")]
         public long FormNo { get; set; }

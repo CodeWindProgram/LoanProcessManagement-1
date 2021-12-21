@@ -355,22 +355,32 @@
                                     <label class="col-md-5">Employee Type<span style="color: Red">&nbsp;*</span></label>
                                 </div>
                                 <div class="col-md-4">
-                                    <table id="ContentPlaceHolder1_rdbEmployeeType" class="rbl" style="font-weight:normal;width:60%;">
+                                    <table id="ContentPlaceHolder1_rdbEmployeeType" style="font-weight:normal;">
                                         <tbody>
                                             <tr>
                                                 <td>
                                                     <input id="ContentPlaceHolder1_rdbEmployeeType_0" type="radio" asp-for="EmploymentType" value="@Model.EmploymentType" checked="checked">
                                                     &nbsp<label for="ContentPlaceHolder1_rdbEmployeeType_0">@Model.EmploymentType</label>
                                                 </td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                             <br />
+
+                            <div style="height: 5px;"></div>
+                            <div id="forBranch">
+                                <div class="row tab" style="padding-left: 8%;">
+                                    <div class="col-md-6"><label class="col-md-6">Applicant Details</label></div>
+                                    <div class="col-md-4"><p><a href="/ApplicantDetails/Index?lead_Id=@Model.Lead_Id&applicantType=0">Click here</a></p></div>
+                                </div>
+                                <br />
+                                <div class="row tab" style="padding-left: 8%;">
+                                    <div class="col-md-6"><label class="col-md-6">Lead ITR Details</label></div>
+                                    <div class="col-md-4"><p><a href="/LeadITRDetails/Index?lead_Id=@Model.Lead_Id&applicantType=0">Click here</a></p></div>
+                                </div>
+                            </div>
 
                             <div style="height: 5px;"></div>
 
@@ -380,7 +390,6 @@
                                     <a id="ContentPlaceHolder1_linkGstrptDownload" href="https://google.com" target="_blank">Click here to download GST report</a>
                                 </div>
                             </div>
-
 
                             <div style="height: 5px; display: none;"></div>
                             <div id="divConverted1">
