@@ -43,5 +43,6 @@ namespace LoanProcessManagement.Domain.Entities
         public bool IsActive { get; set; }
 
         public ICollection<LpmLeadITRDetails> LpmLeadITRDetails { get; set; }
+        public ICollection<LpmCibilCheckDetails> LpmCibilCheckDetails { get; set; }
     }
 }

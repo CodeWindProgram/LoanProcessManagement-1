@@ -106,5 +106,8 @@ namespace LoanProcessManagement.App.Helper.APIHelper
 
         public const string GetLeadITRDetails = "api/v1/LeadITRDetails/GetLeadITRDetails?lead_Id={0}&applicantType={1}";
         public const string AddITRDetails = "api/v1/LeadITRDetails/AddLeadITRDetails";
+
+        public const string GetCibilCheckDetails = "api/v1/CibilCheck/GetCibilCheckDetailsByLeadId?lead_Id={0}&applicantType={1}";
+        public const string AddCibilCheckDetails = "api/v1/CibilCheck/AddCibilCheckDetails";
     }
 }

@@ -123,7 +123,7 @@ namespace LoanProcessManagement.App.Controllers
                 ViewBag.isSuccess = response.Succeeded;
                 ViewBag.Message = response.Data.Message;
             }
-            return View("Index", leadITRDetailsVm);
+            return View(leadITRDetailsVm);
             
         }
         #endregion

@@ -43,7 +43,7 @@ namespace LoanProcessManagement.Persistence
         public DbSet<LpmLeadQuery> LpmLeadQuerys { get; set; }
         public DbSet<LpmLeadApplicantsDetails> LpmLeadApplicantsDetails { get; set; }
         public DbSet<LpmLeadITRDetails> LpmLeadITRDetails { get; set; }
-
+        public DbSet<LpmCibilCheckDetails> LpmCibilCheckDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -57,6 +57,7 @@ using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenus;
 using LoanProcessManagement.Application.Features.UserList.Query.GetLockedUserList;
 using LoanProcessManagement.Application.Features.LoanSchemes;
 using LoanProcessManagement.Application.Features.LeadITRDetails.Command;
+using LoanProcessManagement.Application.Features.CibilCheck.Commands.AddCibilCheckDetails;
 
 namespace LoanProcessManagement.Application.Profiles
 {
@@ -197,6 +198,7 @@ namespace LoanProcessManagement.Application.Profiles
 
 
             CreateMap<LeadITRDetailsCommand, LpmLeadITRDetails>().ReverseMap();
+            CreateMap<AddCibilDetailsCommand, LpmCibilCheckDetails>().ReverseMap();
         }
     }
 }

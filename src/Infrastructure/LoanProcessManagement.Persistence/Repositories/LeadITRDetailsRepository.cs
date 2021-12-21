@@ -52,7 +52,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 response.EmploymentType = details.EmploymentType;
                 response.Consent = true;
                 response.PanCardNo = details.PanCardNo;
-                response.UserName = details.FirstName;
+                response.UserName = details.PanCardNo;
                 response.Message = "Data Fetched";
                 response.Succeeded = true;
                 return response;
