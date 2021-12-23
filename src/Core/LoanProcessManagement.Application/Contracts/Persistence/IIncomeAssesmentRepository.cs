@@ -10,7 +10,7 @@ namespace LoanProcessManagement.Application.Contracts.Persistence
     {
         Task<GstAddEnquiryCommandDto> AddGstEnquiry(int ApplicantType , int Lead_Id);
 
-        //Task<GstCreateEnquiryCommandDto> CreateGstEnquiry(GstCreateEnquiryCommand request);
+      //  Task<GstCreateEnquiryCommandDto> CreateGstEnquiry(GstCreateEnquiryCommand request);
 
     }
 }

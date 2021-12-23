@@ -432,5 +432,10 @@ namespace LoanProcessManagement.App.Controllers
             return Json(loanSchemesByProductId);
         }
         #endregion
+
+        public IActionResult LeadStatus()
+        {
+            return View();
+        }
     }
 }

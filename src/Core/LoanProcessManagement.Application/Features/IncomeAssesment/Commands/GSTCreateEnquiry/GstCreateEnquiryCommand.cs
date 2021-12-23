@@ -7,8 +7,8 @@ namespace LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GS
     public class GstCreateEnquiryCommand : IRequest<Response<GstCreateEnquiryCommandDto>>
     {
         public long ID { get; set; }
-        public long FormNo { get; set; }
-        //public long Lead_Id { get; set; }
+        public long FormNoId { get; set; }
+        public long Lead_IdId { get; set; }
         public string CustomerName { get; set; }
         public int MobileNo { get; set; }
         public string Email { get; set; }

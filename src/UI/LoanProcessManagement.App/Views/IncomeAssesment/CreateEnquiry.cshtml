@@ -1,4 +1,4 @@
-﻿@model LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTAddEnuiry.GstAddEnquiryCommandDto
+﻿@model LoanProcessManagement.App.Models.GstFileSaveVM
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,9 +8,6 @@
 <script type="text/javascript"></script>
 
 <style>
-    .uppercase {
-        text-transform: uppercase;
-    }
     .panel-heading {
         color: white;
         background-color: #343a40;
@@ -20,52 +17,21 @@
         border-top-left-radius: 0.25rem;
         border-top-right-radius: 0.25rem;
     }
-    #divConverted1 h2 {
-        margin: 0px;
-        padding: 2px;
-        background: rgb(251,251,251); /* Old browsers */
-        /* IE9 SVG, needs conditional override of 'filter' to 'none' */
-        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZiZmJmYiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmMmYyZjIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-        background: -moz-linear-gradient(top, rgba(251,251,251,1) 0%, rgba(242,242,242,1) 100%); /* FF3.6+ */
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(251,251,251,1)), color-stop(100%,rgba(242,242,242,1))); /* Chrome,Safari4+ */
-        background: -webkit-linear-gradient(top, rgba(251,251,251,1) 0%,rgba(242,242,242,1) 100%); /* Chrome10+,Safari5.1+ */
-        background: -o-linear-gradient(top, rgba(251,251,251,1) 0%,rgba(242,242,242,1) 100%); /* Opera 11.10+ */
-        background: -ms-linear-gradient(top, rgba(251,251,251,1) 0%,rgba(242,242,242,1) 100%); /* IE10+ */
-        background: linear-gradient(to bottom, rgba(251,251,251,1) 0%,rgba(242,242,242,1) 100%); /* W3C */
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbfbfb', endColorstr='#f2f2f2',GradientType=0 ); /* IE6-8 */
+    .card {
+        background: linear-gradient(to bottom, rgba(251,251,251,10) 0%,rgba(242,242,242,10) 100%);
+        font-family: sans-serif;
         font-size: 18px;
-        padding: 5px;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        border: 1px solid #ddd;
-        margin: 7px auto;
-        filter: none;
+        border: 1px solid;
+        margin: 20px;
+        padding-left:20px;
     }
 
-    #divEmployer h2 {
-        margin: 0px;
-        padding: 2px;
-        background: rgb(251,251,251); /* Old browsers */
-        /* IE9 SVG, needs conditional override of 'filter' to 'none' */
-        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZiZmJmYiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmMmYyZjIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-        background: -moz-linear-gradient(top, rgba(251,251,251,1) 0%, rgba(242,242,242,1) 100%); /* FF3.6+ */
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(251,251,251,1)), color-stop(100%,rgba(242,242,242,1))); /* Chrome,Safari4+ */
-        background: -webkit-linear-gradient(top, rgba(251,251,251,1) 0%,rgba(242,242,242,1) 100%); /* Chrome10+,Safari5.1+ */
-        background: -o-linear-gradient(top, rgba(251,251,251,1) 0%,rgba(242,242,242,1) 100%); /* Opera 11.10+ */
-        background: -ms-linear-gradient(top, rgba(251,251,251,1) 0%,rgba(242,242,242,1) 100%); /* IE10+ */
-        background: linear-gradient(to bottom, rgba(251,251,251,1) 0%,rgba(242,242,242,1) 100%); /* W3C */
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbfbfb', endColorstr='#f2f2f2',GradientType=0 ); /* IE6-8 */
-        font-size: 18px;
-        padding: 5px;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        border: 1px solid #ddd;
-        margin: 7px auto;
-        filter: none;
+    h5 {
+        font-size: 1.25rem;
+        margin-left: 1rem;
+        padding-top: 5px;
+        font-weight: 600;
     }
-
     .tab {
         padding-left: 15px;
     }
@@ -73,71 +39,25 @@
     .AppTabs {
         display: inline-block;
         margin: 3px;
+        background-color: #343a40;
         padding: 5px 30px;
-        background: #191970;
         color: #FFF;
         text-decoration: none;
     }
-
         .AppTabs:hover {
-            background-color: #169dd8;
+            background-color: #adb5bd;
+            color:black;
             text-decoration: none;
         }
 
-        .AppTabs:visited {
+        .active {
             text-decoration: none;
+            background-color: #adb5bd;
         }
 
-    #divStatementPeriod h2 {
-        margin: 0px;
-        padding: 2px;
-        background: rgb(251,251,251); /* Old browsers */
-        /* IE9 SVG, needs conditional override of 'filter' to 'none' */
-        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZiZmJmYiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmMmYyZjIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-        background: -moz-linear-gradient(top, rgba(251,251,251,1) 0%, rgba(242,242,242,1) 100%); /* FF3.6+ */
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(251,251,251,1)), color-stop(100%,rgba(242,242,242,1))); /* Chrome,Safari4+ */
-        background: -webkit-linear-gradient(top, rgba(251,251,251,1) 0%,rgba(242,242,242,1) 100%); /* Chrome10+,Safari5.1+ */
-        background: -o-linear-gradient(top, rgba(251,251,251,1) 0%,rgba(242,242,242,1) 100%); /* Opera 11.10+ */
-        background: -ms-linear-gradient(top, rgba(251,251,251,1) 0%,rgba(242,242,242,1) 100%); /* IE10+ */
-        background: linear-gradient(to bottom, rgba(251,251,251,1) 0%,rgba(242,242,242,1) 100%); /* W3C */
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbfbfb', endColorstr='#f2f2f2',GradientType=0 ); /* IE6-8 */
-        font-size: 18px;
-        padding: 5px;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        border: 1px solid #ddd;
-        margin: 7px auto;
-        filter: none;
-    }
-</style>
-<style>
-    .clsHeading {
-        background-color: #191970;
-        color: white;
-    }
-
-    .cal_align {
-        display: inline-block;
-        width: 90%;
-        margin-right: 10px;
-    }
-
-    .TextBoxCalender {
-        font-family: Arial;
-        font-size: 14px;
-        font-weight: normal;
-        color: black;
-        border: 1px solid #ccc;
-        background-color: White;
-        padding-right: 2px;
-    }
-
-    .ui-datepicker-trigger {
-        margin-left: 94%;
-        margin-top: -13%;
-        position: relative;
-    }
+   .buttons{
+       padding-left:8%;
+   }
 </style>
 
 <script>
@@ -155,61 +75,14 @@
             return false;
         }
     }
-
-
-
-    $(document).ready(function () {
-        $(".TextFrom").datepicker({
-            dateFormat: 'yy-mm',
-            changeMonth: true,
-            changeYear: true,
-            showButtonPanel: true,
-            minDate: "-15m",
-            maxDate: "-12m",
-
-            onClose: function (dateText, inst) {
-                var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-                var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-                $(this).val($.datepicker.formatDate('yy-mm', new Date(year, month, 1)));
-                var dttod = new Date(year, month, 1);
-                dttod.setMonth(dttod.getMonth() + 11);
-
-                var dtlat = new Date();
-                dtlat.setMonth(dtlat.getMonth() - 1);
-                if (dttod > dtlat) {
-                    $(".TextTo").val($.datepicker.formatDate('yy-mm', dtlat));
-                }
-                else {
-                    $(".TextTo").val($.datepicker.formatDate('yy-mm', dttod));
-                }
-            }
-        });
-
-        $(".TextTo").datepicker({
-            dateFormat: 'yy-mm',
-            changeMonth: true,
-            changeYear: true,
-            showButtonPanel: true,
-            minDate: "-15m",
-            maxDate: "-12m",
-        });
-
-        $(".TextBoxCalender").focus(function () {
-            $(".ui-datepicker-calendar").hide();
-            $("#ui-datepicker-div").position({
-                my: "center top",
-                at: "center bottom",
-                of: $(this)
-            });
-        });
-    });
-
-    function fnclearvaluesdate() {
-        $(".TextBoxCalender").val("");
+</script>
+<script>
+    if ($("#lnkCoApp0").is(":active")) {
+        $("#lnkCoApp0").attr("active","");
     }
 </script>
 
-<form method="post" asp-action="CreateEnquiry" id="form1">
+<form method="post" action="/incomeAssesment/CreateEnquiry" enctype="multipart/form-data" id="form1">
 
     <div style="margin-top: 20px" class="container">
     <div class="container app">
@@ -217,172 +90,133 @@
             <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
                 <div class="panel-heading"><h3>Add GST Enquiry</h3></div>
                 <div style="border: 1px solid #343a40;" class="border">
-                    <div class="btn" style="padding-left: 8%;">
-                        <a id="ContentPlaceHolder1_lnkCoApp0" class="AppTabs btn-sm" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp0&#39;,&#39;&#39;)" style="background: #adb5bd;">Applicant</a>
-                        <a id="ContentPlaceHolder1_lnkCoApp1" class="AppTabs btn-sm" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp1&#39;,&#39;&#39;)" style="background: #343a40;">Co-Applicant-1</a>
-                        <a id="ContentPlaceHolder1_lnkCoApp2" class="AppTabs btn-sm" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp2&#39;,&#39;&#39;)" style="background: #343a40;">Co-Applicant-2</a>
-                        <a id="ContentPlaceHolder1_lnkCoApp3" class="AppTabs btn-sm" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp3&#39;,&#39;&#39;)" style="background: #343a40;">Co-Applicant-3</a>
-                        <a id="ContentPlaceHolder1_lnkCoApp4" class="AppTabs btn-sm" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp4&#39;,&#39;&#39;)" style="background: #343a40;">Co-Applicant-4</a>
-                        <a id="ContentPlaceHolder1_lnkCoApp5" class="AppTabs btn-sm" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkCoApp5&#39;,&#39;&#39;)" style="background: #343a40;">Co-Applicant-5</a>
+                    <div class="buttons">
+                        <a id="ContentPlaceHolder1_lnkCoApp0" tabindex="1" class="AppTabs btn-sm active" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=0">Applicant</a>
+                        <a id="ContentPlaceHolder1_lnkCoApp1" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=1">Co-Applicant-1</a>
+                        <a id="ContentPlaceHolder1_lnkCoApp2" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=2">Co-Applicant-2</a>
+                        <a id="ContentPlaceHolder1_lnkCoApp3" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=3">Co-Applicant-3</a>
+                        <a id="ContentPlaceHolder1_lnkCoApp4" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=4">Co-Applicant-4</a>
+                        <a id="ContentPlaceHolder1_lnkCoApp5" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=5">Co-Applicant-5</a>
                     </div>
                     <div style="height: 10px;"></div>
                     <span id="ContentPlaceHolder1_spanMessage" style="color: red; font-size: 18px;"></span>
                     <div style="height: 10px;"></div>
                     <div class="frames">
                         <div class="panel-body">
-
+                            <div hidden>
+                                <input asp-for="gstAddEnquiryCommandDto.Lead_Id" />
+                                <input asp-for="gstAddEnquiryCommandDto.ApplicantType" />
+                            </div>
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div hidden class="form-group">
                                 <div class="col-md-4">
-                                    <label asp-for="ID" class="control-label"></label>
-                                    <input asp-for="ID" class="form-control" />
-                                    <span asp-validation-for="ID" class="text-danger"></span>
+                                    <label asp-for="gstAddEnquiryCommandDto.ID" class="control-label"></label>
+                                    <input asp-for="gstAddEnquiryCommandDto.ID" class="form-control" />
+                                    <span asp-validation-for="gstAddEnquiryCommandDto.ID" class="text-danger"></span>
                                 </div>
                             </div>
 
-                            <div id="ContentPlaceHolder1_alertMsg" style="padding-left: 8%;">
+                            <div id="ContentPlaceHolder1_alertMsg">
                                 <div style="display:flex">
                                     <div class="col-md-4">
                                         <label class="col-md-5">Form No</label>
                                     </div>
-                                    <div class="col-md-5">
-                                        <div class="input-control text" style="display:inline-flex">
-                                            <span id="ContentPlaceHolder1_lblFormNo" style="color: black"><b>@Model.FormNo</b></span>
+                                    <div class="col-md-1">
+                                        <div class="input-control text"style="display:inline-flex">
+                                            <input asp-for="gstAddEnquiryCommandDto.FormNo" style="border: none; background-color: #f4f6f9; font-weight: bold; " type="text" disabled />
+                                            <input asp-for="gstAddEnquiryCommandDto.FormNo" style="border: none; background-color: #f4f6f9; font-weight: bold; " type="text" hidden />
                                         </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div style= "text-align:right;"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="card">
+                                <h5>Customer Details</h5>
+                            </div>
 
 
-                            <div style="display:flex;">
+                            <div style="height: 10px;"></div>
+
+                            <div class="row tab">
                                 <div class="col-md-4">
-
-                                </div>
-                                <div style="width:100%; text-align:center;"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
-                            </div>
-
-
-                            <div id="divConverted1">
-                                <h2><b style="padding-left: 8%;">Customer Details</b></h2>
-                            </div>
-                            <br />
-
-                            <div style="height: 5px;"></div>
-
-                            <div class="row tab" style="padding-left: 8%;">
-                                <div class="col-md-6">
                                     <label class="col-md-5">Customer Name<span style="color: Red">&nbsp;*</span></label>
 
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-7">
                                     <div class="input-control text">
 
-                                        <input type="text" asp-for="CustomerName" readonly="readonly" id="ContentPlaceHolder1_txtCustomerName" class="form-control required" placeholder="XYZ">
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="input-control">
-                                        <input type="submit" value="Edit" id="ContentPlaceHolder1_btnEditName">
-
+                                        <input type="text" style="border: none; background-color: #f4f6f9; font-weight: bold; " asp-for="gstAddEnquiryCommandDto.CustomerName" readonly="readonly" id="ContentPlaceHolder1_txtCustomerName" class="form-control required" placeholder="XYZ">
                                     </div>
                                 </div>
                             </div>
-                            <br />
 
-                            <div style="height: 5px;"></div>
+                            <div style="height: 10px;"></div>
 
-                            <div class="row tab" style="padding-left: 8%;">
-                                <div class="col-md-6">
+                            <div class="row tab">
+                                <div class="col-md-4">
                                     <label class="col-md-5">Customer Email<span style="color: Red">&nbsp;*</span></label>
 
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-7">
                                     <div class="input-control text">
 
-                                        <input type="text" asp-for="Email" readonly="readonly" id="ContentPlaceHolder1_txtEmail" class="form-control" placeholder="abc@xyz.com">
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="input-control">
-                                        <input type="submit" value="Edit" id="ContentPlaceHolder1_btnEditEmail">
+                                        <input type="text" style="border: none; background-color: #f4f6f9; font-weight: bold; " asp-for="gstAddEnquiryCommandDto.Email" readonly="readonly" id="ContentPlaceHolder1_txtEmail" class="form-control" placeholder="abc@xyz.com">
                                     </div>
                                 </div>
                             </div>
-                            <br />
 
-                            <div style="height: 5px;"></div>
+                            <div style="height: 10px;"></div>
 
-                            <div class="row tab" style="padding-left: 8%;">
-                                <div class="col-md-6">
+                            <div class="row tab">
+                                <div class="col-md-4">
                                     <label class="col-md-5">Customer Mobile<span style="color: Red">&nbsp;*</span></label>
 
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-7">
                                     <div class="input-control text">
 
-                                        <input asp-for="MobileNo" maxlength="10" readonly="readonly" id="ContentPlaceHolder1_txtMobile" type="number" class="form-control" placeholder="Mobile No">
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="input-control">
-                                        <input type="submit" value="Edit" id="ContentPlaceHolder1_btnEditMobile">
-
+                                        <input asp-for="gstAddEnquiryCommandDto.MobileNo" style="border: none; background-color: #f4f6f9; font-weight: bold; " maxlength="10" readonly="readonly" id="ContentPlaceHolder1_txtMobile" type="number" class="form-control" placeholder="Mobile No">
                                     </div>
                                 </div>
                             </div>
-                            <br />
 
-                            <div style="height: 5px;"></div>
+                            <div style="height: 10px;"></div>
 
-                            <div class="row tab" style="padding-left: 8%;">
-                                <div class="col-md-6">
+                            <div class="row tab">
+                                <div class="col-md-4">
                                     <label class="col-md-5">GST Number<span style="color: Red">&nbsp;*</span></label>
 
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-7">
                                     <div class="input-control text">
 
-                                        <input asp-for="GstNo" type="text" maxlength="15" id="ContentPlaceHolder1_txtGstNumber" class="form-control uppercase" placeholder="GST Number">
+                                        <input asp-for="gstAddEnquiryCommandDto.GstNo" type="text" maxlength="15" id="ContentPlaceHolder1_txtGstNumber" class="form-control uppercase" placeholder="GST Number">
                                     </div>
                                 </div>
                             </div>
-                            <br />
 
-                            <div style="height: 5px;"></div>
+                            <div style="height: 10px;"></div>
 
-                            <div class="row tab" style="padding-left: 8%;">
-                                <div class="col-md-6">
+                            <div class="row tab">
+                                <div class="col-md-4">
                                     <label class="col-md-5">Employee Type<span style="color: Red">&nbsp;*</span></label>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-7">
                                     <table id="ContentPlaceHolder1_rdbEmployeeType" style="font-weight:normal;">
                                         <tbody>
                                             <tr>
-                                                <td>
-                                                    <input id="ContentPlaceHolder1_rdbEmployeeType_0" type="radio" asp-for="EmploymentType" value="@Model.EmploymentType" checked="checked">
-                                                    &nbsp<label for="ContentPlaceHolder1_rdbEmployeeType_0">@Model.EmploymentType</label>
+                                                <td style="background-color: #f4f6f9;">
+                                                    <input id="ContentPlaceHolder1_rdbEmployeeType_0" type="radio" asp-for="gstAddEnquiryCommandDto.EmploymentType" value="@Model.gstAddEnquiryCommandDto.EmploymentType" checked="checked">
+                                                    &nbsp<label asp-for="gstAddEnquiryCommandDto.EmploymentType" for="ContentPlaceHolder1_rdbEmployeeType_0">@Model.gstAddEnquiryCommandDto.EmploymentType</label>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                            <br />
-
-                            <div style="height: 5px;"></div>
-                            <div id="forBranch">
-                                <div class="row tab" style="padding-left: 8%;">
-                                    <div class="col-md-6"><label class="col-md-6">Applicant Details</label></div>
-                                    <div class="col-md-4"><p><a href="/ApplicantDetails/Index?lead_Id=@Model.Lead_Id&applicantType=0">Click here</a></p></div>
-                                </div>
-                                <br />
-                                <div class="row tab" style="padding-left: 8%;">
-                                    <div class="col-md-6"><label class="col-md-6">Lead ITR Details</label></div>
-                                    <div class="col-md-4"><p><a href="/LeadITRDetails/Index?lead_Id=@Model.Lead_Id&applicantType=0">Click here</a></p></div>
-                                </div>
-                            </div>
-
-                            <div style="height: 5px;"></div>
+                            <div style="height: 10px;"></div>
 
                             <div class="row tab">
 
@@ -392,49 +226,46 @@
                             </div>
 
                             <div style="height: 5px; display: none;"></div>
-                            <div id="divConverted1">
-                                <h2><b style="padding-left: 8%;">Upload Files</b></h2>
+                            <div class="card">
+                                <h5>Upload Files</h5>
                             </div>
-                            <br />
 
                             <div style="height: 5px; display: none;"></div>
 
-                            <div class="row tab" style="padding-left: 8%;">
+                            <div class="row tab">
                                 <div class="col-md-4">
                                     <label class="col-md-4">Excel File<span style="color: Red">&nbsp;*</span></label>
 
                                 </div>
                                 <div class="col-md-8">
-                                    <input type="file" asp-for="ExcelFilePath" id="ContentPlaceHolder1_fileUploadExcel" accept=".xls,.xlsx" onchange="validate_fileupload(this,&#39;xls,xlsx&#39;);">
+                                    <input type="file" asp-for="IExcel" id="ContentPlaceHolder1_fileUploadExcel" accept=".xls,.xlsx" onchange="validate_fileupload(this,&#39;xls,xlsx&#39;);">
                                 </div>
                             </div>
-                            <br />
 
-                            <div style="height: 5px; display: none;"></div>
+                            <div style="height: 10px;"></div>
 
-                            <div class="row tab" style="padding-left: 8%;">
+                            <div class="row tab">
                                 <div class="col-md-4">
                                     <label class="col-md-6">Pdf file<span style="color: Red">&nbsp;*</span></label>
 
                                 </div>
                                 <div class="col-md-8">
-                                    <input type="file" asp-for="PdfFilePath" id="ContentPlaceHolder1_fileUploadPdf" accept=".pdf" onchange="validate_fileupload(this,&#39;pdf&#39;);">
+                                    <input type="file" asp-for="IPdf" id="ContentPlaceHolder1_fileUploadPdf" accept=".pdf" onchange="validate_fileupload(this,&#39;pdf&#39;);">
                                 </div>
                             </div>
 
                             <br>
-                            <br>
                         </div>
                         <div hidden class="form-group">
-                            <label asp-for="ApplicantType" class="control-label"></label>
-                            <input asp-for="ApplicantType" class="form-control" />
-                            <span asp-validation-for="ApplicantType" class="text-danger"></span>
+                            <label asp-for="gstAddEnquiryCommandDto.ApplicantType" class="control-label"></label>
+                            <input asp-for="gstAddEnquiryCommandDto.ApplicantType" class="form-control" />
+                            <span asp-validation-for="gstAddEnquiryCommandDto.ApplicantType" class="text-danger"></span>
                         </div>
 
                         <div hidden class="form-group">
                             <div class="checkbox">
                                 <label>
-                                    <input asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                                    <input asp-for="gstAddEnquiryCommandDto.IsActive" /> @Html.DisplayNameFor(model => model.gstAddEnquiryCommandDto.IsActive)
                                 </label>
                             </div>
                         </div>
@@ -454,14 +285,12 @@
                                 </div>
                             </div>
                         </div>
-                        <br>
-                        <br>
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
     </div>
-    </div>
+</div>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -569,8 +398,6 @@
                     return false;
                 }
                 var patterngst = new RegExp("^([0][1-9]|[1-2][0-9]|[3][0-7])([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$");
-                //var patterngst = new RegExp("^([0][1-9]|[1-2][0-9]|[3][0-5])([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$");
-                //debugger;
                 var gstno = $("#ContentPlaceHolder1_txtGstNumber").val();
                 if (patterngst.test(gstno) == false) {
                     //alert(pattern);
@@ -601,46 +428,16 @@
                     e.preventDefault();
                     return false;
                 }
+                //Pdf file validation
+                var filePdfvalue = $('input[id*="fileUploadPdf"]').val();
+                if (filePdfvalue == "" || filePdfvalue == null) {
+                    console.log(filePdfvalue);
+                    alert('Please Select PDF File to Upload');
+                    e.preventDefault();
+                    return false;
+                }
             })
         });
 
-    </script>
-
-
-    <div class="navbar-fixed-bottom">
-        <div class="container">
-            @*<div id="divLoggedInUser" class="btn-float text-center">
-                <input type="image" name="ctl00$btnUserName" id="btnUserName" formnovalidate="" src="./GICHFGst_files/power-btn.png">
-            </div>*@
-            <div class="col-lg-12 text-center">
-                <h5>
-
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="linklastLogin" href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$linklastLogin&quot;, &quot;&quot;, false, &quot;&quot;, &quot;LastLogin.aspx&quot;, false, true))">Last Login</a>
-                </h5>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Message</h4>
-                </div>
-                <div class="modal-body" id="modalMessage">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="closemodalbutton">Close</button>
-                    <a href="http://1.6.38.247:8090/home.aspx" class="btn btn-primary" role="button" id="redirectbutton">OK</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-    <script type="text/javascript">
-        hideshowbackbtn(1)
     </script>
 </form>

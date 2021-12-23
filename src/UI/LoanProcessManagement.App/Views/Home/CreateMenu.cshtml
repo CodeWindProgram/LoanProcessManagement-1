@@ -179,7 +179,7 @@
 
                                         <select multiple="multiple" asp-for="Childlist" asp-items="@ViewBag.ParentId" id="selectChildren" class="required" disabled required>
                                         </select>
-
+                                        <div><b>To Select Multiple Options Press <i>'Ctrl + Select'</i></b></div>
                                     </div>
                                 </div>
                             </div>
@@ -201,23 +201,6 @@
                                             </div>
                                         }
                                     </div>
-
-                                    @*<div class="col-md-6" id="checkings">
-                                            @{
-                                                for (int i = 0; i < Model.ListVms.Count(); i++)
-                                                {
-                                                    <div class="" id="trtablecheck">
-                                                        <tr>
-                                                            <td>
-                                                                <input asp-for="@Model.ListVms[i].Checkbox" type="checkbox" />
-                                                                @Model.ListVms[i].Name
-                                                            </td>
-                                                            <td><input asp-for="@Model.ListVms[i].Id" hidden /></td>
-                                                        </tr>
-                                                    </div>
-                                                }
-                                            }
-                                        </div>*@
                                 </div>
                             </div>
                             <div hidden class="form-group">

@@ -57,7 +57,7 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             var httpResponse = await _client.PostAsync
                 (
-                    BaseUrl + APIEndpoints.AddEnquiry,
+                    BaseUrl + APIEndpoints.CreateEnquiry,
                     new StringContent(content, Encoding.Default,
                     "application/json")
                 );

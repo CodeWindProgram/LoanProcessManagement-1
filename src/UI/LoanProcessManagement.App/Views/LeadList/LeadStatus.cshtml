@@ -1,0 +1,115 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "LeadStatus";
+}
+
+<style>
+    #tblLoginReport tbody tr td:first-child {
+        text-align: left;
+    }
+
+    td {
+        background-color: rgb(244 246 249);
+    }
+
+    #tblLoginReport thead tr th:first-child {
+        text-align: left !important;
+        padding: 4px 16px 4px 6px !important;
+    }
+
+    #tblLoginReport tbody tr td {
+        text-align: right;
+        padding: 4px 16px 4px 6px !important;
+    }
+
+    #tblLoginReport thead tr th {
+        text-align: right !important;
+        padding: 4px 16px 4px 6px !important;
+    }
+</style>
+
+<div class="container app">
+    <div class="col-sm-12">
+        <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
+            <div class="panel-heading"><h3>Lead Data Report</h3></div>
+            <div style="border-left: 1px solid #343a40; border-right: 1px solid #343a40; " class="border">
+                <div class="panel-body" style="padding: 10px;">
+                    <input type="hidden" name="ctl00$ContentPlaceHolder1$hdnEmpId" id="hdnEmpId" value="HO">
+                    <div class="filters">
+                        <table style="width: 100%">
+                            <tbody>
+                                <tr style="border: none;">
+                                    <td style="width: 25%;">
+                                        Zone
+                                        <div id="divZone">
+                                            <select id="DDLZone" class="form-control">
+                                                <option value="-1">Select</option>
+                                            </select>
+                                            <input type="hidden" name="ctl00$ContentPlaceHolder1$HDNddlZone" id="ContentPlaceHolder1_HDNddlZone">
+                                        </div>
+                                    </td>
+                                    <td style="width: 25%; display: none;">
+                                        Region
+                                        <div id="divRegion">
+                                            <select id="DDLRegion" class="form-control">
+                                                <option value="-1">Select</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td style="width: 25%;">
+                                        Branch
+                                        <div id="divBranch">
+                                            <select id="DDLBranch" class="form-control">
+                                                <option value="-1">Select</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Type of user
+                                        <div id="divUserType">
+                                            <input type="checkbox" name="userType" value="DSA" checked="checked">
+                                            DSA
+                                            <input type="checkbox" name="userType" value="Branch">
+                                            Branch
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                            <input type="button" class="btn btn-primary  btn-sm" value="Submit" id="btnSubmit">
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px; max-width: 100%; overflow: auto;">
+                        <div id="tblLoginReport_wrapper" class="dataTables_wrapper" role="grid">
+                            <div class="dataTables_length" id="tblLoginReport_length"><label>Show <select name="tblLoginReport_length" aria-controls="tblLoginReport" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div id="tblLoginReport_filter" class="dataTables_filter"><label>Search:<input type="search" class="" aria-controls="tblLoginReport"></label></div><table class="display dataTable" id="tblLoginReport" aria-describedby="tblLoginReport_info" style="width: 1156px;">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="centered-cell" bgcolor="" rowspan="1" colspan="1">DSA</th>
+                                        <th class="centered-cell" bgcolor="#F0F8FF" rowspan="1" colspan="1">Total</th>
+                                        <th class="centered-cell" bgcolor="#F5F5DC" rowspan="1" colspan="1">Converted</th>
+                                        <th colspan="6" class="centered-cell" bgcolor="#FFF8DC" rowspan="1">
+                                            <center>Submitted For</center>
+                                        </th>
+                                        <th class="centered-cell" bgcolor="#F0F8FF" rowspan="1" colspan="1">Sanctioned</th>
+                                        <th class="centered-cell" bgcolor="#F0F8FF" rowspan="1" colspan="1">Disbursed</th>
+                                        <th class="centered-cell" bgcolor="#FFF8DC" rowspan="1" colspan="1">Lost</th>
+                                        <th class="centered-cell" bgcolor="#F0F8FF" rowspan="1" colspan="1">Rejected</th>
+                                        <th class="centered-cell" bgcolor="#F0F8FF" rowspan="1" colspan="1">Rejection</th>
+                                    </tr>
+                                    <tr role="row"><th class="centered-cell sorting_asc" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column ascending" style="width: 38px;">Name</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Leads: activate to sort column ascending" style="width: 40px;">Leads</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Leads: activate to sort column ascending" style="width: 70px;">Leads</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Branch (Data Entry): activate to sort column ascending" style="width: 64px;">Branch (Data Entry)</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="HO (In-Prin. Sanc.): activate to sort column ascending" style="width: 58px;">HO (In-Prin. Sanc.)</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Branch (Cust. Processing): activate to sort column ascending" style="width: 98px;">Branch (Cust. Processing)</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Branch (3rd Party Check): activate to sort column ascending" style="width: 71px;">Branch (3rd Party Check)</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Branch (Reco.): activate to sort column ascending" style="width: 58px;">Branch (Reco.)</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="HO (Sanction): activate to sort column ascending" style="width: 74px;">HO (Sanction)</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Leads: activate to sort column ascending" style="width: 75px;">Leads</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Leads: activate to sort column ascending" style="width: 69px;">Leads</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Leads: activate to sort column ascending" style="width: 40px;">Leads</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Leads: activate to sort column ascending" style="width: 58px;">Leads</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="%: activate to sort column ascending" style="width: 63px;">%</th></tr>
+                                </thead>
+                                <tfoot id="tf">
+                                    <tr><th colspan="14" rowspan="1"></th></tr>
+                                </tfoot>
+                                <tbody><tr class="odd"><td valign="top" colspan="14" class="dataTables_empty">No data available in table</td></tr></tbody>
+                            </table><div class="dataTables_info" id="tblLoginReport_info" role="alert" aria-live="polite" aria-relevant="all">Showing 0 to 0 of 0 entries</div><div class="dataTables_paginate paging_simple_numbers" id="tblLoginReport_paginate"><a class="paginate_button previous disabled" aria-controls="tblLoginReport" tabindex="0" id="tblLoginReport_previous">Previous</a><span></span><a class="paginate_button next disabled" aria-controls="tblLoginReport" tabindex="0" id="tblLoginReport_next">Next</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

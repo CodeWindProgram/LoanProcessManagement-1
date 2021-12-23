@@ -82,17 +82,8 @@
         margin-left: 30px;
         margin-top: 10px;
     }
-    /*#checkboxes {
-        display: flex;
-    }*/
-    .multiselect-container{
-        height: 200px;
-        overflow: scroll;
-    }
 </style>
-<link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css"
-      rel="stylesheet" type="text/css" />
-<script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"></script>
+
 
 <div class="container app">
     <div class="col-sm-12 col-lg-12">
@@ -173,8 +164,9 @@
                                         <input type="radio" name="Married" id="Yes" value="Yes" onclick="hideStudentChildren()" required>YES &nbsp&nbsp&nbsp&nbsp
                                         <input type="radio" name="Married" id="No" value="No" onclick="hideStudentChildren()" checked>NO &nbsp&nbsp&nbsp&nbsp
 
-                                        <select multiple="multiple" asp-for="Parlist" asp-items="@ViewBag.ParentId" id="selectChildren" class="required" required>
+                                        <select multiple="multiple" asp-for="Parlist" asp-items="@ViewBag.ParentId" id="selectChildren" class="required" disabled required>
                                         </select>
+                                        <div><b>To Select Multiple Options Press <i>'Ctrl + Select'</i></b></div>
                                     </div>
                                 </div>
                             </div>
@@ -224,21 +216,17 @@
     </div>
 </div>
 <script>
-
-    /*$("#selectChildren").attr("disabled", "disabled");*/
-
     function hideStudentChildren() {
         if ($("#Yes").is(":checked")) {
             check();
-            $(".multiselect").removeAttr("disabled");
             $("#selectChildren").removeAttr("disabled");
         }
         if ($("#No").is(":checked")) {
             uncheck();
-            $(".multiselect").attr("disabled", "disabled");
             $("#selectChildren").attr("disabled", "disabled");
         }
     }
+
 
     function check() {
         document.getElementById("confirming").checked = true;
@@ -247,8 +235,4 @@
     function uncheck() {
         document.getElementById("confirming").checked = false;
     }
-
-    $(function () {
-        $('#selectChildren').multiselect();
-    });
 </script>
