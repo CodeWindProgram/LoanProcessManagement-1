@@ -188,8 +188,9 @@
                                         <label class="">Employee Type</label>
                                     </div>
                                     <div class="col-md-5">
-                                        <div class="input-control text">
-                                            <input type="radio" id="selfEmployee" >
+                                        
+                                        <div class="input-control text" id="EmployeeTypeNo" >
+                                            <input type="radio" id="selfEmployee">
                                             <label for="selfEmployee">Self-Employee</label>
                                         </div>
                                     </div>
@@ -201,12 +202,14 @@
                                         <label class="">Consent</label>
                                     </div>
                                     <div class="col-md-5">
-                                        <div class="input-control text">
+                                       
+                                        <div>
+                                        <div class="input-control text" id="CheckBoxNo" >
                                             <input type="checkbox" id="ConsentValue" >
                                             <label for="ConsentValue"> Yes </label><br>
-                                            @*<span style="color:Red;display:block;"></span>*@
-                                            @*<span id="ContentPlaceHolder1_RegularExpressionValidator3" style="color:Red;display:none;">Invalid Mobile No.</span>*@
+
                                         </div>
+                                            </div>
                                     </div>
                                 </div>
 
@@ -270,3 +273,32 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        @*var checkBoxYes = document.getElementById("CheckBoxYes");
+        var checkBoxNo = document.getElementById("CheckBoxNo");
+        var employeeTypeYes = document.getElementById("EmployeeTypeYes");
+        var employeeTypeNo = document.getElementById("EmployeeTypeYes");
+
+        if ('@Model.IsSuccess' == 'True') {
+            checkBoxYes.style.display = "none";
+            checkBoxNo.style.display = "block";
+
+            employeeTypeYes.style.display = "none";
+            employeeTypeNo.style.display = "block";
+
+        } else {
+
+            checkBoxYes.style.display = "block";
+            checkBoxNo.style.display = "none";
+
+            employeeTypeYes.style.display = "block";
+            employeeTypeNo.style.display = "none";
+
+        }*@
+
+        
+
+    });
+</script>

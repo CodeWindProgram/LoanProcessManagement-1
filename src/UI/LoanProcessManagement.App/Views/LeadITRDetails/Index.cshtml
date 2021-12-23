@@ -289,3 +289,19 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function () {
+
+        if ('@ViewBag.isSuccess' == 'True') {
+            setTimeout(function () {
+                location.href = "/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=@Model.ApplicantType";
+            }, 1000);
+        }
+        else if('@ViewBag.isSuccess' == 'False'){
+             setTimeout(function () {
+                 location.href = "/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=@Model.ApplicantType";
+             }, 1000);
+
+        }
+    });
+</script>

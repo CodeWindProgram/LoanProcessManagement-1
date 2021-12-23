@@ -47,7 +47,8 @@ namespace LoanProcessManagement.App.Controllers
                     EmploymentType = result.Data.EmploymentType,
                     UserName = result.Data.UserName,
                     PanCardNo = result.Data.PanCardNo,
-                    Consent = result.Data.Consent
+                    Consent = result.Data.Consent,
+                    IsSuccess=result.Data.IsSuccess
                 };
                 return View(applicantResult);
             }
@@ -65,8 +66,24 @@ namespace LoanProcessManagement.App.Controllers
                     EmploymentType = result.Data.EmploymentType,
                     UserName = result.Data.UserName,
                     PanCardNo = result.Data.PanCardNo,
-                    Consent = result.Data.Consent
+                    Consent = result.Data.Consent,
+                    IsSuccess = result.Data.IsSuccess
                 };
+
+                //if (result.Data.Succeeded && result.Data.IsSuccess)
+                //{
+                //    //return View(applicantResult);
+                //    return View("LeadITRDetailsFreeze", applicantResult);
+                //}
+                //else if (result.Data.Succeeded && !result.Data.IsSuccess)
+                //{
+                //    //return View("LeadITRDetailsFreeze", applicantResult);
+                //    return View(applicantResult);
+                //}
+                //else
+                //{
+                //    return View("LeadITRDetailsFreeze", applicantResult);
+                //}
 
                 if (result.Data.Succeeded)
                 {

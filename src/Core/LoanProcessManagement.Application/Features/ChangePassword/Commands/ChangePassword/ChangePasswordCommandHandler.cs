@@ -23,20 +23,6 @@ namespace LoanProcessManagement.Application.Features.ChangePassword.Commands.Cha
         {
             var changePasswordCommandResponse = new Response<ChangePasswordDto>();
 
-            //var validator = new CreateCategoryCommandValidator();
-            //var validationResult = await validator.ValidateAsync(request);
-
-            //if (validationResult.Errors.Count > 0)
-            //{
-            //    createCategoryCommandResponse.Succeeded = false;
-            //    createCategoryCommandResponse.Errors = new List<string>();
-            //    foreach (var error in validationResult.Errors)
-            //    {
-            //        createCategoryCommandResponse.Errors.Add(error.ErrorMessage);
-            //    }
-            //}
-            //else
-            //{
             var changePassword = new ChangePasswordModel()
             {
                 OldPassword = request.OldPassword,
@@ -66,3 +52,18 @@ namespace LoanProcessManagement.Application.Features.ChangePassword.Commands.Cha
         }
     }
 }
+
+//var validator = new CreateCategoryCommandValidator();
+//var validationResult = await validator.ValidateAsync(request);
+
+//if (validationResult.Errors.Count > 0)
+//{
+//    createCategoryCommandResponse.Succeeded = false;
+//    createCategoryCommandResponse.Errors = new List<string>();
+//    foreach (var error in validationResult.Errors)
+//    {
+//        createCategoryCommandResponse.Errors.Add(error.ErrorMessage);
+//    }
+//}
+//else
+//{

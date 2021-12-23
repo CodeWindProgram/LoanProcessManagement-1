@@ -1,5 +1,6 @@
 ﻿using LoanProcessManagement.Application.Features.CibilCheck.Commands.AddCibilCheckDetails;
 using LoanProcessManagement.Application.Features.CibilCheck.Queries.ApplicantDetails;
+using LoanProcessManagement.Domain.CustomModels;
 using LoanProcessManagement.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,8 @@ namespace LoanProcessManagement.Application.Contracts.Persistence
     public interface ICibilCheckDetailsRepository
     {
         Task<GetCibilCheckDetailsDto> GetCibilApplicantDetailsAsync(long lead_id, int ApplicantType);
-        Task<AddCibilDetailsDto> UpdateApplicantDetailsByLeadId(LpmCibilCheckDetails request);
+        //Task<AddCibilDetailsDto> UpdateApplicantDetailsByLeadId(LpmCibilCheckDetails request);
+        Task<CibilCheckDetailsModel> UpdateApplicantDetailsByLeadId(CibilCheckDetailsModel request);
     }
     #endregion
 }

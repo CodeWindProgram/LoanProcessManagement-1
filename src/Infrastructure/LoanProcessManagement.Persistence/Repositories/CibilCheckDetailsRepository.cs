@@ -1,6 +1,7 @@
 ﻿using LoanProcessManagement.Application.Contracts.Persistence;
 using LoanProcessManagement.Application.Features.CibilCheck.Commands.AddCibilCheckDetails;
 using LoanProcessManagement.Application.Features.CibilCheck.Queries.ApplicantDetails;
+using LoanProcessManagement.Domain.CustomModels;
 using LoanProcessManagement.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -93,9 +94,17 @@ namespace LoanProcessManagement.Persistence.Repositories
 
         }
 
-        public async Task<AddCibilDetailsDto> UpdateApplicantDetailsByLeadId(LpmCibilCheckDetails request)
+        //public async Task<AddCibilDetailsDto> UpdateApplicantDetailsByLeadId(LpmCibilCheckDetails request)
+        public async Task<CibilCheckDetailsModel> UpdateApplicantDetailsByLeadId(CibilCheckDetailsModel request)
         {
             var applicant = _dbContext.LpmCibilCheckDetails.Where(x => x.FormNo == request.FormNo && x.lead_Id == request.lead_Id && x.ApplicantType == request.ApplicantType).FirstOrDefault();
+
+           // var applicantDetails = _dbContext.LpmLeadApplicantsDetails.Where(x=>x.FormNo==request.FormNo && x.lead_Id==request.lead_Id && x.ApplicantType==request.ApplicantType).FirstOrDefault();
+
+            var applicantDetails = await _dbContext.LpmLeadApplicantsDetails.Include(x => x.LpmLeadMaster)
+                .Where(x => x.lead_Id == request.lead_Id && x.ApplicantType == request.ApplicantType).FirstOrDefaultAsync();
+
+
             AddCibilDetailsDto response = new AddCibilDetailsDto();
 
             if (applicant != null)
@@ -115,20 +124,28 @@ namespace LoanProcessManagement.Persistence.Repositories
                 applicant.LastModifiedBy = request.LastModifiedBy;
                 applicant.LastModifiedDate = DateTime.Now;
 
+                applicantDetails.AddressLine1 = request.AddressLine1;
+                applicantDetails.AddressLine2 = request.AddressLine2;
+                applicantDetails.AddressLine3 = request.AddressLine3;
+                applicantDetails.State = request.State;
+                applicantDetails.Pincode = request.Pincode;
+                applicantDetails.City = request.City;
+                applicantDetails.LastModifiedDate = DateTime.Now;
+
                 await _dbContext.SaveChangesAsync();
 
-                response.Message = "Cibil details Updated Successfully";
-                response.Succeeded = true;
+                request.Message = "Cibil Check Details are Updated Successfully";
+                request.Succeeded = true;
 
-                return response;
+                return request;
 
             }
             else {
-                response.IsSubmit = false;
-                response.Message = "Cibil Details not Updated ";
-                response.Succeeded = false;
+                request.IsSubmit = false;
+                request.Message = "Cibil Details are not Updated ";
+                request.Succeeded = false;
 
-                return response;
+                return request;
             }
         }
         #endregion

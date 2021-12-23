@@ -15,6 +15,7 @@ namespace LoanProcessManagement.Application.Features.LeadITRDetails.Command
         public string LastModifiedBy { get; set; }
         public string Message { get; set; }
         public bool Succeeded { get; set; }
+        public bool IsSuccess { get; set; }
     }
     #endregion
 }

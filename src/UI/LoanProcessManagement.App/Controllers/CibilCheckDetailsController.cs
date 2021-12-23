@@ -1,5 +1,6 @@
 ﻿using LoanProcessManagement.App.Models;
 using LoanProcessManagement.App.Services.Interfaces;
+using LoanProcessManagement.Application.Features.CibilCheck.Commands.AddCibilCheckDetails;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,7 @@ namespace LoanProcessManagement.App.Controllers
         public async Task<IActionResult> Index([FromQuery] long lead_Id, [FromQuery] int applicantType)
         {            
             var applicantResponse = await _cibilCheckService.GetCibilCheckDetails(lead_Id, applicantType);
-            var applicant = new CibilCheckDetailsVm()
+            var applicant = new CibilCheckDetailsVm()//AddCibilDetailsCommand() //CibilCheckDetailsVm()
             {
                 lead_Id = lead_Id,
                 LeadID = applicantResponse.Data.LeadID,
@@ -89,9 +90,15 @@ namespace LoanProcessManagement.App.Controllers
             if (ModelState.IsValid)
             {
                 var response = await _cibilCheckService.UpdateCibilCheckDetailsDetails(cibilCheckDetailsVm);
-
-                ViewBag.isSuccess = response.Succeeded;
-                ViewBag.Message = response.Data.Message;
+                if (response.Succeeded)
+                {
+                    ViewBag.isSuccess = true;
+                    ViewBag.Message = response.Message;
+                }
+                else {
+                    ViewBag.isSuccess = false;
+                    ViewBag.Message = response.Message;
+                }
                 //if (response.Succeeded)
                 //{
                 //     return View(cibilCheckDetailsVm);
@@ -103,7 +110,7 @@ namespace LoanProcessManagement.App.Controllers
             }
             
             return View(cibilCheckDetailsVm);
-            //return RedirectToAction("Index", new { lead_Id = cibilCheckDetailsVm.lead_Id, applicantType=cibilCheckDetailsVm.ApplicantType });
+            
         }
         #endregion
     }

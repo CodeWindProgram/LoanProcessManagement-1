@@ -1,5 +1,7 @@
 ﻿@model LoanProcessManagement.App.Models.CibilCheckDetailsVm
 
+@*@model LoanProcessManagement.Application.Features.CibilCheck.Commands.AddCibilCheckDetails.AddCibilDetailsCommand*@
+
 @{
 }
 @{
@@ -48,6 +50,7 @@
         border-top-left-radius: 0.25rem;
         border-top-right-radius: 0.25rem;
     }
+
     .btnDiv {
         text-align: center;
     }
@@ -136,7 +139,7 @@
                                 <div id="divConverted3PC" class="card initial1">
                                     <h5>Customer Details</h5>
                                 </div>
-                               
+
                                 <div style="display:flex;">
                                     <div class="col-md-4">
 
@@ -147,13 +150,14 @@
                                 <div class="row tab">
                                     <div class="col-md-5">
                                         <label class="">Customer Name</label>
-                                        
+
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-                                            <input asp-for="CustomerName" type="text" maxlength="26" id="ContentPlaceHolder1_txtCustomerName" class="form-control required" placeholder="XYZ">
-                                           
-                                            <span asp-validation-for="CustomerName" style="color:Red;display:block;"></span>
+                                            @*<input asp-for="CustomerName" type="text" maxlength="26" id="ContentPlaceHolder1_txtCustomerName" class="form-control required" placeholder="XYZ">
+
+        <span asp-validation-for="CustomerName" style="color:Red;display:block;"></span>*@
+                                            <label>@Model.CustomerName</label>
                                         </div>
                                     </div>
                                 </div>
@@ -165,8 +169,9 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-                                            <input asp-for="CustomerEmail" type="text" id="ContentPlaceHolder1_txtCustomerEmail" class="form-control" placeholder="abc@xyz.com" maxlength="25">
-                                            <span asp-validation-for="CustomerEmail" style="color:Red;display:block;"></span>
+                                            @*<input asp-for="CustomerEmail" type="text" id="ContentPlaceHolder1_txtCustomerEmail" class="form-control" placeholder="abc@xyz.com" maxlength="25">
+        <span asp-validation-for="CustomerEmail" style="color:Red;display:block;"></span>*@
+                                            <label>@Model.CustomerEmail</label>
                                         </div>
                                     </div>
                                 </div>
@@ -178,8 +183,9 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-                                            <input asp-for="CustomerPhone" type="text" maxlength="10" id="ContentPlaceHolder1_txtCustomerMobile" class="form-control noTxtInput" placeholder="Mobile No">
-                                            <span asp-validation-for="CustomerPhone" style="color:Red;display:block;"></span>
+                                            @*<input asp-for="CustomerPhone" type="text" maxlength="10" id="ContentPlaceHolder1_txtCustomerMobile" class="form-control noTxtInput" placeholder="Mobile No">
+        <span asp-validation-for="CustomerPhone" style="color:Red;display:block;"></span>*@
+                                            <label>@Model.CustomerPhone</label>
                                         </div>
                                     </div>
                                 </div>
@@ -191,10 +197,11 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-                                            <input asp-for="DateOfBirth" asp-format="{0:dd/MM/yyyy}" type="text" id="ContentPlaceHolder1txtDOB" placeholder="dd/mm/yyyy"
-                                                   class="form-control" />
-                                            <span id="ContentPlaceHolder1_RequiredFieldValidator2" style="color:Red;display:none;">Date of Birth is mandatory.</span>
-                                            <span asp-validation-for="DateOfBirth" style="color:Red;display:block;"></span>
+                                            @*<input asp-for="DateOfBirth" asp-format="{0:dd/MM/yyyy}" type="text" id="ContentPlaceHolder1txtDOB" placeholder="dd/mm/yyyy"
+               class="form-control" />
+        <span id="ContentPlaceHolder1_RequiredFieldValidator2" style="color:Red;display:none;">Date of Birth is mandatory.</span>
+        <span asp-validation-for="DateOfBirth" style="color:Red;display:block;"></span>*@
+                                            <label>@Model.DateOfBirth.ToShortDateString()</label>
                                         </div>
                                         <!--<div class="input-group date" id="TextBoxCalendar" data-target-input="nearest">
                                             <input asp-for="DateOfBirth" asp-format="{0:dd/MM/yyyy}" type="text" placeholder="dd/mm/yyyy" class="form-control datetimepicker-input" data-target="#TextBoxCalender" style="width: 92%; display: inline-block; margin-right: 10px;">-->
@@ -215,14 +222,14 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-                                            <select asp-for="Gender" id="ContentPlaceHolder1_ddlGender" class="form-control">
-                                                <option value="">Select Gender</option>
-                                                <option value="Male">Male</option>
-                                                <option value="Female">Female</option>
-                                                <option value="Transgender">Transgender</option>
+                                            @*<select asp-for="Gender" id="ContentPlaceHolder1_ddlGender" class="form-control">
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Transgender">Transgender</option>
 
-                                            </select>
-                                            
+        </select>*@
+                                            <label>@Model.Gender</label>
                                         </div>
                                     </div>
                                 </div>
@@ -231,7 +238,7 @@
                                     <div style="height: 5px;"></div>
                                     <div class="divsubheader card initial1" id="divIdentification">
                                         <h5>Identification </h5>
-                                        
+
                                     </div>
                                     <div style="height: 5px;"></div>
                                     <div class="row tab">
@@ -240,8 +247,9 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="input-control text">
-                                                <input asp-for="PanCardNo" type="text" maxlength="10" id="ContentPlaceHolder1_txtPAN" class="form-control">
-                                                <span asp-validation-for="PanCardNo" style="color:Red;display:block;"></span>
+                                                @*<input asp-for="PanCardNo" type="text" maxlength="10" id="ContentPlaceHolder1_txtPAN" class="form-control">
+        <span asp-validation-for="PanCardNo" style="color:Red;display:block;"></span>*@
+                                                <label>@Model.PanCardNo</label>
                                             </div>
                                         </div>
 
@@ -250,8 +258,9 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="input-control text">
-                                                <input asp-for="PassportNo" type="text" maxlength="8" id="ContentPlaceHolder1_txtPassport" class="form-control">
-                                                <span asp-validation-for="PassportNo" style="color:Red;display:block;"></span>
+                                                @*<input asp-for="PassportNo" type="text" maxlength="8" id="ContentPlaceHolder1_txtPassport" class="form-control">
+        <span asp-validation-for="PassportNo" style="color:Red;display:block;"></span>*@
+                                                <label>@Model.PassportNo</label>
                                             </div>
                                         </div>
                                     </div>
@@ -263,8 +272,9 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="input-control text">
-                                                <input asp-for="VoterId" type="text" maxlength="10" id="ContentPlaceHolder1_txtVoterId" class="form-control">
-                                                <span asp-validation-for="VoterId" style="color:Red;display:block;"></span>
+                                                @*<input asp-for="VoterId" type="text" maxlength="10" id="ContentPlaceHolder1_txtVoterId" class="form-control">
+        <span asp-validation-for="VoterId" style="color:Red;display:block;"></span>*@
+                                                <label>@Model.VoterId</label>
                                             </div>
                                         </div>
 
@@ -274,8 +284,9 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="input-control text">
-                                                <input asp-for="DrivingLiscenceNo" type="text" maxlength="16" id="ContentPlaceHolder1_txtDriverLicense" class="form-control">
-                                                <span asp-validation-for="DrivingLiscenceNo" style="color:Red;display:block;"></span>
+                                                @*<input asp-for="DrivingLiscenceNo" type="text" maxlength="16" id="ContentPlaceHolder1_txtDriverLicense" class="form-control">
+        <span asp-validation-for="DrivingLiscenceNo" style="color:Red;display:block;"></span>*@
+                                                <label>@Model.DrivingLiscenceNo</label>
                                             </div>
                                         </div>
                                     </div>
@@ -286,9 +297,10 @@
 
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="input-control text">
-                                                <input asp-for="RationCardNo" type="text" maxlength="10" id="ContentPlaceHolder1_txtrationCard" class="form-control">
-                                            </div>
+                                            @*<div class="input-control text">
+            <input asp-for="RationCardNo" type="text" maxlength="10" id="ContentPlaceHolder1_txtrationCard" class="form-control">
+        </div>*@
+                                            <label>@Model.RationCardNo</label>
                                         </div>
 
                                         <div class="col-md-2">
@@ -297,8 +309,9 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="input-control text">
-                                                <input asp-for="AadharId" type="text" maxlength="14" id="ContentPlaceHolder1_txtUniversalId" class="form-control">
-                                                <span asp-validation-for="AadharId" style="color:Red;display:block;"></span>
+                                                @*<input asp-for="AadharId" type="text" maxlength="14" id="ContentPlaceHolder1_txtUniversalId" class="form-control">
+        <span asp-validation-for="AadharId" style="color:Red;display:block;"></span>*@
+                                                <label>@Model.AadharId</label>
                                             </div>
                                         </div>
                                     </div>
@@ -307,30 +320,33 @@
 
                                 <div id="PhoneDV">
                                     <div style="height: 5px;"></div>
-                                    <div class="divsubheader card initial1" >
+                                    <div class="divsubheader card initial1">
                                         <h5>Phone</h5>
                                     </div>
                                     <div class="row tab">
                                         <div class="col-md-5">
                                             <label class="">Phone 1</label>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-5">
                                             <div class="input-control text">
-                                                <input asp-for="PhoneNumber1" type="text" maxlength="10" id="ContentPlaceHolder1_txtPhone" class="form-control">
+                                                @*<input asp-for="PhoneNumber1" type="text" maxlength="10" id="ContentPlaceHolder1_txtPhone" class="form-control">
                                                 <span asp-validation-for="PhoneNumber1" style="color:Red;display:block;"></span>
-                                                <span id="ContentPlaceHolder1_RegularExpressionValidator5" style="color:Red;display:none;">Invalid Phone No.</span>
+                                                <span id="ContentPlaceHolder1_RegularExpressionValidator5" style="color:Red;display:none;">Invalid Phone No.</span>*@
+                                                <label>@Model.PhoneNumber1</label>
                                             </div>
                                         </div>
                                     </div>
+                                    <div style="height: 5px;"></div>
                                     <div class="row tab">
                                         <div class="col-md-5">
                                             <label class="">Phone 2</label>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-5">
                                             <div class="input-control text">
-                                                <input asp-for="PhoneNumber2" type="text" maxlength="10" id="ContentPlaceHolder1_txtPhone" class="form-control">
-                                                <span asp-validation-for="PhoneNumber2" style="color:Red;display:block;"></span>
-                                                <span id="ContentPlaceHolder1_RegularExpressionValidator5" style="color:Red;display:none;">Invalid Phone No.</span>
+                                                @*<input asp-for="PhoneNumber2" type="text" maxlength="10" id="ContentPlaceHolder1_txtPhone" class="form-control">
+        <span asp-validation-for="PhoneNumber2" style="color:Red;display:block;"></span>
+        <span id="ContentPlaceHolder1_RegularExpressionValidator5" style="color:Red;display:none;">Invalid Phone No.</span>*@
+                                                <label>@Model.PhoneNumber2</label>
                                             </div>
                                         </div>
                                     </div>
@@ -348,8 +364,9 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-                                            <input asp-for="AddressLine1" type="text" maxlength="40" id="ContentPlaceHolder1_txtCurrentAddress1" class="form-control">
-                                            <span asp-validation-for="AddressLine1" style="color:Red;display:block;"></span>
+                                            @*<input asp-for="AddressLine1" type="text" maxlength="40" id="ContentPlaceHolder1_txtCurrentAddress1" class="form-control">
+        <span asp-validation-for="AddressLine1" style="color:Red;display:block;"></span>*@
+                                            <label>@Model.AddressLine1</label>
                                         </div>
                                     </div>
                                 </div>
@@ -360,8 +377,8 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-                                            <input asp-for="AddressLine2" type="text" maxlength="40" id="ContentPlaceHolder1_txtCurrentAddress2" class="form-control">
-                                           
+                                            @*<input asp-for="AddressLine2" type="text" maxlength="40" id="ContentPlaceHolder1_txtCurrentAddress2" class="form-control">*@
+                                            <label>@Model.AddressLine2</label>
                                         </div>
                                     </div>
                                 </div>
@@ -372,8 +389,8 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-                                            <input asp-for="AddressLine3" type="text" maxlength="40" id="ContentPlaceHolder1_txtCurrentAddress3" class="form-control">
-                                           
+                                            @*<input asp-for="AddressLine3" type="text" maxlength="40" id="ContentPlaceHolder1_txtCurrentAddress3" class="form-control">*@
+                                            <label>@Model.AddressLine3</label>
                                         </div>
                                     </div>
                                 </div>
@@ -384,49 +401,50 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-                                            <select asp-for="State" id="ContentPlaceHolder1_ddlStateCurrent" class="form-control">
-                                                <option value="">----Select----</option>
-                                                <option value="35">ANDAMAN &amp; NICOBAR ISLANDS</option>
-                                                <option value="28">ANDHRA PRADESH</option>
-                                                <option value="12">ARUNACHAL PRADESH</option>
-                                                <option value="18">ASSAM</option>
-                                                <option value="10">BIHAR</option>
-                                                <option value="4">CHANDIGARH</option>
-                                                <option value="22">CHATTISGARH</option>
-                                                <option value="22">CHHATTISGARH</option>
-                                                <option value="26">DADRA &amp; NAGAR HAVELI</option>
-                                                <option value="25">DAMAN &amp; DIU</option>
-                                                <option value="7">DELHI</option>
-                                                <option value="30">GOA</option>
-                                                <option value="24">GUJARAT</option>
-                                                <option value="6">HARYANA</option>
-                                                <option value="2">HIMACHAL PRADESH</option>
-                                                <option value="1">JAMMU &amp; KASHMIR</option>
-                                                <option value="20">JHARKHAND</option>
-                                                <option value="29">KARNATAKA</option>
-                                                <option value="32">KERALA</option>
-                                                <option value="31">LAKSHADWEEP</option>
-                                                <option value="23">MADHYA PRADESH</option>
-                                                <option value="27">MAHARASHTRA</option>
-                                                <option value="14">MANIPUR</option>
-                                                <option value="17">MEGHALAYA</option>
-                                                <option value="15">MIZORAM</option>
-                                                <option value="13">NAGALAND</option>
-                                                <option value="21">ORISSA</option>
-                                                <option value="34">PONDICHERRY</option>
-                                                <option value="3">PUNJAB</option>
-                                                <option value="8">RAJASTHAN</option>
-                                                <option value="11">SIKKIM</option>
-                                                <option value="33">TAMIL NADU</option>
-                                                <option value="36">TELANGANA</option>
-                                                <option value="16">TRIPURA</option>
-                                                <option value="9">UTTAR PRADESH</option>
-                                                <option value="5">UTTARANCHAL</option>
-                                                <option value="19">WEST BENGAL</option>
+                                            <label id="StateNode"></label>
+                                            @*<select asp-for="State" id="ContentPlaceHolder1_ddlStateCurrent" class="form-control">
+            <option value="">----Select----</option>
+            <option value="35">ANDAMAN &amp; NICOBAR ISLANDS</option>
+            <option value="28">ANDHRA PRADESH</option>
+            <option value="12">ARUNACHAL PRADESH</option>
+            <option value="18">ASSAM</option>
+            <option value="10">BIHAR</option>
+            <option value="4">CHANDIGARH</option>
+            <option value="22">CHATTISGARH</option>
+            <option value="22">CHHATTISGARH</option>
+            <option value="26">DADRA &amp; NAGAR HAVELI</option>
+            <option value="25">DAMAN &amp; DIU</option>
+            <option value="7">DELHI</option>
+            <option value="30">GOA</option>
+            <option value="24">GUJARAT</option>
+            <option value="6">HARYANA</option>
+            <option value="2">HIMACHAL PRADESH</option>
+            <option value="1">JAMMU &amp; KASHMIR</option>
+            <option value="20">JHARKHAND</option>
+            <option value="29">KARNATAKA</option>
+            <option value="32">KERALA</option>
+            <option value="31">LAKSHADWEEP</option>
+            <option value="23">MADHYA PRADESH</option>
+            <option value="27">MAHARASHTRA</option>
+            <option value="14">MANIPUR</option>
+            <option value="17">MEGHALAYA</option>
+            <option value="15">MIZORAM</option>
+            <option value="13">NAGALAND</option>
+            <option value="21">ORISSA</option>
+            <option value="34">PONDICHERRY</option>
+            <option value="3">PUNJAB</option>
+            <option value="8">RAJASTHAN</option>
+            <option value="11">SIKKIM</option>
+            <option value="33">TAMIL NADU</option>
+            <option value="36">TELANGANA</option>
+            <option value="16">TRIPURA</option>
+            <option value="9">UTTAR PRADESH</option>
+            <option value="5">UTTARANCHAL</option>
+            <option value="19">WEST BENGAL</option>
 
-                                            </select>
-
-                                            <span asp-validation-for="State" style="color:Red;display:block;"></span>
+        </select>*@
+                                            @*<label>@Model.State</label>
+                                            <span asp-validation-for="State" style="color:Red;display:block;"></span>*@
                                         </div>
                                     </div>
                                 </div>
@@ -437,9 +455,10 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-                                            <input asp-for="City" type="text" maxlength="30" id="ContentPlaceHolder1_txtCityCurrent" class="form-control">
+                                            @*<input asp-for="City" type="text" maxlength="30" id="ContentPlaceHolder1_txtCityCurrent" class="form-control">
 
-                                            <span asp-validation-for="City" style="color:Red;display:block;"></span>
+        <span asp-validation-for="City" style="color:Red;display:block;"></span>*@
+                                            <label>@Model.City</label>
                                         </div>
                                     </div>
                                 </div>
@@ -450,9 +469,10 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-                                            <input asp-for="Pincode" type="text" maxlength="6" id="ContentPlaceHolder1_txtPinCodeCurrent" class="form-control noTxtInput">
+                                            @*<input asp-for="Pincode" type="text" maxlength="6" id="ContentPlaceHolder1_txtPinCodeCurrent" class="form-control noTxtInput">
 
-                                            <span asp-validation-for="Pincode" style="color:Red;display:block;"></span>
+        <span asp-validation-for="Pincode" style="color:Red;display:block;"></span>*@
+                                            <label>@Model.Pincode</label>
                                         </div>
                                     </div>
                                 </div>
@@ -466,18 +486,20 @@
                                     <div class="col-md-5">
                                         <div class="input-control text">
 
-                                            <select asp-for="Category" class="form-control">
-                                                <option value="">----Select----</option>
-                                                <option value="1">Perminant Address</option>
-                                                <option value="2">Residence Address</option>
-                                                <option value="3">Office address</option>
-                                                <option value="4">Not Categorized</option>
+                                            @*<select asp-for="Category" class="form-control" readonly style="pointer-events: none;">
+                                                   <option value="">----Select----</option>
+                                                   <option value="1">Perminant Address</option>
+                                                   <option value="2">Residence Address</option>
+                                                   <option value="3">Office address</option>
+                                                   <option value="4">Not Categorized</option>
                                             </select>
-                                            <span asp-validation-for="Category" style="color:Red;display:block;"></span>
+                                            <span asp-validation-for="Category" style="color:Red;display:block;"></span>*@
+                                            <label id="CategoryNode"></label>
                                         </div>
                                     </div>
                                     <div style="height: 5px;"></div>
                                 </div>
+                                <div style="height: 5px;"></div>
                                 <div class="row tab">
                                     <div class="col-md-5">
                                         <div class="full">
@@ -486,18 +508,19 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-
-                                            <select asp-for="Residence" class="form-control">
+                                            <label id="ResidenceNode"></label>
+                                            @*<select asp-for="Residence" class="form-control">
                                                 <option value="">----Select----</option>
                                                 <option value="1">Owned</option>
                                                 <option value="2">Rented</option>
 
                                             </select>
-                                            <span asp-validation-for="Residence" style="color:Red;display:block;"></span>
+                                            <span asp-validation-for="Residence" style="color:Red;display:block;"></span>*@
                                         </div>
                                     </div>
                                     <div style="height: 5px;"></div>
                                 </div>
+                                <div style="height: 5px;"></div>
                                 <div class="row tab">
                                     <div class="col-md-5">
                                         <div class="full">
@@ -506,8 +529,8 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-
-                                            <select asp-for="Qualification" class="form-control">
+                                            <label id="QualificationNode"></label>
+                                            @*<select asp-for="Qualification" class="form-control">
                                                 <option value="">----Select----</option>
                                                 <option value="1">BA</option>
                                                 <option value="2">B.Arch</option>
@@ -551,39 +574,292 @@
                                                 <option value="40">OTHERS</option>
                                                 <option value="41">PG DIPLOMA</option>
                                                 <option value="42">PHD</option>
-                                            </select>
-                                            <span asp-validation-for="Qualification" style="color:Red;display:block;"></span>
+                                            </select>*@
+                                            @*<span asp-validation-for="Qualification" style="color:Red;display:block;"></span>*@
                                         </div>
                                     </div>
                                     <div style="height: 5px;"></div>
                                 </div>
                             </div>
 
-                            @*<div id="accountDv">
-
-                                <br />
-                                <div class="row tab">
-                                    <div class="col-md-12">
-                                        <center>
-                                            <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="SubmitButton" class="btn" style="background-color: #343a40; color:white;">&nbsp
-                                            <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@Model.LeadID">Cancel</a>
-                                        </center>
-                                    </div>
-                                </div>
-                            </div>*@
+                           
                         </div>
 
                     </form>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    //document.getElementById("SubmitButton").onclick = function () {
-    //    this.disabled = true;
-    //}
+    $(document).ready(function () {
+        var category = document.getElementById("CategoryNode");
+        if (@Model.Category== 1) {
+            category.textContent = "Perminant Address";
+        } else if (@Model.Category== 2) {
+            category.textContent = "Residence Address";
+        }
+        else if (@Model.Category== 3) {
+            category.textContent = "Office Address";
+        }
+        else if (@Model.Category== 4) {
+            category.textContent = "Not Changed Address";
+        }
+    });
 
+    $(document).ready(function () {
+        var residence = document.getElementById("ResidenceNode");
+        if (@Model.Residence== 1) {
+            residence.textContent = "Owned";
+        } else if (@Model.Residence== 2) {
+            residence.textContent = "Rented";
+        }
+    });
+    $(document).ready(function () {
+        var qualification = document.getElementById("QualificationNode");
+        if (@Model.Qualification== 1) {
+            qualification.textContent = "BA";
+        } else if (@Model.Qualification== 2) {
+            qualification.textContent = "B.Arch";
+        }
+        else if (@Model.Qualification== 3) {
+            qualification.textContent = "B.Com";
+        }
+        else if (@Model.Qualification== 4) {
+            qualification.textContent = "B.Ed";
+        }
+        else if (@Model.Qualification== 5) {
+            qualification.textContent = "B.Pharma";
+        }
+        else if (@Model.Qualification== 6) {
+            qualification.textContent = "BSC";
+        }
+        else if (@Model.Qualification== 7) {
+            qualification.textContent = "B.Tech/BE";
+        }
+        else if (@Model.Qualification== 8) {
+            qualification.textContent = "BAMS";
+        }
+        else if (@Model.Qualification== 9) {
+            qualification.textContent = "BBA";
+        }
+        else if (@Model.Qualification== 10) {
+            qualification.textContent = "BCA";
+        }
+        else if (@Model.Qualification== 11) {
+            qualification.textContent = "BDS";
+        }
+        else if (@Model.Qualification== 12) {
+            qualification.textContent = "BFA";
+        }
+        else if (@Model.Qualification== 13) {
+            qualification.textContent = "BHM";
+        }
+        else if (@Model.Qualification== 14) {
+            qualification.textContent = "BHMS";
+        }
+        else if (@Model.Qualification== 15) {
+            qualification.textContent = "BPT";
+        }
+        else if (@Model.Qualification== 16) {
+            qualification.textContent = "BTA";
+        }
+        else if (@Model.Qualification== 17) {
+            qualification.textContent = "CS Diploma";
+        }
+        else if (@Model.Qualification== 18) {
+            qualification.textContent = "HSC";
+        }
+        else if (@Model.Qualification== 19) {
+            qualification.textContent = "ICWA";
+        }
+        else if (@Model.Qualification== 20) {
+            qualification.textContent = "Integrated PG";
+        }
+        else if (@Model.Qualification== 21) {
+            qualification.textContent = "LLB";
+        }
+        else if (@Model.Qualification== 22) {
+            qualification.textContent = "LLM";
+        }
+        else if (@Model.Qualification== 23) {
+            qualification.textContent = "M.Phil";
+        }
+        else if (@Model.Qualification== 24) {
+            qualification.textContent = "MA";
+        }
+
+        else if (@Model.Qualification== 25) {
+            qualification.textContent = "M.Arch";
+        }
+        else if (@Model.Qualification== 26) {
+            qualification.textContent = "M.Com";
+        }
+        else if (@Model.Qualification== 27) {
+            qualification.textContent = "M.Ed";
+        }
+        else if (@Model.Qualification== 28) {
+            qualification.textContent = "M.Pharma";
+        }
+        else if (@Model.Qualification== 29) {
+            qualification.textContent = "MSC";
+        }else if (@Model.Qualification== 30) {
+            qualification.textContent = "M.Tech";
+        }
+        else if (@Model.Qualification== 31) {
+            qualification.textContent = "MBA";
+        }
+        else if (@Model.Qualification==32) {
+            qualification.textContent = "MBBS";
+        }
+        else if (@Model.Qualification== 33) {
+            qualification.textContent = "MCA";
+        }
+        else if (@Model.Qualification== 34) {
+            qualification.textContent = "MCM";
+        }
+
+        else if (@Model.Qualification== 35) {
+            qualification.textContent = "MD";
+        }
+        else if (@Model.Qualification== 36) {
+            qualification.textContent = "ME";
+        }
+        else if (@Model.Qualification== 37) {
+            qualification.textContent = "MPM";
+        }
+        else if (@Model.Qualification== 38) {
+            qualification.textContent = "MS";
+        }
+        else if (@Model.Qualification== 39) {
+            qualification.textContent = "MVSC";
+        }
+        else if (@Model.Qualification== 40) {
+            qualification.textContent = "OTHERS";
+        }
+        else if (@Model.Qualification== 41) {
+            qualification.textContent = "PG Diploma";
+        }
+        else if (@Model.Qualification== 42) {
+            qualification.textContent = "PHD";
+        }
+
+    });
+
+    $(document).ready(function () {
+        var state = document.getElementById("StateNode");
+        if (@Model.State== 1) {
+            state.textContent = "JAMMU & amp; KASHMIR";
+        } else if (@Model.State== 2) {
+            state.textContent = "HIMACHAL PRADESH";
+        }
+        else if (@Model.State== 3) {
+            state.textContent = "PANJAB";
+        }
+        else if (@Model.State== 4) {
+            state.textContent = "CHANDIGARH";
+        }
+        else if (@Model.State== 5) {
+            state.textContent = "UTTARANCHAL";
+        }
+        else if (@Model.State== 6) {
+            state.textContent = "HARYANA";
+        }
+        else if (@Model.State== 7) {
+            state.textContent = "DELHI";
+        }
+        else if (@Model.State== 8) {
+            state.textContent = "RAJASTHAN";
+        }
+        else if (@Model.State== 9) {
+            state.textContent = "UTTAR PRADESH";
+        }
+        else if (@Model.State== 10) {
+            state.textContent = "BHIHAR";
+        }
+        else if (@Model.State== 11) {
+            state.textContent = "SIKKIM";
+        }
+        else if (@Model.State== 12) {
+            state.textContent = "ARUNACHAL PRADESH";
+        }
+        else if (@Model.State== 13) {
+            state.textContent = "NAGALAND";
+        }
+        else if (@Model.State== 14) {
+            state.textContent = "MANIPUR";
+        }
+        else if (@Model.State== 15) {
+            state.textContent = "MIJORAM";
+        }
+        else if (@Model.State== 16) {
+            state.textContent = "TRIPURA";
+        }
+        else if (@Model.State== 17) {
+            state.textContent = "MEGHALAYA";
+        }
+        else if (@Model.State== 18) {
+            state.textContent = "ASSAM";
+        }
+        else if (@Model.State== 19) {
+            state.textContent = "WEST BENGAL";
+        }
+        else if (@Model.State== 20) {
+            state.textContent = "JHARKHAND";
+        }
+        else if (@Model.State== 21) {
+            state.textContent = "ORISSA";
+        }
+        else if (@Model.State== 22) {
+            state.textContent = "CHATTISGARH";
+        }
+        else if (@Model.State== 23) {
+            state.textContent = "MADYA PRADESH";
+        }
+        else if (@Model.State== 24) {
+            state.textContent = "GUJARAT";
+        }
+
+        else if (@Model.State== 25) {
+            state.textContent = "DAMAN & amp ; DIU";
+        }
+        else if (@Model.State== 26) {
+            state.textContent = "DADRA & amp ; NAGAR HAVELI";
+        }
+        else if (@Model.State== 27) {
+            state.textContent = "MAHARASHTRA";
+        }
+        else if (@Model.State== 28) {
+            state.textContent = "ANDHRA PRADESH";
+        }
+        else if (@Model.State== 29) {
+            state.textContent = "KARNATAKA";
+        }else if (@Model.State== 30) {
+            state.textContent = "GOA";
+        }
+        else if (@Model.State== 31) {
+            state.textContent = "LAKSHADWEEP";
+        }
+        else if (@Model.State==32) {
+            state.textContent = "KERALA";
+        }
+        else if (@Model.State== 33) {
+            state.textContent = "TAMILNADU";
+        }
+        else if (@Model.State== 34) {
+            state.textContent = "PONDI CHERRY";
+        }
+
+        else if (@Model.State== 35) {
+            state.textContent = "ANDAMAN & amp; NICOBAR ISLANDS";
+        }
+        else if (@Model.State== 36) {
+            state.textContent = "TELANGANA";
+        }
+        
+        
+    });
 </script>
 

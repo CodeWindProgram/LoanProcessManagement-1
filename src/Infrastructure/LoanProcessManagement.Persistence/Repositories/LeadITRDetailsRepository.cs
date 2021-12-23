@@ -37,6 +37,8 @@ namespace LoanProcessManagement.Persistence.Repositories
         {
             var details =  _dbContext.LpmLeadApplicantsDetails.Where(x=>x.lead_Id == lead_id && x.ApplicantType == ApplicantType).FirstOrDefault();
             
+            var data = _dbContext.LpmLeadITRDetails.Where(x => x.lead_Id == (lead_id).ToString() && x.ApplicantType == ApplicantType).FirstOrDefault();
+            
             var lead = await _dbContext.LpmLeadMasters.Include(x => x.Product).Include(x => x.LeadStatus).Include(z => z.Branch)
                 .Where(x => x.Id == lead_id).FirstOrDefaultAsync();
 
@@ -53,6 +55,10 @@ namespace LoanProcessManagement.Persistence.Repositories
                 response.Consent = true;
                 response.PanCardNo = details.PanCardNo;
                 response.UserName = details.PanCardNo;
+
+                if (data!=null) {
+                    response.IsSuccess = data.IsSuccess;
+                }
                 response.Message = "Data Fetched";
                 response.Succeeded = true;
                 return response;
@@ -90,6 +96,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 applicant.LastModifiedDate = DateTime.Now;
                 applicant.LastModifiedBy = request.LastModifiedBy;
                 applicant.CreatedBy = request.CreatedBy;
+                applicant.IsSuccess = true;
 
                 await _dbContext.SaveChangesAsync();
 

@@ -198,7 +198,8 @@ namespace LoanProcessManagement.Application.Profiles
 
 
             CreateMap<LeadITRDetailsCommand, LpmLeadITRDetails>().ReverseMap();
-            CreateMap<AddCibilDetailsCommand, LpmCibilCheckDetails>().ReverseMap();
+            //CreateMap<AddCibilDetailsCommand, CibilCheckDetailsModel>().ReverseMap();
+            CreateMap<CibilCheckDetailsModel, AddCibilDetailsDto>().ReverseMap();
         }
     }
 }

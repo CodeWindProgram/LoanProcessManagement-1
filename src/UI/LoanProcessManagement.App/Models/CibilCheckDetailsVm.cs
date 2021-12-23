@@ -24,8 +24,8 @@ namespace LoanProcessManagement.App.Models
         public string State { get; set; }
         public string Gender { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateOfBirth { get; set; }
         public string CustomerEmail { get; set; }
         public string CustomerPhone { get; set; }
