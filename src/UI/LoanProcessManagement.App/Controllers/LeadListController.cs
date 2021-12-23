@@ -117,23 +117,50 @@ namespace LoanProcessManagement.App.Controllers
             ModifyLeadVM lead = null;
             if (leadResponse.Data.QueryStatus == 'R')
             {
-                lead = new ModifyLeadVM()
+                if (leadResponse.Data.HoQueryStatus == 'R')
                 {
-                    lead_Id = leadResponse.Data.lead_Id,
-                    login_id = User.Claims.FirstOrDefault(c => c.Type == "LoginId").Value,
-                    UserRoleId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value),
-                    LgId = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value,
-                    CurrentStatus = leadResponse.Data.CurrentStatus,
-                    FormNo = leadResponse.Data.FormNo,
-                    LoanProductID = leadResponse.Data.LoanProductID,
-                    InsuranceProductID = leadResponse.Data.InsuranceProductID,
-                    loanAmount = leadResponse.Data.LoanAmount,
-                    insuranceAmount = leadResponse.Data.InsuranceAmount,
-                    ResidentialStatus = leadResponse.Data.ResidentialStatus,
-                    DateOfAction = DateTime.Today,
-                    QueryStatus = leadResponse.Data.QueryStatus,
-                    
-                };
+                    lead = new ModifyLeadVM()
+                    {
+                        lead_Id = leadResponse.Data.lead_Id,
+                        login_id = User.Claims.FirstOrDefault(c => c.Type == "LoginId").Value,
+                        UserRoleId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value),
+                        LgId = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value,
+                        CurrentStatus = leadResponse.Data.CurrentStatus,
+                        FormNo = leadResponse.Data.FormNo,
+                        LoanProductID = leadResponse.Data.LoanProductID,
+                        InsuranceProductID = leadResponse.Data.InsuranceProductID,
+                        loanAmount = leadResponse.Data.LoanAmount,
+                        insuranceAmount = leadResponse.Data.InsuranceAmount,
+                        ResidentialStatus = leadResponse.Data.ResidentialStatus,
+                        DateOfAction = DateTime.Today,
+                        QueryStatus = leadResponse.Data.QueryStatus,
+                        HoQueryStatus = leadResponse.Data.HoQueryStatus
+                    };
+
+                }
+                else
+                {
+                    lead = new ModifyLeadVM()
+                    {
+                        lead_Id = leadResponse.Data.lead_Id,
+                        login_id = User.Claims.FirstOrDefault(c => c.Type == "LoginId").Value,
+                        UserRoleId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value),
+                        LgId = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value,
+                        CurrentStatus = leadResponse.Data.CurrentStatus,
+                        FormNo = leadResponse.Data.FormNo,
+                        LoanProductID = leadResponse.Data.LoanProductID,
+                        InsuranceProductID = leadResponse.Data.InsuranceProductID,
+                        loanAmount = leadResponse.Data.LoanAmount,
+                        insuranceAmount = leadResponse.Data.InsuranceAmount,
+                        ResidentialStatus = leadResponse.Data.ResidentialStatus,
+                        DateOfAction = DateTime.Today,
+                        QueryStatus = leadResponse.Data.QueryStatus,
+                        HoQueryStatus = leadResponse.Data.HoQueryStatus,
+                        HoSanction_query_comment = leadResponse.Data.HoSanction_query_comment,
+                        HoSanction_query_commentResponse = leadResponse.Data.HoSanction_query_commentResponse
+                    };
+                }
+
 
             }
             else
@@ -162,7 +189,11 @@ namespace LoanProcessManagement.App.Controllers
                     IPSResponseType2 = leadResponse.Data.IPSResponseType2,
                     IPSResponseType3 = leadResponse.Data.IPSResponseType3,
                     IPSResponseType4 = leadResponse.Data.IPSResponseType4,
-                    IPSResponseType5 = leadResponse.Data.IPSResponseType5
+                    IPSResponseType5 = leadResponse.Data.IPSResponseType5,
+                    HoQueryStatus=leadResponse.Data.HoQueryStatus,
+                    HoSanction_query_comment=leadResponse.Data.HoSanction_query_comment,
+                    HoSanction_query_commentResponse=leadResponse.Data.HoSanction_query_commentResponse
+
 
                 };
 
@@ -212,22 +243,49 @@ namespace LoanProcessManagement.App.Controllers
             var leadResponse = await _leadListService.GetLeadByLeadId(lead.lead_Id);
             if(leadResponse.Data.QueryStatus == 'R')
             {
-                currentLead = new ModifyLeadVM()
+                if (leadResponse.Data.HoQueryStatus == 'R')
                 {
-                    lead_Id = leadResponse.Data.lead_Id,
-                    login_id = User.Claims.FirstOrDefault(c => c.Type == "LoginId").Value,
-                    UserRoleId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value),
-                    LgId = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value,
-                    CurrentStatus = leadResponse.Data.CurrentStatus,
-                    FormNo = leadResponse.Data.FormNo,
-                    LoanProductID = leadResponse.Data.LoanProductID,
-                    InsuranceProductID = leadResponse.Data.InsuranceProductID,
-                    loanAmount = leadResponse.Data.LoanAmount,
-                    insuranceAmount = leadResponse.Data.InsuranceAmount,
-                    ResidentialStatus = leadResponse.Data.ResidentialStatus,
-                    DateOfAction = DateTime.Today,
-                    QueryStatus = leadResponse.Data.QueryStatus,
-                };
+                    currentLead = new ModifyLeadVM()
+                    {
+                        lead_Id = leadResponse.Data.lead_Id,
+                        login_id = User.Claims.FirstOrDefault(c => c.Type == "LoginId").Value,
+                        UserRoleId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value),
+                        LgId = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value,
+                        CurrentStatus = leadResponse.Data.CurrentStatus,
+                        FormNo = leadResponse.Data.FormNo,
+                        LoanProductID = leadResponse.Data.LoanProductID,
+                        InsuranceProductID = leadResponse.Data.InsuranceProductID,
+                        loanAmount = leadResponse.Data.LoanAmount,
+                        insuranceAmount = leadResponse.Data.InsuranceAmount,
+                        ResidentialStatus = leadResponse.Data.ResidentialStatus,
+                        DateOfAction = DateTime.Today,
+                        QueryStatus = leadResponse.Data.QueryStatus,
+                        HoQueryStatus = leadResponse.Data.HoQueryStatus
+                    };
+
+                }
+                else
+                {
+                    currentLead = new ModifyLeadVM()
+                    {
+                        lead_Id = leadResponse.Data.lead_Id,
+                        login_id = User.Claims.FirstOrDefault(c => c.Type == "LoginId").Value,
+                        UserRoleId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value),
+                        LgId = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value,
+                        CurrentStatus = leadResponse.Data.CurrentStatus,
+                        FormNo = leadResponse.Data.FormNo,
+                        LoanProductID = leadResponse.Data.LoanProductID,
+                        InsuranceProductID = leadResponse.Data.InsuranceProductID,
+                        loanAmount = leadResponse.Data.LoanAmount,
+                        insuranceAmount = leadResponse.Data.InsuranceAmount,
+                        ResidentialStatus = leadResponse.Data.ResidentialStatus,
+                        DateOfAction = DateTime.Today,
+                        QueryStatus = leadResponse.Data.QueryStatus,
+                        HoQueryStatus = leadResponse.Data.HoQueryStatus,
+                        HoSanction_query_comment = leadResponse.Data.HoSanction_query_comment,
+                        HoSanction_query_commentResponse = leadResponse.Data.HoSanction_query_commentResponse
+                    };
+                }
 
 
             }
@@ -257,7 +315,10 @@ namespace LoanProcessManagement.App.Controllers
                     IPSResponseType2 = leadResponse.Data.IPSResponseType2,
                     IPSResponseType3 = leadResponse.Data.IPSResponseType3,
                     IPSResponseType4 = leadResponse.Data.IPSResponseType4,
-                    IPSResponseType5 = leadResponse.Data.IPSResponseType5
+                    IPSResponseType5 = leadResponse.Data.IPSResponseType5,
+                    HoQueryStatus = leadResponse.Data.HoQueryStatus,
+                    HoSanction_query_comment = leadResponse.Data.HoSanction_query_comment,
+                    HoSanction_query_commentResponse = leadResponse.Data.HoSanction_query_commentResponse
 
                 };
 

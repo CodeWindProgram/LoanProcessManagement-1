@@ -19,6 +19,9 @@ namespace LoanProcessManagement.App.Models
         public char QueryStatus { get; set; }
         [HiddenInput]
         public string LgId { get; set; }
+        [HiddenInput]
+        public char HoQueryStatus { get; set; }
+
 
         public string FormNo { get; set; }
         [Required(ErrorMessage = "Residential Status is Required")]
@@ -60,6 +63,8 @@ namespace LoanProcessManagement.App.Models
         public long RejectLeadReasonID { get; set; }
 
         public string RejectedLeadComment { get; set; }
+        public string HoSanction_query_comment { get; set; }
+        public string HoSanction_query_commentResponse { get; set; }
 
 
 

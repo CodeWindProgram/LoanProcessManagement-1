@@ -62,9 +62,17 @@ namespace LoanProcessManagement.Persistence.Repositories
 
             var leadQuery = await _dbContext.LpmLeadQuerys.Include(x => x.lead).Where(x => x.lead_Id == user.Id)
                 .OrderByDescending(x => x.Id).FirstOrDefaultAsync();
+
+            var hoLeadQuery = await _dbContext.lpmLeadHoSanctionQueries.Include(x => x.lead)
+                        .Where(x => x.lead_Id == user.Id).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
+
             if (leadQuery == null)
             {
                 leadQuery = new LpmLeadQuery();
+            }
+            if (hoLeadQuery == null)
+            {
+                hoLeadQuery = new LpmLeadHoSanctionQuery();
             }
 
             if (userProcessCycle != null)
@@ -97,7 +105,10 @@ namespace LoanProcessManagement.Persistence.Repositories
                     IPSResponseType3=leadQuery.IPSResponseType3,
                     IPSResponseType4=leadQuery.IPSResponseType4,
                     IPSResponseType5=leadQuery.IPSResponseType5,
-                    Id=userProcessCycle.lead.Id
+                    Id=userProcessCycle.lead.Id,
+                    HoQueryStatus=hoLeadQuery.Query_Status,
+                    HoSanction_query_comment=hoLeadQuery.HoSanction_query_comment,
+                    HoSanction_query_commentResponse=hoLeadQuery.HoSanction_query_commentResponse
                     
 
                 };
@@ -128,9 +139,12 @@ namespace LoanProcessManagement.Persistence.Repositories
                     IPSResponseType3 = leadQuery.IPSResponseType3,
                     IPSResponseType4 = leadQuery.IPSResponseType4,
                     IPSResponseType5 = leadQuery.IPSResponseType5,
-                    Id=user.Id
+                    Id=user.Id,
+                    HoQueryStatus = hoLeadQuery.Query_Status,
+                    HoSanction_query_comment = hoLeadQuery.HoSanction_query_comment,
+                    HoSanction_query_commentResponse = hoLeadQuery.HoSanction_query_commentResponse
 
-                    };
+                };
 
                 }
        
@@ -259,6 +273,52 @@ namespace LoanProcessManagement.Persistence.Repositories
                 }
             }
 
+            if (user.CurrentStatus == 7)
+            {
+                if (request.UserRoleId == 2 || request.UserRoleId == 3)
+                {
+                    var hoLeadQuery = await _dbContext.lpmLeadHoSanctionQueries.Include(x => x.lead)
+                        .Where(x => x.lead_Id == user.Id).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
+                    if (hoLeadQuery != null && request.UserRoleId == 3 && hoLeadQuery.Query_Status == 'Q' && request.QueryStatus == 'R')
+                    {
+                        hoLeadQuery.Query_Status = request.HoQueryStatus;
+                        hoLeadQuery.HoSanction_query_commentResponse = request.HoSanction_query_commentResponse;
+                        hoLeadQuery.LastModifiedDate = DateTime.Today;
+                        hoLeadQuery.LastModifiedBy = request.LgId;
+                    }
+                    else
+                    {
+                        if ((hoLeadQuery == null) || request.UserRoleId == 2 && hoLeadQuery.Query_Status == 'R' 
+                            && request.CurrentStatus == user.CurrentStatus)
+                        {
+                            var hoLeadQueryEntry = new LpmLeadHoSanctionQuery()
+                            {
+                                lead_Id = user.Id,
+                                Query_Status = request.HoQueryStatus,
+                                HoSanction_query_comment = request.HoSanction_query_comment,
+                                CreatedBy=request.LgId,
+                                CreatedDate=DateTime.Today
+
+                            };
+                            await _dbContext.lpmLeadHoSanctionQueries.AddAsync(hoLeadQueryEntry);
+
+                        }
+
+
+                    }
+
+
+                }
+                else
+                {
+                    response.Succeeded = false;
+                    response.Message = "Only ho and branch can move file to next stage.";
+                    response.Lead_Id = request.lead_Id;
+                    return response;
+                }
+
+            }
+
             if (userProcessCycle!=null)
             {
                 userProcessCycle.InsuranceProductID = request.InsuranceProductID;
@@ -283,9 +343,17 @@ namespace LoanProcessManagement.Persistence.Repositories
             {
                 var leadQ= await _dbContext.LpmLeadQuerys.Include(x => x.lead).
                     Where(x => x.lead_Id == user.Id).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
+
+                var hoLeadQ = await _dbContext.lpmLeadHoSanctionQueries.Include(x => x.lead)
+                 .Where(x => x.lead_Id == user.Id).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
+
                 if (leadQ == null)
                 {
                     leadQ = new LpmLeadQuery();
+                }
+                if (hoLeadQ == null)
+                {
+                    hoLeadQ = new LpmLeadHoSanctionQuery();
                 }
                 var ThirdPartyStatus = true;
                 if (request.CurrentStatus == 4 && (request.UserRoleId != 2 || leadQ.Query_Status=='Q'))
@@ -333,6 +401,30 @@ namespace LoanProcessManagement.Persistence.Repositories
                 if (request.CurrentStatus == 7 && request.UserRoleId != 3)
                 {      
                     response.Message = "Application can be moved to HO (Sanction) only by Branch .";
+                    response.Succeeded = false;
+                    response.Lead_Id = request.lead_Id;
+                    return response;
+
+                }
+                if (request.CurrentStatus == 7 && request.UserRoleId != 3)
+                {
+                    response.Message = "Application can be moved to HO (Sanction) only by Branch .";
+                    response.Succeeded = false;
+                    response.Lead_Id = request.lead_Id;
+                    return response;
+
+                }
+                if (request.CurrentStatus == 9 && hoLeadQ.Query_Status=='Q')
+                {
+                    response.Message = "Please wait for the branch to resolve the query .";
+                    response.Succeeded = false;
+                    response.Lead_Id = request.lead_Id;
+                    return response;
+
+                }
+                if (request.CurrentStatus == 10 && hoLeadQ.Query_Status == 'Q')
+                {
+                    response.Message = "Please wait for the branch to resolve the query .";
                     response.Succeeded = false;
                     response.Lead_Id = request.lead_Id;
                     return response;

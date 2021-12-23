@@ -34,5 +34,9 @@ namespace LoanProcessManagement.Application.Features.LeadList.Commands.UpdateLea
         public string IPSResponseType3 { get; set; }
         public string IPSResponseType4 { get; set; }
         public string IPSResponseType5 { get; set; }
+        public char HoQueryStatus { get; set; }
+        public string HoSanction_query_comment { get; set; }
+        public string HoSanction_query_commentResponse { get; set; }
+
     }
 }

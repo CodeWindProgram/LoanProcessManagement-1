@@ -158,19 +158,6 @@
                     <label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label>
                     </div>
                 </div>
-
-                @*@if (ViewBag.isSuccess == true)
-                {
-                    <div class="alert alert-success" role="alert">
-                        @ViewBag.Message
-                    </div>
-                }
-                else if (ViewBag.isSuccess == false)
-                {
-                    <div class="alert alert-danger" role="alert">
-                        @ViewBag.Message
-                    </div>
-                }*@
                 <form method="post" action="/leadlist/LeadModification">
 
 
@@ -179,9 +166,7 @@
                     <input type="hidden" asp-for="UserRoleId" id="userRole" />
                     <input type="hidden" asp-for="QueryStatus" id="QueryStatusHidden" />
                     <input type="hidden" asp-for="LgId" />
-
-
-
+                    <input type="hidden" asp-for="HoQueryStatus" id="HoQueryStatusHidden" />
 
                     <div class="initial1">
 
@@ -222,19 +207,68 @@
                         <br /><br />
                     </div>
 
-                    <div class="initial1" id="hoSanctionCommentDiv" style="display:none">
-                        <div class="group1">
-                            <label>HO Sanction Query Comment</label>
+                    <div class="hoQueryDiv" style="display:none">
+                        <div class="initial1" id="holeadQueryDiv">
+                            <div class="group1"><label for="holeadQuery" id="hoLeadQueryText">Raise Query</label></div>
+                            <div class="group2">
+                                <div class="" id="divToggleSwitch">
+                                    <label class="switch">
+                                        <input type="checkbox" id="chkHoQuery">
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <label id="hoLblSwitchName" class="label label-default" style="display: none;">Query Raised</label>
+
+                                </div>
+                            </div>
+                            <br /><br />
                         </div>
-                        <div class="group2">
-                            <div class="" style="">
-                                <input type="text" class="form-control">
+
+                        <div class="initial1" id="hoSanctionCommentDiv">
+                            <div class="group1">
+                                <label>HO Sanction Query Comment</label>
+                            </div>
+                            <div class="group2">
+                                <div class="" style="">
+                                    <input type="text" class="form-control" id="hoQueryInput" asp-for="HoSanction_query_comment">
+
+                                </div>
+                            </div>
+                            <br /><br />
+
+                        </div>
+
+                        <div id="branchResponse" style="display:none">
+                            @{
+                                var displayBranchResponse = "display:none";
+                                if (Model.HoSanction_query_comment != null)
+                                {
+                                    displayBranchResponse = "display:block";
+                                }
+                            }
+                            <div class="initial1" style=@displayBranchResponse>
+                                <div class="group1">
+                                    <label>Branch Response :</label>
+                                </div>
+                                <div class="group2">
+                                    <div class="" style="">
+                                        <select id="branchComment" class="form-control" asp-for="HoSanction_query_commentResponse">
+                                            <option value="" selected="selected">select</option>
+                                            <option value="Query resolved">Query resolved</option>
+                                            <option value="Query raised was not as per credit policy">Query raised was not as per credit policy</option>
+                                            <option value="Query invalid - document already submitted">Query invalid - document already submitted</option>
+                                            <option value="Exception sought from Higher Authority">Exception sought from Higher Authority</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br /><br />
 
                             </div>
                         </div>
-                        <br /><br />
+
 
                     </div>
+
+
 
                     <div id="divQueryType" style="display:none">
                         <div class="initial1" id="div_IPSQueryType">
@@ -257,17 +291,17 @@
 
 
                         @*<div class="row" id="div_IPSQueryType">
-                                <div class="col-sm-3">
-                                    <label>IPS Query - 1</label>
-                                </div>
-                                <div class="col-sm-9">
-                                    <div class="input-control select" style="">
+                <div class="col-sm-3">
+                    <label>IPS Query - 1</label>
+                </div>
+                <div class="col-sm-9">
+                    <div class="input-control select" style="">
 
-                                        <input name="ddl_IPSQueryType" type="text" id="ddl_IPSQueryType" autocomplete="off" class="form-control ui-autocomplete-input" style="width: 75%">
-                                        &nbsp;<input id="btnAddMore1" type="button" class="info smtBtn" value="Add another Query Type" onclick="show_IPSQueryType_ForBtn('2');" style="margin: 0px; padding: 5px 10px;">
-                                    </div>
-                                </div>
-                            </div>*@
+                        <input name="ddl_IPSQueryType" type="text" id="ddl_IPSQueryType" autocomplete="off" class="form-control ui-autocomplete-input" style="width: 75%">
+                        &nbsp;<input id="btnAddMore1" type="button" class="info smtBtn" value="Add another Query Type" onclick="show_IPSQueryType_ForBtn('2');" style="margin: 0px; padding: 5px 10px;">
+                    </div>
+                </div>
+            </div>*@
                         @{
                             var displayProp2 = "display:none";
                             if (Model.IPSQueryType2 != null)
@@ -474,37 +508,37 @@
 
                     @*after query response*@
                     @*<div class="initial1">
-                            <div class="group1"><label for="employement">Employment / Business classification:</label></div>
-                            <div class="group2"><input type="text" id="emp_classification" placeholder="Please enter and select employement/Business classification" value="" disabled /></div>
-                        </div><br /><br />*@
+            <div class="group1"><label for="employement">Employment / Business classification:</label></div>
+            <div class="group2"><input type="text" id="emp_classification" placeholder="Please enter and select employement/Business classification" value="" disabled /></div>
+        </div><br /><br />*@
 
                     @*<div class="card initial1">
-                            <h5>Freedom Logsheet</h5>
-                        </div>
+            <h5>Freedom Logsheet</h5>
+        </div>
 
-                        <div class="initial1">
-                            <div class="group1">
-                                <label for="request_edit_sanction" style="margin-right:250px">Request edit sanction:</label>
-                            </div>
-                            <label class="switch ml-4">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
+        <div class="initial1">
+            <div class="group1">
+                <label for="request_edit_sanction" style="margin-right:250px">Request edit sanction:</label>
+            </div>
+            <label class="switch ml-4">
+                <input type="checkbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
 
-                        <div class="initial1">
-                            <div class="group1"><label for="comments">Comments:</label></div>
-                            <div class="group2"><input type="text" name="comments" placeholder="Comments"></div>
-                        </div><br /><br>
+        <div class="initial1">
+            <div class="group1"><label for="comments">Comments:</label></div>
+            <div class="group2"><input type="text" name="comments" placeholder="Comments"></div>
+        </div><br /><br>
 
-                        <div class="initial1">
-                            <div class="group1"><label for="Status">Status</label></div>
-                            <div class="group2">
-                                <select id="Status" name="Status">
-                                    <option value="-1">Select</option>
-                                </select>
-                            </div>
-                        </div><br />*@
+        <div class="initial1">
+            <div class="group1"><label for="Status">Status</label></div>
+            <div class="group2">
+                <select id="Status" name="Status">
+                    <option value="-1">Select</option>
+                </select>
+            </div>
+        </div><br />*@
 
                     <div class="card initial1">
                         <h5>Loan Product</h5>
@@ -728,16 +762,11 @@
             $(e.target).addClass("selected");
         });
 
-        //if (statusValue == 3 || statusValue==7) {
-        //    $("#leadQueryDiv").css("display", "block");
-        //    if (statusValue == 3) {
-        //        $("#divQueryType").css("display", "block");
+        if (statusValue==7) {
+            $(".hoQueryDiv").css("display", "block");
+   
+        }
 
-        //    }
-        //    if (statusValue == 7) {
-        //        $("#hoSanctionCommentDiv").css("display", "block");
-        //    }
-        //}
           if (statusValue == 3) {
             $("#leadQueryDiv").css("display", "block");
             $("#divQueryType").css("display", "block");
@@ -804,11 +833,44 @@
             }
         })
 
+        $("#chkHoQuery").click(function (e) {
+            var isChecked = $(this).is(":checked");
+            var UserRole = $("#userRole").val();
+            if (isChecked) {
+                if (UserRole == 2) {
+                    $("#hoLblSwitchName").css("display", "inline-block");
+                    $("#HoQueryStatusHidden").val('Q');
+
+                } else {
+                    alert("only Ho can raise a query");
+                    $("#chkHoQuery").prop("checked", false);
+                }
+            }
+            else {
+                if (UserRole == 3) {
+                    $("#HoQueryStatusHidden").val('R');
+                    $("#hoLblSwitchName").css("display", "none");
+
+                }
+                else {
+                    alert("only Branch can resolve a query");
+                    $("#chkHoQuery").prop("checked", true);
+
+                }
+            }
+        })
+
+
         if($("#userRole").val() == 3) {
             $("#divQueryResponseType").css("display", "block");
+            $("#branchResponse").css("display", "block");     
             $("#QueryText").text('Resolve Query');
+            $("#hoLeadQueryText").text('Resolve Query');
             if ($("#QueryStatusHidden").val() == 'R') {
                 $("#divQueryType").css("display", "none");
+                if ($("#HoQueryStatusHidden").val() == 'R') {
+                    $("#hoSanctionCommentDiv").css("display", "none");
+                }
 
             }
 
@@ -826,6 +888,13 @@
         else if($("#QueryStatusHidden").val() == 'R') {
             $("#chkQuery").prop("checked", false);
         }
+
+    if ($("#HoQueryStatusHidden").val() == 'Q') {
+        $("#chkHoQuery").prop("checked", true);
+        $("#hoLblSwitchName").css("display", "inline-block");
+        $("#hoQueryInput").prop('disabled', true);
+
+    }
 
 
 
