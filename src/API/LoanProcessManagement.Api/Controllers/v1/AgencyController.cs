@@ -1,4 +1,5 @@
 ﻿using LoanProcessManagement.Application.Features.Agency.Queries.GetAllAgency;
+using LoanProcessManagement.Application.Features.ThirdPartyCheckDetails.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -30,5 +31,22 @@ namespace LoanProcessManagement.Api.Controllers.v1
             _logger.LogInformation("GetAllAgency Completed");
             return Ok(dtos);
         }
+
+        #region
+        /// <summary>
+        /// 
+        /// Commented by Pratiksha Poshe
+        /// </summary>
+        /// <param name="lead_Id"></param>
+        /// <returns></returns>
+        [HttpGet("getThirdPartyCheckDetails/{lead_Id}")]
+        public async Task<ActionResult> GetThirdPartyCheckDetails([FromRoute] string lead_Id)
+        {
+            _logger.LogInformation("GetThirdPartyCheckDetails Intiated");
+            var thirdPartyDetailsResponse = await _mediator.Send(new GetThirdPartyCheckDetailsByLeadIdQuery(lead_Id));
+            _logger.LogInformation("GetThirdPartyCheckDetails Completed");
+            return Ok(thirdPartyDetailsResponse);
+        }
+        #endregion
     }
 }

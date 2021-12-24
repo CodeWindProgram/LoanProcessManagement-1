@@ -1,0 +1,360 @@
+﻿@model LoanProcessManagement.App.Models.ThirdPartyCheckDetailsVm
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .tab {
+        padding-left: 15px;
+    }
+
+    .AppTabs {
+        display: inline-block;
+        margin-right: 3px;
+        padding: 5px 30px;
+        background: #191970;
+        color: #FFF;
+    }
+
+    .btn {
+        width: inherit;
+        justify-content: center;
+    }
+
+    .AppTabs:hover {
+        background: #adb5bd;
+        color: black;
+    }
+
+    .AppTabs:visited {
+        text-decoration: none;
+    }
+
+    .selected {
+        background: #0d7db5;
+        color: #FFF;
+    }
+
+    .panel-heading {
+        color: white;
+        background-color: #343a40;
+        border-bottom: 1px solid rgba(0,0,0,.125);
+        padding: 0.75rem 1.25rem;
+        position: relative;
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+    }
+
+    .card {
+        /*background-color:slategray;*/
+        background: linear-gradient(to bottom, rgba(251,251,251,10) 0%,rgba(242,242,242,10) 100%);
+        font-family: sans-serif;
+        font-size: 18px;
+        border: 1px solid;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-color: darkgray
+    }
+
+    h5 {
+        font-size: 1.25rem;
+        margin-left: 1rem;
+        padding-top: 5px;
+        font-weight: 600;
+    }
+
+    .btnDiv {
+        text-align: center;
+    }
+
+    .formDiv {
+        /*border: 1px solid #343a40;*/
+        padding-bottom: 5px;
+        padding-left: 1%;
+        padding-right: 1%;
+    }
+</style>
+<div style="margin-top: 20px" class="container">
+    <div class="container app">
+        <div class="col-sm-12 col-lg-12">
+            <div data-effect="helix" id="panels" class="panel panel-info effect-helix in">
+                <div class="panel-heading">
+                    <h3>Third Party Check</h3>
+                </div>
+                <div class="formDiv">
+                    <form method="post" action="/agency/index">
+                       
+                        <div style="height: 15px;"></div>
+                        
+                        <div style="height: 10px;"></div>
+                        <span id="ContentPlaceHolder1_spanMessage" style="color: red;"></span>
+                        <div style="height: 10px;"></div>
+                        <div class="frames">
+                            <div class="panel-body">
+
+                                <ul class="nav nav-tabs" id="myTab">
+                                    <li class="nav-item">
+                                        <button class="nav-link active btn-lg" id="home-tab" data-toggle="tab" data-target="#valuerAgency">Valuer Agency</button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button class="nav-link btn-lg" id="profile-tab" data-toggle="tab" data-target="#legalAgency">Legal</button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button class="nav-link btn-lg" id="contact-tab" data-toggle="tab" data-target="#fiAgency">F.I</button>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="valuerAgency">
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-1"></div>
+                                                <div class="col-3">
+                                                    <label asp-for="valuerAgencyId">Name</label><span style="color: Red">&nbsp;*</span>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="input-control text">
+                                                        <select id="ContentPlaceHolder1_ddlAgency" asp-for="valuerAgencyId" asp-items=" ViewBag.valuerAgencyName" class="form-control">
+                                                            <option value="">Select Name</option>
+                                                        </select>
+                                                        <span style="color:Red;display:block;"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-1"></div>
+                                                <div class="col-3">
+                                                    <label asp-for="ValuerDocumentOut_Date">Document Outdate : </label><span style="color: Red">&nbsp;*</span>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="input-control text">
+                                                        <input asp-for="ValuerDocumentOut_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocOutdate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                        @*<span asp-validation-for="DateOfBirth" style="color:Red;display:block;"></span>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-1"></div>
+                                                <div class="col-3">
+                                                    <label asp-for="ValuerDocumentIn_Date">Document Indate : </label><span style="color: Red">&nbsp;*</span>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="input-control text">
+                                                        <input asp-for="ValuerDocumentIn_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                        @*<span asp-validation-for="DateOfBirth" style="color:Red;display:block;"></span>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-1"></div>
+                                                <div class="col-3">
+                                                    <label class=""> Document list </label><span style="color: Red">&nbsp;*</span>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="input-control text">
+                                                        @foreach (var item in ViewBag.ValuerAgencyDocs)
+                                                        {
+                                                            <input type="checkbox" value="@item.Name" /> @item.Name <br />
+                                                            <input type ="hidden" asp-for="valuerAgencyDocuments" id="valuerAgencyDoc" />
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                              
+                                    </div>
+                                    <div class="tab-pane fade" id="legalAgency">
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-1"></div>
+                                                <div class="col-3">
+                                                    <label asp-for="legalAgencyId">Name</label><span style="color: Red">&nbsp;*</span>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="input-control text">
+                                                        <select id="ContentPlaceHolder1_ddlAgency" asp-for="legalAgencyId" asp-items="ViewBag.legalAgencyName" class="form-control">
+                                                            <option value="">Select Name</option>
+                                                        </select>
+                                                        <span style="color:Red;display:block;"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-1"></div>
+                                                <div class="col-3">
+                                                    <label asp-for="LegalDocumentOut_Date">Document Outdate : </label><span style="color: Red">&nbsp;*</span>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="input-control text">
+                                                        <input asp-for="LegalDocumentOut_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocOutdate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                        @*<span asp-validation-for="DateOfBirth" style="color:Red;display:block;"></span>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-1"></div>
+                                                <div class="col-3">
+                                                    <label asp-for="LegalDocumentIn_Date">Document Indate : </label><span style="color: Red">&nbsp;*</span>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="input-control text">
+                                                        <input asp-for="LegalDocumentIn_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                        <span id="ContentPlaceHolder1_RequiredFieldValidator2" style="color:Red;display:none;">Date of Birth is mandatory.</span>
+                                                        @*<span asp-validation-for="DateOfBirth" style="color:Red;display:block;"></span>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-1"></div>
+                                                <div class="col-3">
+                                                    <label class=""> Document list </label><span style="color: Red">&nbsp;*</span>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="input-control text">
+                                                        @foreach (var item in ViewBag.LegalAgencyDocs)
+                                                        {
+                                                            <input type="checkbox" value="@item.Name" /> @item.Name <br />
+                                                            <input type="hidden" asp-for="legalAgencyDocuments" id="legalAgencyDoc" />
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="tab-pane fade" id="fiAgency">
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-1"></div>
+                                                <div class="col-3">
+                                                    <label asp-for="fiAgencyId">Name</label><span style="color: Red">&nbsp;*</span>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="input-control text">
+                                                        <select id="ContentPlaceHolder1_ddlAgency" asp-for="fiAgencyId" asp-items="ViewBag.fiAgencyName" class="form-control">
+                                                            <option value="">Select Name</option>
+                                                        </select>
+                                                        <span style="color:Red;display:block;"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-1"></div>
+                                                <div class="col-3">
+                                                    <label asp-for="fiDocumentIn_Date">Document Outdate : </label><span style="color: Red">&nbsp;*</span>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="input-control text">
+                                                        <input asp-for="fiDocumentOut_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocOutdate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                        @*<span asp-validation-for="DateOfBirth" style="color:Red;display:block;"></span>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-1"></div>
+                                                <div class="col-3">
+                                                    <label asp-for="fiDocumentIn_Date">Document Indate : </label><span style="color: Red">&nbsp;*</span>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="input-control text">
+                                                        <input asp-for="fiDocumentIn_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                        <span id="ContentPlaceHolder1_RequiredFieldValidator2" style="color:Red;display:none;">Date of Birth is mandatory.</span>
+                                                        @*<span asp-validation-for="DateOfBirth" style="color:Red;display:block;"></span>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-1"></div>
+                                                <div class="col-3">
+                                                    <label class=""> Document list </label><span style="color: Red">&nbsp;*</span>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="input-control text">
+                                                        @foreach (var item in ViewBag.FIAgencyDocs)
+                                                        {
+                                                            <input type="checkbox" value="@item.Id" /> @item.Name <br />
+                                                            <input type="hidden" asp-for="fiAgencyDocuments" id="fiAgencyDoc" />
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="height: 5px;"></div>
+                                <br />
+                                <div class="row tab">
+                                    <div class="col-md-12">
+                                        <center>
+                                            <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="ContentPlaceHolder1_btnAddEnquiry" class="btn" style="background-color: #343a40; color:white;">&nbsp
+                                            <a id="cancelbutton" class="btn btn-danger">Cancel</a>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var date = new Date();
+        date.setDate(date.getDate());
+        $(".datepicker").datepicker({
+            showOn: "button",
+            format: "dd-mm-yyyy",
+            daysOfWeekDisabled: [0, 6],
+            //startDate: '-2d',
+            //endDate: date,
+            //datesDisabled: '0d',
+            changeMonth: true,
+            changeYear: true,           
+            yearRange: "-100:+0"
+        });
+        
+        $('submit').on('click', function () {
+            var array = [];
+            $("input:checked").each(function () {
+                array.push($(this).val());
+            });
+            var chklist = array.toString();
+            $('#GFG_DOWN').text(chklist);
+            $('#valuerAgencyDoc').val(chklist);
+            var variable = $('#valuerAgencyDoc').val();
+            console.log(variable);
+        });
+    });
+</script>

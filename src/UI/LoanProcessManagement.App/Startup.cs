@@ -65,6 +65,7 @@ namespace LoanProcessManagement.App
             services.AddScoped<IQueryHistoryService, QueryHistoryService>();
             services.AddScoped<ILeadITRDetailsService, LeadITRDetailsService>();
             services.AddScoped<ICibilCheckService, CibilCheckService>();
+            services.AddScoped<IAgencyService, AgencyService>();
             services.Configure<APIConfiguration>(Configuration.GetSection("APIConfiguration"));
             services.AddSession();
         }

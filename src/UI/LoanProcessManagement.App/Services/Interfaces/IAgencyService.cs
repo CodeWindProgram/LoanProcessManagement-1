@@ -3,14 +3,14 @@ using LoanProcessManagement.Application.Features.ThirdPartyCheckDetails.Queries;
 using LoanProcessManagement.Application.Responses;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 
-namespace LoanProcessManagement.Application.Contracts.Persistence
+namespace LoanProcessManagement.App.Services.Interfaces
 {
-    public interface IAgencyRepository
+    public interface IAgencyService
     {
-        Task<GetAllAgencyDto> GetAllAgency();
-        Task<GetThirdPartyCheckDetailsByLeadIdDto> GetThirdPartyCheckDetailsByLeadId(string  lead_Id);
+        Task<Response<GetAllAgencyDto>> GetAllAgencyName();
+        Task<Response<GetThirdPartyCheckDetailsByLeadIdDto>> GetThirdPartyCheckDetailsByLeadId(string lead_Id);
     }
 }

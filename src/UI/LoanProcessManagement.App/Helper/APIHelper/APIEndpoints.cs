@@ -40,6 +40,8 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string UnlockUserAccountOnToggleSwitch = "api/v1/UnlockUserAccount/UnlockUserAccountOnToggleSwitch";
         public const string ActivateUserAccountOnToggleSwitch = "api/v1/UnlockUserAccount/ActivateUserAccountOnToggleSwitch";
         public const string LockedUserList = "api/v1/UserList/GetLockedUserList";
+        public const string GetAllAgencyName = "api/v1/Agency/getAllAgency";
+        public const string GetThirdPartyCheckDetailsByLeadId = "api/v1/Agency/getThirdPartyCheckDetails/";
         #endregion
 
         #region Maintaining the Url EndPoint - Saif Khan - 28/10/2021
