@@ -617,6 +617,7 @@
             residence.textContent = "Rented";
         }
     });
+
     $(document).ready(function () {
         var qualification = document.getElementById("QualificationNode");
         if (@Model.Qualification== 1) {
@@ -858,8 +859,41 @@
         else if (@Model.State== 36) {
             state.textContent = "TELANGANA";
         }
-        
-        
+
+
     });
+
+    $(document).ready(function () {
+        var applicant0 = document.getElementById("tabProcess0");
+        var applicant1 = document.getElementById("ContentPlaceHolder1_lnkCoApp1");
+        var applicant2 = document.getElementById("ContentPlaceHolder1_lnkCoApp2");
+        var applicant3 = document.getElementById("ContentPlaceHolder1_lnkCoApp3");
+        var applicant4 = document.getElementById("ContentPlaceHolder1_lnkCoApp4");
+        var applicant5 = document.getElementById("ContentPlaceHolder1_lnkCoApp5");
+
+        if (@Model.ApplicantType == 1) {
+             applicant1.style.backgroundColor = "#adb5bd";
+             applicant0.style.backgroundColor = "#343a40";
+        }
+        else if (@Model.ApplicantType == 2) {
+             applicant2.style.backgroundColor = "#adb5bd";
+             applicant0.style.backgroundColor = "#343a40";
+        }
+        else if (@Model.ApplicantType == 3) {
+             applicant3.style.backgroundColor = "#adb5bd";
+             applicant0.style.backgroundColor = "#343a40";
+        }
+        else if (@Model.ApplicantType == 4) {
+             applicant4.style.backgroundColor = "#adb5bd";
+             applicant0.style.backgroundColor = "#343a40";
+        }
+        else if (@Model.ApplicantType == 5) {
+             applicant5.style.backgroundColor = "#adb5bd";
+             applicant0.style.backgroundColor = "#343a40";
+        }
+
+    });
+
+
 </script>
 

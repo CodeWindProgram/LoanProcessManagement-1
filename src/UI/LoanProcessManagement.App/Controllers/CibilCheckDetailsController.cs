@@ -50,7 +50,7 @@ namespace LoanProcessManagement.App.Controllers
                 RationCardNo = applicantResponse.Data.RationCardNo,
                 VoterId = applicantResponse.Data.VoterId,
                 AadharId = applicantResponse.Data.AadharId,
-                ApplicantType = applicantResponse.Data.ApplicantType,
+                ApplicantType = applicantType,
                 DrivingLiscenceNo = applicantResponse.Data.DrivingLiscenceNo,
                 EmploymentType = applicantResponse.Data.EmploymentType,
                 Gender = applicantResponse.Data.Gender,
@@ -60,6 +60,7 @@ namespace LoanProcessManagement.App.Controllers
                 PhoneNumber2 = applicantResponse.Data.PhoneNumber2,
                 Category = applicantResponse.Data.Category,
                 Residence = applicantResponse.Data.Residence,
+                
                 Qualification = applicantResponse.Data.Qualification,
             };
             if (applicant.IsSubmit)
