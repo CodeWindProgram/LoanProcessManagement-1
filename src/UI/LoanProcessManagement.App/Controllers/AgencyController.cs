@@ -21,6 +21,7 @@ namespace LoanProcessManagement.App.Controllers
         #region Controller method for fetching Thirdpartycheckdetails - Pratiksha - 23/12/2021
         /// <summary>
         /// 23/12/2021 - Controller method for fetching Thirdpartycheckdetails
+        /// commented by Pratiksha Poshe
         /// </summary>
         /// <param name="lead_Id"></param>
         /// <returns></returns>
@@ -29,6 +30,14 @@ namespace LoanProcessManagement.App.Controllers
         public async Task<IActionResult> Index(string lead_Id)
         {
             var thirdPartyDetailsResponse = await _agencyService.GetThirdPartyCheckDetailsByLeadId(lead_Id);
+            var valuerAgencyDocsChkbxValues = thirdPartyDetailsResponse.Data.valuerAgencyDocuments;
+            var legalAgencyDocsChkbxValues = thirdPartyDetailsResponse.Data.legalAgencyDocuments;
+            var fiAgencyDocsChkbxValues = thirdPartyDetailsResponse.Data.fiAgencyDocuments;
+
+            string[] valuerDocArray = valuerAgencyDocsChkbxValues.Split(',');
+            string[] legalDocArray = legalAgencyDocsChkbxValues.Split(',');
+            string[] fiDocArray = fiAgencyDocsChkbxValues.Split(',');
+
             var thirdPartyCheckDetailsResponse = new ThirdPartyCheckDetailsVm();
             if (thirdPartyDetailsResponse != null && thirdPartyDetailsResponse.Data != null)
             {
@@ -56,7 +65,6 @@ namespace LoanProcessManagement.App.Controllers
                 };
             }
 
-
             var allAgencyNameResponse = await _agencyService.GetAllAgencyName();
             if (allAgencyNameResponse != null && allAgencyNameResponse.Data != null)
             {
@@ -67,44 +75,77 @@ namespace LoanProcessManagement.App.Controllers
 
             List<AgencyDocumentVm> ValuerAgencyDocs = new List<AgencyDocumentVm>()
             {
-                new AgencyDocumentVm{Id = 1, Name = "Aggrement to Sale (Registered/Notary)/ Sale Deed"  },
-                new AgencyDocumentVm{Id = 2, Name = "Planning Approvals"},
-                new AgencyDocumentVm{Id = 3, Name = "Construction Agreement"},
-                new AgencyDocumentVm{Id = 4, Name = "Commencement Certificate"},
-                new AgencyDocumentVm{Id = 5, Name = "Completion Certificate"},
-                new AgencyDocumentVm{Id = 6, Name = "Property tax receipts" },
-                new AgencyDocumentVm{Id = 7, Name = "RERA number"},
-                new AgencyDocumentVm{Id = 8, Name = "Architect Estimate ( Construction Estimate )"},
-                new AgencyDocumentVm{Id = 9, Name = "Layout Approval"}
+                new AgencyDocumentVm{Id = 1, Name = "Aggrement to Sale (Registered/Notary)/ Sale Deed", Selected = false },
+                new AgencyDocumentVm{Id = 2, Name = "Planning Approvals", Selected = false},
+                new AgencyDocumentVm{Id = 3, Name = "Construction Agreement", Selected = false},
+                new AgencyDocumentVm{Id = 4, Name = "Commencement Certificate", Selected = false},
+                new AgencyDocumentVm{Id = 5, Name = "Completion Certificate", Selected = false},
+                new AgencyDocumentVm{Id = 6, Name = "Property tax receipts", Selected = false },
+                new AgencyDocumentVm{Id = 7, Name = "RERA number", Selected = false},
+                new AgencyDocumentVm{Id = 8, Name = "Architect Estimate ( Construction Estimate )", Selected = false},
+                new AgencyDocumentVm{Id = 9, Name = "Layout Approval", Selected = false}
             };
+
+            for(int i = 0; i < valuerDocArray.Length; i++)
+            {
+                var obj = ValuerAgencyDocs.Where(x => x.Id == Convert.ToInt32(valuerDocArray[i])).FirstOrDefault();
+
+                if(obj != null)
+                {
+                    obj.Selected = true;
+                }
+            }
+
             ViewBag.ValuerAgencyDocs = ValuerAgencyDocs;
 
             List<AgencyDocumentVm> LegalAgencyDocs = new List<AgencyDocumentVm>()
             {
-                new AgencyDocumentVm{Id = 1, Name = "Aggrement to Sale (Registered/Notary)/ Sale Deed"  },
-                new AgencyDocumentVm{Id = 2, Name = "Planning Approvals"},
-                new AgencyDocumentVm{Id = 3, Name = "Construction Agreement"},
-                new AgencyDocumentVm{Id = 4, Name = "Commencement Certificate"},
-                new AgencyDocumentVm{Id = 5, Name = "Completion Certificate"},
-                new AgencyDocumentVm{Id = 6, Name = "Property tax receipts" },
-                new AgencyDocumentVm{Id = 7, Name = "RERA number"},
-                new AgencyDocumentVm{Id = 8, Name = "Architect Estimate ( Construction Estimate )"},
-                new AgencyDocumentVm{Id = 9, Name = "Layout Approval"}
+                new AgencyDocumentVm{Id = 1, Name = "Aggrement to Sale (Registered/Notary)/ Sale Deed", Selected = false},
+                new AgencyDocumentVm{Id = 2, Name = "Planning Approvals", Selected = false},
+                new AgencyDocumentVm{Id = 3, Name = "Construction Agreement", Selected = false},
+                new AgencyDocumentVm{Id = 4, Name = "Commencement Certificate", Selected = false},
+                new AgencyDocumentVm{Id = 5, Name = "Completion Certificate", Selected = false},
+                new AgencyDocumentVm{Id = 6, Name = "Property tax receipts", Selected = false},
+                new AgencyDocumentVm{Id = 7, Name = "RERA number", Selected = false},
+                new AgencyDocumentVm{Id = 8, Name = "Architect Estimate ( Construction Estimate )", Selected = false},
+                new AgencyDocumentVm{Id = 9, Name = "Layout Approval", Selected = false}
             };
+
+            for (int i = 0; i < legalDocArray.Length; i++)
+            {
+                var obj = LegalAgencyDocs.Where(x => x.Id == Convert.ToInt32(legalDocArray[i])).FirstOrDefault();
+
+                if (obj != null)
+                {
+                    obj.Selected = true;
+                }
+            }
+
             ViewBag.LegalAgencyDocs = LegalAgencyDocs;
 
             List<AgencyDocumentVm> FIAgencyDocs = new List<AgencyDocumentVm>()
             {
-                new AgencyDocumentVm{Id = 1, Name = "Aggrement to Sale (Registered/Notary)/ Sale Deed"  },
-                new AgencyDocumentVm{Id = 2, Name = "Planning Approvals"},
-                new AgencyDocumentVm{Id = 3, Name = "Construction Agreement"},
-                new AgencyDocumentVm{Id = 4, Name = "Commencement Certificate"},
-                new AgencyDocumentVm{Id = 5, Name = "Completion Certificate"},
-                new AgencyDocumentVm{Id = 6, Name = "Property tax receipts" },
-                new AgencyDocumentVm{Id = 7, Name = "RERA number"},
-                new AgencyDocumentVm{Id = 8, Name = "Architect Estimate ( Construction Estimate )"},
-                new AgencyDocumentVm{Id = 9, Name = "Layout Approval"}
+                new AgencyDocumentVm{Id = 1, Name = "Aggrement to Sale (Registered/Notary)/ Sale Deed", Selected = false},
+                new AgencyDocumentVm{Id = 2, Name = "Planning Approvals", Selected = false},
+                new AgencyDocumentVm{Id = 3, Name = "Construction Agreement", Selected = false},
+                new AgencyDocumentVm{Id = 4, Name = "Commencement Certificate", Selected = false},
+                new AgencyDocumentVm{Id = 5, Name = "Completion Certificate", Selected = false},
+                new AgencyDocumentVm{Id = 6, Name = "Property tax receipts", Selected = false},
+                new AgencyDocumentVm{Id = 7, Name = "RERA number", Selected = false},
+                new AgencyDocumentVm{Id = 8, Name = "Architect Estimate ( Construction Estimate )", Selected = false},
+                new AgencyDocumentVm{Id = 9, Name = "Layout Approval", Selected = false}
             };
+
+            for (int i = 0; i < fiDocArray.Length; i++)
+            {
+                var obj = FIAgencyDocs.Where(x => x.Id == Convert.ToInt32(fiDocArray[i])).FirstOrDefault();
+
+                if (obj != null)
+                {
+                    obj.Selected = true;
+                }
+            }
+
             ViewBag.FIAgencyDocs = FIAgencyDocs;
 
             return View(thirdPartyCheckDetailsResponse);

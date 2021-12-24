@@ -164,7 +164,7 @@
                                                     <div class="input-control text">
                                                         @foreach (var item in ViewBag.ValuerAgencyDocs)
                                                         {
-                                                            <input type="checkbox" value="@item.Name" /> @item.Name <br />
+                                                            <input type="checkbox" id="valuerDocs" value="@item.Id" checked="@item.Selected"/> @item.Name <br />
                                                             <input type ="hidden" asp-for="valuerAgencyDocuments" id="valuerAgencyDoc" />
                                                         }
                                                     </div>
@@ -233,7 +233,7 @@
                                                     <div class="input-control text">
                                                         @foreach (var item in ViewBag.LegalAgencyDocs)
                                                         {
-                                                            <input type="checkbox" value="@item.Name" /> @item.Name <br />
+                                                            <input type="checkbox" id="legal_@item.Id" value="@item.Id" checked="@item.Selected"/> @item.Name <br />
                                                             <input type="hidden" asp-for="legalAgencyDocuments" id="legalAgencyDoc" />
                                                         }
                                                     </div>
@@ -302,7 +302,7 @@
                                                     <div class="input-control text">
                                                         @foreach (var item in ViewBag.FIAgencyDocs)
                                                         {
-                                                            <input type="checkbox" value="@item.Id" /> @item.Name <br />
+                                                            <input type="checkbox" value="@item.Id" checked="@item.Selected" /> @item.Name <br />
                                                             <input type="hidden" asp-for="fiAgencyDocuments" id="fiAgencyDoc" />
                                                         }
                                                     </div>

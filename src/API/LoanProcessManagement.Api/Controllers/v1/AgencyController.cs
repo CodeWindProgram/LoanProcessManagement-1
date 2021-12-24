@@ -32,9 +32,9 @@ namespace LoanProcessManagement.Api.Controllers.v1
             return Ok(dtos);
         }
 
-        #region
+        #region GetThirdPartyCheckDetails api - Pratiksha - 24/12/2021
         /// <summary>
-        /// 
+        /// 24/12/2021 - GetThirdPartyCheckDetails api
         /// Commented by Pratiksha Poshe
         /// </summary>
         /// <param name="lead_Id"></param>
