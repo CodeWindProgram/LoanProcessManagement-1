@@ -31,6 +31,7 @@ namespace LoanProcessManagement.App.Controllers
             var queryHistoryResponse = await _queryHistoryService.GetQueryHistoryByLeadId(lead_Id);
             if (queryHistoryResponse != null && queryHistoryResponse.Data != null)
             {
+                ViewBag.lead_Id = lead_Id;
                 return View(queryHistoryResponse.Data);
             }
             return View();

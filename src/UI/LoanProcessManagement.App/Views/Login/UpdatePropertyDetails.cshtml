@@ -63,7 +63,7 @@
     <div class="col-sm-12 col-lg-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in">
             <div class="panel-heading">
-                <h3>Edit Property Details</h3>
+                <h5>Edit Property Details</h5>
             </div>
             <div style="border-left: 1px solid #343a40; border-right: 1px solid #343a40; " class="border">
                 <div class="panel-body">
@@ -79,11 +79,11 @@
                         <form action="/login/UpdatePropertyDetailsUnFreeze" method="post">
                             <br />
                             @*<div style="display:flex;">
-                                <div class="col-md-4">
+                            <div class="col-md-4">
 
-                                </div>
-                                <div style="display:inline-flex; text-align:end;" class="col-md-5"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
-                            </div>*@
+                            </div>
+                            <div style="display:inline-flex; text-align:end;" class="col-md-5"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
+                        </div>*@
                             <div style="text-align:end;"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
                             <input type="hidden" asp-for="lead_Id" />
                             <div class="form-group row">
@@ -111,12 +111,12 @@
                                 <div class="form-group row">
 
                                     @*<label asp-for="PropertyUnderConstruction" class="col-sm-4 col-form-label">a.Under-Construction<span style="color: red; width: 10%;">*</span></label>
-        <div class="col-sm-2">
-            <input asp-for="PropertyUnderConstruction" class="form-control" type="radio" style="pointer-events: none;" autofocus value="YES" id="Yes" readonly /><span class="radio-button">YES</span>
-        </div>
-        <div class="col-sm-2">
-            <input asp-for="PropertyUnderConstruction" class="form-control" type="radio" style="pointer-events: none;" value="NO" id="No" readonly />NO
-        </div>*@
+                                <div class="col-sm-2">
+                                    <input asp-for="PropertyUnderConstruction" class="form-control" type="radio" style="pointer-events: none;" autofocus value="YES" id="Yes" readonly /><span class="radio-button">YES</span>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input asp-for="PropertyUnderConstruction" class="form-control" type="radio" style="pointer-events: none;" value="NO" id="No" readonly />NO
+                                </div>*@
 
 
                                     <label asp-for="PropertyUnderConstruction">a.Under-Construction<span style="color: red; width: 10%;">*</span></label>
@@ -169,14 +169,14 @@
                                 <p class="text-danger"><span class="text-danger" style="font-weight:bold;padding-left:10px">Note:: </span>Property Pincode can be entered only once, Please be guided.</p>
                             </div>
                             @*<div class="button">
-                                <input type="submit" value="Save" id="btnSignIn" Class="btn btn-primary btn-sm" href="#" />
-                            </div>*@
+                            <input type="submit" value="Save" id="btnSignIn" Class="btn btn-primary btn-sm" href="#" />
+                        </div>*@
                         </form>
                     </div>
                 </div>
             </div>
+            @await Html.PartialAsync("~/Views/Shared/_Tabs.cshtml", (string)@ViewBag.lead_Id)
         </div>
-        @await Html.PartialAsync("~/Views/Shared/_Tabs.cshtml", (string)@ViewBag.lead_Id)
 
 
         @*<div class="d-flex flex-row justify-content-around">

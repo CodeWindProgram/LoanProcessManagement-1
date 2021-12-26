@@ -10,164 +10,159 @@
         overflow-x: scroll;
     }
 </style>
-<h2>Query History</h2>
-
-@*<p>
-    <a asp-action="Create">Create New</a>
-</p>*@
 <div class="container app">
-    <div class="col-sm-12 cls-scroll-table">
+    <div class="col-sm-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
-            @*<div class="panel-heading">User List</div>*@
-            <div class="panel-body">
-            </div>
-            <div id="alertMsg" visible="false" runat="server">
-                <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
-                <div style="margin-bottom: 10px"></div>
-            </div>
-            <table class="table table-responsive nowrap" id="tblQueryHistory" width="100%">
-                <thead>
-                    <tr>
-                        @*<th>
-                                @Html.DisplayNameFor(model => model.Id)
-                        </th>*@
-                        <th>
-                            @Html.DisplayNameFor(model => model.SerialNumber)
-                        </th>
-                        <th style="display : none">
-                            @Html.DisplayNameFor(model => model.lead_Id)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.CreatedDate)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.FormNo)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Query_Status)
-                        </th>
-                        
-                        @*<th>
-                                @Html.DisplayNameFor(model => model.Query_Comment)
-                            </th>*@
-                        @*<th>
-                                @Html.DisplayNameFor(model => model.Tat)
-                            </th>*@
-                        <th>
-                            @Html.DisplayNameFor(model => model.IPSQueryType1)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.IPSQueryType2)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.IPSQueryType3)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.IPSQueryType4)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.IPSQueryType5)
-                        </th>
-                        @*<th>
-                            @Html.DisplayNameFor(model => model.IPSQueryType_Comment)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.IPSResponseType1)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.IPSResponseType2)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.IPSResponseType3)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.IPSResponseType4)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.IPSResponseType5)
-                            </th>
-                            <th></th>*@
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            @*<td>
-                                    @Html.DisplayFor(modelItem => item.Id)
-                                </td>*@
-                            <td>
-                                @Html.DisplayFor(modelItem => item.SerialNumber)
-                            </td>
-                            <td style="display : none">
-                                @Html.DisplayFor(modelItem => item.lead_Id)
-                            </td>
-                            <td>
-                                @{
-                                    var CreatedDate = item.CreatedDate.ToShortDateString();
-                                }
-                                @Html.DisplayFor(modelItem => CreatedDate)
-                            </td>
-                                                        <td>
-                                @Html.DisplayFor(modelItem => item.FormNo)
-                            </td>
-                            <td>
-                                @{
-                                    var status = item.Query_Status == 'R' ? "Query Resolved" : "Query Raised";
+            <div class="panel-heading"><h5>Query History</h5></div>
+            <div class="panel-body ">
+                <div class="card" style="padding:15px;">
+                    <table class="display table" id="tblQueryHistory" width="100%">
+                        <thead>
+                            <tr>
+                                @*<th>
+                                        @Html.DisplayNameFor(model => model.Id)
+                                </th>*@
+                                <th>
+                                    @Html.DisplayNameFor(model => model.SerialNumber)
+                                </th>
+                                <th style="display : none">
+                                    @Html.DisplayNameFor(model => model.lead_Id)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.CreatedDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FormNo)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Query_Status)
+                                </th>
 
-                                }
-                                @Html.DisplayFor(modelItem => status)
-                            </td>
+                                @*<th>
+                                    @Html.DisplayNameFor(model => model.Query_Comment)
+                                </th>*@
+                                @*<th>
+                                    @Html.DisplayNameFor(model => model.Tat)
+                                </th>*@
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IPSQueryType1)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IPSQueryType2)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IPSQueryType3)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IPSQueryType4)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IPSQueryType5)
+                                </th>
+                                @*<th>
+                                @Html.DisplayNameFor(model => model.IPSQueryType_Comment)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IPSResponseType1)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IPSResponseType2)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IPSResponseType3)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IPSResponseType4)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IPSResponseType5)
+                                </th>
+                                <th></th>*@
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    @*<td>
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>*@
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SerialNumber)
+                                    </td>
+                                    <td style="display : none">
+                                        @Html.DisplayFor(modelItem => item.lead_Id)
+                                    </td>
+                                    <td>
+                                        @{
+                                            var CreatedDate = item.CreatedDate.ToShortDateString();
+                                        }
+                                        @Html.DisplayFor(modelItem => CreatedDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FormNo)
+                                    </td>
+                                    <td>
+                                        @{
+                                            var status = item.Query_Status == 'R' ? "Query Resolved" : "Query Raised";
 
-                            @*<td>
-                                    @Html.DisplayFor(modelItem => item.Query_Comment)
-                                </td>*@
-                            @*<td>
-                                    @Html.DisplayFor(modelItem => item.Tat)
-                                </td>*@
-                            <td>
-                                @Html.DisplayFor(modelItem => item.IPSQueryType1)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.IPSQueryType2)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.IPSQueryType3)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.IPSQueryType4)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.IPSQueryType5)
-                            </td>
-                            @*<td>
-                                    @Html.DisplayFor(modelItem => item.IPSQueryType_Comment)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.IPSResponseType1)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.IPSResponseType2)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.IPSResponseType3)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.IPSResponseType4)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.IPSResponseType5)
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                                </td>*@
-                        </tr>
-                    }
-                </tbody>
-            </table>
+                                        }
+                                        @Html.DisplayFor(modelItem => status)
+                                    </td>
+
+                                    @*<td>
+                                        @Html.DisplayFor(modelItem => item.Query_Comment)
+                                    </td>*@
+                                    @*<td>
+                                        @Html.DisplayFor(modelItem => item.Tat)
+                                    </td>*@
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IPSQueryType1)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IPSQueryType2)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IPSQueryType3)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IPSQueryType4)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IPSQueryType5)
+                                    </td>
+                                    @*<td>
+                                        @Html.DisplayFor(modelItem => item.IPSQueryType_Comment)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IPSResponseType1)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IPSResponseType2)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IPSResponseType3)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IPSResponseType4)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IPSResponseType5)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                                    </td>*@
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
+
+        @await Html.PartialAsync("~/Views/Shared/_Tabs.cshtml", (string)@ViewBag.lead_Id)
     </div>
 </div>
 <script>
