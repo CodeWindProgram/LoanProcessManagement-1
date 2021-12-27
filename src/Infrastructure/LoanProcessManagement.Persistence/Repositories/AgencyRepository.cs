@@ -1,5 +1,8 @@
 ﻿using LoanProcessManagement.Application.Contracts.Persistence;
 using LoanProcessManagement.Application.Features.Agency.Queries.GetAllAgency;
+using LoanProcessManagement.Application.Features.ThirdPartyCheckDetails.Command;
+using LoanProcessManagement.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using LoanProcessManagement.Application.Features.ThirdPartyCheckDetails.Queries;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -45,6 +48,177 @@ namespace LoanProcessManagement.Persistence.Repositories
 
             }
             return response;
+        }
+
+        public async Task<AddThirdPartyCheckDetailsDto> SubmitToAgency(AddThirdPartyCheckDetailsCommand req)
+        {
+            var user = await _dbContext.LpmLeadMasters.Include(x => x.Product).Include(x => x.LeadStatus).Include(z => z.Branch)
+                .Where(x => x.Id == req.lead_Id).FirstOrDefaultAsync();
+            var ThirdPartyDetails = await _dbContext.lpmThirdPartyCheckDetails.Include(x => x.ValuerAgency).
+                Include(x => x.fiAgency).Include(x => x.legalAgency)
+            .Where(x => x.lead_Id == req.lead_Id).FirstOrDefaultAsync();
+            var response = new AddThirdPartyCheckDetailsDto();
+            if (ThirdPartyDetails != null)
+            {
+                if(req.Tab == "Valuer")
+                {
+                    if (ThirdPartyDetails.valuerAgencyStatus == 0)
+                    {
+                        ThirdPartyDetails.valuerAgencyId = req.valuerAgencyId;
+                        ThirdPartyDetails.ValuerDocumentOut_Date = req.ValuerDocumentOut_Date;
+                        ThirdPartyDetails.valuerAgencyDocuments = req.valuerAgencyDocuments;
+                        ThirdPartyDetails.valuerAgencyStatus = 1;
+                    }
+                    else if(ThirdPartyDetails.valuerAgencyStatus == 1)
+                    {
+                        ThirdPartyDetails.ValuerDocumentIn_Date = req.ValuerDocumentIn_Date;
+                        ThirdPartyDetails.valuerAgencyComment = req.valuerAgencyComment;
+                        ThirdPartyDetails.valuerAgencyStatus = 2;
+
+                    }
+          
+
+                }
+                else if (req.Tab == "Fi")
+                {
+                    if (ThirdPartyDetails.fiAgencyStatus == 0)
+                    {
+                        ThirdPartyDetails.fiAgencyId = req.fiAgencyId;
+                        ThirdPartyDetails.fiDocumentOut_Date = req.fiDocumentOut_Date;
+                        ThirdPartyDetails.fiAgencyDocuments = req.fiAgencyDocuments;
+                        ThirdPartyDetails.fiAgencyStatus = 1;
+                    }
+                    else if(ThirdPartyDetails.fiAgencyStatus == 1)
+                    {
+                        ThirdPartyDetails.fiDocumentIn_Date = req.fiDocumentIn_Date;
+                        ThirdPartyDetails.fiAgencyComment = req.fiAgencyComment;
+                        ThirdPartyDetails.fiAgencyStatus = 2;
+
+                    }
+           
+                }
+                else if (req.Tab == "Legal")
+                {
+                    if(ThirdPartyDetails.legalAgencyStatus == 0)
+                    {
+                        ThirdPartyDetails.legalAgencyId = req.legalAgencyId;
+                        ThirdPartyDetails.LegalDocumentOut_Date = req.LegalDocumentOut_Date;
+                        ThirdPartyDetails.legalAgencyDocuments = req.legalAgencyDocuments;
+                        ThirdPartyDetails.legalAgencyStatus = 1;
+
+                    }
+                    else if(ThirdPartyDetails.legalAgencyStatus == 1)
+                    {
+                        ThirdPartyDetails.LegalDocumentIn_Date = req.LegalDocumentIn_Date;
+                        ThirdPartyDetails.legalAgencyComment = req.legalAgencyComment;
+                        ThirdPartyDetails.legalAgencyStatus = 2;
+
+                    }
+
+                }
+                await _dbContext.SaveChangesAsync();
+                response.Message = "Data Has Been Updated Successfully !!";
+                response.Succeeded = true;
+                response.lead_Id = req.lead_Id;
+                return response;
+
+
+            }
+            else
+            {
+                var thirdPartyEntry = new LpmThirdPartyCheckDetails();
+                if (req.Tab == "Valuer")
+                {
+                    thirdPartyEntry = new LpmThirdPartyCheckDetails()
+                    {
+                        lead_Id = req.lead_Id,
+                        valuerAgencyId = req.valuerAgencyId,
+                        ValuerDocumentOut_Date = req.ValuerDocumentOut_Date,
+                        valuerAgencyDocuments = req.valuerAgencyDocuments,
+                        valuerAgencyComment = req.valuerAgencyComment,
+                        valuerAgencyStatus = 1,
+                        //legalAgencyId = req.legalAgencyId,
+                        //LegalDocumentOut_Date = req.LegalDocumentOut_Date,
+                        //LegalDocumentIn_Date = req.LegalDocumentIn_Date,
+                        //legalAgencyDocuments = req.legalAgencyDocuments,
+                        //legalAgencyComment = req.legalAgencyComment,
+                        //legalAgencyStatus = 0,
+                        //fiAgencyId = req.fiAgencyId,
+                        //fiDocumentOut_Date = req.fiDocumentOut_Date,
+                        //fiDocumentIn_Date = req.fiDocumentIn_Date,
+                        //fiAgencyDocuments = req.fiAgencyDocuments,
+                        //fiAgencyComment = req.fiAgencyComment,
+                        //fiAgencyStatus = 0,
+                        CreatedBy = req.LgId,
+                        CreatedDate = DateTime.Today
+
+                    };
+                }
+                else if(req.Tab == "Fi")
+                {
+                    thirdPartyEntry = new LpmThirdPartyCheckDetails()
+                    {
+                        lead_Id = req.lead_Id,
+                        //valuerAgencyId = req.valuerAgencyId,
+                        //ValuerDocumentOut_Date = req.ValuerDocumentOut_Date,
+                        //valuerAgencyDocuments = req.valuerAgencyDocuments,
+                        //valuerAgencyComment = req.valuerAgencyComment,
+                        //valuerAgencyStatus = 0,
+                        //legalAgencyId = req.legalAgencyId,
+                        //LegalDocumentOut_Date = req.LegalDocumentOut_Date,
+                        //LegalDocumentIn_Date = req.LegalDocumentIn_Date,
+                        //legalAgencyDocuments = req.legalAgencyDocuments,
+                        //legalAgencyComment = req.legalAgencyComment,
+                        //legalAgencyStatus = 0,
+                        fiAgencyId = req.fiAgencyId,
+                        fiDocumentOut_Date = req.fiDocumentOut_Date,
+                        fiDocumentIn_Date = req.fiDocumentIn_Date,
+                        fiAgencyDocuments = req.fiAgencyDocuments,
+                        fiAgencyComment = req.fiAgencyComment,
+                        fiAgencyStatus = 1,
+                        CreatedBy = req.LgId,
+                        CreatedDate = DateTime.Today
+
+                    };
+
+                }
+                else if(req.Tab == "Legal")
+                {
+                    thirdPartyEntry = new LpmThirdPartyCheckDetails()
+                    {
+                        lead_Id = req.lead_Id,
+                        //valuerAgencyId = req.valuerAgencyId,
+                        //ValuerDocumentOut_Date = req.ValuerDocumentOut_Date,
+                        //valuerAgencyDocuments = req.valuerAgencyDocuments,
+                        //valuerAgencyComment = req.valuerAgencyComment,
+                        //valuerAgencyStatus = 0,
+                        legalAgencyId = req.legalAgencyId,
+                        LegalDocumentOut_Date = req.LegalDocumentOut_Date,
+                        legalAgencyDocuments = req.legalAgencyDocuments,
+                        legalAgencyComment = req.legalAgencyComment,
+                        legalAgencyStatus = 1,
+                        //fiAgencyId = req.fiAgencyId,
+                        //fiDocumentOut_Date = req.fiDocumentOut_Date,
+                        //fiDocumentIn_Date = req.fiDocumentIn_Date,
+                        //fiAgencyDocuments = req.fiAgencyDocuments,
+                        //fiAgencyComment = req.fiAgencyComment,
+                        //fiAgencyStatus = 0,
+                        CreatedBy = req.LgId,
+                        CreatedDate = DateTime.Today
+
+                    };
+
+                }
+                
+                await _dbContext.lpmThirdPartyCheckDetails.AddAsync(thirdPartyEntry);
+                await _dbContext.SaveChangesAsync();
+                response.Message = "Data has been added successfully !!";
+                response.Succeeded = true;
+                response.lead_Id = req.lead_Id;
+                return response;
+
+            }
+
         }
 
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,6 +10,8 @@ namespace LoanProcessManagement.App.Models
     {
         public long Id { get; set; }
         public long? lead_Id { get; set; }
+        [HiddenInput]
+        public string Tab { get; set; }
         public long? valuerAgencyId { get; set; }
         public DateTime ValuerDocumentOut_Date { get; set; }
         public DateTime ValuerDocumentIn_Date { get; set; }

@@ -83,29 +83,30 @@
                     <h3>Third Party Check</h3>
                 </div>
                 <div class="formDiv">
-                    <form method="post" action="/agency/index">
-                       
-                        <div style="height: 15px;"></div>
-                        
-                        <div style="height: 10px;"></div>
-                        <span id="ContentPlaceHolder1_spanMessage" style="color: red;"></span>
-                        <div style="height: 10px;"></div>
-                        <div class="frames">
-                            <div class="panel-body">
 
-                                <ul class="nav nav-tabs" id="myTab">
-                                    <li class="nav-item">
-                                        <button class="nav-link active btn-lg" id="home-tab" data-toggle="tab" data-target="#valuerAgency">Valuer Agency</button>
-                                    </li>
-                                    <li class="nav-item">
-                                        <button class="nav-link btn-lg" id="profile-tab" data-toggle="tab" data-target="#legalAgency">Legal</button>
-                                    </li>
-                                    <li class="nav-item">
-                                        <button class="nav-link btn-lg" id="contact-tab" data-toggle="tab" data-target="#fiAgency">F.I</button>
-                                    </li>
-                                </ul>
-                                <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="valuerAgency">
+                    <div style="height: 15px;"></div>
+
+                    <div style="height: 10px;"></div>
+                    <span id="ContentPlaceHolder1_spanMessage" style="color: red;"></span>
+                    <div style="height: 10px;"></div>
+                    <div class="frames">
+                        <div class="panel-body">
+
+                            <ul class="nav nav-tabs" id="myTab">
+                                <li class="nav-item">
+                                    <button class="nav-link active btn-lg" id="home-tab" data-toggle="tab" data-target="#valuerAgency">Valuer Agency</button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-link btn-lg" id="profile-tab" data-toggle="tab" data-target="#legalAgency">Legal</button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-link btn-lg" id="contact-tab" data-toggle="tab" data-target="#fiAgency">F.I</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="valuerAgency">
+                                    <form method="post" action="/agency/index" id="valuerForm">
+                                        <input type="hidden" asp-for="Tab" id="tabValueForValuer" />
 
                                         <div class="form-group">
                                             <div class="row">
@@ -164,17 +165,27 @@
                                                     <div class="input-control text">
                                                         @foreach (var item in ViewBag.ValuerAgencyDocs)
                                                         {
-                                                            <input type="checkbox" id="valuerDocs" value="@item.Id" checked="@item.Selected"/> @item.Name <br />
-                                                            <input type ="hidden" asp-for="valuerAgencyDocuments" id="valuerAgencyDoc" />
+                                                            <input type="checkbox" id="valuerDocs" value="@item.Id" checked="@item.Selected" /> @item.Name <br />
+                                                            <input type="hidden" asp-for="valuerAgencyDocuments" id="valuerAgencyDoc" />
                                                         }
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                              
-                                    </div>
-                                    <div class="tab-pane fade" id="legalAgency">
 
+                                        </div>
+                                        <div class="row tab">
+                                            <div class="col-md-12">
+                                                <center>
+                                                    <input type="submit" value="Submit" id="ValuerTab" class="btn" style="background-color: #343a40; color:white;">&nbsp
+                                                    <a id="cancelbutton" class="btn btn-danger">Cancel</a>
+                                                </center>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="tab-pane fade" id="legalAgency">
+                                    <form method="post" action="/agency/index" id="legalForm">
+                                        <input type="hidden" asp-for="Tab" id="tabValueForLegal" />
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-1"></div>
@@ -230,20 +241,37 @@
                                                     <label class=""> Document list </label><span style="color: Red">&nbsp;*</span>
                                                 </div>
                                                 <div class="col-6">
-                                                    <div class="input-control text">
+                                                    <div class="input-control text legalDocs">
+                                                        @*@foreach (var item in ViewBag.LegalAgencyDocs)
+                                                            {
+                                                                <input type="checkbox" value="@item.Name" /> @item.Name <br />
+                                                                <input type="hidden" asp-for="legalAgencyDocuments" id="legalAgencyDoc" />
+                                                            }*@
                                                         @foreach (var item in ViewBag.LegalAgencyDocs)
                                                         {
-                                                            <input type="checkbox" id="legal_@item.Id" value="@item.Id" checked="@item.Selected"/> @item.Name <br />
+                                                            <input type="checkbox" value="@item.Id" checked="@item.Selected" /> @item.Name <br />
                                                             <input type="hidden" asp-for="legalAgencyDocuments" id="legalAgencyDoc" />
                                                         }
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row tab">
+                                            <div class="col-md-12">
+                                                <center>
+                                                    <input type="submit" value="Submit" id="LegalTab" class="btn" style="background-color: #343a40; color:white;">&nbsp
+                                                    <a id="cancelbutton" class="btn btn-danger">Cancel</a>
+                                                </center>
+                                            </div>
+                                        </div>
+                                    </form>
 
-                                    </div>
-                                    <div class="tab-pane fade" id="fiAgency">
 
+
+                                </div>
+                                <div class="tab-pane fade" id="fiAgency">
+                                    <form method="post" action="/agency/index" id="fiForm">
+                                        <input type="hidden" asp-for="Tab" id="tabValueForFi" />
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-1"></div>
@@ -299,7 +327,12 @@
                                                     <label class=""> Document list </label><span style="color: Red">&nbsp;*</span>
                                                 </div>
                                                 <div class="col-6">
-                                                    <div class="input-control text">
+                                                    <div class="input-control text fiDocs">
+                                                        @*@foreach (var item in ViewBag.FIAgencyDocs)
+                                                            {
+                                                                <input type="checkbox" value="@item.Id" /> @item.Name <br />
+                                                                <input type="hidden" asp-for="fiAgencyDocuments" id="fiAgencyDoc" />
+                                                            }*@
                                                         @foreach (var item in ViewBag.FIAgencyDocs)
                                                         {
                                                             <input type="checkbox" value="@item.Id" checked="@item.Selected" /> @item.Name <br />
@@ -309,21 +342,25 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div style="height: 5px;"></div>
-                                <br />
-                                <div class="row tab">
-                                    <div class="col-md-12">
-                                        <center>
-                                            <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="ContentPlaceHolder1_btnAddEnquiry" class="btn" style="background-color: #343a40; color:white;">&nbsp
-                                            <a id="cancelbutton" class="btn btn-danger">Cancel</a>
-                                        </center>
-                                    </div>
+                                        <div class="row tab">
+                                            <div class="col-md-12">
+                                                <center>
+                                                    <input type="submit" value="Submit" id="FiTab" class="btn" style="background-color: #343a40; color:white;">&nbsp
+                                                    <a id="cancelbutton" class="btn btn-danger">Cancel</a>
+                                                </center>
+                                            </div>
+                                        </div>
+                                    </form>
+
+
                                 </div>
                             </div>
+                            <div style="height: 5px;"></div>
+                            <br />
+
                         </div>
-                    </form>  
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -341,20 +378,70 @@
             //endDate: date,
             //datesDisabled: '0d',
             changeMonth: true,
-            changeYear: true,           
+            changeYear: true,
             yearRange: "-100:+0"
         });
-        
-        $('submit').on('click', function () {
-            var array = [];
-            $("input:checked").each(function () {
-                array.push($(this).val());
-            });
-            var chklist = array.toString();
-            $('#GFG_DOWN').text(chklist);
-            $('#valuerAgencyDoc').val(chklist);
-            var variable = $('#valuerAgencyDoc').val();
-            console.log(variable);
+
+        //$('submit').on('click', function () {
+        //    var array = [];
+        //    $("input:checked").each(function () {
+        //        array.push($(this).val());
+        //    });
+        //    var chklist = array.toString();
+        //    $('#GFG_DOWN').text(chklist);
+        //    $('#valuerAgencyDoc').val(chklist);
+        //    var variable = $('#valuerAgencyDoc').val();
+        //    console.log(variable);
+        //});
+
+        //$('#ValuerTab').on('submit', function () {
+        //    var array = [];
+        //    $(".valuerDocs input:checked").each(function () {
+        //        array.push($(this).val());
+        //    });
+        //    var chklist = array.toString();
+        //    $('#GFG_DOWN').text(chklist);
+        //    $('#valuerAgencyDoc').val(chklist);
+        //    var variable = $('#valuerAgencyDoc').val();
+        //    console.log(variable);
+        //});
+
+        $("#valuerForm").submit(function () {
+            if ($('#valuerForm').valid()) {
+                var array = [];
+                $(".valuerDocs input:checked").each(function () {
+                    array.push($(this).val());
+                });
+                var chklist = array.toString();
+                $('#GFG_DOWN').text(chklist);
+                $('#valuerAgencyDoc').val(chklist);
+                $('#tabValueForValuer').val("Valuer");
+            }
         });
+        $("#legalForm").submit(function () {
+            if ($('#legalForm').valid()) {
+                var array = [];
+                $(".legalDocs input:checked").each(function () {
+                    array.push($(this).val());
+                });
+                var chklist = array.toString();
+                $('#legalAgencyDoc').val(chklist);
+                $('#tabValueForLegal').val("Legal");
+            }
+        });
+        $("#fiForm").submit(function () {
+            if ($('#fiForm').valid()) {
+                var array = [];
+                $(".fiDocs input:checked").each(function () {
+                    array.push($(this).val());
+                });
+                var chklist = array.toString();
+                $('#fiAgencyDocuments').val(chklist);
+                $('#tabValueForFi').val("Fi");
+            }
+        });
+
+
+
     });
 </script>

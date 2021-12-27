@@ -1,5 +1,6 @@
 ﻿using LoanProcessManagement.Application.Features.Agency.Queries.GetAllAgency;
 using LoanProcessManagement.Application.Features.ThirdPartyCheckDetails.Queries;
+using LoanProcessManagement.Application.Features.ThirdPartyCheckDetails.Command;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -48,5 +49,14 @@ namespace LoanProcessManagement.Api.Controllers.v1
             return Ok(thirdPartyDetailsResponse);
         }
         #endregion
+
+        [HttpPost("SubmitToAgency")]
+        public async Task<ActionResult> SubmitToAgency(AddThirdPartyCheckDetailsCommand req)
+        {
+            _logger.LogInformation("SubmitToAgency Initiated");
+            var dtos = await _mediator.Send(req);
+            _logger.LogInformation("SubmitToAgency Completed");
+            return Ok(dtos);
+        }
     }
 }

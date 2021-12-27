@@ -149,8 +149,15 @@ namespace LoanProcessManagement.App.Controllers
             ViewBag.FIAgencyDocs = FIAgencyDocs;
 
             return View(thirdPartyCheckDetailsResponse);
-        } 
+        }
         #endregion
+
+        [Route("[controller]/[action]")]
+        [HttpPost]
+        public async Task<IActionResult> Index(ThirdPartyCheckDetailsVm req)
+        {
+            return View();
+        }
 
     }
 }
