@@ -1,4 +1,6 @@
-﻿using LoanProcessManagement.Application.Features.Agency.Queries.GetAllAgency;
+﻿using LoanProcessManagement.App.Models;
+using LoanProcessManagement.Application.Features.Agency.Queries.GetAllAgency;
+using LoanProcessManagement.Application.Features.ThirdPartyCheckDetails.Command;
 using LoanProcessManagement.Application.Features.ThirdPartyCheckDetails.Queries;
 using LoanProcessManagement.Application.Responses;
 using System;
@@ -12,5 +14,7 @@ namespace LoanProcessManagement.App.Services.Interfaces
     {
         Task<Response<GetAllAgencyDto>> GetAllAgencyName();
         Task<Response<GetThirdPartyCheckDetailsByLeadIdDto>> GetThirdPartyCheckDetailsByLeadId(string lead_Id);
+        Task<Response<AddThirdPartyCheckDetailsDto>> SubmitToAgency(ThirdPartyCheckDetailsVm req);
+
     }
 }

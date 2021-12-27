@@ -9,45 +9,46 @@ namespace LoanProcessManagement.App.Models
 {
     public class ThirdPartyCheckDetailsVm
     {
-        public long Id { get; set; }
-        public long? lead_Id { get; set; }
+        [HiddenInput]
+        public long leadIdLong { get; set; }
         [HiddenInput]
         public string Tab { get; set; }
+        public string LgId { get; set; }
+
         [Required(ErrorMessage = "Please Select Agency Name")]
-        public long? valuerAgencyId { get; set; }
+        public long valuerAgencyId { get; set; }
         [Required(ErrorMessage = "Please Select Document Outdate")]
-        public DateTime ValuerDocumentOut_Date { get; set; }
+        public DateTime? ValuerDocumentOut_Date { get; set; }
         [Required(ErrorMessage = "Please Select Document Indate")]
-        public DateTime ValuerDocumentIn_Date { get; set; }
+        public DateTime? ValuerDocumentIn_Date { get; set; }
+
         [Required(ErrorMessage = "Please Select Documents")]
         public string valuerAgencyDocuments { get; set; }
         public string valuerAgencyComment { get; set; }
         public int valuerAgencyStatus { get; set; }
 
         [Required(ErrorMessage = "Please Select Agency Name")]
-        public long? legalAgencyId { get; set; }
+        public long legalAgencyId { get; set; }
         [Required(ErrorMessage = "Please Select Document Outdate")]
-        public DateTime LegalDocumentOut_Date { get; set; }
+        public DateTime? LegalDocumentOut_Date { get; set; }
         [Required(ErrorMessage = "Please Select Document Indate")]
-        public DateTime LegalDocumentIn_Date { get; set; }
+        public DateTime? LegalDocumentIn_Date { get; set; }
         [Required(ErrorMessage = "Please Select Documents")]
         public string legalAgencyDocuments { get; set; }
         public string legalAgencyComment { get; set; }
         public int legalAgencyStatus { get; set; }
 
         [Required(ErrorMessage = "Please Select Agency Name")]
-        public long? fiAgencyId { get; set; }
+        public long fiAgencyId { get; set; }
         [Required(ErrorMessage = "Please Select Document Outdate")]
-        public DateTime fiDocumentOut_Date { get; set; }
+        public DateTime? fiDocumentOut_Date { get; set; }
         [Required(ErrorMessage = "Please Select Document Indate")]
-        public DateTime fiDocumentIn_Date { get; set; }
+        public DateTime? fiDocumentIn_Date { get; set; }
         [Required(ErrorMessage = "Please Select Documents")]
         public string fiAgencyDocuments { get; set; }
         public string fiAgencyComment { get; set; }
         public int fiAgencyStatus { get; set; }
-        public string CreatedBy { get; set; }
-        public DateTime? CreatedDate { get; set; }
-        public string LastModifiedBy { get; set; }
-        public DateTime? LastModifiedDate { get; set; }
+
+    
     }
 }

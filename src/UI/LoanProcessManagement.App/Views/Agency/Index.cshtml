@@ -107,6 +107,9 @@
                                 <div class="tab-pane fade show active" id="valuerAgency">
                                     <form method="post" action="/agency/index" id="valuerForm">
                                         <input type="hidden" asp-for="Tab" id="tabValueForValuer" />
+                                        <input type="hidden" asp-for="leadIdLong" />
+                                        <input type="hidden" asp-for="LgId" />
+
 
                                         <div class="form-group">
                                             <div class="row">
@@ -163,7 +166,7 @@
                                                     <label class=""> Document list </label><span style="color: Red">&nbsp;*</span>
                                                 </div>
                                                 <div class="col-6">
-                                                    <div class="input-control text">
+                                                    <div class="input-control text valuerDocs">
                                                         @foreach (var item in ViewBag.ValuerAgencyDocs)
                                                         {
                                                             <input type="checkbox" id="valuerDocs" value="@item.Id" checked="@item.Selected" /> @item.Name <br />
@@ -187,6 +190,10 @@
                                 <div class="tab-pane fade" id="legalAgency">
                                     <form method="post" action="/agency/index" id="legalForm">
                                         <input type="hidden" asp-for="Tab" id="tabValueForLegal" />
+                                        <input type="hidden" asp-for="leadIdLong" />
+                                        <input type="hidden" asp-for="LgId" />
+
+
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-1"></div>
@@ -243,10 +250,10 @@
                                                 <div class="col-6">
                                                     <div class="input-control text legalDocs">
                                                         @*@foreach (var item in ViewBag.LegalAgencyDocs)
-                                                            {
-                                                                <input type="checkbox" value="@item.Name" /> @item.Name <br />
-                                                                <input type="hidden" asp-for="legalAgencyDocuments" id="legalAgencyDoc" />
-                                                            }*@
+                        {
+                            <input type="checkbox" value="@item.Name" /> @item.Name <br />
+                            <input type="hidden" asp-for="legalAgencyDocuments" id="legalAgencyDoc" />
+                        }*@
                                                         @foreach (var item in ViewBag.LegalAgencyDocs)
                                                         {
                                                             <input type="checkbox" value="@item.Id" checked="@item.Selected" /> @item.Name <br />
@@ -272,6 +279,10 @@
                                 <div class="tab-pane fade" id="fiAgency">
                                     <form method="post" action="/agency/index" id="fiForm">
                                         <input type="hidden" asp-for="Tab" id="tabValueForFi" />
+                                        <input type="hidden" asp-for="leadIdLong" />
+                                        <input type="hidden" asp-for="LgId" />
+
+
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-1"></div>
@@ -328,10 +339,10 @@
                                                 <div class="col-6">
                                                     <div class="input-control text fiDocs">
                                                         @*@foreach (var item in ViewBag.FIAgencyDocs)
-                                                            {
-                                                                <input type="checkbox" value="@item.Id" /> @item.Name <br />
-                                                                <input type="hidden" asp-for="fiAgencyDocuments" id="fiAgencyDoc" />
-                                                            }*@
+                        {
+                            <input type="checkbox" value="@item.Id" /> @item.Name <br />
+                            <input type="hidden" asp-for="fiAgencyDocuments" id="fiAgencyDoc" />
+                        }*@
                                                         @foreach (var item in ViewBag.FIAgencyDocs)
                                                         {
                                                             <input type="checkbox" value="@item.Id" checked="@item.Selected" /> @item.Name <br />
@@ -376,7 +387,7 @@
             endDate: '0d',
             todayHighlight: true,
             changeMonth: true,
-            changeYear: true,           
+            changeYear: true,
             yearRange: "-100:+0"
         });
 
@@ -438,6 +449,23 @@
                 $('#tabValueForFi').val("Fi");
             }
         });
+
+        $(document).ready(function () {
+            if ('@ViewBag.isSuccess' == 'True') {
+                toastr.success('@ViewBag.Message', "Success");
+                setTimeout(function () {
+                    location.href = "/agency/index/@ViewBag.Lead_Id";
+                }, 4000);
+            }
+            else if ('@ViewBag.isSuccess' == 'False') {
+                toastr.error('@ViewBag.Message', "Error");
+                 setTimeout(function () {
+                    location.href = "/agency/index/@ViewBag.Lead_Id";
+                }, 4000);
+
+            }
+
+        })
 
 
 

@@ -28,6 +28,8 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string GetAllMenuMaps = "api/v1/Menu/GetAllMenuMaps";
         public const string RoleMap = "api/v1/Menu/CreateMenuMaps";
         public const string DeleteRoleMapById = "api/v1/Menu/DeleteMenuMapsById/";
+        public const string SubmitToAgency = "api/v1/Agency/SubmitToAgency";
+
 
         #region Maintaining the Url EndPoint - Pratiksha Poshe - 10/11/2021
         public const string GetAllLoanProducts = "api/v1/LoanProducts/GetAllLoanProducts";

@@ -53,10 +53,10 @@ namespace LoanProcessManagement.Persistence.Repositories
         public async Task<AddThirdPartyCheckDetailsDto> SubmitToAgency(AddThirdPartyCheckDetailsCommand req)
         {
             var user = await _dbContext.LpmLeadMasters.Include(x => x.Product).Include(x => x.LeadStatus).Include(z => z.Branch)
-                .Where(x => x.Id == req.lead_Id).FirstOrDefaultAsync();
+                .Where(x => x.Id == req.leadIdLong).FirstOrDefaultAsync();
             var ThirdPartyDetails = await _dbContext.lpmThirdPartyCheckDetails.Include(x => x.ValuerAgency).
                 Include(x => x.fiAgency).Include(x => x.legalAgency)
-            .Where(x => x.lead_Id == req.lead_Id).FirstOrDefaultAsync();
+            .Where(x => x.lead_Id == req.leadIdLong).FirstOrDefaultAsync();
             var response = new AddThirdPartyCheckDetailsDto();
             if (ThirdPartyDetails != null)
             {
@@ -117,9 +117,9 @@ namespace LoanProcessManagement.Persistence.Repositories
 
                 }
                 await _dbContext.SaveChangesAsync();
-                response.Message = "Data Has Been Updated Successfully !!";
+                response.Message = "Data Has Been Updated Successfully .";
                 response.Succeeded = true;
-                response.lead_Id = req.lead_Id;
+                response.lead_Id = req.leadIdLong;
                 return response;
 
 
@@ -131,24 +131,12 @@ namespace LoanProcessManagement.Persistence.Repositories
                 {
                     thirdPartyEntry = new LpmThirdPartyCheckDetails()
                     {
-                        lead_Id = req.lead_Id,
+                        lead_Id = req.leadIdLong,
                         valuerAgencyId = req.valuerAgencyId,
                         ValuerDocumentOut_Date = req.ValuerDocumentOut_Date,
                         valuerAgencyDocuments = req.valuerAgencyDocuments,
                         valuerAgencyComment = req.valuerAgencyComment,
                         valuerAgencyStatus = 1,
-                        //legalAgencyId = req.legalAgencyId,
-                        //LegalDocumentOut_Date = req.LegalDocumentOut_Date,
-                        //LegalDocumentIn_Date = req.LegalDocumentIn_Date,
-                        //legalAgencyDocuments = req.legalAgencyDocuments,
-                        //legalAgencyComment = req.legalAgencyComment,
-                        //legalAgencyStatus = 0,
-                        //fiAgencyId = req.fiAgencyId,
-                        //fiDocumentOut_Date = req.fiDocumentOut_Date,
-                        //fiDocumentIn_Date = req.fiDocumentIn_Date,
-                        //fiAgencyDocuments = req.fiAgencyDocuments,
-                        //fiAgencyComment = req.fiAgencyComment,
-                        //fiAgencyStatus = 0,
                         CreatedBy = req.LgId,
                         CreatedDate = DateTime.Today
 
@@ -158,18 +146,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 {
                     thirdPartyEntry = new LpmThirdPartyCheckDetails()
                     {
-                        lead_Id = req.lead_Id,
-                        //valuerAgencyId = req.valuerAgencyId,
-                        //ValuerDocumentOut_Date = req.ValuerDocumentOut_Date,
-                        //valuerAgencyDocuments = req.valuerAgencyDocuments,
-                        //valuerAgencyComment = req.valuerAgencyComment,
-                        //valuerAgencyStatus = 0,
-                        //legalAgencyId = req.legalAgencyId,
-                        //LegalDocumentOut_Date = req.LegalDocumentOut_Date,
-                        //LegalDocumentIn_Date = req.LegalDocumentIn_Date,
-                        //legalAgencyDocuments = req.legalAgencyDocuments,
-                        //legalAgencyComment = req.legalAgencyComment,
-                        //legalAgencyStatus = 0,
+                        lead_Id = req.leadIdLong,
                         fiAgencyId = req.fiAgencyId,
                         fiDocumentOut_Date = req.fiDocumentOut_Date,
                         fiDocumentIn_Date = req.fiDocumentIn_Date,
@@ -186,23 +163,12 @@ namespace LoanProcessManagement.Persistence.Repositories
                 {
                     thirdPartyEntry = new LpmThirdPartyCheckDetails()
                     {
-                        lead_Id = req.lead_Id,
-                        //valuerAgencyId = req.valuerAgencyId,
-                        //ValuerDocumentOut_Date = req.ValuerDocumentOut_Date,
-                        //valuerAgencyDocuments = req.valuerAgencyDocuments,
-                        //valuerAgencyComment = req.valuerAgencyComment,
-                        //valuerAgencyStatus = 0,
+                        lead_Id = req.leadIdLong,
                         legalAgencyId = req.legalAgencyId,
                         LegalDocumentOut_Date = req.LegalDocumentOut_Date,
                         legalAgencyDocuments = req.legalAgencyDocuments,
                         legalAgencyComment = req.legalAgencyComment,
                         legalAgencyStatus = 1,
-                        //fiAgencyId = req.fiAgencyId,
-                        //fiDocumentOut_Date = req.fiDocumentOut_Date,
-                        //fiDocumentIn_Date = req.fiDocumentIn_Date,
-                        //fiAgencyDocuments = req.fiAgencyDocuments,
-                        //fiAgencyComment = req.fiAgencyComment,
-                        //fiAgencyStatus = 0,
                         CreatedBy = req.LgId,
                         CreatedDate = DateTime.Today
 
@@ -212,9 +178,9 @@ namespace LoanProcessManagement.Persistence.Repositories
                 
                 await _dbContext.lpmThirdPartyCheckDetails.AddAsync(thirdPartyEntry);
                 await _dbContext.SaveChangesAsync();
-                response.Message = "Data has been added successfully !!";
+                response.Message = "Data has been added successfully .";
                 response.Succeeded = true;
-                response.lead_Id = req.lead_Id;
+                response.lead_Id = req.leadIdLong;
                 return response;
 
             }
@@ -268,7 +234,8 @@ namespace LoanProcessManagement.Persistence.Repositories
             {
                 return new GetThirdPartyCheckDetailsByLeadIdDto()
                 {
-                    Succeeded = false
+                    Succeeded = false,
+                    lead_Id=user.Id
                 };
             }
             

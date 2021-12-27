@@ -141,11 +141,11 @@
                     </a>
                 </li>
                 <!-- <li class="nav-item d-none d-sm-inline-block">
-                  <a href="index3.html" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                  <a href="#" class="nav-link">Contact</a>
-                </li> -->
+          <a href="index3.html" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="#" class="nav-link">Contact</a>
+        </li> -->
             </ul>
 
             @if (User != null && User.Identity.IsAuthenticated)
@@ -153,24 +153,51 @@
                 <!-- Right navbar links -->
                 <ul class="navbar-nav ml-auto">
                     <!-- Navbar Search -->
-                    <li class="nav-item dropdown">
+                    <!--<li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
                             My Profile <i class="fa fa-angle-down ml-2 opacity-8"></i>
                         </a>
                         <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"
                             style="margin: 0.125rem 0 0 -76%">
-                            <li class="dropdown-item"><b>Name:</b> @User.Identities.FirstOrDefault().Name</li>
+                            <li class="dropdown-item"><b>Name:</b> @User.Identities.FirstOrDefault().Name</li>-->
                             @*(@User.Claims.FirstOrDefault(c => c.Type == "Role").Value)*@
-                            <li class="dropdown-item"><b>Branch Name:</b> @User.Identities.FirstOrDefault().FindFirst("Branch").Value</li>
+                            <!--<li class="dropdown-item"><b>Branch Name:</b> @User.Identities.FirstOrDefault().FindFirst("Branch").Value</li>
                             <li class="dropdown-divider"></li>
                             <li class="nav-item d-sm-inline-block">
                                 <a href="/login/logout" class="nav-link">Logout</a>
                             </li>
 
                         </ul>
+                    </li>-->
+
+                    <li class="nav-item" aria-labelledby="exampleModalLabel">
+                        <div class="dropdown">
+                            <button class="btn btn-primary mr-2" style="border-radius:50px" type="button" data-toggle="dropdown">P</button>
+
+                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                <span class="dropdown-item dropdown-header">Profile !!</span>
+                                <div class="dropdown-divider"></div>
+                                <a href="#" class="dropdown-item">
+                                    @*<i class="fas fa-envelope mr-2"></i>*@ <b>Name:</b> @User.Identities.FirstOrDefault().Name
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="#" class="dropdown-item">
+                                    @*<i class="fas fa-tasks"></i>*@ <b>Branch Name:</b> @User.Identities.FirstOrDefault().FindFirst("Branch").Value
+
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <div class="col-sm-10 mb-2">
+                                    <a href="/login/logout" class="nav-link"><i class="fas fa-sign-out-alt mr-1"></i>Logout</a>
+                                </div>
+
+                            </div>
+                        </div>
                     </li>
 
                 </ul>
+
+
+
             }
         </nav>
         <!-- /.navbar -->

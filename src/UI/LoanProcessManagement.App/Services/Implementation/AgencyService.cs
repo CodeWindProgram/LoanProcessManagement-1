@@ -1,13 +1,17 @@
 ﻿using LoanProcessManagement.App.Helper.APIHelper;
+using LoanProcessManagement.App.Models;
 using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.Agency.Queries.GetAllAgency;
+using LoanProcessManagement.Application.Features.ThirdPartyCheckDetails.Command;
 using LoanProcessManagement.Application.Features.ThirdPartyCheckDetails.Queries;
 using LoanProcessManagement.Application.Responses;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -77,7 +81,33 @@ namespace LoanProcessManagement.App.Services.Implementation
             var response = System.Text.Json.JsonSerializer.Deserialize<Response<GetThirdPartyCheckDetailsByLeadIdDto>>(jsonString, options);
 
             return response;
-        } 
+        }
+
+
         #endregion
+
+        public async Task<Response<AddThirdPartyCheckDetailsDto>> SubmitToAgency(ThirdPartyCheckDetailsVm req)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var content = JsonConvert.SerializeObject(req);
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.PostAsync
+                (
+                    BaseUrl + APIEndpoints.SubmitToAgency,
+                    new StringContent(content, Encoding.Default,
+                    "application/json")
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var response = System.Text.Json.JsonSerializer.Deserialize<Response<AddThirdPartyCheckDetailsDto>>(jsonString, options);
+
+            return response;
+        }
     }
 }
