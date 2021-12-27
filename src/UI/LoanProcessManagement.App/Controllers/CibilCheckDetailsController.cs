@@ -59,8 +59,7 @@ namespace LoanProcessManagement.App.Controllers
                 PhoneNumber1 = applicantResponse.Data.PhoneNumber1,
                 PhoneNumber2 = applicantResponse.Data.PhoneNumber2,
                 Category = applicantResponse.Data.Category,
-                Residence = applicantResponse.Data.Residence,
-                
+                Residence = applicantResponse.Data.Residence,                
                 Qualification = applicantResponse.Data.Qualification,
             };
             if (applicant.IsSubmit)

@@ -85,7 +85,11 @@ namespace LoanProcessManagement.Persistence.Repositories
         {
            
             var applicant = _dbContext.LpmLeadITRDetails.Where(x => x.FormNo == request.FormNo && x.lead_Id==request.lead_Id && x.ApplicantType==request.ApplicantType).FirstOrDefault();
-            
+
+
+            var applicantDetails = await _dbContext.LpmLeadApplicantsDetails.Include(x => x.LpmLeadMaster)
+                .Where(x => (x.lead_Id).ToString() == request.lead_Id && x.ApplicantType == request.ApplicantType).FirstOrDefaultAsync();
+
             var encryptPassword = EncryptionDecryption.EncryptString(request.Password);
 
             LeadITRDetailsDto response = new LeadITRDetailsDto();
@@ -97,19 +101,41 @@ namespace LoanProcessManagement.Persistence.Repositories
                 applicant.LastModifiedBy = request.LastModifiedBy;
                 applicant.CreatedBy = request.CreatedBy;
                 applicant.IsSuccess = true;
+                applicant.IsActive = true;
+                applicant.IsConsent = true;
 
                 await _dbContext.SaveChangesAsync();
 
                 response.Message = "Password Updated Successfully";
                 response.Succeeded = true;
-                
+                return response;
             }
             else {
-                response.Message = "Failed to Update Password";
-                response.Succeeded = false;
+                
+                LpmLeadITRDetails details = new LpmLeadITRDetails();
+                details.Password = encryptPassword;
+                details.LastModifiedDate = DateTime.Now;
+                details.LastModifiedBy = request.LastModifiedBy;
+                details.CreatedBy = request.CreatedBy;
+                details.CreatedDate = DateTime.Now;
+                details.FormNo = request.FormNo;
+                details.lead_Id = request.lead_Id;
+                details.ApplicantDetailId = applicantDetails.Id;
+                details.ApplicantType = request.ApplicantType;
+                details.IsSuccess = true;
+                details.IsConsent = true;
+                details.IsActive = true;
+
+                await _dbContext.LpmLeadITRDetails.AddAsync(details);
+                await _dbContext.SaveChangesAsync();
+
+                response.Message = "New Record Added Successfully";
+                response.Succeeded = true;
+
+                return response;
             }
 
-            return response;
+            //return response;
         }
         #endregion
     }

@@ -509,6 +509,7 @@
                                     <div class="col-md-5">
                                         <div class="input-control text">
                                             <label id="ResidenceNode"></label>
+                                            @*<label>@Model.Residence</label>*@
                                             @*<select asp-for="Residence" class="form-control">
                                                 <option value="">----Select----</option>
                                                 <option value="1">Owned</option>
@@ -596,30 +597,33 @@
 <script>
     $(document).ready(function () {
         var category = document.getElementById("CategoryNode");
-        if (@Model.Category== 1) {
+
+        if (@Model.Category == 1) {
             category.textContent = "Perminant Address";
-        } else if (@Model.Category== 2) {
+        } else if (@Model.Category == 2) {
             category.textContent = "Residence Address";
         }
-        else if (@Model.Category== 3) {
+        else if (@Model.Category == 3) {
             category.textContent = "Office Address";
         }
-        else if (@Model.Category== 4) {
+        else if (@Model.Category == 4) {
             category.textContent = "Not Changed Address";
         }
     });
 
     $(document).ready(function () {
         var residence = document.getElementById("ResidenceNode");
-        if (@Model.Residence== 1) {
+
+        if (@Model.Residence == 1) {
             residence.textContent = "Owned";
-        } else if (@Model.Residence== 2) {
+        } else if (@Model.Residence == 2) {
             residence.textContent = "Rented";
         }
     });
 
     $(document).ready(function () {
         var qualification = document.getElementById("QualificationNode");
+
         if (@Model.Qualification== 1) {
             qualification.textContent = "BA";
         } else if (@Model.Qualification== 2) {

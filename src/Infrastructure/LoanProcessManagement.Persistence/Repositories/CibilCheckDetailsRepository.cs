@@ -141,9 +141,39 @@ namespace LoanProcessManagement.Persistence.Repositories
 
             }
             else {
-                request.IsSubmit = false;
-                request.Message = "Cibil Details are not Updated ";
-                request.Succeeded = false;
+                LpmCibilCheckDetails details = new LpmCibilCheckDetails();
+                
+                details.LastModifiedDate = DateTime.Now;
+                details.LastModifiedBy = request.LastModifiedBy;
+                details.CreatedBy = request.CreatedBy;
+                details.CreatedDate = DateTime.Now;
+                details.FormNo = request.FormNo;
+                details.lead_Id = request.lead_Id;
+                details.PhoneNumber1 = request.PhoneNumber1;
+                details.PhoneNumber2 = request.PhoneNumber2;
+                details.ApplicantDetailId = applicantDetails.Id;
+                details.Category = request.Category;
+                details.Residence = request.Residence;
+                details.Qualification = request.Qualification;
+                details.ApplicantType = request.ApplicantType;
+                details.IsSubmit = true;
+                details.IsSuccess = true;
+                details.IsActive = true;
+
+                applicantDetails.AddressLine1 = request.AddressLine1;
+                applicantDetails.AddressLine2 = request.AddressLine2;
+                applicantDetails.AddressLine3 = request.AddressLine3;
+                applicantDetails.State = request.State;
+                applicantDetails.Pincode = request.Pincode;
+                applicantDetails.City = request.City;
+                applicantDetails.LastModifiedDate = DateTime.Now;
+
+                await _dbContext.LpmCibilCheckDetails.AddAsync(details);
+
+                await _dbContext.SaveChangesAsync();
+
+                request.Message = "New Record Added Successfully";
+                request.Succeeded = true;
 
                 return request;
             }

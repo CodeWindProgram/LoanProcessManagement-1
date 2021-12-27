@@ -251,12 +251,12 @@
                                     <div style="height: 5px;"></div>
                                     <div class="row tab">
                                         <div class="col-md-5">
-                                            <label class="">Password</label>
-                                            <span style="color: Red">&nbsp;*</span>
+                                            <label class="" id="PasswordBoxLabel">Password</label>
+                                            <span style="color: Red" id="FieldMark">&nbsp;*</span>
                                         </div>
                                         <div class="col-md-5">
                                             <div class="input-control text">
-                                                <input asp-for="Password" type="password" maxlength="20" id="ContentPlaceHolder1_txtPAN" class="form-control">
+                                                <input asp-for="Password" type="password" maxlength="20" id="PasswordBoxNode" class="form-control">
                                                 <span asp-validation-for="Password" style="color:Red;display:block;"></span>
                                             </div>
                                         </div>
@@ -273,7 +273,7 @@
                                         <div class="col-md-12">
                                             <center>
 
-                                                <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="ContentPlaceHolder1_btnAddEnquiry" class="btn" style="background-color: #343a40; color:white;">&nbsp
+                                                <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="SubmitButton" class="btn" style="background-color: #343a40; color:white;">&nbsp
 
                                                 <input type="submit" name="ctl00$ContentPlaceHolder1$btnExit" value="Exit" id="ContentPlaceHolder1_btnExit" class="btn btn-danger" asp-controller="Home" asp-action="Index">
                                             </center>
@@ -293,6 +293,7 @@
     $(document).ready(function () {
 
         if ('@ViewBag.isSuccess' == 'True') {
+           
             setTimeout(function () {
                 location.href = "/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=@Model.ApplicantType";
             }, 1000);
@@ -334,5 +335,36 @@
              applicant0.style.backgroundColor = "#343a40";
         }
 
+    });
+
+    @*$(document).ready(function () {
+        var buttonNode = $('#SubmitButton');                                       //ContentPlaceHolder1_btnAddEnquiry
+        if (@Model.IsSuccess) {
+            setTimeout(function () {
+                //buttonNode.prop('disabled', true);
+                $("#SubmitButton").prop("disabled", true);
+            }, 1000);
+        }
+
+        if (@Model.IsSuccess) {
+            $("#SubmitButton").hide();
+            $("#PasswordBoxNode").hide();
+            $("#PasswordBoxLabel").hide();
+        }
+    });*@
+
+    $(document).ready(function () {
+        var button = document.getElementById("SubmitButton");
+        var passwordBox = document.getElementById("PasswordBoxNode");
+        var passwordLabel = document.getElementById("PasswordBoxLabel");
+        debugger;
+        if (@Model.IsSuccess.ToString().ToLower() == true) {
+            //$("#SubmitButton").hide();
+            //console.log("HI");
+            $("#SubmitButton").attr("disabled", "disabled");
+            $("#PasswordBoxNode").hide();
+            $("#PasswordBoxLabel").hide();
+            $("#FieldMark").hide();
+        } 
     });
 </script>
