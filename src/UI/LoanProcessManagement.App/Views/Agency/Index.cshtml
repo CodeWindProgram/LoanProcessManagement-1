@@ -119,7 +119,8 @@
                                                         <select id="ContentPlaceHolder1_ddlAgency" asp-for="valuerAgencyId" asp-items=" ViewBag.valuerAgencyName" class="form-control">
                                                             <option value="">Select Name</option>
                                                         </select>
-                                                        <span style="color:Red;display:block;"></span>
+                                                        <span asp-validation-for="valuerAgencyId" class="text-danger"></span>
+                                                        @*<span style="color:Red;display:block;"></span>*@
                                                     </div>
                                                 </div>
                                             </div>
@@ -134,7 +135,7 @@
                                                 <div class="col-6">
                                                     <div class="input-control text">
                                                         <input asp-for="ValuerDocumentOut_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocOutdate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
-                                                        @*<span asp-validation-for="DateOfBirth" style="color:Red;display:block;"></span>*@
+                                                        <span asp-validation-for="ValuerDocumentOut_Date" class="text-danger"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -149,7 +150,7 @@
                                                 <div class="col-6">
                                                     <div class="input-control text">
                                                         <input asp-for="ValuerDocumentIn_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
-                                                        @*<span asp-validation-for="DateOfBirth" style="color:Red;display:block;"></span>*@
+                                                        <span asp-validation-for="ValuerDocumentIn_Date" class="text-danger"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -197,7 +198,7 @@
                                                         <select id="ContentPlaceHolder1_ddlAgency" asp-for="legalAgencyId" asp-items="ViewBag.legalAgencyName" class="form-control">
                                                             <option value="">Select Name</option>
                                                         </select>
-                                                        <span style="color:Red;display:block;"></span>
+                                                        <span asp-validation-for="legalAgencyId" class="text-danger"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -212,7 +213,7 @@
                                                 <div class="col-6">
                                                     <div class="input-control text">
                                                         <input asp-for="LegalDocumentOut_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocOutdate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
-                                                        @*<span asp-validation-for="DateOfBirth" style="color:Red;display:block;"></span>*@
+                                                        <span asp-validation-for="LegalDocumentOut_Date" class="text-danger"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -227,8 +228,7 @@
                                                 <div class="col-6">
                                                     <div class="input-control text">
                                                         <input asp-for="LegalDocumentIn_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
-                                                        <span id="ContentPlaceHolder1_RequiredFieldValidator2" style="color:Red;display:none;">Date of Birth is mandatory.</span>
-                                                        @*<span asp-validation-for="DateOfBirth" style="color:Red;display:block;"></span>*@
+                                                        <span asp-validation-for="LegalDocumentIn_Date" class="text-danger"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -283,7 +283,7 @@
                                                         <select id="ContentPlaceHolder1_ddlAgency" asp-for="fiAgencyId" asp-items="ViewBag.fiAgencyName" class="form-control">
                                                             <option value="">Select Name</option>
                                                         </select>
-                                                        <span style="color:Red;display:block;"></span>
+                                                        <span asp-validation-for="fiAgencyId" class="text-danger"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -298,7 +298,7 @@
                                                 <div class="col-6">
                                                     <div class="input-control text">
                                                         <input asp-for="fiDocumentOut_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocOutdate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
-                                                        @*<span asp-validation-for="DateOfBirth" style="color:Red;display:block;"></span>*@
+                                                        <span asp-validation-for="fiDocumentOut_Date" class="text-danger"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -313,8 +313,7 @@
                                                 <div class="col-6">
                                                     <div class="input-control text">
                                                         <input asp-for="fiDocumentIn_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
-                                                        <span id="ContentPlaceHolder1_RequiredFieldValidator2" style="color:Red;display:none;">Date of Birth is mandatory.</span>
-                                                        @*<span asp-validation-for="DateOfBirth" style="color:Red;display:block;"></span>*@
+                                                        <span asp-validation-for="fiDocumentIn_Date" class="text-danger"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -373,12 +372,11 @@
         $(".datepicker").datepicker({
             showOn: "button",
             format: "dd-mm-yyyy",
-            daysOfWeekDisabled: [0, 6],
-            //startDate: '-2d',
-            //endDate: date,
-            //datesDisabled: '0d',
+            daysOfWeekDisabled: [0,6],
+            endDate: '0d',
+            todayHighlight: true,
             changeMonth: true,
-            changeYear: true,
+            changeYear: true,           
             yearRange: "-100:+0"
         });
 

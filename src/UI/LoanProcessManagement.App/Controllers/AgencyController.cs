@@ -30,17 +30,21 @@ namespace LoanProcessManagement.App.Controllers
         public async Task<IActionResult> Index(string lead_Id)
         {
             var thirdPartyDetailsResponse = await _agencyService.GetThirdPartyCheckDetailsByLeadId(lead_Id);
-            var valuerAgencyDocsChkbxValues = thirdPartyDetailsResponse.Data.valuerAgencyDocuments;
-            var legalAgencyDocsChkbxValues = thirdPartyDetailsResponse.Data.legalAgencyDocuments;
-            var fiAgencyDocsChkbxValues = thirdPartyDetailsResponse.Data.fiAgencyDocuments;
 
-            string[] valuerDocArray = valuerAgencyDocsChkbxValues.Split(',');
-            string[] legalDocArray = legalAgencyDocsChkbxValues.Split(',');
-            string[] fiDocArray = fiAgencyDocsChkbxValues.Split(',');
-
+            List<string> valuerDocArray = new List<string>();
+            List<string> legalDocArray = new List<string>();
+            List<string> fiDocArray = new List<string>();
             var thirdPartyCheckDetailsResponse = new ThirdPartyCheckDetailsVm();
-            if (thirdPartyDetailsResponse != null && thirdPartyDetailsResponse.Data != null)
+            if (thirdPartyDetailsResponse.Data.Succeeded)
             {
+                var valuerAgencyDocsChkbxValues = thirdPartyDetailsResponse.Data.valuerAgencyDocuments;
+                var legalAgencyDocsChkbxValues = thirdPartyDetailsResponse.Data.legalAgencyDocuments;
+                var fiAgencyDocsChkbxValues = thirdPartyDetailsResponse.Data.fiAgencyDocuments;
+
+                valuerDocArray = valuerAgencyDocsChkbxValues.Split(',').ToList();
+                legalDocArray = legalAgencyDocsChkbxValues.Split(',').ToList();
+                fiDocArray = fiAgencyDocsChkbxValues.Split(',').ToList();
+
                 thirdPartyCheckDetailsResponse = new ThirdPartyCheckDetailsVm()
                 {
                     lead_Id = thirdPartyDetailsResponse.Data.lead_Id,
@@ -86,7 +90,7 @@ namespace LoanProcessManagement.App.Controllers
                 new AgencyDocumentVm{Id = 9, Name = "Layout Approval", Selected = false}
             };
 
-            for(int i = 0; i < valuerDocArray.Length; i++)
+            for(int i = 0; i < valuerDocArray.Count; i++)
             {
                 var obj = ValuerAgencyDocs.Where(x => x.Id == Convert.ToInt32(valuerDocArray[i])).FirstOrDefault();
 
@@ -111,7 +115,7 @@ namespace LoanProcessManagement.App.Controllers
                 new AgencyDocumentVm{Id = 9, Name = "Layout Approval", Selected = false}
             };
 
-            for (int i = 0; i < legalDocArray.Length; i++)
+            for (int i = 0; i < legalDocArray.Count; i++)
             {
                 var obj = LegalAgencyDocs.Where(x => x.Id == Convert.ToInt32(legalDocArray[i])).FirstOrDefault();
 
@@ -136,7 +140,7 @@ namespace LoanProcessManagement.App.Controllers
                 new AgencyDocumentVm{Id = 9, Name = "Layout Approval", Selected = false}
             };
 
-            for (int i = 0; i < fiDocArray.Length; i++)
+            for (int i = 0; i < fiDocArray.Count; i++)
             {
                 var obj = FIAgencyDocs.Where(x => x.Id == Convert.ToInt32(fiDocArray[i])).FirstOrDefault();
 

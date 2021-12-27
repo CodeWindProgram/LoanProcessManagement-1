@@ -222,9 +222,10 @@ namespace LoanProcessManagement.Persistence.Repositories
         }
 
 
-        #region 
+        #region Repository method for fetching thirdpartydetails from db - Pratiksha - 24/12/2021
         /// <summary>
-        /// 
+        /// 24/12/2021 - Repository method for fetching thirdpartydetails from db
+        /// commented by Pratiksha Poshe
         /// </summary>
         /// <param name="lead_Id"></param>
         /// <returns></returns>
@@ -258,12 +259,17 @@ namespace LoanProcessManagement.Persistence.Repositories
                     fiDocumentIn_Date = thirdPartyDetails.fiDocumentIn_Date,
                     fiAgencyComment = thirdPartyDetails.fiAgencyComment,
                     fiAgencyDocuments = thirdPartyDetails.fiAgencyDocuments,
-                    fiAgencyStatus = thirdPartyDetails.fiAgencyStatus
+                    fiAgencyStatus = thirdPartyDetails.fiAgencyStatus,
+
+                    Succeeded = true
                 };
             }
             else
             {
-                return new GetThirdPartyCheckDetailsByLeadIdDto();
+                return new GetThirdPartyCheckDetailsByLeadIdDto()
+                {
+                    Succeeded = false
+                };
             }
             
         }
