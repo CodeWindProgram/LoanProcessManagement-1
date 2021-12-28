@@ -7,6 +7,9 @@ using LoanProcessManagement.Application.Responses;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using LoanProcessManagement.Application.Features.LeadList.Commands.AddLead;
+using LoanProcessManagement.Application.Features.Branch.Queries;
+using LoanProcessManagement.Application.Features.LeadList.Query.LeadStatus;
+using LoanProcessManagement.Application.Features.LeadList.Query.LeadNameByLgId;
 
 namespace LoanProcessManagement.App.Services.Interfaces
 {
@@ -14,10 +17,14 @@ namespace LoanProcessManagement.App.Services.Interfaces
     public interface ILeadListService
     {
         Task<Response<IEnumerable<LeadListCommandDto>>> LeadListProcess(LeadListCommand leadListCommand);
-        Task<Response<IEnumerable<LeadHistoryQueryVm>>> LeadHistory(string LeadId); 
+        Task<Response<IEnumerable<LeadHistoryQueryVm>>> LeadHistory(string LeadId);
+        Task<IEnumerable<GetLeadNameByLgIdQueryVm>> LeadByLgId(string LgId);
+        Task<IEnumerable<GetLeadStatusQueryVm>> LeadByBranchId(long Id);
+        Task<GetAllBranchesDto> BranchById(long Id);
         Task<Response<GetLeadByLeadIdDto>> GetLeadByLeadId(string leadId);
         Task<Response<UpdateLeadDto>> ModifyLead(ModifyLeadVM lead);
         Task<Response<AddLeadDto>> AddLead(AddLeadCommandVM leadCommandVm);
+        Task<IEnumerable<GetAllBranchesDto>> AllBranch();
     }
     #endregion
 }

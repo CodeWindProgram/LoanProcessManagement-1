@@ -1,4 +1,5 @@
-﻿using LoanProcessManagement.Application.Features.Branch.Queries;
+﻿using LoanProcessManagement.Application.Features.Branch.GetBranchNameById;
+using LoanProcessManagement.Application.Features.Branch.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -39,7 +40,16 @@ namespace LoanProcessManagement.Api.Controllers.v1
             var dtos = await _mediator.Send(new GetAllBranchesQuery());
             _logger.LogInformation("GetBranches Completed");
             return Ok(dtos);
-        } 
+        }
         #endregion
+
+        [HttpGet("GetBrancheById/{Id}")]
+        public async Task<ActionResult> GetBrancheById(long Id)
+        {
+            _logger.LogInformation("GetBranches Initiated");
+            var dtos = await _mediator.Send(new GetBranchNameByIdQuery(Id));
+            _logger.LogInformation("GetBranches Completed");
+            return Ok(dtos);
+        }
     }
 }

@@ -58,6 +58,10 @@ using LoanProcessManagement.Application.Features.UserList.Query.GetLockedUserLis
 using LoanProcessManagement.Application.Features.LoanSchemes;
 using LoanProcessManagement.Application.Features.LeadITRDetails.Command;
 using LoanProcessManagement.Application.Features.CibilCheck.Commands.AddCibilCheckDetails;
+using LoanProcessManagement.Application.Features.LeadList.Query.LeadStatus;
+using LoanProcessManagement.Application.Features.LeadList.Query.LeadByLGID;
+using LoanProcessManagement.Application.Features.LeadList.Query.LeadNameByLgId;
+using LoanProcessManagement.Application.Features.Branch.GetBranchNameById;
 
 namespace LoanProcessManagement.Application.Profiles
 {
@@ -111,6 +115,12 @@ namespace LoanProcessManagement.Application.Profiles
             CreateMap<LpmLoanProductMaster, LeadHistoryQueryVm>().ReverseMap();
             CreateMap<LpmLeadStatusMaster, LeadHistoryQueryVm>().ReverseMap();
             CreateMap<LpmLeadMaster, LeadHistoryQueryVm>().ReverseMap();
+            CreateMap<LpmLeadMaster, GetLeadStatusQueryVm>().ReverseMap();
+            CreateMap<LpmLeadMaster, GetLeadStatusListQuery>().ReverseMap();
+            CreateMap<LpmLeadMaster, GetLeadByLeadAssigneeIdQueryVm>().ReverseMap();
+            CreateMap<LpmLeadMaster, GetLeadByLeadAssigneeIdQuery>().ReverseMap();
+            CreateMap<LpmLeadMaster, GetLeadNameByLgIdQuery>().ReverseMap();
+            CreateMap<LpmLeadMaster, GetLeadNameByLgIdQueryVm>().ReverseMap();
 
             CreateMap<LpmLeadProcessCycle, LeadHistoryQuery>().ReverseMap();
             CreateMap<LpmLoanProductMaster, LeadHistoryQuery>().ReverseMap();
@@ -147,6 +157,7 @@ namespace LoanProcessManagement.Application.Profiles
             CreateMap<LpmUserRoleMenuMap, GetTheMenuMapsCommand>().ReverseMap();
             CreateMap<LpmUserRoleMenuMap, GetTheMenuMapsCommandDto>().ReverseMap();
             CreateMap<LpmUserRoleMenuMap, DeleteMenuMapByIdCommandDto>().ReverseMap();
+            CreateMap<LpmBranchMaster, GetBranchNameByIdQueryVm>().ReverseMap();
 
 
             #region UnlockUserAccount mapping has created by-Ramya Guduru-29-10-2021

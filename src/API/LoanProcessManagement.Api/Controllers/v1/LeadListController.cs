@@ -9,6 +9,9 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
+using LoanProcessManagement.Application.Features.LeadList.Query.LeadStatus;
+using LoanProcessManagement.Application.Features.LeadList.Query.LeadByLGID;
+using LoanProcessManagement.Application.Features.LeadList.Query.LeadNameByLgId;
 
 namespace LoanProcessManagement.Api.Controllers.v1
 {
@@ -94,5 +97,32 @@ namespace LoanProcessManagement.Api.Controllers.v1
             return Ok(dtos);
         }
         #endregion
+
+        [HttpGet("LeadStatus/{BranchId}")]
+        public async Task<ActionResult> LeadStatus(long BranchId)
+        {
+            _logger.LogInformation("GetHistory Initiated");
+            var dtos = await _mediator.Send(new GetLeadStatusListQuery(BranchId));
+            _logger.LogInformation("GetHistory Completed");
+            return Ok(dtos);
+        }
+
+        [HttpGet("GetLeadByLeadAssigneeId/{Lead_assignee_Id}")]
+        public async Task<ActionResult> GetLeadByLeadAssigneeId(string Lead_assignee_Id)
+        {
+            _logger.LogInformation("GetHistory Initiated");
+            var dtos = await _mediator.Send(new GetLeadByLeadAssigneeIdQuery(Lead_assignee_Id));
+            _logger.LogInformation("GetHistory Completed");
+            return Ok(dtos);
+        }
+
+        [HttpGet("LeadByName/{LgId}")]
+        public async Task<ActionResult> LeadByName(string LgId)
+        {
+            _logger.LogInformation("GetHistory Initiated");
+            var dtos = await _mediator.Send(new GetLeadNameByLgIdQuery(LgId));
+            _logger.LogInformation("GetHistory Completed");
+            return Ok(dtos);
+        }
     }
 }

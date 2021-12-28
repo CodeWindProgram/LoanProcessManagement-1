@@ -94,7 +94,7 @@ namespace LoanProcessManagement.App.Controllers
             var leadResponse = await _leadListService.GetLeadByLeadId(lead_Id);
             ViewBag.lead_Id = lead_Id;
             return View(leadResponse.Data);
-        } 
+        }
         #endregion
         public async Task<IActionResult> LeadProducts(LeadListCommand leadListCommand)
         {
@@ -190,15 +190,15 @@ namespace LoanProcessManagement.App.Controllers
                     IPSResponseType3 = leadResponse.Data.IPSResponseType3,
                     IPSResponseType4 = leadResponse.Data.IPSResponseType4,
                     IPSResponseType5 = leadResponse.Data.IPSResponseType5,
-                    HoQueryStatus=leadResponse.Data.HoQueryStatus,
-                    HoSanction_query_comment=leadResponse.Data.HoSanction_query_comment,
-                    HoSanction_query_commentResponse=leadResponse.Data.HoSanction_query_commentResponse
+                    HoQueryStatus = leadResponse.Data.HoQueryStatus,
+                    HoSanction_query_comment = leadResponse.Data.HoSanction_query_comment,
+                    HoSanction_query_commentResponse = leadResponse.Data.HoSanction_query_commentResponse
 
 
                 };
 
             }
-  
+
             var role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
             var statusResponse = await _commonService.GetAllStatus(role);
             var loanProductsResponse = await _commonService.GetAllLoanProduct();
@@ -241,7 +241,7 @@ namespace LoanProcessManagement.App.Controllers
             ViewBag.Message = modifyLeadResponse.Data.Message;
 
             var leadResponse = await _leadListService.GetLeadByLeadId(lead.lead_Id);
-            if(leadResponse.Data.QueryStatus == 'R')
+            if (leadResponse.Data.QueryStatus == 'R')
             {
                 if (leadResponse.Data.HoQueryStatus == 'R')
                 {
@@ -323,7 +323,7 @@ namespace LoanProcessManagement.App.Controllers
                 };
 
             }
-            
+
 
             var role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
             var statusResponse = await _commonService.GetAllStatus(role);
@@ -345,7 +345,7 @@ namespace LoanProcessManagement.App.Controllers
             ModelState.Clear();
 
             return View(currentLead);
-        } 
+        }
         #endregion
 
         #region This action method will internally call add lead api by - Pratiksha Poshe 10/11/2021
@@ -379,7 +379,7 @@ namespace LoanProcessManagement.App.Controllers
         [HttpPost]
         public async Task<IActionResult> AddLead(AddLeadCommandVM leadCommandVM)
         {
-            if(leadCommandVM != null && leadCommandVM.IsPropertyIdentified.ToLower() == "NO".ToLower())
+            if (leadCommandVM != null && leadCommandVM.IsPropertyIdentified.ToLower() == "NO".ToLower())
             {
                 ModelState.Remove("PropertyID");
                 ModelState.Remove("PropertyPincode");
@@ -390,7 +390,7 @@ namespace LoanProcessManagement.App.Controllers
                 ModelState.Remove("IsSanctionedPlanReceivedID");
             }
 
-            if(leadCommandVM != null && leadCommandVM.EmploymentType.ToLower() == "Salaried".ToLower())
+            if (leadCommandVM != null && leadCommandVM.EmploymentType.ToLower() == "Salaried".ToLower())
             {
                 ModelState.Remove("AnnualTurnOverInLastFy");
             }
@@ -405,7 +405,7 @@ namespace LoanProcessManagement.App.Controllers
                 var response = await _leadListService.AddLead(leadCommandVM);
                 ViewBag.isSuccess = response.Succeeded;
                 ViewBag.Message = response.Data.Message;
-                if(response.Succeeded)
+                if (response.Succeeded)
                 {
                     ModelState.Clear();
                 }
@@ -432,10 +432,52 @@ namespace LoanProcessManagement.App.Controllers
             return Json(loanSchemesByProductId);
         }
         #endregion
-
-        public IActionResult LeadStatus()
+        
+        [Route("[controller]/[action]")]
+        [HttpGet]
+        public async Task<IActionResult> LeadStatus()
         {
-            return View();
+            var leadstatus = new LeadStatusVm();
+            var allBranch = await _leadListService.AllBranch();
+            leadstatus.getAllBranchesDto = new SelectList(allBranch,"Id", "branchname");
+            //var newdata = TempData["List"];
+            leadstatus.leadStatusListModel = leadStatusListModel;
+            return View(leadstatus);
+        }
+        List<LeadStatusListModel> leadStatusListModel = new List<LeadStatusListModel>();
+        public async Task<JsonResult> FilterSearch(long Id)
+        {   
+            var byId = await _leadListService.BranchById(Id);
+            var leadbyBranch = await _leadListService.LeadByBranchId(Id);
+            var lgextratct = leadbyBranch.Select(m=>m.LgId).Distinct();
+            foreach (var item in lgextratct)
+            {
+                var callbyLgId = await _leadListService.LeadByLgId(item);
+                var total = callbyLgId.Count();
+                int reject = callbyLgId.Where(m => m.CurrentStatus == 8).Count();
+                int lost = callbyLgId.Where(m => m.CurrentStatus == 11).Count();
+                int all = reject + lost;
+                int percentage = (int)Math.Round((double)(100 * all) / total);
+                leadStatusListModel.Add(new LeadStatusListModel() {
+                    DsaName = callbyLgId.FirstOrDefault().Name,
+                    TotalLead = total,
+                    ConvertedLead = callbyLgId.Where(m => m.CurrentStatus == 1).Count(),
+                    BranchDataEntry = callbyLgId.Where(m => m.CurrentStatus == 2).Count(),
+                    HoInPrinSanction = callbyLgId.Where(m => m.CurrentStatus ==3).Count(),
+                    BranchCustProcessing = callbyLgId.Where(m =>m.CurrentStatus==4).Count(),
+                    Branch3rdPartyCheck = callbyLgId.Where(m =>m.CurrentStatus==5).Count(),
+                    BranchRecord = callbyLgId.Where(m =>m.CurrentStatus==6).Count(),
+                    HoSanction = callbyLgId.Where(m =>m.CurrentStatus==7).Count(),
+                    RejectedLead = callbyLgId.Where(m =>m.CurrentStatus==8).Count(),
+                    SanctionedLead = callbyLgId.Where(m =>m.CurrentStatus==9).Count(),
+                    DisbursedLead = callbyLgId.Where(m =>m.CurrentStatus==10).Count(),
+                    LostLead = callbyLgId.Where(m =>m.CurrentStatus==11).Count(),
+                    RejectionPercent = percentage
+                });
+            }
+            //TempData["List"] = leadStatusListModel;
+            //return RedirectToAction("LeadStatus", "LeadList");
+            return Json(leadStatusListModel);
         }
     }
 }

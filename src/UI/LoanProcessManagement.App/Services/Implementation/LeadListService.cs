@@ -1,11 +1,14 @@
 ﻿using LoanProcessManagement.App.Helper.APIHelper;
 using LoanProcessManagement.App.Models;
 using LoanProcessManagement.App.Services.Interfaces;
+using LoanProcessManagement.Application.Features.Branch.Queries;
 using LoanProcessManagement.Application.Features.LeadList.Commands;
 using LoanProcessManagement.Application.Features.LeadList.Commands.AddLead;
 using LoanProcessManagement.Application.Features.LeadList.Commands.UpdateLead;
 using LoanProcessManagement.Application.Features.LeadList.Queries;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory;
+using LoanProcessManagement.Application.Features.LeadList.Query.LeadNameByLgId;
+using LoanProcessManagement.Application.Features.LeadList.Query.LeadStatus;
 using LoanProcessManagement.Application.Responses;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -176,5 +179,85 @@ namespace LoanProcessManagement.App.Services.Implementation
             return response;
         }
         #endregion
+
+        public async Task<IEnumerable<GetAllBranchesDto>> AllBranch()
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.GetAsync
+                (
+                    BaseUrl + APIEndpoints.AllBranches
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<IEnumerable<GetAllBranchesDto>>(jsonString, options);
+
+            return model;
+        }
+
+        public async Task<GetAllBranchesDto> BranchById(long Id)
+            {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.GetAsync
+                (
+                    BaseUrl + APIEndpoints.BrancheById + Id
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<GetAllBranchesDto>(jsonString, options);
+
+            return model;
+        }
+
+        public async Task<IEnumerable<GetLeadStatusQueryVm>> LeadByBranchId(long Id)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.GetAsync
+                (
+                    BaseUrl + APIEndpoints.LeadByBranchId + Id
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<IEnumerable<GetLeadStatusQueryVm>>(jsonString, options);
+
+            return model;
+        }
+
+        public async Task<IEnumerable<GetLeadNameByLgIdQueryVm>> LeadByLgId(string LgId)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.GetAsync
+                (
+                    BaseUrl + APIEndpoints.LeadByLgId + LgId
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<IEnumerable<GetLeadNameByLgIdQueryVm>>(jsonString, options);
+
+            return model;
+        }
     }
 }
