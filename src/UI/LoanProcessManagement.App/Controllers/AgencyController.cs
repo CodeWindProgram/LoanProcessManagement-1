@@ -56,6 +56,7 @@ namespace LoanProcessManagement.App.Controllers
                 }
 
                 thirdPartyCheckDetailsResponse.leadIdLong = (long)thirdPartyDetailsResponse.Data.lead_Id;
+                thirdPartyCheckDetailsResponse.leadIdString = Lead_Id;
                 thirdPartyCheckDetailsResponse.LgId = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value;
                 thirdPartyCheckDetailsResponse.valuerAgencyId = (long)thirdPartyDetailsResponse.Data.valuerAgencyId;
                 thirdPartyCheckDetailsResponse.ValuerDocumentOut_Date = thirdPartyDetailsResponse.Data.ValuerDocumentOut_Date;
@@ -64,6 +65,7 @@ namespace LoanProcessManagement.App.Controllers
                 thirdPartyCheckDetailsResponse.valuerAgencyComment = thirdPartyDetailsResponse.Data.valuerAgencyComment;
                 thirdPartyCheckDetailsResponse.valuerAgencyStatus = thirdPartyDetailsResponse.Data.valuerAgencyStatus;
                 thirdPartyCheckDetailsResponse.legalAgencyId = (long)thirdPartyDetailsResponse.Data.legalAgencyId;
+                thirdPartyCheckDetailsResponse.legalAgencyStatus = thirdPartyDetailsResponse.Data.legalAgencyStatus;
                 thirdPartyCheckDetailsResponse.LegalDocumentOut_Date = thirdPartyDetailsResponse.Data.LegalDocumentOut_Date;
                 thirdPartyCheckDetailsResponse.LegalDocumentIn_Date = thirdPartyDetailsResponse.Data.LegalDocumentIn_Date;
                 thirdPartyCheckDetailsResponse.legalAgencyDocuments = thirdPartyDetailsResponse.Data.legalAgencyDocuments;
@@ -79,6 +81,7 @@ namespace LoanProcessManagement.App.Controllers
             }
             else
             {
+                thirdPartyCheckDetailsResponse.leadIdString = Lead_Id;
                 thirdPartyCheckDetailsResponse.leadIdLong = (long)thirdPartyDetailsResponse.Data.lead_Id;
                 thirdPartyCheckDetailsResponse.LgId = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value;
 
@@ -179,54 +182,55 @@ namespace LoanProcessManagement.App.Controllers
             var thirdPartyDetailsResponse = await _agencyService.SubmitToAgency(req);
             if (thirdPartyDetailsResponse != null && thirdPartyDetailsResponse.Data!=null) 
             {
-                //ViewBag.isSuccess = thirdPartyDetailsResponse.Data.Succeeded;
-                //ViewBag.Message = thirdPartyDetailsResponse.Data.Message;
-                //List<AgencyDocumentVm> ValuerAgencyDocs = new List<AgencyDocumentVm>()
-                //{
-                //    new AgencyDocumentVm{Id = 1, Name = "Aggrement to Sale (Registered/Notary)/ Sale Deed", Selected = false },
-                //    new AgencyDocumentVm{Id = 2, Name = "Planning Approvals", Selected = false},
-                //    new AgencyDocumentVm{Id = 3, Name = "Construction Agreement", Selected = false},
-                //    new AgencyDocumentVm{Id = 4, Name = "Commencement Certificate", Selected = false},
-                //    new AgencyDocumentVm{Id = 5, Name = "Completion Certificate", Selected = false},
-                //    new AgencyDocumentVm{Id = 6, Name = "Property tax receipts", Selected = false },
-                //    new AgencyDocumentVm{Id = 7, Name = "RERA number", Selected = false},
-                //    new AgencyDocumentVm{Id = 8, Name = "Architect Estimate ( Construction Estimate )", Selected = false},
-                //    new AgencyDocumentVm{Id = 9, Name = "Layout Approval", Selected = false}
-                //};
-                //List<AgencyDocumentVm> LegalAgencyDocs = new List<AgencyDocumentVm>()
-                //{
-                //    new AgencyDocumentVm{Id = 1, Name = "Aggrement to Sale (Registered/Notary)/ Sale Deed", Selected = false},
-                //    new AgencyDocumentVm{Id = 2, Name = "Planning Approvals", Selected = false},
-                //    new AgencyDocumentVm{Id = 3, Name = "Construction Agreement", Selected = false},
-                //    new AgencyDocumentVm{Id = 4, Name = "Commencement Certificate", Selected = false},
-                //    new AgencyDocumentVm{Id = 5, Name = "Completion Certificate", Selected = false},
-                //    new AgencyDocumentVm{Id = 6, Name = "Property tax receipts", Selected = false},
-                //    new AgencyDocumentVm{Id = 7, Name = "RERA number", Selected = false},
-                //    new AgencyDocumentVm{Id = 8, Name = "Architect Estimate ( Construction Estimate )", Selected = false},
-                //    new AgencyDocumentVm{Id = 9, Name = "Layout Approval", Selected = false}
-                //};
-                //List<AgencyDocumentVm> FIAgencyDocs = new List<AgencyDocumentVm>()
-                //{
-                //    new AgencyDocumentVm{Id = 1, Name = "Aggrement to Sale (Registered/Notary)/ Sale Deed", Selected = false},
-                //    new AgencyDocumentVm{Id = 2, Name = "Planning Approvals", Selected = false},
-                //    new AgencyDocumentVm{Id = 3, Name = "Construction Agreement", Selected = false},
-                //    new AgencyDocumentVm{Id = 4, Name = "Commencement Certificate", Selected = false},
-                //    new AgencyDocumentVm{Id = 5, Name = "Completion Certificate", Selected = false},
-                //    new AgencyDocumentVm{Id = 6, Name = "Property tax receipts", Selected = false},
-                //    new AgencyDocumentVm{Id = 7, Name = "RERA number", Selected = false},
-                //    new AgencyDocumentVm{Id = 8, Name = "Architect Estimate ( Construction Estimate )", Selected = false},
-                //    new AgencyDocumentVm{Id = 9, Name = "Layout Approval", Selected = false}
-                //};
-                //ViewBag.ValuerAgencyDocs = ValuerAgencyDocs;
-                //ViewBag.LegalAgencyDocs = LegalAgencyDocs;
-                //ViewBag.FIAgencyDocs = FIAgencyDocs;
-                //var allAgencyNameResponse = await _agencyService.GetAllAgencyName();
-                //if (allAgencyNameResponse != null && allAgencyNameResponse.Data != null)
-                //{
-                //    ViewBag.valuerAgencyName = new SelectList(allAgencyNameResponse.Data.ValuerAgency, "Id", "AgencyName");
-                //    ViewBag.legalAgencyName = new SelectList(allAgencyNameResponse.Data.LegalAgency, "Id", "AgencyName");
-                //    ViewBag.fiAgencyName = new SelectList(allAgencyNameResponse.Data.FiAgency, "Id", "AgencyName");
-                //}
+                ViewBag.isSuccess = thirdPartyDetailsResponse.Data.Succeeded;
+                ViewBag.Message = thirdPartyDetailsResponse.Data.Message;
+                ViewBag.leadIdString = req.leadIdString;
+                List<AgencyDocumentVm> ValuerAgencyDocs = new List<AgencyDocumentVm>()
+                {
+                    new AgencyDocumentVm{Id = 1, Name = "Aggrement to Sale (Registered/Notary)/ Sale Deed", Selected = false },
+                    new AgencyDocumentVm{Id = 2, Name = "Planning Approvals", Selected = false},
+                    new AgencyDocumentVm{Id = 3, Name = "Construction Agreement", Selected = false},
+                    new AgencyDocumentVm{Id = 4, Name = "Commencement Certificate", Selected = false},
+                    new AgencyDocumentVm{Id = 5, Name = "Completion Certificate", Selected = false},
+                    new AgencyDocumentVm{Id = 6, Name = "Property tax receipts", Selected = false },
+                    new AgencyDocumentVm{Id = 7, Name = "RERA number", Selected = false},
+                    new AgencyDocumentVm{Id = 8, Name = "Architect Estimate ( Construction Estimate )", Selected = false},
+                    new AgencyDocumentVm{Id = 9, Name = "Layout Approval", Selected = false}
+                };
+                List<AgencyDocumentVm> LegalAgencyDocs = new List<AgencyDocumentVm>()
+                {
+                    new AgencyDocumentVm{Id = 1, Name = "Aggrement to Sale (Registered/Notary)/ Sale Deed", Selected = false},
+                    new AgencyDocumentVm{Id = 2, Name = "Planning Approvals", Selected = false},
+                    new AgencyDocumentVm{Id = 3, Name = "Construction Agreement", Selected = false},
+                    new AgencyDocumentVm{Id = 4, Name = "Commencement Certificate", Selected = false},
+                    new AgencyDocumentVm{Id = 5, Name = "Completion Certificate", Selected = false},
+                    new AgencyDocumentVm{Id = 6, Name = "Property tax receipts", Selected = false},
+                    new AgencyDocumentVm{Id = 7, Name = "RERA number", Selected = false},
+                    new AgencyDocumentVm{Id = 8, Name = "Architect Estimate ( Construction Estimate )", Selected = false},
+                    new AgencyDocumentVm{Id = 9, Name = "Layout Approval", Selected = false}
+                };
+                List<AgencyDocumentVm> FIAgencyDocs = new List<AgencyDocumentVm>()
+                {
+                    new AgencyDocumentVm{Id = 1, Name = "Aggrement to Sale (Registered/Notary)/ Sale Deed", Selected = false},
+                    new AgencyDocumentVm{Id = 2, Name = "Planning Approvals", Selected = false},
+                    new AgencyDocumentVm{Id = 3, Name = "Construction Agreement", Selected = false},
+                    new AgencyDocumentVm{Id = 4, Name = "Commencement Certificate", Selected = false},
+                    new AgencyDocumentVm{Id = 5, Name = "Completion Certificate", Selected = false},
+                    new AgencyDocumentVm{Id = 6, Name = "Property tax receipts", Selected = false},
+                    new AgencyDocumentVm{Id = 7, Name = "RERA number", Selected = false},
+                    new AgencyDocumentVm{Id = 8, Name = "Architect Estimate ( Construction Estimate )", Selected = false},
+                    new AgencyDocumentVm{Id = 9, Name = "Layout Approval", Selected = false}
+                };
+                ViewBag.ValuerAgencyDocs = ValuerAgencyDocs;
+                ViewBag.LegalAgencyDocs = LegalAgencyDocs;
+                ViewBag.FIAgencyDocs = FIAgencyDocs;
+                var allAgencyNameResponse = await _agencyService.GetAllAgencyName();
+                if (allAgencyNameResponse != null && allAgencyNameResponse.Data != null)
+                {
+                    ViewBag.valuerAgencyName = new SelectList(allAgencyNameResponse.Data.ValuerAgency, "Id", "AgencyName");
+                    ViewBag.legalAgencyName = new SelectList(allAgencyNameResponse.Data.LegalAgency, "Id", "AgencyName");
+                    ViewBag.fiAgencyName = new SelectList(allAgencyNameResponse.Data.FiAgency, "Id", "AgencyName");
+                }
                 return View(new ThirdPartyCheckDetailsVm());
 
             }

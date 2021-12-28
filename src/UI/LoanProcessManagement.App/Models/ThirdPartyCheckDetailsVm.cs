@@ -12,6 +12,8 @@ namespace LoanProcessManagement.App.Models
         [HiddenInput]
         public long leadIdLong { get; set; }
         [HiddenInput]
+        public string leadIdString { get; set; }
+        [HiddenInput]
         public string Tab { get; set; }
         public string LgId { get; set; }
 
