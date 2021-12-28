@@ -128,7 +128,6 @@
                                                             <option value="">Select Name</option>
                                                         </select>
                                                         <span asp-validation-for="valuerAgencyId" class="text-danger"></span>
-                                                        @*<span style="color:Red;display:block;"></span>*@
                                                     </div>
                                                 </div>
                                             </div>
@@ -170,8 +169,8 @@
                                         <div class="row tab">
                                             <div class="col-md-12">
                                                 <center>
-                                                    <input type="submit" value="Submit" id="ValuerTab" class="btn" style="background-color: #343a40; color:white;">&nbsp
-                                                    <a id="cancelbutton" class="btn btn-danger">Cancel</a>
+                                                    <input type="submit" value="Submit To Agency" id="ValuerTab" class="btn" style="background-color: #343a40; color:white;">&nbsp
+                                                    <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@Model.leadIdString">Cancel</a>
                                                 </center>
                                             </div>
                                         </div>
@@ -196,14 +195,23 @@
                                                 <div class="row">
                                                     <div class="col-1"></div>
                                                     <div class="col-3">
-                                                        <label asp-for="valuerAgencyComment">Comment : </label><span style="color: Red">&nbsp;*</span>
+                                                        <label asp-for="valuerAgencyComment">Comment : </label>
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="input-control text">
-                                                            <input asp-for="valuerAgencyComment" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                            <input asp-for="valuerAgencyComment" type="text" id="ValuerComment" placeholder="Enter Comment" class="form-control datepicker" />
                                                             <span asp-validation-for="valuerAgencyComment" class="text-danger"></span>
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row tab">
+                                                <div class="col-md-12">
+                                                    <center>
+                                                        <input type="submit" value="Submit" id="ValuerTabs" class="btn" style="background-color: #343a40; color:white;">&nbsp
+                                                        <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@Model.leadIdString">Cancel</a>
+                                                    </center>
                                                 </div>
                                             </div>
                                         </div>
@@ -276,7 +284,7 @@
                                             <div class="col-md-12">
                                                 <center>
                                                     <input type="submit" value="Submit To Agency" id="LegalTab" class="btn" style="background-color: #343a40; color:white;">&nbsp
-                                                    <a id="cancelbutton" class="btn btn-danger">Cancel</a>
+                                                    <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@Model.leadIdString">Cancel</a>
                                                 </center>
                                             </div>
                                         </div>
@@ -302,14 +310,23 @@
                                                 <div class="row">
                                                     <div class="col-1"></div>
                                                     <div class="col-3">
-                                                        <label asp-for="legalAgencyComment">Comment : </label><span style="color: Red">&nbsp;*</span>
+                                                        <label asp-for="legalAgencyComment">Comment : </label>
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="input-control text">
-                                                            <input asp-for="legalAgencyComment" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                            <input asp-for="legalAgencyComment" type="text" id="LegalComment" placeholder="Enter Comment" class="form-control datepicker" />
                                                             <span asp-validation-for="legalAgencyComment" class="text-danger"></span>
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row tab">
+                                                <div class="col-md-12">
+                                                    <center>
+                                                        <input type="submit" value="Submit" id="LegalTabs" class="btn" style="background-color: #343a40; color:white;">&nbsp
+                                                        <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@Model.leadIdString">Cancel</a>
+                                                    </center>
                                                 </div>
                                             </div>
                                         </div>
@@ -381,8 +398,8 @@
                                         <div class="row tab">
                                             <div class="col-md-12">
                                                 <center>
-                                                    <input type="submit" value="Submit" id="FiTab" class="btn" style="background-color: #343a40; color:white;">&nbsp
-                                                    <a id="cancelbutton" class="btn btn-danger">Cancel</a>
+                                                    <input type="submit" value="Submit To Agency" id="FiTab" class="btn" style="background-color: #343a40; color:white;">&nbsp
+                                                    <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@Model.leadIdString">Cancel</a>
                                                 </center>
                                             </div>
                                         </div>
@@ -408,14 +425,23 @@
                                                 <div class="row">
                                                     <div class="col-1"></div>
                                                     <div class="col-3">
-                                                        <label asp-for="fiAgencyComment">Comment : </label><span style="color: Red">&nbsp;*</span>
+                                                        <label asp-for="fiAgencyComment">Comment : </label>
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="input-control text">
-                                                            <input asp-for="fiAgencyComment" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                            <input asp-for="fiAgencyComment" type="text" id="FIComment" placeholder="Please Enter Comment" class="form-control datepicker" />
                                                             <span asp-validation-for="fiAgencyComment" class="text-danger"></span>
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row tab">
+                                                <div class="col-md-12">
+                                                    <center>
+                                                        <input type="submit" value="Submit" id="FiTabs" class="btn" style="background-color: #343a40; color:white;">&nbsp
+                                                        <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@Model.leadIdString">Cancel</a>
+                                                    </center>
                                                 </div>
                                             </div>
                                         </div>
@@ -531,6 +557,7 @@
                //$("#valuerAgencyDiv input[type=checkbox]:not(:checked)").prop("disabled", true);
                $("#valuerAgencyDiv input[type=checkbox]").prop("disabled", true);
                $("#valuerIndateCommentDiv").css("display", "block");
+               $('#ValuerTab').prop('disabled', true);
         }
 
         if ('@Model.legalAgencyStatus' == 1) {
@@ -538,11 +565,13 @@
                $("#legalDocOutdate").prop('disabled', true);
                $("#legalAgencyDiv input[type=checkbox]").prop("disabled", true);
                $("#legalIndateCommentDiv").css("display", "block");
+               $('#LegalTab').prop('disabled', true);
         }
         if ('@Model.fiAgencyStatus' == 1) {
                $("#ContentPlaceHolder1_ddlFIAgency").prop('disabled', true);
                $("#fiDocOutdate").prop('disabled', true);
                $("#fiAgencyDiv input[type=checkbox]").prop("disabled", true);
                $("#fiIndateCommentDiv").css("display", "block");
+               $('#FiTab').prop('disabled', true);
         }
 </script>
