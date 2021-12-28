@@ -74,6 +74,9 @@
         padding-left: 1%;
         padding-right: 1%;
     }
+    #valuerIndateCommentDiv, #legalIndateCommentDiv, #fiIndateCommentDiv {
+        display: none
+    }
 </style>
 <div style="margin-top: 20px" class="container">
     <div class="container app">
@@ -119,7 +122,7 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="input-control text">
-                                                        <select id="ContentPlaceHolder1_ddlAgency" asp-for="valuerAgencyId" asp-items=" ViewBag.valuerAgencyName" class="form-control">
+                                                        <select id="ContentPlaceHolder1_ddlValuerAgency" asp-for="valuerAgencyId" asp-items=" ViewBag.valuerAgencyName" class="form-control">
                                                             <option value="">Select Name</option>
                                                         </select>
                                                         <span asp-validation-for="valuerAgencyId" class="text-danger"></span>
@@ -148,25 +151,10 @@
                                             <div class="row">
                                                 <div class="col-1"></div>
                                                 <div class="col-3">
-                                                    <label asp-for="ValuerDocumentIn_Date">Document Indate : </label><span style="color: Red">&nbsp;*</span>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="input-control text">
-                                                        <input asp-for="ValuerDocumentIn_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
-                                                        <span asp-validation-for="ValuerDocumentIn_Date" class="text-danger"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-1"></div>
-                                                <div class="col-3">
                                                     <label class=""> Document list </label><span style="color: Red">&nbsp;*</span>
                                                 </div>
                                                 <div class="col-6">
-                                                    <div class="input-control text valuerDocs">
+                                                    <div class="input-control text valuerDocs" id="valuerAgencyDiv">
                                                         @foreach (var item in ViewBag.ValuerAgencyDocs)
                                                         {
                                                             <input type="checkbox" id="valuerDocs" value="@item.Id" checked="@item.Selected" /> @item.Name <br />
@@ -183,6 +171,38 @@
                                                     <input type="submit" value="Submit" id="ValuerTab" class="btn" style="background-color: #343a40; color:white;">&nbsp
                                                     <a id="cancelbutton" class="btn btn-danger">Cancel</a>
                                                 </center>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div id="valuerIndateCommentDiv">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-1"></div>
+                                                    <div class="col-3">
+                                                        <label asp-for="ValuerDocumentIn_Date">Document Indate : </label><span style="color: Red">&nbsp;*</span>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="input-control text">
+                                                            <input asp-for="ValuerDocumentIn_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                            <span asp-validation-for="ValuerDocumentIn_Date" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                 
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-1"></div>
+                                                    <div class="col-3">
+                                                        <label asp-for="valuerAgencyComment">Comment : </label><span style="color: Red">&nbsp;*</span>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="input-control text">
+                                                            <input asp-for="valuerAgencyComment" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                            <span asp-validation-for="valuerAgencyComment" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </form>
@@ -202,7 +222,7 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="input-control text">
-                                                        <select id="ContentPlaceHolder1_ddlAgency" asp-for="legalAgencyId" asp-items="ViewBag.legalAgencyName" class="form-control">
+                                                        <select id="ContentPlaceHolder1_ddlLegalAgency" asp-for="legalAgencyId" asp-items="ViewBag.legalAgencyName" class="form-control">
                                                             <option value="">Select Name</option>
                                                         </select>
                                                         <span asp-validation-for="legalAgencyId" class="text-danger"></span>
@@ -219,36 +239,21 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="input-control text">
-                                                        <input asp-for="LegalDocumentOut_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocOutdate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                        <input asp-for="LegalDocumentOut_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="legalDocOutdate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
                                                         <span asp-validation-for="LegalDocumentOut_Date" class="text-danger"></span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-1"></div>
-                                                <div class="col-3">
-                                                    <label asp-for="LegalDocumentIn_Date">Document Indate : </label><span style="color: Red">&nbsp;*</span>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="input-control text">
-                                                        <input asp-for="LegalDocumentIn_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
-                                                        <span asp-validation-for="LegalDocumentIn_Date" class="text-danger"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
+                                        <div class="form-group" id="legalAgencyDiv">
                                             <div class="row">
                                                 <div class="col-1"></div>
                                                 <div class="col-3">
                                                     <label class=""> Document list </label><span style="color: Red">&nbsp;*</span>
                                                 </div>
                                                 <div class="col-6">
-                                                    <div class="input-control text legalDocs">
+                                                    <div class="input-control text legalDocs" id="legalAgencyDiv">
                                                         @*@foreach (var item in ViewBag.LegalAgencyDocs)
                         {
                             <input type="checkbox" value="@item.Name" /> @item.Name <br />
@@ -266,15 +271,45 @@
                                         <div class="row tab">
                                             <div class="col-md-12">
                                                 <center>
-                                                    <input type="submit" value="Submit" id="LegalTab" class="btn" style="background-color: #343a40; color:white;">&nbsp
+                                                    <input type="submit" value="Submit To Agency" id="LegalTab" class="btn" style="background-color: #343a40; color:white;">&nbsp
                                                     <a id="cancelbutton" class="btn btn-danger">Cancel</a>
                                                 </center>
                                             </div>
                                         </div>
+
+                                        <br />
+                                        <div id="legalIndateCommentDiv">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-1"></div>
+                                                    <div class="col-3">
+                                                        <label asp-for="LegalDocumentIn_Date">Document Indate : </label><span style="color: Red">&nbsp;*</span>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="input-control text">
+                                                            <input asp-for="LegalDocumentIn_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                            <span asp-validation-for="LegalDocumentIn_Date" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-1"></div>
+                                                    <div class="col-3">
+                                                        <label asp-for="legalAgencyComment">Comment : </label><span style="color: Red">&nbsp;*</span>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="input-control text">
+                                                            <input asp-for="legalAgencyComment" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                            <span asp-validation-for="legalAgencyComment" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </form>
-
-
-
                                 </div>
                                 <div class="tab-pane fade" id="fiAgency">
                                     <form method="post" action="/agency/index" id="fiForm">
@@ -291,7 +326,7 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="input-control text">
-                                                        <select id="ContentPlaceHolder1_ddlAgency" asp-for="fiAgencyId" asp-items="ViewBag.fiAgencyName" class="form-control">
+                                                        <select id="ContentPlaceHolder1_ddlFIAgency" asp-for="fiAgencyId" asp-items="ViewBag.fiAgencyName" class="form-control">
                                                             <option value="">Select Name</option>
                                                         </select>
                                                         <span asp-validation-for="fiAgencyId" class="text-danger"></span>
@@ -304,27 +339,12 @@
                                             <div class="row">
                                                 <div class="col-1"></div>
                                                 <div class="col-3">
-                                                    <label asp-for="fiDocumentIn_Date">Document Outdate : </label><span style="color: Red">&nbsp;*</span>
+                                                    <label asp-for="fiDocumentOut_Date">Document Outdate : </label><span style="color: Red">&nbsp;*</span>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="input-control text">
-                                                        <input asp-for="fiDocumentOut_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocOutdate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                        <input asp-for="fiDocumentOut_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="fiDocOutdate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
                                                         <span asp-validation-for="fiDocumentOut_Date" class="text-danger"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-1"></div>
-                                                <div class="col-3">
-                                                    <label asp-for="fiDocumentIn_Date">Document Indate : </label><span style="color: Red">&nbsp;*</span>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="input-control text">
-                                                        <input asp-for="fiDocumentIn_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
-                                                        <span asp-validation-for="fiDocumentIn_Date" class="text-danger"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -337,7 +357,7 @@
                                                     <label class=""> Document list </label><span style="color: Red">&nbsp;*</span>
                                                 </div>
                                                 <div class="col-6">
-                                                    <div class="input-control text fiDocs">
+                                                    <div class="input-control text fiDocs" id="fiAgencyDiv">
                                                         @*@foreach (var item in ViewBag.FIAgencyDocs)
                         {
                             <input type="checkbox" value="@item.Id" /> @item.Name <br />
@@ -360,9 +380,40 @@
                                                 </center>
                                             </div>
                                         </div>
+
+                                        <br />
+                                        <div id="fiIndateCommentDiv">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-1"></div>
+                                                    <div class="col-3">
+                                                        <label asp-for="fiDocumentIn_Date">Document Indate : </label><span style="color: Red">&nbsp;*</span>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="input-control text">
+                                                            <input asp-for="fiDocumentIn_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                            <span asp-validation-for="fiDocumentIn_Date" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-1"></div>
+                                                    <div class="col-3">
+                                                        <label asp-for="fiAgencyComment">Comment : </label><span style="color: Red">&nbsp;*</span>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="input-control text">
+                                                            <input asp-for="fiAgencyComment" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                            <span asp-validation-for="fiAgencyComment" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </form>
-
-
                                 </div>
                             </div>
                             <div style="height: 5px;"></div>
@@ -383,14 +434,15 @@
         $(".datepicker").datepicker({
             showOn: "button",
             format: "dd-mm-yyyy",
-            daysOfWeekDisabled: [0,6],
+            daysOfWeekDisabled: [0, 6],
+            //startDate: '-2d',
             endDate: '0d',
             todayHighlight: true,
             changeMonth: true,
             changeYear: true,
             yearRange: "-100:+0"
         });
-
+    });
         //$('submit').on('click', function () {
         //    var array = [];
         //    $("input:checked").each(function () {
@@ -459,7 +511,7 @@
             }
             else if ('@ViewBag.isSuccess' == 'False') {
                 toastr.error('@ViewBag.Message', "Error");
-                 setTimeout(function () {
+                setTimeout(function () {
                     location.href = "/agency/index/@ViewBag.Lead_Id";
                 }, 4000);
 
@@ -467,7 +519,24 @@
 
         })
 
+        if ('@Model.valuerAgencyStatus' == 1) {
+               $("#ContentPlaceHolder1_ddlValuerAgency").prop('disabled', true);
+               $("#ValuerDocOutdate").prop('disabled', true);
+               //$("#valuerAgencyDiv input[type=checkbox]:not(:checked)").prop("disabled", true);
+               $("#valuerAgencyDiv input[type=checkbox]").prop("disabled", true);
+               $("#valuerIndateCommentDiv").css("display", "block");
+        }
 
-
-    });
+        if ('@Model.legalAgencyStatus' == 1) {
+               $("#ContentPlaceHolder1_ddlLegalAgency").prop('disabled', true);
+               $("#legalDocOutdate").prop('disabled', true);
+               $("#legalAgencyDiv input[type=checkbox]").prop("disabled", true);
+               $("#legalIndateCommentDiv").css("display", "block");
+        }
+        if ('@Model.fiAgencyStatus' == 1) {
+               $("#ContentPlaceHolder1_ddlFIAgency").prop('disabled', true);
+               $("#fiDocOutdate").prop('disabled', true);
+               $("#fiAgencyDiv input[type=checkbox]").prop("disabled", true);
+               $("#fiIndateCommentDiv").css("display", "block");
+        }
 </script>

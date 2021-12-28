@@ -34,40 +34,48 @@ namespace LoanProcessManagement.App.Controllers
             List<string> valuerDocArray = new List<string>();
             List<string> legalDocArray = new List<string>();
             List<string> fiDocArray = new List<string>();
+
             var thirdPartyCheckDetailsResponse = new ThirdPartyCheckDetailsVm();
-            if (thirdPartyDetailsResponse.Data.Succeeded)
+
+            if (thirdPartyDetailsResponse != null && thirdPartyDetailsResponse.Data != null && thirdPartyDetailsResponse.Data.Succeeded)
             {
-                var valuerAgencyDocsChkbxValues = thirdPartyDetailsResponse.Data.valuerAgencyDocuments;
-                var legalAgencyDocsChkbxValues = thirdPartyDetailsResponse.Data.legalAgencyDocuments;
-                var fiAgencyDocsChkbxValues = thirdPartyDetailsResponse.Data.fiAgencyDocuments;
-
-                valuerDocArray = valuerAgencyDocsChkbxValues.Split(',').ToList();
-                legalDocArray = legalAgencyDocsChkbxValues.Split(',').ToList();
-                fiDocArray = fiAgencyDocsChkbxValues.Split(',').ToList();
-
-                thirdPartyCheckDetailsResponse = new ThirdPartyCheckDetailsVm()
+                if (thirdPartyDetailsResponse.Data.valuerAgencyDocuments != null)
                 {
-                    leadIdLong = (long)thirdPartyDetailsResponse.Data.lead_Id,
-                    LgId = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value,
-                    valuerAgencyId = (long)thirdPartyDetailsResponse.Data.valuerAgencyId,
-                    ValuerDocumentOut_Date = thirdPartyDetailsResponse.Data.ValuerDocumentOut_Date,
-                    ValuerDocumentIn_Date = thirdPartyDetailsResponse.Data.ValuerDocumentIn_Date,
-                    valuerAgencyDocuments = thirdPartyDetailsResponse.Data.valuerAgencyDocuments,
-                    valuerAgencyComment = thirdPartyDetailsResponse.Data.valuerAgencyComment,
-                    valuerAgencyStatus = thirdPartyDetailsResponse.Data.valuerAgencyStatus,
-                    legalAgencyId = (long)thirdPartyDetailsResponse.Data.legalAgencyId,
-                    LegalDocumentOut_Date = thirdPartyDetailsResponse.Data.LegalDocumentOut_Date,
-                    LegalDocumentIn_Date = thirdPartyDetailsResponse.Data.LegalDocumentIn_Date,
-                    legalAgencyDocuments = thirdPartyDetailsResponse.Data.legalAgencyDocuments,
-                    legalAgencyComment = thirdPartyDetailsResponse.Data.legalAgencyComment,
-                    legalAgencyStatus = thirdPartyDetailsResponse.Data.legalAgencyStatus,
-                    fiAgencyId = (long)thirdPartyDetailsResponse.Data.fiAgencyId,
-                    fiDocumentOut_Date = thirdPartyDetailsResponse.Data.fiDocumentOut_Date,
-                    fiDocumentIn_Date = thirdPartyDetailsResponse.Data.fiDocumentIn_Date,
-                    fiAgencyDocuments = thirdPartyDetailsResponse.Data.fiAgencyDocuments,
-                    fiAgencyStatus = thirdPartyDetailsResponse.Data.fiAgencyStatus,
-                    fiAgencyComment = thirdPartyDetailsResponse.Data.fiAgencyComment
-                };
+                    var valuerAgencyDocsChkbxValues = thirdPartyDetailsResponse.Data.valuerAgencyDocuments;
+                    valuerDocArray = valuerAgencyDocsChkbxValues.Split(',').ToList();
+                }
+                if (thirdPartyDetailsResponse.Data.legalAgencyDocuments != null)
+                {
+                    var legalAgencyDocsChkbxValues = thirdPartyDetailsResponse.Data.legalAgencyDocuments;
+                    legalDocArray = legalAgencyDocsChkbxValues.Split(',').ToList();
+                }
+                if (thirdPartyDetailsResponse.Data.fiAgencyDocuments != null)
+                {
+                    var fiAgencyDocsChkbxValues = thirdPartyDetailsResponse.Data.fiAgencyDocuments;
+                    fiDocArray = fiAgencyDocsChkbxValues.Split(',').ToList();
+                }
+
+                thirdPartyCheckDetailsResponse.leadIdLong = (long)thirdPartyDetailsResponse.Data.lead_Id;
+                thirdPartyCheckDetailsResponse.LgId = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value;
+                thirdPartyCheckDetailsResponse.valuerAgencyId = (long)thirdPartyDetailsResponse.Data.valuerAgencyId;
+                thirdPartyCheckDetailsResponse.ValuerDocumentOut_Date = thirdPartyDetailsResponse.Data.ValuerDocumentOut_Date;
+                thirdPartyCheckDetailsResponse.ValuerDocumentIn_Date = thirdPartyDetailsResponse.Data.ValuerDocumentIn_Date;
+                thirdPartyCheckDetailsResponse.valuerAgencyDocuments = thirdPartyDetailsResponse.Data.valuerAgencyDocuments;
+                thirdPartyCheckDetailsResponse.valuerAgencyComment = thirdPartyDetailsResponse.Data.valuerAgencyComment;
+                thirdPartyCheckDetailsResponse.valuerAgencyStatus = thirdPartyDetailsResponse.Data.valuerAgencyStatus;
+                thirdPartyCheckDetailsResponse.legalAgencyId = (long)thirdPartyDetailsResponse.Data.legalAgencyId;
+                thirdPartyCheckDetailsResponse.LegalDocumentOut_Date = thirdPartyDetailsResponse.Data.LegalDocumentOut_Date;
+                thirdPartyCheckDetailsResponse.LegalDocumentIn_Date = thirdPartyDetailsResponse.Data.LegalDocumentIn_Date;
+                thirdPartyCheckDetailsResponse.legalAgencyDocuments = thirdPartyDetailsResponse.Data.legalAgencyDocuments;
+                thirdPartyCheckDetailsResponse.legalAgencyComment = thirdPartyDetailsResponse.Data.legalAgencyComment;
+                thirdPartyCheckDetailsResponse.fiAgencyId = (long)thirdPartyDetailsResponse.Data.fiAgencyId;
+                thirdPartyCheckDetailsResponse.fiDocumentOut_Date = thirdPartyDetailsResponse.Data.fiDocumentOut_Date;
+                thirdPartyCheckDetailsResponse.fiDocumentIn_Date = thirdPartyDetailsResponse.Data.fiDocumentIn_Date;
+                thirdPartyCheckDetailsResponse.fiAgencyDocuments = thirdPartyDetailsResponse.Data.fiAgencyDocuments;
+                thirdPartyCheckDetailsResponse.fiAgencyStatus = thirdPartyDetailsResponse.Data.fiAgencyStatus;
+                thirdPartyCheckDetailsResponse.fiAgencyComment = thirdPartyDetailsResponse.Data.fiAgencyComment;
+
+
             }
             else
             {
@@ -227,5 +235,6 @@ namespace LoanProcessManagement.App.Controllers
             return View();
         }
 
+        
     }
 }
