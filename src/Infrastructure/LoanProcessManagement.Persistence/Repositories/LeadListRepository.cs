@@ -13,6 +13,10 @@ using LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory;
 using System.Text.RegularExpressions;
 using LoanProcessManagement.Application.Features.LeadList.Commands.AddLead;
 using System;
+using LoanProcessManagement.Application.Responses;
+using LoanProcessManagement.Application.Features.LeadList.Query.LeadStatus;
+using LoanProcessManagement.Application.Features.LeadList.Query.LeadByLGID;
+using LoanProcessManagement.Application.Features.LeadList.Query.LeadNameByLgId;
 
 namespace LoanProcessManagement.Persistence.Repositories
 {
@@ -145,10 +149,8 @@ namespace LoanProcessManagement.Persistence.Repositories
                     HoSanction_query_commentResponse = hoLeadQuery.HoSanction_query_commentResponse
 
                 };
-
-                }
-       
             }
+        }
 
         public async Task<UpdateLeadDto> ModifyLead(UpdateLeadCommand request)
         {
@@ -593,6 +595,41 @@ namespace LoanProcessManagement.Persistence.Repositories
         }
 
         #endregion
+
+
+        public async Task<IEnumerable<GetLeadStatusQueryVm>> GetAllLeadStatus(long BranchId)
+        {
+            var result = await (from A in _dbContext.LpmLeadMasters
+                                join C in _dbContext.LpmUserMasters on A.Lead_assignee_Id equals C.LgId
+                                where A.BranchID == BranchId
+                                select new GetLeadStatusQueryVm
+                                {
+                                    Name = C.Name,
+                                    CurrentStatus  = A.CurrentStatus,
+                                    Id = C.Id,
+                                    LgId = C.LgId
+                                }).ToListAsync();
+            return result;
+        }
+
+        public IEnumerable<LpmLeadMaster> getLeadByLeadAssigneeId(string lead_assignee_Id)
+        {
+            return  _dbContext.LpmLeadMasters.Where(i => i.Lead_assignee_Id == lead_assignee_Id).ToList();
+        }
+
+        public async Task<IEnumerable<GetLeadNameByLgIdQueryVm>> LeadByName(string LgId)
+        {
+            var result = await (from A in _dbContext.LpmLeadMasters
+                                join B in _dbContext.LpmUserMasters on A.Lead_assignee_Id equals B.LgId
+                                where A.Lead_assignee_Id ==LgId
+                                select new GetLeadNameByLgIdQueryVm
+                                {
+                                    Name= B.EmployeeId,
+                                    LgId = A.Lead_assignee_Id,
+                                    CurrentStatus = A.CurrentStatus
+                                }).ToListAsync();
+            return result;
+        }
     }
     #endregion
 }

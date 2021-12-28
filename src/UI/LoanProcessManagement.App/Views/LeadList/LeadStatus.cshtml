@@ -1,7 +1,44 @@
-﻿@{
+﻿@model LoanProcessManagement.App.Models.LeadStatusVm
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "LeadStatus";
 }
+
+<script src="~/js/jquery/jquery-1.10.1.min.js"></script>
+<script>
+    //console.log($('#btnSubmit').val())
+    function myfun() {
+        //debugger;
+        //alert('hello');
+        $.ajax({
+            type: "POST",
+            url: "/Leadlist/FilterSearch",
+            data: { "Id": $('#DDLBranch').find('option:selected').val() },
+            success: function (data) {
+                $('#tblLoginReport tbody').empty();
+                $.each(data, function (i, item) {
+                    var rows = "<tr>" +
+                        "<td>" + item.dsaName + "</td>" +
+                        "<td>" + item.totalLead + "</td>" +
+                        "<td>" + item.convertedLead + "</td>" +
+                        "<td>" + item.branchDataEntry + "</td>" +
+                        "<td>" + item.hoInPrinSanction + "</td>" +
+                        "<td>" + item.branchCustProcessing + "</td>" +
+                        "<td>" + item.branch3rdPartyCheck + "</td>" +
+                        "<td>" + item.branchRecord + "</td>" +
+                        "<td>" + item.hoSanction + "</td>" +
+                        "<td>" + item.rejectedLead + "</td>" +
+                        "<td>" + item.sanctionedLead + "</td>" +
+                        "<td>" + item.disbursedLead + "</td>" +
+                        "<td>" + item.lostLead + "</td>" +
+                        "<td>" + item.rejectionPercent + "</td>" +
+                        "</tr>";
+                    $('#tblLoginReport tbody').append(rows);
+                })
+            }
+        });
+    };
+</script>
 
 <style>
     #tblLoginReport tbody tr td:first-child {
@@ -40,32 +77,15 @@
                             <tbody>
                                 <tr style="border: none;">
                                     <td style="width: 25%;">
-                                        Zone
-                                        <div id="divZone">
-                                            <select id="DDLZone" class="form-control">
-                                                <option value="-1">Select</option>
-                                            </select>
-                                            <input type="hidden" name="ctl00$ContentPlaceHolder1$HDNddlZone" id="ContentPlaceHolder1_HDNddlZone">
-                                        </div>
-                                    </td>
-                                    <td style="width: 25%; display: none;">
-                                        Region
-                                        <div id="divRegion">
-                                            <select id="DDLRegion" class="form-control">
-                                                <option value="-1">Select</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td style="width: 25%;">
                                         Branch
                                         <div id="divBranch">
-                                            <select id="DDLBranch" class="form-control">
+                                            <select id="DDLBranch" asp-items=Model.getAllBranchesDto class="form-control">
                                                 <option value="-1">Select</option>
                                             </select>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr hidden>
                                     <td>
                                         Type of user
                                         <div id="divUserType">
@@ -79,12 +99,13 @@
                             </tbody>
                         </table>
                         <div>
-                            <input type="button" class="btn btn-primary  btn-sm" value="Submit" id="btnSubmit">
+                            <input type="button" asp-action="FilterSearch" class="btn btn-primary  btn-sm" onclick="myfun()" value="Submit" id="btnSubmit">
                         </div>
                     </div>
                     <div style="margin-top: 20px; max-width: 100%; overflow: auto;">
                         <div id="tblLoginReport_wrapper" class="dataTables_wrapper" role="grid">
-                            <div class="dataTables_length" id="tblLoginReport_length"><label>Show <select name="tblLoginReport_length" aria-controls="tblLoginReport" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div id="tblLoginReport_filter" class="dataTables_filter"><label>Search:<input type="search" class="" aria-controls="tblLoginReport"></label></div><table class="display dataTable" id="tblLoginReport" aria-describedby="tblLoginReport_info" style="width: 1156px;">
+                            <div class="dataTables_length" id="tblLoginReport_length"><label>Show <select name="tblLoginReport_length" aria-controls="tblLoginReport" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div id="tblLoginReport_filter" class="dataTables_filter"><label>Search:<input type="search" class="" aria-controls="tblLoginReport"></label></div>
+                            <table class="display dataTable" id="tblLoginReport" aria-describedby="tblLoginReport_info" style="width: 1156px;">
                                 <thead>
                                     <tr role="row">
                                         <th class="centered-cell" bgcolor="" rowspan="1" colspan="1">DSA</th>
@@ -99,13 +120,35 @@
                                         <th class="centered-cell" bgcolor="#F0F8FF" rowspan="1" colspan="1">Rejected</th>
                                         <th class="centered-cell" bgcolor="#F0F8FF" rowspan="1" colspan="1">Rejection</th>
                                     </tr>
-                                    <tr role="row"><th class="centered-cell sorting_asc" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column ascending" style="width: 38px;">Name</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Leads: activate to sort column ascending" style="width: 40px;">Leads</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Leads: activate to sort column ascending" style="width: 70px;">Leads</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Branch (Data Entry): activate to sort column ascending" style="width: 64px;">Branch (Data Entry)</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="HO (In-Prin. Sanc.): activate to sort column ascending" style="width: 58px;">HO (In-Prin. Sanc.)</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Branch (Cust. Processing): activate to sort column ascending" style="width: 98px;">Branch (Cust. Processing)</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Branch (3rd Party Check): activate to sort column ascending" style="width: 71px;">Branch (3rd Party Check)</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Branch (Reco.): activate to sort column ascending" style="width: 58px;">Branch (Reco.)</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="HO (Sanction): activate to sort column ascending" style="width: 74px;">HO (Sanction)</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Leads: activate to sort column ascending" style="width: 75px;">Leads</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Leads: activate to sort column ascending" style="width: 69px;">Leads</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Leads: activate to sort column ascending" style="width: 40px;">Leads</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Leads: activate to sort column ascending" style="width: 58px;">Leads</th><th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="%: activate to sort column ascending" style="width: 63px;">%</th></tr>
+                                    <tr role="row">
+                                        <th class="centered-cell sorting_asc" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column ascending" style="width: 38px;">Name</th>
+                                        <th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Leads: activate to sort column ascending" style="width: 40px;">Leads</th>
+                                        <th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Leads: activate to sort column ascending" style="width: 70px;">Leads</th>
+                                        <th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Branch (Data Entry): activate to sort column ascending" style="width: 64px;">Branch (Data Entry)</th>
+                                        <th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="HO (In-Prin. Sanc.): activate to sort column ascending" style="width: 58px;">HO (In-Prin. Sanc.)</th>
+                                        <th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Branch (Cust. Processing): activate to sort column ascending" style="width: 98px;">Branch (Cust. Processing)</th>
+                                        <th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Branch (3rd Party Check): activate to sort column ascending" style="width: 71px;">Branch (3rd Party Check)</th>
+                                        <th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Branch (Reco.): activate to sort column ascending" style="width: 58px;">Branch (Reco.)</th>
+                                        <th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="HO (Sanction): activate to sort column ascending" style="width: 74px;">HO (Sanction)</th>
+                                        <th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Leads: activate to sort column ascending" style="width: 75px;">Leads</th>
+                                        <th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Leads: activate to sort column ascending" style="width: 69px;">Leads</th>
+                                        <th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Leads: activate to sort column ascending" style="width: 40px;">Leads</th>
+                                        <th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="Leads: activate to sort column ascending" style="width: 58px;">Leads</th>
+                                        <th class="centered-cell sorting" tabindex="0" aria-controls="tblLoginReport" rowspan="1" colspan="1" aria-label="%: activate to sort column ascending" style="width: 63px;">%</th>
+                                    </tr>
                                 </thead>
                                 <tfoot id="tf">
                                     <tr><th colspan="14" rowspan="1"></th></tr>
                                 </tfoot>
-                                <tbody><tr class="odd"><td valign="top" colspan="14" class="dataTables_empty">No data available in table</td></tr></tbody>
-                            </table><div class="dataTables_info" id="tblLoginReport_info" role="alert" aria-live="polite" aria-relevant="all">Showing 0 to 0 of 0 entries</div><div class="dataTables_paginate paging_simple_numbers" id="tblLoginReport_paginate"><a class="paginate_button previous disabled" aria-controls="tblLoginReport" tabindex="0" id="tblLoginReport_previous">Previous</a><span></span><a class="paginate_button next disabled" aria-controls="tblLoginReport" tabindex="0" id="tblLoginReport_next">Next</a></div>
+                                <tbody>
+                                    <tr class="odd"></tr>
+                                </tbody>
+                            </table>
+                            <div class="dataTables_info" id="tblLoginReport_info" role="alert" aria-live="polite" aria-relevant="all">Showing 0 to 0 of 0 entries</div>
+                            <div class="dataTables_paginate paging_simple_numbers" id="tblLoginReport_paginate">
+                                <a class="paginate_button previous " aria-controls="tblLoginReport" tabindex="0" id="tblLoginReport_previous">Previous</a><span></span>
+                                <a class="paginate_button next " aria-controls="tblLoginReport" tabindex="0" id="tblLoginReport_next">Next</a>
+                            </div>
                         </div>
                     </div>
                 </div>
