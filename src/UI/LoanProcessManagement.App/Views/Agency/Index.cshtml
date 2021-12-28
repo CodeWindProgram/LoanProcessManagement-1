@@ -414,7 +414,7 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="input-control text">
-                                                            <input asp-for="fiDocumentIn_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                            <input asp-for="fiDocumentIn_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="fiDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
                                                             <span asp-validation-for="fiDocumentIn_Date" class="text-danger"></span>
                                                         </div>
                                                     </div>
@@ -588,7 +588,7 @@
             $('#LegalTab').prop('disabled', true);
             $('#legalDocIndate').prop('disabled', true);
             $('#LegalComment').prop('disabled', true);
-            $('#LegalTabs').prop('disabled', true);     
+            $('#LegalTabs').prop('disabled', true);
 
         }
 
@@ -603,4 +603,17 @@
                $("#fiIndateCommentDiv").css("display", "block");
                $('#FiTab').prop('disabled', true);
         }
+        if ('@Model.fiAgencyStatus' == 2) {
+               $("#ContentPlaceHolder1_ddlFIAgency").prop('disabled', true);
+               $("#fiDocOutdate").prop('disabled', true);
+               $("#fiAgencyDiv input[type=checkbox]").prop("disabled", true);
+               $("#fiIndateCommentDiv").css("display", "block");
+                $('#FiTab').prop('disabled', true);
+                $('#fiDocIndate').prop('disabled', true);
+                $('#FIComment').prop('disabled', true);
+                $('#FiTabs').prop('disabled', true);            
+            
+            
+        }
+
 </script>
