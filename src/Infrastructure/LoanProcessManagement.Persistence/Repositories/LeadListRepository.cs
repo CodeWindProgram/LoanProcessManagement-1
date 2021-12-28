@@ -605,6 +605,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                                 select new GetLeadStatusQueryVm
                                 {
                                     Name = C.Name,
+                                    UserroleId = C.UserRoleId,
                                     CurrentStatus  = A.CurrentStatus,
                                     Id = C.Id,
                                     LgId = C.LgId

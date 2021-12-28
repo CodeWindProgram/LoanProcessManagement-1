@@ -440,44 +440,142 @@ namespace LoanProcessManagement.App.Controllers
             var leadstatus = new LeadStatusVm();
             var allBranch = await _leadListService.AllBranch();
             leadstatus.getAllBranchesDto = new SelectList(allBranch,"Id", "branchname");
-            //var newdata = TempData["List"];
             leadstatus.leadStatusListModel = leadStatusListModel;
             return View(leadstatus);
         }
         List<LeadStatusListModel> leadStatusListModel = new List<LeadStatusListModel>();
-        public async Task<JsonResult> FilterSearch(long Id)
+        public async Task<JsonResult> FilterSearch(long Id,long userId,long UserId2)
         {   
             var byId = await _leadListService.BranchById(Id);
             var leadbyBranch = await _leadListService.LeadByBranchId(Id);
-            var lgextratct = leadbyBranch.Select(m=>m.LgId).Distinct();
-            foreach (var item in lgextratct)
+            var lgextratct = leadbyBranch.Select(m => m.LgId).Distinct();
+            var leadByUrAll = leadbyBranch.Where(m => m.UserroleId == userId || m.UserroleId == UserId2);
+            var lgextratctAll = leadByUrAll.Select(m => m.LgId).Distinct();
+            var lead1byUR = leadbyBranch.Where(m => m.UserroleId == userId).ToList();
+            var lgextratctUR1 = lead1byUR.Select(m => m.LgId).Distinct();
+            var lead1byUR2 = leadbyBranch.Where(m => m.UserroleId == UserId2).ToList();
+            var lgextratctUR2 = lead1byUR2.Select(m => m.LgId).Distinct();
+            if (userId != 0 || UserId2 != 0 )
             {
-                var callbyLgId = await _leadListService.LeadByLgId(item);
-                var total = callbyLgId.Count();
-                int reject = callbyLgId.Where(m => m.CurrentStatus == 8).Count();
-                int lost = callbyLgId.Where(m => m.CurrentStatus == 11).Count();
-                int all = reject + lost;
-                int percentage = (int)Math.Round((double)(100 * all) / total);
-                leadStatusListModel.Add(new LeadStatusListModel() {
-                    DsaName = callbyLgId.FirstOrDefault().Name,
-                    TotalLead = total,
-                    ConvertedLead = callbyLgId.Where(m => m.CurrentStatus == 1).Count(),
-                    BranchDataEntry = callbyLgId.Where(m => m.CurrentStatus == 2).Count(),
-                    HoInPrinSanction = callbyLgId.Where(m => m.CurrentStatus ==3).Count(),
-                    BranchCustProcessing = callbyLgId.Where(m =>m.CurrentStatus==4).Count(),
-                    Branch3rdPartyCheck = callbyLgId.Where(m =>m.CurrentStatus==5).Count(),
-                    BranchRecord = callbyLgId.Where(m =>m.CurrentStatus==6).Count(),
-                    HoSanction = callbyLgId.Where(m =>m.CurrentStatus==7).Count(),
-                    RejectedLead = callbyLgId.Where(m =>m.CurrentStatus==8).Count(),
-                    SanctionedLead = callbyLgId.Where(m =>m.CurrentStatus==9).Count(),
-                    DisbursedLead = callbyLgId.Where(m =>m.CurrentStatus==10).Count(),
-                    LostLead = callbyLgId.Where(m =>m.CurrentStatus==11).Count(),
-                    RejectionPercent = percentage
-                });
+                if(userId == 3 && UserId2 == 4)
+                {
+                    foreach (var item in lgextratctAll)
+                    {
+                        var callbyLgId = await _leadListService.LeadByLgId(item);
+                        var total = callbyLgId.Count();
+                        int reject = callbyLgId.Where(m => m.CurrentStatus == 8).Count();
+                        int lost = callbyLgId.Where(m => m.CurrentStatus == 11).Count();
+                        int all = reject + lost;
+                        int percentage = (int)Math.Round((double)(100 * all) / total);
+                        leadStatusListModel.Add(new LeadStatusListModel()
+                        {
+                            DsaName = callbyLgId.FirstOrDefault().Name,
+                            TotalLead = total,
+                            ConvertedLead = callbyLgId.Where(m => m.CurrentStatus == 1).Count(),
+                            BranchDataEntry = callbyLgId.Where(m => m.CurrentStatus == 2).Count(),
+                            HoInPrinSanction = callbyLgId.Where(m => m.CurrentStatus == 3).Count(),
+                            BranchCustProcessing = callbyLgId.Where(m => m.CurrentStatus == 4).Count(),
+                            Branch3rdPartyCheck = callbyLgId.Where(m => m.CurrentStatus == 5).Count(),
+                            BranchRecord = callbyLgId.Where(m => m.CurrentStatus == 6).Count(),
+                            HoSanction = callbyLgId.Where(m => m.CurrentStatus == 7).Count(),
+                            RejectedLead = reject,
+                            SanctionedLead = callbyLgId.Where(m => m.CurrentStatus == 9).Count(),
+                            DisbursedLead = callbyLgId.Where(m => m.CurrentStatus == 10).Count(),
+                            LostLead = lost,
+                            RejectionPercent = percentage
+                        });
+                    }
+                }
+                else if (userId == 3)
+                {
+                    foreach (var item in lgextratctUR1)
+                    {
+                        var callbyLgId = await _leadListService.LeadByLgId(item);
+                        var total = callbyLgId.Count();
+                        int reject = callbyLgId.Where(m => m.CurrentStatus == 8).Count();
+                        int lost = callbyLgId.Where(m => m.CurrentStatus == 11).Count();
+                        int all = reject + lost;
+                        int percentage = (int)Math.Round((double)(100 * all) / total);
+                        leadStatusListModel.Add(new LeadStatusListModel()
+                        {
+                            DsaName = callbyLgId.FirstOrDefault().Name,
+                            TotalLead = total,
+                            ConvertedLead = callbyLgId.Where(m => m.CurrentStatus == 1).Count(),
+                            BranchDataEntry = callbyLgId.Where(m => m.CurrentStatus == 2).Count(),
+                            HoInPrinSanction = callbyLgId.Where(m => m.CurrentStatus == 3).Count(),
+                            BranchCustProcessing = callbyLgId.Where(m => m.CurrentStatus == 4).Count(),
+                            Branch3rdPartyCheck = callbyLgId.Where(m => m.CurrentStatus == 5).Count(),
+                            BranchRecord = callbyLgId.Where(m => m.CurrentStatus == 6).Count(),
+                            HoSanction = callbyLgId.Where(m => m.CurrentStatus == 7).Count(),
+                            RejectedLead = reject,
+                            SanctionedLead = callbyLgId.Where(m => m.CurrentStatus == 9).Count(),
+                            DisbursedLead = callbyLgId.Where(m => m.CurrentStatus == 10).Count(),
+                            LostLead = lost,
+                            RejectionPercent = percentage
+                        });
+                    }
+                }
+                else if (UserId2 == 4)
+                {
+                    foreach (var item in lgextratctUR2)
+                    {
+                        var callbyLgId = await _leadListService.LeadByLgId(item);
+                        var total = callbyLgId.Count();
+                        int reject = callbyLgId.Where(m => m.CurrentStatus == 8).Count();
+                        int lost = callbyLgId.Where(m => m.CurrentStatus == 11).Count();
+                        int all = reject + lost;
+                        int percentage = (int)Math.Round((double)(100 * all) / total);
+                        leadStatusListModel.Add(new LeadStatusListModel()
+                        {
+                            DsaName = callbyLgId.FirstOrDefault().Name,
+                            TotalLead = total,
+                            ConvertedLead = callbyLgId.Where(m => m.CurrentStatus == 1).Count(),
+                            BranchDataEntry = callbyLgId.Where(m => m.CurrentStatus == 2).Count(),
+                            HoInPrinSanction = callbyLgId.Where(m => m.CurrentStatus == 3).Count(),
+                            BranchCustProcessing = callbyLgId.Where(m => m.CurrentStatus == 4).Count(),
+                            Branch3rdPartyCheck = callbyLgId.Where(m => m.CurrentStatus == 5).Count(),
+                            BranchRecord = callbyLgId.Where(m => m.CurrentStatus == 6).Count(),
+                            HoSanction = callbyLgId.Where(m => m.CurrentStatus == 7).Count(),
+                            RejectedLead = reject,
+                            SanctionedLead = callbyLgId.Where(m => m.CurrentStatus == 9).Count(),
+                            DisbursedLead = callbyLgId.Where(m => m.CurrentStatus == 10).Count(),
+                            LostLead = lost,
+                            RejectionPercent = percentage
+                        });
+                    }
+                }
             }
-            //TempData["List"] = leadStatusListModel;
-            //return RedirectToAction("LeadStatus", "LeadList");
-            return Json(leadStatusListModel);
+            else
+            {
+                foreach (var item in lgextratct)
+                {
+                    var callbyLgId = await _leadListService.LeadByLgId(item);
+                    var total = callbyLgId.Count();
+                    int reject = callbyLgId.Where(m => m.CurrentStatus == 8).Count();
+                    int lost = callbyLgId.Where(m => m.CurrentStatus == 11).Count();
+                    int all = reject + lost;
+                    int percentage = (int)Math.Round((double)(100 * all) / total);
+                    leadStatusListModel.Add(new LeadStatusListModel()
+                    {
+                        DsaName = callbyLgId.FirstOrDefault().Name,
+                        TotalLead = total,
+                        ConvertedLead = callbyLgId.Where(m => m.CurrentStatus == 1).Count(),
+                        BranchDataEntry = callbyLgId.Where(m => m.CurrentStatus == 2).Count(),
+                        HoInPrinSanction = callbyLgId.Where(m => m.CurrentStatus == 3).Count(),
+                        BranchCustProcessing = callbyLgId.Where(m => m.CurrentStatus == 4).Count(),
+                        Branch3rdPartyCheck = callbyLgId.Where(m => m.CurrentStatus == 5).Count(),
+                        BranchRecord = callbyLgId.Where(m => m.CurrentStatus == 6).Count(),
+                        HoSanction = callbyLgId.Where(m => m.CurrentStatus == 7).Count(),
+                        RejectedLead = reject,
+                        SanctionedLead = callbyLgId.Where(m => m.CurrentStatus == 9).Count(),
+                        DisbursedLead = callbyLgId.Where(m => m.CurrentStatus == 10).Count(),
+                        LostLead = lost,
+                        RejectionPercent = percentage
+                    });
+                }
+            }
+            var asid = Json(leadStatusListModel);
+            return asid;
         }
     }
 }
