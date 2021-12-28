@@ -199,7 +199,7 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="input-control text">
-                                                            <input asp-for="valuerAgencyComment" type="text" id="ValuerComment" placeholder="Enter Comment" class="form-control" />
+                                                            <input asp-for="valuerAgencyComment" type="text" id="ValuerComment" placeholder="Enter Comment" class="form-control />
                                                             <span asp-validation-for="valuerAgencyComment" class="text-danger"></span>
                                                         </div>
                                                     </div>
@@ -299,7 +299,7 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="input-control text">
-                                                            <input asp-for="LegalDocumentIn_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                            <input asp-for="LegalDocumentIn_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="legalDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
                                                             <span asp-validation-for="LegalDocumentIn_Date" class="text-danger"></span>
                                                         </div>
                                                     </div>
@@ -529,7 +529,7 @@
                     array.push($(this).val());
                 });
                 var chklist = array.toString();
-                $('#fiAgencyDocuments').val(chklist);
+                $('#fiAgencyDoc').val(chklist);
                 $('#tabValueForFi').val("Fi");
             }
         });
@@ -560,6 +560,19 @@
                $('#ValuerTab').prop('disabled', true);
         }
 
+        if ('@Model.valuerAgencyStatus' == 2) {
+            $("#ContentPlaceHolder1_ddlValuerAgency").prop('disabled', true);
+            $("#ValuerDocOutdate").prop('disabled', true);
+            //$("#valuerAgencyDiv input[type=checkbox]:not(:checked)").prop("disabled", true);
+            $("#valuerAgencyDiv input[type=checkbox]").prop("disabled", true);
+            $("#valuerIndateCommentDiv").css("display", "block");
+            $('#ValuerTab').prop('disabled', true);
+            $("#ValuerDocIndate").prop("disabled", true);
+            $("#ValuerComment").prop("disabled", true);
+            $('#ValuerTabs').prop('disabled', true);
+
+        }
+
         if ('@Model.legalAgencyStatus' == 1) {
                $("#ContentPlaceHolder1_ddlLegalAgency").prop('disabled', true);
                $("#legalDocOutdate").prop('disabled', true);
@@ -567,6 +580,22 @@
                $("#legalIndateCommentDiv").css("display", "block");
                $('#LegalTab').prop('disabled', true);
         }
+        if ('@Model.legalAgencyStatus' == 2) {
+            $("#ContentPlaceHolder1_ddlLegalAgency").prop('disabled', true);
+            $("#legalDocOutdate").prop('disabled', true);
+            $("#legalAgencyDiv input[type=checkbox]").prop("disabled", true);
+            $("#legalIndateCommentDiv").css("display", "block");
+            $('#LegalTab').prop('disabled', true);
+            $('#legalDocIndate').prop('disabled', true);
+            $('#LegalComment').prop('disabled', true);
+            $('#LegalTabs').prop('disabled', true);     
+
+        }
+
+
+
+
+
         if ('@Model.fiAgencyStatus' == 1) {
                $("#ContentPlaceHolder1_ddlFIAgency").prop('disabled', true);
                $("#fiDocOutdate").prop('disabled', true);

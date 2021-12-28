@@ -18,7 +18,7 @@ namespace LoanProcessManagement.App.Models
         public string LgId { get; set; }
 
         [Required(ErrorMessage = "Please Select Agency Name")]
-        public long valuerAgencyId { get; set; }
+        public long? valuerAgencyId { get; set; }
         [Required(ErrorMessage = "Please Select Document Outdate")]
         public DateTime? ValuerDocumentOut_Date { get; set; }
         [Required(ErrorMessage = "Please Select Document Indate")]
@@ -30,7 +30,7 @@ namespace LoanProcessManagement.App.Models
         public int valuerAgencyStatus { get; set; }
 
         [Required(ErrorMessage = "Please Select Agency Name")]
-        public long legalAgencyId { get; set; }
+        public long? legalAgencyId { get; set; }
         [Required(ErrorMessage = "Please Select Document Outdate")]
         public DateTime? LegalDocumentOut_Date { get; set; }
         [Required(ErrorMessage = "Please Select Document Indate")]
@@ -41,7 +41,7 @@ namespace LoanProcessManagement.App.Models
         public int legalAgencyStatus { get; set; }
 
         [Required(ErrorMessage = "Please Select Agency Name")]
-        public long fiAgencyId { get; set; }
+        public long? fiAgencyId { get; set; }
         [Required(ErrorMessage = "Please Select Document Outdate")]
         public DateTime? fiDocumentOut_Date { get; set; }
         [Required(ErrorMessage = "Please Select Document Indate")]
