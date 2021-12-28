@@ -103,7 +103,7 @@
                         <div style="height: 10px;"></div>
                         <div class="frames">
                             <div class="panel-body">
-                                @if (ViewBag.isSuccess == true)
+                                @*@if (ViewBag.isSuccess == true)
                                 {
                                     <div class="alert alert-success" role="alert">
                                         @ViewBag.Message
@@ -115,7 +115,7 @@
                                         <strong>Error!</strong> @ViewBag.Message
                                     </div>
 
-                                }
+                                }*@
                                 <div id="ContentPlaceHolder1_alertMsg">
                                     <div class="row tab">
                                         <div class="col-md-5 center">
@@ -551,6 +551,15 @@
                 return flagavail;
             }
         });
+
+
+        if ('@ViewBag.isSuccess' == 'True') {
+            toastr.success('@ViewBag.Message', "Success");
+        }
+        else if ('@ViewBag.isSuccess' == 'False') {
+            toastr.error('@ViewBag.Message', "Error");
+
+        }
     });
     function fnCheckValidateIDs() {
         //debugger;

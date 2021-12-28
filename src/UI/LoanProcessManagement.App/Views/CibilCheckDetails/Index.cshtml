@@ -103,7 +103,7 @@
                         <div style="height: 10px;"></div>
                         <div class="frames">
                             <div class="panel-body">
-                                @if (ViewBag.isSuccess == true)
+                                @*@if (ViewBag.isSuccess == true)
                                 {
                                     <div class="alert alert-success" role="alert">
                                         <strong>Successful! </strong>@ViewBag.Message
@@ -115,7 +115,7 @@
                                         <strong>Error! </strong> @ViewBag.Message
                                     </div>
 
-                                }
+                                }*@
                                 <div id="ContentPlaceHolder1_alertMsg">
                                     <div class="row">
                                         <div class="col-md-5 center">
@@ -309,7 +309,7 @@
                                         </div>
                                         <div class="col-md-5">
                                             <div class="input-control text">
-                                                <input asp-for="PhoneNumber1" type="text" maxlength="10" id="ContentPlaceHolder1_txtPhone" class="form-control">
+                                                <input asp-for="PhoneNumber1" type="text" maxlength="10" id="ContentPlaceHolder1_txtPhone" class="form-control noTxtInput">
                                                 <span asp-validation-for="PhoneNumber1" style="color:Red;display:block;"></span>
                                                 <span id="ContentPlaceHolder1_RegularExpressionValidator5" style="color:Red;display:none;">Invalid Phone No.</span>
                                             </div>
@@ -324,7 +324,7 @@
                                         </div>
                                         <div class="col-md-5">
                                             <div class="input-control text">
-                                                <input asp-for="PhoneNumber2" type="text" maxlength="10" id="ContentPlaceHolder1_txtPhone" class="form-control">
+                                                <input asp-for="PhoneNumber2" type="text" maxlength="10" id="ContentPlaceHolder1_txtPhone" class="form-control noTxtInput">
                                                 <span asp-validation-for="PhoneNumber2" style="color:Red;display:block;"></span>
                                                 <span id="ContentPlaceHolder1_RegularExpressionValidator5" style="color:Red;display:none;">Invalid Phone No.</span>
                                             </div>
@@ -581,19 +581,20 @@
 <script>
     $(document).ready(function () {
 
-        @*var button = $('#SubmitButton');
-
+        
         if ('@ViewBag.isSuccess' == 'True') {
-            setTimeout(function () {
-                button.attr('disabled',true);
-            }, 1000);
-        }*@
+            toastr.success('@ViewBag.Message', "Success");
+        }
+        else if ('@ViewBag.isSuccess' == 'False') {
+            toastr.error('@ViewBag.Message', "Error");
+
+        }
 
 
         if ('@ViewBag.isSuccess' == 'True') {
             setTimeout(function () {
                 location.href = "/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=@Model.ApplicantType";
-            }, 1000);
+            }, 3000);
         }
         else if('@ViewBag.isSuccess' == 'False'){
              setTimeout(function () {
@@ -601,6 +602,17 @@
              }, 1000);
 
         }
+
+
+        $(function () {
+            $(".noTxtInput").keypress(function (e) {
+                var keyCode = e.which;
+                /* 8 - (backspace), 32 - (space), 48-57 - (0-9) - Numbers */
+                if ((keyCode != 8 || keyCode == 32) && (keyCode < 48 || keyCode > 57)) {
+                    return false;
+                }
+            });
+        });
     });
 
     $(document).ready(function () {

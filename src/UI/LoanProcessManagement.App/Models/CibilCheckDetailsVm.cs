@@ -20,6 +20,8 @@ namespace LoanProcessManagement.App.Models
         public string AddressLine2 { get; set; }
         public string AddressLine3 { get; set; }
         public string City { get; set; }
+
+        [RegularExpression(@"[1-9]{1}[0-9]{5}|[1-9]{1}[0-9]{3}\\s[0-9]{3}", ErrorMessage = "Please Enter Valid Pincode.")]
         public string Pincode { get; set; }
         public string State { get; set; }
         public string Gender { get; set; }
