@@ -269,9 +269,12 @@
             success: function (result) {
                 //debugger;
                 if (result && result.succeeded) {
-                    location.href = '/UserList/Index';
+                    toastr.success(result.data.message, "Success");
+                    //location.href = result.data.message;
                 } else {
-                    location.href = '/UserList/Index';
+                    toastr.success(result.data.message, "Error");
+                    //location.href = result.data.message;
+                    //location.href = '/UserList/Index';
                 }
             },
             error: function (ex) {
@@ -292,12 +295,17 @@
             },
             dataType: 'json',
             success: function (result) {
+
                 //debugger;
                 if (result && result.succeeded) {
-                    location.href = '/UserList/Index';
+                    toastr.success(result.data.message, "Success");
+                    //location.href = result.data.message;
                 } else {
-                    location.href = '/UserList/Index';
+                    toastr.success(result.data.message, "Error");
+                    //location.href = result.data.message;
+                    //location.href = '/UserList/Index';
                 }
+
             },
             error: function () {
                 console.log('something went wrong - debug it!');
@@ -328,12 +336,12 @@
         }
     });
 
-        if ('@ViewBag.Issuccesflag' == 'True') {
+        @*if ('@ViewBag.Issuccesflag' == 'True') {
             toastr.success('@ViewBag.Message', "Success");
         }
         else if (!string.IsNullOrEmpty('@ViewBag.Message')) {
             toastr.error('@ViewBag.Message', "Error");
 
-        }
+        }*@
 
 </script>
