@@ -53,6 +53,6 @@ namespace LoanProcessManagement.App.Models
         public long Category { get; set; }
         [Required(ErrorMessage = "Residence is Required")]
         public long Residence { get; set; }
-        
+        public bool Succeeded { get; set; }
     }
 }

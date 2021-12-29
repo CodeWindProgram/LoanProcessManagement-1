@@ -31,6 +31,7 @@ namespace LoanProcessManagement.App.Controllers
         public async Task<IActionResult> Index([FromQuery] long lead_Id, [FromQuery] int applicantType)
         {            
             var applicantResponse = await _cibilCheckService.GetCibilCheckDetails(lead_Id, applicantType);
+
             var applicant = new CibilCheckDetailsVm()//AddCibilDetailsCommand() //CibilCheckDetailsVm()
             {
                 lead_Id = lead_Id,
@@ -61,6 +62,7 @@ namespace LoanProcessManagement.App.Controllers
                 Category = applicantResponse.Data.Category,
                 Residence = applicantResponse.Data.Residence,                
                 Qualification = applicantResponse.Data.Qualification,
+                Succeeded = applicantResponse.Data.Succeeded
             };
             if (applicant.IsSubmit)
             {
