@@ -49,8 +49,8 @@ namespace LoanProcessManagement.Application.Features.User.Commands.CreateUser
                 var email = new Email()
                 {
                     To = userDto.Email,
-                    Body = $"User Registered Successfully !! \r\nEmployee id : {userDto.EmpId} \r\nPassword : {userDto.Password}",
-                    Subject = "User Credentials"
+                    Body = $"Dear User, <br/><br/>New user has been added in Loan system. Kindly refer below credentials to Login.<br/>\r\nEmployee id : {userDto.EmpId} <br/>\r\nPassword : {userDto.Password} <br/> <br/>Regards, <br/>LOS Support Team.",
+                    Subject = "Loan system : User Registered Successfully !!"
                 };
                 await _emailService.SendEmail(email);
                 return new Response<CreateUserDto>(userDto, "success");
