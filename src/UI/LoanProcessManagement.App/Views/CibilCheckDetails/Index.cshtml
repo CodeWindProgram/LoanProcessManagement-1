@@ -581,7 +581,7 @@
 <script>
     $(document).ready(function () {
 
-        
+
         if ('@ViewBag.isSuccess' == 'True') {
             toastr.success('@ViewBag.Message', "Success");
         }
@@ -613,7 +613,25 @@
                 }
             });
         });
+
+
+        @*$(document).ready(function () {
+        //var button = document.getElementById("SubmitButton");
+        //debugger;
+        if (@Model.Succeeded.ToString().ToLower() == false) {
+            $("#SubmitButton").attr("disabled", "disabled");
+        }
+        });*@
     });
+
+    $(document).ready(function () {
+        //var button = document.getElementById("SubmitButton");
+        debugger;
+        if (@Model.Succeeded.ToString().ToLower() == false) {
+            $("#SubmitButton").attr("disabled", "disabled");
+        }
+    });
+
 
     $(document).ready(function () {
         var applicant0 = document.getElementById("tabProcess0");

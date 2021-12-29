@@ -190,7 +190,7 @@
                                     <div class="col-md-5">
                                         <label class="">Employee Type</label>
                                     </div>
-                                    <div class="col-md-5">
+                                    <div class="col-md-5" id="selfEmployeeNode">
                                         <div class="input-control text">
                                             <input type="radio" id="selfEmployee" checked>
                                             <label for="selfEmployee">Self-Employee</label>
@@ -203,7 +203,7 @@
                                     <div class="col-md-5">
                                         <label class="">Consent</label>
                                     </div>
-                                    <div class="col-md-5">
+                                    <div class="col-md-5" id="consentNode">
                                         <div class="input-control text">
                                             <input type="checkbox" id="ConsentValue" checked>
                                             <label for="ConsentValue"> Yes </label><br>
@@ -365,18 +365,28 @@
         }
     });*@
 
+
     $(document).ready(function () {
         var button = document.getElementById("SubmitButton");
         var passwordBox = document.getElementById("PasswordBoxNode");
         var passwordLabel = document.getElementById("PasswordBoxLabel");
         debugger;
         if (@Model.IsSuccess.ToString().ToLower() == true) {
-            //$("#SubmitButton").hide();
-            //console.log("HI");
             $("#SubmitButton").attr("disabled", "disabled");
             $("#PasswordBoxNode").hide();
             $("#PasswordBoxLabel").hide();
             $("#FieldMark").hide();
+        }
+    });
+
+    $(document).ready(function () {
+        //var button = document.getElementById("SubmitButton");
+        debugger;
+        if (@Model.Succeeded.ToString().ToLower() == false) {
+            $("#SubmitButton").attr("disabled", "disabled");
+            $("#selfEmployeeNode").hide();
+            $("#consentNode").hide();
+            //$("#FieldMark").hide();
         }
     });
 </script>

@@ -106,7 +106,7 @@ namespace LoanProcessManagement.Persistence.Repositories
 
                 await _dbContext.SaveChangesAsync();
 
-                response.Message = "Password Updated Successfully";
+                response.Message = "Enquiry Added Successfully";
                 response.Succeeded = true;
                 return response;
             }
@@ -129,7 +129,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 await _dbContext.LpmLeadITRDetails.AddAsync(details);
                 await _dbContext.SaveChangesAsync();
 
-                response.Message = "New Record Added Successfully";
+                response.Message = "Enquiry Added Successfully";
                 response.Succeeded = true;
 
                 return response;

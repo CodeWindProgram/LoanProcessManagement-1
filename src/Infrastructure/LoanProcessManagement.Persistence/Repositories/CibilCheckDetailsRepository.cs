@@ -134,13 +134,13 @@ namespace LoanProcessManagement.Persistence.Repositories
 
                 await _dbContext.SaveChangesAsync();
 
-                request.Message = "Cibil Check Details are Updated Successfully";
+                request.Message = "Cibil Enquiry Added Successfully";
                 request.Succeeded = true;
 
                 return request;
 
-            }
-            else {
+            } else {
+
                 LpmCibilCheckDetails details = new LpmCibilCheckDetails();
                 
                 details.LastModifiedDate = DateTime.Now;
@@ -172,7 +172,7 @@ namespace LoanProcessManagement.Persistence.Repositories
 
                 await _dbContext.SaveChangesAsync();
 
-                request.Message = "New Record Added Successfully";
+                request.Message = "Cibil Enquiry Added Successfully";
                 request.Succeeded = true;
 
                 return request;
