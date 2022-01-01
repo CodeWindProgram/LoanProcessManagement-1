@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Globalization;
 using System.Net;
 using System.Net.Http;
 
@@ -126,6 +128,20 @@ namespace LoanProcessManagement.App
                 pattern: "{controller=Login}/{action=Index}/{id?}");
             });
 
+
+            //SET Date culture for date formats
+            var supportedCultures = new[] { new CultureInfo("en-GB") };
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("en-GB"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-GB");
+            CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-GB");
+            CultureInfo.CurrentCulture = new CultureInfo("en-GB");
+            CultureInfo.CurrentUICulture = new CultureInfo("en-GB");
+            //SET Date culture for date formats
 
 
             //app.UseEndpoints(endpoints =>
