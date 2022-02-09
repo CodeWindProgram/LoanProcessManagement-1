@@ -31,13 +31,6 @@
         margin-left: 5px;
     }
 
-    #dates {
-        opacity: 1;
-        background-color: #e9ecef;
-    }
-
-
-
     .panel-heading {
         color: white;
         background-color: #343a40;
@@ -562,11 +555,12 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        n = new Date();
-        y = n.getFullYear();
-        m = n.getMonth() + 1;
-        d = n.getDate();
-        document.getElementById("dates").innerHTML = d + "/" + m + "/" + y;
+        const monthNames = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+        const dateObj = new Date();
+        const month = monthNames[dateObj.getMonth()];
+        const day = String(dateObj.getDate()).padStart(2, '0');
+        const year = dateObj.getFullYear();
+        document.getElementById("dates").innerHTML = day + "/" + month + "/" + year;
     });
 
         if ('@ViewBag.isSuccess' == 'True') {
