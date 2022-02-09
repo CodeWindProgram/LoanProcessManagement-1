@@ -221,6 +221,92 @@ namespace LoanProcessManagement.App.Controllers
                     new AgencyDocumentVm{Id = 8, Name = "Architect Estimate ( Construction Estimate )", Selected = false},
                     new AgencyDocumentVm{Id = 9, Name = "Layout Approval", Selected = false}
                 };
+                var response = await _agencyService.GetThirdPartyCheckDetailsByLeadId(req.leadIdString);
+                List<string> valuerDocArray = new List<string>();
+                List<string> legalDocArray = new List<string>();
+                List<string> fiDocArray = new List<string>();
+
+                var thirdPartyCheckDetailsResponse = new ThirdPartyCheckDetailsVm();
+
+                if (response != null && response.Data != null && response.Data.Succeeded)
+                {
+                    if (response.Data.valuerAgencyDocuments != null)
+                    {
+                        var valuerAgencyDocsChkbxValues = response.Data.valuerAgencyDocuments;
+                        valuerDocArray = valuerAgencyDocsChkbxValues.Split(',').ToList();
+                    }
+                    if (response.Data.legalAgencyDocuments != null)
+                    {
+                        var legalAgencyDocsChkbxValues = response.Data.legalAgencyDocuments;
+                        legalDocArray = legalAgencyDocsChkbxValues.Split(',').ToList();
+                    }
+                    if (response.Data.fiAgencyDocuments != null)
+                    {
+                        var fiAgencyDocsChkbxValues = response.Data.fiAgencyDocuments;
+                        fiDocArray = fiAgencyDocsChkbxValues.Split(',').ToList();
+                    }
+
+                    thirdPartyCheckDetailsResponse.leadIdLong = (long)response.Data.lead_Id;
+                    thirdPartyCheckDetailsResponse.leadIdString = req.leadIdString;
+                    thirdPartyCheckDetailsResponse.LgId = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value;
+                    thirdPartyCheckDetailsResponse.valuerAgencyId = response.Data.valuerAgencyId;
+                    thirdPartyCheckDetailsResponse.ValuerDocumentOut_Date = response.Data.ValuerDocumentOut_Date;
+                    thirdPartyCheckDetailsResponse.ValuerDocumentIn_Date = response.Data.ValuerDocumentIn_Date;
+                    thirdPartyCheckDetailsResponse.valuerAgencyDocuments = response.Data.valuerAgencyDocuments;
+                    thirdPartyCheckDetailsResponse.valuerAgencyComment = response.Data.valuerAgencyComment;
+                    thirdPartyCheckDetailsResponse.valuerAgencyStatus = response.Data.valuerAgencyStatus;
+                    thirdPartyCheckDetailsResponse.legalAgencyId = response.Data.legalAgencyId;
+                    thirdPartyCheckDetailsResponse.legalAgencyStatus = response.Data.legalAgencyStatus;
+                    thirdPartyCheckDetailsResponse.LegalDocumentOut_Date = response.Data.LegalDocumentOut_Date;
+                    thirdPartyCheckDetailsResponse.LegalDocumentIn_Date = response.Data.LegalDocumentIn_Date;
+                    thirdPartyCheckDetailsResponse.legalAgencyDocuments = response.Data.legalAgencyDocuments;
+                    thirdPartyCheckDetailsResponse.legalAgencyComment = response.Data.legalAgencyComment;
+                    thirdPartyCheckDetailsResponse.fiAgencyId = response.Data.fiAgencyId;
+                    thirdPartyCheckDetailsResponse.fiDocumentOut_Date = response.Data.fiDocumentOut_Date;
+                    thirdPartyCheckDetailsResponse.fiDocumentIn_Date = response.Data.fiDocumentIn_Date;
+                    thirdPartyCheckDetailsResponse.fiAgencyDocuments = response.Data.fiAgencyDocuments;
+                    thirdPartyCheckDetailsResponse.fiAgencyStatus = response.Data.fiAgencyStatus;
+                    thirdPartyCheckDetailsResponse.fiAgencyComment = response.Data.fiAgencyComment;
+
+
+                }
+                else
+                {
+                    thirdPartyCheckDetailsResponse.leadIdString = req.leadIdString;
+                    thirdPartyCheckDetailsResponse.leadIdLong = (long)response.Data.lead_Id;
+                    thirdPartyCheckDetailsResponse.LgId = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value;
+
+                }
+                for (int i = 0; i < valuerDocArray.Count; i++)
+                {
+                    var obj = ValuerAgencyDocs.Where(x => x.Id == Convert.ToInt32(valuerDocArray[i])).FirstOrDefault();
+
+                    if (obj != null)
+                    {
+                        obj.Selected = true;
+                    }
+                }
+                for (int i = 0; i < legalDocArray.Count; i++)
+                {
+                    var obj = LegalAgencyDocs.Where(x => x.Id == Convert.ToInt32(legalDocArray[i])).FirstOrDefault();
+
+                    if (obj != null)
+                    {
+                        obj.Selected = true;
+                    }
+                }
+
+                for (int i = 0; i < fiDocArray.Count; i++)
+                {
+                    var obj = FIAgencyDocs.Where(x => x.Id == Convert.ToInt32(fiDocArray[i])).FirstOrDefault();
+
+                    if (obj != null)
+                    {
+                        obj.Selected = true;
+                    }
+                }
+
+
                 ViewBag.ValuerAgencyDocs = ValuerAgencyDocs;
                 ViewBag.LegalAgencyDocs = LegalAgencyDocs;
                 ViewBag.FIAgencyDocs = FIAgencyDocs;
@@ -231,7 +317,7 @@ namespace LoanProcessManagement.App.Controllers
                     ViewBag.legalAgencyName = new SelectList(allAgencyNameResponse.Data.LegalAgency, "Id", "AgencyName");
                     ViewBag.fiAgencyName = new SelectList(allAgencyNameResponse.Data.FiAgency, "Id", "AgencyName");
                 }
-                return View(new ThirdPartyCheckDetailsVm());
+                return View(thirdPartyCheckDetailsResponse);
 
             }
 
