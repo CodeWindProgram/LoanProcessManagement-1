@@ -59,6 +59,7 @@
 	  <Folder Include="Logs\" />
 	  <Folder Include="scripts\" />
 	  <Folder Include="swaggerhelper\" />
+	  <Folder Include="Uploadfiles\GSTfiles\" />
 	</ItemGroup>
 
 

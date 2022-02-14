@@ -44,18 +44,19 @@ namespace LoanProcessManagement.App.Controllers
         public async Task<IActionResult> CreateEnquiry(GstFileSaveVM gstFileSaveVM)
         {
             var message = "";
+            var basedirectory = Directory.GetCurrentDirectory();
             var excelfileExtension = System.IO.Path.GetExtension(gstFileSaveVM.IExcel.FileName);
             var pdffileExtension = System.IO.Path.GetExtension(gstFileSaveVM.IPdf.FileName);
             var newFileNameExcel = DateTime.Now.ToString("ddMMyyyyhhmmss_") + gstFileSaveVM.gstAddEnquiryCommandDto.FormNo + excelfileExtension;
             var newFileNamePdf = DateTime.Now.ToString("ddMMyyyyhhmmss_") + gstFileSaveVM.gstAddEnquiryCommandDto.FormNo + pdffileExtension;
 
-            var dirPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Documents\\GST\\" + gstFileSaveVM.gstAddEnquiryCommandDto.FormNo);
+            var dirPath = Path.GetFullPath(Path.Combine(basedirectory, @"..\..\API\\LoanProcessManagement.Api\\Uploadfiles\\GSTfiles\\" + gstFileSaveVM.gstAddEnquiryCommandDto.FormNo));
             if (dirPath != null)
             {
-                System.IO.Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Documents\\GST\\") + gstFileSaveVM.gstAddEnquiryCommandDto.FormNo);
+                System.IO.Directory.CreateDirectory(Path.Combine(basedirectory, @"..\..\API\\LoanProcessManagement.Api\\Uploadfiles\\GSTfiles\\" + gstFileSaveVM.gstAddEnquiryCommandDto.FormNo));
             }
-            var filePathExc = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Documents\\GST\\" + gstFileSaveVM.gstAddEnquiryCommandDto.FormNo, newFileNameExcel);
-            var filePathPdf = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Documents\\GST\\" + gstFileSaveVM.gstAddEnquiryCommandDto.FormNo, newFileNamePdf);
+            var filePathExc = Path.Combine(basedirectory, @"..\..\API\\LoanProcessManagement.Api\\Uploadfiles\\GSTfiles\\" + gstFileSaveVM.gstAddEnquiryCommandDto.FormNo, newFileNameExcel);
+            var filePathPdf = Path.Combine(basedirectory, @"..\..\API\\LoanProcessManagement.Api\\Uploadfiles\\GSTfiles\\" + gstFileSaveVM.gstAddEnquiryCommandDto.FormNo, newFileNamePdf);
             gstFileSaveVM.IExcel.CopyTo(new FileStream(filePathExc, FileMode.Create));
             gstFileSaveVM.IPdf.CopyTo(new FileStream(filePathPdf, FileMode.Create));
 
@@ -83,3 +84,4 @@ namespace LoanProcessManagement.App.Controllers
         #endregion
     }
 }
+//Previous File Save location --- ("wwwroot\\Documents\\GST\\").
