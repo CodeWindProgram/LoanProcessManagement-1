@@ -44,5 +44,6 @@ namespace LoanProcessManagement.Domain.Entities
 
         public ICollection<LpmLeadITRDetails> LpmLeadITRDetails { get; set; }
         public ICollection<LpmCibilCheckDetails> LpmCibilCheckDetails { get; set; }
+        public ICollection<LpmLeadIncomeAssessmentDetails> LpmLeadIncomeAssessmentDetails { get; set; }
     }
 }
