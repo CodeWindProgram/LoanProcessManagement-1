@@ -19,7 +19,7 @@ var Records = (List<ProcessModel>)ViewData["Report"];
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <table class="display table table-responsive" id="tblLoginReport">
+                                    <table class="display table table-responsive-lg" id="tblLoginReport">
                                         <thead>
                                             <tr>
                                                 <th>Form No.</th>
@@ -29,8 +29,8 @@ var Records = (List<ProcessModel>)ViewData["Report"];
                                                 <th>Loan Amount</th>
                                                 <th>Date of Submission</th>
                                                 <th>Query Count</th>
-                                                <th hidden>Ageing HO</th>
-                                                <th hidden>Ageing Branch</th>
+                                                @*<th hidden>Ageing HO</th>
+                                                <th hidden>Ageing Branch</th>*@
                                                 <th>Query Status</th>
                                                 @*<th style="display:none">Processing Officer Name</th>
                                                 <th style="display:none">Sanctioning Officer Name</th>*@
@@ -42,7 +42,7 @@ var Records = (List<ProcessModel>)ViewData["Report"];
                                             {
 
                                                 decimal temps = Convert.ToDecimal(record.LoanAmount);
-                                                var loanAmt = decimal.Round(temps);
+                                                var loanAmt = decimal.Round(temps,2);
 
                                                 var temp = record.SubmissionDate.ToString();
                                                 var temp1 = temp.Split(" ");
@@ -55,8 +55,8 @@ var Records = (List<ProcessModel>)ViewData["Report"];
                                                 <td>@loanAmt</td>
                                                 <td>@temp1[0]</td>
                                                 <td>@record.QueryCount</td>
-                                                <td hidden>0</td>
-                                                <td hidden>0</td>
+                                                @*<td hidden>0</td>
+                                                <td hidden>0</td>*@
                                                 <td>@record.QueryStatus</td>
                                                 @*<td style="display:none">No One</td>
                                                 <td style="display:none">No One</td>*@
