@@ -30,6 +30,7 @@ namespace LoanProcessManagement.App.Controllers
         ///Commented By - Saif Khan 
         ///<returns>leadlistresponse.data</returns>
         ///</summary>
+        [Authorize(AuthenticationSchemes = "Cookies")]
         public async Task<IActionResult> Index(LeadListCommand leadListCommand)
         {
             string message = "";
@@ -68,6 +69,8 @@ namespace LoanProcessManagement.App.Controllers
         /// <returns>View</returns>
         [Route("[controller]/[action]/{LeadId}")]
         [HttpGet]
+        [Authorize(AuthenticationSchemes = "Cookies")]
+
         public async Task<IActionResult> LeadHistory(string LeadId)
         {
             var LeadHistoryResponse = await _leadListService.LeadHistory(LeadId);
@@ -90,6 +93,8 @@ namespace LoanProcessManagement.App.Controllers
         /// <returns>View</returns>
         [Route("[controller]/[action]/{lead_Id}")]
         [HttpGet]
+        [Authorize(AuthenticationSchemes = "Cookies")]
+
         public async Task<IActionResult> LeadSummary(string lead_Id)
         {
             var leadResponse = await _leadListService.GetLeadByLeadId(lead_Id);
