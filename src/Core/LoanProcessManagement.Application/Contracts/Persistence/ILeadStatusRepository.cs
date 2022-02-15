@@ -1,4 +1,5 @@
 ﻿using LoanProcessManagement.Application.Features.LeadStatus.Queries;
+using LoanProcessManagement.Domain.CustomModels;
 using LoanProcessManagement.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,9 @@ namespace LoanProcessManagement.Application.Contracts.Persistence
     {
         Task<IEnumerable<LpmLeadStatusMaster>> GetLeadStatus(string role);
         Task<GetLeadStatusCountDto> GetLeadStatusCount(GetLeadStatusCountQuery req);
+        Task<List<ProcessModel>> GetInPrincipleSanctionLists(GetInPrincipleSanctionListQuery req);
 
-        
+
 
     }
 }

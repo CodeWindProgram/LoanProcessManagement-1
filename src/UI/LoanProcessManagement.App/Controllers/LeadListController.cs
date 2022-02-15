@@ -2,6 +2,7 @@
 using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.LeadList.Commands;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory;
+using LoanProcessManagement.Application.Features.LeadStatus.Queries;
 using LoanProcessManagement.Application.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,7 @@ namespace LoanProcessManagement.App.Controllers
         ///Commented By - Saif Khan 
         ///<returns>leadlistresponse.data</returns>
         ///</summary>
+        [Authorize(AuthenticationSchemes = "Cookies")]
         public async Task<IActionResult> Index(LeadListCommand leadListCommand)
         {
             string message = "";
@@ -67,6 +69,8 @@ namespace LoanProcessManagement.App.Controllers
         /// <returns>View</returns>
         [Route("[controller]/[action]/{LeadId}")]
         [HttpGet]
+        [Authorize(AuthenticationSchemes = "Cookies")]
+
         public async Task<IActionResult> LeadHistory(string LeadId)
         {
             var LeadHistoryResponse = await _leadListService.LeadHistory(LeadId);
@@ -89,6 +93,8 @@ namespace LoanProcessManagement.App.Controllers
         /// <returns>View</returns>
         [Route("[controller]/[action]/{lead_Id}")]
         [HttpGet]
+        [Authorize(AuthenticationSchemes = "Cookies")]
+
         public async Task<IActionResult> LeadSummary(string lead_Id)
         {
             var leadResponse = await _leadListService.GetLeadByLeadId(lead_Id);
@@ -576,6 +582,20 @@ namespace LoanProcessManagement.App.Controllers
             }
             var asid = Json(leadStatusListModel);
             return asid;
+        }
+    
+       
+        public async Task<IActionResult> InprincipleSanctionReport()
+        {
+            GetInPrincipleSanctionListQuery SanctionList = new GetInPrincipleSanctionListQuery();
+            SanctionList.UserRoleId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value);
+            SanctionList.BranchId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "BranchID").Value);
+            SanctionList.DSAId = (User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value);
+            SanctionList.LgId = "";
+
+            var Report = await _leadListService.InPrincipleSanctionList(SanctionList);
+            ViewData["Report"] = Report;
+            return View();
         }
     }
 }
