@@ -62,13 +62,14 @@
         margin-bottom: 20px;
     }
 
-    h5 {
+    /*h5 {
         font-size: 1.25rem;
         margin-left: 1rem;
         padding-top: 5px;
         font-weight: 600;
     }
 
+*/
     .btnDiv {
         text-align: center;
     }
@@ -86,7 +87,7 @@
         top: 0px;
         height: auto;
         width: 100%;
-        background: #308d46;
+        
     }
 
     .btnDiv ul {
@@ -98,7 +99,7 @@
         margin-inline-end: 0px;
         padding-inline-start: 0px;
         margin-bottom: 0px;
-        padding-left: 40px;
+        padding-left: 70px;
     }
 
         .btnDiv ul li {
@@ -127,12 +128,12 @@
 
     
 </style>
-<div style="margin-top: 20px" class="container">
+<div class="container mt-5 mb-4">
     <div class="container app">
         <div class="col-sm-12 col-lg-12">
             <div data-effect="helix" id="panels" class="panel panel-info effect-helix in">
                 <div class="panel-heading">
-                    <h3>Add Customer Enquiry</h3>
+                    <h5>Add Customer Enquiry</h5>
                 </div>
                 <div class="formDiv">
                     <form method="post" action="/applicantdetails/index">
@@ -141,57 +142,59 @@
                         <input type="hidden" asp-for="ApplicantType" id="hdnApplicantType">
                         <input type="hidden" asp-for="CreatedBy" value=@User.FindFirst("lg_id").Value />
                         <input type="hidden" asp-for="LastModifiedBy" value=@User.FindFirst("lg_id").Value />
+
                         <div style="height: 15px;"></div>
-                        <div class="btnDiv">
+                        <div class="btnDiv pl-4 pr-4">
                             <ul>
 
                                 <li id="l0"><a href="/ApplicantDetails/Index?lead_Id=@Model.lead_Id&applicantType=0" class="AppTabs btn-sm " id="tabProcess0">Applicant</a></li>
                                 <li id="l1"><a id="ContentPlaceHolder1_lnkCoApp1" class="AppTabs btn-sm" href="/ApplicantDetails/Index?lead_Id=@Model.lead_Id&applicantType=1">Co-Applicant-1</a></li>
-                                <li id="l2"><a id="ContentPlaceHolder1_lnkCoApp2" class="AppTabs btn-sm" href="/ApplicantDetails/Index?lead_Id=@Model.lead_Id&applicantType=2" >Co-Applicant-2</a></li>
-                                <li id="l3"><a id="ContentPlaceHolder1_lnkCoApp3" class="AppTabs btn-sm" href="/ApplicantDetails/Index?lead_Id=@Model.lead_Id&applicantType=3" >Co-Applicant-3</a></li>
-                                <li id="l4"><a id="ContentPlaceHolder1_lnkCoApp4" class="AppTabs btn-sm" href="/ApplicantDetails/Index?lead_Id=@Model.lead_Id&applicantType=4" >Co-Applicant-4</a></li>
-                                <li id="l5"><a id="ContentPlaceHolder1_lnkCoApp5" class="AppTabs btn-sm" href="/ApplicantDetails/Index?lead_Id=@Model.lead_Id&applicantType=5" >Co-Applicant-5</a></li>
+                                <li id="l2"><a id="ContentPlaceHolder1_lnkCoApp2" class="AppTabs btn-sm" href="/ApplicantDetails/Index?lead_Id=@Model.lead_Id&applicantType=2">Co-Applicant-2</a></li>
+                                <li id="l3"><a id="ContentPlaceHolder1_lnkCoApp3" class="AppTabs btn-sm" href="/ApplicantDetails/Index?lead_Id=@Model.lead_Id&applicantType=3">Co-Applicant-3</a></li>
+                                <li id="l4"><a id="ContentPlaceHolder1_lnkCoApp4" class="AppTabs btn-sm" href="/ApplicantDetails/Index?lead_Id=@Model.lead_Id&applicantType=4">Co-Applicant-4</a></li>
+                                <li id="l5"><a id="ContentPlaceHolder1_lnkCoApp5" class="AppTabs btn-sm" href="/ApplicantDetails/Index?lead_Id=@Model.lead_Id&applicantType=5">Co-Applicant-5</a></li>
                             </ul>
                         </div>
-                        <div style="height: 10px;"></div>
+                        <div id="ContentPlaceHolder1_alertMsg">
+                            <div class="row tab pt-3">
+                                <div center">
+                                    <label class="h5">Form No.</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="input-control text-left">
+                                        <span id="ContentPlaceHolder1_lblFormNo" class="h5" style="color: black; border:none">
+                                            <label>@Model.FormNo</label>
+                                            <input type="hidden" asp-for="FormNo" />
+                                            @*<label asp-for="FormNo">@Model.FormNo</label>*@
+                                            @*<input type="text" asp-for="FormNo" disabled="disabled">*@
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="height: 5px;"></div>
                         <span id="ContentPlaceHolder1_spanMessage" style="color: red;"></span>
-                        <div style="height: 10px;"></div>
+                        <div style="height: 1px;"></div>
                         <div class="frames">
                             <div class="panel-body">
                                 @*@if (ViewBag.isSuccess == true)
-                                    {
-                                        <div class="alert alert-success" role="alert">
-                                            @ViewBag.Message
-                                        </div>
-                                    }
-                                    else if (ViewBag.isSuccess == false)
-                                    {
-                                        <div class="alert alert-danger" role="alert">
-                                            <strong>Error!</strong> @ViewBag.Message
-                                        </div>
+                {
+                    <div class="alert alert-success" role="alert">
+                        @ViewBag.Message
+                    </div>
+                }
+                else if (ViewBag.isSuccess == false)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        <strong>Error!</strong> @ViewBag.Message
+                    </div>
 
-                                    }*@
-                                <div id="ContentPlaceHolder1_alertMsg">
-                                    <div class="row tab">
-                                        <div class="col-md-5 center">
-                                            <label class="h5">Form No</label>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <div class="input-control text">
-                                                <span id="ContentPlaceHolder1_lblFormNo" class="h5" style="color: black; border:none">
-                                                    <label>@Model.FormNo</label>
-                                                    <input type="hidden" asp-for="FormNo" />
-                                                    @*<label asp-for="FormNo">@Model.FormNo</label>*@
-                                                    @*<input type="text" asp-for="FormNo" disabled="disabled">*@
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card initial1">
-                                    <h5>Customer Details</h5>
-                                </div>
-                                @*<hr />*@
+                }*@
+
+                                <hr />
+                                <h4><u><b>Customer Details</b></u></h4>
+
+
 
                                 <div style="display:flex;">
                                     <div class="col-md-4">
@@ -199,7 +202,7 @@
                                     </div>
                                     <div style="width:100%; text-align:right;"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
                                 </div>
-                                <div style="height: 5px;"></div>
+                                <div class="pt-2" style="height: 5px;"></div>
                                 <div class="row tab">
                                     <div class="col-md-5">
                                         <label class="">First Name</label>
@@ -209,7 +212,7 @@
                                         <div class="input-control text">
                                             <input asp-for="FirstName" type="text" maxlength="26" id="ContentPlaceHolder1_txtCustomerName" class="form-control required" placeholder="XYZ">
                                             @*<span id="ContentPlaceHolder1_RequiredFieldValidator14" style="color:Red;display:none;">Customer name is mandatory.</span>
-                                                <span id="ContentPlaceHolder1_RegularExpressionValidator7" style="color:Red;display:none;">Invalid Customer Name.</span>*@
+                            <span id="ContentPlaceHolder1_RegularExpressionValidator7" style="color:Red;display:none;">Invalid Customer Name.</span>*@
                                             <span asp-validation-for="FirstName" style="color:Red;display:block;"></span>
                                         </div>
                                     </div>
@@ -225,7 +228,7 @@
                                         <div class="input-control text">
                                             <input asp-for="MiddleName" type="text" maxlength="26" id="ContentPlaceHolder1_txtCustomerMiddleName" class="form-control required" placeholder="XYZ">
                                             @*<span id="ContentPlaceHolder1_RequiredFieldValidator14" style="color:Red;display:none;">Customer name is mandatory.</span>
-                                                <span id="ContentPlaceHolder1_RegularExpressionValidator7" style="color:Red;display:none;">Invalid Customer Name.</span>*@
+                            <span id="ContentPlaceHolder1_RegularExpressionValidator7" style="color:Red;display:none;">Invalid Customer Name.</span>*@
                                             <span asp-validation-for="MiddleName" style="color:Red;display:block;"></span>
                                         </div>
                                     </div>
@@ -241,7 +244,7 @@
                                         <div class="input-control text">
                                             <input asp-for="LastName" type="text" maxlength="26" id="ContentPlaceHolder1_txtCustomerLastName" class="form-control required" placeholder="XYZ">
                                             @*<span id="ContentPlaceHolder1_RequiredFieldValidator14" style="color:Red;display:none;">Customer name is mandatory.</span>
-                                                <span id="ContentPlaceHolder1_RegularExpressionValidator7" style="color:Red;display:none;">Invalid Customer Name.</span>*@
+                            <span id="ContentPlaceHolder1_RegularExpressionValidator7" style="color:Red;display:none;">Invalid Customer Name.</span>*@
                                             <span asp-validation-for="LastName" style="color:Red;display:block;"></span>
                                         </div>
                                     </div>
@@ -286,14 +289,14 @@
                                             <span asp-validation-for="DateOfBirth" style="color:Red;display:block;"></span>
                                         </div>
                                         <!--<div class="input-group date" id="TextBoxCalendar" data-target-input="nearest">
-                                        <input asp-for="DateOfBirth" asp-format="{0:dd/MM/yyyy}" type="text" placeholder="dd/mm/yyyy" class="form-control datetimepicker-input" data-target="#TextBoxCalender" style="width: 92%; display: inline-block; margin-right: 10px;">-->
+                    <input asp-for="DateOfBirth" asp-format="{0:dd/MM/yyyy}" type="text" placeholder="dd/mm/yyyy" class="form-control datetimepicker-input" data-target="#TextBoxCalender" style="width: 92%; display: inline-block; margin-right: 10px;">-->
                                         @*<img class="ui-datepicker-trigger" src="../css/Images/sort_asc.png" alt="..." title="...">*@
                                         <!--<div class="input-group-append" data-target="#TextBoxCalender" data-toggle="datetimepicker">
-                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                        </div>-->
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>-->
                                         @*<span id="ContentPlaceHolder1_RequiredFieldValidator2" style="color:Red;display:none;">Date of Birth is mandatory.</span>*@
                                         <!--<span asp-validation-for="DateOfBirth" style="color:Red;display:block;"></span>
-                                        </div>-->
+                    </div>-->
                                     </div>
                                 </div>
 
@@ -318,11 +321,12 @@
                                 <div style="height: 5px;"></div>
                                 <div id="IdentificationDv">
                                     <div style="height: 5px;"></div>
-                                    <div class="card initial1" id="divIdentification">
-                                        <h5>Identification <span style="color: Red">&nbsp;*</span></h5>
+                                    <hr />
+                                    <div id="divIdentification">
+                                        <h4><u><b>Identification</b></u><span style="color: Red">&nbsp;*</span></h4>
                                     </div>
                                     <p class="row tab"><span style="color: red; font-style: italic">NOTE : Atleast one ID proof is required.</span></p>
-                                    <div style="height: 5px;"></div>
+                                    <div class="pt-2" style="height: 5px;"></div>
                                     <div class="row tab">
                                         <div class="col-md-2">
                                             <label class="">PAN</label>
@@ -406,29 +410,30 @@
                                 </div>
 
                                 <!--<div id="PhoneDV">
-                                <div style="height: 5px;"></div>
-                                <div class="divsubheader">
-                                    <h2>Phone</h2>
-                                </div>
-                                <div class="row tab">
-                                    <div class="col-md-5">
-                                        <label class="">Phone 1</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="input-control text">
-                                            <input asp-for="CustomerPhone" type="text" maxlength="10" id="ContentPlaceHolder1_txtPhone" class="form-control">
-                                            <span asp-validation-for="CustomerPhone" style="color:Red;display:block;"></span>-->
+            <div style="height: 5px;"></div>
+            <div class="divsubheader">
+                <h2>Phone</h2>
+            </div>
+            <div class="row tab">
+                <div class="col-md-5">
+                    <label class="">Phone 1</label>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-control text">
+                        <input asp-for="CustomerPhone" type="text" maxlength="10" id="ContentPlaceHolder1_txtPhone" class="form-control">
+                        <span asp-validation-for="CustomerPhone" style="color:Red;display:block;"></span>-->
                                 @*<span id="ContentPlaceHolder1_RegularExpressionValidator5" style="color:Red;display:none;">Invalid Phone No.</span>*@
                                 <!--</div>
-                                        </div>
-                                    </div>
-                                </div>-->
+                    </div>
+                </div>
+            </div>-->
 
                                 <div id="currentAddr">
-                                    <div id="divConverted4" class="card initial1">
-                                        <h5>Address</h5>
+                                    <div id="divConverted4">
+                                        <hr />
+                                        <h4><u><b>Address</b></u></h4>
                                     </div>
-                                    <div style="height: 5px;"></div>
+                                    <div class="pt-2" style="height: 5px;"></div>
                                     <div class="row tab">
                                         <div class="col-md-5">
                                             <label class="">Address Line 1</label><span style="color: Red">&nbsp;*</span>
@@ -539,7 +544,7 @@
                                             <div class="input-control text">
                                                 <input asp-for="Pincode" type="text" maxlength="6" id="ContentPlaceHolder1_txtPinCodeCurrent" class="form-control noTxtInput">
                                                 @*<span id="ContentPlaceHolder1_RequiredFieldValidator9" style="color:Red;display:none;">Pincode is mandatory.</span>
-                                                    <span id="ContentPlaceHolder1_RegularExpressionValidator1" style="color:Red;display:none;">Invalid Pincode.</span>*@
+                                <span id="ContentPlaceHolder1_RegularExpressionValidator1" style="color:Red;display:none;">Invalid Pincode.</span>*@
                                                 <span asp-validation-for="Pincode" style="color:Red;display:block;"></span>
                                             </div>
                                         </div>
@@ -547,10 +552,11 @@
                                     <div style="height: 5px;"></div>
                                 </div>
 
-                                <div id="divConverted5" class="card initial1">
-                                    <h5>Accounts</h5>
+                                <hr />
+                                <div id="divConverted5">
+                                    <h4><u><b>Accounts</b></u></h4>
                                 </div>
-                                <div id="accountDv">
+                                <div id="accountDv" class="pt-2">
 
                                     @*<div style="height: 5px;"></div>*@
                                     <div class="row tab">
@@ -586,6 +592,7 @@
                                                 <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@Model.LeadID">Cancel</a>
                                             </center>
                                         </div>
+                                        <br />
                                     </div>
                                 </div>
                             </div>
