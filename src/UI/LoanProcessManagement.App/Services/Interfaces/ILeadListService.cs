@@ -10,6 +10,8 @@ using LoanProcessManagement.Application.Features.LeadList.Commands.AddLead;
 using LoanProcessManagement.Application.Features.Branch.Queries;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadStatus;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadNameByLgId;
+using LoanProcessManagement.Domain.CustomModels;
+using LoanProcessManagement.Application.Features.LeadStatus.Queries;
 
 namespace LoanProcessManagement.App.Services.Interfaces
 {
@@ -25,6 +27,7 @@ namespace LoanProcessManagement.App.Services.Interfaces
         Task<Response<UpdateLeadDto>> ModifyLead(ModifyLeadVM lead);
         Task<Response<AddLeadDto>> AddLead(AddLeadCommandVM leadCommandVm);
         Task<IEnumerable<GetAllBranchesDto>> AllBranch();
+        Task<List<ProcessModel>> InPrincipleSanctionList(GetInPrincipleSanctionListQuery SanctionList);
     }
     #endregion
 }

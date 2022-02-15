@@ -29,6 +29,12 @@
     .construction {
     margin-left:270px;
     }
+    .button1{
+        margin-left:1025px;
+        margin-bottom:10px;
+    }
+    
+    
 </style>
 
 <div class="container app">
@@ -53,9 +59,10 @@
                             </div>
 
                         }
+                        
                         <form action="/login/UpdatePropertyDetailsUnFreeze" method="post">
                             <input type="hidden" asp-for="lead_Id" />
-                            <div class="form-group row">
+                            <div class="form-group row" style="margin-top:10px;">
                                 <label asp-for="PropertyID" class="col-sm-4 col-form-label">Property Type<span style="color: red; width: 10%;">*</span></label>
                                 <div class="col-sm-8">
                                     <select asp-for="PropertyID" class="form-control">
@@ -78,17 +85,25 @@
 
                             <div class="row">
                                 <label asp-for="PropertyUnderConstruction" class="col-sm-4 col-form-label">a.Under-Construction<span style="color: red; width: 10%;">*</span></label>
-                                <div class="col-sm-2">
+                                @*<div class="col-sm-2">
 
-                                    <input asp-for="PropertyUnderConstruction" class="form-control" type="radio" autofocus value="Yes" id="yes" />
-                                    <span class="label-top-margin">YES</span>
+                                        <input asp-for="PropertyUnderConstruction" class="form-control" type="radio" autofocus value="Yes" id="yes" />
+                                        <span class="label-top-margin">YES</span>
 
+                                    </div>
+                                    <div class="col-sm-2">
+
+                                        <input asp-for="PropertyUnderConstruction" class="form-control" type="radio" value="No" id="no" />
+                                        <span class="label-top-margin">NO</span>
+
+                                    </div>*@
+                                <div class="form-check form-check-inline" style="margin-left:20px;">
+                                    <input asp-for="PropertyUnderConstruction" class="form-check-input" type="radio" name="inlineRadioOptions" id="yes" value="yes">
+                                    <label class="form-check-label" for="inlineRadio1">YES</label>
                                 </div>
-                                <div class="col-sm-2">
-
-                                    <input asp-for="PropertyUnderConstruction" class="form-control" type="radio" value="No" id="no" />
-                                    <span class="label-top-margin">NO</span>
-
+                                <div class="form-check form-check-inline" style="margin-left:20px;">
+                                    <input asp-for="PropertyUnderConstruction" class="form-check-input" type="radio" name="inlineRadioOptions" id="No" value="no">
+                                    <label class="form-check-label" for="inlineRadio2">NO</label>
                                 </div>
                                 <br><br>
                                 <span asp-validation-for="PropertyUnderConstruction" class="text-danger ml-5 construction"></span>
@@ -133,8 +148,8 @@
                             <div>
                                 <p class="text-danger"><span class="text-danger" style="font-weight:bold;padding-left:10px;">Note: </span>Property Pincode Can Be Entered Only Once, Please be Guided.</p>
                             </div>
-                            <div class="button">
-                                <input type="submit" value="Save" Class="btn btn-primary btn-sm" onClick="hide()" />
+                            <div class="button1">
+                                <input type="submit" value="Save" Class="btn btn-primary" onClick="hide()" />
                             </div>
                         </form>
                     </div>

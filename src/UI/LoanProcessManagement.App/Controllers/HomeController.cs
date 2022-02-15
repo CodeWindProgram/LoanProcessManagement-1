@@ -100,6 +100,8 @@ namespace LoanProcessManagement.App.Controllers
         /// <param name="UserroleId"></param>
         /// <returns></returns>
         [HttpGet("Menulist")]
+        [Authorize(AuthenticationSchemes = "Cookies")]
+
         public async Task<IActionResult> Menulist()
         {
             MenuListQuery menuProcess = new MenuListQuery();

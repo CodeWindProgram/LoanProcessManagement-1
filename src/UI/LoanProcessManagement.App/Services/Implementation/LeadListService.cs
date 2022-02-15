@@ -9,7 +9,9 @@ using LoanProcessManagement.Application.Features.LeadList.Queries;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadNameByLgId;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadStatus;
+using LoanProcessManagement.Application.Features.LeadStatus.Queries;
 using LoanProcessManagement.Application.Responses;
+using LoanProcessManagement.Domain.CustomModels;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -179,7 +181,7 @@ namespace LoanProcessManagement.App.Services.Implementation
             return response;
         }
         #endregion
-
+        
         public async Task<IEnumerable<GetAllBranchesDto>> AllBranch()
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
@@ -199,7 +201,29 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             return model;
         }
+        #region This action method will Internally Call leadStatus API and return InPrincipleSanctionList by - Raj Bhosale - 15/02/2022
+        public async Task<List<ProcessModel>> InPrincipleSanctionList(GetInPrincipleSanctionListQuery SanctionList)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
+            var _client = clientfact.CreateClient("LoanService");
+            var content = JsonConvert.SerializeObject(SanctionList);
+
+            var httpResponse = await _client.PostAsync
+                (
+                    BaseUrl + APIEndpoints.InPrincipleList,new StringContent(content, Encoding.Default,
+                    "application/json")
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<List<ProcessModel>>(jsonString, options);
+
+            return model;
+        }
+        #endregion
         public async Task<GetAllBranchesDto> BranchById(long Id)
             {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
