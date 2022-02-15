@@ -12,7 +12,7 @@ namespace LoanProcessManagement.Application.Features.ChangePassword.Commands.Cha
         public string lg_id { get; set; }
         //public string OldPassword { get; set; }
         //public string NewPassword { get; set; }
-        [Required(ErrorMessage = "Please Enter Password")]
+        [Required(ErrorMessage = "Please Enter old Password")]
         [StringLength(25, MinimumLength = 8, ErrorMessage = "Password Should Atleast Contain 8 Character")]
 
         public string OldPassword { get; set; }
