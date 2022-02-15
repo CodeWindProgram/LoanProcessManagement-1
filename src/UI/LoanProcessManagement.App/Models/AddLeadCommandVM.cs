@@ -66,7 +66,7 @@ namespace LoanProcessManagement.App.Models
         [Required(ErrorMessage = "Please Select Your Nationality Type")]
         public string NationalityType { get; set; }
 
-        [Required(ErrorMessage = "Please Select Yes/No")]
+        [Required(ErrorMessage = "Please Select Appropriate Option")]
         public string IsPropertyIdentified { get; set; }
 
         public string Comment { get; set; }
