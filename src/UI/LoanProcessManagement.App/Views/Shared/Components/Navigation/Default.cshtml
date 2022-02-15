@@ -1,53 +1,63 @@
 ﻿@model LoanProcessManagement.Application.Responses.Response<IEnumerable<LoanProcessManagement.Application.Features.Menu.Query.GetMenuMasterServicesVm>>
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-<div class="sidebar">
-    <!-- Sidebar Menu -->
-    <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column"
-            data-widget="treeview"
-            role="menu"
-            data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-            with font-awesome or any other icon font library -->
+
+    <script src="~/js/NewFolder/Active.js"></script>
+    @*
+        For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+    *@
+    @{
+    }
+    <div class="sidebar">
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column"
+                data-widget="treeview"
+                role="menu"
+                data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
 
 
-            @foreach (var itm in Model.Data)
-            {
-                if (itm.IsParent)
+                @foreach (var itm in Model.Data)
                 {
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            @*@itm.Link@ViewBag.UserId*@
-                            <img src="@itm.Icon" style="width: auto; max-height: 33px; opacity: 1" />
-                            <p>
-                                @itm.MenuName
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        @await Component.InvokeAsync("SubMenu", new { parentId = itm.Id })
-                        @*@await Component.InvokeAsync("SubMenu", new { ParentID = itm.ParentID })*@
-                    </li>
-                }
-                else
-                {
-                    <li class="nav-item">
-                        <a href="@itm.Link" class="nav-link">
-                            <img src="@itm.Icon" style="width: auto; max-height: 33px; opacity: 1" />
-                            <p>
-                                @itm.MenuName
-                            </p>
-                        </a>
-                    </li>
+                    if (itm.IsParent)
+                    {
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                @*@itm.Link@ViewBag.UserId*@
+                                <img src="@itm.Icon" style="width: auto; max-height: 33px; opacity: 1" />
+                                <p class="tab">
+                                    @itm.MenuName
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            @await Component.InvokeAsync("SubMenu", new { parentId = itm.Id })
+                            @*@await Component.InvokeAsync("SubMenu", new { ParentID = itm.ParentID })*@
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a href="@itm.Link" class="nav-link">
+                                <img src="@itm.Icon" style="width: auto; max-height: 33px; opacity: 1" />
+                                <p class="tab">
+                                    @itm.MenuName
+                                </p>
+                            </a>
+                        </li>
+
+                    }
+
 
                 }
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
 
 
-            }
-        </ul>
-    </nav>
-    <!-- /.sidebar-menu -->
-</div>
+
+<style>
+    .sub{
+        background-color: #007bff;
+    }
+</style>
