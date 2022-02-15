@@ -263,7 +263,7 @@
                                         <label asp-for="FirstName">First Name :<span style="color: red; width: 10%;">*</span></label>
                                     </div>
                                     <div class="col-6">
-                                        <input asp-for="FirstName" class="form-control" type="text" placeholder="Enter First Name" maxlength="25"/>
+                                        <input asp-for="FirstName" class="form-control" type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="Enter First Name" maxlength="25"/>
                                         <span asp-validation-for="FirstName" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -277,7 +277,7 @@
                                         <label asp-for="MiddleName">Middle Name :</label>
                                     </div>
                                     <div class="col-6">
-                                        <input asp-for="MiddleName" class="form-control" type="text" placeholder="Enter Middle Name" maxlength="25"/>
+                                        <input asp-for="MiddleName" class="form-control" onkeydown="return /[a-z]/i.test(event.key)" type="text" placeholder="Enter Middle Name" maxlength="25"/>
                                     </div>
                                 </div>
                             </div>
@@ -289,7 +289,7 @@
                                         <label asp-for="LastName">Last Name :<span style="color: red; width: 10%;">*</span></label>
                                     </div>
                                     <div class="col-6">
-                                        <input asp-for="LastName" class="form-control" type="text" placeholder="Enter Last Name" maxlength="25"/>
+                                        <input asp-for="LastName" class="form-control" type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="Enter Last Name" maxlength="25"/>
                                         <span asp-validation-for="LastName" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -333,7 +333,7 @@
                                 <div class="row">
                                     <div class="col-1"></div>
                                     <div class="col-3">
-                                        <label asp-for="TypeOfFirms">Type Of Firms :<span style="color: red; width: 10%;">*</span></label>
+                                        <label asp-for="TypeOfFirms">Type Of Firm :<span style="color: red; width: 10%;">*</span></label>
                                     </div>
                                     <div class="col-6">
                                         <select id="DDL_typeoffirms" class="form-control" asp-for="TypeOfFirms">
@@ -499,7 +499,7 @@
                                     </div>
                                     <div class="col-6">
                                         <select id="DDL_ProductInterest" class="form-control" asp-for="ProductID" asp-items="ViewBag.loanProducts">
-                                            <option value="">Select Property</option>
+                                            <option value="">Select Product</option>
                                         </select>
                                         <span asp-validation-for="ProductID" class="text-danger"></span>
                                     </div>
