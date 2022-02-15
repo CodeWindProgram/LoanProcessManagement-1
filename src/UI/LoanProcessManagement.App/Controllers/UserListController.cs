@@ -3,10 +3,12 @@ using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.UserList.Query;
 using LoanProcessManagement.Application.Features.UserList.Query.GetLockedUserList;
 using LoanProcessManagement.Domain.CustomModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace LoanProcessManagement.App.Controllers
@@ -25,6 +27,8 @@ namespace LoanProcessManagement.App.Controllers
         /// Commented By Saif Khan
         /// </summary>
         /// <returns>UserListServiceResponse</returns>
+        [Authorize(AuthenticationSchemes = "Cookies")]
+
         public async Task<IActionResult> Index(string flag = "1")
         {
             GetUserListQuery UserList = new GetUserListQuery();
