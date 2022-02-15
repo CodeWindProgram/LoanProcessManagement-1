@@ -1,5 +1,6 @@
 ﻿using LoanProcessManagement.Application.Contracts.Persistence;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries;
+using LoanProcessManagement.Domain.CustomModels;
 using LoanProcessManagement.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -15,7 +16,7 @@ namespace LoanProcessManagement.Persistence.Repositories
     {
         protected readonly ApplicationDbContext _dbContext;
         private readonly ILogger<LeadStatusRepository> _logger;
-        public LeadStatusRepository(ApplicationDbContext dbContext,ILogger<LeadStatusRepository> logger)
+        public LeadStatusRepository(ApplicationDbContext dbContext, ILogger<LeadStatusRepository> logger)
         {
             _dbContext = dbContext;
             _logger = logger;
@@ -23,8 +24,8 @@ namespace LoanProcessManagement.Persistence.Repositories
         }
         public async Task<IEnumerable<LpmLeadStatusMaster>> GetLeadStatus(string role)
         {
-        
-            if(role=="DSA" || role == "dsa")
+
+            if (role == "DSA" || role == "dsa")
             {
                 var status = new List<string>()
                 {
@@ -46,7 +47,7 @@ namespace LoanProcessManagement.Persistence.Repositories
             GetLeadStatusCountDto statusCount = new GetLeadStatusCountDto();
             if (req.UserRoleId == 1 || req.UserRoleId == 2)
             {
-                var leadStatusCountList =_dbContext.LpmLeadMasters
+                var leadStatusCountList = _dbContext.LpmLeadMasters
                 .AsEnumerable()
                 .GroupBy(u => u.CurrentStatus);
                 foreach (var statusCountKey in leadStatusCountList)
@@ -90,7 +91,7 @@ namespace LoanProcessManagement.Persistence.Repositories
             {
                 var leadStatusCountList = _dbContext.LpmLeadMasters
                 .AsEnumerable()
-                .Where(u=>u.BranchID==req.BranchId && u.Lead_assignee_Id==req.LgId)
+                .Where(u => u.BranchID == req.BranchId && u.Lead_assignee_Id == req.LgId)
                 .GroupBy(u => u.CurrentStatus);
 
                 foreach (var statusCountKey in leadStatusCountList)
@@ -179,5 +180,144 @@ namespace LoanProcessManagement.Persistence.Repositories
             return statusCount;
 
         }
+
+        public async Task<List<ProcessModel>> GetInPrincipleSanctionLists(GetInPrincipleSanctionListQuery req)
+        {
+
+            if (req.UserRoleId == 2)
+            {
+
+                var HoInPrinciples = await _dbContext.LpmLeadMasters.Where(p => p.CurrentStatus == 3)
+                    .Include(x => x.leadquery)
+                    .Include(x => x.Branch)
+                    .Include(a => a.LpmLeadProcessCycle).ToListAsync();
+
+                var qs = await _dbContext.LpmLeadQuerys.OrderByDescending(p=>p.Id).ToListAsync();
+                var userMaster = _dbContext.LpmUserMasters;
+                var res = from element in qs
+                          group element by element.lead_Id
+              into groups
+                          select groups.First();
+
+                var temp = await _dbContext.LpmLeadProcessCycles.Where(p => p.CurrentStatus == 3).ToListAsync();
+                var Process = from HO in HoInPrinciples
+                              join PC in temp
+                              on HO.Id equals PC.lead_Id
+                              join U in userMaster
+                              on HO.CreatedBy equals U.LgId
+                              join LQ in res
+                              on HO.Id equals LQ.lead_Id into ps
+                              from LQ in ps.DefaultIfEmpty()
+
+                              select new ProcessModel
+                              {
+                                  Id = HO.Id,
+                                  FormNo = HO.FormNo,
+                                  FirstName = HO.FirstName,
+                                  LastName = HO.LastName,
+                                  DsaName = U.Name,
+                                  BranchName = HO.Branch.branchname,
+                                  LoanAmount = PC.LoanAmount,
+                                  SubmissionDate = PC.DateOfAction,
+                                  QueryStatus = LQ== null ? "Pending With HO":(LQ.Query_Status.Equals('Q') ? "Pending With Branch" : "Pending with HO"),
+                                  QueryCount = HO.leadquery.Count()
+                              };
+
+
+                return Process.ToList();
+
+
+
+
+            }
+            else if (req.UserRoleId == 3)
+            {
+                var HoInPrincipley = _dbContext.LpmLeadMasters.Where(p => p.CurrentStatus == 3)
+                    .Include(x => x.leadquery)
+                    .Include(x => x.Branch)
+                    .Include(a => a.LpmLeadProcessCycle);
+                var HoInPrinciples = await HoInPrincipley.Where(x => x.Branch.Id == req.BranchId).ToListAsync();
+                var qs = await _dbContext.LpmLeadQuerys.OrderByDescending(p => p.Id).ToListAsync();
+                var res = from element in qs
+                          group element by element.lead_Id
+             into groups
+                          select groups.First();
+
+                var temp = await _dbContext.LpmLeadProcessCycles.Where(p => p.CurrentStatus == 3).ToListAsync();
+                var Process = from HO in HoInPrinciples
+                              join PC in temp
+                              on HO.Id equals PC.lead_Id
+                              join U in _dbContext.LpmUserMasters
+                              on HO.CreatedBy equals U.LgId
+                              join LQ in res
+                              on HO.Id equals LQ.lead_Id into ps
+                              from LQ in ps.DefaultIfEmpty()
+
+                              select new ProcessModel
+                              {
+                                  Id = HO.Id,
+                                  FormNo = HO.FormNo,
+                                  FirstName = HO.FirstName,
+                                  LastName = HO.LastName,
+                                  DsaName = U.Name,
+                                  BranchName = HO.Branch.branchname,
+                                  LoanAmount = PC.LoanAmount,
+                                  SubmissionDate = PC.DateOfAction,
+                                  QueryStatus = LQ == null ? "Pending With HO" : (LQ.Query_Status.Equals('Q') ? "Pending With Branch" : "Pending with HO"),
+                                  QueryCount = HO.leadquery.Count()
+                              };
+                return Process.ToList();
+
+
+
+            }
+            else if (req.UserRoleId == 4)
+            {
+                var HoInPrincipley = _dbContext.LpmLeadMasters.Where(p => p.CurrentStatus == 3)
+                   .Include(x => x.leadquery)
+                   .Include(x => x.Branch)
+                   .Include(a => a.LpmLeadProcessCycle);
+                var HoInPrinciples = await HoInPrincipley.Where(x => x.Lead_assignee_Id == req.DSAId).ToListAsync();
+                var qs = await _dbContext.LpmLeadQuerys.OrderByDescending(p => p.Id).ToListAsync();
+                var res = from element in qs
+                          group element by element.lead_Id
+             into groups
+                          select groups.First();
+
+
+                var temp = await _dbContext.LpmLeadProcessCycles.Where(p => p.CurrentStatus == 3).ToListAsync();
+                var Process = from HO in HoInPrinciples
+                              join PC in temp
+                              on HO.Id equals PC.lead_Id
+                              join U in _dbContext.LpmUserMasters
+                              on HO.CreatedBy equals U.LgId
+                              join LQ in res
+                              on HO.Id equals LQ.lead_Id into ps
+                              from LQ in ps.DefaultIfEmpty()
+
+                              select new ProcessModel
+                              {
+                                  Id = HO.Id,
+                                  FormNo = HO.FormNo,
+                                  FirstName = HO.FirstName,
+                                  LastName = HO.LastName,
+                                  DsaName = U.Name,
+                                  BranchName = HO.Branch.branchname,
+                                  LoanAmount = PC.LoanAmount,
+                                  SubmissionDate = PC.DateOfAction,
+                                  QueryStatus = LQ == null ? "Pending With HO" : (LQ.Query_Status.Equals('Q') ? "Pending With Branch" : "Pending with HO"),
+                                  QueryCount = HO.leadquery.Count()
+                              };
+                return Process.ToList();
+
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
+
     }
 }

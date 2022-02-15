@@ -49,5 +49,14 @@ namespace LoanProcessManagement.Api.Controllers.v1
             _logger.LogInformation("GetStatusCount Completed");
             return Ok(dtos);
         }
+
+        [HttpPost("GetSanctionList")]
+        public async Task<ActionResult> GetSanctionList([FromBody] GetInPrincipleSanctionListQuery req)
+        {
+            var dtos = await _mediator.Send(req);
+            return Ok(dtos);
+        }
+
+
     }
 }

@@ -94,6 +94,10 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string LeadListing = "api/v1/GSTEnquiryLeadList/LeadListing/";
         #endregion
 
+        #region Added Url Endpoints for Ho-InPrinciple List Report- Raj Bhosale - 15-02-2022
+        public const string InPrincipleList = "api/v1/LeadStatus/GetSanctionList";
+        #endregion
+
         public const string AddEnquiry = "api/v1/IncomeAssesment/";
         public const string CreateEnquiry = "api/v1/IncomeAssesment";
 

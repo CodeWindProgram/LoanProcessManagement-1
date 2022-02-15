@@ -2,6 +2,7 @@
 using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.LeadList.Commands;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory;
+using LoanProcessManagement.Application.Features.LeadStatus.Queries;
 using LoanProcessManagement.Application.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -576,6 +577,20 @@ namespace LoanProcessManagement.App.Controllers
             }
             var asid = Json(leadStatusListModel);
             return asid;
+        }
+    
+       
+        public async Task<IActionResult> InprincipleSanctionReport()
+        {
+            GetInPrincipleSanctionListQuery SanctionList = new GetInPrincipleSanctionListQuery();
+            SanctionList.UserRoleId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value);
+            SanctionList.BranchId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "BranchID").Value);
+            SanctionList.DSAId = (User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value);
+            SanctionList.LgId = "";
+
+            var Report = await _leadListService.InPrincipleSanctionList(SanctionList);
+            ViewData["Report"] = Report;
+            return View();
         }
     }
 }
