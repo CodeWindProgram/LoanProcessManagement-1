@@ -121,5 +121,6 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string BrancheById = "api/v1/Branch/GetBrancheById/";
         public const string LeadByBranchId = "api/v1/LeadList/LeadStatus/";
         public const string LeadByLgId = "api/v1/LeadList/LeadByName/";
+        public const string resetPassword = "api/v1/ChangePassword/ResetPasswords";
     }
 }

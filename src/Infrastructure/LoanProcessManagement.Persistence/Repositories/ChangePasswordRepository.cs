@@ -1,5 +1,8 @@
 ﻿using LoanProcessManagement.Application.Contracts.Infrastructure;
 using LoanProcessManagement.Application.Contracts.Persistence;
+using LoanProcessManagement.Application.Features.ChangePassword.Commands.ResetPassword;
+using LoanProcessManagement.Application.Helper;
+using LoanProcessManagement.Application.Models.Mail;
 using LoanProcessManagement.Domain.CustomModels;
 using LoanProcessManagement.Domain.Entities;
 using LoanProcessManagement.Infrastructure.EncryptDecrypt;
@@ -71,5 +74,56 @@ namespace LoanProcessManagement.Persistence.Repositories
 
             return changePassword;
         }
+
+
+
+        public ResetPasswordModel ResetPassword(ResetPasswordModel ResetPassword)
+        {
+            var userDetails = _dbContext.LpmUserMasters.Where(x => x.LgId == ResetPassword.Lg_id).FirstOrDefault();
+
+            if (userDetails != null)
+            {
+                var dynamicPassword = DynamicCodeGeneration.GeneratePassword();
+                var encryptPassword = EncryptionDecryption.EncryptString(dynamicPassword);
+                userDetails.Password = encryptPassword;
+
+                userDetails.WrongLoginAttempt = 0;
+                userDetails.IsLocked = false;
+
+                _dbContext.SaveChanges();
+
+                var emailSecretPassCode = EncryptionDecryption.DecryptString(userDetails.Password);
+
+                var SendEmail = new Email()
+                {
+                    To = userDetails.Email,
+                    Subject = "Your reset password Code is",
+                    //Body = emailSecretPassCode,
+                    //Name=userDetails.Name
+                    Body = "Dear User <br><br> Your Loan system Login Password has been Reset Successfully. Please try to Login with Updated Password. <br><br> Password: " + emailSecretPassCode + "<br><br>Thanks, <br> Loan Process Team."
+                };
+
+                var email = _emailService.SendEmail(SendEmail);
+                if (email.Result == true)
+                {
+                    ResetPassword.Issuccess = true;
+                    ResetPassword.Message = " Password Successfully Send To Registered Email Address.";
+                }
+                else
+                {
+                    ResetPassword.Issuccess = false;
+                    ResetPassword.Message = "User does not exist, please try with correct Employee ID.";
+                }
+
+            }
+            else
+            {
+                ResetPassword.Issuccess = false;
+                ResetPassword.Message = "User does not exist, please try with correct Lg ID.";
+            }
+
+            return ResetPassword;
+        }
+
     }
 }

@@ -21,6 +21,7 @@ using System.Threading;
 using LoanProcessManagement.Application.Features.PropertyDetails.Commands.UpdatePropertyDetails;
 using System;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Queries.UnlockedAndLockedUsers;
+using LoanProcessManagement.Application.Features.ChangePassword.Commands.ResetPassword;
 
 namespace LoanProcessManagement.App.Controllers
 {
@@ -28,13 +29,15 @@ namespace LoanProcessManagement.App.Controllers
     public class LoginController : Controller
     {
         private readonly IAccountService _accountService;
+        private readonly IUserListService _userListService;
         private readonly ICommonServices _commonService;
         //private readonly IPropertyDetailsService _propertyDetailsService;
 
-        public LoginController(IAccountService accountService, ICommonServices commonService)
+        public LoginController(IAccountService accountService, ICommonServices commonService,IUserListService userListService)
         {
             _accountService = accountService;
             _commonService = commonService;
+            _userListService = userListService;
         }
 
         [Route("~/")]
@@ -49,7 +52,23 @@ namespace LoanProcessManagement.App.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
+        [HttpGet("{lg_id}")]
+        public async Task<IActionResult> ResetPassword(string lg_id)
+        {
+            var resetPasss = new ResetPasswordCommand()
+            {
+                Lg_id = lg_id
+            };
 
+            var result =await _userListService.ResetPass(resetPasss);
+
+            
+            TempData["Message"] = result.Message;
+            TempData["Success"] = result.Succeeded;
+
+            //return RedirectToAction()
+            return RedirectToAction("UpdateUser","Login",new { lgid = lg_id });
+        }
 
         #region This action method will authenticate user and return view by - Akshay Pawar - 28/10/2021, User login using Cookie Authentication Added by - Pratiksha, Akshay - 05/11/2021
         /// <summary>
