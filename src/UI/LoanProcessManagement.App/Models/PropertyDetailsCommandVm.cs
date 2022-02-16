@@ -10,7 +10,7 @@ namespace LoanProcessManagement.App.Models
     #region added model to update all property details added by - Ramya Guduru - 15/11/2021
     public class PropertyDetailsCommandVm
     {
-        [Required(ErrorMessage = "Please Enter Property Type*")]
+        [Required(ErrorMessage = "Please Select Property Type*")]
         public long PropertyID { get; set; }
         [HiddenInput]
         public string lead_Id { get; set; }

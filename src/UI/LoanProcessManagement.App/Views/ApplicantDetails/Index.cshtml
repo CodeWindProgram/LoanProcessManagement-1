@@ -208,7 +208,7 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-                                            <input asp-for="FirstName" type="text" maxlength="26" id="ContentPlaceHolder1_txtCustomerName" class="form-control required" placeholder="XYZ">
+                                            <input asp-for="FirstName" onkeydown="return /[a-z]/i.test(event.key)" type="text" maxlength="26" id="ContentPlaceHolder1_txtCustomerName" class="form-control required" placeholder="XYZ">
                                             @*<span id="ContentPlaceHolder1_RequiredFieldValidator14" style="color:Red;display:none;">Customer name is mandatory.</span>
                     <span id="ContentPlaceHolder1_RegularExpressionValidator7" style="color:Red;display:none;">Invalid Customer Name.</span>*@
                                             <span asp-validation-for="FirstName" style="color:Red;display:block;"></span>
@@ -224,7 +224,7 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-                                            <input asp-for="MiddleName" type="text" maxlength="26" id="ContentPlaceHolder1_txtCustomerMiddleName" class="form-control required" placeholder="XYZ">
+                                            <input asp-for="MiddleName" onkeydown="return /[a-z]/i.test(event.key)" type="text" maxlength="26" id="ContentPlaceHolder1_txtCustomerMiddleName" class="form-control required" placeholder="XYZ">
                                             @*<span id="ContentPlaceHolder1_RequiredFieldValidator14" style="color:Red;display:none;">Customer name is mandatory.</span>
                     <span id="ContentPlaceHolder1_RegularExpressionValidator7" style="color:Red;display:none;">Invalid Customer Name.</span>*@
                                             <span asp-validation-for="MiddleName" style="color:Red;display:block;"></span>
@@ -240,7 +240,7 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-                                            <input asp-for="LastName" type="text" maxlength="26" id="ContentPlaceHolder1_txtCustomerLastName" class="form-control required" placeholder="XYZ">
+                                            <input asp-for="LastName" type="text" onkeydown="return /[a-z]/i.test(event.key)" maxlength="26" id="ContentPlaceHolder1_txtCustomerLastName" class="form-control required" placeholder="XYZ">
                                             @*<span id="ContentPlaceHolder1_RequiredFieldValidator14" style="color:Red;display:none;">Customer name is mandatory.</span>
                     <span id="ContentPlaceHolder1_RegularExpressionValidator7" style="color:Red;display:none;">Invalid Customer Name.</span>*@
                                             <span asp-validation-for="LastName" style="color:Red;display:block;"></span>
@@ -527,7 +527,7 @@
                                         </div>
                                         <div class="col-md-5">
                                             <div class="input-control text">
-                                                <input asp-for="City" type="text" maxlength="30" id="ContentPlaceHolder1_txtCityCurrent" class="form-control">
+                                                <input asp-for="City" type="text"  onkeydown="return /[a-z]/i.test(event.key)" maxlength="30" id="ContentPlaceHolder1_txtCityCurrent" class="form-control">
                                                 @*<span id="ContentPlaceHolder1_RequiredFieldValidator8" style="color:Red;display:none;">City is mandatory.</span>*@
                                                 <span asp-validation-for="City" style="color:Red;display:block;"></span>
                                             </div>
@@ -747,12 +747,12 @@
         if ('@ViewBag.isSuccess' == 'True') {
             setTimeout(function () {
                 location.href = "/ApplicantDetails/Index?lead_Id=@Model.lead_Id&applicantType=@Model.ApplicantType";
-            }, 1000);
+            }, 4000);
         }
         else if('@ViewBag.isSuccess' == 'False'){
              setTimeout(function () {
                 location.href="/ApplicantDetails/Index?lead_Id=@Model.lead_Id&@Model.ApplicantType";
-            }, 3000);
+            }, 4000);
 
         }
 

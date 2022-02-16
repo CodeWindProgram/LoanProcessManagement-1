@@ -437,7 +437,7 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-                                            <input asp-for="City" type="text" maxlength="30" id="ContentPlaceHolder1_txtCityCurrent" class="form-control">
+                                            <input asp-for="City" onkeydown="return /[a-z]/i.test(event.key)" type="text" maxlength="30" id="ContentPlaceHolder1_txtCityCurrent" class="form-control">
 
                                             <span asp-validation-for="City" style="color:Red;display:block;"></span>
                                         </div>
