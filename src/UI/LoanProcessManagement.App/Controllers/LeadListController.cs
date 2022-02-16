@@ -243,9 +243,10 @@ namespace LoanProcessManagement.App.Controllers
             var modifyLeadResponse = await _leadListService.ModifyLead(lead);
             ModifyLeadVM currentLead = null;
 
-            ViewBag.isSuccess = modifyLeadResponse.Succeeded;
-            ViewBag.Message = modifyLeadResponse.Data.Message;
-
+            //ViewBag.isSuccess = modifyLeadResponse.Succeeded;
+            //ViewBag.Message = modifyLeadResponse.Data.Message;
+            TempData["ModificationSuccess"] = modifyLeadResponse.Succeeded;
+            TempData["ModificationMessage"] = modifyLeadResponse.Data.Message;
             var leadResponse = await _leadListService.GetLeadByLeadId(lead.lead_Id);
             if (leadResponse.Data.QueryStatus == 'R')
             {
@@ -349,8 +350,8 @@ namespace LoanProcessManagement.App.Controllers
             ViewBag.insuranceProducts = new SelectList(insuranceProductsResponse.Data, "Id", "ProductName");
             ViewBag.leadQuery = new SelectList(queries, "QueryName", "QueryName");
             ModelState.Clear();
-
-            return View(currentLead);
+            return RedirectToAction("LeadSummary", "LeadList", new { lead_Id = lead.lead_Id});
+            //return View(currentLead);
         }
         #endregion
 
