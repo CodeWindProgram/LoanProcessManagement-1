@@ -1,5 +1,6 @@
 ﻿using LoanProcessManagement.App.Helper.APIHelper;
 using LoanProcessManagement.App.Services.Interfaces;
+using LoanProcessManagement.Application.Features.ChangePassword.Commands.ResetPassword;
 using LoanProcessManagement.Application.Features.UserList.Query;
 using LoanProcessManagement.Application.Features.UserList.Query.GetLockedUserList;
 using LoanProcessManagement.Application.Responses;
@@ -88,6 +89,30 @@ namespace LoanProcessManagement.App.Services.Implementation
             return model;
         }
         #endregion
+
+        public async Task<Response<ResetPasswordCommandDTO>> ResetPass(ResetPasswordCommand resetPass)
+        {
+
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+            var content = JsonConvert.SerializeObject(resetPass);
+
+            var httpResponse = await _client.PostAsync
+                (
+                    BaseUrl + APIEndpoints.resetPassword, new StringContent(content, Encoding.Default,
+                    "application/json")
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<Response<ResetPasswordCommandDTO>>(jsonString, options);
+
+            return model;
+
+        }
 
     }
     #endregion

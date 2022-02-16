@@ -35,18 +35,18 @@
                 <div style="border: 1px solid #343a40;padding-right:5px;padding-bottom:5px;" class="border">
                     <div class="border-part">
                         @*@if (ViewBag.isSuccess == true)
-                        {
-                            <div class="alert alert-success" role="alert">
-                                @ViewBag.Message
-                            </div>
-                        }
-                        else if (ViewBag.isSuccess == false)
-                        {
-                            <div class="alert alert-danger" role="alert">
-                                <strong>Error!</strong> @ViewBag.Message
-                            </div>
+                            {
+                                <div class="alert alert-success" role="alert">
+                                    @ViewBag.Message
+                                </div>
+                            }
+                            else if (ViewBag.isSuccess == false)
+                            {
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>Error!</strong> @ViewBag.Message
+                                </div>
 
-                        }*@
+                            }*@
                         <form action="/login/updateuser" method="post">
                             <br />
                             @*<div asp-validation-summary="ModelOnly" class="text-danger font-italic"></div>*@
@@ -109,6 +109,11 @@
                                 <div class="col-sm-5">
                                     <input type="submit" value="Modify User" id="btnSignIn" Class="btn" />
                                     <a id="cancelbutton" class="btn btn-danger" href="/UserList/Index">Cancel</a>
+                                    @if (Model != null)
+                                    {
+                                    <a id="cancelbutton" class="btn btn-primary" asp-controller="Login" asp-action="ResetPassword" 
+                                       asp-route-lg_id="@Model.LgId">Reset Password</a>
+                                    }
                                 </div>
                             </div>
                         </form>
@@ -121,14 +126,31 @@
 
 
 <script>
-        $(document).ready(function () {
-        if ('@ViewBag.isSuccess' == 'True') {
-            toastr.success('@ViewBag.Message', "Success");
-        }
-        else if ('@ViewBag.isSuccess' == 'False') {
-            toastr.error('@ViewBag.Message', "Error");
+    $(document).ready(function () {
+
+
+        if ('@TempData["UpdateSuccess"]' == 'True') {
+            toastr.success('@TempData["UpdateMessage"]', "Success");
 
         }
+        else if ('@TempData["UpdateSuccess"]' == 'False') {
+            toastr.error('@TempData["UpdateMessage"]', "Error");
+
+        }
+
+
+        var resetSuccess = '@TempData["Success"]';
+        if (resetSuccess == 'True') {
+            toastr.success('@TempData["Message"]', "Success");
+
+        }
+        else if (resetSuccess == 'False') {
+            toastr.error('@TempData["Message"]', "Error");
+
+        }
+
+
+
 
     })
 </script>

@@ -118,7 +118,19 @@
      if('@Model.CurrentStatus' == '5') {
          $("#ThirdPartyCheck").css("display", "inline-block");
      }
-    
+    //-------------------------------------------------------------------------------------------------------------------
+    $(document).ready(function () {
+        if ('@TempData["ModificationSuccess"]' == 'True') {
+            toastr.success('@TempData["ModificationMessage"]', "Success");
 
+        }
+        else if ('@TempData["ModificationSuccess"]' == 'False') {
+            toastr.error('@TempData["ModificationMessage"]', "Error");
+
+
+        }
+
+    })
+    //-------------------------------------------------------------------------------------------------------------------
 
 </script>

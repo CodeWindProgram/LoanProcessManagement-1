@@ -897,9 +897,9 @@
 
     }
 
+    /*----------------------------------------------------------------------------------------------------------------------*/
 
-
-    $(document).ready(function () {
+    @*$(document).ready(function () {
         if ('@ViewBag.isSuccess' == 'True') {
             toastr.success('@ViewBag.Message', "Success");
             setTimeout(function () {
@@ -914,8 +914,8 @@
 
         }
 
-    })
-
+    })*@
+    /*----------------------------------------------------------------------------------------------------------------------*/
     $(function () {
         $(".amt").keypress(function (e) {
             var keyCode = e.which;

@@ -8,15 +8,6 @@
 <script type="text/javascript"></script>
 
 <style>
-    .panel-heading {
-        color: white;
-        background-color: #343a40;
-        border-bottom: 1px solid rgba(0,0,0,.125);
-        padding: 0.75rem 1.25rem;
-        position: relative;
-        border-top-left-radius: 0.25rem;
-        border-top-right-radius: 0.25rem;
-    }
     .card {
         background: linear-gradient(to bottom, rgba(251,251,251,10) 0%,rgba(242,242,242,10) 100%);
         font-family: sans-serif;
@@ -359,6 +350,61 @@
             }
 
         }
+
+        //$(function () {
+        //    $("li").click(function (e) {
+        //        e.preventDefault();
+        //        $("li").removeClass("active");
+        //        $(this).addClass("active");
+        //    });
+        //});
+
+
+
+        $(document).ready(function () {
+
+        if ('@ViewBag.incomeTypeNo' == 0) {
+            $("#l0").removeClass("active");
+            $("#l0").addClass("active");
+
+
+        }
+
+        if ('@ViewBag.incomeTypeNo' == 1) {
+            $("#l1").removeClass("active");
+            $("#l1").addClass("active");
+
+
+        }
+
+        else if ('@ViewBag.incomeTypeNo' == 2) {
+            $("#l2").removeClass("active");
+            $("#l2").addClass("active");
+
+        }
+
+        else if ('@ViewBag.incomeTypeNo' == 3) {
+            $("#l3").removeClass("active");
+            $("#l3").addClass("active");
+
+
+        }
+
+        else if ('@ViewBag.incomeTypeNo' == 4) {
+            $("#l4").removeClass("active");
+            $("#l4").addClass("active");
+
+
+        }
+        else if ('@ViewBag.incomeTypeNo' == 5) {
+            $("#l5").removeClass("active");
+            $("#l5").addClass("active");
+
+
+        }
+    });
+
+
 
         $(document).ready(function () {
             //debugger;

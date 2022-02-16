@@ -1,4 +1,5 @@
-﻿using LoanProcessManagement.Application.Features.UserList.Query;
+﻿using LoanProcessManagement.Application.Features.ChangePassword.Commands.ResetPassword;
+using LoanProcessManagement.Application.Features.UserList.Query;
 using LoanProcessManagement.Application.Features.UserList.Query.GetLockedUserList;
 using LoanProcessManagement.Application.Responses;
 using System;
@@ -13,7 +14,7 @@ namespace LoanProcessManagement.App.Services.Interfaces
     {
        Task<Response<IEnumerable<GetUserListQueryVm>>> UserListProcess(GetUserListQuery userListProcess);
        Task<Response<IEnumerable<GetLockedUserListQueryVm>>> LockedUserListProcess(GetLockedUserListQuery userListProcess);
-
+       Task<Response<ResetPasswordCommandDTO>> ResetPass(ResetPasswordCommand resetPass);
     }
     #endregion
 }

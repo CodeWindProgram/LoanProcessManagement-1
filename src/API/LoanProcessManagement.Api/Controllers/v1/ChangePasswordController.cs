@@ -1,4 +1,5 @@
 ﻿using LoanProcessManagement.Application.Features.ChangePassword.Commands.ChangePassword;
+using LoanProcessManagement.Application.Features.ChangePassword.Commands.ResetPassword;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -39,6 +40,12 @@ namespace LoanProcessManagement.Api.Controllers.v1
             var response = await _mediator.Send(changePassword);
             _logger.LogInformation("ChangePassword Completed");
             return Ok(response);
+        }
+        [HttpPost("ResetPasswords")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordCommand resetPass)
+        {
+            var result = await _mediator.Send(resetPass);
+            return Ok(result);
         }
 
         #endregion
