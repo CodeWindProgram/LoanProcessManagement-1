@@ -416,11 +416,14 @@ namespace LoanProcessManagement.App.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateUser(CreateUserCommandVM user)
         {
+            var lg_id = user.LgId;
             if (ModelState.IsValid)
             {
                 var response = await _accountService.UpdateUser(user);
                 ViewBag.isSuccess = response.Succeeded;
                 ViewBag.Message = response.Data.Message;
+                TempData["UpdateSuccess"] = response.Succeeded;
+                TempData["UpdateMessage"] = response.Data.Message;
 
             }
             var roles = await _commonService.GetAllRoles();
@@ -428,7 +431,7 @@ namespace LoanProcessManagement.App.Controllers
 
             var branches = await _commonService.GetAllBranches();
             ViewBag.branches = new SelectList(branches, "Id", "branchname");
-            return View();
+            return RedirectToAction("UpdateUser", "Login", new { lgid = lg_id });
         }
         #endregion
 
