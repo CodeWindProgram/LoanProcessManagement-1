@@ -22,6 +22,7 @@ using LoanProcessManagement.Application.Features.PropertyDetails.Commands.Update
 using System;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Queries.UnlockedAndLockedUsers;
 using LoanProcessManagement.Application.Features.ChangePassword.Commands.ResetPassword;
+using System.Linq;
 
 namespace LoanProcessManagement.App.Controllers
 {
@@ -55,9 +56,11 @@ namespace LoanProcessManagement.App.Controllers
         [HttpGet("{lg_id}")]
         public async Task<IActionResult> ResetPassword(string lg_id)
         {
+            var name = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value;
             var resetPasss = new ResetPasswordCommand()
             {
-                Lg_id = lg_id
+                Lg_id = lg_id,
+                ModifiedBy = name
             };
 
             var result =await _userListService.ResetPass(resetPasss);

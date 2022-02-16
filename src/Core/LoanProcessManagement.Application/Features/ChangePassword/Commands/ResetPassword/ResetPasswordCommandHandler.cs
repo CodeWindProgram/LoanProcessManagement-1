@@ -29,7 +29,7 @@ namespace LoanProcessManagement.Application.Features.ChangePassword.Commands.Res
             {
                 Lg_id = request.Lg_id
             };
-            var result = _changepasswordRepository.ResetPassword(resetPass);
+            var result = _changepasswordRepository.ResetPassword(resetPass,request.ModifiedBy);
 
             if (result.Issuccess)
             {

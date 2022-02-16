@@ -9,6 +9,7 @@ namespace LoanProcessManagement.Application.Features.ChangePassword.Commands.Res
     public class ResetPasswordCommand:IRequest<Response<ResetPasswordCommandDTO>>
     {
         public string Lg_id { get; set; }
+        public string ModifiedBy { get; set; }
 
     }
 }

@@ -77,7 +77,7 @@ namespace LoanProcessManagement.Persistence.Repositories
 
 
 
-        public ResetPasswordModel ResetPassword(ResetPasswordModel ResetPassword)
+        public ResetPasswordModel ResetPassword(ResetPasswordModel ResetPassword,string LastModified)
         {
             var userDetails = _dbContext.LpmUserMasters.Where(x => x.LgId == ResetPassword.Lg_id).FirstOrDefault();
 
@@ -86,7 +86,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 var dynamicPassword = DynamicCodeGeneration.GeneratePassword();
                 var encryptPassword = EncryptionDecryption.EncryptString(dynamicPassword);
                 userDetails.Password = encryptPassword;
-
+                userDetails.LastModifiedBy = LastModified;
                 userDetails.WrongLoginAttempt = 0;
                 userDetails.IsLocked = false;
 

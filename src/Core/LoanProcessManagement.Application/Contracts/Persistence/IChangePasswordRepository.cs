@@ -18,7 +18,7 @@ namespace LoanProcessManagement.Application.Contracts.Persistence
     public interface IChangePasswordRepository : IAsyncRepository<ChangePasswordModel>
     {
        Task<ChangePasswordModel> ChangePasswordWithEvents(ChangePasswordModel changePassword);
-        ResetPasswordModel ResetPassword(ResetPasswordModel ResetPassword);
+        ResetPasswordModel ResetPassword(ResetPasswordModel ResetPassword,string LastModified);
     }
     #endregion
 }
