@@ -35,8 +35,11 @@ namespace LoanProcessManagement.App.Controllers
             gstFileSaveVm.gstAddEnquiryCommandDto = AddEnquiryServiceResponse.Data;
             if (gstFileSaveVm != null)
             {
+                ViewBag.incomeTypeNo = applicantType;
                 return View(gstFileSaveVm);
             }
+            
+
             return View("Error");
         }
 
