@@ -63,25 +63,28 @@
         margin-top: 20px;
         margin-bottom: 20px;
     }
-    h5 {
+    /*h5 {
         font-size: 1.25rem;
         margin-left: 1rem;
         padding-top: 5px;
         font-weight: 600;
-    }
+    }*/
     .formDiv {
         border: 1px solid #343a40;
         padding-bottom: 5px;
         padding-left: 1%;
         padding-right: 1%;
     }
+    u {
+        font-weight: 600;
+    }
 </style>
-<div style="margin-top: 20px" class="container">
+<div class="container">
     <div class="container app">
         <div class="col-sm-12 col-lg-12">
             <div data-effect="helix" id="panels" class="panel panel-info effect-helix in">
                 <div class="panel-heading">
-                    <h3>Add Customer Enquiry</h3>
+                    <h5>Add Customer Enquiry</h5>
                 </div>
                 <div class="formDiv">
                     <form method="post" action="/CibilCheckDetails/index">
@@ -90,7 +93,7 @@
                         <input type="hidden" asp-for="CreatedBy" value=@User.FindFirst("lg_id").Value />
                         <input type="hidden" asp-for="LastModifiedBy" value=@User.FindFirst("lg_id").Value />
                         <div style="height: 15px;"></div>
-                        <div class="btnDiv">
+                        <div class="btnDiv  pt-4 pl-4 pr-4">
                             <a href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=0" class="AppTabs btn-sm selected" id="tabProcess0" style="background: #adb5bd;">Applicant</a>
                             <a id="ContentPlaceHolder1_lnkCoApp1" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=1" style="background: #343a40;">Co-Applicant-1</a>
                             <a id="ContentPlaceHolder1_lnkCoApp2" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=2" style="background: #343a40;">Co-Applicant-2</a>
@@ -98,9 +101,9 @@
                             <a id="ContentPlaceHolder1_lnkCoApp4" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=4" style="background: #343a40;">Co-Applicant-4</a>
                             <a id="ContentPlaceHolder1_lnkCoApp5" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=5" style="background: #343a40;">Co-Applicant-5</a>
                         </div>
-                        <div style="height: 10px;"></div>
+                        
                         <span id="ContentPlaceHolder1_spanMessage" style="color: red;"></span>
-                        <div style="height: 10px;"></div>
+                        
                         <div class="frames">
                             <div class="panel-body">
                                 @*@if (ViewBag.isSuccess == true)
@@ -117,31 +120,31 @@
 
                                 }*@
                                 <div id="ContentPlaceHolder1_alertMsg">
-                                    <div class="row">
-                                        <div class="col-md-5 center">
-                                            <label class="h5">Form No</label>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <div class="input-control text">
-                                                <span id="ContentPlaceHolder1_lblFormNo" class="h4" style="color: black; border:none">
-                                                    <label>@Model.FormNo</label>
-                                                    <input type="hidden" asp-for="FormNo" />
-                                                    @*<label asp-for="FormNo">@Model.FormNo</label>*@
-                                                    @*<input type="text" asp-for="FormNo" disabled="disabled">*@
-                                                </span>
-                                            </div>
+                                    <div class="row tab pt-3 pr-1">
+                                        <div class="col-md-12 text-center">
+                                            <label class="h4">Form No.</label>
+
+
+                                            @*<div class="input-control text">*@
+                                            <span id="ContentPlaceHolder1_lblFormNo" class="h4" style="color: black; border:none">
+                                                <label>@Model.FormNo</label>
+                                                <input type="hidden" asp-for="FormNo" />
+
+                                            </span>
+                                            @*</div>*@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="divConverted3PC" class="card initial1">
-                                    <h5>Customer Details</h5>
+                                <hr />
+                                <div id="divConverted3PC">
+                                    <h4><u>Customer Details</u></h4>
                                 </div>
                                 
                                 <div style="display:flex;">
                                     <div class="col-md-4">
 
                                     </div>
-                                    <div style="width:100%; text-align:right;"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
+                                    @*<div style="width:100%; text-align:right;"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>*@
                                 </div>
                                 <div style="height: 5px;"></div>
                                 <div class="row tab">
@@ -219,10 +222,11 @@
                                     </div>
                                 </div>
                                 <div style="height: 5px;"></div>
+                                <hr />
                                 <div id="IdentificationDv">
                                     <div style="height: 5px;"></div>
-                                    <div class="divsubheader card initial1" id="divIdentification">
-                                        <h5>Identification </h5>
+                                    <div id="divIdentification">
+                                        <h4><u>Identification</u></h4>
                                         
                                     </div>
                                     <div style="height: 5px;"></div>
@@ -297,11 +301,11 @@
                                     </div>
                                     
                                 </div>
-
+                                <hr />
                                 <div id="PhoneDV">
                                     <div style="height: 5px;"></div>
-                                    <div class="divsubheader card initial1">
-                                        <h5>Phone</h5>
+                                    <div>
+                                        <h4><u>Phone</u></h4>
                                     </div>
                                     <div class="row tab">
                                         <div class="col-md-5">
@@ -332,10 +336,10 @@
                                     </div>
                                 </div>
                                 </div>
-
+                            <hr />
                             <div id="currentAddr">
-                                <div id="divConverted4" class="divsubheader card initial1">
-                                    <h5>Address</h5>
+                                <div id="divConverted4">
+                                    <h4><u>Address</u></h4>
                                 </div>
                                 <div style="height: 5px;"></div>
                                 <div class="row tab">
