@@ -8,15 +8,6 @@
 <script type="text/javascript"></script>
 
 <style>
-    .panel-heading {
-        color: white;
-        background-color: #343a40;
-        border-bottom: 1px solid rgba(0,0,0,.125);
-        padding: 0.75rem 1.25rem;
-        position: relative;
-        border-top-left-radius: 0.25rem;
-        border-top-right-radius: 0.25rem;
-    }
     .card {
         background: linear-gradient(to bottom, rgba(251,251,251,10) 0%,rgba(242,242,242,10) 100%);
         font-family: sans-serif;
@@ -26,12 +17,6 @@
         padding-left:20px;
     }
 
-    h5 {
-        font-size: 1.25rem;
-        margin-left: 1rem;
-        padding-top: 5px;
-        font-weight: 600;
-    }
     .tab {
         padding-left: 15px;
     }
@@ -58,6 +43,12 @@
    .buttons{
        padding-left:8%;
    }
+    .formDiv {
+        border: 1px solid #343a40;
+        padding-bottom: 5px;
+        padding-left: 1%;
+        padding-right: 1%;
+    }
 </style>
 
 <script>
@@ -84,12 +75,12 @@
 
 <form method="post" action="/incomeAssesment/CreateEnquiry" enctype="multipart/form-data" id="form1">
 
-    <div style="margin-top: 20px" class="container">
+    <div class="container">
     <div class="container app">
         <div class="col-sm-12">
             <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
-                <div class="panel-heading"><h4>Add GST Enquiry</h4></div>
-                <div style="border: 1px solid #343a40;" class="border">
+                <div class="panel-heading"><h5>Add GST Enquiry</h5></div>
+                <div class="formDiv">
                     <div class="buttons">
                         <a id="ContentPlaceHolder1_lnkCoApp0" tabindex="1" class="AppTabs btn-sm active" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=0">Applicant</a>
                         <a id="ContentPlaceHolder1_lnkCoApp1" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=1">Co-Applicant-1</a>
@@ -98,8 +89,6 @@
                         <a id="ContentPlaceHolder1_lnkCoApp4" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=4">Co-Applicant-4</a>
                         <a id="ContentPlaceHolder1_lnkCoApp5" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=5">Co-Applicant-5</a>
                     </div>
-                    <div style="height: 10px;"></div>
-                    <span id="ContentPlaceHolder1_spanMessage" style="color: red; font-size: 18px;"></span>
                     <div style="height: 10px;"></div>
                     <div class="frames">
                         <div class="panel-body">

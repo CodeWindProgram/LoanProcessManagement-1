@@ -29,6 +29,8 @@ namespace LoanProcessManagement.App.Controllers
         [HttpGet("applicantdetails/{lead_Id}/{applicantType}")]
         public async Task<IActionResult> Index([FromQuery] long lead_Id, [FromQuery] int applicantType)
         {
+
+            
             if (lead_Id == 0)
             {
                 return View();
@@ -66,7 +68,7 @@ namespace LoanProcessManagement.App.Controllers
                     DateOfBirth = applicantResponse.Data.DateOfBirth,
                 };
 
-
+                ViewBag.applicantTypeNo = applicantType;
 
                 return View(applicant);
             }
