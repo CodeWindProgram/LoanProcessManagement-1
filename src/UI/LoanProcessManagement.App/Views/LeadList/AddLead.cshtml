@@ -120,11 +120,13 @@
                                         <label asp-for="FormNo">Form Number :<span style="color: red; width: 10%;">*</span></label>
                                     </div>
                                     <div class="col-6">
-                                        <input asp-for="FormNo" class="form-control" type="text" name="FormNo" placeholder="Enter Form Number" />
+                                        <input asp-for="FormNo" class="form-control noTxtInput" type="text" name="FormNo" placeholder="Enter Form Number" maxlength="6" />
                                         <span asp-validation-for="FormNo" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
+
+                           
 
                             <div class="form-group">
                                 <div class="row">
@@ -263,7 +265,7 @@
                                         <label asp-for="FirstName">First Name :<span style="color: red; width: 10%;">*</span></label>
                                     </div>
                                     <div class="col-6">
-                                        <input asp-for="FirstName" class="form-control" type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="Enter First Name" maxlength="25"/>
+                                        <input asp-for="FirstName" class="form-control" type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="Enter First Name" maxlength="25" />
                                         <span asp-validation-for="FirstName" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -277,7 +279,7 @@
                                         <label asp-for="MiddleName">Middle Name :</label>
                                     </div>
                                     <div class="col-6">
-                                        <input asp-for="MiddleName" class="form-control" onkeydown="return /[a-z]/i.test(event.key)" type="text" placeholder="Enter Middle Name" maxlength="25"/>
+                                        <input asp-for="MiddleName" class="form-control" onkeydown="return /[a-z]/i.test(event.key)" type="text" placeholder="Enter Middle Name" maxlength="25" />
                                     </div>
                                 </div>
                             </div>
@@ -289,7 +291,7 @@
                                         <label asp-for="LastName">Last Name :<span style="color: red; width: 10%;">*</span></label>
                                     </div>
                                     <div class="col-6">
-                                        <input asp-for="LastName" class="form-control" type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="Enter Last Name" maxlength="25"/>
+                                        <input asp-for="LastName" class="form-control" type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="Enter Last Name" maxlength="25" />
                                         <span asp-validation-for="LastName" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -528,7 +530,7 @@
                                     </div>
                                     <div class="col-6">
                                         <textarea asp-for="Comment" class="form-control" placeholder="Enter Comments" maxlength="300"></textarea>
-                                        
+
                                     </div>
                                 </div>
                             </div>
