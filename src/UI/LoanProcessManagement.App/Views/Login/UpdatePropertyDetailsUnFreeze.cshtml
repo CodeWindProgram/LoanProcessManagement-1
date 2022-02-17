@@ -172,6 +172,20 @@
             var result = document.getElementById("btnSignIn").disabled = true;
         }
 
+        $(document).ready(function () {
+            if ('@TempData["UpdatePropertySuccess"]' == 'True') {
+            toastr.success('@TempData["UpdatePropertyMessage"]', "Success");
+
+            }
+            else if ('@TempData["UpdatePropertySuccess"]' == 'False') {
+                toastr.error('@TempData["UpdatePropertyMessage"]', "Error");
+
+
+            }
+
+        })
+
+
     </script>
 
 

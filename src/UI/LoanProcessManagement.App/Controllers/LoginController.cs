@@ -511,12 +511,12 @@ namespace LoanProcessManagement.App.Controllers
                     var response = await _accountService.UpdateProperty(property);
                     if (response.Data.Succeeded)
                     {
-                        ViewBag.isSuccess = true;
-                        ViewBag.Message = "Successfully Property Details Updated";
+                        TempData["UpdatePropertySuccess"] = true;
+                       TempData["UpdatePropertyMessage"] = "Successfully Property Details Updated";
                     }
                     else {
-                        ViewBag.isSuccess = false;
-                        ViewBag.Message = "Failed to Update Property Details";
+                    TempData["UpdatePropertySuccess"] = false;
+                    TempData["UpdatePropertyMessage"] = "Failed to Update Property Details";
                     }
                 }
             //var propertyType = await _accountService.GetAllPropertyType();
