@@ -627,6 +627,10 @@
     });
 
     $(document).ready(function () {
+
+       
+
+
         $('#DDL_ProductInterest').change(function () {
             //debugger
             selectedValue = $(this).children("option:selected").val();
@@ -653,5 +657,7 @@
             }
         })
         });
+
+        $('#DDL_ProductInterest').trigger("change");
     });
 </script>

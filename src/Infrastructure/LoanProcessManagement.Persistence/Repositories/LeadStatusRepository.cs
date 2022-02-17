@@ -277,7 +277,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                    .Include(x => x.leadquery)
                    .Include(x => x.Branch)
                    .Include(a => a.LpmLeadProcessCycle);
-                var HoInPrinciples = await HoInPrincipley.Where(x => x.Lead_assignee_Id == req.DSAId).ToListAsync();
+                var HoInPrinciples = await HoInPrincipley.Where(x => x.Lead_assignee_Id == req.DSAId && x.BranchID == req.BranchId).ToListAsync();
                 var qs = await _dbContext.LpmLeadQuerys.OrderByDescending(p => p.Id).ToListAsync();
                 var res = from element in qs
                           group element by element.lead_Id
