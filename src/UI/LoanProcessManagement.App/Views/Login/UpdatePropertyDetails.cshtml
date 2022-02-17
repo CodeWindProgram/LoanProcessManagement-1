@@ -193,11 +193,11 @@
     $(document).ready(function () {
 
         //var temp = true;
-    if ('@TempData["UpdatePropertySuccess"]' == true) {
+    if ('@TempData["UpdatePropertySuccess"]' == 'True') {
         toastr.success('@TempData["UpdatePropertyMessage"]', "Success");
 
         }
-     else if ('@TempData["UpdatePropertySuccess"]' == false){
+     else if ('@TempData["UpdatePropertySuccess"]' == 'False'){
         toastr.error('@TempData["UpdatePropertyMessage"]', "Error");
      }
 
