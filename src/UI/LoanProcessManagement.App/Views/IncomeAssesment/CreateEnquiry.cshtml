@@ -17,6 +17,12 @@
         padding-left:20px;
     }
 
+    /*h4 {
+        font-size: 1.25rem;
+        margin-left: 1rem;
+        padding-top: 5px;
+        font-weight: 600;
+    }*/
     .tab {
         padding-left: 15px;
     }
@@ -40,56 +46,14 @@
             background-color: #adb5bd;
         }
 
-   .buttons{
-       padding-left:8%;
-   }
-    .formDiv {
-        border: 1px solid #343a40;
-        padding-bottom: 5px;
-        padding-left: 1%;
-        padding-right: 1%;
+    .buttons {
+        text-align: center;
     }
-    .navbar {
-        position: fixed;
-        left: 0px;
-        top: 0px;
-        height: auto;
-        width: 100%;
+    u {
+        font-weight: 600;
+        margin-left: 15px;
     }
-
-    .btnDiv ul {
-        display: flex;
-        list-style-type: none;
-        margin-block-start: 1em;
-        margin-block-end: 1em;
-        margin-inline-start: 0px;
-        margin-inline-end: 0px;
-        padding-inline-start: 0px;
-        margin-bottom: 0px;
-        padding-left: 70px;
-    }
-
-        .btnDiv ul li {
-            display: inline;
-            list-style: none;
-            font-size: 1rem;
-            position: relative;
-        }
-
-            .btnDiv ul li.active {
-                /* background-color: #b5aeae;*/
-            }
-
-            .btnDiv ul li a {
-                text-decoration: none;
-                color: #b5aeae;
-                background: #343a40;
-            }
-
-            .btnDiv ul li.active a {
-                color: #ffffff;
-                background: #828385;
-            }
+    
 </style>
 
 <script>
@@ -121,18 +85,18 @@
         <div class="col-sm-12">
             <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
                 <div class="panel-heading"><h5>Add GST Enquiry</h5></div>
-                <div class="formDiv">
-                    <div class="btnDiv pl-4 pr-4">
-                        <ul>
-                            <li id="l0"><a class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=0">Applicant</a></li>
-                            <li id="l1"><a id="ContentPlaceHolder1_lnkCoApp1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=1">Co-Applicant-1</a></li>
-                            <li id="l2"><a id="ContentPlaceHolder1_lnkCoApp2" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=2">Co-Applicant-2</a></li>
-                            <li id="l3"><a id="ContentPlaceHolder1_lnkCoApp3" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=3">Co-Applicant-3</a></li>
-                            <li id="l4"><a id="ContentPlaceHolder1_lnkCoApp4" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=4">Co-Applicant-4</a></li>
-                            <li id="l5"><a id="ContentPlaceHolder1_lnkCoApp5" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=5">Co-Applicant-5</a></li>
-                        </ul>
+                <div style="border: 1px solid #343a40;" class="border-dark">
+                    <div class="buttons pt-4 pl-4 pr-4">
+                        <a id="ContentPlaceHolder1_lnkCoApp0" tabindex="1" class="AppTabs btn-sm active" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=0">Applicant</a>
+                        <a id="ContentPlaceHolder1_lnkCoApp1" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=1">Co-Applicant-1</a>
+                        <a id="ContentPlaceHolder1_lnkCoApp2" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=2">Co-Applicant-2</a>
+                        <a id="ContentPlaceHolder1_lnkCoApp3" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=3">Co-Applicant-3</a>
+                        <a id="ContentPlaceHolder1_lnkCoApp4" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=4">Co-Applicant-4</a>
+                        <a id="ContentPlaceHolder1_lnkCoApp5" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=5">Co-Applicant-5</a>
                     </div>
-                    <div style="height: 10px;"></div>
+                   
+                    <span id="ContentPlaceHolder1_spanMessage" style="color: red; font-size: 18px;"></span>
+                    
                     <div class="frames">
                         <div class="panel-body">
                             <div hidden>
@@ -149,23 +113,27 @@
                             </div>
 
                             <div id="ContentPlaceHolder1_alertMsg">
-                                <div style="display:flex">
-                                    <div class="col-md-4">
-                                        <label class="col-md-5">Form No</label>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <div class="input-control text"style="display:inline-flex">
-                                            <input asp-for="gstAddEnquiryCommandDto.FormNo" style="border: none; background-color: #f4f6f9; font-weight: bold; " type="text" disabled />
-                                            <input asp-for="gstAddEnquiryCommandDto.FormNo" style="border: none; background-color: #f4f6f9; font-weight: bold; " type="text" hidden />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <div style= "text-align:right;"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
+                                <div class="row tab pt-3 pr-1">
+                                    <div class="col-md-12 text-center">
+                                        <label class="h4">Form No.</label>
+
+
+                                        @*<div class="input-control text">*@
+                                        <span id="ContentPlaceHolder1_lblFormNo" class="h4" style="color: black; border:none">
+                                            <label>@Model.gstAddEnquiryCommandDto.FormNo</label>
+                                            <input type="hidden" asp-for="gstAddEnquiryCommandDto.FormNo" />
+
+                                        </span>
+                                        @*</div>*@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card">
-                                <h5>Customer Details</h5>
+                            <hr />
+                            
+                            <div style="text-align:right;" class="p-1"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
+                        
+                            <div>
+                                <h4><u>Customer Details</u></h4>
                             </div>
 
 
@@ -258,8 +226,9 @@
                             </div>
 
                             <div style="height: 5px; display: none;"></div>
-                            <div class="card">
-                                <h5>Upload Files</h5>
+                            <hr />
+                            <div>
+                                <h4><u>Upload Files</u></h4>
                             </div>
 
                             <div style="height: 5px; display: none;"></div>
@@ -312,7 +281,7 @@
                             <div class="row tab">
                                 <div style="display:inline-flex" class="col-md-12">
                                     <center>
-                                        <a type="button" asp-controller="Home" asp-action="Index" value="Cancel" id="cancelbutton" class="btn btn-danger">Cancel</a>
+                                        <a type="button" href="/LeadList/LeadSummary/@ViewBag.LeadId" value="Cancel" id="cancelbutton" class="btn btn-danger">Cancel</a>
                                     </center>
                                 </div>
                             </div>
