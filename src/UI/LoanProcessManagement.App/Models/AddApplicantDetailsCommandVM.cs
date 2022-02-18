@@ -17,7 +17,6 @@ namespace LoanProcessManagement.App.Models
         [Required(ErrorMessage = "First Name is Required")]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Middle Name is Required")]
         public string MiddleName { get; set; }
         [Required(ErrorMessage = "Last Name is Required")]
         public string LastName { get; set; }

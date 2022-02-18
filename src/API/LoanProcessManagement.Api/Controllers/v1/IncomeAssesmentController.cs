@@ -1,5 +1,7 @@
 ﻿using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTAddEnuiry;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTCreateEnquiry;
+using LoanProcessManagement.Application.Features.IncomeAssesment.Queries.GetIncomeAssessment;
+using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.AddIncomeAssessment;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -41,5 +43,40 @@ namespace LoanProcessManagement.Api.Controllers.v1
             _logger.LogInformation("RegisterAsync Completed");
             return Ok(dtos);
         }
+
+        #region GetIncomeAssessmentDetails API by Pratiksha Poshe - 14/02/2022
+        /// <summary>
+        /// 14/02/2021 - GetIncomeAssessmentDetails API
+        /// Commented by Pratiksha Poshe
+        /// </summary>
+        /// <param name="lead_Id"></param>
+        /// <param name="applicantType"></param>
+        /// <returns></returns>
+        [HttpGet("GetIncomeAssessmentDetailsByLeadId")]
+        public async Task<ActionResult> GetIncomeAssessmentDetailsByLeadId([FromQuery] int applicantType, [FromQuery] long lead_Id)
+        {
+            _logger.LogInformation("GetIncomeAssessmentDetails Initiated");
+            var result = await _mediator.Send(new GetIncomeAssessmentDetailsQuery(applicantType,lead_Id));
+            _logger.LogInformation("GetIncomeAssessmentDetails Initiated");
+            return Ok(result);
+        }
+        #endregion
+        #region AddIncomeAssessmentDetails API by Pratiksha Poshe - 14/02/2022
+        /// <summary>
+        /// 14/02/2021 - AddIncomeAssessmentDetails API
+        /// Commented by Pratiksha Poshe
+        /// </summary>
+        /// <param name="lead_Id"></param>
+        /// <param name="applicantType"></param>
+        /// <returns></returns>
+        [HttpPost("AddIncomeAssessmentDetailsByLeadId")]
+        public async Task<ActionResult> AddIncomeAssessmentDetailsByLeadId([FromBody] AddIncomeAssessmentDetailsCommand addIncomeAssessmentDetails)
+        {
+            _logger.LogInformation("AddIncomeAssessmentDetails Initiated");
+            var result = await _mediator.Send(addIncomeAssessmentDetails);
+            _logger.LogInformation("AddIncomeAssessmentDetails Initiated");
+            return Ok(result);
+        }
+        #endregion
     }
 }

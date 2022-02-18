@@ -584,6 +584,7 @@ namespace LoanProcessManagement.Persistence.Repositories
             lpmLeadApplicantsDetails.CustomerPhone = request.CustomerPhone;
             lpmLeadApplicantsDetails.EmploymentType = request.EmploymentType;
             lpmLeadApplicantsDetails.IsActive = request.IsActive;
+            lpmLeadApplicantsDetails.CustomerEmail = request.CustomerEmail;
             await _dbContext.LpmLeadApplicantsDetails.AddAsync(lpmLeadApplicantsDetails);
             await _dbContext.SaveChangesAsync();
 
