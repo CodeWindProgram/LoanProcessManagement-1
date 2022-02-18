@@ -10,6 +10,7 @@ using LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadNameByLgId;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadStatus;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries;
+using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetHOSanctionListQuery;
 using LoanProcessManagement.Application.Responses;
 using LoanProcessManagement.Domain.CustomModels;
 using Microsoft.Extensions.Options;
@@ -212,6 +213,30 @@ namespace LoanProcessManagement.App.Services.Implementation
             var httpResponse = await _client.PostAsync
                 (
                     BaseUrl + APIEndpoints.InPrincipleList,new StringContent(content, Encoding.Default,
+                    "application/json")
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<List<ProcessModel>>(jsonString, options);
+
+            return model;
+        }
+        #endregion
+
+        #region This action method will Internally Call leadStatus API and return InPrincipleSanctionList by - Raj Bhosale - 15/02/2022
+        public async Task<List<ProcessModel>> HOSanctionList(GetHOSanctionListQuery SanctionList)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+            var content = JsonConvert.SerializeObject(SanctionList);
+
+            var httpResponse = await _client.PostAsync
+                (
+                    BaseUrl + APIEndpoints.HOSanctionList, new StringContent(content, Encoding.Default,
                     "application/json")
                 );
 

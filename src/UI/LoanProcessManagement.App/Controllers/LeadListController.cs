@@ -3,6 +3,7 @@ using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.LeadList.Commands;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries;
+using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetHOSanctionListQuery;
 using LoanProcessManagement.Application.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -584,8 +585,8 @@ namespace LoanProcessManagement.App.Controllers
             var asid = Json(leadStatusListModel);
             return asid;
         }
-    
-       
+
+        #region HO-Inprinciple Sanction Report List - 14/02/2022 - Raj Bhosale
         public async Task<IActionResult> InprincipleSanctionReport()
         {
             GetInPrincipleSanctionListQuery SanctionList = new GetInPrincipleSanctionListQuery();
@@ -598,5 +599,21 @@ namespace LoanProcessManagement.App.Controllers
             ViewData["Report"] = Report;
             return View();
         }
+        #endregion
+
+        #region HO-Sanction Report List - 14/02/2022 - Raj Bhosale
+        public async Task<IActionResult> HOSanctionReport()
+        {
+            GetHOSanctionListQuery SanctionList = new GetHOSanctionListQuery();
+            SanctionList.UserRoleId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value);
+            SanctionList.BranchId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "BranchID").Value);
+            SanctionList.DSAId = (User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value);
+            SanctionList.LgId = "";
+
+            var Report = await _leadListService.HOSanctionList(SanctionList);
+            ViewData["HOSanctionReport"] = Report;
+            return View();
+        }
+        #endregion
     }
 }

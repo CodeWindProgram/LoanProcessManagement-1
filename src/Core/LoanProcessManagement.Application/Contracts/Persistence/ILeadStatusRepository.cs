@@ -1,4 +1,5 @@
 ﻿using LoanProcessManagement.Application.Features.LeadStatus.Queries;
+using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetHOSanctionListQuery;
 using LoanProcessManagement.Domain.CustomModels;
 using LoanProcessManagement.Domain.Entities;
 using System;
@@ -14,7 +15,7 @@ namespace LoanProcessManagement.Application.Contracts.Persistence
         Task<GetLeadStatusCountDto> GetLeadStatusCount(GetLeadStatusCountQuery req);
         Task<List<ProcessModel>> GetInPrincipleSanctionLists(GetInPrincipleSanctionListQuery req);
 
-
+        Task<List<ProcessModel>> GetHOSanctionLists(GetHOSanctionListQuery req);
 
     }
 }
