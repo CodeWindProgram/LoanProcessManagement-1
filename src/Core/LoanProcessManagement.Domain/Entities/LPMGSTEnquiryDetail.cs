@@ -15,6 +15,10 @@ namespace LoanProcessManagement.Domain.Entities
         public LpmLeadMaster FormNo { get; set; }
         public LpmLeadMaster Lead_Id { get; set; }
         public string CustomerName { get; set; }
+        public long? ApplicantDetailId { get; set; }
+
+        [ForeignKey("ApplicantDetailId")]
+        public LpmLeadApplicantsDetails LeadApplicantDetails { get; set; }
         public int MobileNo { get; set; }
         public string Email { get; set; }
         public string EmploymentType { get; set; }

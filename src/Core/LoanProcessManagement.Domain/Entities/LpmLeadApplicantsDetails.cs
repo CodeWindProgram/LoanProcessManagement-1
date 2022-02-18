@@ -42,6 +42,16 @@ namespace LoanProcessManagement.Domain.Entities
         public int NoOfBankAccounts { get; set; }
         public bool IsActive { get; set; }
 
+        public bool isItrRequired { get; set; }
+        public bool isCibilCheckRequired { get; set; }
+        public bool isPerfiosRequired { get; set; }
+        public bool isGstRequired { get; set; }
+        public bool isItrSubmitSuccess { get; set; }
+        public bool isCibilCheckSubmitSuccess { get; set; }
+        public bool isPerfiosSubmitSuccess { get; set; }
+        public bool isGstSubmitSuccess { get; set; }
+        
+        public ICollection<LPMGSTEnquiryDetail> LPMGSTEnquiryDetails { get; set; }
         public ICollection<LpmLeadITRDetails> LpmLeadITRDetails { get; set; }
         public ICollection<LpmCibilCheckDetails> LpmCibilCheckDetails { get; set; }
         public ICollection<LpmLeadIncomeAssessmentDetails> LpmLeadIncomeAssessmentDetails { get; set; }
