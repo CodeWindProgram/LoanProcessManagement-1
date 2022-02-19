@@ -7,7 +7,7 @@
     }
     else if (temp[1] == 'Leadlist') {
         var element = $(".nav-item a[href='" + path + "']");
-        element.addClass("active");
+        element.addClass("active");     
     }
     else if (temp[1] == 'ChangePasswordUI') {
         var element = $(".nav-item a[href='" + path + "']");
@@ -37,13 +37,14 @@
         var element = $(".nav-item a[href='" + path + "']");
         element.addClass("active");
     }
-    //var parentele = $(".nav-item a[href='" + path + "']")[0]?.parentelement.parentelement;
 
-    //if (parentele.closest('li') != null) {
-    //    parentele.closest('li').setattribute("class", "nav-item menu-is-opening menu-open")
-    //    parentele.show();
-    //}
 
+    var parentEle = $(".nav-item a[href='" + path + "']")[0]?.parentElement.parentElement;
+
+    if (parentEle.closest('li') != null) {
+        parentEle.closest('li').setAttribute("class", "nav-item menu-is-opening menu-open")
+        parentEle.show();
+    }
 });
 
 
