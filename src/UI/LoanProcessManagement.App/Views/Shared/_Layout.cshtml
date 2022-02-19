@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -141,11 +142,11 @@
                     </a>
                 </li>
                 <!-- <li class="nav-item d-none d-sm-inline-block">
-          <a href="index3.html" class="nav-link">Home</a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">Contact</a>
-        </li> -->
+                  <a href="index3.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                  <a href="#" class="nav-link">Contact</a>
+                </li> -->
             </ul>
 
             @if (User != null && User.Identity.IsAuthenticated)
@@ -160,8 +161,8 @@
                         <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"
                             style="margin: 0.125rem 0 0 -76%">
                             <li class="dropdown-item"><b>Name:</b> @User.Identities.FirstOrDefault().Name</li>-->
-                            @*(@User.Claims.FirstOrDefault(c => c.Type == "Role").Value)*@
-                            <!--<li class="dropdown-item"><b>Branch Name:</b> @User.Identities.FirstOrDefault().FindFirst("Branch").Value</li>
+                    @*(@User.Claims.FirstOrDefault(c => c.Type == "Role").Value)*@
+                    <!--<li class="dropdown-item"><b>Branch Name:</b> @User.Identities.FirstOrDefault().FindFirst("Branch").Value</li>
                             <li class="dropdown-divider"></li>
                             <li class="nav-item d-sm-inline-block">
                                 <a href="/login/logout" class="nav-link">Logout</a>
@@ -178,7 +179,7 @@
                                 <span class="dropdown-item dropdown-header">Profile !!</span>
                                 <div class="dropdown-divider"></div>
                                 <a href="#" class="dropdown-item">
-                                    @*<i class="fas fa-envelope mr-2"></i>*@ <b>Name:</b> @User.Identities.FirstOrDefault().Name
+                                    @*<i class="fas fa-envelope mr-2"></i>*@ <b>Name:</b> @User.Identities.FirstOrDefault().Name (@User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value)
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a href="#" class="dropdown-item">
