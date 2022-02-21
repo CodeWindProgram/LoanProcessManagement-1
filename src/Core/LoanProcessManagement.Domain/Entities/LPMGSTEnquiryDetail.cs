@@ -24,5 +24,6 @@ namespace LoanProcessManagement.Domain.Entities
         public int ApplicantType { get; set; }
         public bool IsActive { get; set; }
         public string Reinitiated_By { get; set; }
+        public string FormNumber { get; set; }
     }
 }

@@ -125,6 +125,17 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string BrancheById = "api/v1/Branch/GetBrancheById/";
         public const string LeadByBranchId = "api/v1/LeadList/LeadStatus/";
         public const string LeadByLgId = "api/v1/LeadList/LeadByName/";
+
+        #region added url Endpoints ITR, GST and Cibil enquiry Details List- Ramya Guduru - 14/02/2022
+        public const string CreditITRDetailsList = "api/v1/CreditITRDetails/GetCreditITRDetailsList";
+        public const string CreditITRUserDetailsList = "api/v1/CreditITRDetails/GetCreditITRUserDetailsList/";
+
+        public const string CreditCibilDetailsList = "api/v1/CreditCibilDetails/GetCreditCibilDetailsList";
+        public const string CreditCibilUserDetailsList = "api/v1/CreditCibilDetails/GetCreditCibilUserDetailsList/";
+
+        public const string CreditGstDetailsList = "api/v1/CreditGstDetails/GetCreditGstDetailsList";
+        public const string CreditGstUserDetailsList = "api/v1/CreditGstDetails/GetCreditGstUserDetailsList/";
+        #endregion
         public const string resetPassword = "api/v1/ChangePassword/ResetPasswords";
     }
 }
