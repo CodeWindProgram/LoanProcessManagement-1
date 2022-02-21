@@ -4,14 +4,16 @@ using LoanProcessManagement.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LoanProcessManagement.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220215140916_initial_20")]
+    partial class initial_20
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -203,9 +205,6 @@ namespace LoanProcessManagement.Persistence.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long?>("ApplicantDetailId")
-                        .HasColumnType("bigint");
-
                     b.Property<int>("ApplicantType")
                         .HasColumnType("int");
 
@@ -258,8 +257,6 @@ namespace LoanProcessManagement.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("ApplicantDetailId");
 
                     b.HasIndex("FormNoId");
 
@@ -488,38 +485,6 @@ namespace LoanProcessManagement.Persistence.Migrations
 
                     b.Property<string>("VoterId")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("isCibilCheckRequired")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<bool>("isCibilCheckSubmitSuccess")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isGstRequired")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<bool>("isGstSubmitSuccess")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isItrRequired")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<bool>("isItrSubmitSuccess")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isPerfiosRequired")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<bool>("isPerfiosSubmitSuccess")
-                        .HasColumnType("bit");
 
                     b.Property<long>("lead_Id")
                         .HasColumnType("bigint");
@@ -1657,10 +1622,6 @@ namespace LoanProcessManagement.Persistence.Migrations
 
             modelBuilder.Entity("LoanProcessManagement.Domain.Entities.LPMGSTEnquiryDetail", b =>
                 {
-                    b.HasOne("LoanProcessManagement.Domain.Entities.LpmLeadApplicantsDetails", "LeadApplicantDetails")
-                        .WithMany("LPMGSTEnquiryDetails")
-                        .HasForeignKey("ApplicantDetailId");
-
                     b.HasOne("LoanProcessManagement.Domain.Entities.LpmLeadMaster", "FormNo")
                         .WithMany()
                         .HasForeignKey("FormNoId");
