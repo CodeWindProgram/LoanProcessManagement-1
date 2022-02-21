@@ -62,6 +62,12 @@ using LoanProcessManagement.Application.Features.LeadList.Query.LeadStatus;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadByLGID;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadNameByLgId;
 using LoanProcessManagement.Application.Features.Branch.GetBranchNameById;
+using LoanProcessManagement.Application.Features.CreditITRDetails.Queries;
+using LoanProcessManagement.Application.Features.CreditITRDetails.UserDetails.Queries;
+using LoanProcessManagement.Application.Features.CreditCibilDetails.CreditCibilCheckDetails.Queries;
+using LoanProcessManagement.Application.Features.CreditCibilDetails.UserDetails.Queries;
+using LoanProcessManagement.Application.Features.CreditGstDetails.CreditGstCheckDetails.Queries;
+using LoanProcessManagement.Application.Features.CreditGstDetails.UserDetails.Queries;
 
 namespace LoanProcessManagement.Application.Profiles
 {
@@ -209,8 +215,15 @@ namespace LoanProcessManagement.Application.Profiles
 
 
             CreateMap<LeadITRDetailsCommand, LpmLeadITRDetails>().ReverseMap();
-            //CreateMap<AddCibilDetailsCommand, CibilCheckDetailsModel>().ReverseMap();
+            CreateMap<AddCibilDetailsCommand, CibilCheckDetailsModel>().ReverseMap();
             CreateMap<CibilCheckDetailsModel, AddCibilDetailsDto>().ReverseMap();
+
+            CreateMap<CreditITRDetailsListModel, GetCreditITRDetailsListVm>().ReverseMap();
+            CreateMap<CreditITRDetailsListModel, GetCreditITRUserDetailsVm>().ReverseMap();
+            CreateMap<CreditITRDetailsListModel, GetCreditCibilDetailsVm>().ReverseMap();
+            CreateMap<CreditITRDetailsListModel, GetCreditCibilUserDetailsVm>().ReverseMap();
+            CreateMap<CreditITRDetailsListModel, GetCreditGstDetailsVm>().ReverseMap();
+            CreateMap<CreditITRDetailsListModel, GetCreditGstUserDetailsVm>().ReverseMap();
         }
     }
 }
