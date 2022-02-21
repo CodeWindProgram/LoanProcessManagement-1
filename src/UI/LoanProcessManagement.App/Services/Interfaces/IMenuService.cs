@@ -2,6 +2,7 @@
 using LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands;
 using LoanProcessManagement.Application.Features.Menu.Commands.DeleteCommand;
 using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand;
+using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand.AlterMenuStatus;
 using LoanProcessManagement.Application.Features.Menu.Query;
 using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenuMaps.Query;
 using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenus;
@@ -31,6 +32,7 @@ namespace LoanProcessManagement.App.Services.Interfaces
 
         public Task<Response<GetMenuByIdQueryVm>> MenuById(long Id);
         public Task<Response<IEnumerable<GetMenuMasterServicesVm>>> GetChildMenuById(long Id , long userRoleId);
+        public  Task<AlterMenuStatusCommandDTO> AlterStatus(AlterMenuStatusCommand alterStatus);
 
     }
     #endregion

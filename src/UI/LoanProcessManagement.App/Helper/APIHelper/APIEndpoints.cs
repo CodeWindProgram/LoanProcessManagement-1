@@ -55,6 +55,7 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string MenuById = "api/v1/Menu/MenuById/";
         public const string ParentMenu = "api/v1/Menu/GetAllMenus";
         public const string ChildMenu = "api/v1/Menu/GetChildMenu/";
+        public const string AlterStatus = "api/v1/Menu/AlterMenuStatus";
 
     #endregion
 
