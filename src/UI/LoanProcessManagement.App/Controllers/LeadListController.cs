@@ -496,6 +496,7 @@ namespace LoanProcessManagement.App.Controllers
                 }
                 else if (userId == 3)
                 {
+                    //foreach(var item in leadbyBranch.ToList())
                     foreach (var item in lgextratctUR1)
                     {
                         var callbyLgId = await _leadListService.LeadByLgId(item);

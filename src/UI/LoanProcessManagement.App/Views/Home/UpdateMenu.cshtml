@@ -4,6 +4,7 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "UpdateMenu";
+    var status = (bool)TempData["Status"];
 }
 <style type="text/css">
     #pswd_info {
@@ -197,13 +198,37 @@
                                     </label>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                </div>
+                                <div class="col-lg-4">
+                                
+                                @{
+                                    if (status)
+
+                                    {
+
+                                        <a href="" onclick="myfun()"> Click Here To Disable Status</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="" onclick="myfun()">Click Here To Enable Status</a>
+                                    }
+                                }
+                            </div>
+                                <div class="col-lg-4">
+                                </div>
+
+                            </div>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-1"></div>
                                     <div class="col-md-1"></div>
                                     <div class="col-md-1"></div>
                                     <div class="col-md-1"></div>
-                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1">
+                                        
+                                    </div>
                                     <div class="col-md-1"><button type="submit" style="background-color: #343a40;color:white" class="btn">Submit</button></div>
                                     <div class="col-md-2"><a asp-action="Menulist" id="btn2" type="button" value="Cancel" class="btn btn-danger">Cancel</a></div>
                                 </div>
@@ -235,4 +260,42 @@
     function uncheck() {
         document.getElementById("confirming").checked = false;
     }
+
+    function myfun() {
+        console.log(@Model.Parlist);
+        var temp = '@TempData["MenuId"]';
+        console.log(temp);
+        $.ajax({
+            type: "POST",
+            url: "/Home/AlterStatusMenuList",
+            data: { "Id": temp },
+            success: function (data) {
+                console.log(data);
+
+                if (data.isSuccess == true)
+                {
+                    toastr.success(data.message, "Success");
+                }
+                else if (data.isSuccess == false)
+                {
+                     toastr.error(data.message, "Error");
+                }
+                window.location.href = '/MenuUpdate/' +temp;
+            }
+        });
+    }
+    $(document).ready(function () {
+
+
+        if ('@TempData["ApiDataIsSuccess"]' == 'True') {
+            toastr.success('@TempData["ApiDataMessage"]', "Success");
+
+        }
+        else if ('@TempData["ApiDataIsSuccess"]' == 'False') {
+            toastr.error('@TempData["ApiDataMessage"]', "Error");
+
+
+        }
+
+    })
 </script>

@@ -103,7 +103,7 @@ namespace LoanProcessManagement.Domain.Entities
 
         public bool IsActive { get; set; }
 
-        public string AnnualTurnOverInLastFy { get; set; }
+        public long? AnnualTurnOverInLastFy { get; set; }
 
         public string IsApplicantExemptedFromGst { get; set; }
 

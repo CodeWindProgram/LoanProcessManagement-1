@@ -99,6 +99,7 @@ namespace LoanProcessManagement.App.Controllers
                         new Claim(ClaimTypes.Email, authenticateUserResponse.Email),
                         new Claim(ClaimTypes.Role, authenticateUserResponse.Role),
                         new Claim(ClaimTypes.Name, authenticateUserResponse.Name),
+                        new Claim("Role",authenticateUserResponse.Role),
                         new Claim("BranchID", authenticateUserResponse.BranchID.ToString()),
                         new Claim("Branch", authenticateUserResponse.Branch),
                         new Claim("UserRoleId", authenticateUserResponse.UserRoleId.ToString()),

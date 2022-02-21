@@ -69,7 +69,7 @@ namespace LoanProcessManagement.Application.Features.LeadList.Commands.AddLead
 
         public string Comment { get; set; }
 
-        public string AnnualTurnOverInLastFy { get; set; }
+        public long? AnnualTurnOverInLastFy { get; set; }
 
         public string IsApplicantExemptedFromGst { get; set; }
 

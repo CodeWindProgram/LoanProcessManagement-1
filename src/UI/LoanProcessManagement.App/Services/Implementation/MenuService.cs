@@ -4,6 +4,7 @@ using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands;
 using LoanProcessManagement.Application.Features.Menu.Commands.DeleteCommand;
 using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand;
+using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand.AlterMenuStatus;
 using LoanProcessManagement.Application.Features.Menu.Query;
 using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenuMaps.Query;
 using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenus;
@@ -52,7 +53,7 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             var httpResponse = await _client.PostAsync
                 (
-                    BaseUrl + APIEndpoints.MenuProcess, 
+                    BaseUrl + APIEndpoints.MenuProcess,
                     new StringContent(content, Encoding.Default,
                     "application/json")
                 );
@@ -143,7 +144,7 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             var httpResponse = await _client.PostAsync
                 (
-                    BaseUrl + APIEndpoints.MenuDelete + Id,null
+                    BaseUrl + APIEndpoints.MenuDelete + Id, null
                 );
 
             var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
@@ -230,7 +231,7 @@ namespace LoanProcessManagement.App.Services.Implementation
             return response;
         }
 
-        public async Task<Response<IEnumerable<GetMenuMasterServicesVm>>> GetChildMenuById(long Id ,long userRoleId)
+        public async Task<Response<IEnumerable<GetMenuMasterServicesVm>>> GetChildMenuById(long Id, long userRoleId)
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
@@ -238,7 +239,7 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             var httpResponse = await _client.GetAsync
                 (
-                    BaseUrl + APIEndpoints.ChildMenu + Id +"/"+ userRoleId
+                    BaseUrl + APIEndpoints.ChildMenu + Id + "/" + userRoleId
                 );
 
             var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
@@ -248,6 +249,32 @@ namespace LoanProcessManagement.App.Services.Implementation
             var response = System.Text.Json.JsonSerializer.Deserialize<Response<IEnumerable<GetMenuMasterServicesVm>>>(jsonString, options);
 
             return response;
+        }
+
+
+
+        public async Task<AlterMenuStatusCommandDTO> AlterStatus(AlterMenuStatusCommand alterStatus)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var content = JsonConvert.SerializeObject(alterStatus);
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.PostAsync
+                (
+                    BaseUrl + APIEndpoints.AlterStatus,
+                    new StringContent(content, Encoding.Default,
+                    "application/json")
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<AlterMenuStatusCommandDTO>(jsonString, options);
+
+            return model;
         }
     }
     #endregion
