@@ -5,38 +5,7 @@
     ViewData["Title"] = "UpdatePropertyDetailsUnFreeze";
 }
 
-<style>
-    .row {
-        margin-left: 5px;
-        margin-right: 5px;
-    }
 
-    #btnSignIn {
-        margin-left: 5px;
-    }
-
-    .div {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-        align-content: end;
-        align-self: end;
-    }
-    .label-top-margin {
-    margin-top:-16px;
-    
-    }
-    .construction {
-    margin-left:270px;
-    }
-    #sub {
-        margin-right: 14px;
-        margin-bottom: 10px;
-    }
-    
-    
-    
-</style>
 
 <div class="container app">
     <div class="col-sm-12 col-lg-12">
@@ -51,6 +20,131 @@
                         {
                             <div class="alert alert-success" role="alert">
                                 @ViewBag.Message @*<a asp-controller="userlist" asp-action="index">Go to user list</a>*@
+                            </div>
+                        }
+                        else if (ViewBag.isSuccess == false)
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                <strong>Error!</strong> @ViewBag.Message
+                            </div>
+
+                        }
+
+                    <form action="/login/UpdatePropertyDetailsUnFreeze" method="post">
+                        <br />
+                         <div style="text-align:right;" class="pr-2 pb-2"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
+                        <input type="hidden" asp-for="lead_Id" />
+                        <div class="form-group">
+                            <div class="row p-3">
+                                <div class="col-lg-4 col-sm-12">
+                                    <label asp-for="PropertyID">Property Type<span style="color: red; width: 10%;">*</span></label>
+                                    <select asp-for="PropertyID" class="form-control">
+                                        <option value="">Select Property Type</option>
+                                        <option value="2">Plot</option>
+                                        <option value="3">Flat</option>
+                                        <option value="4">Independent House</option>
+                                    </select>
+                                    <span asp-validation-for="PropertyID" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-lg-4 col-sm-12">
+                                    <label asp-for="PropertyPincode">Add Pincode Of Identified Property<span style="color: red; width: 10%;">*</span></label>
+                                    <input asp-for="PropertyPincode" class="form-control" type="text" placeholder="Add Pincode Of Identified Property" autofocus id="pincode" />
+                                    <span asp-validation-for="PropertyPincode" class="text-danger" id="error-msg"></span>
+                                </div>
+
+                                <div class="col-lg-4 col-sm-12">
+
+                                    <label asp-for="PropertyUnderConstruction">Under-Construction<span style="color: red; width: 10%;">*</span></label><br />
+                                    <div class="form-check form-check-inline" style="margin-left:20px;">
+                                        <input asp-for="PropertyUnderConstruction" class="form-check-input" type="radio" name="inlineRadioOptions" id="yes" value="yes">
+                                        <label class="form-check-label" for="yes">Yes</label>
+                                    </div>
+                                    <div class="form-check form-check-inline" style="margin-left:20px;">
+                                        <input asp-for="PropertyUnderConstruction" class="form-check-input" type="radio" name="inlineRadioOptions" id="No" value="no">
+                                        <label class="form-check-label" for="No">No</label>
+                                    </div>
+                                    <br><br>
+                                    <span asp-validation-for="PropertyUnderConstruction" class="text-danger ml-5 construction"></span>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row p-3">
+
+                                <div class="col-lg-4 col-sm-12">
+                                    <label asp-for="ProjectName">Project Name<span style="color: red; width: 10%;">*</span></label>
+                                    <input asp-for="ProjectName" class="form-control" placeholder="Project Name" autofocus />
+                                    <span asp-validation-for="ProjectName" class="text-danger"></span>
+                                </div>
+
+
+
+                                <div class="col-lg-4 col-sm-12">
+                                    <label asp-for="UnitName">Unit Name<span style="color: red; width: 10%;">*</span></label>
+                                    <input asp-for="UnitName" class="form-control" type="text" placeholder="Unit Name" autofocus />
+                                    <span asp-validation-for="UnitName" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-lg-4 col-sm-12">
+                                    <label asp-for="IsSanctionedPlanReceivedID">Does The Property Have a Approved Plan ?<span style="color: red; width: 10%;">*</span></label>
+                                    <select asp-for="IsSanctionedPlanReceivedID" class="form-control">
+                                        <option value="">Select Property Sanctioned Plan</option>
+                                        <option value="1">NO- < 120 Sq.mt. (For Delhi NCR only)</option>
+                                        <option value="4">NO- < 300 Sq.mt. (For Delhi NCR only)</option>
+                                        <option value="5">YES</option>
+                                    </select>
+                                    <span asp-validation-for="IsSanctionedPlanReceivedID" class="text-danger"></span>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row p-3">
+                                <div class="col-lg-4 col-sm-12">
+                                    <label asp-for="ProjectAddress">Project Address<span style="color: red; width: 10%;">*</span></label>
+                                    <textarea asp-for="ProjectAddress" class="form-control" placeholder="Project Address" autofocus></textarea>
+                                    <span asp-validation-for="ProjectAddress" class="text-danger"></span>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div class="row pl-3 pr-3">
+                            <p class="text-danger" style="font-size:medium;"><span class="text-danger" style="font-weight:bold;padding-left:10px;font-size:medium;">Note: </span>Property Pincode Can Be Entered Only Once, Please be Guided.</p>
+                        </div>
+                        <div class="d-flex justify-content-end pr-3 pb-3" id="sub">
+                            <input type="submit" value="Save" Class="btn btn-primary btn-lg" onClick="hide()" />
+                        </div>
+
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+ 
+    @await Html.PartialAsync("~/Views/Shared/_Tabs.cshtml", (string)@ViewBag.lead_Id)
+</div>
+</div>
+    
+
+@*<div class="container app">
+    <div class="col-sm-12 col-lg-12">
+        <div data-effect="helix" id="panels" class="panel panel-info effect-helix in">
+            <div class="panel-heading">
+                <h5>Edit Property Details</h5>
+            </div>
+            <div style="border-left: 1px solid #343a40; border-right: 1px solid #343a40; " class="border">
+                <div class="panel-body">
+                    <div class="border-part">
+                        @if (ViewBag.isSuccess == true)
+                        {
+                            <div class="alert alert-success" role="alert">
+                                @ViewBag.Message
                             </div>
                         }
                         else if (ViewBag.isSuccess == false)
@@ -86,18 +180,7 @@
 
                             <div class="row">
                                 <label asp-for="PropertyUnderConstruction" class="col-sm-4 col-form-label">a.Under-Construction<span style="color: red; width: 10%;">*</span></label>
-                                @*<div class="col-sm-2">
-
-                                        <input asp-for="PropertyUnderConstruction" class="form-control" type="radio" autofocus value="Yes" id="yes" />
-                                        <span class="label-top-margin">YES</span>
-
-                                    </div>
-                                    <div class="col-sm-2">
-
-                                        <input asp-for="PropertyUnderConstruction" class="form-control" type="radio" value="No" id="no" />
-                                        <span class="label-top-margin">NO</span>
-
-                                    </div>*@
+                               
                                 <div class="form-check form-check-inline" style="margin-left:20px;">
                                     <input asp-for="PropertyUnderConstruction" class="form-check-input" type="radio" name="inlineRadioOptions" id="yes" value="yes">
                                     <label class="form-check-label" for="inlineRadio1">YES</label>
@@ -159,7 +242,7 @@
         </div>
         @await Html.PartialAsync("~/Views/Shared/_Tabs.cshtml", (string)@ViewBag.lead_Id)
     </div>
-</div>
+</div*@
 
     <script>
         //var pincode = document.getElementById("pincode");

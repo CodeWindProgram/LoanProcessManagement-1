@@ -7,12 +7,211 @@
     #act1 {
         color: white;
     }
-    /*
-        #act1:hover {
-            color: black;
-        }*/
+    #pswd_info {
+        position: relative;
+        left: 20px;
+        right: 40px;
+        width: 70%;
+        padding: 15px;
+        background: #fefefe;
+        font-family: Arial;
+        font-size: 15px;
+        color: #444;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px #ccc;
+        border: 1px solid #ddd;
+    }
+
+        #pswd_info::before {
+            content: "\25B2";
+            position: relative;
+            top: -19px;
+            left: 45%;
+            font-size: 16px;
+            line-height: 14px;
+            color: #ddd;
+            text-shadow: none;
+            display: block;
+        }
+
+    .panel-heading {
+        color: white;
+        background-color: #343a40;
+        border-bottom: 1px solid rgba(0,0,0,.125);
+        padding: 0.75rem 1.25rem;
+        position: relative;
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+    }
+
+    button {
+        color: white;
+        background-color: #343a40;
+    }
+
+    #para {
+        color: red;
+        text-align: center;
+        font-size: larger;
+    }
+
+    #bara {
+        color: #191970;
+    }
+
+    .border-part {
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+
+    #inpcheck {
+        margin-left: 10px;
+    }
+
+    #txtlab {
+        padding-top: 9px;
+    }
+
+    #lblcheck {
+        font-size: 14px;
+        color: #818181;
+        font-family: sans-serif;
+    }
+
+    #checkings {
+        display: inline-flex;
+        /* margin-left: 30px;
+        margin-top: 10px;*/
+    }
+
+    #selectChildren {
+        width: 320px;
+    }
 </style>
 <div class="container app">
+    <div class="col-sm-12 col-lg-12">
+        <div data-effect="helix" id="panels" class="panel panel-info effect-helix in ">
+            <div style="border: 1px solid #343a40" class="border">
+                <div class="panel-heading">
+                    <h5>Create Menu</h5>
+                </div>
+                <div class="panel-body">
+                    <div class="border-part">
+                        <form asp-action="CreateMenu" method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div><br />
+                            <div style="text-align:end" class="form-group"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
+                            <div class="form-group">
+                                <div class="row">
+
+                                    <div class="col-lg-4 col-sm-12">
+                                        <label asp-for="createMenuCommand.MenuName" class="control-label">Menu Name<span style="color: Red">&nbsp;*</span></label>
+
+                                        <input asp-for="createMenuCommand.MenuName" class="form-control" maxlength="50" placeholder="Menu Name"/>
+                                        <span asp-validation-for="createMenuCommand.MenuName" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-lg-4 col-sm-12">
+                                        <label asp-for="createMenuCommand.Link" class="control-label">Link<span style="color: Red">&nbsp;*</span></label>
+
+                                        <input asp-for="createMenuCommand.Link" class="form-control" maxlength="200" placeholder="Link" />
+                                        <span asp-validation-for="createMenuCommand.Link" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-lg-4 col-sm-12">
+                                        <label asp-for="createMenuCommand.Icon" class="control-label">Icon<span style="color: Red">&nbsp;*</span></label>
+
+                                        <input asp-for="createMenuCommand.Icon" class="form-control" maxlength="200" placeholder="Icon" />
+                                        <span asp-validation-for="createMenuCommand.Icon" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <div class="row">
+
+                                    <div class="col-lg-4 col-sm-12">
+                                        <label asp-for="createMenuCommand.Position" class="control-label">Position<span style="color: Red">&nbsp;*</span></label>
+
+                                        <input asp-for="createMenuCommand.Position" class="form-control" maxlength="50" />
+                                        <span asp-validation-for="createMenuCommand.Position" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-lg-4 col-sm-12">
+                                        <label asp-for="createMenuCommand.CreatedDate" class="control-label">Created Date<span style="color: Red">&nbsp;*</span></label>
+
+                                        <input asp-for="createMenuCommand.CreatedDate" class="form-control" maxlength="50" />
+                                        <span asp-validation-for="createMenuCommand.CreatedDate" class="text-danger"></span>
+                                    </div>
+
+
+                                    <div class="col-lg-4 col-sm-12">
+                                        <label id="txtlab">Menu Is Being Created For<span style="color: Red">&nbsp;*</span> </label>
+
+
+                                        <div id="checkings">
+                                            @for (int i = 0; i < Model.ListVms.Count(); i++)
+                                            {
+                                                <div class="">
+                                                    <tr id="lblcheck">
+                                                        <td><input asp-for="@Model.ListVms[i].Id" hidden /></td>
+                                                        <td><input asp-for="@Model.ListVms[i].Checkbox" id="inpcheck" type="checkbox" />@Model.ListVms[i].Name</td>
+                                                    </tr>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+
+                                    <div class="col-lg-4 col-sm-12">
+                                        <label>Is Parent Menu?<span style="color: Red">&nbsp;*</span></label>
+
+                                        <input hidden id="confirming" asp-for="createMenuCommand.IsParent" />
+                                        <input type="radio" name="Married" id="Yes" value="Yes" onclick="hideStudentChildren()" required>YES &nbsp&nbsp&nbsp&nbsp
+                                        <input type="radio" name="Married" id="No" value="No" onclick="hideStudentChildren()" checked>NO &nbsp&nbsp&nbsp&nbsp
+                                    </div>
+                                    <div class="col-lg-4 col-sm-12">
+                                        <label>Sub Menus</label>
+                                        <select multiple="multiple" asp-for="Childlist" asp-items="@ViewBag.ParentId" id="selectChildren" class="required" disabled required>
+                                        </select>
+                                        <div><b>To Select Multiple Options Press <i>'Ctrl + Select'</i></b></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div hidden class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input asp-for="createMenuCommand.IsActive" checked /> @Html.DisplayNameFor(model => model.createMenuCommand.IsActive)
+                                    </label>
+                                </div>
+                            </div>
+
+                             <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-1"><button type="submit" style="background-color: #343a40;color:white" class="btn">Submit</button></div>
+                                            <div class="col-md-2"><a asp-action="Menulist" id="btn2" type="button" value="Cancel" class="btn btn-danger">Cancel</a></div>
+                                        </div>
+                                    </div>
+                           
+                        </form>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+@*<div class="container app">
     <div class="col-sm-12 col-lg-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in ">
             <div style="border: 1px solid #343a40" class="border">
@@ -88,7 +287,7 @@
                                 <div class="row">
                                     <div class="col-md-1"></div>
                                     <div class="col-md-3">
-                                        <label>Parent Id<span style="color: Red">&nbsp;*</span></label>
+                                        <label>Is Parent Menu?<span style="color: Red">&nbsp;*</span></label>
                                     </div>
                                     <div class="col-md-6">
                                         <input hidden id="confirming" asp-for="createMenuCommand.IsParent" />
@@ -146,7 +345,8 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
+
 <script>
     function hideStudentChildren() {
         if ($("#Yes").is(":checked")) {

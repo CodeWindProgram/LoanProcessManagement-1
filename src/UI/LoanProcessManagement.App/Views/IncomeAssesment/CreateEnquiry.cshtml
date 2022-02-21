@@ -1,5 +1,5 @@
 ﻿@model LoanProcessManagement.App.Models.GstFileSaveVM
-
+ <link href="~/css/Common Css/Common1.css" rel="stylesheet" />
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "CreateEnquiry";
@@ -7,7 +7,7 @@
 <script src="./GICHFGst_files/jquery-1.10.1.min.js.download"></script>
 <script type="text/javascript"></script>
 
-<style>
+@*<style>
     .card {
         background: linear-gradient(to bottom, rgba(251,251,251,10) 0%,rgba(242,242,242,10) 100%);
         font-family: sans-serif;
@@ -17,12 +17,12 @@
         padding-left:20px;
     }
 
-    /*h4 {
+    h4 {
         font-size: 1.25rem;
         margin-left: 1rem;
         padding-top: 5px;
         font-weight: 600;
-    }*/
+    }
     .tab {
         padding-left: 15px;
     }
@@ -46,15 +46,12 @@
             background-color: #adb5bd;
         }
 
-    .buttons {
-        text-align: center;
-    }
+    
     u {
-        font-weight: 600;
         margin-left: 15px;
     }
     
-</style>
+</style>*@
 
 <script>
     function validate_fileupload(filename, extvalues) {
@@ -78,211 +75,174 @@
     }
 </script>
 
-<form method="post" action="/incomeAssesment/CreateEnquiry" enctype="multipart/form-data" id="form1">
 
-    <div class="container">
-    <div class="container app">
-        <div class="col-sm-12">
-            <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
-                <div class="panel-heading"><h5>Add GST Enquiry</h5></div>
-                <div style="border: 1px solid #343a40;" class="border-dark">
-                    <div class="buttons pt-4 pl-4 pr-4">
-                        <a id="ContentPlaceHolder1_lnkCoApp0" tabindex="1" class="AppTabs btn-sm active" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=0">Applicant</a>
-                        <a id="ContentPlaceHolder1_lnkCoApp1" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=1">Co-Applicant-1</a>
-                        <a id="ContentPlaceHolder1_lnkCoApp2" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=2">Co-Applicant-2</a>
-                        <a id="ContentPlaceHolder1_lnkCoApp3" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=3">Co-Applicant-3</a>
-                        <a id="ContentPlaceHolder1_lnkCoApp4" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=4">Co-Applicant-4</a>
-                        <a id="ContentPlaceHolder1_lnkCoApp5" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=5">Co-Applicant-5</a>
-                    </div>
-                   
-                    <span id="ContentPlaceHolder1_spanMessage" style="color: red; font-size: 18px;"></span>
-                    
-                    <div class="frames">
-                        <div class="panel-body">
-                            <div hidden>
-                                <input asp-for="gstAddEnquiryCommandDto.Lead_Id" />
-                                <input asp-for="gstAddEnquiryCommandDto.ApplicantType" />
-                            </div>
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <div hidden class="form-group">
-                                <div class="col-md-4">
-                                    <label asp-for="gstAddEnquiryCommandDto.ID" class="control-label"></label>
-                                    <input asp-for="gstAddEnquiryCommandDto.ID" class="form-control" />
-                                    <span asp-validation-for="gstAddEnquiryCommandDto.ID" class="text-danger"></span>
+
+<div class="container pb-5">
+    <form method="post" action="/incomeAssesment/CreateEnquiry" enctype="multipart/form-data" id="form1">
+        <div class="container app">
+            <div class="col-sm-12">
+                <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
+                    <div class="panel-heading"><h5>Add GST Enquiry</h5></div>
+                    <div style="border: 1px solid #343a40;" class="border-dark">
+                        <div class="btnDiv pt-4 pl-4 pr-4">
+                            <ul>
+                                <li><a id="ContentPlaceHolder1_lnkCoApp0" tabindex="1" class="AppTabs btn-sm active" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=0">Applicant</a></li>
+                                <li><a id="ContentPlaceHolder1_lnkCoApp1" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=1">Co-Applicant-1</a></li>
+                                <li><a id="ContentPlaceHolder1_lnkCoApp2" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=2">Co-Applicant-2</a></li>
+                                <li><a id="ContentPlaceHolder1_lnkCoApp3" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=3">Co-Applicant-3</a></li>
+                                <li><a id="ContentPlaceHolder1_lnkCoApp4" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=4">Co-Applicant-4</a></li>
+                                <li><a id="ContentPlaceHolder1_lnkCoApp5" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=5">Co-Applicant-5</a></li>
+                            </ul>
+                        </div>
+
+                        <span id="ContentPlaceHolder1_spanMessage" style="color: red; font-size: 18px;"></span>
+
+                        <div class="frames">
+                            <div class="panel-body">
+                                <div hidden>
+                                    <input asp-for="gstAddEnquiryCommandDto.Lead_Id" />
+                                    <input asp-for="gstAddEnquiryCommandDto.ApplicantType" />
                                 </div>
-                            </div>
-
-                            <div id="ContentPlaceHolder1_alertMsg">
-                                <div class="row tab pt-3 pr-1">
-                                    <div class="col-md-12 text-center">
-                                        <label class="h4">Form No.</label>
-
-
-                                        @*<div class="input-control text">*@
-                                        <span id="ContentPlaceHolder1_lblFormNo" class="h4" style="color: black; border:none">
-                                            <label>@Model.gstAddEnquiryCommandDto.FormNo</label>
-                                            <input type="hidden" asp-for="gstAddEnquiryCommandDto.FormNo" />
-
-                                        </span>
-                                        @*</div>*@
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div hidden class="form-group">
+                                    <div class="col-md-4">
+                                        <label asp-for="gstAddEnquiryCommandDto.ID" class="control-label"></label>
+                                        <input asp-for="gstAddEnquiryCommandDto.ID" class="form-control" />
+                                        <span asp-validation-for="gstAddEnquiryCommandDto.ID" class="text-danger"></span>
                                     </div>
                                 </div>
-                            </div>
-                            <hr />
-                            
-                            <div style="text-align:right;" class="p-1"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
-                        
-                            <div>
-                                <h4><u>Customer Details</u></h4>
-                            </div>
+
+                                <div id="ContentPlaceHolder1_alertMsg">
+                                    <div class="row tab pt-3 pr-1">
+                                        <div class="col-md-12 text-center">
+                                            <label class="h4">Form No.</label>
 
 
-                            <div style="height: 10px;"></div>
+                                            @*<div class="input-control text">*@
+                                            <span id="ContentPlaceHolder1_lblFormNo" class="h4" style="color: black; border:none">
+                                                <label>@Model.gstAddEnquiryCommandDto.FormNo</label>
+                                                <input type="hidden" asp-for="gstAddEnquiryCommandDto.FormNo" />
 
-                            <div class="row tab">
-                                <div class="col-md-4">
-                                    <label class="col-md-5">Customer Name<span style="color: Red">&nbsp;*</span></label>
-
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="input-control text">
-
-                                        <input type="text" style="border: none; background-color: #f4f6f9; font-weight: bold; " asp-for="gstAddEnquiryCommandDto.CustomerName" readonly="readonly" id="ContentPlaceHolder1_txtCustomerName" class="form-control required" placeholder="XYZ">
+                                            </span>
+                                            @*</div>*@
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                                <hr />
 
-                            <div style="height: 10px;"></div>
+                                <div style="text-align:right;" class="p-1"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
 
-                            <div class="row tab">
-                                <div class="col-md-4">
-                                    <label class="col-md-5">Customer Email<span style="color: Red">&nbsp;*</span></label>
-
+                                <div class="pl-2">
+                                    <h4><u><b>Customer Details</b></u></h4>
                                 </div>
-                                <div class="col-md-7">
-                                    <div class="input-control text">
+                                <div class="form-group p-3">
+                                    <div class="row">
 
-                                        <input type="text" style="border: none; background-color: #f4f6f9; font-weight: bold; " asp-for="gstAddEnquiryCommandDto.Email" readonly="readonly" id="ContentPlaceHolder1_txtEmail" class="form-control" placeholder="abc@xyz.com">
+                                        <div class="col-lg-4 col-sm-12">
+                                            <label>Customer Name</label>
+                                            <input type="text" style="border: none; background-color: #f4f6f9;" asp-for="gstAddEnquiryCommandDto.CustomerName" readonly="readonly" id="ContentPlaceHolder1_txtCustomerName" class="form-control required" placeholder="XYZ">
+                                        </div>
+
+                                        <div class="col-lg-4 col-sm-12">
+                                            <label>Customer Email</label>
+                                            <input type="text" style="border: none; background-color: #f4f6f9;" asp-for="gstAddEnquiryCommandDto.Email" readonly="readonly" id="ContentPlaceHolder1_txtEmail" class="form-control" placeholder="abc@xyz.com">
+                                        </div>
+
+
+
+                                        <div class="col-lg-4 col-sm-12">
+                                            <label>Customer Mobile</label>
+                                            <input asp-for="gstAddEnquiryCommandDto.MobileNo" style="border: none; background-color: #f4f6f9;" maxlength="10" readonly="readonly" id="ContentPlaceHolder1_txtMobile" type="number" class="form-control" placeholder="Mobile No">
+                                        </div>
+
+
+
                                     </div>
                                 </div>
-                            </div>
 
-                            <div style="height: 10px;"></div>
+                                <div class="form-group p-3">
+                                    <div class="row">
 
-                            <div class="row tab">
-                                <div class="col-md-4">
-                                    <label class="col-md-5">Customer Mobile<span style="color: Red">&nbsp;*</span></label>
+                                        <div class="col-lg-4 col-sm-12">
+                                            <label>Employee Type</label>
+                                            <table id="ContentPlaceHolder1_rdbEmployeeType" style="font-weight:normal;">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="background-color: #f4f6f9;">
+                                                            <input id="ContentPlaceHolder1_rdbEmployeeType_0" style="border: none; background-color: #f4f6f9;" class="form-control" readonly="readonly" asp-for="gstAddEnquiryCommandDto.EmploymentType" value="@Model.gstAddEnquiryCommandDto.EmploymentType" checked="checked">
+                                                            @*&nbsp<label asp-for="gstAddEnquiryCommandDto.EmploymentType" for="ContentPlaceHolder1_rdbEmployeeType_0">@Model.gstAddEnquiryCommandDto.EmploymentType</label>*@
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
 
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="input-control text">
+                                        <div class="col-lg-4 col-sm-12">
+                                            <label>GST Number</label>
+                                            <input asp-for="gstAddEnquiryCommandDto.GstNo" type="text" maxlength="15" id="ContentPlaceHolder1_txtGstNumber" class="form-control uppercase" placeholder="GST Number">
+                                        </div>
 
-                                        <input asp-for="gstAddEnquiryCommandDto.MobileNo" style="border: none; background-color: #f4f6f9; font-weight: bold; " maxlength="10" readonly="readonly" id="ContentPlaceHolder1_txtMobile" type="number" class="form-control" placeholder="Mobile No">
+
                                     </div>
                                 </div>
-                            </div>
 
-                            <div style="height: 10px;"></div>
-
-                            <div class="row tab">
-                                <div class="col-md-4">
-                                    <label class="col-md-5">GST Number<span style="color: Red">&nbsp;*</span></label>
-
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="input-control text">
-
-                                        <input asp-for="gstAddEnquiryCommandDto.GstNo" type="text" maxlength="15" id="ContentPlaceHolder1_txtGstNumber" class="form-control uppercase" placeholder="GST Number">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div style="height: 10px;"></div>
-
-                            <div class="row tab">
-                                <div class="col-md-4">
-                                    <label class="col-md-5">Employee Type<span style="color: Red">&nbsp;*</span></label>
-                                </div>
-                                <div class="col-md-7">
-                                    <table id="ContentPlaceHolder1_rdbEmployeeType" style="font-weight:normal;">
-                                        <tbody>
-                                            <tr>
-                                                <td style="background-color: #f4f6f9;">
-                                                    <input id="ContentPlaceHolder1_rdbEmployeeType_0" type="radio" asp-for="gstAddEnquiryCommandDto.EmploymentType" value="@Model.gstAddEnquiryCommandDto.EmploymentType" checked="checked">
-                                                    &nbsp<label asp-for="gstAddEnquiryCommandDto.EmploymentType" for="ContentPlaceHolder1_rdbEmployeeType_0">@Model.gstAddEnquiryCommandDto.EmploymentType</label>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div style="height: 10px;"></div>
-
-                            <div class="row tab">
 
                                 <div class="col-md-7">
                                     <a id="ContentPlaceHolder1_linkGstrptDownload" href="https://google.com" target="_blank">Click here to download GST report</a>
                                 </div>
-                            </div>
 
-                            <div style="height: 5px; display: none;"></div>
-                            <hr />
-                            <div>
-                                <h4><u>Upload Files</u></h4>
-                            </div>
 
-                            <div style="height: 5px; display: none;"></div>
 
-                            <div class="row tab">
-                                <div class="col-md-4">
-                                    <label class="col-md-4">Excel File<span style="color: Red">&nbsp;*</span></label>
-
+                                <hr />
+                                <div class="pl-2">
+                                    <h4><u><b>Upload Files</b></u></h4>
                                 </div>
-                                <div class="col-md-8">
-                                    <input type="file" asp-for="IExcel" id="ContentPlaceHolder1_fileUploadExcel" accept=".xls,.xlsx" onchange="validate_fileupload(this,&#39;xls,xlsx&#39;);">
+
+
+                                <div class="form-group p-3">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-sm-12 mb-3">
+                                            <label class="col-md-4">Excel File<span style="color: Red">&nbsp;*</span></label>
+                                            <input class="form-control" type="file" asp-for="IExcel" id="ContentPlaceHolder1_fileUploadExcel" accept=".xls,.xlsx" onchange="validate_fileupload(this,&#39;xls,xlsx&#39;);">
+                                        </div>
+
+
+                                        <div class="col-lg-4 col-sm-12 mb-3">
+                                            <label class="col-md-6">Pdf file<span style="color: Red">&nbsp;*</span></label>
+                                            <input class="form-control" type="file" asp-for="IPdf" id="ContentPlaceHolder1_fileUploadPdf" accept=".pdf" onchange="validate_fileupload(this,&#39;pdf&#39;);">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div style="height: 10px;"></div>
 
-                            <div class="row tab">
-                                <div class="col-md-4">
-                                    <label class="col-md-6">Pdf file<span style="color: Red">&nbsp;*</span></label>
-
+                                <div hidden class="form-group">
+                                    <label asp-for="gstAddEnquiryCommandDto.ApplicantType" class="control-label"></label>
+                                    <input asp-for="gstAddEnquiryCommandDto.ApplicantType" class="form-control" />
+                                    <span asp-validation-for="gstAddEnquiryCommandDto.ApplicantType" class="text-danger"></span>
                                 </div>
-                                <div class="col-md-8">
-                                    <input type="file" asp-for="IPdf" id="ContentPlaceHolder1_fileUploadPdf" accept=".pdf" onchange="validate_fileupload(this,&#39;pdf&#39;);">
-                                </div>
-                            </div>
 
-                            <br>
-                        </div>
-                        <div hidden class="form-group">
-                            <label asp-for="gstAddEnquiryCommandDto.ApplicantType" class="control-label"></label>
-                            <input asp-for="gstAddEnquiryCommandDto.ApplicantType" class="form-control" />
-                            <span asp-validation-for="gstAddEnquiryCommandDto.ApplicantType" class="text-danger"></span>
-                        </div>
-
-                        <div hidden class="form-group">
-                            <div class="checkbox">
-                                <label>
-                                    <input asp-for="gstAddEnquiryCommandDto.IsActive" /> @Html.DisplayNameFor(model => model.gstAddEnquiryCommandDto.IsActive)
-                                </label>
-                            </div>
-                        </div>
-                        <div style="justify-content:center;display:flex">
-                            <div class="row tab">
-                                <div style="display:inline-flex" class="col-md-12">
-                                    <center>
-                                        <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="ContentPlaceHolder1_btnAddEnquiry" style="background-color: #343a40;color:white;" class="btn">
-                                    </center>
+                                <div hidden class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input asp-for="gstAddEnquiryCommandDto.IsActive" /> @Html.DisplayNameFor(model => model.gstAddEnquiryCommandDto.IsActive)
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row tab">
-                                <div style="display:inline-flex" class="col-md-12">
-                                    <center>
-                                        <a type="button" href="/LeadList/LeadSummary/@ViewBag.LeadId" value="Cancel" id="cancelbutton" class="btn btn-danger">Cancel</a>
-                                    </center>
+                                <div style="justify-content:center;display:flex" class="pb-3">
+                                    <div class="row tab">
+                                        <div style="display:inline-flex" class="col-md-12">
+                                            <center>
+                                                <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="ContentPlaceHolder1_btnAddEnquiry" style="background-color: #343a40;color:white;" class="btn">
+                                            </center>
+                                        </div>
+                                    </div>
+                                    <div class="row tab">
+                                        <div style="display:inline-flex" class="col-md-12">
+                                            <center>
+                                                <a type="button" href="/LeadList/LeadSummary/@ViewBag.LeadId" value="Cancel" id="cancelbutton" class="btn btn-danger">Cancel</a>
+                                            </center>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -290,10 +250,214 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
-    <script type="text/javascript">
+        <!--<form method="post" action="/incomeAssesment/CreateEnquiry" enctype="multipart/form-data" id="form1">
+
+            <div class="container pb-5">
+            <div class="container app">
+                <div class="col-sm-12">
+                    <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
+                        <div class="panel-heading"><h5>Add GST Enquiry</h5></div>
+                        <div style="border: 1px solid #343a40;" class="border-dark">
+                            <div class="buttons pt-4 pl-4 pr-4">
+                                <a id="ContentPlaceHolder1_lnkCoApp0" tabindex="1" class="AppTabs btn-sm active" href="/incomeAssesment/CreateEnquiry?lead_Id=Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=0">Applicant</a>
+                                <a id="ContentPlaceHolder1_lnkCoApp1" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=1">Co-Applicant-1</a>
+                                <a id="ContentPlaceHolder1_lnkCoApp2" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=2">Co-Applicant-2</a>
+                                <a id="ContentPlaceHolder1_lnkCoApp3" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=odel.gstAddEnquiryCommandDto.Lead_Id&applicantType=3">Co-Applicant-3</a>
+                                <a id="ContentPlaceHolder1_lnkCoApp4" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=4">Co-Applicant-4</a>
+                                <a id="ContentPlaceHolder1_lnkCoApp5" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=5">Co-Applicant-5</a>
+                            </div>
+
+                            <span id="ContentPlaceHolder1_spanMessage" style="color: red; font-size: 18px;"></span>
+
+                            <div class="frames">
+                                <div class="panel-body">
+                                    <div hidden>
+                                        <input asp-for="gstAddEnquiryCommandDto.Lead_Id" />
+                                        <input asp-for="gstAddEnquiryCommandDto.ApplicantType" />
+                                    </div>
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <div hidden class="form-group">
+                                        <div class="col-md-4">
+                                            <label asp-for="gstAddEnquiryCommandDto.ID" class="control-label"></label>
+                                            <input asp-for="gstAddEnquiryCommandDto.ID" class="form-control" />
+                                            <span asp-validation-for="gstAddEnquiryCommandDto.ID" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div id="ContentPlaceHolder1_alertMsg">
+                                        <div class="row tab pt-3 pr-1">
+                                            <div class="col-md-12 text-center">
+                                                <label class="h4">Form No.</label>-->
+        <!--</div>
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                    <div style="text-align:right;" class="p-1"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
+
+                                    <div>
+                                        <h4><u>Customer Details</u></h4>
+                                    </div>
+
+
+                                    <div style="height: 10px;"></div>
+
+                                    <div class="row tab">
+                                        <div class="col-md-4">
+                                            <label class="col-md-5">Customer Name<span style="color: Red">&nbsp;*</span></label>
+
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="input-control text">
+
+                                                <input type="text" style="border: none; background-color: #f4f6f9; font-weight: bold; " asp-for="gstAddEnquiryCommandDto.CustomerName" readonly="readonly" id="ContentPlaceHolder1_txtCustomerName" class="form-control required" placeholder="XYZ">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div style="height: 10px;"></div>
+
+                                    <div class="row tab">
+                                        <div class="col-md-4">
+                                            <label class="col-md-5">Customer Email<span style="color: Red">&nbsp;*</span></label>
+
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="input-control text">
+
+                                                <input type="text" style="border: none; background-color: #f4f6f9; font-weight: bold; " asp-for="gstAddEnquiryCommandDto.Email" readonly="readonly" id="ContentPlaceHolder1_txtEmail" class="form-control" placeholder="abc@xyz.com">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div style="height: 10px;"></div>
+
+                                    <div class="row tab">
+                                        <div class="col-md-4">
+                                            <label class="col-md-5">Customer Mobile<span style="color: Red">&nbsp;*</span></label>
+
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="input-control text">
+
+                                                <input asp-for="gstAddEnquiryCommandDto.MobileNo" style="border: none; background-color: #f4f6f9; font-weight: bold; " maxlength="10" readonly="readonly" id="ContentPlaceHolder1_txtMobile" type="number" class="form-control" placeholder="Mobile No">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div style="height: 10px;"></div>
+
+                                    <div class="row tab">
+                                        <div class="col-md-4">
+                                            <label class="col-md-5">GST Number<span style="color: Red">&nbsp;*</span></label>
+
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="input-control text">
+
+                                                <input asp-for="gstAddEnquiryCommandDto.GstNo" type="text" maxlength="15" id="ContentPlaceHolder1_txtGstNumber" class="form-control uppercase" placeholder="GST Number">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div style="height: 10px;"></div>
+
+                                    <div class="row tab">
+                                        <div class="col-md-4">
+                                            <label class="col-md-5">Employee Type<span style="color: Red">&nbsp;*</span></label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <table id="ContentPlaceHolder1_rdbEmployeeType" style="font-weight:normal;">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="background-color: #f4f6f9;">
+                                                            <input id="ContentPlaceHolder1_rdbEmployeeType_0" type="radio" asp-for="gstAddEnquiryCommandDto.EmploymentType" value="Model.gstAddEnquiryCommandDto.EmploymentType" checked="checked">
+                                                            &nbsp<label asp-for="gstAddEnquiryCommandDto.EmploymentType" for="ContentPlaceHolder1_rdbEmployeeType_0">Model.gstAddEnquiryCommandDto.EmploymentType</label>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div style="height: 10px;"></div>
+
+                                    <div class="row tab">
+
+                                        <div class="col-md-7">
+                                            <a id="ContentPlaceHolder1_linkGstrptDownload" href="" target="_blank">Click here to download GST report</a>
+                                        </div>
+                                    </div>
+
+                                    <div style="height: 5px; display: none;"></div>
+                                    <hr />
+                                    <div>
+                                        <h4><u>Upload Files</u></h4>
+                                    </div>
+
+                                    <div style="height: 5px; display: none;"></div>
+
+                                    <div class="row tab">
+                                        <div class="col-md-4">
+                                            <label class="col-md-4">Excel File<span style="color: Red">&nbsp;*</span></label>
+
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="file" asp-for="IExcel" id="ContentPlaceHolder1_fileUploadExcel" accept=".xls,.xlsx" onchange="validate_fileupload(this,&#39;xls,xlsx&#39;);">
+                                        </div>
+                                    </div>
+
+                                    <div style="height: 10px;"></div>
+
+                                    <div class="row tab">
+                                        <div class="col-md-4">
+                                            <label class="col-md-6">Pdf file<span style="color: Red">&nbsp;*</span></label>
+
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="file" asp-for="IPdf" id="ContentPlaceHolder1_fileUploadPdf" accept=".pdf" onchange="validate_fileupload(this,&#39;pdf&#39;);">
+                                        </div>
+                                    </div>
+
+                                    <br>
+                                </div>
+                                <div hidden class="form-group">
+                                    <label asp-for="gstAddEnquiryCommandDto.ApplicantType" class="control-label"></label>
+                                    <input asp-for="gstAddEnquiryCommandDto.ApplicantType" class="form-control" />
+                                    <span asp-validation-for="gstAddEnquiryCommandDto.ApplicantType" class="text-danger"></span>
+                                </div>
+
+                                <div hidden class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input asp-for="gstAddEnquiryCommandDto.IsActive" /> Html.DisplayNameFor(model => model.gstAddEnquiryCommandDto.IsActive)
+                                        </label>
+                                    </div>
+                                </div>
+                                <div style="justify-content:center;display:flex" class="pb-3">
+                                    <div class="row tab">
+                                        <div style="display:inline-flex" class="col-md-12">
+                                            <center>
+                                                <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="ContentPlaceHolder1_btnAddEnquiry" style="background-color: #343a40;color:white;" class="btn">
+                                            </center>
+                                        </div>
+                                    </div>
+                                    <div class="row tab">
+                                        <div style="display:inline-flex" class="col-md-12">
+                                            <center>
+                                                <a type="button" href="/LeadList/LeadSummary/ViewBag.LeadId" value="Cancel" id="cancelbutton" class="btn btn-danger">Cancel</a>
+                                            </center>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+
+        <script type="text/javascript">
         $(document).ready(function () {
             if ($("#ContentPlaceHolder1_btnAddEnquiry").is(":disabled")) {
                 $("#htmlsubmitbtn").prop("disabled", true);
@@ -495,5 +659,6 @@
             })
         });
 
-    </script>
-</form>
+        </script>
+    </form>
+</div>
