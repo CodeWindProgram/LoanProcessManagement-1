@@ -1,0 +1,79 @@
+﻿
+@using LoanProcessManagement.Domain.CustomModels;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "LeadStatus";
+    var Records = (List<ProcessModel>)ViewData["HOSanctionReport"];
+}
+
+<div class="container app">
+    <div class="col-sm-12">
+        <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
+            <div class="panel-heading"><h5>HO Sanction Report</h5></div>
+            <div class="panel-body ">
+                <div class="card" style="padding:15px;">
+                    <div class="filters">
+
+
+                        <hr />
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <table class="display table table-responsive-lg" id="tblLoginReport">
+                                        <thead>
+                                            <tr>
+                                                <th>Form No.</th>
+                                                <th>Customer Name</th>
+                                                <th>DSA Name</th>
+                                                <th>Branch Name</th>
+                                                <th>Loan Amount</th>
+                                                <th>Date of Submission</th>
+                                                <th>Query Count</th>
+                                                @*<th hidden>Ageing HO</th>
+                                                    <th hidden>Ageing Branch</th>*@
+                                                <th>Query Status</th>
+                                                @*<th style="display:none">Processing Officer Name</th>
+                                                    <th style="display:none">Sanctioning Officer Name</th>*@
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var record in Records)
+                                            {
+
+                                                decimal temps = Convert.ToDecimal(record.LoanAmount);
+                                                var loanAmt = decimal.Round(temps, 2);
+
+                                                var temp = record.SubmissionDate.ToString();
+                                                var temp1 = temp.Split(" ");
+
+                                                <tr>
+                                                    <td>@record.FormNo</td>
+                                                    <td>@record.FirstName  @record.LastName</td>
+                                                    <td>@record.DsaName</td>
+                                                    <td> @record.BranchName</td>
+                                                    <td>@loanAmt</td>
+                                                    <td>@temp1[0]</td>
+                                                    <td>@record.QueryCount</td>
+                                                    @*<td hidden>0</td>
+                                                        <td hidden>0</td>*@
+                                                    <td>@record.QueryStatus</td>
+                                                    @*<td style="display:none">No One</td>
+                                                        <td style="display:none">No One</td>*@
+                                                </tr>
+                                            }
+
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -3,6 +3,7 @@ using LoanProcessManagement.Application.Contracts.Persistence;
 using LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands;
 using LoanProcessManagement.Application.Features.Menu.Commands.DeleteCommand;
 using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand;
+using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand.AlterMenuStatus;
 using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenuMaps.GetAllMenuMaps;
 using LoanProcessManagement.Application.Features.Menu.Query.MenuList;
 using LoanProcessManagement.Application.Responses;
@@ -208,6 +209,41 @@ namespace LoanProcessManagement.Persistence.Repositories
                                    Link = B.Link
                                }).ToListAsync();
             return result;
+        }
+
+        public AlterMenuStatusCommandDTO AlterStatus(int id,string LgId)
+        {
+            AlterMenuStatusCommandDTO response = new AlterMenuStatusCommandDTO();
+            var result =  _dbContext.LpmMenuMasters.Where(x => x.Id == id).FirstOrDefault();
+            if (result != null)
+            {
+                if(result.IsActive == true)
+                {
+                    result.IsActive = false;
+                    result.LastModifiedBy = LgId;
+                    _dbContext.SaveChanges();
+                    response.IsSuccess = true;
+                    response.Message = "Menu Is Disabled";
+                    response.Status = false;
+                }
+                else
+                {
+                    result.IsActive = true;
+                    result.LastModifiedBy = LgId;
+                    _dbContext.SaveChanges();
+                    response.IsSuccess = true;
+                    response.Message = "Menu Is Enabled";
+                    response.Status = true;
+                }
+            }
+            else
+            {
+                response.IsSuccess = false;
+                response.Message = "Menu Not Found";
+                response.Status = false;
+            }
+            return response;
+
         }
     }
 }

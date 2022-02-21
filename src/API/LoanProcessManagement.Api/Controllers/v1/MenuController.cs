@@ -2,6 +2,7 @@
 using LoanProcessManagement.Application.Features.Menu.Commands.DeleteCommand;
 using LoanProcessManagement.Application.Features.Menu.Commands.DeleteMenuMapById;
 using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand;
+using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand.AlterMenuStatus;
 using LoanProcessManagement.Application.Features.Menu.Query;
 using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenuMaps.GetAllMenuMaps;
 using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenuMaps.Query;
@@ -137,6 +138,12 @@ namespace LoanProcessManagement.Api.Controllers.v1
             return Ok(await _mediator.Send(new GetChildMenuQuery(parentId,userRoleId)));
         }
 
+        [HttpPost("AlterMenuStatus")]
+        public async Task<IActionResult> AlterStatus(AlterMenuStatusCommand alterStatus)
+        {
+            var respone = await _mediator.Send(alterStatus);
+            return Ok(respone);
+        }
 
 
     }

@@ -62,6 +62,13 @@ using LoanProcessManagement.Application.Features.LeadList.Query.LeadStatus;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadByLGID;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadNameByLgId;
 using LoanProcessManagement.Application.Features.Branch.GetBranchNameById;
+using LoanProcessManagement.Application.Features.CreditITRDetails.Queries;
+using LoanProcessManagement.Application.Features.CreditITRDetails.UserDetails.Queries;
+using LoanProcessManagement.Application.Features.CreditCibilDetails.CreditCibilCheckDetails.Queries;
+using LoanProcessManagement.Application.Features.CreditCibilDetails.UserDetails.Queries;
+using LoanProcessManagement.Application.Features.CreditGstDetails.CreditGstCheckDetails.Queries;
+using LoanProcessManagement.Application.Features.CreditGstDetails.UserDetails.Queries;
+using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.AddIncomeAssessment;
 
 namespace LoanProcessManagement.Application.Profiles
 {
@@ -143,6 +150,10 @@ namespace LoanProcessManagement.Application.Profiles
             CreateMap<LpmUserMaster, GetLockedUserListQueryVm>().ReverseMap();
             CreateMap<UserMasterListModel, GetLockedUserListQueryVm>().ReverseMap();
             #endregion
+            #region AddIncomeDetails mapping has created by - Pratiksha Poshe - 14/02/2022
+            CreateMap<LpmLeadIncomeAssessmentDetails, AddIncomeAssessmentDetailsDto>().ReverseMap();
+            CreateMap<IncomeAssessmentDetailsModel, AddIncomeAssessmentDetailsDto>().ReverseMap();
+            #endregion
 
             CreateMap<LPMGSTEnquiryDetail, GstCreateEnquiryCommand>().ReverseMap();
             CreateMap<LPMGSTEnquiryDetail, GstCreateEnquiryCommandDto>().ReverseMap();
@@ -209,8 +220,15 @@ namespace LoanProcessManagement.Application.Profiles
 
 
             CreateMap<LeadITRDetailsCommand, LpmLeadITRDetails>().ReverseMap();
-            //CreateMap<AddCibilDetailsCommand, CibilCheckDetailsModel>().ReverseMap();
+            CreateMap<AddCibilDetailsCommand, CibilCheckDetailsModel>().ReverseMap();
             CreateMap<CibilCheckDetailsModel, AddCibilDetailsDto>().ReverseMap();
+
+            CreateMap<CreditITRDetailsListModel, GetCreditITRDetailsListVm>().ReverseMap();
+            CreateMap<CreditITRDetailsListModel, GetCreditITRUserDetailsVm>().ReverseMap();
+            CreateMap<CreditITRDetailsListModel, GetCreditCibilDetailsVm>().ReverseMap();
+            CreateMap<CreditITRDetailsListModel, GetCreditCibilUserDetailsVm>().ReverseMap();
+            CreateMap<CreditITRDetailsListModel, GetCreditGstDetailsVm>().ReverseMap();
+            CreateMap<CreditITRDetailsListModel, GetCreditGstUserDetailsVm>().ReverseMap();
         }
     }
 }

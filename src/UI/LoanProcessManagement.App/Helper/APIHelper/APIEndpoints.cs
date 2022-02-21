@@ -44,6 +44,8 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string LockedUserList = "api/v1/UserList/GetLockedUserList";
         public const string GetAllAgencyName = "api/v1/Agency/getAllAgency";
         public const string GetThirdPartyCheckDetailsByLeadId = "api/v1/Agency/getThirdPartyCheckDetails/";
+        public const string GetIncomeAssessmentDetails = "api/v1/IncomeAssesment/GetIncomeAssessmentDetailsByLeadId?applicantType={0}&lead_Id={1}";
+        public const string AddIncomeAssessmentDetails = "api/v1/IncomeAssesment/AddIncomeAssessmentDetailsByLeadId/";
         #endregion
 
         #region Maintaining the Url EndPoint - Saif Khan - 28/10/2021
@@ -55,6 +57,7 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string MenuById = "api/v1/Menu/MenuById/";
         public const string ParentMenu = "api/v1/Menu/GetAllMenus";
         public const string ChildMenu = "api/v1/Menu/GetChildMenu/";
+        public const string AlterStatus = "api/v1/Menu/AlterMenuStatus";
 
     #endregion
 
@@ -98,6 +101,10 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string InPrincipleList = "api/v1/LeadStatus/GetSanctionList";
         #endregion
 
+        #region Added Url Endpoints for Ho-InPrinciple List Report- Raj Bhosale - 15-02-2022
+        public const string HOSanctionList = "api/v1/LeadStatus/GetHOSanctionList";
+        #endregion
+
         public const string AddEnquiry = "api/v1/IncomeAssesment/";
         public const string CreateEnquiry = "api/v1/IncomeAssesment";
 
@@ -121,6 +128,17 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string BrancheById = "api/v1/Branch/GetBrancheById/";
         public const string LeadByBranchId = "api/v1/LeadList/LeadStatus/";
         public const string LeadByLgId = "api/v1/LeadList/LeadByName/";
+
+        #region added url Endpoints ITR, GST and Cibil enquiry Details List- Ramya Guduru - 14/02/2022
+        public const string CreditITRDetailsList = "api/v1/CreditITRDetails/GetCreditITRDetailsList";
+        public const string CreditITRUserDetailsList = "api/v1/CreditITRDetails/GetCreditITRUserDetailsList/";
+
+        public const string CreditCibilDetailsList = "api/v1/CreditCibilDetails/GetCreditCibilDetailsList";
+        public const string CreditCibilUserDetailsList = "api/v1/CreditCibilDetails/GetCreditCibilUserDetailsList/";
+
+        public const string CreditGstDetailsList = "api/v1/CreditGstDetails/GetCreditGstDetailsList";
+        public const string CreditGstUserDetailsList = "api/v1/CreditGstDetails/GetCreditGstUserDetailsList/";
+        #endregion
         public const string resetPassword = "api/v1/ChangePassword/ResetPasswords";
     }
 }

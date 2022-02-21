@@ -5,6 +5,7 @@ using LoanProcessManagement.Application.Features.LeadStatus.Queries;
 using LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands;
 using LoanProcessManagement.Application.Features.Menu.Commands.DeleteCommand;
 using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand;
+using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand.AlterMenuStatus;
 using LoanProcessManagement.Application.Features.Menu.Query;
 using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenuMaps.GetAllMenuMaps;
 using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenuMaps.Query;
@@ -119,6 +120,19 @@ namespace LoanProcessManagement.App.Controllers
             return View();
         }
         #endregion
+        [HttpPost]
+        public async Task<AlterMenuStatusCommandDTO> AlterStatusMenuList(int Id)
+        {
+            AlterMenuStatusCommand alterStatus = new AlterMenuStatusCommand();
+            alterStatus.Id = Id;
+            alterStatus.LgId = (User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value);
+
+            var response =await  _menuService.AlterStatus(alterStatus);
+            TempData["Status"] = response.Status;
+            TempData["ApiDataIsSuccess"] = response.IsSuccess;
+            TempData["ApiDataMessage"] = response.Message;
+            return response;
+        }
 
         #region Calling the API for the Create Menu - Saif Khan - 11//11/2021
         /// <summary>
@@ -223,6 +237,7 @@ namespace LoanProcessManagement.App.Controllers
             var rolelist = await _roleMasterService.RoleListProcess();
             var newrolelist = rolelist.Data.ToList();
             var menumaps = await _roleMasterService.GetCheckList();
+            TempData["MenuId"] = Id;
             for (var i= 0;i< rolelist.Data.Count();i++)
             {
                 var data = menumaps.Data.Where(m => m.MenuId == res.Data.Id && m.UserRoleId == newrolelist[i].Id).FirstOrDefault();
@@ -237,6 +252,7 @@ namespace LoanProcessManagement.App.Controllers
             updateCheckboxfunctionVm.getMenuByIdQueryVm = res.Data;
             updateCheckboxfunctionVm.RoleList = menuCheckListVm;
             ViewBag.CheckedIds = getallparId;
+            TempData["Status"] = updateCheckboxfunctionVm.getMenuByIdQueryVm.IsActive;
             return View(updateCheckboxfunctionVm);
         }
 
@@ -303,7 +319,9 @@ namespace LoanProcessManagement.App.Controllers
             return View();
         }
         #endregion
+       
 
+         
         #region Calling API for the Delete Menu - Saif Khan - 11/11/2021
         /// <summary>
         /// Calling API fro the Delete Menu - Saif Khan - 11/11/2021

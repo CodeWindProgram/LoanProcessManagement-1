@@ -275,6 +275,22 @@
         </div>
     </div>*@
 
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        //var temp = true;
+    if ('@TempData["UpdatePropertySuccess"]' == 'True') {
+        toastr.success('@TempData["UpdatePropertyMessage"]', "Success");
+
+        }
+     else if ('@TempData["UpdatePropertySuccess"]' == 'False'){
+        toastr.error('@TempData["UpdatePropertyMessage"]', "Error");
+     }
+
+
+
+        });
+</script>
 
 
 

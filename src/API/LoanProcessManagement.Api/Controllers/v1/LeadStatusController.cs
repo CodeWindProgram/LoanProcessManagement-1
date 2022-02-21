@@ -1,4 +1,5 @@
 ﻿using LoanProcessManagement.Application.Features.LeadStatus.Queries;
+using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetHOSanctionListQuery;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -57,6 +58,12 @@ namespace LoanProcessManagement.Api.Controllers.v1
             return Ok(dtos);
         }
 
+        [HttpPost("GetHOSanctionList")]
+        public async Task<ActionResult> GetHOSanctionList([FromBody] GetHOSanctionListQuery req)
+        {
+            var dtos = await _mediator.Send(req);
+            return Ok(dtos);
+        }
 
     }
 }
