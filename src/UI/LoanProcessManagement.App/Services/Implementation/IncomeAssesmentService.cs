@@ -1,7 +1,9 @@
 ﻿using LoanProcessManagement.App.Helper.APIHelper;
 using LoanProcessManagement.App.Services.Interfaces;
+using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.AddIncomeAssessment;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTAddEnuiry;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTCreateEnquiry;
+using LoanProcessManagement.Application.Features.IncomeAssesment.Queries.GetIncomeAssessment;
 using LoanProcessManagement.Application.Responses;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -70,5 +72,66 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             return model;
         }
+
+        #region GetIncomeDetailsService - Pratiksha Poshe - 15/02/2022
+        /// <summary>
+        /// 15/02/2021 - GetIncomeDetailsService
+        /// commented by Pratiksha Poshe
+        /// </summary>
+        /// <param name="applicantType"></param>
+        /// <param name="lead_Id"></param>
+        /// <returns></returns>
+        public async Task<Response<GetIncomeAssessmentDetailsDto>> GetIncomeDetailsService(int applicantType, int lead_Id)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.GetAsync
+                (
+                    BaseUrl + APIEndpoints.GetIncomeAssessmentDetails.Replace("{0}", applicantType.ToString()).Replace("{1}", lead_Id.ToString())
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var response = System.Text.Json.JsonSerializer.Deserialize<Response<GetIncomeAssessmentDetailsDto>>(jsonString, options);
+
+            return response;
+        }
+        #endregion
+
+        #region AddIncomeDetailsService - Pratiksha Poshe - 15/02/2022
+        /// <summary>
+        /// 15/02/2021 - AddIncomeDetailsService
+        /// commented by Pratiksha Poshe
+        /// </summary>
+        /// <param name="addIncomeAssessmentDetailsDto"></param>
+        /// <returns></returns>
+        public async Task<AddIncomeAssessmentDetailsDto> AddIncomeAssessmentDetails(AddIncomeAssessmentDetailsDto addIncomeAssessmentDetailsDto)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var content = JsonConvert.SerializeObject(addIncomeAssessmentDetailsDto);
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.PostAsync
+                (
+                    BaseUrl + APIEndpoints.AddIncomeAssessmentDetails,
+                    new StringContent(content, Encoding.Default,
+                    "application/json")
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<AddIncomeAssessmentDetailsDto>(jsonString, options);
+
+            return model;
+        }
+        #endregion
     }
 }

@@ -1,5 +1,6 @@
 ﻿using LoanProcessManagement.App.Models;
 using LoanProcessManagement.App.Services.Interfaces;
+using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.AddIncomeAssessment;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTAddEnuiry;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTCreateEnquiry;
 using LoanProcessManagement.Application.Responses;
@@ -84,7 +85,102 @@ namespace LoanProcessManagement.App.Controllers
             var app = gstFileSaveVM.gstAddEnquiryCommandDto.ApplicantType;
             //var toreturn = lead + app;
             return RedirectToAction("CreateEnquiry",new { applicantType=app, lead_Id = lead});
-        } 
+        }
+        #endregion
+
+        #region Get Income Assessment Details  - Pratiksha - 15/02/2021
+        /// <summary>
+        /// 15/02/2021 - Get Income Assessment Details
+        /// commented by Pratiksha Poshe
+        /// </summary>
+        /// <param name="applicantType"></param>
+        /// <param name="lead_Id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> Index([FromQuery] int applicantType, [FromQuery] int lead_Id)
+        {
+
+            var getIncomeDetailsServiceResponse = await _incomeAssesmentService.GetIncomeDetailsService(applicantType, lead_Id);
+            var incomeAssessmentDetailsVm = new IncomeAssessmentDetailsVm() { 
+                FormNo = getIncomeDetailsServiceResponse.Data.FormNo,
+                lead_Id = getIncomeDetailsServiceResponse.Data.lead_Id,
+                CustomerName = getIncomeDetailsServiceResponse.Data.CustomerName,
+                CustomerEmail = getIncomeDetailsServiceResponse.Data.CustomerEmail,
+                CustomerPhone = getIncomeDetailsServiceResponse.Data.CustomerPhone,
+                NoOfBankAccounts = getIncomeDetailsServiceResponse.Data.NoOfBankAccounts,
+                EmploymentType = getIncomeDetailsServiceResponse.Data.EmploymentType,
+                LeadID = getIncomeDetailsServiceResponse.Data.LeadID,
+                IsSubmitCount = getIncomeDetailsServiceResponse.Data.IsSubmitCount,
+            };
+            ViewBag.applicantTypeNo = applicantType;
+
+            return View(incomeAssessmentDetailsVm);
+        }
+        #endregion
+
+        #region Add Income Assessment Details  - Pratiksha - 15/02/2021
+        /// <summary>
+        /// 15-02-2021 - Add Income Assessment Details
+        /// commented by Pratiksha Poshe
+        /// </summary>
+        /// <param name="incomeAssessmentDetailsVm"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> Index(IncomeAssessmentDetailsVm incomeAssessmentDetailsVm)
+        {
+            var newFileNamePdf = "";
+            if (incomeAssessmentDetailsVm != null && incomeAssessmentDetailsVm.FileType.ToLower() == "GenerateLink".ToLower())
+            {
+                ModelState.Remove("Institution_Id");
+                ModelState.Remove("DocumentType");
+                ModelState.Remove("IPdf");
+                ModelState.Remove("FilePassword");
+            }
+            if(incomeAssessmentDetailsVm!=null && incomeAssessmentDetailsVm.IPdf != null)
+            {
+                var basedirectory = Directory.GetCurrentDirectory();
+
+                var pdffileExtension = System.IO.Path.GetExtension(incomeAssessmentDetailsVm.IPdf.FileName);
+
+                newFileNamePdf = DateTime.Now.ToString("ddMMyyyyhhmmss_") + incomeAssessmentDetailsVm.FormNo + pdffileExtension;
+
+                var dirPath = Path.GetFullPath(Path.Combine(basedirectory, @"..\..\API\\LoanProcessManagement.Api\\Uploadfiles\\IncomeAssessmentFiles\\" + incomeAssessmentDetailsVm.FormNo));
+                if (dirPath != null)
+                {
+                    System.IO.Directory.CreateDirectory(Path.Combine(basedirectory, @"..\..\API\\LoanProcessManagement.Api\\Uploadfiles\\IncomeAssessmentFiles\\" + incomeAssessmentDetailsVm.FormNo));
+                }
+
+                var filePathPdf = Path.Combine(basedirectory, @"..\..\API\\LoanProcessManagement.Api\\Uploadfiles\\IncomeAssessmentFiles\\" + incomeAssessmentDetailsVm.FormNo, newFileNamePdf);
+
+                incomeAssessmentDetailsVm.IPdf.CopyTo(new FileStream(filePathPdf, FileMode.Create));
+            }
+            
+            var addIncomeAssessmentDetailsDto = new AddIncomeAssessmentDetailsDto()
+            {
+                FormNo = incomeAssessmentDetailsVm.FormNo,
+                lead_Id = incomeAssessmentDetailsVm.lead_Id,
+                CreatedBy = incomeAssessmentDetailsVm.CreatedBy,
+                LastModifiedBy = incomeAssessmentDetailsVm.LastModifiedBy,
+                StartDate = incomeAssessmentDetailsVm.StartDate,
+                EndDate = incomeAssessmentDetailsVm.EndDate,
+                EmployerName1 = incomeAssessmentDetailsVm.EmployerName1,
+                EmployerName2 = incomeAssessmentDetailsVm.EmployerName2,
+                EmployerName3 = incomeAssessmentDetailsVm.EmployerName3,
+                EmployerName4 = incomeAssessmentDetailsVm.EmployerName4,
+                EmployerName5 = incomeAssessmentDetailsVm.EmployerName5,
+                FileType = incomeAssessmentDetailsVm.FileType,
+                Institution_Id = incomeAssessmentDetailsVm.Institution_Id,
+                PdfFileName = newFileNamePdf,
+                DocumentType = incomeAssessmentDetailsVm.DocumentType,
+                FilePassword = incomeAssessmentDetailsVm.FilePassword,
+                ApplicantType = incomeAssessmentDetailsVm.ApplicantType,
+            };
+            var response = await _incomeAssesmentService.AddIncomeAssessmentDetails(addIncomeAssessmentDetailsDto);
+            var lead = incomeAssessmentDetailsVm.lead_Id;
+            var app = incomeAssessmentDetailsVm.ApplicantType;
+
+            return RedirectToAction("Index", new { applicantType = app, lead_Id = lead });
+        }
         #endregion
     }
 }
