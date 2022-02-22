@@ -31,20 +31,20 @@
     }
     else if (temp[1] == 'TrainingVideos') {
         var element = $(".nav-item a[href='" + path + "']");
-        element.addClass("sub");
+        element.addClass("active");
     }
     else if (temp[1] == 'ReportsLeadList') {
         var element = $(".nav-item a[href='" + path + "']");
-        element.addClass("sub");
+        element.addClass("active");
     }
 
 
-    var parentEle = $(".nav-item a[href='" + path + "']")[0]?.parentElement.parentElement;
+    //var parentEle = $(".nav-item a[href='" + path + "']")[0]?.parentElement.parentElement;
 
-    if (parentEle.closest('li') != null) {
-        parentEle.closest('li').setAttribute("class", "nav-item menu-is-opening menu-open")
-        parentEle.show();
-    }
+    //if (parentEle.closest('li') != null) {
+    //    parentEle.closest('li').setAttribute("class", "nav-item menu-is-opening menu-open")
+    //    parentEle.show();
+    //}
 });
 
 

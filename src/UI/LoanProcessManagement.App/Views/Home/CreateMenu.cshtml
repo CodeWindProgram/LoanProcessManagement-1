@@ -1,9 +1,10 @@
 ﻿@model LoanProcessManagement.App.Models.CheckboxfunctionVm
+    <link href="~/css/Common Css/Common1.css" rel="stylesheet" />
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "CreateMenu";
 }
-<style>
+@*<style>
     #act1 {
         color: white;
     }
@@ -87,7 +88,7 @@
     #selectChildren {
         width: 320px;
     }
-</style>
+</style>*@
 <div class="container app">
     <div class="col-sm-12 col-lg-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in ">
@@ -154,7 +155,7 @@
                                                 <div class="">
                                                     <tr id="lblcheck">
                                                         <td><input asp-for="@Model.ListVms[i].Id" hidden /></td>
-                                                        <td><input asp-for="@Model.ListVms[i].Checkbox" id="inpcheck" type="checkbox" />@Model.ListVms[i].Name</td>
+                                                        <td><input asp-for="@Model.ListVms[i].Checkbox" id="inpcheck" type="checkbox" />&nbsp;@Model.ListVms[i].Name</td>
                                                     </tr>
                                                 </div>
                                             }
@@ -168,7 +169,7 @@
                                 <div class="row">
 
                                     <div class="col-lg-4 col-sm-12">
-                                        <label>Is Parent Menu?<span style="color: Red">&nbsp;*</span></label>
+                                        <label>Is Parent Menu?<span style="color: Red">&nbsp;*</span></label><br />
 
                                         <input hidden id="confirming" asp-for="createMenuCommand.IsParent" />
                                         <input type="radio" name="Married" id="Yes" value="Yes" onclick="hideStudentChildren()" required>YES &nbsp&nbsp&nbsp&nbsp

@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "AddLead";
 }
-<style>
+@*<style>
     .group1 {
         padding-left: 4px;
         float: left;
@@ -45,7 +45,7 @@
         border-top-left-radius: 0.25rem;
         border-top-right-radius: 0.25rem;
     }*/
-</style>
+</style>*@
 
 <!--<div class="container app pb-5">
     <div class="col-sm-12 col-lg-12">
@@ -590,7 +590,7 @@
 
                         <form asp-controller="LeadList" asp-action="AddLead" method="post">
 
-                            <div class="form-group">
+                            <div class="form-group pl-1 pr-1 pb-1">
                                 <div class="row">
                                     <div class="col-lg-4 col-sm-12">
                                         <label asp-for="BranchID">Branch Name :</label>
@@ -615,7 +615,7 @@
                                 </div>
                             </div>
                             <hr />
-                            <div class="form-group">
+                            <div class="form-group pl-1 pr-1 pb-1">
                                 <div class="row">
                                     <div class="col-lg-4 col-sm-12">
                                         <label asp-for="FormNo">Form Number :<span style="color: red; width: 10%;">*</span></label>
@@ -637,9 +637,9 @@
                                 </div>
                             </div>
                             <hr />
-                            <h5><u><b>Property Information</b></u>:</h5>
+                            <h4><u><b>Property Information</b></u>:</h4>
 
-                            <div class="form-group">
+                            <div class="form-group pl-1 pr-1 pb-1">
                                 <div class="row">
                                     <div class="col-lg-4 col-sm-12">
                                         <label asp-for="IsPropertyIdentified">Property Identified :<span style="color: red; width: 10%;">*</span></label>
@@ -657,7 +657,7 @@
 
 
 
-                                <div class="form-group">
+                                <div class="form-group pl-1 pr-1 pb-1">
                                     <div class="row">
 
                                         <div class="col-lg-4 col-sm-12">
@@ -698,7 +698,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group pl-1 pr-1 pb-1">
                                     <div class="row">
 
 
@@ -733,7 +733,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group pl-1 pr-1 pb-1">
 
 
                                     <div class="col-lg-4 col-sm-12">
@@ -748,9 +748,9 @@
                             </div>
 
                             <hr />
-                            <h5><u><b>Personal Information</b></u>:</h5>
+                            <h4><u><b>Personal Information</b></u>:</h4>
 
-                            <div class="form-group">
+                            <div class="form-group pl-1 pr-1 pb-1">
                                 <div class="row">
 
                                     <div class="col-md-4">
@@ -777,7 +777,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group pl-1 pr-1 pb-1">
                                 <div class="row">
 
                                     <div class="col-md-4">
@@ -786,12 +786,12 @@
                                         <div>
                                             <input id="chkSalaried" asp-for="EmploymentType" type="radio" name="employmentType" value="Salaried" checked="checked" />
                                             <label for="chkSalaried">
-                                                <span id="normal">Salaried</span>
+                                                <span id="normal" class="font-weight-normal">Salaried</span>
                                             </label>
                                             &nbsp;&nbsp;&nbsp;
                                             <input id="chkSelfEmployment" asp-for="EmploymentType" type="radio" name="employmentType" value="SelfEmployment" />
                                             <label for="chkSelfEmployment">
-                                                <span id="normal">Self Employed</span>
+                                                <span id="normal" class="font-weight-normal">Self Employed</span>
                                             </label>
                                         </div>
                                         <span asp-validation-for="EmploymentType" class="text-danger"></span>
@@ -815,7 +815,7 @@
                             </div>
 
                             <div id="enableOnSlfEmployment2" style="display : none">
-                                <div class="form-group">
+                                <div class="form-group pl-1 pr-1 pb-1">
                                     <div class="row">
 
                                         @*<div id="enableOnSlfEmployment1" style="display : none">*@
@@ -862,9 +862,9 @@
 
 
                             <hr />
-                            <h5><u><b>Contact Information</b></u>:</h5>
+                            <h4><u><b>Contact Information</b></u>:</h4>
 
-                            <div class="form-group">
+                            <div class="form-group pl-1 pr-1 pb-1">
                                 <div class="row">
 
                                     <div class="col-lg-4 col-sm-12">
@@ -891,7 +891,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group pl-1 pr-1 pb-1">
                                 <div class="row">
 
                                     <div class="col-lg-4 col-sm-12">
@@ -906,7 +906,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group pl-1 pr-1 pb-1">
                                 <div class="row">
 
                                     <div class="col-lg-4 col-sm-12">
@@ -925,7 +925,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group pl-1 pr-1 pb-1">
                                 <div class="row">
 
                                     <div class="col-lg-4 col-sm-12">
@@ -949,8 +949,8 @@
                                 </div>
                             </div>
                             <hr />
-                            <h5><u><b>Other Information</b></u>:</h5>
-                            <div class="form-group">
+                            <h4><u><b>Other Information</b></u>:</h4>
+                            <div class="form-group pl-1 pr-1 pb-1">
                                 <div class="row">
                                     <div class="col-lg-4 col-sm-12">
                                         <label asp-for="ProductID">Product Chosen : <span style="color: red; width: 10%;">*</span></label>
@@ -973,7 +973,7 @@
 
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group pl-1 pr-1 pb-1">
                                 <div class="row">
                                     <div class="col-8">
                                         <label asp-for="Comment">Comments : </label>
