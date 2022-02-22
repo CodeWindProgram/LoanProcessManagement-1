@@ -88,7 +88,7 @@ namespace LoanProcessManagement.App.Controllers
         }
         #endregion
 
-        #region Get Income Assessment Details  - Pratiksha - 15/02/2021
+        #region Get Income Assessment Details  - Pratiksha - 15/02/2022
         /// <summary>
         /// 15/02/2021 - Get Income Assessment Details
         /// commented by Pratiksha Poshe
@@ -101,24 +101,30 @@ namespace LoanProcessManagement.App.Controllers
         {
 
             var getIncomeDetailsServiceResponse = await _incomeAssesmentService.GetIncomeDetailsService(applicantType, lead_Id);
-            var incomeAssessmentDetailsVm = new IncomeAssessmentDetailsVm() { 
-                FormNo = getIncomeDetailsServiceResponse.Data.FormNo,
-                lead_Id = getIncomeDetailsServiceResponse.Data.lead_Id,
-                CustomerName = getIncomeDetailsServiceResponse.Data.CustomerName,
-                CustomerEmail = getIncomeDetailsServiceResponse.Data.CustomerEmail,
-                CustomerPhone = getIncomeDetailsServiceResponse.Data.CustomerPhone,
-                NoOfBankAccounts = getIncomeDetailsServiceResponse.Data.NoOfBankAccounts,
-                EmploymentType = getIncomeDetailsServiceResponse.Data.EmploymentType,
-                LeadID = getIncomeDetailsServiceResponse.Data.LeadID,
-                IsSubmitCount = getIncomeDetailsServiceResponse.Data.IsSubmitCount,
-            };
-            ViewBag.applicantTypeNo = applicantType;
+            if(getIncomeDetailsServiceResponse != null && getIncomeDetailsServiceResponse.Data != null)
+            {
+                var incomeAssessmentDetailsVm = new IncomeAssessmentDetailsVm()
+                {
+                    FormNo = getIncomeDetailsServiceResponse.Data.FormNo,
+                    lead_Id = getIncomeDetailsServiceResponse.Data.lead_Id,
+                    CustomerName = getIncomeDetailsServiceResponse.Data.CustomerName,
+                    CustomerEmail = getIncomeDetailsServiceResponse.Data.CustomerEmail,
+                    CustomerPhone = getIncomeDetailsServiceResponse.Data.CustomerPhone,
+                    NoOfBankAccounts = getIncomeDetailsServiceResponse.Data.NoOfBankAccounts,
+                    EmploymentType = getIncomeDetailsServiceResponse.Data.EmploymentType,
+                    LeadID = getIncomeDetailsServiceResponse.Data.LeadID,
+                    IsSubmitCount = getIncomeDetailsServiceResponse.Data.IsSubmitCount,
+                    AppTypeList1 = getIncomeDetailsServiceResponse.Data.AppTypeList1,
+                };
+                ViewBag.applicantTypeNo = applicantType;
 
-            return View(incomeAssessmentDetailsVm);
+                return View(incomeAssessmentDetailsVm);
+            }
+            return View();
         }
         #endregion
 
-        #region Add Income Assessment Details  - Pratiksha - 15/02/2021
+        #region Add Income Assessment Details  - Pratiksha - 15/02/2022
         /// <summary>
         /// 15-02-2021 - Add Income Assessment Details
         /// commented by Pratiksha Poshe
