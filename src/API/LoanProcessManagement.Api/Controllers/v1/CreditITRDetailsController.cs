@@ -21,7 +21,7 @@ namespace LoanProcessManagement.Api.Controllers.v1
         private readonly IMediator _mediator;
         private readonly ILogger _logger;
 
-        public CreditITRDetailsController(IMediator mediator, ILogger<CreditCibilDetailsController> logger)
+        public CreditITRDetailsController(IMediator mediator, ILogger<CreditITRDetailsController> logger)
         {
             _logger = logger;
             _mediator = mediator;
