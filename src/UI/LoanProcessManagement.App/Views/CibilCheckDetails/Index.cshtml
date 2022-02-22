@@ -1,5 +1,6 @@
 ﻿
 @model LoanProcessManagement.App.Models.CibilCheckDetailsVm
+    <link href="~/css/Common Css/Common1.css" rel="stylesheet" />
 @*@model LoanProcessManagement.Application.Features.CibilCheck.Commands.AddCibilCheckDetails.AddCibilDetailsCommand*@
 
 @{
@@ -9,10 +10,10 @@
     ViewData["Title"] = "Cibil Check Details";
 }
 
-<style>
-    .tab {
+@*<style>
+    /*.tab {
         padding-left: 15px;
-    }
+    }*/
 
     .AppTabs {
         display: inline-block;
@@ -22,26 +23,26 @@
         color: #FFF;
     }
 
-    .btn {
+    /*.btn {
         width: inherit;
         justify-content: center;
-    }
+    }*/
 
     .AppTabs:hover {
         background: #adb5bd;
         color: black;
     }
 
-    .AppTabs:visited {
+    /*.AppTabs:visited {
         text-decoration: none;
-    }
+    }*/
 
-    .selected {
+    /*.selected {
         background: #0d7db5;
         color: #FFF;
-    }
+    }*/
 
-    .panel-heading {
+    /*.panel-heading {
         color: white;
         background-color: #343a40;
         border-bottom: 1px solid rgba(0,0,0,.125);
@@ -49,7 +50,7 @@
         position: relative;
         border-top-left-radius: 0.25rem;
         border-top-right-radius: 0.25rem;
-    }
+    }*/
 
     .btnDiv {
         text-align: center;
@@ -80,7 +81,7 @@
     u {
         font-weight: 600;
     }
-</style>
+</style>*@
 
 <div class="container pb-5">
     <div class="container app">
@@ -96,7 +97,7 @@
                         <input type="hidden" asp-for="CreatedBy" value=@User.FindFirst("lg_id").Value />
                         <input type="hidden" asp-for="LastModifiedBy" value=@User.FindFirst("lg_id").Value />
                         <div style="height: 15px;"></div>
-                        <div class="btnDiv  pt-4 pl-4 pr-4">
+                        <div class="frr pt-4 pl-4 pr-4">
                             <a href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=0" class="AppTabs btn-sm selected" id="tabProcess0" style="background: #adb5bd;">Applicant</a>
                             <a id="ContentPlaceHolder1_lnkCoApp1" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=1" style="background: #343a40;">Co-Applicant-1</a>
                             <a id="ContentPlaceHolder1_lnkCoApp2" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=2" style="background: #343a40;">Co-Applicant-2</a>
@@ -149,7 +150,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-lg-4 col-sm-12">
@@ -164,7 +165,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                   
+
                                 <hr />
                                 <div id="IdentificationDv">
                                     <div style="height: 5px;"></div>
@@ -172,7 +173,7 @@
                                         <h4><u>Identification</u></h4>
 
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-lg-4 col-sm-12">
@@ -191,7 +192,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                        
+
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-lg-4 col-sm-12">
@@ -212,8 +213,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                       
-                                   
+
+
                                 </div>
                                 <hr />
                                 <div id="PhoneDV">
@@ -221,236 +222,236 @@
                                     <div>
                                         <h4><u>Phone</u></h4>
                                     </div>
-                                  <div class="form-group">
-                                      <div class="row">
-                                          <div class="col-lg-4 col-sm-12">
-                                              <label class="">Phone 1</label><span style="color: Red">&nbsp;*</span>
-                                              <input asp-for="PhoneNumber1" placeholder="Phone 1" type="text" maxlength="10" id="ContentPlaceHolder1_txtPhone" class="form-control noTxtInput">
-                                              <span asp-validation-for="PhoneNumber1" style="color:Red;display:block;"></span>
-                                              <span id="ContentPlaceHolder1_RegularExpressionValidator5" style="color:Red;display:none;">Invalid Phone No.</span>
-                                          </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label class="">Phone 1</label><span style="color: Red">&nbsp;*</span>
+                                                <input asp-for="PhoneNumber1" placeholder="Phone 1" type="text" maxlength="10" id="ContentPlaceHolder1_txtPhone" class="form-control noTxtInput">
+                                                <span asp-validation-for="PhoneNumber1" style="color:Red;display:block;"></span>
+                                                <span id="ContentPlaceHolder1_RegularExpressionValidator5" style="color:Red;display:none;">Invalid Phone No.</span>
+                                            </div>
 
 
-                                          <div class="col-lg-4 col-sm-12">
-                                              <label class="">Phone 2</label><span style="color: Red">&nbsp;*</span>
-                                              <input asp-for="PhoneNumber2"  placeholder="Phone 2" type="text" maxlength="10" id="ContentPlaceHolder1_txtPhone" class="form-control noTxtInput">
-                                              <span asp-validation-for="PhoneNumber2" style="color:Red;display:block;"></span>
-                                              <span id="ContentPlaceHolder1_RegularExpressionValidator5" style="color:Red;display:none;">Invalid Phone No.</span>
-                                          </div>
-                                      </div>
-                                  </div>
-                                        
-                                    
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label class="">Phone 2</label><span style="color: Red">&nbsp;*</span>
+                                                <input asp-for="PhoneNumber2" placeholder="Phone 2" type="text" maxlength="10" id="ContentPlaceHolder1_txtPhone" class="form-control noTxtInput">
+                                                <span asp-validation-for="PhoneNumber2" style="color:Red;display:block;"></span>
+                                                <span id="ContentPlaceHolder1_RegularExpressionValidator5" style="color:Red;display:none;">Invalid Phone No.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                 </div>
-                            
-                            <hr />
-                            <div id="currentAddr">
-                                <div id="divConverted4">
-                                    <h4><u>Address</u></h4>
+
+                                <hr />
+                                <div id="currentAddr">
+                                    <div id="divConverted4">
+                                        <h4><u>Address</u></h4>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label class="">Address Line 1</label>
+                                                <input asp-for="AddressLine1" placeholder="Address Line 1" type="text" maxlength="40" id="ContentPlaceHolder1_txtCurrentAddress1" class="form-control">
+                                                <span asp-validation-for="AddressLine1" style="color:Red;display:block;"></span>
+                                            </div>
+
+
+
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label class="">Address Line 2</label>
+                                                <input asp-for="AddressLine2" placeholder="Address Line 2" type="text" maxlength="40" id="ContentPlaceHolder1_txtCurrentAddress2" class="form-control">
+                                            </div>
+
+
+
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label class="">Address Line 3</label>
+                                                <input asp-for="AddressLine3" placeholder="Address Line 3" type="text" maxlength="40" id="ContentPlaceHolder1_txtCurrentAddress3" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-sm-12">
+                                            <label class="">State</label>
+
+                                            <select asp-for="State" class="form-control">
+                                                <option value="">----Select----</option>
+                                                <option value="35">ANDAMAN &amp; NICOBAR ISLANDS</option>
+                                                <option value="28">ANDHRA PRADESH</option>
+                                                <option value="12">ARUNACHAL PRADESH</option>
+                                                <option value="18">ASSAM</option>
+                                                <option value="10">BIHAR</option>
+                                                <option value="4">CHANDIGARH</option>
+                                                <option value="22">CHATTISGARH</option>
+                                                <option value="22">CHHATTISGARH</option>
+                                                <option value="26">DADRA &amp; NAGAR HAVELI</option>
+                                                <option value="25">DAMAN &amp; DIU</option>
+                                                <option value="7">DELHI</option>
+                                                <option value="30">GOA</option>
+                                                <option value="24">GUJARAT</option>
+                                                <option value="6">HARYANA</option>
+                                                <option value="2">HIMACHAL PRADESH</option>
+                                                <option value="1">JAMMU &amp; KASHMIR</option>
+                                                <option value="20">JHARKHAND</option>
+                                                <option value="29">KARNATAKA</option>
+                                                <option value="32">KERALA</option>
+                                                <option value="31">LAKSHADWEEP</option>
+                                                <option value="23">MADHYA PRADESH</option>
+                                                <option value="27">MAHARASHTRA</option>
+                                                <option value="14">MANIPUR</option>
+                                                <option value="17">MEGHALAYA</option>
+                                                <option value="15">MIZORAM</option>
+                                                <option value="13">NAGALAND</option>
+                                                <option value="21">ORISSA</option>
+                                                <option value="34">PONDICHERRY</option>
+                                                <option value="3">PUNJAB</option>
+                                                <option value="8">RAJASTHAN</option>
+                                                <option value="11">SIKKIM</option>
+                                                <option value="33">TAMIL NADU</option>
+                                                <option value="36">TELANGANA</option>
+                                                <option value="16">TRIPURA</option>
+                                                <option value="9">UTTAR PRADESH</option>
+                                                <option value="5">UTTARANCHAL</option>
+                                                <option value="19">WEST BENGAL</option>
+
+                                            </select>
+
+                                            <span asp-validation-for="State" style="color:Red;display:block;"></span>
+                                        </div>
+
+
+
+                                        <div class="col-lg-4 col-sm-12">
+                                            <label class="">City</label>
+                                            <input asp-for="City" placeholder="City" onkeydown="return /[a-z]/i.test(event.key)" type="text" maxlength="30" id="ContentPlaceHolder1_txtCityCurrent" class="form-control">
+
+                                            <span asp-validation-for="City" style="color:Red;display:block;"></span>
+                                        </div>
+
+
+
+                                        <div class="col-lg-4 col-sm-12">
+                                            <label class="">Pin Code</label>
+                                            <input asp-for="Pincode" placeholder="Pincode" type="text" maxlength="6" id="ContentPlaceHolder1_txtPinCodeCurrent" class="form-control noTxtInput">
+
+                                            <span asp-validation-for="Pincode" style="color:Red;display:block;"></span>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-lg-4 col-sm-12">
-                                            <label class="">Address Line 1</label>
-                                            <input asp-for="AddressLine1" placeholder="Address Line 1" type="text" maxlength="40" id="ContentPlaceHolder1_txtCurrentAddress1" class="form-control">
-                                            <span asp-validation-for="AddressLine1" style="color:Red;display:block;"></span>
+
+                                            <label class="">Category</label><span style="color: Red">&nbsp;*</span>
+
+
+                                            <select asp-for="Category" class="form-control">
+                                                <option value="">----Select----</option>
+                                                <option value="1">Perminant Address</option>
+                                                <option value="2">Residence Address</option>
+                                                <option value="3">Office address</option>
+                                                <option value="4">Not Categorized</option>
+                                            </select>
+                                            <span asp-validation-for="Category" style="color:Red;display:block;"></span>
+
                                         </div>
 
 
-
                                         <div class="col-lg-4 col-sm-12">
-                                            <label class="">Address Line 2</label>
-                                            <input asp-for="AddressLine2" placeholder="Address Line 2" type="text" maxlength="40" id="ContentPlaceHolder1_txtCurrentAddress2" class="form-control">
+
+                                            <label class="">Residence code</label><span style="color: Red">&nbsp;*</span>
+
+                                            <select asp-for="Residence" class="form-control">
+                                                <option value="">----Select----</option>
+                                                <option value="1">Owned</option>
+                                                <option value="2">Rented</option>
+
+                                            </select>
+                                            <span asp-validation-for="Residence" style="color:Red;display:block;"></span>
+
                                         </div>
 
 
-
                                         <div class="col-lg-4 col-sm-12">
-                                            <label class="">Address Line 3</label>
-                                            <input asp-for="AddressLine3" placeholder="Address Line 3" type="text" maxlength="40" id="ContentPlaceHolder1_txtCurrentAddress3" class="form-control">
+
+                                            <label class="">Qualification</label><span style="color: Red">&nbsp;*</span>
+
+
+                                            <select asp-for="Qualification" class="form-control">
+                                                <option value="">----Select----</option>
+                                                <option value="1">BA</option>
+                                                <option value="2">B.Arch</option>
+                                                <option value="3">B.Com</option>
+                                                <option value="4">B.Ed</option>
+                                                <option value="5">B.Pharma</option>
+                                                <option value="6">BSC</option>
+                                                <option value="7">B.Tech/BE</option>
+                                                <option value="8">BAMS</option>
+                                                <option value="9">BBA</option>
+                                                <option value="10">BCA</option>
+                                                <option value="11">BDS</option>
+                                                <option value="12">BFA</option>
+                                                <option value="13">BHM</option>
+                                                <option value="14">BHMS</option>
+                                                <option value="15">BPT</option>
+                                                <option value="16">BTA</option>
+                                                <option value="17">CS Diploma</option>
+                                                <option value="18">HSC</option>
+                                                <option value="19">ICWA</option>
+                                                <option value="20">Integrated PG</option>
+                                                <option value="21">LLB</option>
+                                                <option value="22">LLM</option>
+                                                <option value="23">M Phil</option>
+                                                <option value="24">MA</option>
+                                                <option value="25">A arch </option>
+                                                <option value="26">M COM</option>
+                                                <option value="27">M ed</option>
+                                                <option value="28">M pharma</option>
+                                                <option value="29">MSC</option>
+                                                <option value="30">MTech</option>
+                                                <option value="31">MBA/PGDM</option>
+                                                <option value="32">MBBS</option>
+                                                <option value="33">MCA</option>
+                                                <option value="34">MCM</option>
+                                                <option value="35">MD</option>
+                                                <option value="36">ME</option>
+                                                <option value="37">MPM</option>
+                                                <option value="38">MS</option>
+                                                <option value="39">MVSC</option>
+                                                <option value="40">OTHERS</option>
+                                                <option value="41">PG DIPLOMA</option>
+                                                <option value="42">PHD</option>
+                                            </select>
+                                            <span asp-validation-for="Qualification" style="color:Red;display:block;"></span>
                                         </div>
                                     </div>
                                 </div>
-                                
-                             </div>  
-                               <div class="form-group">
-                                   <div class="row">
-                                       <div class="col-lg-4 col-sm-12">
-                                           <label class="">State</label>
-
-                                           <select asp-for="State" class="form-control">
-                                               <option value="">----Select----</option>
-                                               <option value="35">ANDAMAN &amp; NICOBAR ISLANDS</option>
-                                               <option value="28">ANDHRA PRADESH</option>
-                                               <option value="12">ARUNACHAL PRADESH</option>
-                                               <option value="18">ASSAM</option>
-                                               <option value="10">BIHAR</option>
-                                               <option value="4">CHANDIGARH</option>
-                                               <option value="22">CHATTISGARH</option>
-                                               <option value="22">CHHATTISGARH</option>
-                                               <option value="26">DADRA &amp; NAGAR HAVELI</option>
-                                               <option value="25">DAMAN &amp; DIU</option>
-                                               <option value="7">DELHI</option>
-                                               <option value="30">GOA</option>
-                                               <option value="24">GUJARAT</option>
-                                               <option value="6">HARYANA</option>
-                                               <option value="2">HIMACHAL PRADESH</option>
-                                               <option value="1">JAMMU &amp; KASHMIR</option>
-                                               <option value="20">JHARKHAND</option>
-                                               <option value="29">KARNATAKA</option>
-                                               <option value="32">KERALA</option>
-                                               <option value="31">LAKSHADWEEP</option>
-                                               <option value="23">MADHYA PRADESH</option>
-                                               <option value="27">MAHARASHTRA</option>
-                                               <option value="14">MANIPUR</option>
-                                               <option value="17">MEGHALAYA</option>
-                                               <option value="15">MIZORAM</option>
-                                               <option value="13">NAGALAND</option>
-                                               <option value="21">ORISSA</option>
-                                               <option value="34">PONDICHERRY</option>
-                                               <option value="3">PUNJAB</option>
-                                               <option value="8">RAJASTHAN</option>
-                                               <option value="11">SIKKIM</option>
-                                               <option value="33">TAMIL NADU</option>
-                                               <option value="36">TELANGANA</option>
-                                               <option value="16">TRIPURA</option>
-                                               <option value="9">UTTAR PRADESH</option>
-                                               <option value="5">UTTARANCHAL</option>
-                                               <option value="19">WEST BENGAL</option>
-
-                                           </select>
-
-                                           <span asp-validation-for="State" style="color:Red;display:block;"></span>
-                                       </div>
 
 
 
-                                       <div class="col-lg-4 col-sm-12">
-                                           <label class="">City</label>
-                                           <input asp-for="City"  placeholder="City" onkeydown="return /[a-z]/i.test(event.key)" type="text" maxlength="30" id="ContentPlaceHolder1_txtCityCurrent" class="form-control">
-
-                                           <span asp-validation-for="City" style="color:Red;display:block;"></span>
-                                       </div>
 
 
 
-                                       <div class="col-lg-4 col-sm-12">
-                                           <label class="">Pin Code</label>
-                                           <input asp-for="Pincode"  placeholder="Pincode" type="text" maxlength="6" id="ContentPlaceHolder1_txtPinCodeCurrent" class="form-control noTxtInput">
+                                <div id="accountDv">
 
-                                           <span asp-validation-for="Pincode" style="color:Red;display:block;"></span>
-                                       </div>
-                                   </div>
-                               </div>
-                               
-                                 <div class="form-group">
-                                     <div class="row">
-                                         <div class="col-lg-4 col-sm-12">
-
-                                             <label class="">Category</label><span style="color: Red">&nbsp;*</span>
-
-
-                                             <select asp-for="Category" class="form-control">
-                                                 <option value="">----Select----</option>
-                                                 <option value="1">Perminant Address</option>
-                                                 <option value="2">Residence Address</option>
-                                                 <option value="3">Office address</option>
-                                                 <option value="4">Not Categorized</option>
-                                             </select>
-                                             <span asp-validation-for="Category" style="color:Red;display:block;"></span>
-
-                                         </div>
-
-
-                                         <div class="col-lg-4 col-sm-12">
-
-                                             <label class="">Residence code</label><span style="color: Red">&nbsp;*</span>
-
-                                             <select asp-for="Residence" class="form-control">
-                                                 <option value="">----Select----</option>
-                                                 <option value="1">Owned</option>
-                                                 <option value="2">Rented</option>
-
-                                             </select>
-                                             <span asp-validation-for="Residence" style="color:Red;display:block;"></span>
-
-                                         </div>
-
-
-                                         <div class="col-lg-4 col-sm-12">
-
-                                             <label class="">Qualification</label><span style="color: Red">&nbsp;*</span>
-
-
-                                             <select asp-for="Qualification" class="form-control">
-                                                 <option value="">----Select----</option>
-                                                 <option value="1">BA</option>
-                                                 <option value="2">B.Arch</option>
-                                                 <option value="3">B.Com</option>
-                                                 <option value="4">B.Ed</option>
-                                                 <option value="5">B.Pharma</option>
-                                                 <option value="6">BSC</option>
-                                                 <option value="7">B.Tech/BE</option>
-                                                 <option value="8">BAMS</option>
-                                                 <option value="9">BBA</option>
-                                                 <option value="10">BCA</option>
-                                                 <option value="11">BDS</option>
-                                                 <option value="12">BFA</option>
-                                                 <option value="13">BHM</option>
-                                                 <option value="14">BHMS</option>
-                                                 <option value="15">BPT</option>
-                                                 <option value="16">BTA</option>
-                                                 <option value="17">CS Diploma</option>
-                                                 <option value="18">HSC</option>
-                                                 <option value="19">ICWA</option>
-                                                 <option value="20">Integrated PG</option>
-                                                 <option value="21">LLB</option>
-                                                 <option value="22">LLM</option>
-                                                 <option value="23">M Phil</option>
-                                                 <option value="24">MA</option>
-                                                 <option value="25">A arch </option>
-                                                 <option value="26">M COM</option>
-                                                 <option value="27">M ed</option>
-                                                 <option value="28">M pharma</option>
-                                                 <option value="29">MSC</option>
-                                                 <option value="30">MTech</option>
-                                                 <option value="31">MBA/PGDM</option>
-                                                 <option value="32">MBBS</option>
-                                                 <option value="33">MCA</option>
-                                                 <option value="34">MCM</option>
-                                                 <option value="35">MD</option>
-                                                 <option value="36">ME</option>
-                                                 <option value="37">MPM</option>
-                                                 <option value="38">MS</option>
-                                                 <option value="39">MVSC</option>
-                                                 <option value="40">OTHERS</option>
-                                                 <option value="41">PG DIPLOMA</option>
-                                                 <option value="42">PHD</option>
-                                             </select>
-                                             <span asp-validation-for="Qualification" style="color:Red;display:block;"></span>
-                                         </div>
-                                     </div>
-                                 </div>   
-                                
-                                
-                                
-                                    
-                                   
-
-                            <div id="accountDv">
-
-                                <br />
-                                <div class="row tab">
-                                    <div class="col-md-12">
-                                        <center>
-                                            <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="SubmitButton" class="btn" style="background-color: #343a40; color:white;">&nbsp
-                                            <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@Model.LeadID">Cancel</a>
-                                        </center>
+                                    <br />
+                                    <div class="row tab">
+                                        <div class="col-md-12">
+                                            <center>
+                                                <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="SubmitButton" class="btn" style="background-color: #343a40; color:white;">&nbsp
+                                                <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@Model.LeadID">Cancel</a>
+                                            </center>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
                     </form>
                 </div>

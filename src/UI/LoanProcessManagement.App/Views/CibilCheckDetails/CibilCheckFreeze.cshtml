@@ -1,5 +1,5 @@
 ﻿@model LoanProcessManagement.App.Models.CibilCheckDetailsVm
-
+<link href="~/css/Common Css/Common1.css" rel="stylesheet" />
 @*@model LoanProcessManagement.Application.Features.CibilCheck.Commands.AddCibilCheckDetails.AddCibilDetailsCommand*@
 
 @{
@@ -9,10 +9,10 @@
     //ViewData["Title"] = "Cibil Check Details";
 }
 
-<style>
-    .tab {
+@*<style>
+    /*.tab {
         padding-left: 15px;
-    }
+    }*/
 
     .AppTabs {
         display: inline-block;
@@ -22,26 +22,26 @@
         color: #FFF;
     }
 
-    .btn {
+        /*.btn {
         width: inherit;
         justify-content: center;
-    }
+    }*/
 
-    .AppTabs:hover {
-        background: #adb5bd;
-        color: black;
-    }
+        .AppTabs:hover {
+            background: #adb5bd;
+            color: black;
+        }
 
-    .AppTabs:visited {
+    /*.AppTabs:visited {
         text-decoration: none;
-    }
+    }*/
 
-    .selected {
+    /*.selected {
         background: #0d7db5;
         color: #FFF;
-    }
+    }*/
 
-    .panel-heading {
+    /*.panel-heading {
         color: white;
         background-color: #343a40;
         border-bottom: 1px solid rgba(0,0,0,.125);
@@ -49,21 +49,21 @@
         position: relative;
         border-top-left-radius: 0.25rem;
         border-top-right-radius: 0.25rem;
-    }
+    }*/
 
-    .btnDiv {
+    .frr {
         text-align: center;
     }
 
-    .card {
-        /*background-color:slategray;*/
-        background: linear-gradient(to bottom, rgba(251,251,251,10) 0%,rgba(242,242,242,10) 100%);
+    /*.card {*/
+    /*background-color:slategray;*/
+    /*background: linear-gradient(to bottom, rgba(251,251,251,10) 0%,rgba(242,242,242,10) 100%);
         font-family: sans-serif;
         font-size: 18px;
         border: 1px solid;
         margin-top: 20px;
         margin-bottom: 20px;
-    }
+    }*/
 
     /*h4 {
         font-size: 1.25rem;
@@ -72,16 +72,17 @@
         font-weight: 600;
     }*/
 
-    .formDiv {
+    /*.formDiv {
         border: 1px solid #343a40;
         padding-bottom: 5px;
         padding-left: 1%;
         padding-right: 1%;
-    }
+    }*/
+
     u {
         font-weight: 600;
     }
-</style>
+</style>*@
 
 <div class="container pb-5">
     <div class="container app">
@@ -97,7 +98,7 @@
                         <input type="hidden" asp-for="CreatedBy" value=@User.FindFirst("lg_id").Value />
                         <input type="hidden" asp-for="LastModifiedBy" value=@User.FindFirst("lg_id").Value />
                         <div style="height: 15px;"></div>
-                        <div class="btnDiv pt-4 pl-4 pr-4">
+                        <div class="frr pt-4 pl-4 pr-4">
                             <a href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=0" class="AppTabs btn-sm selected" id="tabProcess0" style="background: #adb5bd;">Applicant</a>
                             <a id="ContentPlaceHolder1_lnkCoApp1" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=1" style="background: #343a40;">Co-Applicant-1</a>
                             <a id="ContentPlaceHolder1_lnkCoApp2" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=2" style="background: #343a40;">Co-Applicant-2</a>
@@ -134,8 +135,8 @@
                                     </div>
 
                                 </div>
-                                <div id="divConverted3PC">
-                                    <h4><u>Customer Details</u></h4>
+                                <div id="">
+                                    <h4><u><b>Customer Details</b></u></h4>
                                 </div>
 
                                 <div class="form-group pl-2">
@@ -163,58 +164,58 @@
 
                                     </div>
                                 </div>
-                               
-                               <div class="form-group pl-2">
-                                   <div class="row">
-                                       <div class="col-lg-4 col-sm-12">
-                                           <label class="">Date of Birth</label>
-                                           <p>@Model.DateOfBirth.ToShortDateString()</p>
-                                       </div>
+
+                                <div class="form-group pl-2">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-sm-12">
+                                            <label class="">Date of Birth</label>
+                                            <p>@Model.DateOfBirth.ToShortDateString()</p>
+                                        </div>
 
 
 
 
-                                       <div class="col-lg-4 col-sm-12">
-                                           <label class="">Gender</label>
-                                           <p>@Model.Gender</p>
-                                       </div>
+                                        <div class="col-lg-4 col-sm-12">
+                                            <label class="">Gender</label>
+                                            <p>@Model.Gender</p>
+                                        </div>
 
-                                   </div>
-                               </div>
-                                    
-                               
-                              
-                                   
-                                
+                                    </div>
+                                </div>
+
+
+
+
+
                                 <hr />
                                 <div id="IdentificationDv">
                                     <div style="height: 5px;"></div>
                                     <div id="divIdentification">
-                                        <h4><u>Identification </u></h4>
+                                        <h4><u><b>Identification</b></u></h4>
 
                                     </div>
-                                   
-                                   <div class="form-group pl-2">
-                                       <div class="row">
-                                           <div class="col-lg-4 col-sm-12">
-                                               <label class="">PAN</label>
-                                               <p>@Model.PanCardNo</p>
-                                           </div>
 
-                                           <div class="col-lg-4 col-sm-12">
-                                               <label class="">Passport</label>
-                                               <p>@Model.PassportNo</p>
-                                           </div>
+                                    <div class="form-group pl-2">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label class="">PAN</label>
+                                                <p>@Model.PanCardNo</p>
+                                            </div>
+
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label class="">Passport</label>
+                                                <p>@Model.PassportNo</p>
+                                            </div>
 
 
 
-                                           <div class="col-lg-4 col-sm-12">
-                                               <label class="">Voter ID</label>
-                                               <p>@Model.VoterId</p>
-                                           </div>
-                                       </div>
-                                   </div>
-                                      
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label class="">Voter ID</label>
+                                                <p>@Model.VoterId</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group pl-2">
                                         <div class="row">
                                             <div class="col-lg-4 col-sm-12">
@@ -236,17 +237,17 @@
                                         </div>
                                     </div>
 
-                                       
-                                   
+
+
 
                                 </div>
                                 <hr />
                                 <div id="PhoneDV">
                                     <div style="height: 5px;"></div>
                                     <div>
-                                        <h4><u>Phone</u></h4>
+                                        <h4><u><b>Phone</b></u></h4>
                                     </div>
-                                   
+
                                     <div class="form-group pl-2">
                                         <div class="row">
                                             <div class="col-lg-4 col-sm-12">
@@ -262,92 +263,92 @@
                                             </div>
                                         </div>
                                     </div>
-                                        
-                                    
+
+
                                 </div>
-                            
-                            <hr />
-                            <div id="currentAddr">
-                                <div id="divConverted4">
-                                    <h4><u>Address</u></h4>
-                                </div>
-                               
-                              <div class="form-group pl-2">
-                                  <div class="row">
-                                      <div class="col-lg-4 col-sm-12">
-                                          <label class="">Address Line 1</label>
-                                          <p>@Model.AddressLine1</p>
-                                      </div>
+
+                                <hr />
+                                <div id="currentAddr">
+                                    <div id="divConverted4">
+                                        <h4><u><b>Address</b></u></h4>
+                                    </div>
+
+                                    <div class="form-group pl-2">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label class="">Address Line 1</label>
+                                                <p>@Model.AddressLine1</p>
+                                            </div>
 
 
 
-                                      <div class="col-lg-4 col-sm-12">
-                                          <label class="">Address Line 2</label>
-                                          <p>@Model.AddressLine2</p>
-                                      </div>
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label class="">Address Line 2</label>
+                                                <p>@Model.AddressLine2</p>
+                                            </div>
 
 
 
-                                      <div class="col-lg-4 col-sm-12">
-                                          <label class="">Address Line 3</label>
-                                          <p>@Model.AddressLine3</p>
-                                      </div>
-
-                                  </div>
-                              </div>
-                                    
-                                <div class="form-group pl-2">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-sm-12" id="dvStateCurrent">
-                                            <label class="">State</label>
-                                            <p id="StateNode"></p>
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label class="">Address Line 3</label>
+                                                <p>@Model.AddressLine3</p>
+                                            </div>
 
                                         </div>
+                                    </div>
+
+                                    <div class="form-group pl-2">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-sm-12" id="dvStateCurrent">
+                                                <label class="">State</label>
+                                                <p id="StateNode"></p>
+
+                                            </div>
 
 
 
-                                        <div class="col-lg-4 col-sm-12">
-                                            <label class="">City</label>
-                                            <p>@Model.City</p>
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label class="">City</label>
+                                                <p>@Model.City</p>
+                                            </div>
+
+
+
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label class="">Pin Code</label>
+                                                <p>@Model.Pincode</p>
+                                            </div>
                                         </div>
+                                    </div>
+
+                                    <div class="form-group pl-2">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label class="">Category</label>
+                                                <p id="CategoryNode"></p>
+                                            </div>
 
 
 
-                                        <div class="col-lg-4 col-sm-12">
-                                            <label class="">Pin Code</label>
-                                            <p>@Model.Pincode</p>
+
+
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label class="">Residence code</label>
+                                                <p id="ResidenceNode"></p>
+                                            </div>
+
+
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label class="">Qualification</label>
+                                                <p id="QualificationNode"></p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                               
-                                <div class="form-group pl-2">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-sm-12">
-                                            <label class="">Category</label>
-                                            <p id="CategoryNode"></p>
-                                        </div>
 
 
 
 
-
-                                        <div class="col-lg-4 col-sm-12">
-                                            <label class="">Residence code</label>
-                                            <p id="ResidenceNode"></p>
-                                        </div>
-
-
-                                        <div class="col-lg-4 col-sm-12">
-                                            <label class="">Qualification</label>
-                                            <p id="QualificationNode"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                   </div> 
-                               
-                               
-                                
-                                                                    
                             </div>
                         </div>
 
@@ -360,296 +361,374 @@
 </div>
 
 @*<div class="container pb-5">
-    <div class="container app">
-        <div class="col-sm-12 col-lg-12">
-            <div data-effect="helix" id="panels" class="panel panel-info effect-helix in">
-                <div class="panel-heading">
-                    <h5>Add Customer Enquiry</h5>
-                </div>
-                <div class="formDiv">
-                    <form method="post" action="/CibilCheckDetails/index">
-                        <input type="hidden" asp-for="lead_Id" id="hdnLeadId">
-                        <input type="hidden" asp-for="ApplicantType" id="hdnApplicantType">
-                        <input type="hidden" asp-for="CreatedBy" value=@User.FindFirst("lg_id").Value />
-                        <input type="hidden" asp-for="LastModifiedBy" value=@User.FindFirst("lg_id").Value />
-                        <div style="height: 15px;"></div>
-                        <div class="btnDiv pt-4 pl-4 pr-4">
-                            <a href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=0" class="AppTabs btn-sm selected" id="tabProcess0" style="background: #adb5bd;">Applicant</a>
-                            <a id="ContentPlaceHolder1_lnkCoApp1" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=1" style="background: #343a40;">Co-Applicant-1</a>
-                            <a id="ContentPlaceHolder1_lnkCoApp2" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=2" style="background: #343a40;">Co-Applicant-2</a>
-                            <a id="ContentPlaceHolder1_lnkCoApp3" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=3" style="background: #343a40;">Co-Applicant-3</a>
-                            <a id="ContentPlaceHolder1_lnkCoApp4" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=4" style="background: #343a40;">Co-Applicant-4</a>
-                            <a id="ContentPlaceHolder1_lnkCoApp5" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=5" style="background: #343a40;">Co-Applicant-5</a>
-                        </div>
-                        
-                        <span id="ContentPlaceHolder1_spanMessage" style="color: red;"></span>
-                        
-                        <div class="frames">
-                            <div class="panel-body">
-                               
-                                <div id="ContentPlaceHolder1_alertMsg">
-                                    <div class="row tab pt-3 pr-1">
-                                        <div class="col-md-12 text-center">
-                                            <label class="h4">Form No.</label>
+        <div class="container app">
+            <div class="col-sm-12 col-lg-12">
+                <div data-effect="helix" id="panels" class="panel panel-info effect-helix in">
+                    <div class="panel-heading">
+                        <h5>Add Customer Enquiry</h5>
+                    </div>
+                    <div class="formDiv">
+                        <form method="post" action="/CibilCheckDetails/index">
+                            <input type="hidden" asp-for="lead_Id" id="hdnLeadId">
+                            <input type="hidden" asp-for="ApplicantType" id="hdnApplicantType">
+                            <input type="hidden" asp-for="CreatedBy" value=@User.FindFirst("lg_id").Value />
+                            <input type="hidden" asp-for="LastModifiedBy" value=@User.FindFirst("lg_id").Value />
+                            <div style="height: 15px;"></div>
+                            <div class="btnDiv pt-4 pl-4 pr-4">
+                                <a href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=0" class="AppTabs btn-sm selected" id="tabProcess0" style="background: #adb5bd;">Applicant</a>
+                                <a id="ContentPlaceHolder1_lnkCoApp1" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=1" style="background: #343a40;">Co-Applicant-1</a>
+                                <a id="ContentPlaceHolder1_lnkCoApp2" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=2" style="background: #343a40;">Co-Applicant-2</a>
+                                <a id="ContentPlaceHolder1_lnkCoApp3" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=3" style="background: #343a40;">Co-Applicant-3</a>
+                                <a id="ContentPlaceHolder1_lnkCoApp4" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=4" style="background: #343a40;">Co-Applicant-4</a>
+                                <a id="ContentPlaceHolder1_lnkCoApp5" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=5" style="background: #343a40;">Co-Applicant-5</a>
+                            </div>
+
+                            <span id="ContentPlaceHolder1_spanMessage" style="color: red;"></span>
+
+                            <div class="frames">
+                                <div class="panel-body">
+
+                                    <div id="ContentPlaceHolder1_alertMsg">
+                                        <div class="row tab pt-3 pr-1">
+                                            <div class="col-md-12 text-center">
+                                                <label class="h4">Form No.</label>
 
 
-                                           
-                                            <span id="ContentPlaceHolder1_lblFormNo" class="h4" style="color: black; border:none">
-                                                <label>@Model.FormNo</label>
-                                                <input type="hidden" asp-for="FormNo" />
 
-                                            </span>
-                                           
+                                                <span id="ContentPlaceHolder1_lblFormNo" class="h4" style="color: black; border:none">
+                                                    <label>@Model.FormNo</label>
+                                                    <input type="hidden" asp-for="FormNo" />
+
+                                                </span>
+
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <hr />
-                                <div style="display:flex;">
-                                    <div class="col-md-4">
+                                    <hr />
+                                    <div style="display:flex;">
+                                        <div class="col-md-4">
 
-                                    </div>
-                                  
-                                </div>
-                                <div id="divConverted3PC">
-                                    <h4><u>Customer Details</u></h4>
-                                </div>
-
-
-                                <div style="height: 5px;"></div>
-                                <div class="row tab">
-                                    <div class="col-md-5">
-                                        <label class="">Customer Name</label>
-
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="input-control text">
-                                            
-                                            <label>@Model.CustomerName</label>
                                         </div>
-                                    </div>
-                                </div>
 
-                                <div style="height: 5px;"></div>
-                                <div class="row tab">
-                                    <div class="col-md-5">
-                                        <label class="">Customer Email</label>
                                     </div>
-                                    <div class="col-md-5">
-                                        <div class="input-control text">
-                                           
-                                            <label>@Model.CustomerEmail</label>
-                                        </div>
+                                    <div id="divConverted3PC">
+                                        <h4><u>Customer Details</u></h4>
                                     </div>
-                                </div>
 
-                                <div style="height: 5px;"></div>
-                                <div class="row tab">
-                                    <div class="col-md-5">
-                                        <label class="">Customer Mobile</label>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="input-control text">
-                                            
-                                            <label>@Model.CustomerPhone</label>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div style="height: 5px;"></div>
-                                <div class="row tab">
-                                    <div class="col-md-5">
-                                        <label class="">Date of Birth</label>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="input-control text">
-                                            
-                                            <label>@Model.DateOfBirth.ToShortDateString()</label>
-                                        </div>
-                                       
-                                    </div>
-                                </div>
-
-                                <div style="height: 5px;"></div>
-                                <div class="row tab">
-                                    <div class="col-md-5">
-                                        <label class="">Gender</label>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="input-control text">
-                                                     <label>@Model.Gender</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="height: 5px;"></div>
-                                <hr />
-                                <div id="IdentificationDv">
                                     <div style="height: 5px;"></div>
-                                    <div id="divIdentification">
-                                        <h4><u>Identification </u></h4>
+                                    <div class="row tab">
+                                        <div class="col-md-5">
+                                            <label class="">Customer Name</label>
 
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="input-control text">
+
+                                                <label>@Model.CustomerName</label>
+                                            </div>
+                                        </div>
+                                    </div>
                                     </div>
                                     <div style="height: 5px;"></div>
                                     <div class="row tab">
-                                        <div class="col-md-2">
-                                            <label class="">PAN</label>
+                                        <div class="col-md-5">
+                                            <label class="">Customer Email</label>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-5">
                                             <div class="input-control text">
-                                               
-                                                <label>@Model.PanCardNo</label>
+
+                                                <label>@Model.CustomerEmail</label>
                                             </div>
                                         </div>
+                                    </div>
+                                        </div>
+                                    <div style="height: 5px;"></div>
+                                    <div class="row tab">
+                                        <div class="col-md-5">
+                                            <label class="">Customer Mobile</label>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="input-control text">
+
+                                                <label>@Model.CustomerPhone</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                            <label>@Model.CustomerPhone</label>
+                                    <div style="height: 5px;"></div>
+                                    <div class="row tab">
+                                        <div class="col-md-5">
+                                            <label class="">Date of Birth</label>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="input-control text">
+
+                                                <label>@Model.DateOfBirth.ToShortDateString()</label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                    <span id="ContentPlaceHolder1_RequiredFieldValidator2" style="color:Red;display:none;">Date of Birth is mandatory.</span>
+                                    <div style="height: 5px;"></div>
+                                    <div class="row tab">
+                                        <div class="col-md-5">
+                                            <label class="">Gender</label>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="input-control text">
+                                                         <label>@Model.Gender</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="height: 5px;"></div>
+                                    <hr />
+                                    <div id="IdentificationDv">
+                                        <div style="height: 5px;"></div>
+                                        <div id="divIdentification">
+                                            <h4><u>Identification </u></h4>
+                                    <div class="col-md-5">
+                                        </div>
+                                        <div style="height: 5px;"></div>
+                                        <div class="row tab">
+                                            <div class="col-md-2">
+                                                <label class="">PAN</label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="input-control text">
+
+                                                    <label>@Model.PanCardNo</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <div class="col-md-2">
+                                                <label class="">Passport</label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="input-control text">
+
+                                                    <label>@Model.PassportNo</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="height: 5px;"></div>
+                                        <div style="height: 5px;"></div>
+                                        <div class="row tab">
+                                            <div class="col-md-2">
+                                                <label class="">Voter ID</label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="input-control text">
+
+                                                    <label>@Model.VoterId</label>
+                                                </div>
+                                            </div>
 
                                         <div class="col-md-2">
                                             <label class="">Passport</label>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="input-control text">
-                                                
-                                                <label>@Model.PassportNo</label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="input-control text">
+
+                                                    <label>@Model.DrivingLiscenceNo</label>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div style="height: 5px;"></div>
-                                    <div style="height: 5px;"></div>
-                                    <div class="row tab">
-                                        <div class="col-md-2">
+                                        <div style="height: 5px;"></div>
+                                        <div class="row tab">
+                                            <div class="col-md-2">
+                                                <label class="">Ration Card</label>
                                             <label class="">Voter ID</label>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="input-control text">
-                                                
+                                            </div>
+                                            <div class="col-md-3">
+
+                                                <label>@Model.RationCardNo</label>
+                                            </div>
                                                 <label>@Model.VoterId</label>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-2">
-                                            <label class="">Driver's Licence</label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="input-control text">
 
+                                                    <label>@Model.AadharId</label>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="input-control text">
-                                                
                                                 <label>@Model.DrivingLiscenceNo</label>
+                                    </div>
+                                    <hr />
+                                    <div id="PhoneDV">
+                                        <div style="height: 5px;"></div>
+                                        <div>
+                                            <h4><u>Phone</u></h4>
+                                        </div>
+                                        <div class="row tab">
+                                            <div class="col-md-5">
+                                                <label class="">Phone 1</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="input-control text">
+
+                                                    <label>@Model.PhoneNumber1</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="height: 5px;"></div>
+                                        <div class="row tab">
+                                            <div class="col-md-5">
+                                                <label class="">Phone 2</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="input-control text">
+
+                                                    <label>@Model.PhoneNumber2</label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div style="height: 5px;"></div>
-                                    <div class="row tab">
-                                        <div class="col-md-2">
-                                            <label class="">Ration Card</label>
-
-                                        </div>
-                                        <div class="col-md-3">
-                                           
-                                            <label>@Model.RationCardNo</label>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <label class="">Universal ID</label>
-
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="input-control text">
-                                              
-                                                <label>@Model.AadharId</label>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                 </div>
                                 <hr />
-                                <div id="PhoneDV">
-                                    <div style="height: 5px;"></div>
-                                    <div>
-                                        <h4><u>Phone</u></h4>
+                                <div id="currentAddr">
+                                    <div id="divConverted4">
+                                        <h4><u>Address</u></h4>
                                     </div>
+                                    <div style="height: 5px;"></div>
                                     <div class="row tab">
                                         <div class="col-md-5">
-                                            <label class="">Phone 1</label>
+                                            <label class="">Address Line 1</label>
                                         </div>
                                         <div class="col-md-5">
                                             <div class="input-control text">
-                                               
-                                                <label>@Model.PhoneNumber1</label>
+
+                                                <label>@Model.AddressLine1</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div style="height: 5px;"></div>
                                     <div class="row tab">
                                         <div class="col-md-5">
-                                            <label class="">Phone 2</label>
+                                            <label class="">Address Line 2</label>
                                         </div>
                                         <div class="col-md-5">
                                             <div class="input-control text">
-                                               
-                                                <label>@Model.PhoneNumber2</label>
+
+                                                <label>@Model.AddressLine2</label>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <hr />
-                            <div id="currentAddr">
-                                <div id="divConverted4">
-                                    <h4><u>Address</u></h4>
-                                </div>
-                                <div style="height: 5px;"></div>
-                                <div class="row tab">
-                                    <div class="col-md-5">
-                                        <label class="">Address Line 1</label>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="input-control text">
-                                            
-                                            <label>@Model.AddressLine1</label>
+                                    <div style="height: 5px;"></div>
+                                    <div class="row tab">
+                                        <div class="col-md-5">
+                                            <label class="">Address Line 3</label>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="input-control text">
+
+                                                <label>@Model.AddressLine3</label>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div style="height: 5px;"></div>
-                                <div class="row tab">
-                                    <div class="col-md-5">
-                                        <label class="">Address Line 2</label>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="input-control text">
-                                           
-                                            <label>@Model.AddressLine2</label>
+                                    <div style="height: 5px;"></div>
+                                    <div class="row tab" id="dvStateCurrent">
+                                        <div class="col-md-5">
+                                            <label class="">State</label>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="input-control text">
+                                                <label id="StateNode"></label>
+
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div style="height: 5px;"></div>
-                                <div class="row tab">
-                                    <div class="col-md-5">
-                                        <label class="">Address Line 3</label>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="input-control text">
-                                            
-                                            <label>@Model.AddressLine3</label>
+                                    <div style="height: 5px;"></div>
+                                    <div class="row tab" id="dvCityCurrent">
+                                        <div class="col-md-5">
+                                            <label class="">City</label>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="input-control text">
+
+                                                <label>@Model.City</label>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div style="height: 5px;"></div>
-                                <div class="row tab" id="dvStateCurrent">
-                                    <div class="col-md-5">
-                                        <label class="">State</label>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="input-control text">
-                                            <label id="StateNode"></label>
-                                            
+                                    <div style="height: 5px;"></div>
+                                    <div class="row tab">
+                                        <div class="col-md-5">
+                                            <label class="">Pin Code</label>
                                         </div>
+                                        <div class="col-md-5">
+                                            <div class="input-control text">
+
+                                                <label>@Model.Pincode</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="height: 5px;"></div>
+                                    <div class="row tab">
+                                        <div class="col-md-5">
+                                            <div class="full">
+                                                <label class="">Category</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="input-control text">
+            <option value="28">ANDHRA PRADESH</option>
+
+                                                <label id="CategoryNode"></label>
+                                            </div>
+                                        </div>
+                                        <div style="height: 5px;"></div>
+                                    </div>
+                                    <div style="height: 5px;"></div>
+                                    <div class="row tab">
+                                        <div class="col-md-5">
+                                            <div class="full">
+                                                <label class="">Residence code</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="input-control text">
+                                                <label id="ResidenceNode"></label>
+
+                                            </div>
+                                        </div>
+                                        <div style="height: 5px;"></div>
+                                    </div>
+                                    <div style="height: 5px;"></div>
+                                    <div class="row tab">
+                                        <div class="col-md-5">
+                                            <div class="full">
+                                                <label class="">Qualification</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="input-control text">
+                                                <label id="QualificationNode"></label>
+
+                                            </div>
+                                        </div>
+                                        <div style="height: 5px;"></div>
+                                    </div>
+                                </div>
+                                            @*<label>@Model.State</label>
+                                            <span asp-validation-for="State" style="color:Red;display:block;"></span>*@
+                                        @**</div>
                                     </div>
                                 </div>
                                 <div style="height: 5px;"></div>
                                 <div class="row tab" id="dvCityCurrent">
-                                    <div class="col-md-5">
-                                        <label class="">City</label>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="input-control text">
-                                            
+                </div>
+            </div>
+        </div>
+    </div>*@
+                                        @*<div class="input-control text">*@
+                                            @*<input asp-for="City" type="text" maxlength="30" id="ContentPlaceHolder1_txtCityCurrent" class="form-control">
+
+        <span asp-validation-for="City" style="color:Red;display:block;"></span>*@
                                             <label>@Model.City</label>
                                         </div>
                                     </div>
@@ -661,8 +740,10 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-                                           
-                                            <label>@Model.Pincode</label>
+                                            @*<input asp-for="Pincode" type="text" maxlength="6" id="ContentPlaceHolder1_txtPinCodeCurrent" class="form-control noTxtInput">
+
+        <span asp-validation-for="Pincode" style="color:Red;display:block;"></span>*@
+                                            @*<label>@Model.Pincode</label>
                                         </div>
                                     </div>
                                 </div>
@@ -674,10 +755,17 @@
                                         </div>
                                     </div>
                                     <div class="col-md-5">
-                                        <div class="input-control text">
+                                        <div class="input-control text">*@
 
-                                          
-                                            <label id="CategoryNode"></label>
+                                            @*<select asp-for="Category" class="form-control" readonly style="pointer-events: none;">
+                                                   <option value="">----Select----</option>
+                                                   <option value="1">Perminant Address</option>
+                                                   <option value="2">Residence Address</option>
+                                                   <option value="3">Office address</option>
+                                                   <option value="4">Not Categorized</option>
+                                            </select>
+                                            <span asp-validation-for="Category" style="color:Red;display:block;"></span>*@
+                                            @*<label id="CategoryNode"></label>
                                         </div>
                                     </div>
                                     <div style="height: 5px;"></div>
@@ -691,9 +779,16 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-                                            <label id="ResidenceNode"></label>
-                                            
-                                        </div>
+                                            <label id="ResidenceNode"></label>*@
+                                            @*<label>@Model.Residence</label>*@
+                                            @*<select asp-for="Residence" class="form-control">
+                                                <option value="">----Select----</option>
+                                                <option value="1">Owned</option>
+                                                <option value="2">Rented</option>
+
+                                            </select>
+                                            <span asp-validation-for="Residence" style="color:Red;display:block;"></span>*@
+                                        @*</div>
                                     </div>
                                     <div style="height: 5px;"></div>
                                 </div>
@@ -706,19 +801,64 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-                                            <label id="QualificationNode"></label>
-                                           
-                                        </div>
+                                            <label id="QualificationNode"></label>*@
+                                            @*<select asp-for="Qualification" class="form-control">
+                                                <option value="">----Select----</option>
+                                                <option value="1">BA</option>
+                                                <option value="2">B.Arch</option>
+                                                <option value="3">B.Com</option>
+                                                <option value="4">B.Ed</option>
+                                                <option value="5">B.Pharma</option>
+                                                <option value="6">BSC</option>
+                                                <option value="7">B.Tech/BE</option>
+                                                <option value="8">BAMS</option>
+                                                <option value="9">BBA</option>
+                                                <option value="10">BCA</option>
+                                                <option value="11">BDS</option>
+                                                <option value="12">BFA</option>
+                                                <option value="13">BHM</option>
+                                                <option value="14">BHMS</option>
+                                                <option value="15">BPT</option>
+                                                <option value="16">BTA</option>
+                                                <option value="17">CS Diploma</option>
+                                                <option value="18">HSC</option>
+                                                <option value="19">ICWA</option>
+                                                <option value="20">Integrated PG</option>
+                                                <option value="21">LLB</option>
+                                                <option value="22">LLM</option>
+                                                <option value="23">M Phil</option>
+                                                <option value="24">MA</option>
+                                                <option value="25">A arch </option>
+                                                <option value="26">M COM</option>
+                                                <option value="27">M ed</option>
+                                                <option value="28">M pharma</option>
+                                                <option value="29">MSC</option>
+                                                <option value="30">MTech</option>
+                                                <option value="31">MBA/PGDM</option>
+                                                <option value="32">MBBS</option>
+                                                <option value="33">MCA</option>
+                                                <option value="34">MCM</option>
+                                                <option value="35">MD</option>
+                                                <option value="36">ME</option>
+                                                <option value="37">MPM</option>
+                                                <option value="38">MS</option>
+                                                <option value="39">MVSC</option>
+                                                <option value="40">OTHERS</option>
+                                                <option value="41">PG DIPLOMA</option>
+                                                <option value="42">PHD</option>
+                                            </select>*@
+                                            @*<span asp-validation-for="Qualification" style="color:Red;display:block;"></span>*@
+                                        @*</div>
                                     </div>
                                     <div style="height: 5px;"></div>
                                 </div>
                             </div>
 
-                           
-                        </div>
 
-                    </form>
-                </div>
+                            </div>
+
+                        </form>
+                    </div>
 
             </div>
         </div>
