@@ -468,17 +468,19 @@ namespace LoanProcessManagement.Persistence.Repositories
         public async Task<IEnumerable<LeadHistoryQueryVm>> GetLeadhistory(string lead_id)
         {
             string input = lead_id;
+            var onlyid = input.Split("_");
             int res = 0;
             bool success = int.TryParse(new string(input
                                  .SkipWhile(x => !char.IsDigit(x))
                                  .TakeWhile(x => char.IsDigit(x))
                                  .ToArray()), out res);
-            var result = await (from A in _dbContext.LpmLeadProcessCycles
+            var temp = _dbContext.LpmLeadProcessCycles.Where(x => x.lead_Id == long.Parse(onlyid[1]));
+            var result = await (from A in _dbContext.LpmLeadProcessCycles where A.lead_Id == long.Parse(onlyid[1])
                                 join B in _dbContext.LpmLeadStatusMasters on A.CurrentStatus equals B.Id
                                 join C in _dbContext.LpmLoanProductMasters on A.LoanProductID equals C.Id
-                                join D in _dbContext.LpmLeadMasters on A.LeadStatus equals D.LeadStatus
+                                join D in _dbContext.LpmLeadMasters on A.lead_Id equals D.Id
                                 join E in _dbContext.LpmUserMasters on A.CreatedBy equals E.LgId
-                                where A.lead_Id == res
+                                where A.lead_Id == long.Parse(onlyid[1])
                                 select new LeadHistoryQueryVm
                                 {
                                     Stage = B.StatusDescription,
@@ -486,7 +488,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                                     EndDate = null,
                                     Description = C.ProducDescription,
                                     UpdatedBy = E.Name,
-                                    ReasonForReject = D.RejectedLeadComment + " " + D.LostLeadComment,
+                                    ReasonForReject = (D.LostLeadReasonID == 0 || D.RejectLeadReasonID ==0)? null : D.LostLeadComment + " " + D.RejectedLeadComment,
                                     ProductsSold = C.ProductName
                                 }).ToListAsync();
             return result;
