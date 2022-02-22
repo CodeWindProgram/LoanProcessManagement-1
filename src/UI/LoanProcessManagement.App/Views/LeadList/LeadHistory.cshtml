@@ -3,8 +3,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "LeadHistory";
 }
-<style>
-    .panel-heading {
+@*<style>
+    /*.panel-heading {
         color: white;
         background-color: #343a40;
         border-bottom: 1px solid rgba(0,0,0,.125);
@@ -13,11 +13,7 @@
         border-top-left-radius: 0.25rem;
         border-top-right-radius: 0.25rem;
     }
-    .btn {
-        background-color: #343a40;
-        color: white;
-        margin-bottom: 5px;
-    }
+    
     .btn:hover {
         background-color: #adb5bd;
         color: black;
@@ -26,12 +22,12 @@
     .selected {
         background: #adb5bd;
         color: #FFF;
-    }
-</style>
+    }*/
+</style>*@
 <div class="container app">
     <div class="col-sm-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
-            <div class="panel-heading"><h3>History</h3></div>
+            <div class="panel-heading"><h5>History</h5></div>
             <div class="panel-body">
                 <div class="card" style="padding:5px;">
                     <div id="alertMsg" visible="false" runat="server">

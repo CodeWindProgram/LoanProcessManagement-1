@@ -1,12 +1,12 @@
 ﻿@model LoanProcessManagement.App.Models.UpdateCheckboxfunctionVm
-
+    <link href="~/css/Common Css/Common1.css" rel="stylesheet" />
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "UpdateMenu";
     var status = (bool)TempData["Status"];
 }
-<style type="text/css">
+@*<style type="text/css">
     #pswd_info {
         position: relative;
         left: 20px;
@@ -44,11 +44,7 @@
         border-top-right-radius: 0.25rem;
     }
 
-    button {
-        color: white;
-        background-color: #343a40;
-    }
-
+   
     #para {
         color: red;
         text-align: center;
@@ -80,13 +76,152 @@
 
     #checkings {
         display: inline-flex;
-        margin-left: 30px;
-        margin-top: 10px;
+        /* margin-left: 30px;
+        margin-top: 10px;*/
     }
-</style>
 
-
+    #selectChildren {
+        width: 320px;
+    }
+</style>*@
 <div class="container app">
+    <div class="col-sm-12 col-lg-12">
+        <div data-effect="helix" id="panels" class="panel panel-info effect-helix in">
+            <div style="border: 1px solid #343a40" class="border">
+                <div class="panel-heading">
+                    <h5>Update Menu</h5>
+                </div>
+                <div class="panel-body">
+                    <div class="border-part">
+                        <form method="post" asp-controller="Home">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div><br />
+                            <div style="text-align:end" class="form-group"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
+                            <div hidden class="form-group">
+                                <div class="row">
+                                    <div class="col-1"></div>
+                                    <label asp-for="getMenuByIdQueryVm.Id" class="control-label"></label>
+                                    <input readonly asp-for="getMenuByIdQueryVm.Id" class="form-control" />
+                                    <span asp-validation-for="getMenuByIdQueryVm.Id" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+
+                                    <div class="col-lg-4 col-sm-12">
+                                        <label asp-for="getMenuByIdQueryVm.MenuName" class="control-label">Menu Name<span style="color: Red">&nbsp;*</span></label>
+
+                                        <input asp-for="getMenuByIdQueryVm.MenuName" class="form-control" maxlength="50" />
+                                        <span asp-validation-for="getMenuByIdQueryVm.MenuName" class="text-danger"></span>
+                                    </div>
+
+
+                                    <div class="col-lg-4 col-sm-12">
+                                        <label asp-for="getMenuByIdQueryVm.Link" class="control-label">Link<span style="color: Red">&nbsp;*</span></label>
+
+                                        <input asp-for="getMenuByIdQueryVm.Link" class="form-control" maxlength="200" />
+                                        <span asp-validation-for="getMenuByIdQueryVm.Link" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-lg-4 col-sm-12">
+                                        <label asp-for="getMenuByIdQueryVm.Icon" class="control-label">Icon<span style="color: Red">&nbsp;*</span></label>
+
+                                        <input asp-for="getMenuByIdQueryVm.Icon" class="form-control" maxlength="200" />
+                                        <span asp-validation-for="getMenuByIdQueryVm.Icon" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+
+                                    <div class="col-lg-4 col-sm-12">
+                                        <label asp-for="getMenuByIdQueryVm.Position" class="control-label">Position<span style="color: Red">&nbsp;*</span></label>
+
+                                        <input asp-for="getMenuByIdQueryVm.Position" class="form-control" maxlength="200" />
+                                        <span asp-validation-for="getMenuByIdQueryVm.Position" class="text-danger"></span>
+                                    </div>
+
+
+
+
+
+                                    <div class="col-lg-4 col-sm-12">
+                                        <label id="txtlab">Menu Is Being Updated For<span style="color: Red">&nbsp;*</span> </label>
+
+
+                                        <div id="checkings">
+                                            @for (int i = 0; i < Model.RoleList.Count(); i++)
+                                            {
+                                                <div class="">
+                                                    <tr id="lblcheck">
+                                                        <td><input asp-for="@Model.RoleList[i].Id" hidden /></td>
+                                                        <td><input asp-for="@Model.RoleList[i].Checkbox" id="inpcheck" type="checkbox" />&nbsp;@Model.RoleList[i].Name</td>
+                                                    </tr>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+
+                                    <div class="col-lg-4 col-sm-12">
+                                        <label>Is Parent Menu?<span style="color: Red">&nbsp;*</span></label><br />
+
+                                        <input hidden id="confirming" asp-for="getMenuByIdQueryVm.IsParent" />
+                                        <input type="radio" name="Married" id="Yes" value="Yes" onclick="hideStudentChildren()" required>YES &nbsp&nbsp&nbsp&nbsp
+                                        <input type="radio" name="Married" id="No" value="No" onclick="hideStudentChildren()" checked>NO &nbsp&nbsp&nbsp&nbsp
+                                    </div>
+                                    <div class="col-lg-4 col-sm-12">
+                                        <label>Sub Menus</label>
+                                        <select multiple="multiple" asp-for="Parlist" asp-items="@ViewBag.ParentId" id="selectChildren" class="required" disabled required>
+                                        </select>
+                                        <div><b>To Select Multiple Options Press <i>'Ctrl + Select'</i></b></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div hidden class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input asp-for="getMenuByIdQueryVm.IsActive" /> @Html.DisplayNameFor(model => model.getMenuByIdQueryVm.IsActive)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4">
+                                        <button type="submit" style="background-color: #343a40;color:white" class="btn">Submit</button>
+                                        <a asp-action="Menulist" id="btn2" type="button" value="Cancel" class="btn btn-danger">Cancel</a>
+                                    
+                                        @{
+                                            if (status)
+
+                                            {
+
+                                                @*<a href="" onclick="myfun()" class="btn btn-danger col-md-6 col-sm-5">Disable Status</a>*@
+                                            }
+                                            else
+                                            {
+                                                <a href="" onclick="myfun()" class="btn btn-success col-md-6 col-sm-5">Enable Status</a>
+                                            }
+                                        }
+
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="container app">
     <div class="col-sm-12 col-lg-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in">
             <div style="border: 1px solid #343a40" class="border">
@@ -202,8 +337,8 @@
                                 <div class="col-lg-4">
                                 </div>
                                 <div class="col-lg-4">
-                                
-                               
+
+
                             </div>
                                 <div class="col-lg-4">
                                 </div>
@@ -213,34 +348,10 @@
                                 <div class="row">
                                     <div class="col-md-4"></div>
                                     @*<div class="col-md-1"></div>*@
-                                    @*<div class="col-md-1"></div>
-        <div class="col-md-1"></div>*@
+@*<div class="col-md-1"></div>
+    <div class="col-md-1"></div>**@
 
-                                    <div class="col-md-4"><button type="submit" style="background-color: #343a40;color:white" class="btn">Submit</button>
-                                   <a asp-action="Menulist" id="btn2" type="button" value="Cancel" class="btn btn-danger">Cancel</a></div>
-                                    <div class="col-md-4">
-                                        @{
-                                            if (status)
 
-                                            {
-
-                                                <a href="" onclick="myfun()" class="btn btn-danger"> Click Here To Disable Status</a>
-                                            }
-                                            else
-                                            {
-                                                <a href="" onclick="myfun()" class="btn btn-success">Click Here To Enable Status</a>
-                                            }
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <script>
     function hideStudentChildren() {
         if ($("#Yes").is(":checked")) {
@@ -256,7 +367,7 @@
             }
             $("#selectChildren").val(parentList);
 
-           
+
 
 
 
@@ -301,14 +412,14 @@
         });
     }
     $(document).ready(function () {
-        
+
         var temp = '@TempData["temp"]';
         var temp = temp.trim();
         var splitTemp = [];
         if (temp != "") {
             splitTemp = temp.split(" ");
         }
-       
+
         if (splitTemp.length != 0) {
 
             check();
@@ -324,7 +435,7 @@
         }
         console.log(splitTemp);
         console.log(splitTemp.length);
-        
+
         if ('@TempData["ApiDataIsSuccess"]' == 'True') {
             toastr.success('@TempData["ApiDataMessage"]', "Success");
 

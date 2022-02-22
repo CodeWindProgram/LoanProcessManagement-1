@@ -1,11 +1,12 @@
 ﻿@model LoanProcessManagement.App.Models.LeadITRDetailsVm
+    <link href="~/css/Common Css/Common1.css" rel="stylesheet" />
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     //ViewData["Title"] = "ITR Details Details";
 }
 
-<style>
+@*<style>
     .tab {
         padding-left: 15px;
     }
@@ -73,10 +74,9 @@
     u {
         font-weight: 600;
     }
-</style>
+</style>*@
 
-
-<div class="container">
+<div class="container pb-5">
     <div class="container app">
         <div class="col-sm-12 col-lg-12">
             <div data-effect="helix" id="panels" class="panel panel-info effect-helix in">
@@ -85,7 +85,135 @@
                 </div>
                 <div class="formDiv">
                     <form method="post" action="/applicantdetails/index">
-                        @*<input type="hidden" name="ctl00$ContentPlaceHolder1$hdnEmpId" id="hdnEmpId" value="">*@
+
+                        <input type="hidden" asp-for="lead_Id" id="hdnLeadId">
+                        <input type="hidden" asp-for="ApplicantType" id="hdnApplicantType">
+                        <input type="hidden" asp-for="CreatedBy" value=@User.FindFirst("lg_id").Value />
+                        <input type="hidden" asp-for="LastModifiedBy" value=@User.FindFirst("lg_id").Value />
+                        <div style="height: 15px;"></div>
+                        <div class="btnDiv pt-4 pl-4 pr-4">
+                            <ul>
+                                <li><a href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=0" class="AppTabs btn-sm selected" id="tabProcess0" style="background: #adb5bd;">Applicant</a></li>
+                                <li><a id="ContentPlaceHolder1_lnkCoApp1" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=1" style="background: #343a40;">Co-Applicant-1</a></li>
+                                <li><a id="ContentPlaceHolder1_lnkCoApp2" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=2" style="background: #343a40;">Co-Applicant-2</a></li>
+                                <li><a id="ContentPlaceHolder1_lnkCoApp3" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=3" style="background: #343a40;">Co-Applicant-3</a></li>
+                                <li><a id="ContentPlaceHolder1_lnkCoApp4" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=4" style="background: #343a40;">Co-Applicant-4</a></li>
+                                <li><a id="ContentPlaceHolder1_lnkCoApp5" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=5" style="background: #343a40;">Co-Applicant-5</a></li>
+                            </ul>
+                               </div>
+
+                        <span id="ContentPlaceHolder1_spanMessage" style="color: red;"></span>
+
+                        <div class="frames">
+                            <div class="panel-body">
+
+                                <div id="ContentPlaceHolder1_alertMsg">
+                                    <div class="row tab pt-3 pr-1">
+                                        <div class="col-md-12 text-center">
+                                            <label class="h4">Form No.</label>
+
+
+
+                                            <span id="ContentPlaceHolder1_lblFormNo" class="h4" style="color: black; border:none">
+                                                <label>@Model.FormNo</label>
+                                                <input type="hidden" asp-for="FormNo" />
+
+                                            </span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="display:flex;">
+                                    <div class="col-md-4">
+
+                                    </div>
+
+                                </div>
+                                <div style="height: 5px;"></div>
+                                <hr />
+                                <div>
+                                    <h4><u><b>Customer Details</b></u></h4>
+                                </div>
+                                <div class="form-group pl-2">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-sm-12">
+                                            <label class="">Customer Name</label>
+                                            <p>@Model.CustomerName</p>
+                                        </div>
+
+                                        <div class="col-lg-4 col-sm-12">
+                                            <label class="">Customer Email</label>
+                                            <p>@Model.CustomerEmail</p>
+                                        </div>
+
+                                        <div class="col-lg-4 col-sm-12">
+                                            <label class="">Customer Mobile</label>
+                                            <p>@Model.CustomerPhone</p>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                             <div class="form-group pl-2">
+                                 <div class="row">
+                                     <div class="col-lg-4 col-sm-12" id="EmployeeTypeNo">
+                                         <label class="">Employee Type</label><br />
+                                         @*<input type="radio" id="selfEmployee">*@
+                                         <label style="font-weight:normal;" for="selfEmployee">Self-Employee</label>
+                                     </div>
+
+                                     <div class="col-lg-4 col-sm-12" id="CheckBoxNo">
+                                         <label class="">Consent</label><br />
+                                         @*<input type="checkbox" id="ConsentValue">*@
+                                         <label style="font-weight:normal;" for="ConsentValue"> Yes </label><br>
+                                     </div>
+                                 </div>
+                             </div>                               
+                                    
+                                        
+                                
+                                <hr />
+                                <div style="height: 5px;"></div>
+                                <div id="IdentificationDv">
+                                    <div style="height: 5px;"></div>
+                                    <div id="divIdentification">
+                                        <h4><u><b>ITR Details</b></u></h4>
+
+                                    </div>
+                                    
+                                    <div class="form-group pl-2">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label class="">PAN</label><br />
+                                                <label>@Model.PanCardNo</label>
+                                            </div>
+
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label class="">User Name</label>
+                                                <label>@Model.UserName</label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="container pb-5">
+    <div class="container app">
+        <div class="col-sm-12 col-lg-12">
+            <div data-effect="helix" id="panels" class="panel panel-info effect-helix in">
+                <div class="panel-heading">
+                    <h5>Add ITR Enquiry</h5>
+                </div>
+                <div class="formDiv">
+                    <form method="post" action="/applicantdetails/index">
+                        
                         <input type="hidden" asp-for="lead_Id" id="hdnLeadId">
                         <input type="hidden" asp-for="ApplicantType" id="hdnApplicantType">
                         <input type="hidden" asp-for="CreatedBy" value=@User.FindFirst("lg_id").Value />
@@ -104,32 +232,20 @@
                         
                         <div class="frames">
                             <div class="panel-body">
-                                @*@if (ViewBag.isSuccess == true)
-                                {
-                                    <div class="alert alert-success" role="alert">
-                                        @ViewBag.Message
-                                    </div>
-                                }
-                                else if (ViewBag.isSuccess == false)
-                                {
-                                    <div class="alert alert-danger" role="alert">
-                                        <strong>Error!</strong> @ViewBag.Message
-                                    </div>
-
-                                }*@
+                                
                                 <div id="ContentPlaceHolder1_alertMsg">
                                     <div class="row tab pt-3 pr-1">
                                         <div class="col-md-12 text-center">
                                             <label class="h4">Form No.</label>
 
 
-                                            @*<div class="input-control text">*@
+                                            
                                             <span id="ContentPlaceHolder1_lblFormNo" class="h4" style="color: black; border:none">
                                                 <label>@Model.FormNo</label>
                                                 <input type="hidden" asp-for="FormNo" />
 
                                             </span>
-                                            @*</div>*@
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -152,7 +268,7 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-                                            @*<input asp-for="CustomerName" type="text" maxlength="26" id="ContentPlaceHolder1_txtCustomerName" class="form-control required" placeholder="XYZ">*@
+                                            
                                             <label>@Model.CustomerName</label>
                                         </div>
                                     </div>
@@ -165,7 +281,7 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-                                            @*<input asp-for="CustomerEmail" type="text" id="ContentPlaceHolder1_txtCustomerEmail" class="form-control" placeholder="abc@xyz.com">*@
+                                            
                                             <label>@Model.CustomerEmail</label>
                                         </div>
                                     </div>
@@ -178,7 +294,7 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-control text">
-                                            @*<input asp-for="CustomerPhone" type="text" maxlength="10" id="ContentPlaceHolder1_txtCustomerMobile" class="form-control noTxtInput" placeholder="Mobile No">*@
+                                            
                                             <label>@Model.CustomerPhone</label>
                                         </div>
                                     </div>
@@ -229,7 +345,7 @@
                                         </div>
                                         <div class="col-md-5">
                                             <div class="input-control text">
-                                                @*<input asp-for="PanCardNo" type="text" maxlength="10" id="ContentPlaceHolder1_txtPAN" class="form-control">*@
+                                                
                                                 <label>@Model.PanCardNo</label>
                                             </div>
                                         </div>
@@ -243,26 +359,12 @@
                                         </div>
                                         <div class="col-md-5">
                                             <div class="input-control text">
-                                                @*<input asp-for="UserName" type="text" maxlength="10" id="ContentPlaceHolder1_txtPAN" class="form-control">*@
+                                               
                                                 <label>@Model.UserName</label>
                                             </div>
                                         </div>
 
                                     </div>
-
-                                    <!--<div style="height: 5px;"></div>
-                                    <div class="row tab">
-                                        <div class="col-md-5">
-                                            <label class="">Password</label>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <div class="input-control text">-->
-                                                @*<input asp-for="Password" type="text" maxlength="10" id="ContentPlaceHolder1_txtPAN" class="form-control">*@
-                                                <!--<label>@Model.Password</label>
-                                            </div>
-                                        </div>
-
-                                    </div>-->
 
                                 </div>
 
@@ -274,7 +376,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
 <script>
     $(document).ready(function () {

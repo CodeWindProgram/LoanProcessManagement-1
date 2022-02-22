@@ -1,42 +1,40 @@
 ﻿@model LoanProcessManagement.App.Models.ThirdPartyCheckDetailsVm
+    <link href="~/css/Common Css/Common1.css" rel="stylesheet" />
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Index";
 }
 
-<style>
-    .tab {
-        padding-left: 15px;
-    }
-
-    .AppTabs {
+@*<style>
+    
+    /*.AppTabs {
         display: inline-block;
         margin-right: 3px;
         padding: 5px 30px;
         background: #191970;
         color: #FFF;
-    }
+    }*/
 
-    .btn {
+    /*.btn {
         width: inherit;
         justify-content: center;
-    }
+    }*/
 
-    .AppTabs:hover {
+    /*.AppTabs:hover {
         background: #adb5bd;
         color: black;
-    }
+    }*/
 
-    .AppTabs:visited {
+    /*.AppTabs:visited {
         text-decoration: none;
-    }
+    }*/
 
-    .selected {
+    /*.selected {
         background: #0d7db5;
         color: #FFF;
-    }
+    }*/
 
-    .panel-heading {
+    /*.panel-heading {
         color: white;
         background-color: #343a40;
         border-bottom: 1px solid rgba(0,0,0,.125);
@@ -44,41 +42,356 @@
         position: relative;
         border-top-left-radius: 0.25rem;
         border-top-right-radius: 0.25rem;
-    }
+    }*/
 
-    .card {
+    /*.card {*/
         /*background-color:slategray;*/
-        background: linear-gradient(to bottom, rgba(251,251,251,10) 0%,rgba(242,242,242,10) 100%);
+        /*background: linear-gradient(to bottom, rgba(251,251,251,10) 0%,rgba(242,242,242,10) 100%);
         font-family: sans-serif;
         font-size: 18px;
         border: 1px solid;
         margin-top: 20px;
         margin-bottom: 20px;
         border-color: darkgray
-    }
+    }*/
 
-    h5 {
+    /*h5 {
         font-size: 1.25rem;
         margin-left: 1rem;
         padding-top: 5px;
         font-weight: 600;
-    }
+    }*/
 
-    .btnDiv {
+    /*.btnDiv {
         text-align: center;
-    }
+    }*/
 
-    .formDiv {
+    /*.formDiv {*/
         /*border: 1px solid #343a40;*/
-        padding-bottom: 5px;
+        /*padding-bottom: 5px;
         padding-left: 1%;
         padding-right: 1%;
-    }
-    #valuerIndateCommentDiv, #legalIndateCommentDiv, #fiIndateCommentDiv {
+    }*/
+    /*#valuerIndateCommentDiv, #legalIndateCommentDiv, #fiIndateCommentDiv {
         display: none
-    }
-</style>
+    }*/
+</style>*@
+
 <div style="margin-top: 20px" class="container">
+    <div class="container app">
+        <div class="col-sm-12 col-lg-12">
+            <div data-effect="helix" id="panels" class="panel panel-info effect-helix in border">
+                <div class="panel-heading">
+                    <h5>Third Party Check</h5>
+                </div>
+                <div class="formDiv">
+
+                    <div style="height: 15px;"></div>
+
+                    <div style="height: 10px;"></div>
+                    <span id="ContentPlaceHolder1_spanMessage" style="color: red;"></span>
+                    <div style="height: 10px;"></div>
+                    <div class="frames">
+                        <div class="panel-body">
+
+                            <ul class="nav nav-tabs " id="myTab">
+                                <li class="nav-item ">
+                                    <button class="nav-link active btn-lg " id="home-tab" data-toggle="tab" data-target="#valuerAgency">Valuer Agency</button>
+                                </li>
+                                <li class="nav-item ">
+                                    <button class="nav-link btn-lg" id="profile-tab" data-toggle="tab" data-target="#legalAgency">Legal</button>
+                                </li>
+                                <li class="nav-item ">
+                                    <button class="nav-link btn-lg" id="contact-tab" data-toggle="tab" data-target="#fiAgency">F.I</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="valuerAgency">
+                                    <form method="post" action="/agency/index" id="valuerForm">
+                                        <input type="hidden" asp-for="Tab" id="tabValueForValuer" />
+                                        <input type="hidden" asp-for="leadIdLong" />
+                                        <input type="hidden" asp-for="LgId" />
+                                        <input type="hidden" asp-for="leadIdString" />
+
+
+                                        
+                                        <div class="form-group pt-3">
+                                            <div class="row">
+                                                <div class="col-2"></div>
+                                                <div class="col-lg-4 col-sm-12">
+                                                    <label asp-for="valuerAgencyId">Name</label><span style="color: Red">&nbsp;*</span>
+                                                    <div class="input-control text">
+                                                        <select id="ContentPlaceHolder1_ddlValuerAgency" asp-for="valuerAgencyId" asp-items=" ViewBag.valuerAgencyName" class="form-control">
+                                                            <option value="">Select Name</option>
+                                                        </select>
+                                                        <span asp-validation-for="valuerAgencyId" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-sm-12">
+                                                    <label asp-for="ValuerDocumentOut_Date">Document Outdate : </label><span style="color: Red">&nbsp;*</span>
+
+                                                    <div class="input-control text">
+                                                        <input asp-for="ValuerDocumentOut_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocOutdate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                        <span asp-validation-for="ValuerDocumentOut_Date" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-2"></div>
+                                                <div class="col-lg-4 col-sm-12">
+                                                    <label class=""> Document list </label><span style="color: Red">&nbsp;*</span>
+                                                </div>
+                                                <div class="col-lg-4 col-sm-12">
+                                                    <div class="input-control text valuerDocs" id="valuerAgencyDiv">
+                                                        @foreach (var item in ViewBag.ValuerAgencyDocs)
+                                                        {
+                                                            <input type="checkbox" id="valuerDocs" value="@item.Id" checked="@item.Selected" /> @item.Name <br />
+                                                            <input type="hidden" asp-for="valuerAgencyDocuments" id="valuerAgencyDoc" />
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row tab">
+                                            <div class="col-md-12">
+                                                <center>
+                                                    <input type="submit" value="Submit To Agency" id="ValuerTab" class="btn" style="background-color: #343a40; color:white;">&nbsp
+                                                    <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@Model.leadIdString">Cancel</a>
+                                                </center>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div id="valuerIndateCommentDiv ">
+                                            <div class="form-group ">
+                                                <div class="row">
+                                                    <div class="col-2"></div>
+                                                    <div class="col-lg-4 col-sm-12">
+                                                        <label asp-for="ValuerDocumentIn_Date">Document Indate : </label><span style="color: Red">&nbsp;*</span>
+
+                                                        <div class="input-control text">
+                                                            <input asp-for="ValuerDocumentIn_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                            <span asp-validation-for="ValuerDocumentIn_Date" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-sm-12">
+                                                        <label asp-for="valuerAgencyComment">Comment : </label>
+                                                        <div class="input-control text">
+                                                            <input asp-for="valuerAgencyComment" type="text" id="ValuerComment" placeholder="Enter Comment" class="form-control"  />
+                                                            <span asp-validation-for="valuerAgencyComment" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row tab">
+                                                <div class="col-md-12">
+                                                    <center>
+                                                        <input type="submit" value="Submit" id="ValuerTabs" class="btn" style="background-color: #343a40; color:white;">&nbsp
+                                                        <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@Model.leadIdString">Cancel</a>
+                                                    </center>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="tab-pane fade" id="legalAgency">
+                                    <form method="post" action="/agency/index" id="legalForm">
+                                        <input type="hidden" asp-for="Tab" id="tabValueForLegal" />
+                                        <input type="hidden" asp-for="leadIdLong" />
+                                        <input type="hidden" asp-for="LgId" />
+                                        <input type="hidden" asp-for="leadIdString" />
+
+
+
+                                        <div class="form-group pt-3">
+                                            <div class="row">
+                                                <div class="col-2"></div>
+                                                <div class="col-lg-4 col-sm-12">
+                                                    <label asp-for="legalAgencyId">Name</label><span style="color: Red">&nbsp;*</span>
+                                                    <div class="input-control text">
+                                                        <select id="ContentPlaceHolder1_ddlLegalAgency" asp-for="legalAgencyId" asp-items="ViewBag.legalAgencyName" class="form-control">
+                                                            <option value="">Select Name</option>
+                                                        </select>
+                                                        <span asp-validation-for="legalAgencyId" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-sm-12">
+                                                    <label asp-for="LegalDocumentOut_Date">Document Outdate : </label><span style="color: Red">&nbsp;*</span>
+                                                    <div class="input-control text">
+                                                        <input asp-for="LegalDocumentOut_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="legalDocOutdate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                        <span asp-validation-for="LegalDocumentOut_Date" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" id="legalAgencyDiv">
+                                            <div class="row">
+                                                <div class="col-2"></div>
+                                                <div class="col-lg-4 col-sm-12">
+                                                    <label class=""> Document list </label><span style="color: Red">&nbsp;*</span>
+                                                </div>
+                                                <div class="col-lg-4 col-sm-12">
+                                                    <div class="input-control text legalDocs" id="legalAgencyDiv">
+                                                        @foreach (var item in ViewBag.LegalAgencyDocs)
+                                                        {
+                                                            <input type="checkbox" value="@item.Id" checked="@item.Selected" /> @item.Name <br />
+                                                            <input type="hidden" asp-for="legalAgencyDocuments" id="legalAgencyDoc" />
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row tab">
+                                            <div class="col-md-12">
+                                                <center>
+                                                    <input type="submit" value="Submit To Agency" id="LegalTab" class="btn" style="background-color: #343a40; color:white;">&nbsp
+                                                    <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@Model.leadIdString">Cancel</a>
+                                                </center>
+                                            </div>
+                                        </div>
+
+                                        <br />
+                                        <div id="legalIndateCommentDiv">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-2"></div>
+                                                    <div class="col-lg-4 col-sm-12">
+                                                        <label asp-for="LegalDocumentIn_Date">Document Indate : </label><span style="color: Red">&nbsp;*</span>
+                                                        <div class="input-control text">
+                                                            <input asp-for="LegalDocumentIn_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="legalDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                            <span asp-validation-for="LegalDocumentIn_Date" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-sm-12">
+                                                        <label asp-for="legalAgencyComment">Comment : </label>
+                                                        <div class="input-control text">
+                                                            <input asp-for="legalAgencyComment" type="text" id="LegalComment" placeholder="Enter Comment" class="form-control" />
+                                                            <span asp-validation-for="legalAgencyComment" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row tab">
+                                                <div class="col-md-12">
+                                                    <center>
+                                                        <input type="submit" value="Submit" id="LegalTabs" class="btn" style="background-color: #343a40; color:white;">&nbsp
+                                                        <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@Model.leadIdString">Cancel</a>
+                                                    </center>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="tab-pane fade" id="fiAgency">
+                                    <form method="post" action="/agency/index" id="fiForm">
+                                        <input type="hidden" asp-for="Tab" id="tabValueForFi" />
+                                        <input type="hidden" asp-for="leadIdLong" />
+                                        <input type="hidden" asp-for="LgId" />
+                                        <input type="hidden" asp-for="leadIdString" />
+
+
+
+                                        <div class="form-group pt-3">
+                                            <div class="row">
+                                                <div class="col-2"></div>
+                                                <div class="col-lg-4 col-sm-12">
+                                                    <label asp-for="fiAgencyId">Name</label><span style="color: Red">&nbsp;*</span>
+                                                    <div class="input-control text">
+                                                        <select id="ContentPlaceHolder1_ddlFIAgency" asp-for="fiAgencyId" asp-items="ViewBag.fiAgencyName" class="form-control">
+                                                            <option value="">Select Name</option>
+                                                        </select>
+                                                        <span asp-validation-for="fiAgencyId" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-sm-12">
+                                                    <label asp-for="fiDocumentOut_Date">Document Outdate : </label><span style="color: Red">&nbsp;*</span>
+                                                    <div class="input-control text">
+                                                        <input asp-for="fiDocumentOut_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="fiDocOutdate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                        <span asp-validation-for="fiDocumentOut_Date" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-2"></div>
+                                                <div class="col-lg-4 col-sm-12">
+                                                    <label class=""> Document list </label><span style="color: Red">&nbsp;*</span>
+                                                </div>
+                                                <div class="col-lg-4 col-sm-12">
+                                                    <div class="input-control text fiDocs" id="fiAgencyDiv">
+                                                        @foreach (var item in ViewBag.FIAgencyDocs)
+                                                        {
+                                                            <input type="checkbox" value="@item.Id" checked="@item.Selected" /> @item.Name <br />
+                                                            <input type="hidden" asp-for="fiAgencyDocuments" id="fiAgencyDoc" />
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row tab">
+                                            <div class="col-md-12">
+                                                <center>
+                                                    <input type="submit" value="Submit To Agency" id="FiTab" class="btn" style="background-color: #343a40; color:white;">&nbsp
+                                                    <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@Model.leadIdString">Cancel</a>
+                                                </center>
+                                            </div>
+                                        </div>
+
+                                        <br />
+                                        <div id="fiIndateCommentDiv">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-2"></div>
+                                                    <div class="col-lg-4 col-sm-12">
+                                                        <label asp-for="fiDocumentIn_Date">Document Indate : </label><span style="color: Red">&nbsp;*</span>
+                                                        <div class="input-control text">
+                                                            <input asp-for="fiDocumentIn_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="fiDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                            <span asp-validation-for="fiDocumentIn_Date" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-sm-12">
+                                                        <label asp-for="fiAgencyComment">Comment : </label>
+                                                        <div class="input-control text">
+                                                            <input asp-for="fiAgencyComment" type="text" id="FIComment" placeholder="Please Enter Comment" class="form-control" />
+                                                            <span asp-validation-for="fiAgencyComment" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row tab">
+                                                <div class="col-md-12">
+                                                    <center>
+                                                        <input type="submit" value="Submit" id="FiTabs" class="btn" style="background-color: #343a40; color:white;">&nbsp
+                                                        <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@Model.leadIdString">Cancel</a>
+                                                    </center>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div style="height: 5px;"></div>
+                            <br />
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div style="margin-top: 20px" class="container">
     <div class="container app">
         <div class="col-sm-12 col-lg-12">
             <div data-effect="helix" id="panels" class="panel panel-info effect-helix in">
@@ -155,13 +468,13 @@
                                                     <label class=""> Document list </label><span style="color: Red">&nbsp;*</span>
                                                 </div>
                                                 <div class="col-6">
-                                                    <div class="input-control text valuerDocs" id="valuerAgencyDiv">
-                                                        @foreach (var item in ViewBag.ValuerAgencyDocs)
+                                                    <div class="input-control text valuerDocs" id="valuerAgencyDiv">-->
+                                                        @*@foreach (var item in ViewBag.ValuerAgencyDocs)
                                                         {
                                                             <input type="checkbox" id="valuerDocs" value="@item.Id" checked="@item.Selected" /> @item.Name <br />
                                                             <input type="hidden" asp-for="valuerAgencyDocuments" id="valuerAgencyDoc" />
-                                                        }
-                                                    </div>
+                                                        }*@
+                                                    <!--/div>
                                                 </div>
                                             </div>
 
@@ -199,7 +512,7 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="input-control text">
-                                                            <input asp-for="valuerAgencyComment" type="text" id="ValuerComment" placeholder="Enter Comment" class="form-control />
+                                                            <input asp-for="valuerAgencyComment" type="text" id="ValuerComment" placeholder="Enter Comment" class="form-control  />
                                                             <span asp-validation-for="valuerAgencyComment" class="text-danger"></span>
                                                         </div>
                                                     </div>
@@ -265,18 +578,18 @@
                                                     <label class=""> Document list </label><span style="color: Red">&nbsp;*</span>
                                                 </div>
                                                 <div class="col-6">
-                                                    <div class="input-control text legalDocs" id="legalAgencyDiv">
+                                                    <div class="input-control text legalDocs" id="legalAgencyDiv">-->
                                                         @*@foreach (var item in ViewBag.LegalAgencyDocs)
-                        {
-                            <input type="checkbox" value="@item.Name" /> @item.Name <br />
-                            <input type="hidden" asp-for="legalAgencyDocuments" id="legalAgencyDoc" />
-                        }*@
+                                                            {
+                                                                <input type="checkbox" value="@item.Name" /> @item.Name <br />
+                                                                <input type="hidden" asp-for="legalAgencyDocuments" id="legalAgencyDoc" />
+                                                            }
                                                         @foreach (var item in ViewBag.LegalAgencyDocs)
                                                         {
                                                             <input type="checkbox" value="@item.Id" checked="@item.Selected" /> @item.Name <br />
                                                             <input type="hidden" asp-for="legalAgencyDocuments" id="legalAgencyDoc" />
-                                                        }
-                                                    </div>
+                                                        }*@
+                                                    <!--/div>
                                                 </div>
                                             </div>
                                         </div>
@@ -380,18 +693,18 @@
                                                     <label class=""> Document list </label><span style="color: Red">&nbsp;*</span>
                                                 </div>
                                                 <div class="col-6">
-                                                    <div class="input-control text fiDocs" id="fiAgencyDiv">
+                                                    <div class="input-control text fiDocs" id="fiAgencyDiv">-->
                                                         @*@foreach (var item in ViewBag.FIAgencyDocs)
-                        {
-                            <input type="checkbox" value="@item.Id" /> @item.Name <br />
-                            <input type="hidden" asp-for="fiAgencyDocuments" id="fiAgencyDoc" />
-                        }*@
+                                                            {
+                                                                <input type="checkbox" value="@item.Id" /> @item.Name <br />
+                                                                <input type="hidden" asp-for="fiAgencyDocuments" id="fiAgencyDoc" />
+                                                            }
                                                         @foreach (var item in ViewBag.FIAgencyDocs)
                                                         {
                                                             <input type="checkbox" value="@item.Id" checked="@item.Selected" /> @item.Name <br />
                                                             <input type="hidden" asp-for="fiAgencyDocuments" id="fiAgencyDoc" />
-                                                        }
-                                                    </div>
+                                                        }*@
+                                                    <!--/div>
                                                 </div>
                                             </div>
                                         </div>
@@ -438,10 +751,10 @@
 
                                             <div class="row tab">
                                                 <div class="col-md-12">
-                                                    <center>
-                                                        <input type="submit" value="Submit" id="FiTabs" class="btn" style="background-color: #343a40; color:white;">&nbsp
-                                                        <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@Model.leadIdString">Cancel</a>
-                                                    </center>
+                                                    <center>-->
+                                                        @*<input type="submit" value="Submit" id="FiTabs" class="btn" style="background-color: #343a40; color:white;">&nbsp
+                                                        <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@Model.leadIdString">Cancel</a>*@
+                                                    <!--/center>
                                                 </div>
                                             </div>
                                         </div>
@@ -458,7 +771,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 <script>
     $(document).ready(function () {
         var date = new Date();
