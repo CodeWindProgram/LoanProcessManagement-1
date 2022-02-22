@@ -179,7 +179,7 @@
                                 <span class="dropdown-item dropdown-header">Profile !!</span>
                                 <div class="dropdown-divider"></div>
                                 <a href="#" class="dropdown-item">
-                                    @*<i class="fas fa-envelope mr-2"></i>*@ <b>Name:</b> @User.Identities.FirstOrDefault().Name (@User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value)
+                                    @*<i class="fas fa-envelope mr-2"></i>*@ <b>Name:</b> @User.Identities.FirstOrDefault().Name (@User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value)
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a href="#" class="dropdown-item">

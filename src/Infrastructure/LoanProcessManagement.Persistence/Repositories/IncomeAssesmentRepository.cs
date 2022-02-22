@@ -69,9 +69,9 @@ namespace LoanProcessManagement.Persistence.Repositories
             var applicant = await _dbContext.LpmLeadApplicantsDetails.Include(x => x.LpmLeadMaster)
                 .Where(x => x.lead_Id == lead_id && x.ApplicantType == ApplicantType).FirstOrDefaultAsync();
 
-            var isSubmitCount = _dbContext.LpmLeadIncomeAssessmentDetails.Include(x => x.LeadApplicantDetails).Where(x => x.lead_Id == lead_id && x.ApplicantType == ApplicantType && x.IsActive).Count();
+            List<int> applicantTypeList = await _dbContext.LpmLeadApplicantsDetails.Where(x => x.lead_Id == lead_id).OrderBy(x => x.ApplicantType).Select(x => x.ApplicantType).ToListAsync();
 
-            var incomeDetails = _dbContext.LpmLeadIncomeAssessmentDetails.Where(x => x.ApplicantType == ApplicantType && x.lead_Id == lead_id).FirstOrDefault();
+            var isSubmitCount = _dbContext.LpmLeadIncomeAssessmentDetails.Include(x => x.LeadApplicantDetails).Where(x => x.lead_Id == lead_id && x.ApplicantType == ApplicantType && x.IsActive).Count();
 
             GetIncomeAssessmentDetailsDto response = new GetIncomeAssessmentDetailsDto();
 
@@ -89,6 +89,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 response.ApplicantType = applicant.ApplicantType;
                 response.LeadID = lead.lead_Id;
                 response.IsSubmitCount = isSubmitCount;
+                response.AppTypeList1 = applicantTypeList;
 
                 response.Message = "Income Assessment Details fetched";
                 response.Succeeded = true;
@@ -112,8 +113,6 @@ namespace LoanProcessManagement.Persistence.Repositories
         {
             var applicantDetails = await _dbContext.LpmLeadApplicantsDetails.Include(x => x.LpmLeadMaster)
                 .Where(x => x.lead_Id == request.lead_Id && x.ApplicantType == request.ApplicantType).FirstOrDefaultAsync();
-
-            //var incomeDetails = _dbContext.LpmLeadIncomeAssessmentDetails.Where(x => x.FormNo == request.FormNo && x.lead_Id == request.lead_Id && x.ApplicantType == request.ApplicantType).FirstOrDefault();
 
             LpmLeadIncomeAssessmentDetails details = new LpmLeadIncomeAssessmentDetails();
 

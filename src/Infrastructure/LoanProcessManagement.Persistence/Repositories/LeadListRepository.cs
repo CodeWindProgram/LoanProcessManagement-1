@@ -281,7 +281,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 {
                     var hoLeadQuery = await _dbContext.lpmLeadHoSanctionQueries.Include(x => x.lead)
                         .Where(x => x.lead_Id == user.Id).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
-                    if (hoLeadQuery != null && request.UserRoleId == 3 && hoLeadQuery.Query_Status == 'Q')
+                    if (hoLeadQuery != null && request.UserRoleId == 3 && hoLeadQuery.Query_Status == 'Q' && request.QueryStatus == 'R')
                     {
                         hoLeadQuery.Query_Status = request.HoQueryStatus;
                         hoLeadQuery.HoSanction_query_commentResponse = request.HoSanction_query_commentResponse;
@@ -349,16 +349,6 @@ namespace LoanProcessManagement.Persistence.Repositories
                 var hoLeadQ = await _dbContext.lpmLeadHoSanctionQueries.Include(x => x.lead)
                  .Where(x => x.lead_Id == user.Id).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
 
-                var ThirdPartyDetails = await _dbContext.lpmThirdPartyCheckDetails.Include(x => x.ValuerAgency).
-                   Include(x => x.fiAgency).Include(x => x.legalAgency)
-               .Where(x => x.lead_Id == user.Id).FirstOrDefaultAsync();
-                Boolean ThirdPartyStatus = false;
-                if (ThirdPartyDetails != null)
-                {
-                    ThirdPartyStatus = ThirdPartyDetails.valuerAgencyStatus == 2 && ThirdPartyDetails.legalAgencyStatus == 2
-                    && ThirdPartyDetails.fiAgencyStatus == 2;
-                }
-
                 if (leadQ == null)
                 {
                     leadQ = new LpmLeadQuery();
@@ -367,6 +357,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 {
                     hoLeadQ = new LpmLeadHoSanctionQuery();
                 }
+                var ThirdPartyStatus = true;
                 if (request.CurrentStatus == 4 && (request.UserRoleId != 2 || leadQ.Query_Status=='Q'))
                 {
                     if(leadQ.Query_Status == 'Q')
@@ -417,27 +408,25 @@ namespace LoanProcessManagement.Persistence.Repositories
                     return response;
 
                 }
-
-                if (request.CurrentStatus == 9 && (hoLeadQ.Query_Status=='Q' || request.UserRoleId != 2))
+                if (request.CurrentStatus == 7 && request.UserRoleId != 3)
                 {
-                    if (hoLeadQ.Query_Status == 'Q')
-                    {
-                        response.Message = "Please wait for the branch to resolve the query before moving to submitted for Sanctioned.";
-                    }
-                    else
-                    {
-                        response.Message = "Application can be moved to Sanctioned only by HO.";
-                    }
-
+                    response.Message = "Application can be moved to HO (Sanction) only by Branch .";
                     response.Succeeded = false;
                     response.Lead_Id = request.lead_Id;
                     return response;
-                
 
                 }
-                if (request.CurrentStatus == 10 && request.UserRoleId != 2)
+                if (request.CurrentStatus == 9 && hoLeadQ.Query_Status=='Q')
                 {
-                    response.Message = "Application can be moved to Disbursed only by HO.";
+                    response.Message = "Please wait for the branch to resolve the query .";
+                    response.Succeeded = false;
+                    response.Lead_Id = request.lead_Id;
+                    return response;
+
+                }
+                if (request.CurrentStatus == 10 && hoLeadQ.Query_Status == 'Q')
+                {
+                    response.Message = "Please wait for the branch to resolve the query .";
                     response.Succeeded = false;
                     response.Lead_Id = request.lead_Id;
                     return response;

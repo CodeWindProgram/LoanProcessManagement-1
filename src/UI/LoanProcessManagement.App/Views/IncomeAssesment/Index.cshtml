@@ -17,7 +17,7 @@
     }
 
     .AppTabs {
-        display: inline-block;
+        display: none;
         margin-right: 3px;
         padding: 5px 30px;
         background: #191970;
@@ -130,17 +130,18 @@
                         <input type="hidden" asp-for="CreatedBy" value=@User.FindFirst("lg_id").Value />
                         <input type="hidden" asp-for="LastModifiedBy" value=@User.FindFirst("lg_id").Value />
                         <input type="hidden" asp-for="IsSubmitCount" />
+                        <input type="hidden" asp-for="AppTypeList1" />
 
                        
                         <div class="btnDiv pt-4 pl-4 pr-4">
                             <ul>
 
-                                <li id="l0"><a href="/IncomeAssesment/Index?applicantType=0&lead_Id=@Model.lead_Id" class="AppTabs btn-sm " id="tabProcess0">Applicant</a></li>
-                                <li id="l1"><a id="ContentPlaceHolder1_lnkCoApp1" class="AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=1&lead_Id=@Model.lead_Id">Co-Applicant-1</a></li>
-                                <li id="l2"><a id="ContentPlaceHolder1_lnkCoApp2" class="AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=2&lead_Id=@Model.lead_Id">Co-Applicant-2</a></li>
-                                <li id="l3"><a id="ContentPlaceHolder1_lnkCoApp3" class="AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=3&lead_Id=@Model.lead_Id">Co-Applicant-3</a></li>
-                                <li id="l4"><a id="ContentPlaceHolder1_lnkCoApp4" class="AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=4&lead_Id=@Model.lead_Id">Co-Applicant-4</a></li>
-                                <li id="l5"><a id="ContentPlaceHolder1_lnkCoApp5" class="AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=5&lead_Id=@Model.lead_Id">Co-Applicant-5</a></li>
+                                <li id="l0"><a id="lnkCoApp_0" href="/IncomeAssesment/Index?applicantType=0&lead_Id=@Model.lead_Id" class="AppTabs btn-sm" >Applicant</a></li>
+                                <li id="l1"><a id="lnkCoApp_1" class="AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=1&lead_Id=@Model.lead_Id" >Co-Applicant-1</a></li>
+                                <li id="l2"><a id="lnkCoApp_2" class="AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=2&lead_Id=@Model.lead_Id" >Co-Applicant-2</a></li>
+                                <li id="l3"><a id="lnkCoApp_3" class="AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=3&lead_Id=@Model.lead_Id" >Co-Applicant-3</a></li>
+                                <li id="l4"><a id="lnkCoApp_4" class="AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=4&lead_Id=@Model.lead_Id" >Co-Applicant-4</a></li>
+                                <li id="l5"><a id="lnkCoApp_5" class="AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=5&lead_Id=@Model.lead_Id" >Co-Applicant-5</a></li>
                             </ul>
                         </div>
                         <div id="ContentPlaceHolder1_alertMsg">
@@ -708,7 +709,7 @@
 </script>
 
 <script>
- 
+
     $(document).ready(function () {
 
         $("#startDate").datepicker({
@@ -748,11 +749,18 @@
         });
 
         $('#btnClear').click(function () {
-            
+
                 $('#startDate').val('');
                 $('#endDate').val('');
-            
+
         });
+
+        var jsArray = @Html.Raw(Json.Serialize(Model.AppTypeList1));  
+        for (var i = 0; i < jsArray.length; i++) {
+            var id = "#lnkCoApp_" + jsArray[i];
+            $(id).css("display", "inline-block");
+        }
+
     });
 
     $(function () {
@@ -828,7 +836,6 @@
     if (@Model.NoOfBankAccounts <= @Model.IsSubmitCount) {
         $("#btnSubmitIncomeDetails").attr('disabled', 'disabled');
     }
-
 </script>
 
 
