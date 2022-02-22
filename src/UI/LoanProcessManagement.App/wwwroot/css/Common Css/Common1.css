@@ -1,16 +1,12 @@
-﻿.tab {
-    padding-left: 15px;
-}
-
+﻿
 .AppTabs {
     display: inline-block;
     margin-right: 3px;
     padding: 5px 30px;
-   /* background: #191970;*/
-    color: black;
+    color: white;
 }
 
-.btn {
+#btnClear {
     width: inherit;
     justify-content: center;
 }
@@ -18,25 +14,6 @@
 .AppTabs:hover {
     background: #adb5bd;
     color: black;
-}
-
-.AppTabs:visited {
-    text-decoration: none;
-}
-
-.selected {
-    background: #0d7db5;
-    color: black;
-}
-
-.panel-heading {
-    color: white;
-    background-color: #343a40;
-    border-bottom: 1px solid rgba(0,0,0,.125);
-    padding: 0.75rem 1.25rem;
-    position: relative;
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
 }
 
 .card {
@@ -49,17 +26,83 @@
     margin-bottom: 20px;
 }
 
-/*h5 {
-        font-size: 1.25rem;
-        margin-left: 1rem;
-        padding-top: 5px;
-        font-weight: 600;
+#valuerIndateCommentDiv, #legalIndateCommentDiv, #fiIndateCommentDiv {
+    display: none
+}
+
+.switch {
+    position: relative;
+    width: 60px;
+    height: 34px;
+}
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
     }
-        
-    
-*/
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/ Rounded sliders /
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.frr {
+    text-align: center;
+}
 
 .btnDiv {
+    text-align: center;
+}
+
+u {
+    font-weight: 600;
+}
+
+
+.btnClear {
     text-align: center;
 }
 
@@ -70,14 +113,6 @@
     padding-right: 1%;
 }
 
-/*.navbar {
-        position: fixed;
-        left: 0px;
-        top: 0px;
-        height: auto;
-        width: 100%;
-        
-    }*/
 
 .btnDiv ul {
     /*display: flex;*/

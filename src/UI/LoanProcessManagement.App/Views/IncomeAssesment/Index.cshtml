@@ -1,4 +1,5 @@
 ﻿@model LoanProcessManagement.App.Models.IncomeAssessmentDetailsVm
+    <link href="~/css/Common Css/Common1.css" rel="stylesheet" />
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -10,7 +11,7 @@
 }
 
 
-<style>
+@*<style>
     .tab {
         padding-left: 15px;
     }
@@ -114,8 +115,8 @@
                 color: #ffffff;
                 background: #828385;
             }
-</style>
-<div class="container mt-5 mb-4">
+</style>*@
+<div class="container pb-5">
     <div class="container app">
         <div class="col-sm-12 col-lg-12">
             <div data-effect="helix" id="panels" class="panel panel-info effect-helix in">
@@ -130,8 +131,8 @@
                         <input type="hidden" asp-for="LastModifiedBy" value=@User.FindFirst("lg_id").Value />
                         <input type="hidden" asp-for="IsSubmitCount" />
 
-                        <div style="height: 15px;"></div>
-                        <div class="btnDiv pl-4 pr-4">
+                       
+                        <div class="btnDiv pt-4 pl-4 pr-4">
                             <ul>
 
                                 <li id="l0"><a href="/IncomeAssesment/Index?applicantType=0&lead_Id=@Model.lead_Id" class="AppTabs btn-sm " id="tabProcess0">Applicant</a></li>
@@ -140,6 +141,278 @@
                                 <li id="l3"><a id="ContentPlaceHolder1_lnkCoApp3" class="AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=3&lead_Id=@Model.lead_Id">Co-Applicant-3</a></li>
                                 <li id="l4"><a id="ContentPlaceHolder1_lnkCoApp4" class="AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=4&lead_Id=@Model.lead_Id">Co-Applicant-4</a></li>
                                 <li id="l5"><a id="ContentPlaceHolder1_lnkCoApp5" class="AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=5&lead_Id=@Model.lead_Id">Co-Applicant-5</a></li>
+                            </ul>
+                        </div>
+                        <div id="ContentPlaceHolder1_alertMsg">
+                            <div class="row tab pt-3 pr-1">
+                                <div class="col-md-12 text-center">
+                                    <label class="h4">Form No.</label>
+
+
+                                    @*<div class="input-control text">*@
+                                    <span id="ContentPlaceHolder1_lblFormNo" class="h4" style="color: black; border:none">
+                                        <label>@Model.FormNo</label>
+                                        <input type="hidden" asp-for="FormNo" />
+
+                                    </span>
+                                    @*</div>*@
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <span id="ContentPlaceHolder1_spanMessage" style="color: red;"></span>
+                       
+                        <div class="frames">
+                            <div class="panel-body">
+                                <hr />
+
+                                <div style="display:flex;">
+                                    <div style="width:100%; text-align:right;" class="p-1"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
+                                </div>
+                                <div class="pl-2">
+                                    <h4><u><b>Customer Details</b></u></h4>
+                                </div>
+                                <div class="form-group p-3">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-sm-12">
+                                            <label class="">Name</label>
+                                            <p>@Model.CustomerName</p>
+                                        </div>
+
+                                        <div class="col-lg-4 col-sm-12">
+                                            <label class="">Customer Email</label>
+                                            <p>@Model.CustomerEmail</p>
+                                        </div>
+
+                                        <div class="col-lg-4 col-sm-12">
+                                            <label class="">Customer Mobile</label>
+                                            <p>@Model.CustomerPhone</p>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group p-3">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-sm-12">
+                                            <label class="">Employee Type</label>
+                                            <p>@Model.EmploymentType</p>
+                                        </div>
+
+                                        <div class="col-lg-4 col-sm-12">
+                                            <label class="">No of Bank Accounts</label>
+                                            <p id="idNoOfBankAccounts">@Model.NoOfBankAccounts</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div id="IdentificationDv">
+                                    <hr />
+                                    <div id="divIdentification">
+                                        <h4><u><b>Statement Period</b></u></h4>
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <div class="row">
+
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label asp-for="StartDate" class="control-label noTxtInput">Statement Start Month<span style="color: Red">&nbsp;*</span></label>
+
+                                                <input asp-for="StartDate" class="form-control" id="startDate" placeholder="mm-yyyy" onkeydown="return /[a-z]/i.test(event.key)" autocomplete="off" />
+                                                <span asp-validation-for="StartDate" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label asp-for="EndDate" class="control-label noTxtInput">Statement End Month<span style="color: Red">&nbsp;*</span></label>
+
+                                                <input asp-for="EndDate" class="form-control" id="endDate" placeholder="mm-yyyy" onkeydown="return /[a-z]/i.test(event.key)" readonly />
+                                                <span asp-validation-for="EndDate" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="col-lg-2 col-sm-12">
+                                                <label>&nbsp;&nbsp;</label>
+                                                <input type="reset" class="btn btn-primary" value="Clear Date Filter" id="btnClear" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div id="divEmployerDetails">
+                                        <hr />
+                                        <h4><u><b>Employer Details</b></u></h4>
+                                    </div>
+                                    <div class="pt-2" style="height: 5px;"></div>
+                                    <div class="form-group p-3">
+                                        <div class="row">
+
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label asp-for="EmployerName1" class="control-label">Employer Name 1<span style="color: Red">&nbsp;*</span></label>
+
+                                                <input asp-for="EmployerName1" class="form-control" maxlength="100" placeholder="Enter Employer Name 1" />
+                                                <span asp-validation-for="EmployerName1" class="text-danger"></span>
+                                            </div>
+
+
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label asp-for="EmployerName2" class="control-label">Employer Name 2</label>
+
+                                                <input asp-for="EmployerName2" class="form-control" maxlength="100" placeholder="Enter Employer Name 2" />
+                                                <span asp-validation-for="EmployerName2" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label asp-for="EmployerName3" class="control-label">Employer Name 3</label>
+
+                                                <input asp-for="EmployerName3" class="form-control" maxlength="100" placeholder="Enter Employer Name 3" />
+                                                <span asp-validation-for="EmployerName3" class="text-danger"></span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group p-3">
+                                        <div class="row">
+
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label asp-for="EmployerName4" class="control-label">Employer Name 4</label>
+
+                                                <input asp-for="EmployerName4" class="form-control" maxlength="100" placeholder="Enter Employer Name 4" />
+                                                <span asp-validation-for="EmployerName4" class="text-danger"></span>
+                                            </div>
+
+
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label asp-for="EmployerName5" class="control-label">Employer Name 5</label>
+
+                                                <input asp-for="EmployerName5" class="form-control" maxlength="100" placeholder="Enter Employer Name 5" />
+                                                <span asp-validation-for="EmployerName5" class="text-danger"></span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div id="divConverted5">
+                                    <h4><u><b>Select Type of File Upload</b></u></h4>
+                                </div>
+                                <div id="fileDiv" class="pt-2">
+
+                                    <div class="row tab">
+                                        <div class="col-md-5">
+                                            <div class="input-control text">
+                                                <input id="radGenerateLink" asp-for="FileType" type="radio" name="FileType" value="GenerateLink" checked="checked" />
+                                                Generate Link
+                                                &nbsp;&nbsp;&nbsp;
+                                                <input id="radFileUpload" asp-for="FileType" type="radio" name="FileType" value="FileUpload" />
+                                                Upload File
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="divFileUpload" style="display : none">
+                                    <div id="divFillDetails">
+                                        <hr />
+                                        <h4><u><b>Fill Details</b></u></h4>
+                                    </div>
+                                    <div class="pt-2" style="height: 5px;"></div>
+                                    <div class="form-group">
+                                        <div class="row">
+
+                                            <div class="col-lg-6 col-sm-12">
+                                                <label asp-for="Institution_Id" class="control-label">Institution Name<span style="color: Red">&nbsp;*</span></label>
+
+                                                <div class="input-control text">
+                                                    <select asp-for="Institution_Id" class="form-control">
+                                                        <option value="">Select Institution</option>
+                                                        <option value="1">AU Small Finance Bank</option>
+                                                        <option value="2">Acme Bank Ltd</option>
+                                                        <option value="3">Adarsh Bank</option>
+                                                        <option value="4">Ahmedabad District Co-Op</option>
+                                                        <option value="5">Airtel Payments Bank</option>
+                                                    </select>
+                                                    <span asp-validation-for="Institution_Id" style="color:Red;display:block;"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6 col-sm-12">
+                                                <label asp-for="DocumentType" class="control-label">Document Type</label><br />
+
+                                                <input id="radScannedDocument" asp-for="DocumentType" type="radio" name="DocumentType" value="ScannedDocument" />
+                                                Scanned Document
+                                                &nbsp;&nbsp;&nbsp;
+                                                <input id="radStatement" asp-for="DocumentType" type="radio" name="DocumentType" value="e-Statement" />
+                                                e-Statement
+                                                <span asp-validation-for="DocumentType" class="text-danger"></span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+
+                                            <div class="col-lg-6 col-sm-12">
+                                                <label asp-for="IPdf" class="control-label">Upload File (PDF Only)</label>
+
+                                                <input type="file" asp-for="IPdf" id="fileUploadPdf" class="form-control" accept=".pdf" onchange="validate_fileupload(this,&#39;pdf&#39;);">
+                                                <span asp-validation-for="IPdf" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="col-lg-6 col-sm-12">
+                                                <label asp-for="FilePassword" class="control-label">PDF File Passwords (if any) </label>
+
+                                                <input asp-for="FilePassword" class="form-control" placeholder="Enter Pdf Password" />
+                                                <span asp-validation-for="FilePassword" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row tab pb-3">
+                                    <div class="col-md-12">
+                                        <center>
+                                            <input type="submit" name="btnAddIncomeDetails" value="Submit" id="btnSubmitIncomeDetails" class="btn" style="background-color: #343a40; color:white;">&nbsp
+                                            <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@Model.LeadID">Cancel</a>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="container mt-5 mb-4">
+    <div class="container app">
+        <div class="col-sm-12 col-lg-12">
+            <div data-effect="helix" id="panels" class="panel panel-info effect-helix in">
+                <div class="panel-heading">
+                    <h5>Add Customer Enquiry</h5>
+                </div>
+                <div class="formDiv">
+                    <form method="post" action="/IncomeAssesment/Index" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="lead_Id" id="hdnLeadId">
+                        <input type="hidden" asp-for="ApplicantType" id="hdnApplicantType">
+                        <input type="hidden" asp-for="CreatedBy" value=@User.FindFirst("lg_id").Value />
+                        <input type="hidden" asp-for="LastModifiedBy" value=@User.FindFirst("lg_id").Value />
+                        <input type="hidden" asp-for="IsSubmitCount" />
+                        <input type="hidden" asp-for="AppTypeList1" />
+
+                        <div style="height: 15px;"></div>
+                        <div class="btnDiv pl-4 pr-4">
+                            <ul>
+
+                                <li id="l0"><a id="lnkCoApp_0" href="/IncomeAssesment/Index?applicantType=0&lead_Id=@Model.lead_Id" class="AppTabs btn-sm">Applicant</a></li>
+                                <li id="l1"><a id="lnkCoApp_1" class="AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=1&lead_Id=@Model.lead_Id">Co-Applicant-1</a></li>
+                                <li id="l2"><a id="lnkCoApp_2" class="AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=2&lead_Id=@Model.lead_Id">Co-Applicant-2</a></li>
+                                <li id="l3"><a id="lnkCoApp_3" class="AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=3&lead_Id=@Model.lead_Id">Co-Applicant-3</a></li>
+                                <li id="l4"><a id="lnkCoApp_4" class="AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=4&lead_Id=@Model.lead_Id">Co-Applicant-4</a></li>
+                                <li id="l5"><a id="lnkCoApp_5" class="AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=5&lead_Id=@Model.lead_Id">Co-Applicant-5</a></li>
                             </ul>
                         </div>
                         <div id="ContentPlaceHolder1_alertMsg">
@@ -240,14 +513,14 @@
                                         <h4><u><b>Statement Period</b></u></h4>
                                     </div>
                                     <div class="pt-2" style="height: 5px;"></div>
-          
+
                                     <div class="form-group">
                                         <div class="row">
 
                                             <div class="col-lg-4 col-sm-12">
                                                 <label asp-for="StartDate" class="control-label noTxtInput">Statement Start Month<span style="color: Red">&nbsp;*</span></label>
 
-                                                <input asp-for="StartDate" class="form-control" id="startDate" placeholder="mm-yyyy" onkeydown="return /[a-z]/i.test(event.key)" autocomplete="off"/>
+                                                <input asp-for="StartDate" class="form-control" id="startDate" placeholder="mm-yyyy" onkeydown="return /[a-z]/i.test(event.key)" autocomplete="off" />
                                                 <span asp-validation-for="StartDate" class="text-danger"></span>
                                             </div>
 
@@ -260,7 +533,7 @@
 
                                             <div class="col-lg-2 col-sm-12">
                                                 <label>&nbsp;&nbsp;</label>
-                                                <input type="reset" class="btn btn-primary" value="Clear Date Filter" id="btnClear"/>                                
+                                                <input type="reset" class="btn btn-primary" value="Clear Date Filter" id="btnClear" />
                                             </div>
 
                                         </div>
@@ -282,7 +555,7 @@
                                             <div class="col-lg-4 col-sm-12">
                                                 <label asp-for="EmployerName1" class="control-label">Employer Name 1<span style="color: Red">&nbsp;*</span></label>
 
-                                                <input asp-for="EmployerName1" class="form-control" maxlength="100" placeholder="Enter Employer Name 1"/>
+                                                <input asp-for="EmployerName1" class="form-control" maxlength="100" placeholder="Enter Employer Name 1" />
                                                 <span asp-validation-for="EmployerName1" class="text-danger"></span>
                                             </div>
 
@@ -317,7 +590,7 @@
                                             <div class="col-lg-4 col-sm-12">
                                                 <label asp-for="EmployerName5" class="control-label">Employer Name 5</label>
 
-                                                <input asp-for="EmployerName5" class="form-control" maxlength="100" placeholder="Enter Employer Name 5"/>
+                                                <input asp-for="EmployerName5" class="form-control" maxlength="100" placeholder="Enter Employer Name 5" />
                                                 <span asp-validation-for="EmployerName5" class="text-danger"></span>
                                             </div>
 
@@ -377,7 +650,7 @@
                                                 <input id="radStatement" asp-for="DocumentType" type="radio" name="DocumentType" value="e-Statement" />
                                                 e-Statement
                                                 <span asp-validation-for="DocumentType" class="text-danger"></span>
-                                            </div>                                              
+                                            </div>
 
                                         </div>
                                     </div>
@@ -409,7 +682,7 @@
                                         </center>
                                     </div>
                                     <br />
-                                </div>                                
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -417,7 +690,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
 <script>
 

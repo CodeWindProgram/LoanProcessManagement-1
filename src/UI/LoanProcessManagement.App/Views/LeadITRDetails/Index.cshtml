@@ -206,45 +206,38 @@
                                                     <label class="">User Name</label><br />
                                                     <p>@Model.UserName</p>
                                                 </div>
+                                            
                                             </div>
                                         </div>
 
 
-
-
-                                        <div style="height: 5px;"></div>
-                                        <div class="row tab">
-                                            <div class="col-md-5">
-                                                <label class="" id="PasswordBoxLabel">Password</label>
-                                                <span style="color: Red" id="FieldMark">&nbsp;*</span>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <div class="input-control text">
-                                                    <input asp-for="Password" type="password" maxlength="20" id="PasswordBoxNode" class="form-control">
-                                                    <span asp-validation-for="Password" style="color:Red;display:block;"></span>
+                                        <div class="col-lg-4 col-sm-12">
+                                            <div class="row">          
+                                                    <label class="" id="PasswordBoxLabel">Password</label>
+                                                    <span style="color: Red" id="FieldMark">&nbsp;*</span>                                                
+                                                        <input asp-for="Password" type="password" maxlength="20" id="PasswordBoxNode" class="form-control">
+                                                        <span asp-validation-for="Password" style="color:Red;display:block;"></span>                                                   
                                                 </div>
                                             </div>
-
+                                          
                                         </div>
 
-                                    </div>
-
-                                    <div id="accountDv">
+                                        <div id="accountDv">
 
 
-                                        <br />
-                                        <div class="row tab">
-                                            <div class="col-md-12">
-                                                <center>
+                                            <br />
+                                            <div class="row tab">
+                                                <div class="col-md-12 mb-3">
+                                                    <center>
+                                               
+                                                        <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="SubmitButton" class="btn" style="background-color: #343a40; color:white;">&nbsp
+                                                        <a id="cancelbutton" class="btn btn-danger" href="/LeadList">Cancel</a>
 
-                                                    <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="SubmitButton" class="btn" style="background-color: #343a40; color:white;">&nbsp
-                                                    <a id="cancelbutton" class="btn btn-danger" href="/LeadList">Cancel</a>
-
-                                                </center>
+                                                    </center>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                             </div>
                         </form>
                     </div>
