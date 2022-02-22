@@ -69,6 +69,8 @@
     <Compile Remove="Migrations\20211119081538_Initial_12.Designer.cs" />
     <Compile Remove="Migrations\20211210115848_initial_15.cs" />
     <Compile Remove="Migrations\20211210115848_initial_15.Designer.cs" />
+    <Compile Remove="Migrations\20220218092149_Initial_20.cs" />
+    <Compile Remove="Migrations\20220218092149_Initial_20.Designer.cs" />
     <Compile Remove="Migrations\GloboTicketDbContextModelSnapshot.cs" />
   </ItemGroup>
 
