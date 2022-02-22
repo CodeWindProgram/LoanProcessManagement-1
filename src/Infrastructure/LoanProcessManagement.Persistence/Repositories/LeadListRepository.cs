@@ -281,7 +281,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 {
                     var hoLeadQuery = await _dbContext.lpmLeadHoSanctionQueries.Include(x => x.lead)
                         .Where(x => x.lead_Id == user.Id).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
-                    if (hoLeadQuery != null && request.UserRoleId == 3 && hoLeadQuery.Query_Status == 'Q' && request.QueryStatus == 'R')
+                    if (hoLeadQuery != null && request.UserRoleId == 3 && hoLeadQuery.Query_Status == 'Q')
                     {
                         hoLeadQuery.Query_Status = request.HoQueryStatus;
                         hoLeadQuery.HoSanction_query_commentResponse = request.HoSanction_query_commentResponse;
@@ -349,6 +349,16 @@ namespace LoanProcessManagement.Persistence.Repositories
                 var hoLeadQ = await _dbContext.lpmLeadHoSanctionQueries.Include(x => x.lead)
                  .Where(x => x.lead_Id == user.Id).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
 
+                var ThirdPartyDetails = await _dbContext.lpmThirdPartyCheckDetails.Include(x => x.ValuerAgency).
+                   Include(x => x.fiAgency).Include(x => x.legalAgency)
+               .Where(x => x.lead_Id == user.Id).FirstOrDefaultAsync();
+                Boolean ThirdPartyStatus = false;
+                if (ThirdPartyDetails != null)
+                {
+                    ThirdPartyStatus = ThirdPartyDetails.valuerAgencyStatus == 2 && ThirdPartyDetails.legalAgencyStatus == 2
+                    && ThirdPartyDetails.fiAgencyStatus == 2;
+                }
+
                 if (leadQ == null)
                 {
                     leadQ = new LpmLeadQuery();
@@ -357,7 +367,6 @@ namespace LoanProcessManagement.Persistence.Repositories
                 {
                     hoLeadQ = new LpmLeadHoSanctionQuery();
                 }
-                var ThirdPartyStatus = true;
                 if (request.CurrentStatus == 4 && (request.UserRoleId != 2 || leadQ.Query_Status=='Q'))
                 {
                     if(leadQ.Query_Status == 'Q')
@@ -408,25 +417,27 @@ namespace LoanProcessManagement.Persistence.Repositories
                     return response;
 
                 }
-                if (request.CurrentStatus == 7 && request.UserRoleId != 3)
+
+                if (request.CurrentStatus == 9 && (hoLeadQ.Query_Status=='Q' || request.UserRoleId != 2))
                 {
-                    response.Message = "Application can be moved to HO (Sanction) only by Branch .";
+                    if (hoLeadQ.Query_Status == 'Q')
+                    {
+                        response.Message = "Please wait for the branch to resolve the query before moving to submitted for Sanctioned.";
+                    }
+                    else
+                    {
+                        response.Message = "Application can be moved to Sanctioned only by HO.";
+                    }
+
                     response.Succeeded = false;
                     response.Lead_Id = request.lead_Id;
                     return response;
+                
 
                 }
-                if (request.CurrentStatus == 9 && hoLeadQ.Query_Status=='Q')
+                if (request.CurrentStatus == 10 && request.UserRoleId != 2)
                 {
-                    response.Message = "Please wait for the branch to resolve the query .";
-                    response.Succeeded = false;
-                    response.Lead_Id = request.lead_Id;
-                    return response;
-
-                }
-                if (request.CurrentStatus == 10 && hoLeadQ.Query_Status == 'Q')
-                {
-                    response.Message = "Please wait for the branch to resolve the query .";
+                    response.Message = "Application can be moved to Disbursed only by HO.";
                     response.Succeeded = false;
                     response.Lead_Id = request.lead_Id;
                     return response;
@@ -468,17 +479,19 @@ namespace LoanProcessManagement.Persistence.Repositories
         public async Task<IEnumerable<LeadHistoryQueryVm>> GetLeadhistory(string lead_id)
         {
             string input = lead_id;
+            var onlyid = input.Split("_");
             int res = 0;
             bool success = int.TryParse(new string(input
                                  .SkipWhile(x => !char.IsDigit(x))
                                  .TakeWhile(x => char.IsDigit(x))
                                  .ToArray()), out res);
-            var result = await (from A in _dbContext.LpmLeadProcessCycles
+            var temp = _dbContext.LpmLeadProcessCycles.Where(x => x.lead_Id == long.Parse(onlyid[1]));
+            var result = await (from A in _dbContext.LpmLeadProcessCycles where A.lead_Id == long.Parse(onlyid[1])
                                 join B in _dbContext.LpmLeadStatusMasters on A.CurrentStatus equals B.Id
                                 join C in _dbContext.LpmLoanProductMasters on A.LoanProductID equals C.Id
-                                join D in _dbContext.LpmLeadMasters on A.LeadStatus equals D.LeadStatus
+                                join D in _dbContext.LpmLeadMasters on A.lead_Id equals D.Id
                                 join E in _dbContext.LpmUserMasters on A.CreatedBy equals E.LgId
-                                where A.lead_Id == res
+                                where A.lead_Id == long.Parse(onlyid[1])
                                 select new LeadHistoryQueryVm
                                 {
                                     Stage = B.StatusDescription,
@@ -486,7 +499,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                                     EndDate = null,
                                     Description = C.ProducDescription,
                                     UpdatedBy = E.Name,
-                                    ReasonForReject = D.RejectedLeadComment + " " + D.LostLeadComment,
+                                    ReasonForReject = (D.LostLeadReasonID == 0 || D.RejectLeadReasonID ==0)? null : D.LostLeadComment + " " + D.RejectedLeadComment,
                                     ProductsSold = C.ProductName
                                 }).ToListAsync();
             return result;
