@@ -40,11 +40,11 @@
                                         @Html.DisplayNameFor(model => model.Link)
                                     </th>*@
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Icon)
+                                    @Html.DisplayNameFor(model => model.Link)
                                 </th>
-                                @*<th>
-                                        @Html.DisplayNameFor(model => model.Position)
-                                    </th>*@
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IsActive)
+                                </th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -60,11 +60,21 @@
                                             @Html.DisplayFor(modelItem => item.Link)
                                         </td>*@
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Icon)
+                                        @Html.DisplayFor(modelItem => item.Link)
                                     </td>
-                                    @*<td>
-                                            @Html.DisplayFor(modelItem => item.Position)
-                                        </td>*@
+                                    <td>
+                                        @{
+                                            if (item.IsActive == true)
+                                            {
+                                                <b style="color:darkgreen">Active</b>
+                                            }
+                                            else
+                                            {
+                                                <b style="color:red">Deactive</b>
+                                            }
+                                        }
+
+                                    </td>
                                     <td>
                                         @Html.ActionLink("Modify", "UpdateMenu", new { id = item.Id }, new { @Class = "btn btn-primary btn-sm" })
                                         @Html.ActionLink("Remove", "DeleteMenu", new { id = item.Id }, new { @Class = "btn btn-danger btn-sm" })

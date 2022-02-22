@@ -203,18 +203,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                 
-                                @{
-                                    if (status)
-
-                                    {
-
-                                        <a href="" onclick="myfun()"> Click Here To Disable Status</a>
-                                    }
-                                    else
-                                    {
-                                        <a href="" onclick="myfun()">Click Here To Enable Status</a>
-                                    }
-                                }
+                               
                             </div>
                                 <div class="col-lg-4">
                                 </div>
@@ -222,15 +211,27 @@
                             </div>
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-1">
-                                        
+                                    <div class="col-md-4"></div>
+                                    @*<div class="col-md-1"></div>*@
+                                    @*<div class="col-md-1"></div>
+        <div class="col-md-1"></div>*@
+
+                                    <div class="col-md-4"><button type="submit" style="background-color: #343a40;color:white" class="btn">Submit</button>
+                                   <a asp-action="Menulist" id="btn2" type="button" value="Cancel" class="btn btn-danger">Cancel</a></div>
+                                    <div class="col-md-4">
+                                        @{
+                                            if (status)
+
+                                            {
+
+                                                <a href="" onclick="myfun()" class="btn btn-danger"> Click Here To Disable Status</a>
+                                            }
+                                            else
+                                            {
+                                                <a href="" onclick="myfun()" class="btn btn-success">Click Here To Enable Status</a>
+                                            }
+                                        }
                                     </div>
-                                    <div class="col-md-1"><button type="submit" style="background-color: #343a40;color:white" class="btn">Submit</button></div>
-                                    <div class="col-md-2"><a asp-action="Menulist" id="btn2" type="button" value="Cancel" class="btn btn-danger">Cancel</a></div>
                                 </div>
                             </div>
                         </form>
@@ -244,7 +245,21 @@
     function hideStudentChildren() {
         if ($("#Yes").is(":checked")) {
             check();
+
             $("#selectChildren").removeAttr("disabled");
+            var temp = '@TempData["temp"]';
+            var temp = temp.trim();
+            var splitTemp = temp.split(" ");
+            var parentList = [];
+            for (var i = 0; i < splitTemp.length; i++) {
+                parentList.push(parseInt(splitTemp[i]));
+            }
+            $("#selectChildren").val(parentList);
+
+           
+
+
+
         }
         if ($("#No").is(":checked")) {
             uncheck();
@@ -262,7 +277,7 @@
     }
 
     function myfun() {
-        console.log(@Model.Parlist);
+
         var temp = '@TempData["MenuId"]';
         console.log(temp);
         $.ajax({
@@ -285,8 +300,30 @@
         });
     }
     $(document).ready(function () {
+        
+        var temp = '@TempData["temp"]';
+        var temp = temp.trim();
+        var splitTemp = [];
+        if (temp != "") {
+            splitTemp = temp.split(" ");
+        }
+       
+        if (splitTemp.length != 0) {
+
+            check();
+            $("input:radio[name=Married]").attr("checked", true);
+            $("#selectChildren").removeAttr("disabled");
+            var parentList = [];
+            for (var i = 0; i < splitTemp.length; i++) {
+                parentList.push(parseInt(splitTemp[i]));
+            }
+            $("#selectChildren").val(parentList);
 
 
+        }
+        console.log(splitTemp);
+        console.log(splitTemp.length);
+        
         if ('@TempData["ApiDataIsSuccess"]' == 'True') {
             toastr.success('@TempData["ApiDataMessage"]', "Success");
 
