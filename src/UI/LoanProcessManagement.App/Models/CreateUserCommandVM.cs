@@ -25,7 +25,7 @@ namespace LoanProcessManagement.App.Models
         [Required(ErrorMessage = "Email is Required .")]
         [RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$",
         ErrorMessage = "Invalid Email Format")]
-        [StringLength(30)]
+        [StringLength(100)]
         public string Email { get; set; }
 
         [Display(Name = "Branch")]
