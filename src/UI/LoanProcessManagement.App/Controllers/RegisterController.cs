@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace LoanProcessManagement.App.Controllers
 {
+    [Authorize(AuthenticationSchemes = "Cookies")]
     public class RegisterController : Controller
     {
         private readonly ICommonServices _commonService;

@@ -1,4 +1,5 @@
 ﻿using LoanProcessManagement.App.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 namespace LoanProcessManagement.App.Controllers
 {
     [Route("reports")]
+    [Authorize(AuthenticationSchemes = "Cookies")]
     public class ReportsController : Controller
     {
         private readonly IReportsService _reportsService;

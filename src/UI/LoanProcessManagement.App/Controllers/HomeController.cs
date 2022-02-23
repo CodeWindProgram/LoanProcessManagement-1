@@ -26,6 +26,7 @@ using System.Threading.Tasks;
 namespace LoanProcessManagement.App.Controllers
 {
     //[Route("Home")]
+    [Authorize(AuthenticationSchemes = "Cookies")]
     public class HomeController : Controller
     {
         private readonly IAccountService _accountService;

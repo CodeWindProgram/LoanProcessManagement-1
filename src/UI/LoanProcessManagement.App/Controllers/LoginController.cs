@@ -23,6 +23,7 @@ using System;
 using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Queries.UnlockedAndLockedUsers;
 using LoanProcessManagement.Application.Features.ChangePassword.Commands.ResetPassword;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LoanProcessManagement.App.Controllers
 {
@@ -42,6 +43,7 @@ namespace LoanProcessManagement.App.Controllers
         }
 
         [Route("~/")]
+
         public IActionResult Index(string returnUrl = null)
         {
             bool isAuthenticated = User.Identity.IsAuthenticated;
@@ -136,7 +138,7 @@ namespace LoanProcessManagement.App.Controllers
             return View();
         }
         #endregion
-
+        [Authorize(AuthenticationSchemes = "Cookies")]
         #region Change password functionality - Ramya Guduru - 25/10/2021
         /// <summary>
         /// 2021/10/25 - Change password functionality
@@ -151,7 +153,7 @@ namespace LoanProcessManagement.App.Controllers
         {
             return View();
         }
-
+        [Authorize(AuthenticationSchemes = "Cookies")]
 
         [HttpPost("/ChangePasswordUI")]
         public async Task<IActionResult> ChangePassword(ChangePasswordCommand changePasswordCommand)
@@ -235,6 +237,7 @@ namespace LoanProcessManagement.App.Controllers
             return View();
         }
         #endregion
+        [Authorize(AuthenticationSchemes = "Cookies")]
 
         #region UnlockUserAccount functionality - Ramya Guduru - 29/10/2021
         /// <summary>
@@ -254,8 +257,9 @@ namespace LoanProcessManagement.App.Controllers
             newuserlocklist.getAllUsersQueryVm = usersListServiceResponse.Data;
             return View(newuserlocklist);
         }
-
+        [Authorize(AuthenticationSchemes = "Cookies")]
         [HttpPost("/UnlockUserAccount")]
+        [Authorize(AuthenticationSchemes = "Cookies")]
         public async Task<IActionResult> UnlockUserAccount(UnlockedAndLockedUsersVm unlockedAndLockedUsersVm)
         {
             var message = "";
@@ -289,6 +293,7 @@ namespace LoanProcessManagement.App.Controllers
             ModelState.Clear();
             return RedirectToAction("UnlockUserAccount");
         }
+        [Authorize(AuthenticationSchemes = "Cookies")]
         [HttpPost("/UnlockAndResetPassword")]
         public async Task<IActionResult> UnlockAndResetPassword(UnlockAndResetPasswordCommand unlockUserAccountCommand)
         {
@@ -322,6 +327,7 @@ namespace LoanProcessManagement.App.Controllers
             ModelState.Clear();
             return View("UnlockUserAccount");
         }
+        [Authorize(AuthenticationSchemes = "Cookies")]
 
         [HttpPost("/ActivateUserAccount")]
         public async Task<IActionResult> ActivateUserAccount(ActivateUserAccountCommand unlockUserAccountCommand)
@@ -368,6 +374,7 @@ namespace LoanProcessManagement.App.Controllers
         /// <param name="user">User object </param>
         /// <returns>Add user view</returns>
         [Route("{lgid}")]
+        [Authorize(AuthenticationSchemes = "Cookies")]
         public async Task<IActionResult> RemoveUser([FromRoute] string lgid)
         {
             var response = await _accountService.RemoveUser(lgid);
@@ -384,6 +391,7 @@ namespace LoanProcessManagement.App.Controllers
         /// <param name="lgid">lgid</param>
         /// <returns>view</returns>
         [HttpGet("{lgid}")]
+        [Authorize(AuthenticationSchemes = "Cookies")]
         public async Task<IActionResult> UpdateUser(string lgid)
         {
             var response = await _accountService.GetUser(lgid);
@@ -415,6 +423,7 @@ namespace LoanProcessManagement.App.Controllers
         /// <param name="user">user</param>
         /// <returns>view</returns>
         [HttpPost]
+        [Authorize(AuthenticationSchemes = "Cookies")]
         public async Task<IActionResult> UpdateUser(CreateUserCommandVM user)
         {
             var lg_id = user.LgId;
@@ -460,6 +469,7 @@ namespace LoanProcessManagement.App.Controllers
         /// <param name="lead_Id">lead_Id</param>
         /// <returns>view</returns>
         [HttpGet("{lead_Id}")]
+        [Authorize(AuthenticationSchemes = "Cookies")]
         public async Task<IActionResult> UpdatePropertyDetails(string lead_Id)
         {
             var response = await _accountService.GetProperty(lead_Id);
@@ -504,6 +514,7 @@ namespace LoanProcessManagement.App.Controllers
         /// <param name="property">property</param>
         /// <returns>view</returns>
         [HttpPost]
+        [Authorize(AuthenticationSchemes = "Cookies")]
         public async Task<IActionResult> UpdatePropertyDetailsUnFreeze(UpdatePropertyDetailsCommand property)
         {
            
@@ -542,6 +553,7 @@ namespace LoanProcessManagement.App.Controllers
         /// <param name="IsLocked"></param>
         /// <returns></returns>
         [HttpPost("/UnlockUserAccountOnToggleSwitch")]
+        [Authorize(AuthenticationSchemes = "Cookies")]
         public async Task<IActionResult> UnlockUserAccountOnToggleSwitch(string EmployeeId, bool IsLocked)
         {
             UnlockUserAccountOnToggleSwitchVm unlockUserAccount = new UnlockUserAccountOnToggleSwitchVm();
@@ -572,6 +584,7 @@ namespace LoanProcessManagement.App.Controllers
         /// <param name="IsActive"></param>
         /// <returns></returns>
         [HttpPost("/ActivateUserAccountOnToggleSwitch")]
+        [Authorize(AuthenticationSchemes = "Cookies")]
         public async Task<IActionResult> ActivateUserAccountOnToggleSwitch(string EmployeeId, bool IsActive)
         {
             ActivateUserAccountOnToggleSwitchVm activeUserAccount = new ActivateUserAccountOnToggleSwitchVm();

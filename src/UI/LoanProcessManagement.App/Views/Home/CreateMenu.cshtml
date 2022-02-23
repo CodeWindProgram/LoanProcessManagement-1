@@ -137,12 +137,12 @@
                                         <span asp-validation-for="createMenuCommand.Position" class="text-danger"></span>
                                     </div>
 
-                                    <div class="col-lg-4 col-sm-12">
+                                    @*<div class="col-lg-4 col-sm-12">
                                         <label asp-for="createMenuCommand.CreatedDate" class="control-label">Created Date<span style="color: Red">&nbsp;*</span></label>
 
                                         <input asp-for="createMenuCommand.CreatedDate" class="form-control" maxlength="50" />
                                         <span asp-validation-for="createMenuCommand.CreatedDate" class="text-danger"></span>
-                                    </div>
+                                    </div>*@
 
 
                                     <div class="col-lg-4 col-sm-12">
@@ -161,6 +161,16 @@
                                             }
                                         </div>
                                     </div>
+
+                                    <div class="col-lg-4 col-sm-12">
+                                        <label>Is Parent Menu?<span style="color: Red">&nbsp;*</span></label><br />
+
+                                        <input hidden id="confirming" asp-for="createMenuCommand.IsParent" />
+                                        <input type="radio" name="Married" id="Yes" value="Yes" onclick="hideStudentChildren()" required>
+                                        <label class="font-weight-normal" for="Yes"><span>Yes</span></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                        <input type="radio" name="Married" id="No" value="No" onclick="hideStudentChildren()" checked>
+                                        <label class="font-weight-normal" for="No"><span>No</span></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                    </div>
                                 </div>
 
                             </div>
@@ -168,13 +178,6 @@
                             <div class="form-group">
                                 <div class="row">
 
-                                    <div class="col-lg-4 col-sm-12">
-                                        <label>Is Parent Menu?<span style="color: Red">&nbsp;*</span></label><br />
-
-                                        <input hidden id="confirming" asp-for="createMenuCommand.IsParent" />
-                                        <input type="radio" name="Married" id="Yes" value="Yes" onclick="hideStudentChildren()" required>YES &nbsp&nbsp&nbsp&nbsp
-                                        <input type="radio" name="Married" id="No" value="No" onclick="hideStudentChildren()" checked>NO &nbsp&nbsp&nbsp&nbsp
-                                    </div>
                                     <div class="col-lg-4 col-sm-12">
                                         <label>Sub Menus</label>
                                         <select multiple="multiple" asp-for="Childlist" asp-items="@ViewBag.ParentId" id="selectChildren" class="required" disabled required>

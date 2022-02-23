@@ -4,6 +4,7 @@ using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.AddInc
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTAddEnuiry;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTCreateEnquiry;
 using LoanProcessManagement.Application.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 namespace LoanProcessManagement.App.Controllers
 {
     [Route("[controller]/[action]")]
+    [Authorize(AuthenticationSchemes = "Cookies")]
     public class IncomeAssesmentController : Controller
     {
         private readonly IIncomeAssesmentService _incomeAssesmentService;

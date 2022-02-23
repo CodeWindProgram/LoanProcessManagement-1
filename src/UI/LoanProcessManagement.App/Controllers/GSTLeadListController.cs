@@ -1,13 +1,16 @@
 ﻿using LoanProcessManagement.App.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace LoanProcessManagement.App.Controllers
 {
     [Route("[controller]/[action]")]
+    [Authorize(AuthenticationSchemes = "Cookies")]
     public class GSTLeadListController : Controller
     {
         private readonly IGSTLeadListService _GSTLeadListService;
