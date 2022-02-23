@@ -1,5 +1,6 @@
 ﻿using LoanProcessManagement.App.Models;
 using LoanProcessManagement.App.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace LoanProcessManagement.App.Controllers
 {
+    [Authorize(AuthenticationSchemes = "Cookies")]
     public class ApplicantDetailsController : Controller
     {
         private readonly IApplicantDetailsService _applicantDetailsService;

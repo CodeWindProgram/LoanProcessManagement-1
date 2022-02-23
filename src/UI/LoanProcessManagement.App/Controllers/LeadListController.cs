@@ -16,6 +16,8 @@ using System.Threading.Tasks;
 
 namespace LoanProcessManagement.App.Controllers
 {
+    [Authorize(AuthenticationSchemes = "Cookies")]
+
     public class LeadListController : Controller
     {
         private readonly ILeadListService _leadListService;

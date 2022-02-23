@@ -1,5 +1,6 @@
 ﻿using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.ProductsList.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 namespace LoanProcessManagement.App.Controllers
 {
     [Route("[controller]/[action]")]
+    [Authorize(AuthenticationSchemes = "Cookies")]
     public class ProductsListController : Controller
     {
         private readonly IProductService _productService;

@@ -1,5 +1,6 @@
 ﻿using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.DSACorner.Query.DSACornerList;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 namespace LoanProcessManagement.App.Controllers
 {
     [Route("[controller]")]
+    [Authorize(AuthenticationSchemes = "Cookies")]
     public class DSACornerController : Controller
     {
         private readonly IAccountService _accountService;

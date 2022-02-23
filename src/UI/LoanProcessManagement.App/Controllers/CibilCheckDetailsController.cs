@@ -1,6 +1,7 @@
 ﻿using LoanProcessManagement.App.Models;
 using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.CibilCheck.Commands.AddCibilCheckDetails;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace LoanProcessManagement.App.Controllers
 {
+    [Authorize(AuthenticationSchemes = "Cookies")]
     public class CibilCheckDetailsController : Controller
     {
         private readonly ICibilCheckService _cibilCheckService;
