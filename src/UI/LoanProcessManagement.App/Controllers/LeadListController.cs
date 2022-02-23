@@ -200,7 +200,7 @@ namespace LoanProcessManagement.App.Controllers
                     IPSResponseType4 = leadResponse.Data.IPSResponseType4,
                     IPSResponseType5 = leadResponse.Data.IPSResponseType5,
                     HoQueryStatus = leadResponse.Data.HoQueryStatus,
-                    HoSanction_query_comment = leadResponse.Data.HoSanction_query_comment,
+                    HoSanction_query_comment = leadResponse.Data.HoQueryStatus == 'R' ? null : leadResponse.Data.HoSanction_query_comment,
                     HoSanction_query_commentResponse = leadResponse.Data.HoSanction_query_commentResponse
 
 
