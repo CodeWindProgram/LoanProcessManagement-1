@@ -220,12 +220,14 @@
                                     <div class="row">
                                         <div class="col-lg-4 col-sm-12">
                                             <label class="">Customer Email</label>
+                                            <span style="color: Red">&nbsp;*</span>
                                             <input asp-for="CustomerEmail" type="text" id="ContentPlaceHolder1_txtCustomerEmail" class="form-control" placeholder="abc@xyz.com" maxlength="25">
                                             <span asp-validation-for="CustomerEmail" style="color:Red;display:block;"></span>
                                         </div>
 
                                         <div class="col-lg-4 col-sm-12">
                                             <label class="">Customer Mobile</label>
+                                            <span style="color: Red">&nbsp;*</span>
                                             <input asp-for="CustomerPhone" type="text" maxlength="10" id="ContentPlaceHolder1_txtCustomerMobile" class="form-control noTxtInput" placeholder="Mobile No">
                                             <span asp-validation-for="CustomerPhone" style="color:Red;display:block;"></span>
                                         </div>
