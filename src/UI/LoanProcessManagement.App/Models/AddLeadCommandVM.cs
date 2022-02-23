@@ -8,7 +8,7 @@ namespace LoanProcessManagement.App.Models
 {
     public class AddLeadCommandVM
     {
-        //[StringLength(6)]
+        [StringLength(6)]
         [RegularExpression(@"^[0-9]\d{5}$", ErrorMessage = "Please Enter Valid Form Number.")]
         [Required(ErrorMessage = "Form No is Required")]
         public string FormNo { get; set; }
