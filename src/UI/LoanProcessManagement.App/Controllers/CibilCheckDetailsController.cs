@@ -64,7 +64,8 @@ namespace LoanProcessManagement.App.Controllers
                 Category = applicantResponse.Data.Category,
                 Residence = applicantResponse.Data.Residence,                
                 Qualification = applicantResponse.Data.Qualification,
-                Succeeded = applicantResponse.Data.Succeeded
+                Succeeded = applicantResponse.Data.Succeeded,
+                AppTypeList = applicantResponse.Data.AppTypeList
             };
             if (applicant.IsSubmit)
             {

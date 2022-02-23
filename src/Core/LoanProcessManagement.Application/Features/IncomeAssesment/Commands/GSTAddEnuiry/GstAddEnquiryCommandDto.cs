@@ -27,5 +27,6 @@ namespace LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GS
         public string PdfFilePath { get; set; }
         public int ApplicantType { get; set; }
         public bool IsActive { get; set; }
+        public List<int> AppTypeList { get; set; }
     }
 }

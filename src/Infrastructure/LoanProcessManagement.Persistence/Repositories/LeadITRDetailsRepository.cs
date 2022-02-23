@@ -42,6 +42,8 @@ namespace LoanProcessManagement.Persistence.Repositories
             var lead = await _dbContext.LpmLeadMasters.Include(x => x.Product).Include(x => x.LeadStatus).Include(z => z.Branch)
                 .Where(x => x.Id == lead_id).FirstOrDefaultAsync();
 
+            List<int> applicantTypeList = await _dbContext.LpmLeadApplicantsDetails.Where(x => x.lead_Id == lead_id).OrderBy(x => x.ApplicantType).Select(x => x.ApplicantType).ToListAsync();      //to fetch all applicant types under a particular lead
+
             GetLeadITRDetailsDto response = new GetLeadITRDetailsDto();
 
             if (details != null)
@@ -55,7 +57,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 response.Consent = true;
                 response.PanCardNo = details.PanCardNo;
                 response.UserName = details.PanCardNo;
-
+                response.AppTypeList = applicantTypeList;
                 if (data!=null) {
                     response.IsSuccess = data.IsSuccess;
                 }

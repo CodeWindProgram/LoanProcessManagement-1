@@ -19,7 +19,7 @@ namespace LoanProcessManagement.App.Services.Interfaces
         #region Interface Methods For Income Assessment Details - Pratiksha Poshe - 15/02/2022
         Task<Response<GetIncomeAssessmentDetailsDto>> GetIncomeDetailsService(int applicantType, int lead_Id);
 
-        Task<AddIncomeAssessmentDetailsDto> AddIncomeAssessmentDetails(AddIncomeAssessmentDetailsDto addIncomeAssessmentDetailsDto); 
+        Task<Response<AddIncomeAssessmentDetailsDto>> AddIncomeAssessmentDetails(AddIncomeAssessmentDetailsDto addIncomeAssessmentDetailsDto); 
         #endregion
     }
 }

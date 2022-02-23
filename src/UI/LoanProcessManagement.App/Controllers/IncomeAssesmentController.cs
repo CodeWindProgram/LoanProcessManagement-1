@@ -116,7 +116,7 @@ namespace LoanProcessManagement.App.Controllers
                     EmploymentType = getIncomeDetailsServiceResponse.Data.EmploymentType,
                     LeadID = getIncomeDetailsServiceResponse.Data.LeadID,
                     IsSubmitCount = getIncomeDetailsServiceResponse.Data.IsSubmitCount,
-                    AppTypeList1 = getIncomeDetailsServiceResponse.Data.AppTypeList1,
+                    AppTypeList = getIncomeDetailsServiceResponse.Data.AppTypeList,
                 };
                 ViewBag.applicantTypeNo = applicantType;
 
@@ -186,7 +186,8 @@ namespace LoanProcessManagement.App.Controllers
             var response = await _incomeAssesmentService.AddIncomeAssessmentDetails(addIncomeAssessmentDetailsDto);
             var lead = incomeAssessmentDetailsVm.lead_Id;
             var app = incomeAssessmentDetailsVm.ApplicantType;
-
+            TempData["isSuccess"] = response.Succeeded;
+            TempData["Message"] = response.Message;
             return RedirectToAction("Index", new { applicantType = app, lead_Id = lead });
         }
         #endregion

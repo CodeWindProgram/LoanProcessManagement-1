@@ -22,5 +22,6 @@ namespace LoanProcessManagement.Application.Features.LeadITRDetails.Queries.Lead
         public string Message { get; set; }
         public bool Succeeded { get; set; }
         public bool IsSuccess { get; set; }
+        public List<int> AppTypeList { get; set; }
     }
 }

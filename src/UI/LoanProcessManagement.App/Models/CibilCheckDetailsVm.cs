@@ -54,5 +54,6 @@ namespace LoanProcessManagement.App.Models
         [Required(ErrorMessage = "Residence is Required")]
         public long Residence { get; set; }
         public bool Succeeded { get; set; }
+        public List<int> AppTypeList { get; set; }         //represent list of applicant types under particular lead
     }
 }
