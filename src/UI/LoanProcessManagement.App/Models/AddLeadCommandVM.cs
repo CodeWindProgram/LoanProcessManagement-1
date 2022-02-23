@@ -25,6 +25,7 @@ namespace LoanProcessManagement.App.Models
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Residence Address is Required")]
+        [MaxLength(100)]
         public string CustomerResidenceaddress { get; set; }
 
         [RegularExpression(@"[1-9]{1}[0-9]{5}|[1-9]{1}[0-9]{3}\\s[0-9]{3}", ErrorMessage = "Please Enter Valid Pincode.")]
@@ -32,6 +33,7 @@ namespace LoanProcessManagement.App.Models
         public string CustomerResidencePincode { get; set; }
 
         [Required(ErrorMessage = "Office Address is Required")]
+        [MaxLength(100)]
         public string CustomerOfficeaddress { get; set; }
 
         [RegularExpression(@"[1-9]{1}[0-9]{5}|[1-9]{1}[0-9]{3}\\s[0-9]{3}", ErrorMessage = "Please Enter Valid Pincode.")]
@@ -69,23 +71,26 @@ namespace LoanProcessManagement.App.Models
 
         [Required(ErrorMessage = "Please Select Appropriate Option")]
         public string IsPropertyIdentified { get; set; }
-
+        [MaxLength(150)] 
         public string Comment { get; set; }
 
         [RegularExpression(@"[1-9]{1}[0-9]{5}|[1-9]{1}[0-9]{3}\\s[0-9]{3}", ErrorMessage = "Please Enter Valid Pincode.")]
         [Required(ErrorMessage = "Property Pincode is Required")]
         public string PropertyPincode { get; set; }
 
-        [Required(ErrorMessage = "Please Select Yes/No")]
+        [Required(ErrorMessage = "Please Select Appropriate Option")]
         public string PropertyUnderConstruction { get; set; }
 
         [Required(ErrorMessage = "Project Name is Required")]
+        [MaxLength(50)]
         public string ProjectName { get; set; }
 
         [Required(ErrorMessage = "Unit Name is Required")]
+        [MaxLength(50)]
         public string UnitName { get; set; }
 
         [Required(ErrorMessage = "Project Address is Required")]
+        [MaxLength(100)]
         public string ProjectAddress { get; set; }
 
         [Required(ErrorMessage = "Please Select Appropriate Option")]
@@ -102,6 +107,7 @@ namespace LoanProcessManagement.App.Models
         [Required(ErrorMessage = "Please Select Yes/No")]
         public string IsApplicantExemptedFromGst { get; set; }
         [Required(ErrorMessage = "Please Provide Your Reason")]
+        [MaxLength(100)]
         public string ExemptedCategory { get; set; }
 
         [Required(ErrorMessage = "Please Select Appropriate Option")]
