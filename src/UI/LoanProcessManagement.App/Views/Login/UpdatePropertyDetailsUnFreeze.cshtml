@@ -57,11 +57,11 @@
 
                                     <label asp-for="PropertyUnderConstruction">Under-Construction<span style="color: red; width: 10%;">*</span></label><br />
                                     <div class="form-check form-check-inline" style="margin-left:20px;">
-                                        <input asp-for="PropertyUnderConstruction" class="form-check-input" type="radio" name="inlineRadioOptions" value="yes">
+                                        <input asp-for="PropertyUnderConstruction" class="form-check-input" id="yes" type="radio" name="PropertyUnderConstruction" value="yes">
                                         <label class="form-check-label" for="yes">Yes</label>
                                     </div>
                                     <div class="form-check form-check-inline" style="margin-left:20px;">
-                                        <input asp-for="PropertyUnderConstruction" class="form-check-input" type="radio" name="inlineRadioOptions" value="no">
+                                        <input asp-for="PropertyUnderConstruction" class="form-check-input" id="No" type="radio" name="PropertyUnderConstruction" value="no" checked>
                                         <label class="form-check-label" for="No">No</label>
                                     </div>
                                     <br><br>
@@ -258,7 +258,7 @@
         function hide() {
             var result = document.getElementById("btnSignIn").disabled = true;
         }
-    </script>*@
+   </script>*@
 
 
 
