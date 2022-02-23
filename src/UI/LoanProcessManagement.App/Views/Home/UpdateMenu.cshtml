@@ -161,18 +161,20 @@
                                         </div>
                                     </div>
 
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-
                                     <div class="col-lg-4 col-sm-12">
                                         <label>Is Parent Menu?<span style="color: Red">&nbsp;*</span></label><br />
 
                                         <input hidden id="confirming" asp-for="getMenuByIdQueryVm.IsParent" />
-                                        <input type="radio" name="Married" id="Yes" value="Yes" onclick="hideStudentChildren()" required>YES &nbsp&nbsp&nbsp&nbsp
-                                        <input type="radio" name="Married" id="No" value="No" onclick="hideStudentChildren()" checked>NO &nbsp&nbsp&nbsp&nbsp
+                                        <input type="radio" name="Married" id="Yes" value="Yes" onclick="hideStudentChildren()" required>
+                                        <label class="font-weight-normal" for="Yes"><span>Yes</span></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                        <input type="radio" name="Married" id="No" value="No" onclick="hideStudentChildren()" checked>
+                                        <label class="font-weight-normal" for="No"><span>No</span></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                                     </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
                                     <div class="col-lg-4 col-sm-12">
                                         <label>Sub Menus</label>
                                         <select multiple="multiple" asp-for="Parlist" asp-items="@ViewBag.ParentId" id="selectChildren" class="required" disabled required>
