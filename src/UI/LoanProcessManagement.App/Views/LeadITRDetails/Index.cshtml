@@ -229,9 +229,11 @@
                                             <div class="row tab">
                                                 <div class="col-md-12 mb-3">
                                                     <center>
-                                               
+
                                                         <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="SubmitButton" class="btn" style="background-color: #343a40; color:white;">&nbsp
-                                                        <a id="cancelbutton" class="btn btn-danger" href="/LeadList/">Cancel</a>
+                                                        @{ var leadId = "Lead_" + Model.lead_Id;}
+
+                                                        <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@leadId">Cancel</a>
 
                                                     </center>
                                                 </div>
