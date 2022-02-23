@@ -35,6 +35,14 @@ namespace LoanProcessManagement.Api.Controllers.v1
             return Ok(res);
         }
 
+        [HttpPost]
+        [Route("GetLeadListById")]
+        public async Task<ActionResult> GetLeadListById(GetLeadListByIdQuery BranchId)
+        {
+            var res = await _mediator.Send(BranchId);
+            return Ok(res);
+        }
+
         #region Api which will get lead by Id by - Akshay Pawar - 18/11/2021
         /// <summary>
         /// 18/11/2021 - Api which will get lead by Id

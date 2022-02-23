@@ -25,6 +25,7 @@ namespace LoanProcessManagement.Application.Contracts.Persistence
         Task<AddLeadDto> AddLeadAsync(LpmLeadMaster request);
         Task<GetLeadByLeadIdDto> GetLeadByLeadId(string lead_id);
         Task<UpdateLeadDto> ModifyLead(UpdateLeadCommand request);
+        Task<IEnumerable<LeadListByIdModel>> GetLeadListById(GetLeadListByIdQuery request);
 
 
     }
