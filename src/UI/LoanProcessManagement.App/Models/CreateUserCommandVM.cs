@@ -35,6 +35,7 @@ namespace LoanProcessManagement.App.Models
         [Display(Name = "Phone Number")]
         [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone Number Must Contain 10 digits .")]
         [Required(ErrorMessage = "Phone Number is Required .")]
+        [MaxLength(10)]
         public string PhoneNumber { get; set; }
 
         [Display(Name = "Role")]

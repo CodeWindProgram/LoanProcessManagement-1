@@ -15,11 +15,11 @@
         border-top-right-radius: 0.25rem;
     }
 
-    .btn {
+    /*.btn {
         background-color: #343a40;
         color: white;
         margin-bottom: 5px;
-    }
+    }*/
 
         .btn:hover {
             background-color: #adb5bd;
@@ -43,7 +43,7 @@
                     <div style="margin-bottom: 10px"></div>
                 </div>
                 <div class="card" style="padding:5px;">
-                    <table id="CreditDetailsList" class="display">
+                    <table id="CreditDetailsList" class="display table-responsive-lg">
                         <h5>Form No : @ViewBag.FormNo</h5>
                         <thead>
                             <tr>
@@ -93,8 +93,8 @@
                 "sZeroRecords": "No Records to Display",
                 "sSearch": "Search "
             },
-            "iDisplayLength": 15,
-            "aLengthMenu": [[25, 50, 100, 200, 500], [25, 50, 100, 200, 500]],
+            "iDisplayLength": 10,
+            "aLengthMenu": [[10, 50, 100, 200, 500], [10, 50, 100, 200, 500]],
             "bSortClasses": false,
             "bPaginate": true,
             "bAutoWidth": false,
