@@ -37,6 +37,18 @@
         var element = $(".nav-item a[href='" + path + "']");
         element.addClass("active");
     }
+    else if (temp[1] == 'CreditCibilDetailsList') {
+        var element = $(".nav-item a[href='" + path + "']");
+        element.addClass("active");
+    }
+    else if (temp[2] == 'HOSanctionReport') {
+        var element = $(".nav-item a[href='" + path + "']");
+        element.addClass("active");
+    }
+    else if (temp[2] == 'InprincipleSanctionReport') {
+        var element = $(".nav-item a[href='" + path + "']");
+        element.addClass("active");
+    }
 
 
     var parentEle = $(".nav-item a[href='" + path + "']")[0]?.parentElement.parentElement;
