@@ -68,6 +68,10 @@ namespace LoanProcessManagement.Persistence.Repositories
                 response.State = applicant.State;
                 response.NoOfBankAccounts = applicant.NoOfBankAccounts;
                 response.LeadID = lead.lead_Id;
+                response.isPerfiosRequired = applicant.isPerfiosRequired;
+                response.isCibilCheckRequired = applicant.isCibilCheckRequired;
+                response.isItrRequired = applicant.isItrRequired;
+                response.isGstRequired = applicant.isGstRequired;
                 return response;
             }
             else
@@ -130,6 +134,10 @@ namespace LoanProcessManagement.Persistence.Repositories
                 applicant.IsActive = true;
                 applicant.CreatedBy = request.CreatedBy;
                 applicant.LastModifiedBy = request.LastModifiedBy;
+                applicant.isPerfiosRequired = request.isPerfiosRequired;
+                applicant.isCibilCheckRequired = request.isCibilCheckRequired;
+                applicant.isItrRequired = request.isItrRequired;
+                applicant.isGstRequired = request.isGstRequired;
 
                 await _dbContext.SaveChangesAsync();
 
@@ -169,6 +177,10 @@ namespace LoanProcessManagement.Persistence.Repositories
                 applicantsDetails.CreatedBy = request.CreatedBy;
                 applicantsDetails.LastModifiedBy = request.LastModifiedBy;
                 applicantsDetails.State = request.State;
+                applicantsDetails.isPerfiosRequired = request.isPerfiosRequired;
+                applicantsDetails.isCibilCheckRequired = request.isCibilCheckRequired;
+                applicantsDetails.isItrRequired = request.isItrRequired;
+                applicantsDetails.isGstRequired = request.isGstRequired;
 
                 await _dbContext.LpmLeadApplicantsDetails.AddAsync(applicantsDetails);
                 await _dbContext.SaveChangesAsync();

@@ -129,6 +129,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 details.IsActive = true;
 
                 await _dbContext.LpmLeadITRDetails.AddAsync(details);
+                applicantDetails.isItrSubmitSuccess = true;
                 await _dbContext.SaveChangesAsync();
 
                 response.Message = "Enquiry Added Successfully";

@@ -40,5 +40,9 @@ namespace LoanProcessManagement.Application.Features.ApplicantDetails.Command
         public string AadharId { get; set; }
         public int ApplicantType { get; set; }  //  
         public int NoOfBankAccounts { get; set; }
+        public bool isItrRequired { get; set; }
+        public bool isCibilCheckRequired { get; set; }
+        public bool isPerfiosRequired { get; set; }
+        public bool isGstRequired { get; set; }
     }
 }

@@ -4,7 +4,56 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Index";
 }
+<style>
 
+/* With arrow tabs */
+
+.with-arrow .nav-link.active {
+    position: relative;
+}
+
+    .with-arrow .nav-link.active::after {
+        content: '';
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 6px solid #2b90d9;
+        position: absolute;
+        bottom: -6px;
+        left: 50%;
+        transform: translateX(-70%);
+        display: block;
+    }
+
+/* lined tabs */
+
+.nav-item .nav-link {
+    border: none;
+    border-bottom: 3px solid transparent;
+}
+
+    .flex-sm-fill .nav-link {
+        border: 1px solid lightgray;
+        color: #343A40;
+        /*border-bottom: 3px solid transparent;*/
+    }
+
+    .nav-item .nav-link.active {
+        background-color:#343A40;
+        color: white;
+        border-color: #2b90d9;
+        /*font-size:small;*/
+    }
+
+
+.nav-pills .nav-link {
+    color: #555;
+}
+
+.text-uppercase {
+    letter-spacing: 0.1em;
+}
+
+</style>
 @*<style>
     
     /*.AppTabs {
@@ -83,7 +132,7 @@
 </style>
 
 <div style="margin-top: 20px" class="container">
-    <div class="container app">
+    <div class="container app pb-5">
         <div class="col-sm-12 col-lg-12">
             <div data-effect="helix" id="panels" class="panel panel-info effect-helix in border">
                 <div class="panel-heading">
@@ -99,7 +148,20 @@
                     <div class="frames">
                         <div class="panel-body">
 
-                            <ul class="nav nav-tabs " id="myTab">
+                            <ul role="tablist" class="nav nav-tabs nav-pills flex-column flex-sm-row text-center bg-light border-0 rounded-nav p-2" id="myTab">
+                                <li class="nav-item flex-sm-fill">
+                                    <a role="tab" class="nav-link border-1 text-uppercase font-weight-bold active" id="home-tab" data-toggle="tab" data-target="#valuerAgency">Valuer Agency</a>
+                                </li>
+                                <li class="nav-item flex-sm-fill">
+                                    <a role="tab" class="nav-link border-1 text-uppercase font-weight-bold" id="profile-tab" data-toggle="tab" data-target="#legalAgency">&nbsp;&nbsp;&nbsp;&nbsp;Legal&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                </li>
+                                <li class="nav-item flex-sm-fill">
+                                    <a role="tab" class="nav-link border-1 text-uppercase font-weight-bold" id="contact-tab" data-toggle="tab" data-target="#fiAgency">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                </li>
+                            </ul>
+                            <hr />
+
+                                                @*<ul class="nav nav-tabs " id="myTab">
                                 <li class="nav-item ">
                                     <button class="nav-link active btn-lg " id="home-tab" data-toggle="tab" data-target="#valuerAgency">Valuer Agency</button>
                                 </li>
@@ -109,7 +171,7 @@
                                 <li class="nav-item ">
                                     <button class="nav-link btn-lg" id="contact-tab" data-toggle="tab" data-target="#fiAgency">F.I</button>
                                 </li>
-                            </ul>
+                            </ul>*@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="valuerAgency">
                                     <form method="post" action="/agency/index" id="valuerForm">
@@ -119,7 +181,7 @@
                                         <input type="hidden" asp-for="leadIdString" />
 
 
-                                        
+
                                         <div class="form-group pt-3">
                                             <div class="row">
                                                 <div class="col-2"></div>
@@ -187,7 +249,7 @@
                                                     <div class="col-lg-4 col-sm-12">
                                                         <label asp-for="valuerAgencyComment">Comment : </label>
                                                         <div class="input-control text">
-                                                            <input asp-for="valuerAgencyComment" type="text" id="ValuerComment" placeholder="Enter Comment" class="form-control"  />
+                                                            <input asp-for="valuerAgencyComment" type="text" id="ValuerComment" placeholder="Enter Comment" class="form-control" />
                                                             <span asp-validation-for="valuerAgencyComment" class="text-danger"></span>
                                                         </div>
                                                     </div>
@@ -839,6 +901,7 @@
                 $('#GFG_DOWN').text(chklist);
                 $('#valuerAgencyDoc').val(chklist);
                 $('#tabValueForValuer').val("Valuer");
+               
             }
         });
         $("#legalForm").submit(function () {

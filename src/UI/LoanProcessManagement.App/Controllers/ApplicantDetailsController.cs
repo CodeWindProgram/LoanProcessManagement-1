@@ -45,6 +45,7 @@ namespace LoanProcessManagement.App.Controllers
                     lead_Id = lead_Id,
                     LeadID = applicantResponse.Data.LeadID,
                     FormNo = applicantResponse.Data.FormNo,
+                    UserRoleId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value),
                     FirstName = applicantResponse.Data.FirstName,
                     MiddleName = applicantResponse.Data.MiddleName,
                     LastName = applicantResponse.Data.LastName,
@@ -68,6 +69,10 @@ namespace LoanProcessManagement.App.Controllers
                     Gender = applicantResponse.Data.Gender,
                     GstNo = applicantResponse.Data.GstNo,
                     DateOfBirth = applicantResponse.Data.DateOfBirth,
+                    isPerfiosRequired = applicantResponse.Data.isPerfiosRequired,
+                    isCibilCheckRequired = applicantResponse.Data.isCibilCheckRequired,
+                    isItrRequired = applicantResponse.Data.isCibilCheckRequired,
+                    isGstRequired = applicantResponse.Data.isGstRequired
                 };
 
                 ViewBag.applicantTypeNo = applicantType;
@@ -89,6 +94,10 @@ namespace LoanProcessManagement.App.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(AddApplicantDetailsCommandVM applicantDetailsCommandVM)
         {
+            if (applicantDetailsCommandVM != null)
+            {
+                ModelState.Remove("UserRoleId");
+            }
             if (ModelState.IsValid)
             {
                 var response = await _applicantDetailsService.UpdateApplicantDetails(applicantDetailsCommandVM);
