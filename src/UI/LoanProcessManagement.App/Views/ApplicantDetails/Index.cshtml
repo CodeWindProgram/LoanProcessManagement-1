@@ -202,9 +202,8 @@
 
                                         <div class="col-lg-4 col-sm-12">
                                             <label class="">Middle Name</label>
-                                            <span style="color: Red">&nbsp;*</span>
-                                            <input asp-for="MiddleName" onkeydown="return /[a-z]/i.test(event.key)" type="text" maxlength="26" id="ContentPlaceHolder1_txtCustomerMiddleName" class="form-control required" placeholder="XYZ">
-                                            <span asp-validation-for="MiddleName" style="color:Red;display:block;"></span>
+                                            <input asp-for="MiddleName" onkeydown="return /[a-z]/i.test(event.key)" type="text" maxlength="26" id="ContentPlaceHolder1_txtCustomerMiddleName" class="form-control" placeholder="XYZ">
+
                                         </div>
 
                                         <div class="col-lg-4 col-sm-12">
@@ -235,7 +234,7 @@
                                         <div class="col-lg-4 col-sm-12">
                                             <label class="">Date of Birth</label><span style="color: Red">&nbsp;*</span>
                                             <input asp-for="DateOfBirth" asp-format="{0:dd/MM/yyyy}" type="text" id="ContentPlaceHolder1txtDOB" placeholder="dd/mm/yyyy"
-                                                   class="form-control" />
+                                                   class="form-control noTxtInput" onkeydown="return /[a-z]/i.test(event.key)"/>
                                             <span id="ContentPlaceHolder1_RequiredFieldValidator2" style="color:Red;display:none;">Date of Birth is mandatory.</span>
                                             <span asp-validation-for="DateOfBirth" style="color:Red;display:block;"></span>
                                         </div>
@@ -255,6 +254,22 @@
 
                                             </select>
                                             <span asp-validation-for="Gender" style="color:Red;display:block;"></span>
+                                        </div>
+                                        <div class="col-lg-4 col-sm-12">
+                                            <label asp-for="EmploymentType">Employment Type</label>
+                                            <br />
+                                            <div>
+                                                <input id="chkSalaried" asp-for="EmploymentType" type="radio" name="employmentType" value="Salaried" checked="checked" />
+                                                <label for="chkSalaried">
+                                                    <span id="normal" class="font-weight-normal">Salaried</span>
+                                                </label>
+                                                &nbsp;&nbsp;&nbsp;                                              
+                                                <input id="chkSelfEmployment" asp-for="EmploymentType" type="radio" name="employmentType" value="SelfEmployment" />
+                                                <label for="chkSelfEmployment">
+                                                    <span id="normal" class="font-weight-normal">Self Employed</span>
+                                                </label>
+                                            </div>
+                                            <span asp-validation-for="EmploymentType" class="text-danger"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -295,12 +310,13 @@
                                         <div class="col-lg-4 col-sm-12">
                                             <label class="">Driver's Licence</label>
                                             <input asp-for="DrivingLiscenceNo" placeholder="Driver's Licence" maxlength="16" id="ContentPlaceHolder1_txtDriverLicense" class="form-control">
-                                            <span asp-validation-for="AadharId" style="color:Red;display:block;"></span>
+                                            <span asp-validation-for="DrivingLiscenceNo" style="color:Red;display:block;"></span>
                                         </div>
 
                                         <div class="col-lg-4 col-sm-12">
                                             <label class="">Ration Card</label>
                                             <input asp-for="RationCardNo" type="text" placeholder="Ration Card" maxlength="10" id="ContentPlaceHolder1_txtrationCard" class="form-control">
+                                            <span asp-validation-for="RationCardNo" style="color:Red;display:block;"></span>
                                         </div>
 
 
