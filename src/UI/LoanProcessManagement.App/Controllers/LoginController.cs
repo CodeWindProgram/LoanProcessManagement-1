@@ -223,14 +223,14 @@ namespace LoanProcessManagement.App.Controllers
                 if (forgotPasswordResponse.Succeeded)
                 {
                     message = forgotPasswordResponse.Message;
-                    ViewBag.Issuccesflag = true;
-                    ViewBag.Message = message;
+                   TempData["ForgetPasswordSuccess"]= true;
+                    TempData["ForgetPasswordMessage"] = message;
                 }
                 else
                 {
                     message = forgotPasswordResponse.Message;
-                    ViewBag.Issuccesflag = false;
-                    ViewBag.Message = message;
+                    TempData["ForgetPasswordSuccess"] = false;
+                    TempData["ForgetPasswordMessage"] = message;
                 }
             }
             ModelState.Clear();

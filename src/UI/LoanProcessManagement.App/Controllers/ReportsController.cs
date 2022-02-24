@@ -56,18 +56,18 @@ namespace LoanProcessManagement.App.Controllers
             return View();
         }
 
-        //[HttpGet("/MyQueueList/{ParentId}")]
-        //public async Task<IActionResult> MyQueueList(long ParentId)
-        //{
+        [HttpGet("/MyQueueList/{ParentId}")]
+        public async Task<IActionResult> MyQueueList(long ParentId)
+        {
 
-        //    var dsaServiceResponse = await _dsaCornerService.DSACornerList(ParentId);
+            var dsaServiceResponse = await _dsaCornerService.DSACornerList(ParentId);
 
-        //    if (dsaServiceResponse != null && dsaServiceResponse.Succeeded && dsaServiceResponse.Data != null)
-        //    {
-        //        return View(dsaServiceResponse.Data);
-        //    }
-        //    return View();
-        //}
+            if (dsaServiceResponse != null && dsaServiceResponse.Succeeded && dsaServiceResponse.Data != null)
+            {
+                return View(dsaServiceResponse.Data);
+            }
+            return View();
+        }
 
         #endregion
     }

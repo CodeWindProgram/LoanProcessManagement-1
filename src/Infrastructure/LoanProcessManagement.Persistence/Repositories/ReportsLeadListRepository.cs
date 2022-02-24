@@ -43,7 +43,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                                select new ReportsLeadListModel
                                {
                                    FormNo = A.FormNo,
-                                   CustomerName=B.Name,
+                                   CustomerName=A.FirstName +" "+ A.LastName,
                                    PhoneNo=A.CustomerPhone,
                                    FirstMeeting=C.CreatedDate,
                                    Status=C.StatusDescription,
