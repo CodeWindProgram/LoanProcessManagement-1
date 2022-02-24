@@ -12,7 +12,7 @@ namespace LoanProcessManagement.Application.Contracts.Persistence
     {
         Task<GstAddEnquiryCommandDto> AddGstEnquiry(int ApplicantType , int Lead_Id);
 
-        //  Task<GstCreateEnquiryCommandDto> CreateGstEnquiry(GstCreateEnquiryCommand request);
+        Task<LPMGSTEnquiryDetail> CreateGstEnquiry(GstCreateEnquiryCommand request);
 
         #region Interface Method - Pratiksha Poshe - 14-02-2022
         Task<GetIncomeAssessmentDetailsDto> GetIncomeAssessmentDetailsAsync(int ApplicantType, long lead_id);

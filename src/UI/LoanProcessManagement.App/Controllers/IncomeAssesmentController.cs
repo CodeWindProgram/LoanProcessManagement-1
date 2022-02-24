@@ -40,10 +40,9 @@ namespace LoanProcessManagement.App.Controllers
             {
                 ViewBag.LeadId = "Lead_" + lead_Id;
                 ViewBag.incomeTypeNo = applicantType;
-                return View(gstFileSaveVm);
+                if (gstFileSaveVm.gstAddEnquiryCommandDto.IsSubmit== true) { return View("FreezedCreateEnquiry", gstFileSaveVm); }
+                else { return View(gstFileSaveVm); }
             }
-            
-
             return View("Error");
         }
 
@@ -69,7 +68,7 @@ namespace LoanProcessManagement.App.Controllers
 
             var gstCreateEnquiryCommandDto = new GstCreateEnquiryCommand()
             {
-                ID = gstFileSaveVM.gstAddEnquiryCommandDto.ID,
+                //ID = gstFileSaveVM.gstAddEnquiryCommandDto.ID,
                 CustomerName = gstFileSaveVM.gstAddEnquiryCommandDto.CustomerName,
                 MobileNo = gstFileSaveVM.gstAddEnquiryCommandDto.MobileNo,
                 Email = gstFileSaveVM.gstAddEnquiryCommandDto.Email,
@@ -78,9 +77,11 @@ namespace LoanProcessManagement.App.Controllers
                 ExcelFilePath = newFileNameExcel,
                 IsActive = gstFileSaveVM.gstAddEnquiryCommandDto.IsActive,
                 EmploymentType = gstFileSaveVM.gstAddEnquiryCommandDto.EmploymentType,
-                FormNoId = gstFileSaveVM.gstAddEnquiryCommandDto.FormNo,
+                FormNo = gstFileSaveVM.gstAddEnquiryCommandDto.FormNo,
                 Lead_IdId = gstFileSaveVM.gstAddEnquiryCommandDto.Lead_Id,
-                ApplicantType = gstFileSaveVM.gstAddEnquiryCommandDto.ApplicantType
+                ApplicantType = gstFileSaveVM.gstAddEnquiryCommandDto.ApplicantType,
+                ApplicantDetailId = gstFileSaveVM.gstAddEnquiryCommandDto.ApplicantDetailId,
+                IsSubmit = gstFileSaveVM.gstAddEnquiryCommandDto.IsSubmit
             };
             var createmenuresponse = await _incomeAssesmentService.CreateEnquiry(gstCreateEnquiryCommandDto);
             var lead = gstFileSaveVM.gstAddEnquiryCommandDto.Lead_Id;

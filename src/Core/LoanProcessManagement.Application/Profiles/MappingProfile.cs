@@ -134,6 +134,7 @@ namespace LoanProcessManagement.Application.Profiles
             CreateMap<LpmLeadStatusMaster, LeadHistoryQuery>().ReverseMap();
             CreateMap<LpmLeadMaster, LeadHistoryQuery>().ReverseMap();
             CreateMap<LPMGSTEnquiryDetail, GstAddEnquiryCommandDto>().ReverseMap();
+            CreateMap<LpmLeadApplicantsDetails, GstAddEnquiryCommandDto>().ReverseMap();
             #region GetAllLoanProducts mapping has created by - Pratiksha Poshe - 10/11/2021
             CreateMap<LpmLoanProductMaster, GetAllLoanProductsDto>().ReverseMap();
             #endregion
@@ -156,7 +157,9 @@ namespace LoanProcessManagement.Application.Profiles
             #endregion
 
             CreateMap<LPMGSTEnquiryDetail, GstCreateEnquiryCommand>().ReverseMap();
+            CreateMap<LpmLeadApplicantsDetails, GstCreateEnquiryCommand>().ReverseMap();
             CreateMap<LPMGSTEnquiryDetail, GstCreateEnquiryCommandDto>().ReverseMap();
+            CreateMap<LpmLeadApplicantsDetails, GstCreateEnquiryCommandDto>().ReverseMap();
 
             #region forgotpassword mapping has created by - Ramya Guduru -01/11/2021
             CreateMap<ForgotPasswordModel, ForgotPasswordDto>().ReverseMap();

@@ -28,6 +28,30 @@ namespace LoanProcessManagement.Persistence.Repositories
 
         }
 
+        public async Task<LPMGSTEnquiryDetail> CreateGstEnquiry(GstCreateEnquiryCommand request)
+        {
+            var lead = _dbContext.LpmLeadMasters.Where(a => a.lead_Id == (request.Lead_IdId).ToString()).FirstOrDefault();
+            var gstCreateEnquiryCommandDto = new LPMGSTEnquiryDetail()
+            {
+                FormNumber = request.FormNo.ToString(),
+                Lead_Id = lead,
+                CustomerName = request.CustomerName,
+                MobileNo = request.MobileNo,
+                Email = request.Email,
+                ExcelFilePath = request.ExcelFilePath,
+                PdfFilePath = request.PdfFilePath,
+                GstNo = request.GstNo,
+                ApplicantType = request.ApplicantType,
+                IsActive = request.IsActive,
+                EmploymentType = request.EmploymentType,
+                ApplicantDetailId = request.ApplicantDetailId,
+                IsSubmit = request.IsSubmit
+            };
+            var obj = await _dbContext.LPMGSTEnquiryDetails.AddAsync(gstCreateEnquiryCommandDto);
+            _dbContext.SaveChanges();
+            return obj.Entity;
+        }
+
         public async Task<GstAddEnquiryCommandDto> AddGstEnquiry(int ApplicantType, int Lead_Id)
         {
             List<int> applicantTypeList = await _dbContext.LpmLeadApplicantsDetails.Where(x => x.lead_Id == Lead_Id).OrderBy(x => x.ApplicantType).Select(x => x.ApplicantType).ToListAsync();      //represent list of applicant types under particular lead

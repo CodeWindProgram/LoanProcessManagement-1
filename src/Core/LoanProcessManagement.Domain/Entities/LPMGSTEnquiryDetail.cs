@@ -16,10 +16,9 @@ namespace LoanProcessManagement.Domain.Entities
         public LpmLeadMaster Lead_Id { get; set; }
         public string CustomerName { get; set; }
         public long? ApplicantDetailId { get; set; }
-
         [ForeignKey("ApplicantDetailId")]
         public LpmLeadApplicantsDetails LeadApplicantDetails { get; set; }
-        public int MobileNo { get; set; }
+        public string MobileNo { get; set; }
         public string Email { get; set; }
         public string EmploymentType { get; set; }
         public string ExcelFilePath { get; set; }
@@ -29,5 +28,6 @@ namespace LoanProcessManagement.Domain.Entities
         public bool IsActive { get; set; }
         public string Reinitiated_By { get; set; }
         public string FormNumber { get; set; }
+        public bool IsSubmit { get; set; }
     }
 }
