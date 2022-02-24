@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LoanProcessManagement.Application.Features.IncomeAssesment.Queries.GetIsSubmitFromGst;
+using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.UpdateSubmitGst;
 
 namespace LoanProcessManagement.Api.Controllers.v1
 {
@@ -61,6 +63,7 @@ namespace LoanProcessManagement.Api.Controllers.v1
             return Ok(result);
         }
         #endregion
+
         #region AddIncomeAssessmentDetails API by Pratiksha Poshe - 14/02/2022
         /// <summary>
         /// 14/02/2021 - AddIncomeAssessmentDetails API
@@ -78,5 +81,20 @@ namespace LoanProcessManagement.Api.Controllers.v1
             return Ok(result);
         }
         #endregion
+
+
+        [HttpGet("GetSubmit/{Id}")]
+        public async Task<ActionResult> GetSubmit([FromRoute]long Id)
+        {
+            var dtos = await _mediator.Send(new GetIsSubmitFromGstQuery(Id));
+            return Ok(dtos);
+        }
+
+        [HttpPut("UpdateSubmitGst")]
+        public async Task<ActionResult> UpdateSubmitGst([FromBody] UpdateSubmitGstCommand request)
+        {
+            var dtos = await _mediator.Send(request);
+            return Ok(dtos);
+        }
     }
 }

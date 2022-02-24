@@ -3,6 +3,7 @@ using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.AddIncomeAssessment;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTAddEnuiry;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTCreateEnquiry;
+using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.UpdateSubmitGst;
 using LoanProcessManagement.Application.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -36,12 +37,14 @@ namespace LoanProcessManagement.App.Controllers
             var gstFileSaveVm = new GstFileSaveVM();
             var AddEnquiryServiceResponse = await _incomeAssesmentService.AddEnquiry(applicantType, lead_Id);
             gstFileSaveVm.gstAddEnquiryCommandDto = AddEnquiryServiceResponse.Data;
+            var newws = gstFileSaveVm.gstAddEnquiryCommandDto.ID;
+            var submitted = await _incomeAssesmentService.GetIsSubmit(newws);
             if (gstFileSaveVm != null)
             {
                 ViewBag.LeadId = "Lead_" + lead_Id;
                 ViewBag.incomeTypeNo = applicantType;
-                if (gstFileSaveVm.gstAddEnquiryCommandDto.IsSubmit== true) { return View("FreezedCreateEnquiry", gstFileSaveVm); }
-                else { return View(gstFileSaveVm); }
+                if(submitted.Data.IsSubmit == true) { return View("FreezedCreateEnquiry",gstFileSaveVm);}
+                return View(gstFileSaveVm);
             }
             return View("Error");
         }
@@ -80,12 +83,18 @@ namespace LoanProcessManagement.App.Controllers
                 FormNo = gstFileSaveVM.gstAddEnquiryCommandDto.FormNo,
                 Lead_IdId = gstFileSaveVM.gstAddEnquiryCommandDto.Lead_Id,
                 ApplicantType = gstFileSaveVM.gstAddEnquiryCommandDto.ApplicantType,
-                ApplicantDetailId = gstFileSaveVM.gstAddEnquiryCommandDto.ApplicantDetailId,
-                IsSubmit = gstFileSaveVM.gstAddEnquiryCommandDto.IsSubmit
+                ApplicantDetailId = gstFileSaveVM.gstAddEnquiryCommandDto.ApplicantDetailId
             };
             var createmenuresponse = await _incomeAssesmentService.CreateEnquiry(gstCreateEnquiryCommandDto);
             var lead = gstFileSaveVM.gstAddEnquiryCommandDto.Lead_Id;
             var app = gstFileSaveVM.gstAddEnquiryCommandDto.ApplicantType;
+            var newws = gstFileSaveVM.gstAddEnquiryCommandDto.ID;
+            var updateSubmitGstCommand = new UpdateSubmitGstCommand()
+            {
+                Id = newws,
+                IsSubmit = true
+            };
+            var submitgoal = _incomeAssesmentService.PostIsSubmit(updateSubmitGstCommand);
             //var toreturn = lead + app;
             return RedirectToAction("CreateEnquiry",new { applicantType=app, lead_Id = lead});
         }

@@ -13,6 +13,9 @@ using LoanProcessManagement.Application.Features.IncomeAssesment.Queries.GetInco
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.AddIncomeAssessment;
 using LoanProcessManagement.Domain.CustomModels;
 using System;
+using LoanProcessManagement.Application.Features.IncomeAssesment.Queries.GetIsSubmitFromGst;
+using LoanProcessManagement.Application.Responses;
+using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.UpdateSubmitGst;
 
 namespace LoanProcessManagement.Persistence.Repositories
 {
@@ -44,8 +47,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 ApplicantType = request.ApplicantType,
                 IsActive = request.IsActive,
                 EmploymentType = request.EmploymentType,
-                ApplicantDetailId = request.ApplicantDetailId,
-                IsSubmit = request.IsSubmit
+                ApplicantDetailId = request.ApplicantDetailId
             };
             var obj = await _dbContext.LPMGSTEnquiryDetails.AddAsync(gstCreateEnquiryCommandDto);
             _dbContext.SaveChanges();
@@ -55,27 +57,27 @@ namespace LoanProcessManagement.Persistence.Repositories
         public async Task<GstAddEnquiryCommandDto> AddGstEnquiry(int ApplicantType, int Lead_Id)
         {
             List<int> applicantTypeList = await _dbContext.LpmLeadApplicantsDetails.Where(x => x.lead_Id == Lead_Id).OrderBy(x => x.ApplicantType).Select(x => x.ApplicantType).ToListAsync();      //represent list of applicant types under particular lead
-            var result = await (from A in _dbContext.LPMGSTEnquiryDetails
-                                join B in _dbContext.LpmLeadMasters on A.Lead_Id.lead_Id equals B.lead_Id
-                                where A.ApplicantType == ApplicantType && A.Lead_Id.Id == Lead_Id && A.IsActive == true
-                                select new GstAddEnquiryCommandDto
-                                {
-                                    Lead_Id = Lead_Id,
-                                    ID = A.ID,
-                                    FormNo = int.Parse(B.FormNo),
-                                    CustomerName = A.CustomerName,
-                                    Email = A.Email,
-                                    MobileNo = A.MobileNo,
-                                    GstNo = A.GstNo,
-                                    EmploymentType = A.EmploymentType,
-                                    ExcelFilePath = A.ExcelFilePath,
-                                    PdfFilePath = A.PdfFilePath,
-                                    IsActive = A.IsActive,
-                                    ApplicantType = A.ApplicantType,
-                                    AppTypeList = applicantTypeList
-                                }).FirstOrDefaultAsync();
-            
-            return result;
+            var res = await (from A in _dbContext.LpmLeadApplicantsDetails
+                                 //join B in _dbContext.LPMGSTEnquiryDetails on A.Id equals B.ApplicantDetailId
+                             where A.ApplicantType == ApplicantType && A.lead_Id == Lead_Id && A.IsActive == true
+                             select new GstAddEnquiryCommandDto
+                             {
+                                 Lead_Id = Lead_Id,
+                                 ID = A.Id,
+                                 FormNo = long.Parse(A.FormNo),
+                                 CustomerName = A.FirstName + " " + A.LastName,
+                                 Email = A.CustomerEmail,
+                                 MobileNo = A.CustomerPhone,
+                                 GstNo = A.GstNo,
+                                 EmploymentType = A.EmploymentType,
+                                 //ExcelFilePath = B.ExcelFilePath,
+                                 //PdfFilePath = B.PdfFilePath,
+                                 IsActive = A.IsActive,
+                                 ApplicantType = A.ApplicantType,
+                                 ApplicantDetailId = A.Id,
+                                 AppTypeList = applicantTypeList
+                             }).FirstOrDefaultAsync();
+            return res;
         }
 
         #region this repository method will get IncomeAssessment Details - Pratiksha Poshe - 14/02/2021
@@ -174,32 +176,17 @@ namespace LoanProcessManagement.Persistence.Repositories
         }
         #endregion
 
-        //public async Task<GstCreateEnquiryCommandDto> CreateGstEnquiry(GstCreateEnquiryCommand request)
-        //{
-        //    //var user = await _dbContext.LpmLeadMasters.Include(x => x.FormNo).Where(x => x.Id == request.FormNo).FirstOrDefaultAsync();
-
-        //    //var userProcessCycle = await _dbContext.LPMGSTEnquiryDetails.Include(x => x.FormNo).Where(x => x.ID == user.Id).FirstOrDefaultAsync();
-
-
-        //    var result = await (from A in _dbContext.LPMGSTEnquiryDetails
-        //                        join B in _dbContext.LpmLeadMasters on A.Lead_Id.lead_Id equals B.lead_Id
-        //                        where A.IsActive == true
-        //                        select new GstCreateEnquiryCommandDto
-        //                        {
-        //                            ID = A.ID,
-        //                            FormNo = int.Parse(B.FormNo),
-        //                            CustomerName = A.CustomerName,
-        //                            Email = A.Email,
-        //                            MobileNo = A.MobileNo,
-        //                            GstNo = A.GstNo,
-        //                            EmploymentType = A.EmploymentType,
-        //                            ExcelFilePath = A.ExcelFilePath,
-        //                            PdfFilePath = A.PdfFilePath,
-        //                            IsActive = A.IsActive,
-        //                            ApplicantType = A.ApplicantType
-
-        //                        }).FirstOrDefaultAsync();
-        //    return result;
-        //}
+        public async Task<Response<UpdateSubmitGstCommandDto>>UpdateIsSubmit(UpdateSubmitGstCommand req)
+        {
+            UpdateSubmitGstCommandDto response = new UpdateSubmitGstCommandDto();
+            var data =  _dbContext.LpmLeadApplicantsDetails.Where(x => x.Id == req.Id).FirstOrDefault();
+            if (data != null)
+            {
+                data.Id = req.Id;
+                data.IsSubmit = req.IsSubmit;
+                await _dbContext.SaveChangesAsync();
+            }
+            return new Response<UpdateSubmitGstCommandDto>(response);
+        }
     }
 }
