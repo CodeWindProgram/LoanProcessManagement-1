@@ -15,10 +15,13 @@ using LoanProcessManagement.Application.Features.Menu.Query.MenuList;
 using LoanProcessManagement.Application.Features.RoleMaster.Queries.GetRoleMasterList;
 using LoanProcessManagement.Application.Responses;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -33,12 +36,14 @@ namespace LoanProcessManagement.App.Controllers
         private readonly ICommonServices _commonService;
         private readonly IMenuService _menuService;
         private readonly IRoleMasterService _roleMasterService;
-        public HomeController(IAccountService accountService, ICommonServices commonService, IMenuService menuService, IRoleMasterService roleMasterService)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public HomeController(IAccountService accountService, ICommonServices commonService,IWebHostEnvironment webHostEnvironment, IMenuService menuService, IRoleMasterService roleMasterService)
         {
             _roleMasterService = roleMasterService;
             _accountService = accountService;
             _commonService = commonService;
             _menuService = menuService;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         #region Calling the API for the MenuMaster - Saif Khan - 28/10/2021
@@ -161,8 +166,13 @@ namespace LoanProcessManagement.App.Controllers
             var message = "";
 
             var ReturnsTomenulist = ViewBag.UserId = HttpContext.Request.Cookies["Id"];
+            var IconPath = UniqueName(checkboxfunctionVm.Icons);
+            checkboxfunctionVm.createMenuCommand.Icon = IconPath;
+            if (checkboxfunctionVm.Icons != null && IconPath != null && checkboxfunctionVm.createMenuCommand.Icon != null)
+                ModelState.Clear();
             if (ModelState.IsValid)
             {
+
                 var createmenuresponse = await _menuService.CreateMenu(checkboxfunctionVm.createMenuCommand);
                 if (createmenuresponse.Succeeded)
                 {
@@ -210,6 +220,12 @@ namespace LoanProcessManagement.App.Controllers
             return RedirectToAction("Menulist");
         }
         #endregion
+
+       
+
+
+
+
 
         #region Return Method - Saif Khan - 11/11/2021
         public async Task<IActionResult> ReturnToMenuList()
@@ -263,12 +279,26 @@ namespace LoanProcessManagement.App.Controllers
             updateCheckboxfunctionVm.RoleList = menuCheckListVm;
             ViewBag.CheckedIds = getallparId;
             TempData["Status"] = updateCheckboxfunctionVm.getMenuByIdQueryVm.IsActive;
+            TempData["Icon"] = updateCheckboxfunctionVm.getMenuByIdQueryVm.Icon;
             return View(updateCheckboxfunctionVm);
         }
 
         [HttpPost("/MenuUpdate/{Id}")]
         public async Task<IActionResult> UpdateMenu(UpdateCheckboxfunctionVm updateCheckboxfunctionVm)
         {
+            if(updateCheckboxfunctionVm.Icons == null)
+            {
+                updateCheckboxfunctionVm.getMenuByIdQueryVm.Icon = TempData["Icon"].ToString();
+            }
+            else
+            {
+                var IconPath = UniqueName(updateCheckboxfunctionVm.Icons);
+                updateCheckboxfunctionVm.getMenuByIdQueryVm.Icon = IconPath;
+               
+
+            }
+            if (updateCheckboxfunctionVm.getMenuByIdQueryVm.Icon != null)
+                ModelState.Clear();
             if (ModelState.IsValid)
             {
                 var updatemenucommand = new UpdateMenuCommand()
@@ -331,7 +361,24 @@ namespace LoanProcessManagement.App.Controllers
         }
         #endregion
 
-
+        private string UniqueName(IFormFile nameFile)
+        {
+            string thumbnail = null;
+            var Guids = Guid.NewGuid().ToString();
+            if (nameFile != null)
+            {
+                Directory.CreateDirectory("css/images/icon/MenuIcons");
+                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "css/images/icon/MenuIcons/");
+                thumbnail = "/css/images/icon/MenuIcons/" + Guids + "_" + nameFile.FileName;
+                var temp = Guids + "_" + nameFile.FileName;
+                string filePath = Path.Combine(uploadsFolder, temp);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    nameFile.CopyTo(fileStream);
+                }
+            }
+            return thumbnail;
+        }
 
         #region Calling API for the Delete Menu - Saif Khan - 11/11/2021
         /// <summary>

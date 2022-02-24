@@ -1,89 +1,90 @@
 ﻿@model LoanProcessManagement.App.Models.UpdateCheckboxfunctionVm
-    <link href="~/css/Common Css/Common1.css" rel="stylesheet" />
+<link href="~/css/Common Css/Common1.css" rel="stylesheet" />
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "UpdateMenu";
     var status = (bool)TempData["Status"];
+    var Icon = Model.getMenuByIdQueryVm.Icon;
 }
 @*<style type="text/css">
-    #pswd_info {
-        position: relative;
-        left: 20px;
-        right: 40px;
-        width: 70%;
-        padding: 15px;
-        background: #fefefe;
-        font-family: Arial;
-        font-size: 15px;
-        color: #444;
-        border-radius: 5px;
-        box-shadow: 0 1px 3px #ccc;
-        border: 1px solid #ddd;
-    }
-
-        #pswd_info::before {
-            content: "\25B2";
+        #pswd_info {
             position: relative;
-            top: -19px;
-            left: 45%;
-            font-size: 16px;
-            line-height: 14px;
-            color: #ddd;
-            text-shadow: none;
-            display: block;
+            left: 20px;
+            right: 40px;
+            width: 70%;
+            padding: 15px;
+            background: #fefefe;
+            font-family: Arial;
+            font-size: 15px;
+            color: #444;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px #ccc;
+            border: 1px solid #ddd;
         }
 
-    .panel-heading {
-        color: white;
-        background-color: #343a40;
-        border-bottom: 1px solid rgba(0,0,0,.125);
-        padding: 0.75rem 1.25rem;
-        position: relative;
-        border-top-left-radius: 0.25rem;
-        border-top-right-radius: 0.25rem;
-    }
+            #pswd_info::before {
+                content: "\25B2";
+                position: relative;
+                top: -19px;
+                left: 45%;
+                font-size: 16px;
+                line-height: 14px;
+                color: #ddd;
+                text-shadow: none;
+                display: block;
+            }
 
-   
-    #para {
-        color: red;
-        text-align: center;
-        font-size: larger;
-    }
+        .panel-heading {
+            color: white;
+            background-color: #343a40;
+            border-bottom: 1px solid rgba(0,0,0,.125);
+            padding: 0.75rem 1.25rem;
+            position: relative;
+            border-top-left-radius: 0.25rem;
+            border-top-right-radius: 0.25rem;
+        }
 
-    #bara {
-        color: #191970;
-    }
 
-    .border-part {
-        padding-left: 60px;
-        padding-right: 60px;
-    }
+        #para {
+            color: red;
+            text-align: center;
+            font-size: larger;
+        }
 
-    #inpcheck {
-        margin-left: 10px;
-    }
+        #bara {
+            color: #191970;
+        }
 
-    #txtlab {
-        padding-top: 9px;
-    }
+        .border-part {
+            padding-left: 60px;
+            padding-right: 60px;
+        }
 
-    #lblcheck {
-        font-size: 14px;
-        color: #818181;
-        font-family: sans-serif;
-    }
+        #inpcheck {
+            margin-left: 10px;
+        }
 
-    #checkings {
-        display: inline-flex;
-        /* margin-left: 30px;
-        margin-top: 10px;*/
-    }
+        #txtlab {
+            padding-top: 9px;
+        }
 
-    #selectChildren {
-        width: 320px;
-    }
-</style>*@
+        #lblcheck {
+            font-size: 14px;
+            color: #818181;
+            font-family: sans-serif;
+        }
+
+        #checkings {
+            display: inline-flex;
+            /* margin-left: 30px;
+            margin-top: 10px;*/
+        }
+
+        #selectChildren {
+            width: 320px;
+        }
+    </style>*@
 <div class="container app">
     <div class="col-sm-12 col-lg-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in">
@@ -93,7 +94,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="border-part">
-                        <form method="post" asp-controller="Home">
+                        <form method="post" asp-controller="Home" enctype="multipart/form-data">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div><br />
                             <div style="text-align:end" class="form-group"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
                             <div hidden class="form-group">
@@ -123,10 +124,19 @@
                                     </div>
 
                                     <div class="col-lg-4 col-sm-12">
-                                        <label asp-for="getMenuByIdQueryVm.Icon" class="control-label">Icon<span style="color: Red">&nbsp;*</span></label>
+                           
 
-                                        <input asp-for="getMenuByIdQueryVm.Icon" class="form-control" maxlength="200" />
-                                        <span asp-validation-for="getMenuByIdQueryVm.Icon" class="text-danger"></span>
+                                        <label asp-for="Icons" class="control-label">Icon<span style="color: Red">&nbsp;*</span></label>
+
+                                        <span id="errorFileSize" style="font-size: 12px" class="text-danger"></span>
+                                        <input asp-for="Icons" type="file" name="Icons" accept="image/*" id="Icons" onchange="readURL(this);" />
+                                        <div class="pt-3">
+                                            <img id="thumbnail" class="img-thumbnail" src="@Icon" alt="Icon image" style="height:80px;width:80px;">
+                                        </div>
+                                        <span asp-validation-for="Icons" class="text-danger"></span>
+
+
+
                                     </div>
                                 </div>
                             </div>
@@ -197,7 +207,7 @@
                                     <div class="col-md-4">
                                         <button type="submit" style="background-color: #343a40;color:white" class="btn">Submit</button>
                                         <a asp-action="Menulist" id="btn2" type="button" value="Cancel" class="btn btn-danger">Cancel</a>
-                                    
+
                                         @{
                                             if (status)
 
@@ -449,4 +459,47 @@
         }
 
     })
+
+
+
+    function readURL(input) {
+        var ext = $(input).val().split('.').pop().toLowerCase();
+        var result = $.inArray(ext, ['PNG', 'png', 'JPG', 'JPEG', 'jpg', 'jpeg']);
+        if (input.files && input.files[0] && result >= 0) {
+            var fileSize = $(input)[0].files[0].size;
+            if (fileSize <= 1000000) {
+                $('#errorFileSize').text("");
+                var reader = new FileReader();
+                $('#thumbnail').show();
+                reader.onload = function (e) {
+                    $('#thumbnail').attr('src', e.target.result)
+                        .width(80)
+                        .height(80);
+
+
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+            else {
+                var $el = $('#Icons');
+                $el.wrap('<form>').closest('form').get(0).reset();
+                $el.unwrap();
+                $('#thumbnail').attr('src', null);
+                $('#errorFileSize').text("Max File Size is 1 MB");
+                $('#thumbnail').hide();
+
+            }
+        }
+        else {
+            var $el = $('#Icons');
+            $el.wrap('<form>').closest('form').get(0).reset();
+            $el.unwrap();
+            $('#errorFileSize').text("Only png, jpg and jpeg Images allowed");
+            $('#thumbnail').hide();
+            setTimeout(
+                function () {
+                    $('#errorFileSize').text("");
+                }, 10000);
+        }
+    }
 </script>

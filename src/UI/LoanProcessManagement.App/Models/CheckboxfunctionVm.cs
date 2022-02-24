@@ -2,7 +2,9 @@
 using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenus;
 using LoanProcessManagement.Application.Features.Menu.Query.GetMenuByID;
 using LoanProcessManagement.Application.Features.RoleMaster.Queries.GetRoleMasterList;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace LoanProcessManagement.App.Models
 {
@@ -13,5 +15,7 @@ namespace LoanProcessManagement.App.Models
         public List<MenuCheckListVm> ListVms { get; set; }
         public List<long> Childlist { get; set; }
         public List<GetAllMenusQueryVm> getWithParentId { get; set; }
+        [Required]
+        public IFormFile Icons { get; set; }
     }
 }
