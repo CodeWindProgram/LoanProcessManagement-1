@@ -15,7 +15,7 @@
     }*/
 
     .AppTabs {
-        display: inline-block;
+        display: none;
         margin-right: 3px;
         padding: 5px 30px;
         background: #191970;
@@ -97,14 +97,15 @@
                         <input type="hidden" asp-for="ApplicantType" id="hdnApplicantType">
                         <input type="hidden" asp-for="CreatedBy" value=@User.FindFirst("lg_id").Value />
                         <input type="hidden" asp-for="LastModifiedBy" value=@User.FindFirst("lg_id").Value />
+                        <input type="hidden" asp-for="AppTypeList" />
                         <div style="height: 15px;"></div>
-                        <div class="frr pt-4 pl-4 pr-4">
-                            <a href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=0" class="AppTabs btn-sm selected" id="tabProcess0" style="background: #adb5bd;">Applicant</a>
-                            <a id="ContentPlaceHolder1_lnkCoApp1" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=1" style="background: #343a40;">Co-Applicant-1</a>
-                            <a id="ContentPlaceHolder1_lnkCoApp2" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=2" style="background: #343a40;">Co-Applicant-2</a>
-                            <a id="ContentPlaceHolder1_lnkCoApp3" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=3" style="background: #343a40;">Co-Applicant-3</a>
-                            <a id="ContentPlaceHolder1_lnkCoApp4" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=4" style="background: #343a40;">Co-Applicant-4</a>
-                            <a id="ContentPlaceHolder1_lnkCoApp5" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=5" style="background: #343a40;">Co-Applicant-5</a>
+                        <div class="btnDiv pt-4 pl-4 pr-4">
+                            <a href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=0" class="AppTabs btn-sm selected" id="lnkCoApp_0" style="background: #adb5bd;">Applicant</a>
+                            <a id="lnkCoApp_1" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=1" style="background: #343a40;">Co-Applicant-1</a>
+                            <a id="lnkCoApp_2" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=2" style="background: #343a40;">Co-Applicant-2</a>
+                            <a id="lnkCoApp_3" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=3" style="background: #343a40;">Co-Applicant-3</a>
+                            <a id="lnkCoApp_4" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=4" style="background: #343a40;">Co-Applicant-4</a>
+                            <a id="lnkCoApp_5" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=5" style="background: #343a40;">Co-Applicant-5</a>
                         </div>
 
                         <span id="ContentPlaceHolder1_spanMessage" style="color: red;"></span>
@@ -729,7 +730,7 @@
                                             @*<input asp-for="City" type="text" maxlength="30" id="ContentPlaceHolder1_txtCityCurrent" class="form-control">
 
         <span asp-validation-for="City" style="color:Red;display:block;"></span>*@
-                                            <label>@Model.City</label>
+                                            @*<label>@Model.City</label>
                                         </div>
                                     </div>
                                 </div>
@@ -739,7 +740,7 @@
                                         <label class="">Pin Code</label>
                                     </div>
                                     <div class="col-md-5">
-                                        <div class="input-control text">
+                                        <div class="input-control text">*@
                                             @*<input asp-for="Pincode" type="text" maxlength="6" id="ContentPlaceHolder1_txtPinCodeCurrent" class="form-control noTxtInput">
 
         <span asp-validation-for="Pincode" style="color:Red;display:block;"></span>*@
@@ -1139,12 +1140,12 @@
     });
 
     $(document).ready(function () {
-        var applicant0 = document.getElementById("tabProcess0");
-        var applicant1 = document.getElementById("ContentPlaceHolder1_lnkCoApp1");
-        var applicant2 = document.getElementById("ContentPlaceHolder1_lnkCoApp2");
-        var applicant3 = document.getElementById("ContentPlaceHolder1_lnkCoApp3");
-        var applicant4 = document.getElementById("ContentPlaceHolder1_lnkCoApp4");
-        var applicant5 = document.getElementById("ContentPlaceHolder1_lnkCoApp5");
+        var applicant0 = document.getElementById("lnkCoApp_0");
+        var applicant1 = document.getElementById("lnkCoApp_1");
+        var applicant2 = document.getElementById("lnkCoApp_2");
+        var applicant3 = document.getElementById("lnkCoApp_3");
+        var applicant4 = document.getElementById("lnkCoApp_4");
+        var applicant5 = document.getElementById("lnkCoApp_5");
 
         if (@Model.ApplicantType == 1) {
              applicant1.style.backgroundColor = "#adb5bd";
@@ -1167,8 +1168,15 @@
              applicant0.style.backgroundColor = "#343a40";
         }
 
+        //debugger
+        $(function () {
+            var jsArray = @Html.Raw(Json.Serialize(Model.AppTypeList));
+            for (var i = 0; i < jsArray.length; i++) {
+                var id = "#lnkCoApp_" + jsArray[i];
+                //$(id).css("display", "inline-block");
+                $(id).show();
+            }
+        });
     });
-
-
 </script>
 

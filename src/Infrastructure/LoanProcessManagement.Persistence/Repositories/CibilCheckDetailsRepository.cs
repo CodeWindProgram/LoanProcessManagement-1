@@ -42,6 +42,9 @@ namespace LoanProcessManagement.Persistence.Repositories
 
             var details = _dbContext.LpmCibilCheckDetails.Where(x => x.ApplicantType == ApplicantType && x.lead_Id==lead_id).FirstOrDefault();
             ///*&& applicant.FormNo == x.FormNo && applicant.Id==x.ApplicantDetailId*/
+
+            List<int> applicantTypeList = await _dbContext.LpmLeadApplicantsDetails.Where(x => x.lead_Id == lead_id).OrderBy(x => x.ApplicantType).Select(x => x.ApplicantType).ToListAsync();   //to fetch all applicant types under a particular lead 
+
             GetCibilCheckDetailsDto response = new GetCibilCheckDetailsDto();
 
             if (applicant != null)
@@ -68,6 +71,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 response.Pincode = applicant.Pincode;
                 response.State = applicant.State;
                 response.LeadID = lead.lead_Id;
+                response.AppTypeList = applicantTypeList;
                 if (details != null)
                 {
                     response.IsSubmit = details.IsSubmit;

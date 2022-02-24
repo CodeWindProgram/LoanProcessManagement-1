@@ -109,7 +109,7 @@ namespace LoanProcessManagement.App.Services.Implementation
         /// </summary>
         /// <param name="addIncomeAssessmentDetailsDto"></param>
         /// <returns></returns>
-        public async Task<AddIncomeAssessmentDetailsDto> AddIncomeAssessmentDetails(AddIncomeAssessmentDetailsDto addIncomeAssessmentDetailsDto)
+        public async Task<Response<AddIncomeAssessmentDetailsDto>> AddIncomeAssessmentDetails(AddIncomeAssessmentDetailsDto addIncomeAssessmentDetailsDto)
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
@@ -128,7 +128,7 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             var options = new JsonSerializerOptions();
 
-            var model = System.Text.Json.JsonSerializer.Deserialize<AddIncomeAssessmentDetailsDto>(jsonString, options);
+            var model = System.Text.Json.JsonSerializer.Deserialize<Response<AddIncomeAssessmentDetailsDto>>(jsonString, options);
 
             return model;
         }

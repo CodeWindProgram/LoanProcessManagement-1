@@ -45,5 +45,6 @@ namespace LoanProcessManagement.Application.Features.CibilCheck.Queries.Applican
         public bool IsSubmit { get; set; }
         public string Message { get; set; }
         public bool Succeeded { get; set; }
+        public List<int> AppTypeList { get; set; }      //represent list of applicant types under particular lead
     }
 }

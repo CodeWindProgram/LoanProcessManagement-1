@@ -25,7 +25,7 @@ namespace LoanProcessManagement.Persistence.Repositories
     {
         protected readonly ApplicationDbContext _dbContext;
         private readonly ILogger _logger;
-        public LeadListRepository(ApplicationDbContext dbContext, ILogger<LeadListModel> logger)
+        public LeadListRepository(ApplicationDbContext dbContext, ILogger<LeadListByIdModel> logger)
         {
             _dbContext = dbContext;
             _logger = logger;
@@ -55,6 +55,55 @@ namespace LoanProcessManagement.Persistence.Repositories
             return result;
         }
         #endregion
+
+        public async Task<IEnumerable<LeadListByIdModel>> GetLeadListById(GetLeadListByIdQuery request)
+        {
+            if (request.UserRoleId == 3)
+            {
+                var result = (from A in _dbContext.LpmLeadMasters.Where(x => x.BranchID == request.BranchId)
+                              join B in _dbContext.LpmLoanProductMasters on A.ProductID equals B.Id
+                              join C in _dbContext.LpmLeadStatusMasters on A.CurrentStatus equals C.Id
+
+                              select new LeadListByIdModel
+                              {
+                                  FormNo = A.FormNo,
+                                  BranchID = A.BranchID,
+                                  CustomerName = A.FirstName + " " + A.LastName,
+                                  CustomerPhone = A.CustomerPhone,
+                                  Product = B.ProductName,
+                                  Appointment_Date = A.Appointment_Date,
+                                  LeadStatus = C.StatusDescription,
+                                  lead_Id = A.lead_Id
+
+                              });
+                return result;
+            }
+            else if(request.UserRoleId == 4)
+            {
+                var result = (from A in _dbContext.LpmLeadMasters.Where(x => x.BranchID == request.BranchId && x.Lead_assignee_Id ==request.LgId)
+                              join B in _dbContext.LpmLoanProductMasters on A.ProductID equals B.Id
+                              join C in _dbContext.LpmLeadStatusMasters on A.CurrentStatus equals C.Id
+
+                              select new LeadListByIdModel
+                              {
+                                  FormNo = A.FormNo,
+                                  BranchID = A.BranchID,
+                                  CustomerName = A.FirstName + " " + A.LastName,
+                                  CustomerPhone = A.CustomerPhone,
+                                  Product = B.ProductName,
+                                  Appointment_Date = A.Appointment_Date,
+                                  LeadStatus = C.StatusDescription,
+                                  lead_Id = A.lead_Id
+
+                              });
+                return result;
+            }
+            return null;
+            
+        }
+
+
+
         public async Task<GetLeadByLeadIdDto> GetLeadByLeadId(string lead_id)
             {
                 var user = await _dbContext.LpmLeadMasters.Include(x => x.Product).Include(x => x.LeadStatus).Include(z=>z.Branch)
@@ -645,6 +694,8 @@ namespace LoanProcessManagement.Persistence.Repositories
                                 }).ToListAsync();
             return result;
         }
+
+        
     }
     #endregion
 }

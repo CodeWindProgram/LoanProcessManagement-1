@@ -40,10 +40,9 @@ namespace LoanProcessManagement.App.Controllers
             {
                 ViewBag.LeadId = "Lead_" + lead_Id;
                 ViewBag.incomeTypeNo = applicantType;
-                return View(gstFileSaveVm);
+                if (gstFileSaveVm.gstAddEnquiryCommandDto.IsSubmit== true) { return View("FreezedCreateEnquiry", gstFileSaveVm); }
+                else { return View(gstFileSaveVm); }
             }
-            
-
             return View("Error");
         }
 
@@ -69,7 +68,7 @@ namespace LoanProcessManagement.App.Controllers
 
             var gstCreateEnquiryCommandDto = new GstCreateEnquiryCommand()
             {
-                ID = gstFileSaveVM.gstAddEnquiryCommandDto.ID,
+                //ID = gstFileSaveVM.gstAddEnquiryCommandDto.ID,
                 CustomerName = gstFileSaveVM.gstAddEnquiryCommandDto.CustomerName,
                 MobileNo = gstFileSaveVM.gstAddEnquiryCommandDto.MobileNo,
                 Email = gstFileSaveVM.gstAddEnquiryCommandDto.Email,
@@ -78,9 +77,11 @@ namespace LoanProcessManagement.App.Controllers
                 ExcelFilePath = newFileNameExcel,
                 IsActive = gstFileSaveVM.gstAddEnquiryCommandDto.IsActive,
                 EmploymentType = gstFileSaveVM.gstAddEnquiryCommandDto.EmploymentType,
-                FormNoId = gstFileSaveVM.gstAddEnquiryCommandDto.FormNo,
+                FormNo = gstFileSaveVM.gstAddEnquiryCommandDto.FormNo,
                 Lead_IdId = gstFileSaveVM.gstAddEnquiryCommandDto.Lead_Id,
-                ApplicantType = gstFileSaveVM.gstAddEnquiryCommandDto.ApplicantType
+                ApplicantType = gstFileSaveVM.gstAddEnquiryCommandDto.ApplicantType,
+                ApplicantDetailId = gstFileSaveVM.gstAddEnquiryCommandDto.ApplicantDetailId,
+                IsSubmit = gstFileSaveVM.gstAddEnquiryCommandDto.IsSubmit
             };
             var createmenuresponse = await _incomeAssesmentService.CreateEnquiry(gstCreateEnquiryCommandDto);
             var lead = gstFileSaveVM.gstAddEnquiryCommandDto.Lead_Id;
@@ -116,7 +117,7 @@ namespace LoanProcessManagement.App.Controllers
                     EmploymentType = getIncomeDetailsServiceResponse.Data.EmploymentType,
                     LeadID = getIncomeDetailsServiceResponse.Data.LeadID,
                     IsSubmitCount = getIncomeDetailsServiceResponse.Data.IsSubmitCount,
-                    AppTypeList1 = getIncomeDetailsServiceResponse.Data.AppTypeList1,
+                    AppTypeList = getIncomeDetailsServiceResponse.Data.AppTypeList,
                 };
                 ViewBag.applicantTypeNo = applicantType;
 
@@ -186,7 +187,8 @@ namespace LoanProcessManagement.App.Controllers
             var response = await _incomeAssesmentService.AddIncomeAssessmentDetails(addIncomeAssessmentDetailsDto);
             var lead = incomeAssessmentDetailsVm.lead_Id;
             var app = incomeAssessmentDetailsVm.ApplicantType;
-
+            TempData["isSuccess"] = response.Succeeded;
+            TempData["Message"] = response.Message;
             return RedirectToAction("Index", new { applicantType = app, lead_Id = lead });
         }
         #endregion

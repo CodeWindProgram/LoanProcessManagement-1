@@ -1,8 +1,15 @@
-﻿@model IEnumerable<LoanProcessManagement.Application.Features.LeadList.Commands.LeadListCommandDto>
+﻿@using LoanProcessManagement.Application.Features.LeadList.Commands;
+@using LoanProcessManagement.Domain.CustomModels;
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Index";
+    var leadlistById = (List<LeadListByIdModel>)TempData["LeadListById"];
+
+
+    var leadlistAll = (List<LeadListCommandDto>)TempData["LeadListAll"];
+
+
 }
 <div class="container app mb-4">
     <div class="col-sm-12">
@@ -10,61 +17,126 @@
             <div class="panel-heading"><h5>Lead List</h5></div>
             <div class="panel-body ">
                 <div class="card" style="padding:15px;">
-                    <table id="tblLeadList" class="display table table-responsive-lg">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Form No
-                                </th>
-                                <th>
-                                    Customer Name
-                                </th>
-                                <th>
-                                    Customer Phone
-                                </th>
-                                <th>
-                                    Product Name
-                                </th>
-                                <th>
-                                    Status
-                                </th>
-                                <th>
-                                    Appointment Date
-                                </th>
-                                <th>
-                                    Action
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.FormNo)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.CustomerName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.CustomerPhone)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Product)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.LeadStatus)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Appointment_Date)
-                                    </td>
-                                    <td>
-                                        @Html.ActionLink("Edit", "LeadSummary", "LeadList", new { lead_Id = item.lead_Id }, new { @Class = "btn btn-primary btn-sm" })
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+                    @{
+                        if (leadlistById != null)
+                        {
+                            <table id="tblLeadList" class="display table table-responsive-lg">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Form No
+                                        </th>
+                                        <th>
+                                            Customer Name
+                                        </th>
+                                        <th>
+                                            Customer Phone
+                                        </th>
+                                        <th>
+                                            Product Name
+                                        </th>
+                                        <th>
+                                            Status
+                                        </th>
+                                        <th>
+                                            Appointment Date
+                                        </th>
+                                        <th>
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in leadlistById)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.FormNo)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CustomerName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CustomerPhone)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Product)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.LeadStatus)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Appointment_Date)
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Edit", "LeadSummary", "LeadList", new { lead_Id = item.lead_Id }, new { @Class = "btn btn-primary btn-sm" })
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        }
+                        else
+                        {
+                            <table id="tblLeadList" class="display table table-responsive-lg">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Form No
+                                        </th>
+                                        <th>
+                                            Customer Name
+                                        </th>
+                                        <th>
+                                            Customer Phone
+                                        </th>
+                                        <th>
+                                            Product Name
+                                        </th>
+                                        <th>
+                                            Status
+                                        </th>
+                                        <th>
+                                            Appointment Date
+                                        </th>
+                                        <th>
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in leadlistAll)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.FormNo)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CustomerName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CustomerPhone)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Product)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.LeadStatus)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Appointment_Date)
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Edit", "LeadSummary", "LeadList", new { lead_Id = item.lead_Id }, new { @Class = "btn btn-primary btn-sm" })
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        }
+                    }
                 </div>
             </div>
         </div>

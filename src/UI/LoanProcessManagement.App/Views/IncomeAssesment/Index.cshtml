@@ -8,6 +8,8 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Add Income Assessment Details";
+    var isSuccess = TempData["isSuccess"] != null ? Convert.ToBoolean(TempData["isSuccess"]) : false;
+    var Message = TempData["Message"] != null ? TempData["Message"].ToString() : string.Empty;
 }
 
 
@@ -130,7 +132,7 @@
                         <input type="hidden" asp-for="CreatedBy" value=@User.FindFirst("lg_id").Value />
                         <input type="hidden" asp-for="LastModifiedBy" value=@User.FindFirst("lg_id").Value />
                         <input type="hidden" asp-for="IsSubmitCount" />
-                        <input type="hidden" asp-for="AppTypeList1" />
+                        <input type="hidden" asp-for="AppTypeList" />
 
                        
                         <div class="btnDiv pt-4 pl-4 pr-4">
@@ -219,16 +221,16 @@
                                         <div class="row">
 
                                             <div class="col-lg-4 col-sm-12">
-                                                <label asp-for="StartDate" class="control-label noTxtInput">Statement Start Month<span style="color: Red">&nbsp;*</span></label>
+                                                <label asp-for="StartDate" class="control-label">Statement Start Month<span style="color: Red">&nbsp;*</span></label>
 
-                                                <input asp-for="StartDate" class="form-control" id="startDate" placeholder="mm-yyyy" onkeydown="return /[a-z]/i.test(event.key)" autocomplete="off" />
+                                                <input asp-for="StartDate" class="form-control noTxtInput" id="startDate" placeholder="mm-yyyy" onkeydown="return /[a-z]/i.test(event.key)" autocomplete="off" />
                                                 <span asp-validation-for="StartDate" class="text-danger"></span>
                                             </div>
 
                                             <div class="col-lg-4 col-sm-12">
-                                                <label asp-for="EndDate" class="control-label noTxtInput">Statement End Month<span style="color: Red">&nbsp;*</span></label>
+                                                <label asp-for="EndDate" class="control-label">Statement End Month<span style="color: Red">&nbsp;*</span></label>
 
-                                                <input asp-for="EndDate" class="form-control" id="endDate" placeholder="mm-yyyy" onkeydown="return /[a-z]/i.test(event.key)" readonly />
+                                                <input asp-for="EndDate" class="form-control noTxtInput" id="endDate" placeholder="mm-yyyy" onkeydown="return /[a-z]/i.test(event.key)" readonly />
                                                 <span asp-validation-for="EndDate" class="text-danger"></span>
                                             </div>
 
@@ -252,7 +254,7 @@
                                             <div class="col-lg-4 col-sm-12">
                                                 <label asp-for="EmployerName1" class="control-label">Employer Name 1<span style="color: Red">&nbsp;*</span></label>
 
-                                                <input asp-for="EmployerName1" class="form-control" maxlength="100" placeholder="Enter Employer Name 1" />
+                                                <input asp-for="EmployerName1" class="form-control" maxlength="100" placeholder="Employer Name 1" onkeydown="return /[a-z_ ]/i.test(event.key)"/>
                                                 <span asp-validation-for="EmployerName1" class="text-danger"></span>
                                             </div>
 
@@ -260,14 +262,14 @@
                                             <div class="col-lg-4 col-sm-12">
                                                 <label asp-for="EmployerName2" class="control-label">Employer Name 2</label>
 
-                                                <input asp-for="EmployerName2" class="form-control" maxlength="100" placeholder="Enter Employer Name 2" />
+                                                <input asp-for="EmployerName2" class="form-control" maxlength="100" placeholder="Employer Name 2" onkeydown="return /[a-z_ ]/i.test(event.key)"/>
                                                 <span asp-validation-for="EmployerName2" class="text-danger"></span>
                                             </div>
 
                                             <div class="col-lg-4 col-sm-12">
                                                 <label asp-for="EmployerName3" class="control-label">Employer Name 3</label>
 
-                                                <input asp-for="EmployerName3" class="form-control" maxlength="100" placeholder="Enter Employer Name 3" />
+                                                <input asp-for="EmployerName3" class="form-control" maxlength="100" placeholder="Employer Name 3" onkeydown="return /[a-z_ ]/i.test(event.key)"/>
                                                 <span asp-validation-for="EmployerName3" class="text-danger"></span>
                                             </div>
 
@@ -279,7 +281,7 @@
                                             <div class="col-lg-4 col-sm-12">
                                                 <label asp-for="EmployerName4" class="control-label">Employer Name 4</label>
 
-                                                <input asp-for="EmployerName4" class="form-control" maxlength="100" placeholder="Enter Employer Name 4" />
+                                                <input asp-for="EmployerName4" class="form-control" maxlength="100" placeholder="Employer Name 4" onkeydown="return /[a-z_ ]/i.test(event.key)"/>
                                                 <span asp-validation-for="EmployerName4" class="text-danger"></span>
                                             </div>
 
@@ -287,7 +289,7 @@
                                             <div class="col-lg-4 col-sm-12">
                                                 <label asp-for="EmployerName5" class="control-label">Employer Name 5</label>
 
-                                                <input asp-for="EmployerName5" class="form-control" maxlength="100" placeholder="Enter Employer Name 5" />
+                                                <input asp-for="EmployerName5" class="form-control" maxlength="100" placeholder="Employer Name 5" onkeydown="return /[a-z_ ]/i.test(event.key)"/>
                                                 <span asp-validation-for="EmployerName5" class="text-danger"></span>
                                             </div>
 
@@ -308,6 +310,7 @@
                                                 &nbsp;&nbsp;&nbsp;
                                                 <input id="radFileUpload" asp-for="FileType" type="radio" name="FileType" value="FileUpload" />
                                                 Upload File
+                                                <span asp-validation-for="FileType" class="text-danger"></span>
                                             </div>
 
                                         </div>
@@ -334,12 +337,12 @@
                                                         <option value="4">Ahmedabad District Co-Op</option>
                                                         <option value="5">Airtel Payments Bank</option>
                                                     </select>
-                                                    <span asp-validation-for="Institution_Id" style="color:Red;display:block;"></span>
+                                                    <span asp-validation-for="Institution_Id" class="text-danger"></span>
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-6 col-sm-12">
-                                                <label asp-for="DocumentType" class="control-label">Document Type</label><br />
+                                                <label asp-for="DocumentType" class="control-label">Document Type<span style="color: Red">&nbsp;*</span></label><br />
 
                                                 <input id="radScannedDocument" asp-for="DocumentType" type="radio" name="DocumentType" value="ScannedDocument" />
                                                 Scanned Document
@@ -355,16 +358,16 @@
                                         <div class="row">
 
                                             <div class="col-lg-6 col-sm-12">
-                                                <label asp-for="IPdf" class="control-label">Upload File (PDF Only)</label>
+                                                <label asp-for="IPdf" class="control-label">Upload File (PDF Only)<span style="color: Red">&nbsp;*</span></label>
 
                                                 <input type="file" asp-for="IPdf" id="fileUploadPdf" class="form-control" accept=".pdf" onchange="validate_fileupload(this,&#39;pdf&#39;);">
                                                 <span asp-validation-for="IPdf" class="text-danger"></span>
                                             </div>
 
                                             <div class="col-lg-6 col-sm-12">
-                                                <label asp-for="FilePassword" class="control-label">PDF File Passwords (if any) </label>
+                                                <label asp-for="FilePassword" class="control-label">PDF File Passwords (if any) <span style="color: Red">&nbsp;*</span></label>
 
-                                                <input type="password" asp-for="FilePassword" class="form-control" placeholder="Enter Pdf Password" />
+                                                <input type="password" asp-for="FilePassword" class="form-control" placeholder="Pdf Password" />
                                                 <span asp-validation-for="FilePassword" class="text-danger"></span>
                                             </div>
                                         </div>
@@ -696,19 +699,13 @@
 <script>
 
     $(document).ready(function () {
-
-        if ('@ViewBag.isSuccess' == 'True') {
-            toastr.success('@ViewBag.Message', "Success");
-        }
-        else if ('@ViewBag.isSuccess' == 'False') {
-            toastr.error('@ViewBag.Message', "Error");
-
+        //debugger
+        if ('@isSuccess'.toLowerCase() == 'True'.toLowerCase()) {
+            toastr.success('@Message', "Success");
         }
     });
 
-</script>
 
-<script>
 
     $(document).ready(function () {
 
@@ -755,12 +752,14 @@
 
         });
 
-        var jsArray = @Html.Raw(Json.Serialize(Model.AppTypeList1));  
-        for (var i = 0; i < jsArray.length; i++) {
-            var id = "#lnkCoApp_" + jsArray[i];
-            $(id).css("display", "inline-block");
-        }
-
+        $(function () {
+            var jsArray = @Html.Raw(Json.Serialize(Model.AppTypeList));
+            for (var i = 0; i < jsArray.length; i++) {
+                var id = "#lnkCoApp_" + jsArray[i];
+                //$(id).css("display", "inline-block");
+                $(id).show();
+            }
+        });
     });
 
     $(function () {
@@ -835,6 +834,21 @@
     var labelVal = $("#idNoOfBankAccounts").text();
     if (@Model.NoOfBankAccounts <= @Model.IsSubmitCount) {
         $("#btnSubmitIncomeDetails").attr('disabled', 'disabled');
+    }
+
+    function validate_fileupload(filename, extvalues) {
+        //debugger;
+        var allowedExt = extvalues.split(',');
+        var filearr = filename.value.toLowerCase().split('.');
+        var fileext = filearr[filearr.length - 1];
+        if (allowedExt.includes(fileext)) {
+            return true;
+        }
+        else {
+            alert("Please Select File of " + extvalues + " Extension Format Only");
+            filename.value = "";
+            return false;
+        }
     }
 </script>
 

@@ -28,9 +28,33 @@ namespace LoanProcessManagement.Persistence.Repositories
 
         }
 
+        public async Task<LPMGSTEnquiryDetail> CreateGstEnquiry(GstCreateEnquiryCommand request)
+        {
+            var lead = _dbContext.LpmLeadMasters.Where(a => a.lead_Id == (request.Lead_IdId).ToString()).FirstOrDefault();
+            var gstCreateEnquiryCommandDto = new LPMGSTEnquiryDetail()
+            {
+                FormNumber = request.FormNo.ToString(),
+                Lead_Id = lead,
+                CustomerName = request.CustomerName,
+                MobileNo = request.MobileNo,
+                Email = request.Email,
+                ExcelFilePath = request.ExcelFilePath,
+                PdfFilePath = request.PdfFilePath,
+                GstNo = request.GstNo,
+                ApplicantType = request.ApplicantType,
+                IsActive = request.IsActive,
+                EmploymentType = request.EmploymentType,
+                ApplicantDetailId = request.ApplicantDetailId,
+                IsSubmit = request.IsSubmit
+            };
+            var obj = await _dbContext.LPMGSTEnquiryDetails.AddAsync(gstCreateEnquiryCommandDto);
+            _dbContext.SaveChanges();
+            return obj.Entity;
+        }
+
         public async Task<GstAddEnquiryCommandDto> AddGstEnquiry(int ApplicantType, int Lead_Id)
         {
-
+            List<int> applicantTypeList = await _dbContext.LpmLeadApplicantsDetails.Where(x => x.lead_Id == Lead_Id).OrderBy(x => x.ApplicantType).Select(x => x.ApplicantType).ToListAsync();      //represent list of applicant types under particular lead
             var result = await (from A in _dbContext.LPMGSTEnquiryDetails
                                 join B in _dbContext.LpmLeadMasters on A.Lead_Id.lead_Id equals B.lead_Id
                                 where A.ApplicantType == ApplicantType && A.Lead_Id.Id == Lead_Id && A.IsActive == true
@@ -47,9 +71,10 @@ namespace LoanProcessManagement.Persistence.Repositories
                                     ExcelFilePath = A.ExcelFilePath,
                                     PdfFilePath = A.PdfFilePath,
                                     IsActive = A.IsActive,
-                                    ApplicantType = A.ApplicantType
-                                    
+                                    ApplicantType = A.ApplicantType,
+                                    AppTypeList = applicantTypeList
                                 }).FirstOrDefaultAsync();
+            
             return result;
         }
 
@@ -89,7 +114,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 response.ApplicantType = applicant.ApplicantType;
                 response.LeadID = lead.lead_Id;
                 response.IsSubmitCount = isSubmitCount;
-                response.AppTypeList1 = applicantTypeList;
+                response.AppTypeList = applicantTypeList;
 
                 response.Message = "Income Assessment Details fetched";
                 response.Succeeded = true;

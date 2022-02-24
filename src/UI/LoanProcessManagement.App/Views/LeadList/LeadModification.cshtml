@@ -200,7 +200,7 @@
                                     </div>
                                     <div class="col-lg-4 col-sm-12" id="hoSanctionCommentDiv">
                                         <label>HO Sanction Query Comment</label>
-                                        <input type="text" class="form-control" asp-for="HoSanction_query_comment">
+                                        <input type="text" class="form-control" asp-for="HoSanction_query_comment" id="hoQueryInput">
                                     </div>
                                 </div>
                             </div>
@@ -1249,6 +1249,12 @@
                 }
 
             }
+            if ($("#HoQueryStatusHidden").val() == 'R') {
+                $("#hoSanctionCommentDiv").css("display", "none");
+                $("#branchResponse").css("display", "none");
+
+
+            }
 
         }
 
@@ -1265,12 +1271,13 @@
             $("#chkQuery").prop("checked", false);
         }
 
-    if ($("#HoQueryStatusHidden").val() == 'Q') {
-        $("#chkHoQuery").prop("checked", true);
-        $("#hoLblSwitchName").css("display", "inline-block");
-        $("#hoQueryInput").prop('disabled', true);
+        if ($("#HoQueryStatusHidden").val() == 'Q') {
+            $("#chkHoQuery").prop("checked", true);
+            $("#hoLblSwitchName").css("display", "inline-block");
+            $("#hoQueryInput").prop('disabled', true);
 
-    }
+        }
+  
 
     /*----------------------------------------------------------------------------------------------------------------------*/
 

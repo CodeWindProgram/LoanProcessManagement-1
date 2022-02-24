@@ -30,8 +30,8 @@ namespace LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GS
         public async Task<Response<GstCreateEnquiryCommandDto>> Handle(GstCreateEnquiryCommand request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Handle Initiated");
-            var user = _mapper.Map<LPMGSTEnquiryDetail>(request);
-            await _incomeAssesmentRepository.UpdateAsync(user);
+            var user = _mapper.Map<GstCreateEnquiryCommand>(request);
+            await _incomeAssesmentRepository.CreateGstEnquiry(user);
             var user2 = _mapper.Map<GstCreateEnquiryCommandDto>(user);
             return new Response<GstCreateEnquiryCommandDto>(user2);
         }

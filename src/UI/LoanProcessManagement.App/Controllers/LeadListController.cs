@@ -1,6 +1,7 @@
 ﻿using LoanProcessManagement.App.Models;
 using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.LeadList.Commands;
+using LoanProcessManagement.Application.Features.LeadList.Queries;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetHOSanctionListQuery;
@@ -39,26 +40,51 @@ namespace LoanProcessManagement.App.Controllers
             string message = "";
             if (ModelState.IsValid)
             {
-                LeadListCommand leadlists = new LeadListCommand();
-                leadlists.LgId = "LG_1";
-                leadlists.UserRoleId = "1";
-                leadlists.BranchId = "1";
+                string LgId = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value;
+                long UserRoleId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value);
+                long BranchId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "BranchID").Value);
 
-                var leadlistResponse = await _leadListService.LeadListProcess(leadListCommand);
-
-                if (leadlistResponse.Succeeded)
+                //LeadListCommand leadlists = new LeadListCommand();
+                //leadlists.LgId = "LG_1";
+                //leadlists.UserRoleId = "1";
+                //leadlists.BranchId = "1";
+                //var leadlistResponse = await _leadListService.LeadListProcess(leadListCommand);
+                
+                if (UserRoleId == 3 || UserRoleId == 4)
                 {
-                    message = leadlistResponse.Message;
-                    ViewBag.Issuccesflag = true;
-                    ViewBag.Message = message;
-                    return View(leadlistResponse.Data);
+                    GetLeadListByIdQuery leadListByIdQuery = new GetLeadListByIdQuery();
+                    leadListByIdQuery.LgId = LgId;
+                    leadListByIdQuery.UserRoleId = UserRoleId;
+                    leadListByIdQuery.BranchId = BranchId;
+
+                   var leadlistResponse = await _leadListService.GetLeadListById(leadListByIdQuery);
+                    TempData["LeadListById"] = leadlistResponse.ToList();
+                    return View();
+                    
                 }
                 else
                 {
-                    message = leadlistResponse.Message;
-                    ViewBag.Issuccesflag = false;
-                    ViewBag.Message = message;
+                    LeadListCommand leadlists = new LeadListCommand();
+                    leadlists.LgId = LgId;
+                    leadlists.UserRoleId = "1";
+                    leadlists.BranchId = "1";
+                    var leadlistResponse = await _leadListService.LeadListProcess(leadListCommand);
+                    TempData["LeadListAll"] = leadlistResponse.Data.ToList();
+                    if (leadlistResponse.Succeeded)
+                    {
+                        message = leadlistResponse.Message;
+                        ViewBag.Issuccesflag = true;
+                        ViewBag.Message = message;
+                        return View(leadlistResponse.Data);
+                    }
+                    else
+                    {
+                        message = leadlistResponse.Message;
+                        ViewBag.Issuccesflag = false;
+                        ViewBag.Message = message;
+                    }
                 }
+         
             }
             return View();
         }
@@ -200,7 +226,7 @@ namespace LoanProcessManagement.App.Controllers
                     IPSResponseType4 = leadResponse.Data.IPSResponseType4,
                     IPSResponseType5 = leadResponse.Data.IPSResponseType5,
                     HoQueryStatus = leadResponse.Data.HoQueryStatus,
-                    HoSanction_query_comment = leadResponse.Data.HoSanction_query_comment,
+                    HoSanction_query_comment = leadResponse.Data.HoQueryStatus == 'R' ? null : leadResponse.Data.HoSanction_query_comment,
                     HoSanction_query_commentResponse = leadResponse.Data.HoSanction_query_commentResponse
 
 

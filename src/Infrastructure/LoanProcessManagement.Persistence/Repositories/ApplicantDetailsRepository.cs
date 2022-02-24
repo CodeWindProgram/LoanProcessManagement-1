@@ -46,7 +46,6 @@ namespace LoanProcessManagement.Persistence.Repositories
                 response.FirstName = applicant.FirstName;
                 response.MiddleName = applicant.MiddleName;
                 response.LastName = applicant.LastName;
-                //response.FormNo = applicant.FormNo;
                 response.FormNo = lead.FormNo;
                 response.ApplicantType = applicant.ApplicantType;
                 response.AadharId = applicant.AadharId;
@@ -131,7 +130,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 applicant.IsActive = true;
                 applicant.CreatedBy = request.CreatedBy;
                 applicant.LastModifiedBy = request.LastModifiedBy;
-                
+
                 await _dbContext.SaveChangesAsync();
 
                 response.Message = "Applicant details Updated Successfully";
@@ -169,6 +168,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 applicantsDetails.Gender = request.Gender;
                 applicantsDetails.CreatedBy = request.CreatedBy;
                 applicantsDetails.LastModifiedBy = request.LastModifiedBy;
+                applicantsDetails.State = request.State;
 
                 await _dbContext.LpmLeadApplicantsDetails.AddAsync(applicantsDetails);
                 await _dbContext.SaveChangesAsync();

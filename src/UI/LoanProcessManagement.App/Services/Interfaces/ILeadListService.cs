@@ -30,6 +30,7 @@ namespace LoanProcessManagement.App.Services.Interfaces
         Task<IEnumerable<GetAllBranchesDto>> AllBranch();
         Task<List<ProcessModel>> InPrincipleSanctionList(GetInPrincipleSanctionListQuery SanctionList);
         Task<List<ProcessModel>> HOSanctionList(GetHOSanctionListQuery SanctionList);
+        Task<IEnumerable<LeadListByIdModel>> GetLeadListById(GetLeadListByIdQuery leadListByIdQuery);
     }
     #endregion
 }

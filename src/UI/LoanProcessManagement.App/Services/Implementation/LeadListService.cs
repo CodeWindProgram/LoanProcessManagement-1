@@ -308,5 +308,27 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             return model;
         }
+
+        public async Task<IEnumerable<LeadListByIdModel>> GetLeadListById(GetLeadListByIdQuery leadListByIdQuery)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+            var content = JsonConvert.SerializeObject(leadListByIdQuery);
+
+            var httpResponse = await _client.PostAsync
+                (
+                    BaseUrl + APIEndpoints.LeadListById, new StringContent(content, Encoding.Default,
+                    "application/json")
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<IEnumerable<LeadListByIdModel>>(jsonString, options);
+
+            return model;
+        }
     }
 }

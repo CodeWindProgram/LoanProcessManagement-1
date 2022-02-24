@@ -52,6 +52,7 @@ namespace LoanProcessManagement.App.Models
         [RegularExpression(@"^[6-9]\d{9}$", ErrorMessage = "Please Enter Valid Phone Number.")]
         [Required(ErrorMessage = "Phone No is Required")]
         public string CustomerPhone { get; set; }
+        [Required(ErrorMessage = "Employment Type is Required")]
         public string EmploymentType { get; set; }
 
         [RegularExpression("^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$", ErrorMessage = "Please enter valid GST No")]

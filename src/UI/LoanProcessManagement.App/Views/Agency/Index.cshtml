@@ -1,5 +1,5 @@
 ﻿@model LoanProcessManagement.App.Models.ThirdPartyCheckDetailsVm
-    <link href="~/css/Common Css/Common1.css" rel="stylesheet" />
+<link href="~/css/Common Css/Common1.css" rel="stylesheet" />
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Index";
@@ -77,9 +77,9 @@
     }*/
 </style>*@
 <style>
-    #valuerIndateCommentDiv, #legalIndateCommentDiv, #fiIndateCommentDiv {
+/*    #valuerIndateCommentDiv, #legalIndateCommentDiv, #fiIndateCommentDiv {
         display: none
-    }
+    }*/
 </style>
 
 <div style="margin-top: 20px" class="container">
@@ -155,8 +155,10 @@
                                                         {
                                                             <input type="checkbox" id="valuerDocs" value="@item.Id" checked="@item.Selected" /> @item.Name <br />
                                                             <input type="hidden" asp-for="valuerAgencyDocuments" id="valuerAgencyDoc" />
+
                                                         }
                                                     </div>
+                                                    <span id="Err_Msg_Valuer" class="text-danger"></span>
                                                 </div>
                                             </div>
 
@@ -246,8 +248,11 @@
                                                         {
                                                             <input type="checkbox" value="@item.Id" checked="@item.Selected" /> @item.Name <br />
                                                             <input type="hidden" asp-for="legalAgencyDocuments" id="legalAgencyDoc" />
+
                                                         }
+
                                                     </div>
+                                                    <span id="Err_Msg_Legal" class="text-danger"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -338,6 +343,8 @@
                                                             <input type="hidden" asp-for="fiAgencyDocuments" id="fiAgencyDoc" />
                                                         }
                                                     </div>
+                                                    <span id="Err_Msg_Fi" class="text-danger"></span>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -824,6 +831,11 @@
                     array.push($(this).val());
                 });
                 var chklist = array.toString();
+                if (chklist == "") {
+                    $("#Err_Msg_Valuer").text("Please Select Documents");
+                    return false;
+
+                }
                 $('#GFG_DOWN').text(chklist);
                 $('#valuerAgencyDoc').val(chklist);
                 $('#tabValueForValuer').val("Valuer");
@@ -836,6 +848,11 @@
                     array.push($(this).val());
                 });
                 var chklist = array.toString();
+                if (chklist == "") {
+                    $("#Err_Msg_Legal").text("Please Select Documents");
+                    return false;
+
+                }
                 $('#legalAgencyDoc').val(chklist);
                 $('#tabValueForLegal').val("Legal");
             }
@@ -847,6 +864,11 @@
                     array.push($(this).val());
                 });
                 var chklist = array.toString();
+                if (chklist == "") {
+                    $("#Err_Msg_Fi").text("Please Select Documents");
+                    return false;
+
+                }
                 $('#fiAgencyDoc').val(chklist);
                 $('#tabValueForFi').val("Fi");
             }

@@ -28,6 +28,7 @@ namespace LoanProcessManagement.App.Models
         public string Message { get; set; }
         public bool Succeeded { get; set; }
         public bool IsSuccess { get; set; }
+        public List<int> AppTypeList { get; set; }      //represent list of applicant types under particular lead
     }
     #endregion
 }

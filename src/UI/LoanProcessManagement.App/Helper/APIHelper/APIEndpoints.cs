@@ -68,6 +68,7 @@ namespace LoanProcessManagement.App.Helper.APIHelper
 
         #region Maintaining the Url EndPoint for Leads - Saif Khan - 01/11/2021
         public const string LeadList = "api/v1/LeadList";
+        public const string LeadListById = "api/v1/LeadList/GetLeadListById";
         public const string LeadHistory = "api/v1/LeadList/GetLeadHistory/";
         #endregion
 

@@ -51,7 +51,8 @@ namespace LoanProcessManagement.App.Controllers
                     PanCardNo = result.Data.PanCardNo,
                     Consent = result.Data.Consent,
                     IsSuccess = result.Data.IsSuccess,
-                    Succeeded = result.Data.Succeeded
+                    Succeeded = result.Data.Succeeded,
+                    AppTypeList = result.Data.AppTypeList
                 };
                 return View(applicantResult);
 
@@ -73,7 +74,8 @@ namespace LoanProcessManagement.App.Controllers
                     PanCardNo = result.Data.PanCardNo,
                     Consent = result.Data.Consent,
                     IsSuccess = result.Data.IsSuccess,
-                    Succeeded = result.Data.Succeeded
+                    Succeeded = result.Data.Succeeded,
+                    AppTypeList = result.Data.AppTypeList,
                 };
 
 

@@ -28,7 +28,7 @@
     }
 
     .AppTabs {
-        display: inline-block;
+        display: none;
         margin: 3px;
         background-color: #343a40;
         padding: 5px 30px;
@@ -74,8 +74,7 @@
         $("#lnkCoApp0").attr("active","");
     }
 </script>
-
-
+             
 
 <div class="container pb-5">
     <form method="post" action="/incomeAssesment/CreateEnquiry" enctype="multipart/form-data" id="form1">
@@ -86,12 +85,12 @@
                     <div style="border: 1px solid #343a40;" class="border-dark">
                         <div class="btnDiv pt-4 pl-4 pr-4">
                             <ul>
-                                <li><a id="ContentPlaceHolder1_lnkCoApp0" tabindex="1" class="AppTabs btn-sm active" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=0">Applicant</a></li>
-                                <li><a id="ContentPlaceHolder1_lnkCoApp1" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=1">Co-Applicant-1</a></li>
-                                <li><a id="ContentPlaceHolder1_lnkCoApp2" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=2">Co-Applicant-2</a></li>
-                                <li><a id="ContentPlaceHolder1_lnkCoApp3" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=3">Co-Applicant-3</a></li>
-                                <li><a id="ContentPlaceHolder1_lnkCoApp4" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=4">Co-Applicant-4</a></li>
-                                <li><a id="ContentPlaceHolder1_lnkCoApp5" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=5">Co-Applicant-5</a></li>
+                                <li><a id="lnkCoApp_0" tabindex="1" class="AppTabs btn-sm active" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=0">Applicant</a></li>
+                                <li><a id="lnkCoApp_1" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=1">Co-Applicant-1</a></li>
+                                <li><a id="lnkCoApp_2" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=2">Co-Applicant-2</a></li>
+                                <li><a id="lnkCoApp_3" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=3">Co-Applicant-3</a></li>
+                                <li><a id="lnkCoApp_4" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=4">Co-Applicant-4</a></li>
+                                <li><a id="lnkCoApp_5" tabindex="1" class="AppTabs btn-sm" href="/incomeAssesment/CreateEnquiry?lead_Id=@Model.gstAddEnquiryCommandDto.Lead_Id&applicantType=5">Co-Applicant-5</a></li>
                             </ul>
                         </div>
 
@@ -102,6 +101,8 @@
                                 <div hidden>
                                     <input asp-for="gstAddEnquiryCommandDto.Lead_Id" />
                                     <input asp-for="gstAddEnquiryCommandDto.ApplicantType" />
+                                    <input asp-for="gstAddEnquiryCommandDto.ApplicantDetailId" />
+                                    <input asp-for="gstAddEnquiryCommandDto.IsSubmit"/>
                                 </div>
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <div hidden class="form-group">
@@ -250,7 +251,8 @@
                 </div>
             </div>
         </div>
-
+    </form>
+</div>
         <!--<form method="post" action="/incomeAssesment/CreateEnquiry" enctype="multipart/form-data" id="form1">
 
             <div class="container pb-5">
@@ -457,7 +459,7 @@
             </div>
         </div>-->
 
-        <script type="text/javascript">
+<script type="text/javascript">
         $(document).ready(function () {
             if ($("#ContentPlaceHolder1_btnAddEnquiry").is(":disabled")) {
                 $("#htmlsubmitbtn").prop("disabled", true);
@@ -525,47 +527,35 @@
 
 
 
-        $(document).ready(function () {
+    $(document).ready(function () {
+        var applicant0 = document.getElementById("lnkCoApp_0");
+        var applicant1 = document.getElementById("lnkCoApp_1");
+        var applicant2 = document.getElementById("lnkCoApp_2");
+        var applicant3 = document.getElementById("lnkCoApp_3");
+        var applicant4 = document.getElementById("lnkCoApp_4");
+        var applicant5 = document.getElementById("lnkCoApp_5");
 
-        if ('@ViewBag.incomeTypeNo' == 0) {
-            $("#l0").removeClass("active");
-            $("#l0").addClass("active");
-
-
+        if (@Model.gstAddEnquiryCommandDto.ApplicantType == 1) {
+            applicant1.style.backgroundColor = "#adb5bd";
+             applicant0.style.backgroundColor = "#343a40";
+        }
+        else if (@Model.gstAddEnquiryCommandDto.ApplicantType == 2) {
+            applicant2.style.backgroundColor = "#adb5bd";
+             applicant0.style.backgroundColor = "#343a40";
+        }
+        else if (@Model.gstAddEnquiryCommandDto.ApplicantType == 3) {
+            applicant3.style.backgroundColor = "#adb5bd";
+             applicant0.style.backgroundColor = "#343a40";
+        }
+        else if (@Model.gstAddEnquiryCommandDto.ApplicantType == 4) {
+             applicant4.style.backgroundColor = "#adb5bd";
+             applicant0.style.backgroundColor = "#343a40";
+        }
+        else if (@Model.gstAddEnquiryCommandDto.ApplicantType == 5) {
+             applicant5.style.backgroundColor = "#adb5bd";
+             applicant0.style.backgroundColor = "#343a40";
         }
 
-        if ('@ViewBag.incomeTypeNo' == 1) {
-            $("#l1").removeClass("active");
-            $("#l1").addClass("active");
-
-
-        }
-
-        else if ('@ViewBag.incomeTypeNo' == 2) {
-            $("#l2").removeClass("active");
-            $("#l2").addClass("active");
-
-        }
-
-        else if ('@ViewBag.incomeTypeNo' == 3) {
-            $("#l3").removeClass("active");
-            $("#l3").addClass("active");
-
-
-        }
-
-        else if ('@ViewBag.incomeTypeNo' == 4) {
-            $("#l4").removeClass("active");
-            $("#l4").addClass("active");
-
-
-        }
-        else if ('@ViewBag.incomeTypeNo' == 5) {
-            $("#l5").removeClass("active");
-            $("#l5").addClass("active");
-
-
-        }
     });
 
 
@@ -657,8 +647,16 @@
                     return false;
                 }
             })
-        });
 
-        </script>
-    </form>
-</div>
+
+            $(function () {
+                var jsArray = @Html.Raw(Json.Serialize(Model.gstAddEnquiryCommandDto.AppTypeList));
+                for (var i = 0; i < jsArray.length; i++) {
+                    var id = "#lnkCoApp_" + jsArray[i];
+                    //$(id).css("display", "inline-block");
+                    $(id).show();
+                }
+            });
+        });
+</script>
+
