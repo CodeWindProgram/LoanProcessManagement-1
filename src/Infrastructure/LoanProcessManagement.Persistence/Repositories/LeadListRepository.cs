@@ -237,6 +237,54 @@ namespace LoanProcessManagement.Persistence.Repositories
                 return response;
 
             }
+            if (request.CurrentStatus == 3)
+            {
+                var leadAddedApplicantsList = await _dbContext.LpmLeadApplicantsDetails
+                    .Where(x => x.lead_Id == user.Id).Include(x => x.LpmLeadMaster).ToListAsync();
+                foreach (var leadAddedApplicants in leadAddedApplicantsList)
+                {
+                    string message = leadAddedApplicants.ApplicantType == 0 ? "co-applicant." : $"co-applicant {leadAddedApplicants.ApplicantType}.";
+
+                    if (leadAddedApplicants.isCibilCheckRequired && !leadAddedApplicants.isCibilCheckSubmitSuccess)
+                    {
+                        response.Message = "Cibil is pending for " + message;
+                        response.Succeeded = false;
+                        response.Lead_Id = request.lead_Id;
+                        return response;
+                    }
+                    if (leadAddedApplicants.isItrRequired && leadAddedApplicants.EmploymentType == "SelfEmployment"
+                        && !leadAddedApplicants.isItrSubmitSuccess)
+                    {
+                        response.Message = "ITR is pending for " + message;
+                        response.Succeeded = false;
+                        response.Lead_Id = request.lead_Id;
+                        return response;
+
+                    }
+                    //if (leadAddedApplicants.isGstRequired && leadAddedApplicants.EmploymentType == "SelfEmployment" && leadAddedApplicants.LpmLeadMaster.AnnualTurnOverInLastFy > 4000000
+                    //    && !leadAddedApplicants.isGstSubmitSuccess)
+                    //{
+                    //    response.Message = "GST is pending for " + message;
+                    //    response.Succeeded = false;
+                    //    response.Lead_Id = request.lead_Id;
+                    //    return response;
+
+                    //}
+                    if (leadAddedApplicants.isPerfiosRequired && leadAddedApplicants.LpmLeadMaster.NationalityType == "Resident Indian"
+                        && !leadAddedApplicants.isPerfiosSubmitSuccess)
+                    {
+                        response.Message = "Perfios is pending for " + message;
+                        response.Succeeded = false;
+                        response.Lead_Id = request.lead_Id;
+                        return response;
+
+                    }
+                }
+
+
+
+
+            }
 
             if (user.CurrentStatus == 3)
             {

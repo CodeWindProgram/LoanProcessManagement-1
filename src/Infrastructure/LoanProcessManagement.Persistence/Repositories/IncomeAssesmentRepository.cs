@@ -164,6 +164,7 @@ namespace LoanProcessManagement.Persistence.Repositories
             details.IsActive = true;
             details.IsSuccess = true;
             await _dbContext.LpmLeadIncomeAssessmentDetails.AddAsync(details);
+            applicantDetails.isPerfiosSubmitSuccess = true;
             await _dbContext.SaveChangesAsync();
 
             request.Message = "Income Assessment Details Added Successfully";

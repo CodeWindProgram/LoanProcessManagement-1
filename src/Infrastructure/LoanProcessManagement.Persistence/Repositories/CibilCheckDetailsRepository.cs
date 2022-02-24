@@ -173,7 +173,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 applicantDetails.LastModifiedDate = DateTime.Now;
 
                 await _dbContext.LpmCibilCheckDetails.AddAsync(details);
-
+                applicantDetails.isCibilCheckSubmitSuccess = true;
                 await _dbContext.SaveChangesAsync();
 
                 request.Message = "Cibil Enquiry Added Successfully";
