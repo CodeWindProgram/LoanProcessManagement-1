@@ -91,8 +91,10 @@ namespace LoanProcessManagement.App.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(CibilCheckDetailsVm cibilCheckDetailsVm)
         {
-            //ModelState["{CibilCheckDetailsVm.AppTypeList}"].Errors.Clear();
-            ModelState.Remove("AppTypeList");
+            if(cibilCheckDetailsVm != null)
+            {
+                ModelState.Remove("AppTypeList");
+            }
             if (ModelState.IsValid)
             {
                 var response = await _cibilCheckService.UpdateCibilCheckDetailsDetails(cibilCheckDetailsVm);

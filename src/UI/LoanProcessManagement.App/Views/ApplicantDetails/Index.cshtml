@@ -146,6 +146,7 @@
                         <input type="hidden" asp-for="ApplicantType" id="hdnApplicantType">
                         <input type="hidden" asp-for="CreatedBy" value=@User.FindFirst("lg_id").Value />
                         <input type="hidden" asp-for="LastModifiedBy" value=@User.FindFirst("lg_id").Value />
+                        <input type="hidden" asp-for="UserRoleId" id="userRole" />
 
                         <div style="height: 15px;"></div>
                         <div class="btnDiv pt-2 pl-4 pr-4">
@@ -234,7 +235,7 @@
                                         <div class="col-lg-4 col-sm-12">
                                             <label class="">Date of Birth</label><span style="color: Red">&nbsp;*</span>
                                             <input asp-for="DateOfBirth" asp-format="{0:dd/MM/yyyy}" type="text" id="ContentPlaceHolder1txtDOB" placeholder="dd/mm/yyyy"
-                                                   class="form-control noTxtInput" onkeydown="return /[a-z]/i.test(event.key)"/>
+                                                   class="form-control noTxtInput" onkeydown="return /[a-z]/i.test(event.key)" />
                                             <span id="ContentPlaceHolder1_RequiredFieldValidator2" style="color:Red;display:none;">Date of Birth is mandatory.</span>
                                             <span asp-validation-for="DateOfBirth" style="color:Red;display:block;"></span>
                                         </div>
@@ -263,7 +264,7 @@
                                                 <label for="chkSalaried">
                                                     <span id="normal" class="font-weight-normal">Salaried</span>
                                                 </label>
-                                                &nbsp;&nbsp;&nbsp;                                              
+                                                &nbsp;&nbsp;&nbsp;
                                                 <input id="chkSelfEmployment" asp-for="EmploymentType" type="radio" name="employmentType" value="SelfEmployment" />
                                                 <label for="chkSelfEmployment">
                                                     <span id="normal" class="font-weight-normal">Self Employed</span>
@@ -286,7 +287,7 @@
                                         <div class="row">
                                             <div class="col-lg-4 col-sm-12">
                                                 <label class="">PAN</label>
-                                                <input asp-for="PanCardNo"  placeholder="PAN" type="text" maxlength="10" id="ContentPlaceHolder1_txtPAN" class="form-control">
+                                                <input asp-for="PanCardNo" placeholder="PAN" type="text" maxlength="10" id="ContentPlaceHolder1_txtPAN" class="form-control">
                                                 <span asp-validation-for="PanCardNo" style="color:Red;display:block;"></span>
                                             </div>
 
@@ -322,7 +323,7 @@
 
                                         <div class="col-lg-4 col-sm-12">
                                             <label class="">Universal ID</label>
-                                            <input asp-for="AadharId" type="text"  placeholder="Universal ID" maxlength="14" id="ContentPlaceHolder1_txtUniversalId" class="form-control">
+                                            <input asp-for="AadharId" type="text" placeholder="Universal ID" maxlength="14" id="ContentPlaceHolder1_txtUniversalId" class="form-control">
                                             <span asp-validation-for="AadharId" style="color:Red;display:block;"></span>
                                         </div>
                                     </div>
@@ -330,15 +331,15 @@
 
 
                                 <div class="form-group">
-                                    <div class="row">                                       
-                                            <div class="col-lg-4 col-sm-12">
-                                                <label class="">GST No</label>                                           
-                                                    <input asp-for="GstNo" type="text" placeholder="GST No" minlength="15" maxlength="15" id="ContentPlaceHolder1_txtGSTNo" class="form-control">
-                                                    <span asp-validation-for="GstNo" style="color:Red;display:block;"></span>
-                                                </div>
-                                            </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-sm-12">
+                                            <label class="">GST No</label>
+                                            <input asp-for="GstNo" type="text" placeholder="GST No" minlength="15" maxlength="15" id="ContentPlaceHolder1_txtGSTNo" class="form-control">
+                                            <span asp-validation-for="GstNo" style="color:Red;display:block;"></span>
                                         </div>
-                                    
+                                    </div>
+                                </div>
+
 
 
 
@@ -368,120 +369,156 @@
                                                 <input asp-for="AddressLine3" placeholder="Address Line 3" type="text" maxlength="40" id="ContentPlaceHolder1_txtCurrentAddress3" class="form-control">
                                             </div>
                                         </div>
-                                </div>
+                                    </div>
 
                                     <div class="form-group">
                                         <div class="row">
-                                            
-                                                <div class="col-lg-4 col-sm-12" id="dvStateCurrent">
-                                                    <label class="">State</label><span style="color: Red">&nbsp;*</span>
+
+                                            <div class="col-lg-4 col-sm-12" id="dvStateCurrent">
+                                                <label class="">State</label><span style="color: Red">&nbsp;*</span>
 
 
-                                                    <select asp-for="State" id="ContentPlaceHolder1_ddlStateCurrent" class="form-control">
-                                                        <option value="">----Select----</option>
-                                                        <option value="35">ANDAMAN &amp; NICOBAR ISLANDS</option>
-                                                        <option value="28">ANDHRA PRADESH</option>
-                                                        <option value="12">ARUNACHAL PRADESH</option>
-                                                        <option value="18">ASSAM</option>
-                                                        <option value="10">BIHAR</option>
-                                                        <option value="4">CHANDIGARH</option>
-                                                        <option value="22">CHATTISGARH</option>
-                                                        <option value="22">CHHATTISGARH</option>
-                                                        <option value="26">DADRA &amp; NAGAR HAVELI</option>
-                                                        <option value="25">DAMAN &amp; DIU</option>
-                                                        <option value="7">DELHI</option>
-                                                        <option value="30">GOA</option>
-                                                        <option value="24">GUJARAT</option>
-                                                        <option value="6">HARYANA</option>
-                                                        <option value="2">HIMACHAL PRADESH</option>
-                                                        <option value="1">JAMMU &amp; KASHMIR</option>
-                                                        <option value="20">JHARKHAND</option>
-                                                        <option value="29">KARNATAKA</option>
-                                                        <option value="32">KERALA</option>
-                                                        <option value="31">LAKSHADWEEP</option>
-                                                        <option value="23">MADHYA PRADESH</option>
-                                                        <option value="27">MAHARASHTRA</option>
-                                                        <option value="14">MANIPUR</option>
-                                                        <option value="17">MEGHALAYA</option>
-                                                        <option value="15">MIZORAM</option>
-                                                        <option value="13">NAGALAND</option>
-                                                        <option value="21">ORISSA</option>
-                                                        <option value="34">PONDICHERRY</option>
-                                                        <option value="3">PUNJAB</option>
-                                                        <option value="8">RAJASTHAN</option>
-                                                        <option value="11">SIKKIM</option>
-                                                        <option value="33">TAMIL NADU</option>
-                                                        <option value="36">TELANGANA</option>
-                                                        <option value="16">TRIPURA</option>
-                                                        <option value="9">UTTAR PRADESH</option>
-                                                        <option value="5">UTTARANCHAL</option>
-                                                        <option value="19">WEST BENGAL</option>
+                                                <select asp-for="State" id="ContentPlaceHolder1_ddlStateCurrent" class="form-control">
+                                                    <option value="">----Select----</option>
+                                                    <option value="35">ANDAMAN &amp; NICOBAR ISLANDS</option>
+                                                    <option value="28">ANDHRA PRADESH</option>
+                                                    <option value="12">ARUNACHAL PRADESH</option>
+                                                    <option value="18">ASSAM</option>
+                                                    <option value="10">BIHAR</option>
+                                                    <option value="4">CHANDIGARH</option>
+                                                    <option value="22">CHATTISGARH</option>
+                                                    <option value="22">CHHATTISGARH</option>
+                                                    <option value="26">DADRA &amp; NAGAR HAVELI</option>
+                                                    <option value="25">DAMAN &amp; DIU</option>
+                                                    <option value="7">DELHI</option>
+                                                    <option value="30">GOA</option>
+                                                    <option value="24">GUJARAT</option>
+                                                    <option value="6">HARYANA</option>
+                                                    <option value="2">HIMACHAL PRADESH</option>
+                                                    <option value="1">JAMMU &amp; KASHMIR</option>
+                                                    <option value="20">JHARKHAND</option>
+                                                    <option value="29">KARNATAKA</option>
+                                                    <option value="32">KERALA</option>
+                                                    <option value="31">LAKSHADWEEP</option>
+                                                    <option value="23">MADHYA PRADESH</option>
+                                                    <option value="27">MAHARASHTRA</option>
+                                                    <option value="14">MANIPUR</option>
+                                                    <option value="17">MEGHALAYA</option>
+                                                    <option value="15">MIZORAM</option>
+                                                    <option value="13">NAGALAND</option>
+                                                    <option value="21">ORISSA</option>
+                                                    <option value="34">PONDICHERRY</option>
+                                                    <option value="3">PUNJAB</option>
+                                                    <option value="8">RAJASTHAN</option>
+                                                    <option value="11">SIKKIM</option>
+                                                    <option value="33">TAMIL NADU</option>
+                                                    <option value="36">TELANGANA</option>
+                                                    <option value="16">TRIPURA</option>
+                                                    <option value="9">UTTAR PRADESH</option>
+                                                    <option value="5">UTTARANCHAL</option>
+                                                    <option value="19">WEST BENGAL</option>
 
-                                                    </select>
+                                                </select>
 
-                                                    <span asp-validation-for="State" style="color:Red;display:block;"></span>
-                                                </div>
-                                           
-
-                                            
-                                                <div class="col-lg-4 col-sm-12" id="dvCityCurrent">
-                                                    <label class="">City</label><span style="color: Red">&nbsp;*</span>
-                                                    <input asp-for="City" type="text" placeholder="City" onkeydown="return /[a-z]/i.test(event.key)" maxlength="30" id="ContentPlaceHolder1_txtCityCurrent" class="form-control">
-                                                    <span asp-validation-for="City" style="color:Red;display:block;"></span>
-
-                                                </div>
-
-                                                <div class="col-lg-4 col-sm-12" id="dvCityCurrent">
-                                                    <label class="">Pin Code</label><span style="color: Red">&nbsp;*</span>
-                                                    <input asp-for="Pincode" placeholder="Pincode" type="text" maxlength="6" id="ContentPlaceHolder1_txtPinCodeCurrent" class="form-control noTxtInput">
-                                                    <span asp-validation-for="Pincode" style="color:Red;display:block;"></span>
-                                                </div>
-                                            
-                                        </div>
-                                        </div>
-
-                                      <hr />
-                                            <div id="divConverted5">
-                                                <h4><u><b>Accounts</b></u></h4>
+                                                <span asp-validation-for="State" style="color:Red;display:block;"></span>
                                             </div>
-                                            <div id="accountDv" class="pt-2">
 
 
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <div class="col-lg-4 col-sm-12">
 
-                                                            <label class="">No of Bank Accounts</label>
+                                            <div class="col-lg-4 col-sm-12" id="dvCityCurrent">
+                                                <label class="">City</label><span style="color: Red">&nbsp;*</span>
+                                                <input asp-for="City" type="text" placeholder="City" onkeydown="return /[a-z]/i.test(event.key)" maxlength="30" id="ContentPlaceHolder1_txtCityCurrent" class="form-control">
+                                                <span asp-validation-for="City" style="color:Red;display:block;"></span>
 
-                                                            <select asp-for="NoOfBankAccounts" class="form-control">
-                                                                <option value="">----Select----</option>
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
-                                                                <option value="3">3</option>
-                                                                <option value="4">4</option>
-                                                                <option value="5">5</option>
-                                                            </select>
-                                                            <span asp-validation-for="NoOfBankAccounts" style="color:Red;display:block;"></span>
-                                                        </div>
-                                                    </div>
+                                            </div>
 
+                                            <div class="col-lg-4 col-sm-12" id="dvCityCurrent">
+                                                <label class="">Pin Code</label><span style="color: Red">&nbsp;*</span>
+                                                <input asp-for="Pincode" placeholder="Pincode" type="text" maxlength="6" id="ContentPlaceHolder1_txtPinCodeCurrent" class="form-control noTxtInput">
+                                                <span asp-validation-for="Pincode" style="color:Red;display:block;"></span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <hr />
+                                    <div id="divConverted5">
+                                        <h4><u><b>Accounts</b></u></h4>
+                                    </div>
+                                    <div id="accountDv" class="pt-2">
+
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-sm-12">
+
+                                                    <label class="">No of Bank Accounts</label>
+
+                                                    <select asp-for="NoOfBankAccounts" class="form-control">
+                                                        <option value="">----Select----</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                    </select>
+                                                    <span asp-validation-for="NoOfBankAccounts" style="color:Red;display:block;"></span>
                                                 </div>
-                                                </div>
+                                            </div>
 
-                                                <br />
-                                                <div class="row tab">
-                                                    <div class="col-md-12 mb-3">
-                                                        <center>
-                                                            <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="ContentPlaceHolder1_btnAddEnquiry" class="btn" style="background-color: #343a40; color:white;">&nbsp
-                                                            <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@Model.LeadID">Cancel</a>
-                                                        </center>
+                                        </div>
+                                    </div>
+
+                                    <div id="detailsDiv">
+                                        <div id="divConverted5">
+                                            <h4><u><b>Required Details</b></u></h4>
+                                        </div>
+                                        <div id="requiredDetailsDv" class="pt-2">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-sm-12">
+
+                                                        <input type="checkbox" asp-for="isPerfiosRequired" /> Is perfios income assessment required<br />
+                                                        <span asp-validation-for="isPerfiosRequired" style="color:Red;display:block;"></span>
                                                     </div>
-                                                    <br />
+                                                    <div class="col-lg-6 col-sm-12">
+
+                                                        <input type="checkbox" asp-for="isCibilCheckRequired" /> Is cibil check required<br />
+                                                        <span asp-validation-for="isCibilCheckRequired" style="color:Red;display:block;"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-sm-12">
+
+                                                        <input type="checkbox" asp-for="isItrRequired" /> Is lead ITR check required<br />
+                                                        <span asp-validation-for="isItrRequired" style="color:Red;display:block;"></span>
+                                                    </div>
+                                                    <div class="col-lg-6 col-sm-12">
+
+                                                        <input type="checkbox" asp-for="isGstRequired" /> Is GST check required<br />
+                                                        <span asp-validation-for="isGstRequired" style="color:Red;display:block;"></span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-</form>
+                                    <br />
+                                    <div class="row tab">
+                                        <div class="col-md-12 mb-3">
+                                            <center>
+                                                <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="ContentPlaceHolder1_btnAddEnquiry" class="btn" style="background-color: #343a40; color:white;">&nbsp
+                                                <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@Model.LeadID">Cancel</a>
+                                            </center>
+                                        </div>
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -1075,6 +1112,15 @@
         }
 
     })
+    //debugger
+    $(function () {
+        if (@Model.UserRoleId == 2) {
+            $("#detailsDiv").show();
+        }
+        else {
+            $("#detailsDiv").hide();
+        }
+    });
 </script>
 
 

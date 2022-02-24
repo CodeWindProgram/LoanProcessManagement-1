@@ -40,6 +40,10 @@ namespace LoanProcessManagement.Application.Features.ApplicantDetails.Queries.Ad
         public int ApplicantType { get; set; }  //  
         //public string Qualification { get; set; } //
         public int NoOfBankAccounts { get; set; }
+        public bool isItrRequired { get; set; }
+        public bool isCibilCheckRequired { get; set; }
+        public bool isPerfiosRequired { get; set; }
+        public bool isGstRequired { get; set; }
         public string Message { get; set; }
         public bool Succeeded { get; set; }
     }

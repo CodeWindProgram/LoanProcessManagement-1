@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace LoanProcessManagement.App.Models
         public string FormNo { get; set; }
         public long lead_Id { get; set; }
         public string LeadID { get; set; }
+        [HiddenInput]
+        public long UserRoleId { get; set; }
 
         [Required(ErrorMessage = "First Name is Required")]
         public string FirstName { get; set; }
@@ -81,5 +84,13 @@ namespace LoanProcessManagement.App.Models
         
         [Required(ErrorMessage = "No of Bank Accounts is Required")]
         public int NoOfBankAccounts { get; set; }
+
+        public bool isItrRequired { get; set; }
+
+        public bool isCibilCheckRequired { get; set; }
+
+        public bool isPerfiosRequired { get; set; }
+
+        public bool isGstRequired { get; set; }
     }
 }
