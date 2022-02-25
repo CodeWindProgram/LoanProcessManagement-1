@@ -12,10 +12,11 @@
 }
 
 .AppTabs {
-    display: none;
+    display: inline-block;
     margin-right: 3px;
     padding: 5px 30px;
     color: white;
+    pointer-events: none;
 }
 
 #btnClear {
