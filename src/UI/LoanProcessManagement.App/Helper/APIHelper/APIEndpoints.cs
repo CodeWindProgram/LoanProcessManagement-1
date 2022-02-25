@@ -141,5 +141,8 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string CreditGstUserDetailsList = "api/v1/CreditGstDetails/GetCreditGstUserDetailsList/";
         #endregion
         public const string resetPassword = "api/v1/ChangePassword/ResetPasswords";
+
+        public const string GetSubmit = "api/v1/IncomeAssesment/GetSubmit/";
+        public const string PostSubmit = "api/v1/IncomeAssesment/UpdateSubmitGst";
     }
 }

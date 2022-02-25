@@ -63,40 +63,43 @@
 </div>*@
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
             <div class="panel-heading"><h5>GST Report List</h5></div>
-            <div>
-                <div class="row">
-                    <div class="col-3">
-                        <br>
-                        <label>Credit Report</label><span style="color: Red">&nbsp;*</span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-5">
-                            <div id="divBranch" class="input-control text">
-                                <select id="enquiryVal" class="form-control">
-                                    <option value="cibil" id="cibil" >Cibil Enquiry Details</option>
-                                    <option value="gst" id="gst" selected>GST Enquiry Details</option>
-                                    <option value="itr" id="itr">ITR Enquiry Details</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-3">
-                            <input type="button" class="btn btn-dark  btn-md" @*onclick="myfun()"*@ value="Submit" id="btnSubmit">
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
             <div class="panel-body">
                 <div id="alertMsg" visible="false" runat="server">
                     <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
-                    <div style="margin-bottom: 10px"></div>
                 </div>
-                <div class="card" style="padding:5px;">
+                <div class="card" style="padding:15px;">
+                    <div>
+                        <div class="row">
+                            <div class="col-3">
+                                <br>
+                                <label>Select Report</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-5">
+                                    <div id="divBranch" class="input-control text">
+                                        <select id="enquiryVal" class="form-control">
+                                            <option value="cibil" id="cibil">Cibil Enquiry Details</option>
+                                            <option value="gst" id="gst" selected>GST Enquiry Details</option>
+                                            <option value="itr" id="itr">ITR Enquiry Details</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-3">
+                                    <input type="button" class="btn btn-dark  btn-md" @*onclick="myfun()"*@ value="Submit" id="btnSubmit">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <table id="CreditDetailsList" class="display table-responsive-lg">
                         <thead>
                             <tr>
+                                <th>
+                                    Form No
+                                </th>
                                 <th>
                                     Customer Name
                                 </th>
@@ -109,37 +112,36 @@
                                 <th>
                                     Created Date
                                 </th>
-                                <th>
-                                    View Details
-                                </th>
+
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.CustomerName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.MobileNumber)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.EmailId)
-                                    </td>
+                            <tr>
+                                <td>
+                                    @Html.ActionLink(item.FormNo, "userGstDetails", @*"CreditDetails",*@new { FormNo = item.FormNo })
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CustomerName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MobileNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EmailId)
+                                </td>
 
 
 
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.CreatedDate)
-                                    </td>
-                                    @*<td>
-                                    @Html.DisplayFor(modelItem => item.FormNo)
-                                </td>*@
-                                    <td>
-                                        @Html.ActionLink(item.FormNo, "userGstDetails", @*"CreditDetails",*@new { FormNo = item.FormNo })
-                                    </td>
-                                </tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                                </td>
+                                @*<td>
+            @Html.DisplayFor(modelItem => item.FormNo)
+        </td>*@
+
+                            </tr>
 
                             }
                         </tbody>

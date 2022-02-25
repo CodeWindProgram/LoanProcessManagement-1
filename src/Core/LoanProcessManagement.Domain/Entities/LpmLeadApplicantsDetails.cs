@@ -50,6 +50,7 @@ namespace LoanProcessManagement.Domain.Entities
         public bool isCibilCheckSubmitSuccess { get; set; }
         public bool isPerfiosSubmitSuccess { get; set; }
         public bool isGstSubmitSuccess { get; set; }
+        public bool IsSubmit { get; set; }
         
         public ICollection<LPMGSTEnquiryDetail> LPMGSTEnquiryDetails { get; set; }
         public ICollection<LpmLeadITRDetails> LpmLeadITRDetails { get; set; }

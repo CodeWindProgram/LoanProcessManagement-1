@@ -3,7 +3,9 @@ using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.AddIncomeAssessment;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTAddEnuiry;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTCreateEnquiry;
+using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.UpdateSubmitGst;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Queries.GetIncomeAssessment;
+using LoanProcessManagement.Application.Features.IncomeAssesment.Queries.GetIsSubmitFromGst;
 using LoanProcessManagement.Application.Responses;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -133,5 +135,51 @@ namespace LoanProcessManagement.App.Services.Implementation
             return model;
         }
         #endregion
+
+        public async Task<Response<GetIsSubmitFromGstQueryDto>> GetIsSubmit(long Id)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var content = JsonConvert.SerializeObject(Id);
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.GetAsync
+                (
+                    BaseUrl + APIEndpoints.GetSubmit + Id
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<Response<GetIsSubmitFromGstQueryDto>>(jsonString, options);
+
+            return model;
+        }
+
+        public async Task<UpdateSubmitGstCommandDto> PostIsSubmit(UpdateSubmitGstCommand gstCreateEnquiryCommand)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var content = JsonConvert.SerializeObject(gstCreateEnquiryCommand);
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.PutAsync
+                (
+                    BaseUrl + APIEndpoints.PostSubmit,
+                    new StringContent(content, Encoding.Default,
+                    "application/json")
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<UpdateSubmitGstCommandDto>(jsonString, options);
+
+            return model;
+        }
     }
 }

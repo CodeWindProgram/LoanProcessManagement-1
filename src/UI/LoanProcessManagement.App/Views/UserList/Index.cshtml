@@ -75,32 +75,30 @@
         padding: 0px 1px;
     }*/
 </style>
-<div class="container app pb-3">
+<div class="container app ">
     <div class="col-sm-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s">
             <div class="panel-heading"><h5>User List</h5></div>
             <div class="panel-body">
+                @*@if (ViewBag.Issuccesflag)
+        {
+            <div class="alert alert-success" role="alert">
+                <p>@ViewBag.Message</p>
+            </div>
+        }
+        else if (!string.IsNullOrEmpty(ViewBag.Message))
+        {
+            <div class="alert alert-danger" role="alert">
+                <strong>Error! @ViewBag.Message</strong>
+            </div>
 
-                <div class="border-part ">
-                    @*@if (ViewBag.Issuccesflag)
-                    {
-                        <div class="alert alert-success" role="alert">
-                            <p>@ViewBag.Message</p>
-                        </div>
-                    }
-                    else if (!string.IsNullOrEmpty(ViewBag.Message))
-                    {
-                        <div class="alert alert-danger" role="alert">
-                            <strong>Error! @ViewBag.Message</strong>
-                        </div>
-
-                    }*@
-                    <div id="alertMsg" visible="false" runat="server">
-                        <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
-                        <div style="margin-bottom: 10px"></div>
-                    </div>
+        }*@
+                <div id="alertMsg" visible="false" runat="server">
+                    <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
+                </div>
+                <div class="card" style="padding:15px;">
                     <div>
-                        <div class="row">
+                        <div class="row mt-3">
                             <div class="col-lg-1">
                                 <label>Filter  :</label>
                             </div>
@@ -115,122 +113,122 @@
                     </div>
                     <hr />
                     @*<div class="row d-flex flex-wrap">
-                        <div class="col-lg-10  d-flex flex-wrap">*@
-                            <table id="tblUserList" class="display table table-responsive" >
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.SerialNumber)
-                                        </th>
-                                        <th style="display : none">
-                                            @Html.DisplayNameFor(model => model.LgId)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.EmployeeId)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Name)
-                                        </th>
-                                        <th class="w-1">
-                                            @Html.DisplayNameFor(model => model.Email)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.BranchName)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.PhoneNumber)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.IsLocked)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.IsActive)
-                                        </th>
-                                        <th style="display : none">
-                                            @Html.DisplayNameFor(model => model.StaffType)
-                                        </th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="">
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.SerialNumber)
-                                            </td>
-                                            <td style="display : none">
-                                                @Html.DisplayFor(modelItem => item.LgId)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.EmployeeId)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Name)
-                                            </td>
-                                            <td style="word-break:break-all;">
-                                                @Html.DisplayFor(modelItem => item.Email)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.BranchName)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.PhoneNumber)
-                                            </td>
-                                            <td>
+            <div class="col-lg-10  d-flex flex-wrap">*@
+                    <table id="tblUserList" class="display table table-responsive-lg">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.SerialNumber)
+                                </th>
+                                <th style="display : none">
+                                    @Html.DisplayNameFor(model => model.LgId)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.EmployeeId)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                                <th class="w-1">
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.BranchName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IsLocked)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IsActive)
+                                </th>
+                                <th style="display : none">
+                                    @Html.DisplayNameFor(model => model.StaffType)
+                                </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="">
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SerialNumber)
+                                    </td>
+                                    <td style="display : none">
+                                        @Html.DisplayFor(modelItem => item.LgId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EmployeeId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td style="word-break:break-all;">
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.BranchName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                    </td>
+                                    <td>
 
-                                                @{
-                                                    if (item.IsLocked == true)
-                                                    {
-                                                        <label class="switch">
-                                                            <input type="checkbox" id="chkQuery" checked onchange="checkUncheckUnlockUser(this, '@item.EmployeeId')">
-                                                            <span class="slider round" data-on="Yes" data-off="No"></span>
-                                                        </label>
-                                                    }
-                                                    else
-                                                    {
-                                                        <label class="switch">
-                                                            <input type="checkbox" id="chkQuery" onchange="checkUncheckUnlockUser(this, '@item.EmployeeId')">
-                                                            <span class="slider round" data-on="Yes" data-off="No"></span>
-                                                        </label>
-                                                    }
+                                        @{
+                                            if (item.IsLocked == true)
+                                            {
+                                                <label class="switch">
+                                                    <input type="checkbox" id="chkQuery" checked onchange="checkUncheckUnlockUser(this, '@item.EmployeeId')">
+                                                    <span class="slider round" data-on="Yes" data-off="No"></span>
+                                                </label>
+                                            }
+                                            else
+                                            {
+                                                <label class="switch">
+                                                    <input type="checkbox" id="chkQuery" onchange="checkUncheckUnlockUser(this, '@item.EmployeeId')">
+                                                    <span class="slider round" data-on="Yes" data-off="No"></span>
+                                                </label>
+                                            }
 
-                                                }
-                                            </td>
-                                            <td>
-                                                @{
-                                                    if (item.IsActive == true)
-                                                    {
-                                                        <label class="switch">
-                                                            <input type="checkbox" id="chkQuery" checked onchange="checkUncheckActiveUser(this, '@item.EmployeeId')">
-                                                            <span class="slider round" data-on="Yes" data-off="No"></span>
-                                                        </label>
-                                                    }
-                                                    else
-                                                    {
-                                                        <label class="switch">
-                                                            <input type="checkbox" id="chkQuery" onchange="checkUncheckActiveUser(this, '@item.EmployeeId')">
-                                                            <span class="slider round" data-on="Yes" data-off="No"></span>
-                                                        </label>
-                                                    }
-                                                }
-                                            </td>
-                                            <td style="display : none">
-                                                @Html.DisplayFor(modelItem => item.StaffType)
-                                            </td>
-                                            <td class="text-nowrap">
-                                                @Html.ActionLink("Modify", "UpdateUser", "Login", new { lgid = item.LgId }, new { @Class = "btn btn-primary btn-sm" })
-                                                @Html.ActionLink("Delete", "RemoveUser", "Login", new { lgid = item.LgId },
-                                               new { onclick = "return confirm('Are you sure you want to delete ?');", @Class = "btn btn-danger btn-sm" })
-                                                @*<a asp-action="RemoveUser" id="deleteBtn" asp-route-lgid="item.LgId">Delete</a>*@
+                                        }
+                                    </td>
+                                    <td>
+                                        @{
+                                            if (item.IsActive == true)
+                                            {
+                                                <label class="switch">
+                                                    <input type="checkbox" id="chkQuery" checked onchange="checkUncheckActiveUser(this, '@item.EmployeeId')">
+                                                    <span class="slider round" data-on="Yes" data-off="No"></span>
+                                                </label>
+                                            }
+                                            else
+                                            {
+                                                <label class="switch">
+                                                    <input type="checkbox" id="chkQuery" onchange="checkUncheckActiveUser(this, '@item.EmployeeId')">
+                                                    <span class="slider round" data-on="Yes" data-off="No"></span>
+                                                </label>
+                                            }
+                                        }
+                                    </td>
+                                    <td style="display : none">
+                                        @Html.DisplayFor(modelItem => item.StaffType)
+                                    </td>
+                                    <td class="text-nowrap">
+                                        @Html.ActionLink("Modify", "UpdateUser", "Login", new { lgid = item.LgId }, new { @Class = "btn btn-primary btn-sm" })
+                                        @Html.ActionLink("Delete", "RemoveUser", "Login", new { lgid = item.LgId },
+                                       new { onclick = "return confirm('Are you sure you want to delete ?');", @Class = "btn btn-danger btn-sm" })
+                                        @*<a asp-action="RemoveUser" id="deleteBtn" asp-route-lgid="item.LgId">Delete</a>*@
 
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        @*</div>
-                    </div>*@
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    @*</div>
+            </div>*@
                 </div>
             </div>
         </div>

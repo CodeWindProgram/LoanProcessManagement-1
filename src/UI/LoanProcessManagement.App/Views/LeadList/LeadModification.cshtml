@@ -149,18 +149,18 @@
                         <div class="form-group ">
                             <div class="row">
                                 <div class="col-lg-4 col-sm-12">
-                                    <label for="Form_No">Form No:<span style="color: Red">&nbsp;*</span></label>
+                                    <label for="Form_No">Form No <span style="color: Red">&nbsp;*</span></label>
                                     <input type="text" class="form-control" asp-for="FormNo" readonly>
                                 </div>
                                 <div class="col-lg-4 col-sm-12">
-                                    <label for="status_lead">Status of Lead<span style="color:red;margin-left: 4px;font-size: 15px;">*</span></label>
+                                    <label for="status_lead">Status of Lead <span style="color:red;margin-left: 4px;font-size: 15px;">*</span></label>
                                     <select id="status_lead" class="form-control" asp-for="CurrentStatus" asp-items="ViewBag.leadStatus">
                                         <option value="">Select</option>
                                     </select>
                                     <span asp-validation-for="CurrentStatus" class="text-danger"></span>
                                 </div>
                                 <div class="col-lg-4 col-sm-12">
-                                    <label for="residential_status">Residential Status<span style="color:red;margin-left: 4px;font-size: 15px;">*</span></label>
+                                    <label for="residential_status">Residential Status </label>
                                     <select id="residential_status" class="form-control" asp-for="ResidentialStatus">
                                         <option value="Resident Indian">Resident Indian</option>
                                         <option value="Non-Resident Indian">Non-Resident Indian</option>
@@ -218,7 +218,7 @@
                             }
                             <div class="form-group row" style=@displayBranchResponse>
                                 <div class="col-lg-4 col-sm-12">
-                                    <label>Branch Response :</label>
+                                    <label>Branch Response</label>
                                 </div>
                                 <div class="col-lg-4 col-sm-12">
                                     <select id="branchComment" class="form-control" asp-for="HoSanction_query_commentResponse">
@@ -454,7 +454,7 @@
 
                         <div class="form-group row pt-3">
                             <div class="col-lg-4 col-sm-12">
-                                <label for="property_purchase_loan">Product Sold(if sale made)<span style="color:red;margin-left: 4px;font-size: 15px;">*</span></label>
+                                <label for="property_purchase_loan">Product Name <span style="color:red;margin-left: 4px;font-size: 15px;">*</span></label>
                                 <select id="property_purchase_loan" class="form-control" asp-for="LoanProductID" asp-items="ViewBag.loanProducts">
                                     <option value="">Select</option>
                                 </select>
@@ -462,7 +462,7 @@
                             </div>
 
                             <div class="col-lg-4 col-sm-12">
-                                <label for="amount">Amount(in INR):<span style="color:red;margin-left: 4px;font-size: 15px;">*</span></label>
+                                <label for="amount">Amount(in INR) <span style="color:red;margin-left: 4px;font-size: 15px;">*</span></label>
                                 <input type="text" class="form-control amt" placeholder="Enter Amount" asp-for="loanAmount" maxlength="8">
                                 <div><i style="color : red">(Note : Loan Amount Should be Greater than 1 Lakh and less than 5 Crore)</i></div>
                                 <span asp-validation-for="loanAmount" class="text-danger"></span>
@@ -472,16 +472,15 @@
 
                         <hr />
                         <h4><u><b>Insurance Product</b></u></h4>
-
                         <div class="form-group row pt-3">
                             <div class="col-lg-4 col-sm-12">
-                                <label for="property_purchase_insurance">Product Sold(if sale made)</label>
+                                <label for="property_purchase_insurance">Product Name</label>
                                 <select id="property_purchase_insurance" class="form-control" asp-for="InsuranceProductID" asp-items="ViewBag.insuranceProducts">
                                     <option value="">Select</option>
                                 </select>
                             </div>
                             <div class="col-lg-4 col-sm-12">
-                                <label for="amount_insurance">Amount(in INR):</label>
+                                <label for="amount_insurance">Amount(in INR)</label>
 
                                 <input type="text" class="form-control amt" placeholder="Enter Amount" asp-for="insuranceAmount" maxlength="6">
                                 <span asp-validation-for="insuranceAmount" class="text-danger"></span>
@@ -494,7 +493,7 @@
 
                         <div class="form-group row  pt-3">
                             <div class="col-lg-4 col-sm-12">
-                                <label for="date">Date :</label>
+                                <label for="date">Date </label>
                                 <input type="date" id="dates" class="form-control" asp-for="DateOfAction" readonly>
                             </div>
                             <div class="col-lg-4 col-sm-12">
@@ -509,7 +508,7 @@
                             </div>
                             <div class="form-group row pt-3">
                                 <div class="col-lg-4 col-sm-12">
-                                    <label>Select Reason :</label>
+                                    <label>Select Reason </label>
                                     <select id="RejectReasonList" asp-for="RejectLeadReasonID" class="form-control">
                                         <option selected="selected" value="0">Select</option>
                                         <option value="1">Delinquency in CIBIL report</option>
@@ -537,7 +536,7 @@
                             </div>
                             <div class="form-group row pt-3">
                                 <div class="col-lg-4 col-sm-12">
-                                    <label>Select Reason :</label>
+                                    <label>Select Reason </label>
                                     <select id="LostReasonList" class="form-control" asp-for="LostLeadReasonID">
                                         <option selected="selected" value="0">Select</option>
                                         <option value="1">Customer has availed loan from other institutions</option>
@@ -553,7 +552,7 @@
                                 </div>
 
                                 <div class="col-lg-4 col-sm-12" id="lostLeadComment" style="display:none">
-                                    <label>Comment : </label>
+                                    <label>Comments</label>
                                     <textarea placeholder="Comments" class="form-control" asp-for="LostLeadComment"></textarea>
                                 </div>
                             </div>

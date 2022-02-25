@@ -101,10 +101,13 @@ namespace LoanProcessManagement.App.Controllers
             if (ModelState.IsValid)
             {
                 var response = await _applicantDetailsService.UpdateApplicantDetails(applicantDetailsCommandVM);
-                ViewBag.isSuccess = response.Succeeded;
-                ViewBag.Message = response.Data.Message;
+                //ViewBag.isSuccess = response.Succeeded;
+                //ViewBag.Message = response.Data.Message;
+                TempData["applicantDetailIsSuccess"] = true;
+                TempData["applicantDetailMessage"] = response.Message;
             }
-            return View(applicantDetailsCommandVM);
+            var temp = "Lead_" + applicantDetailsCommandVM.lead_Id;
+            return RedirectToAction("LeadSummary", "LeadList", new { lead_Id = temp });
         }
         #endregion
     }

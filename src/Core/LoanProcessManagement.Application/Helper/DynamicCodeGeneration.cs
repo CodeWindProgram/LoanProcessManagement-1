@@ -12,14 +12,29 @@ namespace LoanProcessManagement.Application.Helper
     {
         public static string GeneratePassword()
         {
-            string strPwdchar = "abcdefghijklmnopqrstuvwxyz0123456789#+@&$ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            string strPwdchar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             StringBuilder strPwd = new StringBuilder(string.Empty);
             Random rnd = new Random();
-            for (int i = 0; i <= 8; i++)
+            for (int i = 0; i <= 2; i++)
             {
                 int iRandom = rnd.Next(0, strPwdchar.Length - 1);
                 strPwd.Append(strPwdchar.Substring(iRandom, 1));
             }
+            string strPwdsmall = "abcdefghijklmnopqrstuvwxyz";
+            
+            for (int i = 0; i <= 2; i++)
+            {
+                int iRa = rnd.Next(0, strPwdsmall.Length - 1);
+                strPwd.Append(strPwdsmall.Substring(iRa, 1));
+            }
+
+            string strPwddigi = "0123456789";
+            for (int i = 0; i <= 1; i++)
+            {
+                int iRandoms = rnd.Next(0, strPwddigi.Length - 1);
+                strPwd.Append(strPwddigi.Substring(iRandoms, 1));
+            }
+            
             return strPwd.ToString();
         }
     }

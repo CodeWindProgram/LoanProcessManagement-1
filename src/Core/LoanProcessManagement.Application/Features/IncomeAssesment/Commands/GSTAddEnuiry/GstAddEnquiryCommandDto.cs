@@ -28,7 +28,6 @@ namespace LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GS
         public int ApplicantType { get; set; }
         public bool IsActive { get; set; }
         public long ApplicantDetailId { get; set; }
-        public bool IsSubmit { get; set; }
         public List<int> AppTypeList { get; set; }
     }
 }

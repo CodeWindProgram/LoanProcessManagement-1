@@ -16,13 +16,17 @@ namespace LoanProcessManagement.App.Models
         public string LeadID { get; set; }
         public string CustomerName { get; set; }
         public bool IsSubmit { get; set; }
+        [Required(ErrorMessage = "AddressLine1 is Required")]
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
         public string AddressLine3 { get; set; }
+        [Required(ErrorMessage = "City is Required")]
         public string City { get; set; }
 
         [RegularExpression(@"[1-9]{1}[0-9]{5}|[1-9]{1}[0-9]{3}\\s[0-9]{3}", ErrorMessage = "Please Enter Valid Pincode.")]
+        [Required(ErrorMessage = "Pincode is Required")]
         public string Pincode { get; set; }
+        [Required(ErrorMessage = "State is Required")]
         public string State { get; set; }
         public string Gender { get; set; }
 
@@ -38,7 +42,6 @@ namespace LoanProcessManagement.App.Models
         public string PhoneNumber1 { get; set; }
 
         [RegularExpression(@"^[6-9]\d{9}$", ErrorMessage = "Please Enter Valid Phone Number.")]
-        [Required(ErrorMessage = "Phone No.2 is Required")]
         public string PhoneNumber2 { get; set; }
         public string PanCardNo { get; set; }
         public string PassportNo { get; set; }

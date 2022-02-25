@@ -132,6 +132,31 @@
 
 
         }
+        if ('@TempData["cibilCheckIsSuccess"]' == 'True') {
+            toastr.success('@TempData["cibilCheckMessage"]', "Success");
+
+        }
+        else if ('@TempData["cibilCheckIsSuccess"]' == 'False') {
+            toastr.error('@TempData["cibilCheckMessage"]', "Error");
+
+
+        }
+        if ('@TempData["applicantDetailIsSuccess"]' == 'True') {
+            toastr.success('@TempData["applicantDetailMessage"]', "Success");
+
+        }
+        else if ('@TempData["applicantDetailIsSuccess"]' == 'False') {
+            toastr.error('@TempData["applicantDetailMessage "]', "Error");
+
+        }
+        if ('@TempData["leadItrIsSuccess"]' == 'True') {
+            toastr.success('@TempData["leadItrMessage"]', "Success");
+
+        }
+        else if ('@TempData["leadItrIsSuccess"]' == 'False') {
+            toastr.error('@TempData["leadItrMessage"]', "Error");
+
+        }
 
     })
     //-------------------------------------------------------------------------------------------------------------------

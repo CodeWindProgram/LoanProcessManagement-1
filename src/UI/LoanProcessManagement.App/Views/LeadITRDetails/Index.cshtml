@@ -148,7 +148,11 @@
                                                 <label class="">Customer Email</label><br />
                                                 <p>@Model.CustomerEmail</p>
                                             </div>
-
+                                            <div class="col-lg-4 col-sm-12">
+                                                <label class="">Customer Mobile</label><br />
+                                                <p>@Model.CustomerPhone</p>
+                                                <span asp-validation-for="CustomerPhone" style="color:Red;display:block;"></span>
+                                            </div>
 
                                         </div>
                                     </div>
@@ -157,15 +161,7 @@
 
                                     <div class="form-group pl-2">
                                         <div class="row">
-                                            <div class="col-lg-4 col-sm-12">
-                                                <label class="">Customer Mobile</label><br />
-                                                <p>@Model.CustomerPhone</p>
-                                                <span asp-validation-for="CustomerPhone" style="color:Red;display:block;"></span>
-                                            </div>
-
-
-
-
+                                            
                                             <div class="col-lg-4 col-sm-12">
                                                 <label class="">Employee Type</label><br />
                                                 @*<input style="border: none; background-color: #f4f6f9;" id="selfEmployee" checked>*@

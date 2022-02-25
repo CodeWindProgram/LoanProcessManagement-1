@@ -100,12 +100,14 @@ namespace LoanProcessManagement.App.Controllers
                 var response = await _cibilCheckService.UpdateCibilCheckDetailsDetails(cibilCheckDetailsVm);
                 if (response.Succeeded)
                 {
-                    ViewBag.isSuccess = true;
-                    ViewBag.Message = response.Message;
+                    //ViewBag.isSuccess = true;
+                    //ViewBag.Message = response.Message;
+                    TempData["cibilCheckIsSuccess"] = true;
+                    TempData["cibilCheckMessage"] = response.Message;
                 }
                 else {
-                    ViewBag.isSuccess = false;
-                    ViewBag.Message = response.Message;
+                    TempData["cibilCheckIsSuccess"] = false;
+                    TempData["cibilCheckMessage"] = response.Message;
                 }
                 //if (response.Succeeded)
                 //{
@@ -116,9 +118,10 @@ namespace LoanProcessManagement.App.Controllers
                 //     return View(cibilCheckDetailsVm);
                 //}
             }
-            
-            return View(cibilCheckDetailsVm);
-            
+            var temp ="Lead_" + cibilCheckDetailsVm.lead_Id;
+            return RedirectToAction("LeadSummary", "LeadList", new { lead_Id = temp });
+
+
         }
         #endregion
     }
