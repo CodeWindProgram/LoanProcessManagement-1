@@ -35,6 +35,7 @@ namespace LoanProcessManagement.App.Controllers
         [HttpGet("/ReportsLeadList/{LgId}/{BranchID}")]
         public async Task<IActionResult> ReportsLeadList(string LgId,long BranchID)
         {
+            LgId = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value;
             var leadListingServiceResponse = await _reportsService.GetReportsLeadList(LgId,BranchID);
             if (leadListingServiceResponse != null && leadListingServiceResponse.Data != null && leadListingServiceResponse.Succeeded)
             {
