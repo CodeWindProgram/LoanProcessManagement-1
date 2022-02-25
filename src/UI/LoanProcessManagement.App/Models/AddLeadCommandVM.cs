@@ -49,7 +49,7 @@ namespace LoanProcessManagement.App.Models
         public string CustomerPhone_Alternate { get; set; }
 
         [EmailAddress(ErrorMessage = "Please Provide Valid Email Id")]
-        [Required(ErrorMessage = "Email Address is Required")]
+        [Required(ErrorMessage = "Email-Id is Required")]
         public string CustomerEmail { get; set; }
 
         [Required(ErrorMessage = "Employment Type is Required")]

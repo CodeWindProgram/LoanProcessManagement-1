@@ -173,13 +173,17 @@
 
                     <li class="nav-item" aria-labelledby="exampleModalLabel">
                         <div class="dropdown">
-                            <button class="btn btn-primary mr-2" style="border-radius:50px" type="button" data-toggle="dropdown">P</button>
+                            <button class="btn mr-2" type="button" data-toggle="dropdown"><i class='fa fa-user' style='color: #343A40; font-size: 30px ' ></i></button>
 
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                                <span class="dropdown-item dropdown-header">Profile !!</span>
+                                <span class="dropdown-item dropdown-header"><h5><b>Profile</b></h5></span>
                                 <div class="dropdown-divider"></div>
                                 <a href="#" class="dropdown-item">
-                                    @*<i class="fas fa-envelope mr-2"></i>*@ <b>Name:</b> @User.Identities.FirstOrDefault().Name (@User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value)
+                                    @*<i class="fas fa-envelope mr-2"></i>*@ <b>Name:</b> @User.Identities.FirstOrDefault().Name 
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="#" class="dropdown-item">
+                                    @*<i class="fas fa-envelope mr-2"></i>*@ <b>Role:</b> @User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a href="#" class="dropdown-item">

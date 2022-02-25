@@ -135,12 +135,13 @@ namespace LoanProcessManagement.App.Controllers
             if (ModelState.IsValid)
             {                
                 var response = await _leadITRDetails.UpdateLeadITRDetails(leadITRDetailsVm);
-                
-                ViewBag.isSuccess = response.Succeeded;
-                ViewBag.Message = response.Data.Message;
+
+                TempData["leadItrIsSuccess"] = true;
+                TempData["leadItrMessage"] = response.Message;
             }
-            return View(leadITRDetailsVm);
-            
+            var temp = "Lead_" + leadITRDetailsVm.lead_Id;
+            return RedirectToAction("LeadSummary", "LeadList", new { lead_Id = temp });
+
         }
         #endregion
     }

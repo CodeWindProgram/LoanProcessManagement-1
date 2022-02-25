@@ -234,7 +234,7 @@
 
 
                                             <div class="col-lg-4 col-sm-12">
-                                                <label class="">Phone 2</label><span style="color: Red">&nbsp;*</span>
+                                                <label class="">Phone 2</label>
                                                 <input asp-for="PhoneNumber2" placeholder="Phone 2" type="text" maxlength="10" id="ContentPlaceHolder1_txtPhone" class="form-control noTxtInput">
                                                 <span asp-validation-for="PhoneNumber2" style="color:Red;display:block;"></span>
                                                 <span id="ContentPlaceHolder1_RegularExpressionValidator5" style="color:Red;display:none;">Invalid Phone No.</span>
@@ -254,7 +254,7 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-lg-4 col-sm-12">
-                                                <label class="">Address Line 1</label>
+                                                <label class="">Address Line 1</label><span style="color: Red">&nbsp;*</span>
                                                 <input asp-for="AddressLine1" placeholder="Address Line 1" type="text" maxlength="40" id="ContentPlaceHolder1_txtCurrentAddress1" class="form-control">
                                                 <span asp-validation-for="AddressLine1" style="color:Red;display:block;"></span>
                                             </div>
@@ -279,7 +279,7 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-lg-4 col-sm-12">
-                                            <label class="">State</label>
+                                            <label class="">State</label><span style="color: Red">&nbsp;*</span>
 
                                             <select asp-for="State" class="form-control">
                                                 <option value="">----Select----</option>
@@ -329,7 +329,7 @@
 
 
                                         <div class="col-lg-4 col-sm-12">
-                                            <label class="">City</label>
+                                            <label class="">City</label><span style="color: Red">&nbsp;*</span>
                                             <input asp-for="City" placeholder="City" onkeydown="return /[a-z]/i.test(event.key)" type="text" maxlength="30" id="ContentPlaceHolder1_txtCityCurrent" class="form-control">
 
                                             <span asp-validation-for="City" style="color:Red;display:block;"></span>
@@ -338,7 +338,7 @@
 
 
                                         <div class="col-lg-4 col-sm-12">
-                                            <label class="">Pin Code</label>
+                                            <label class="">Pin Code</label><span style="color: Red">&nbsp;*</span>
                                             <input asp-for="Pincode" placeholder="Pincode" type="text" maxlength="6" id="ContentPlaceHolder1_txtPinCodeCurrent" class="form-control noTxtInput">
 
                                             <span asp-validation-for="Pincode" style="color:Red;display:block;"></span>
@@ -366,8 +366,8 @@
 
 
                                         <div class="col-lg-4 col-sm-12">
-                                           
-                                            <label class="">Residence code</label><span style="color: Red">&nbsp;*</span>
+
+                                            <label class="">Residence Type</label><span style="color: Red">&nbsp;*</span>
 
                                             <select asp-for="Residence" class="form-control">
                                                 <option value="">----Select----</option>
@@ -957,7 +957,7 @@
         }
 
 
-        if ('@ViewBag.isSuccess' == 'True') {
+        @*if ('@ViewBag.isSuccess' == 'True') {
             setTimeout(function () {
                 location.href = "/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=@Model.ApplicantType";
             }, 3000);
@@ -967,7 +967,7 @@
                 location.href = "/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=@Model.ApplicantType";
              }, 1000);
 
-        }
+        }*@
 
 
         $(function () {
@@ -1000,7 +1000,6 @@
 
     $(document).ready(function () {
         //var button = document.getElementById("SubmitButton");
-        //debugger;
         if (@Model.Succeeded.ToString().ToLower() == false) {
             $("#SubmitButton").attr("disabled", "disabled");
         }
