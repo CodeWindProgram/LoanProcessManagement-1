@@ -1,7 +1,7 @@
 ﻿
 .AppTabs_AppDetails {
     display: inline-block;
-    margin-right: 3px;
+    /*margin-right: 3px;*/
     padding: 5px 30px;
     color: white;
 }
@@ -107,6 +107,8 @@ input:checked + .slider:before {
 
 .btnDiv {
     text-align: center;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 u {
@@ -127,7 +129,7 @@ u {
 
 
 .btnDiv ul {
-    display: flex;
+   /* display: flex;*/
     list-style-type: none;
     margin-block-start: 1em;
     margin-block-end: 1em;
@@ -147,6 +149,7 @@ u {
 
         .btnDiv ul li.active {
              background-color: #b5aeae;
+             border-radius:initial;
         }
 
         .btnDiv ul li a {
