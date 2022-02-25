@@ -7,45 +7,45 @@
     ViewData["Title"] = "AddLead";
 }
 @*<style>
-    .group1 {
-        padding-left: 4px;
-        float: left;
-    }
+        .group1 {
+            padding-left: 4px;
+            float: left;
+        }
 
-    .group2 {
-        float: right;
-        width: 65%;
-        padding-right: 4px;
-    }
+        .group2 {
+            float: right;
+            width: 65%;
+            padding-right: 4px;
+        }
 
-    input[type=text], textarea, select {
-        width: 100%;
-    }
+        input[type=text], textarea, select {
+            width: 100%;
+        }
 
-    .row {
-        margin-left: 5px;
-        margin-right: 5px;
-    }
+        .row {
+            margin-left: 5px;
+            margin-right: 5px;
+        }
 
-    #btnSignIn {
-        margin-left: 5px;
-    }
-    #normal{
-        font-weight:normal;
-    }
+        #btnSignIn {
+            margin-left: 5px;
+        }
+        #normal{
+            font-weight:normal;
+        }
 
-    
 
-    /*.panel-heading {
-        color: white;
-        background-color: #343a40;
-        border-bottom: 1px solid rgba(0,0,0,.125);
-        padding: 0.75rem 1.25rem;
-        position: relative;
-        border-top-left-radius: 0.25rem;
-        border-top-right-radius: 0.25rem;
-    }*/
-</style>*@
+
+        /*.panel-heading {
+            color: white;
+            background-color: #343a40;
+            border-bottom: 1px solid rgba(0,0,0,.125);
+            padding: 0.75rem 1.25rem;
+            position: relative;
+            border-top-left-radius: 0.25rem;
+            border-top-right-radius: 0.25rem;
+        }*/
+    </style>*@
 
 <!--<div class="container app pb-5">
     <div class="col-sm-12 col-lg-12">
@@ -533,7 +533,7 @@
                                     </div>
                                     <div class="col-6">
                                         <textarea asp-for="Comment" class="form-control" placeholder="Enter Comments" maxlength="300"></textarea>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -619,21 +619,23 @@
                                 <div class="row">
                                     <div class="col-lg-4 col-sm-12">
                                         <label asp-for="FormNo">Form Number <span style="color: red; width: 10%;">*</span></label>
-                                        <input asp-for="FormNo" class="form-control" type="text" name="FormNo" placeholder="Enter Form Number" />
+                                        <input asp-for="FormNo" class="form-control" type="text" name="FormNo" id="FormNo" placeholder="Enter Form Number" />
                                         <span asp-validation-for="FormNo" class="text-danger"></span>
+                                        <span id="FormNospanTrue" class="text-danger"></span>
+                                        <span id="FormNospanFalse" class="text-success"></span>
                                     </div>
 
 
                                     @*<div class="col-lg-4 col-sm-12">
-                    <label asp-for="IsPropertyIdentified">Property Identified :<span style="color: red; width: 10%;">*</span></label>
+                                            <label asp-for="IsPropertyIdentified">Property Identified :<span style="color: red; width: 10%;">*</span></label>
 
-                    <select asp-for="IsPropertyIdentified" id="DDL_PropId" class="form-control">
-                        <option value="">Select</option>
-                        <option value="YES">Yes</option>
-                        <option value="NO">No</option>
-                    </select>
-                    <span asp-validation-for="IsPropertyIdentified" class="text-danger"></span>
-                </div>*@
+                                            <select asp-for="IsPropertyIdentified" id="DDL_PropId" class="form-control">
+                                                <option value="">Select</option>
+                                                <option value="YES">Yes</option>
+                                                <option value="NO">No</option>
+                                            </select>
+                                            <span asp-validation-for="IsPropertyIdentified" class="text-danger"></span>
+                                        </div>*@
                                 </div>
                             </div>
                             <hr />
@@ -1105,5 +1107,9 @@
         })
         });
         $('#DDL_ProductInterest').trigger("change");
+
+        
+
+
     });
 </script>

@@ -330,5 +330,24 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             return model;
         }
+        public async Task<bool> VerifyFormNo(string formNo)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.GetAsync
+                (
+                    BaseUrl + APIEndpoints.FormNo + formNo
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<bool>(jsonString, options);
+            model = !model;
+            return model;
+        }
     }
 }

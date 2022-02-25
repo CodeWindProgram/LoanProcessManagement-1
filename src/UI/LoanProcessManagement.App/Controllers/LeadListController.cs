@@ -131,6 +131,7 @@ namespace LoanProcessManagement.App.Controllers
             return View(leadResponse.Data);
         }
         #endregion
+
         public async Task<IActionResult> LeadProducts(LeadListCommand leadListCommand)
         {
             return View();
@@ -383,6 +384,12 @@ namespace LoanProcessManagement.App.Controllers
             //return View(currentLead);
         }
         #endregion
+
+        public async Task<bool> VerifyFormNo(string formNo)
+        {
+            var result = await _leadListService.VerifyFormNo(formNo);
+            return result;
+        }
 
         #region This action method will internally call add lead api by - Pratiksha Poshe 10/11/2021
         /// <summary>
