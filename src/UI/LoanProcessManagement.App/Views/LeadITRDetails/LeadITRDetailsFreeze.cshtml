@@ -441,8 +441,9 @@
             var jsArray = @Html.Raw(Json.Serialize(Model.AppTypeList));
             for (var i = 0; i < jsArray.length; i++) {
                 var id = "#lnkCoApp_" + jsArray[i];
+                $(id).css('pointer-events', 'auto');
                 //$(id).css("display", "inline-block");
-                $(id).show();
+                //$(id).show();
             }
         });
     });

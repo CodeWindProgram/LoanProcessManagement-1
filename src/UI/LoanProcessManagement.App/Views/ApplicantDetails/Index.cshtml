@@ -149,10 +149,9 @@
                         <input type="hidden" asp-for="UserRoleId" id="userRole" />
 
                         <div style="height: 15px;"></div>
-                        <div class="btnDiv pt-2 pl-4 pr-4">
+                        <div class="btnDiv">
                             <ul>
-
-                                <li id="l0"><a href="/ApplicantDetails/Index?lead_Id=@Model.lead_Id&applicantType=0" class="AppTabs_AppDetails btn-sm " id="tabProcess0">Applicant</a></li>
+                                <li id="l0"><a href="/ApplicantDetails/Index?lead_Id=@Model.lead_Id&applicantType=0" class="AppTabs_AppDetails btn-sm" id="tabProcess0">Applicant</a></li>
                                 <li id="l1"><a id="ContentPlaceHolder1_lnkCoApp1" class="AppTabs_AppDetails btn-sm" href="/ApplicantDetails/Index?lead_Id=@Model.lead_Id&applicantType=1">Co-Applicant-1</a></li>
                                 <li id="l2"><a id="ContentPlaceHolder1_lnkCoApp2" class="AppTabs_AppDetails btn-sm" href="/ApplicantDetails/Index?lead_Id=@Model.lead_Id&applicantType=2">Co-Applicant-2</a></li>
                                 <li id="l3"><a id="ContentPlaceHolder1_lnkCoApp3" class="AppTabs_AppDetails btn-sm" href="/ApplicantDetails/Index?lead_Id=@Model.lead_Id&applicantType=3">Co-Applicant-3</a></li>
@@ -219,14 +218,14 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-lg-4 col-sm-12">
-                                            <label class="">Customer Email</label>
+                                            <label class="">Email Id </label>
                                             <span style="color: Red">&nbsp;*</span>
                                             <input asp-for="CustomerEmail" type="text" id="ContentPlaceHolder1_txtCustomerEmail" class="form-control" placeholder="abc@xyz.com" maxlength="50">
                                             <span asp-validation-for="CustomerEmail" style="color:Red;display:block;"></span>
                                         </div>
 
                                         <div class="col-lg-4 col-sm-12">
-                                            <label class="">Customer Mobile</label>
+                                            <label class="">Contact No </label>
                                             <span style="color: Red">&nbsp;*</span>
                                             <input asp-for="CustomerPhone" type="text" maxlength="10" id="ContentPlaceHolder1_txtCustomerMobile" class="form-control noTxtInput" placeholder="Mobile No">
                                             <span asp-validation-for="CustomerPhone" style="color:Red;display:block;"></span>
@@ -478,12 +477,12 @@
                                                 <div class="row">
                                                     <div class="col-lg-6 col-sm-12">
 
-                                                        <input type="checkbox" asp-for="isPerfiosRequired" /> Is perfios income assessment required<br />
+                                                        <input type="checkbox" asp-for="isPerfiosRequired" checked/> Is perfios income assessment required<br />
                                                         <span asp-validation-for="isPerfiosRequired" style="color:Red;display:block;"></span>
                                                     </div>
                                                     <div class="col-lg-6 col-sm-12">
 
-                                                        <input type="checkbox" asp-for="isCibilCheckRequired" /> Is cibil check required<br />
+                                                        <input type="checkbox" asp-for="isCibilCheckRequired" checked/> Is cibil check required<br />
                                                         <span asp-validation-for="isCibilCheckRequired" style="color:Red;display:block;"></span>
                                                     </div>
                                                 </div>
@@ -493,12 +492,12 @@
                                                 <div class="row">
                                                     <div class="col-lg-6 col-sm-12">
 
-                                                        <input type="checkbox" asp-for="isItrRequired" /> Is lead ITR check required<br />
+                                                        <input type="checkbox" asp-for="isItrRequired" checked/> Is lead ITR check required<br />
                                                         <span asp-validation-for="isItrRequired" style="color:Red;display:block;"></span>
                                                     </div>
                                                     <div class="col-lg-6 col-sm-12">
 
-                                                        <input type="checkbox" asp-for="isGstRequired" /> Is GST check required<br />
+                                                        <input type="checkbox" asp-for="isGstRequired" checked/> Is GST check required<br />
                                                         <span asp-validation-for="isGstRequired" style="color:Red;display:block;"></span>
                                                     </div>
                                                 </div>

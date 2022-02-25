@@ -25,9 +25,9 @@ namespace LoanProcessManagement.App.Models
         public string CustomerPhone { get; set; }
         public string EmploymentType { get; set; }
 
-        [Required(ErrorMessage = "Please Select Date")]
+        //[Required(ErrorMessage = "Please Select Date")]
         public string StartDate { get; set; }
-        [Required(ErrorMessage = "Please Select Date")]
+        //[Required(ErrorMessage = "Please Select Date")]
         public string EndDate { get; set; }
         [Required(ErrorMessage = "Please Enter Employer Name")]
         public string EmployerName1 { get; set; }

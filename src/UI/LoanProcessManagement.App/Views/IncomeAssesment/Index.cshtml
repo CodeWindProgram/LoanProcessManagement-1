@@ -221,17 +221,17 @@
                                         <div class="row">
 
                                             <div class="col-lg-4 col-sm-12">
-                                                <label asp-for="StartDate" class="control-label">Statement Start Month<span style="color: Red">&nbsp;*</span></label>
+                                                <label asp-for="StartDate" class="control-label">Statement Start Month</label>
 
                                                 <input asp-for="StartDate" class="form-control noTxtInput" id="startDate" placeholder="mm-yyyy" onkeydown="return /[a-z]/i.test(event.key)" autocomplete="off" />
-                                                <span asp-validation-for="StartDate" class="text-danger"></span>
+                                                
                                             </div>
 
                                             <div class="col-lg-4 col-sm-12">
-                                                <label asp-for="EndDate" class="control-label">Statement End Month<span style="color: Red">&nbsp;*</span></label>
+                                                <label asp-for="EndDate" class="control-label">Statement End Month</label>
 
                                                 <input asp-for="EndDate" class="form-control noTxtInput" id="endDate" placeholder="mm-yyyy" onkeydown="return /[a-z]/i.test(event.key)" readonly />
-                                                <span asp-validation-for="EndDate" class="text-danger"></span>
+                                                
                                             </div>
 
                                             <div class="col-lg-2 col-sm-12">
@@ -325,7 +325,7 @@
                                     <div class="form-group">
                                         <div class="row">
 
-                                            <div class="col-lg-6 col-sm-12">
+                                            <div class="col-lg-4  col-sm-12">
                                                 <label asp-for="Institution_Id" class="control-label">Institution Name<span style="color: Red">&nbsp;*</span></label>
 
                                                 <div class="input-control text">
@@ -341,14 +341,14 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-lg-6 col-sm-12">
+                                            <div class="col-lg-4 col-sm-12">
                                                 <label asp-for="DocumentType" class="control-label">Document Type<span style="color: Red">&nbsp;*</span></label><br />
 
                                                 <input id="radScannedDocument" asp-for="DocumentType" type="radio" name="DocumentType" value="ScannedDocument" />
                                                 Scanned Document
                                                 &nbsp;&nbsp;&nbsp;
                                                 <input id="radStatement" asp-for="DocumentType" type="radio" name="DocumentType" value="e-Statement" />
-                                                e-Statement
+                                                e-Statement&nbsp;&nbsp;
                                                 <span asp-validation-for="DocumentType" class="text-danger"></span>
                                             </div>
 
@@ -357,14 +357,14 @@
                                     <div class="form-group">
                                         <div class="row">
 
-                                            <div class="col-lg-6 col-sm-12">
+                                            <div class="col-lg-4 col-sm-12">
                                                 <label asp-for="IPdf" class="control-label">Upload File (PDF Only)<span style="color: Red">&nbsp;*</span></label>
 
                                                 <input type="file" asp-for="IPdf" id="fileUploadPdf" class="form-control" accept=".pdf" onchange="validate_fileupload(this,&#39;pdf&#39;);">
                                                 <span asp-validation-for="IPdf" class="text-danger"></span>
                                             </div>
 
-                                            <div class="col-lg-6 col-sm-12">
+                                            <div class="col-lg-4 col-sm-12">
                                                 <label asp-for="FilePassword" class="control-label">PDF File Passwords (if any) <span style="color: Red">&nbsp;*</span></label>
 
                                                 <input type="password" asp-for="FilePassword" class="form-control" placeholder="Pdf Password" />
@@ -751,13 +751,15 @@
                 $('#endDate').val('');
 
         });
-
+        
         $(function () {
+            //debugger
             var jsArray = @Html.Raw(Json.Serialize(Model.AppTypeList));
             for (var i = 0; i < jsArray.length; i++) {
                 var id = "#lnkCoApp_" + jsArray[i];
+                $(id).css('pointer-events', 'auto');
                 //$(id).css("display", "inline-block");
-                $(id).show();
+                //$(id).show();               
             }
         });
     });

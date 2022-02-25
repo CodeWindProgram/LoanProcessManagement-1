@@ -143,14 +143,14 @@
                                 <div class="form-group pl-2">
                                     <div class="row">
                                         <div class="col-lg-4 col-sm-12">
-                                            <label class="">Customer Name</label>
+                                            <label class="">Name</label>
                                             <p>@Model.CustomerName</p>
                                         </div>
 
 
 
                                         <div class="col-lg-4 col-sm-12">
-                                            <label class="">Customer Email</label>
+                                            <label class="">Email Id</label>
                                             <p>@Model.CustomerEmail</p>
                                         </div>
 
@@ -158,7 +158,7 @@
 
 
                                         <div class="col-lg-4 col-sm-12">
-                                            <label class="">Customer Mobile</label>
+                                            <label class="">Contact No</label>
                                             <p>@Model.CustomerPhone</p>
                                         </div>
 
@@ -252,14 +252,14 @@
                                     <div class="form-group pl-2">
                                         <div class="row">
                                             <div class="col-lg-4 col-sm-12">
-                                                <label class="">Phone 1</label>
+                                                <label class="">Phone No</label>
                                                 <p>@Model.PhoneNumber1</p>
                                             </div>
 
 
 
                                             <div class="col-lg-4 col-sm-12">
-                                                <label class="">Phone 2</label>
+                                                <label class="">Alternate Phone No </label>
                                                 <p>@Model.PhoneNumber2</p>
                                             </div>
                                         </div>
@@ -1173,8 +1173,9 @@
             var jsArray = @Html.Raw(Json.Serialize(Model.AppTypeList));
             for (var i = 0; i < jsArray.length; i++) {
                 var id = "#lnkCoApp_" + jsArray[i];
+                $(id).css('pointer-events', 'auto');
                 //$(id).css("display", "inline-block");
-                $(id).show();
+                //$(id).show();
             }
         });
     });

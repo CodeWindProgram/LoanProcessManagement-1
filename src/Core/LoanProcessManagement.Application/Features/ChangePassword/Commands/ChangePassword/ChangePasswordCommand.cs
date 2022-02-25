@@ -14,9 +14,9 @@ namespace LoanProcessManagement.Application.Features.ChangePassword.Commands.Cha
         //public string NewPassword { get; set; }
         [Required(ErrorMessage = "Please Enter old Password")]
         [StringLength(25, MinimumLength = 8, ErrorMessage = "Password Should Atleast Contain 8 Character")]
-
         public string OldPassword { get; set; }
-        [Compare("OldPassword", ErrorMessage = "Old password should not be same as new password")]
+
+        
         [Required(ErrorMessage = "Please Enter New Password")]
         [RegularExpression(@"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$",
             ErrorMessage = "Password must contain: Minimum 8 characters atleast 1 UpperCase Alphabet, 1 LowerCase Alphabet and 1 digit.")]

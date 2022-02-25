@@ -384,20 +384,30 @@ namespace LoanProcessManagement.App.Controllers
         /// <summary>
         /// Calling API fro the Delete Menu - Saif Khan - 11/11/2021
         /// </summary>
-        [HttpGet("/MenuDelete/{Id}")]
-        public async Task<IActionResult> DeleteMenu(long Id)
+        /// 
+        [Route("/MenuDelete/{Id}")]
+        [Authorize(AuthenticationSchemes = "Cookies")]
+        public async Task<IActionResult> DeleteMenu([FromRoute] long Id)
         {
-            var res = await _menuService.MenuById(Id);
+            var response = await _menuService.DeleteMenu(Id);
+            return RedirectToAction("MenuList");
 
-            return View(res.Data);
         }
-        [HttpPost("/MenuDelete/{Id}")]
-        public async Task<IActionResult> DeleteMenu(GetMenuByIdQueryVm deleteMenuCommand)
-        {
-            var response = await _menuService.DeleteMenu(deleteMenuCommand.Id);
-            //var ReturnsTo = ViewBag.UserId = HttpContext.Request.Cookies["Id"];
-            return RedirectToAction("Menulist");
-        }
+
+        //[HttpGet("/MenuDelete/{Id}")]
+        //public async Task<IActionResult> DeleteMenu(long Id)
+        //{
+        //    var res = await _menuService.MenuById(Id);
+
+        //    return View(res.Data);
+        //}
+        //[HttpPost("/MenuDelete/{Id}")]
+        //public async Task<IActionResult> DeleteMenu(GetMenuByIdQueryVm deleteMenuCommand)
+        //{
+        //    var response = await _menuService.DeleteMenu(deleteMenuCommand.Id);
+        //    //var ReturnsTo = ViewBag.UserId = HttpContext.Request.Cookies["Id"];
+        //    return RedirectToAction("Menulist");
+        //}
         #endregion
     }
 }
