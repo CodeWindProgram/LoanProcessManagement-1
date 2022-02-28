@@ -34,6 +34,8 @@ namespace LoanProcessManagement.Persistence.Repositories
         public async Task<LPMGSTEnquiryDetail> CreateGstEnquiry(GstCreateEnquiryCommand request)
         {
             var lead = _dbContext.LpmLeadMasters.Where(a => a.lead_Id == (request.Lead_IdId).ToString()).FirstOrDefault();
+            var applicantDetails = await _dbContext.LpmLeadApplicantsDetails
+            .Where(x => x.lead_Id == request.Lead_IdId && x.ApplicantType == request.ApplicantType).FirstOrDefaultAsync();
             var gstCreateEnquiryCommandDto = new LPMGSTEnquiryDetail()
             {
                 FormNumber = request.FormNo.ToString(),
@@ -50,6 +52,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 ApplicantDetailId = request.ApplicantDetailId
             };
             var obj = await _dbContext.LPMGSTEnquiryDetails.AddAsync(gstCreateEnquiryCommandDto);
+            applicantDetails.isGstSubmitSuccess = true;
             _dbContext.SaveChanges();
             return obj.Entity;
         }
@@ -57,7 +60,7 @@ namespace LoanProcessManagement.Persistence.Repositories
         public async Task<GstAddEnquiryCommandDto> AddGstEnquiry(int ApplicantType, int Lead_Id)
         {
             List<int> applicantTypeList = await _dbContext.LpmLeadApplicantsDetails.Where(x => x.lead_Id == Lead_Id).OrderBy(x => x.ApplicantType).Select(x => x.ApplicantType).ToListAsync();      //represent list of applicant types under particular lead
-            var res = await (from A in _dbContext.LpmLeadApplicantsDetails
+               var res = await (from A in _dbContext.LpmLeadApplicantsDetails
                                  //join B in _dbContext.LPMGSTEnquiryDetails on A.Id equals B.ApplicantDetailId
                              where A.ApplicantType == ApplicantType && A.lead_Id == Lead_Id && A.IsActive == true
                              select new GstAddEnquiryCommandDto

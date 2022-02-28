@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -8,6 +9,8 @@ namespace LoanProcessManagement.Application.Features.LeadList.Queries
     public class GetLeadByLeadIdDto
     {
         public long Id { get; set; }
+        [HiddenInput]
+        public long UserRoleId { get; set; }
 
         public string lead_Id { get; set; }
 

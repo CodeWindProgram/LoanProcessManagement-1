@@ -115,7 +115,7 @@
         $("#anch_summary").addClass("selected");
 
     })
-     if('@Model.CurrentStatus' == '2') {
+    if ('@Model.CurrentStatus' == '2' && ('@Model.UserRoleId'=='2' || '@Model.UserRoleId'=='3')) {
          $("#forBranch").css("display", "block");
      }
      if('@Model.CurrentStatus' == '5') {
