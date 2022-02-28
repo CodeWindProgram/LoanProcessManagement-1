@@ -1,6 +1,6 @@
 ﻿
 @model LoanProcessManagement.App.Models.CibilCheckDetailsVm
-    <link href="~/css/Common Css/Common1.css" rel="stylesheet" />
+<link href="~/css/Common Css/Common1.css" rel="stylesheet" />
 @*@model LoanProcessManagement.Application.Features.CibilCheck.Commands.AddCibilCheckDetails.AddCibilDetailsCommand*@
 
 @{
@@ -9,6 +9,35 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Cibil Check Details";
 }
+@*<style>
+    .AppTabs:hover {
+        background: #adb5bd;
+        color: black;
+    }
+    .btnDiv ul li {
+        list-style: none;
+    }
+
+        .btnDiv ul li a {
+            text-decoration: none;
+            color: #343A40;
+            border: 1px solid lightgray;
+        }
+
+        .btnDiv ul li.active a {
+            color: #ffffff;
+            background: #343A40;
+        }
+    .rounded-nav {
+        border-radius: 50rem !important;
+    }
+        .rounded-nav .nav-link {
+            border-radius: 50rem !important;
+        }
+    .text-uppercase {
+        letter-spacing: 0.1em;
+    }
+</style>*@
 
 @*<style>
     /*.tab {
@@ -22,65 +51,65 @@
         color: #FFF;
     }
 
-    /*.btn {
-        width: inherit;
-        justify-content: center;
-    }*/
+        /*.btn {
+            width: inherit;
+            justify-content: center;
+        }*/
 
-    .AppTabs:hover {
-        background: #adb5bd;
-        color: black;
-    }
+        .AppTabs:hover {
+            background: #adb5bd;
+            color: black;
+        }
 
-    /*.AppTabs:visited {
-        text-decoration: none;
-    }*/
+        /*.AppTabs:visited {
+            text-decoration: none;
+        }*/
 
-    /*.selected {
-        background: #0d7db5;
-        color: #FFF;
-    }*/
+        /*.selected {
+            background: #0d7db5;
+            color: #FFF;
+        }*/
 
-    /*.panel-heading {
-        color: white;
-        background-color: #343a40;
-        border-bottom: 1px solid rgba(0,0,0,.125);
-        padding: 0.75rem 1.25rem;
-        position: relative;
-        border-top-left-radius: 0.25rem;
-        border-top-right-radius: 0.25rem;
-    }*/
+        /*.panel-heading {
+            color: white;
+            background-color: #343a40;
+            border-bottom: 1px solid rgba(0,0,0,.125);
+            padding: 0.75rem 1.25rem;
+            position: relative;
+            border-top-left-radius: 0.25rem;
+            border-top-right-radius: 0.25rem;
+        }*/
 
-    .btnDiv {
-        text-align: center;
-    }
+        .btnDiv {
+            text-align: center;
+        }
 
-    .card {
-        /*background-color:slategray;*/
-        background: linear-gradient(to bottom, rgba(251,251,251,10) 0%,rgba(242,242,242,10) 100%);
-        font-family: sans-serif;
-        font-size: 18px;
-        border: 1px solid;
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-    /*h5 {
-        font-size: 1.25rem;
-        margin-left: 1rem;
-        padding-top: 5px;
-        font-weight: 600;
-    }*/
-    .formDiv {
-        border: 1px solid #343a40;
-        padding-bottom: 5px;
-        padding-left: 1%;
-        padding-right: 1%;
-    }
+        .card {
+            /*background-color:slategray;*/
+            background: linear-gradient(to bottom, rgba(251,251,251,10) 0%,rgba(242,242,242,10) 100%);
+            font-family: sans-serif;
+            font-size: 18px;
+            border: 1px solid;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        /*h5 {
+            font-size: 1.25rem;
+            margin-left: 1rem;
+            padding-top: 5px;
+            font-weight: 600;
+        }*/
+        .formDiv {
+            border: 1px solid #343a40;
+            padding-bottom: 5px;
+            padding-left: 1%;
+            padding-right: 1%;
+        }
 
-    u {
-        font-weight: 600;
-    }
-</style>*@
+        u {
+            font-weight: 600;
+        }
+    </style>*@
 
 <div class="container pb-5">
     <div class="container app">
@@ -97,13 +126,15 @@
                         <input type="hidden" asp-for="LastModifiedBy" value=@User.FindFirst("lg_id").Value />
                         <input type="hidden" asp-for="AppTypeList" />
                         <div style="height: 15px;"></div>
-                        <div class="btnDiv  pt-4 pl-4 pr-4">
-                            <a href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=0" class="AppTabs btn-sm selected" id="lnkCoApp_0" style="background: #adb5bd;">Applicant</a>
-                            <a id="lnkCoApp_1" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=1" style="background: #343a40;">Co-Applicant-1</a>
-                            <a id="lnkCoApp_2" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=2" style="background: #343a40;">Co-Applicant-2</a>
-                            <a id="lnkCoApp_3" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=3" style="background: #343a40;">Co-Applicant-3</a>
-                            <a id="lnkCoApp_4" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=4" style="background: #343a40;">Co-Applicant-4</a>
-                            <a id="lnkCoApp_5" class="AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=5" style="background: #343a40;">Co-Applicant-5</a>
+                        <div class="btnDiv mt-5 ml-4">
+                            <ul class="row text-center rounded-nav pl-5">
+                                <li><a href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=0" class="nav-link border-1 text-uppercase font-weight-bold AppTabs btn-sm " style="background-color: #343A40;color:white;" id="lnkCoApp_0">&nbsp;&nbsp;&nbsp;Applicant&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a id="lnkCoApp_1" class="nav-link border-1 text-uppercase font-weight-bold AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=1" style="background-color: white; color: #343A40;">Co-Applicant-1</a></li>
+                                <li><a id="lnkCoApp_2" class="nav-link border-1 text-uppercase font-weight-bold AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=2" style="background-color: white; color: #343A40;">Co-Applicant-2</a></li>
+                                <li><a id="lnkCoApp_3" class="nav-link border-1 text-uppercase font-weight-bold AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=3" style="background-color: white; color: #343A40;">Co-Applicant-3</a></li>
+                                <li><a id="lnkCoApp_4" class="nav-link border-1 text-uppercase font-weight-bold AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=4" style="background-color: white; color: #343A40;">Co-Applicant-4</a></li>
+                                <li><a id="lnkCoApp_5" class="nav-link border-1 text-uppercase font-weight-bold AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=5" style="background-color: white; color: #343A40;">Co-Applicant-5</a></li>
+                            </ul>
                         </div>
 
                         <span id="ContentPlaceHolder1_spanMessage" style="color: red;"></span>
@@ -452,7 +483,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                         </div>
                     </form>
                 </div>
             </div>
@@ -1015,24 +1046,34 @@
         var applicant5 = document.getElementById("lnkCoApp_5");
 
         if (@Model.ApplicantType == 1) {
-             applicant1.style.backgroundColor = "#adb5bd";
-             applicant0.style.backgroundColor = "#343a40";
+            applicant1.style.backgroundColor = "#343A40";
+            applicant1.style.color = "white";
+            applicant0.style.backgroundColor = "white";
+            applicant0.style.color = "#343A40";
         }
         else if (@Model.ApplicantType == 2) {
-             applicant2.style.backgroundColor = "#adb5bd";
-             applicant0.style.backgroundColor = "#343a40";
+            applicant2.style.backgroundColor = "#343A40";
+            applicant2.style.color = "white";
+            applicant0.style.backgroundColor = "white";
+            applicant0.style.color = "#343A40";
         }
         else if (@Model.ApplicantType == 3) {
-             applicant3.style.backgroundColor = "#adb5bd";
-             applicant0.style.backgroundColor = "#343a40";
+            applicant3.style.backgroundColor = "#343A40";
+            applicant3.style.color = "white";
+            applicant0.style.backgroundColor = "white";
+            applicant0.style.color = "#343A40";
         }
         else if (@Model.ApplicantType == 4) {
-             applicant4.style.backgroundColor = "#adb5bd";
-             applicant0.style.backgroundColor = "#343a40";
+            applicant4.style.backgroundColor = "#343A40";
+            applicant4.style.color = "white";
+            applicant0.style.backgroundColor = "white";
+            applicant0.style.color = "#343A40";
         }
         else if (@Model.ApplicantType == 5) {
-             applicant5.style.backgroundColor = "#adb5bd";
-             applicant0.style.backgroundColor = "#343a40";
+            applicant5.style.backgroundColor = "#343A40";
+            applicant5.style.color = "white";
+            applicant0.style.backgroundColor = "white";
+            applicant0.style.color = "#343A40";
         }
 
     });

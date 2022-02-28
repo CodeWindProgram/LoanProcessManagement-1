@@ -134,18 +134,28 @@
                         <input type="hidden" asp-for="IsSubmitCount" />
                         <input type="hidden" asp-for="AppTypeList" />
 
-                       
-                        <div class="btnDiv pt-4 pl-4 pr-4">
-                            <ul>
-
-                                <li id="l0"><a id="lnkCoApp_0" href="/IncomeAssesment/Index?applicantType=0&lead_Id=@Model.lead_Id" class="AppTabs btn-sm" >Applicant</a></li>
-                                <li id="l1"><a id="lnkCoApp_1" class="AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=1&lead_Id=@Model.lead_Id" >Co-Applicant-1</a></li>
-                                <li id="l2"><a id="lnkCoApp_2" class="AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=2&lead_Id=@Model.lead_Id" >Co-Applicant-2</a></li>
-                                <li id="l3"><a id="lnkCoApp_3" class="AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=3&lead_Id=@Model.lead_Id" >Co-Applicant-3</a></li>
-                                <li id="l4"><a id="lnkCoApp_4" class="AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=4&lead_Id=@Model.lead_Id" >Co-Applicant-4</a></li>
-                                <li id="l5"><a id="lnkCoApp_5" class="AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=5&lead_Id=@Model.lead_Id" >Co-Applicant-5</a></li>
+                        <div class="btnDiv pt-5 pl-4 pr-4">
+                            <ul class="row text-center rounded-nav pl-5">
+                                <li id="l0"><a href="/IncomeAssesment/Index?applicantType=0&lead_Id=@Model.lead_Id" class="nav-link border-1 text-uppercase font-weight-bold AppTabs btn-sm" id="lnkCoApp_0">&nbsp;&nbsp;&nbsp;Applicant&nbsp;&nbsp;&nbsp;</a></li>
+                                <li id="l1"><a id="lnkCoApp_1" class="nav-link border-1 text-uppercase font-weight-bold AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=1&lead_Id=@Model.lead_Id">Co-Applicant-1</a></li>
+                                <li id="l2"><a id="lnkCoApp_2" class="nav-link border-1 text-uppercase font-weight-bold AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=2&lead_Id=@Model.lead_Id">Co-Applicant-2</a></li>
+                                <li id="l3"><a id="lnkCoApp_3" class="nav-link border-1 text-uppercase font-weight-bold AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=3&lead_Id=@Model.lead_Id">Co-Applicant-3</a></li>
+                                <li id="l4"><a id="lnkCoApp_4" class="nav-link border-1 text-uppercase font-weight-bold AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=4&lead_Id=@Model.lead_Id">Co-Applicant-4</a></li>
+                                <li id="l5"><a id="lnkCoApp_5" class="nav-link border-1 text-uppercase font-weight-bold AppTabs btn-sm" href="/IncomeAssesment/Index?applicantType=5&lead_Id=@Model.lead_Id">Co-Applicant-5</a></li>
                             </ul>
                         </div>
+
+                        @*<div class="btnDiv mt-5 ml-4">
+            <ul class="row text-center rounded-nav pl-5">
+                <li id="l0"><a href="/IncomeAssesment/Index?applicantType=0&lead_Id=@Model.lead_Id" class="nav-link border-1 text-uppercase font-weight-bold AppTabs_AppDetails btn-sm" id="tabProcess0">&nbsp;&nbsp;&nbsp;Applicant&nbsp;&nbsp;&nbsp;</a></li>
+                <li id="l1"><a id="ContentPlaceHolder1_lnkCoApp1" class="nav-link border-1 text-uppercase font-weight-bold AppTabs_AppDetails btn-sm" href="/IncomeAssesment/Index?applicantType=1&lead_Id=@Model.lead_Id">Co-Applicant-1</a></li>
+                <li id="l2"><a id="ContentPlaceHolder1_lnkCoApp2" class="nav-link border-1 text-uppercase font-weight-bold AppTabs_AppDetails btn-sm" href="/IncomeAssesment/Index?applicantType=2&lead_Id=@Model.lead_Id">Co-Applicant-2</a></li>
+                <li id="l3"><a id="ContentPlaceHolder1_lnkCoApp3" class="nav-link border-1 text-uppercase font-weight-bold AppTabs_AppDetails btn-sm" href="/IncomeAssesment/Index?applicantType=3&lead_Id=@Model.lead_Id">Co-Applicant-3</a></li>
+                <li id="l4"><a id="ContentPlaceHolder1_lnkCoApp4" class="nav-link border-1 text-uppercase font-weight-bold AppTabs_AppDetails btn-sm" href="/IncomeAssesment/Index?applicantType=4&lead_Id=@Model.lead_Id">Co-Applicant-4</a></li>
+                <li id="l5"><a id="ContentPlaceHolder1_lnkCoApp5" class="nav-link border-1 text-uppercase font-weight-bold AppTabs_AppDetails btn-sm" href="/IncomeAssesment/Index?applicantType=5&lead_Id=@Model.lead_Id">Co-Applicant-5</a></li>
+            </ul>
+        </div>*@
+
                         <div id="ContentPlaceHolder1_alertMsg">
                             <div class="row tab pt-3 pr-1">
                                 <div class="col-md-12 text-center">
@@ -162,9 +172,9 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <span id="ContentPlaceHolder1_spanMessage" style="color: red;"></span>
-                       
+
                         <div class="frames">
                             <div class="panel-body">
                                 <hr />
@@ -224,14 +234,14 @@
                                                 <label asp-for="StartDate" class="control-label">Statement Start Month</label>
 
                                                 <input asp-for="StartDate" class="form-control noTxtInput" id="startDate" placeholder="mm-yyyy" onkeydown="return /[a-z]/i.test(event.key)" autocomplete="off" />
-                                                
+
                                             </div>
 
                                             <div class="col-lg-4 col-sm-12">
                                                 <label asp-for="EndDate" class="control-label">Statement End Month</label>
 
                                                 <input asp-for="EndDate" class="form-control noTxtInput" id="endDate" placeholder="mm-yyyy" onkeydown="return /[a-z]/i.test(event.key)" readonly />
-                                                
+
                                             </div>
 
                                             <div class="col-lg-2 col-sm-12">
@@ -254,7 +264,7 @@
                                             <div class="col-lg-4 col-sm-12">
                                                 <label asp-for="EmployerName1" class="control-label">Employer Name 1<span style="color: Red">&nbsp;*</span></label>
 
-                                                <input asp-for="EmployerName1" class="form-control" maxlength="100" placeholder="Employer Name 1" onkeydown="return /[a-z_ ]/i.test(event.key)"/>
+                                                <input asp-for="EmployerName1" class="form-control" maxlength="100" placeholder="Employer Name 1" onkeydown="return /[a-z_ ]/i.test(event.key)" />
                                                 <span asp-validation-for="EmployerName1" class="text-danger"></span>
                                             </div>
 
@@ -262,14 +272,14 @@
                                             <div class="col-lg-4 col-sm-12">
                                                 <label asp-for="EmployerName2" class="control-label">Employer Name 2</label>
 
-                                                <input asp-for="EmployerName2" class="form-control" maxlength="100" placeholder="Employer Name 2" onkeydown="return /[a-z_ ]/i.test(event.key)"/>
+                                                <input asp-for="EmployerName2" class="form-control" maxlength="100" placeholder="Employer Name 2" onkeydown="return /[a-z_ ]/i.test(event.key)" />
                                                 <span asp-validation-for="EmployerName2" class="text-danger"></span>
                                             </div>
 
                                             <div class="col-lg-4 col-sm-12">
                                                 <label asp-for="EmployerName3" class="control-label">Employer Name 3</label>
 
-                                                <input asp-for="EmployerName3" class="form-control" maxlength="100" placeholder="Employer Name 3" onkeydown="return /[a-z_ ]/i.test(event.key)"/>
+                                                <input asp-for="EmployerName3" class="form-control" maxlength="100" placeholder="Employer Name 3" onkeydown="return /[a-z_ ]/i.test(event.key)" />
                                                 <span asp-validation-for="EmployerName3" class="text-danger"></span>
                                             </div>
 
@@ -281,7 +291,7 @@
                                             <div class="col-lg-4 col-sm-12">
                                                 <label asp-for="EmployerName4" class="control-label">Employer Name 4</label>
 
-                                                <input asp-for="EmployerName4" class="form-control" maxlength="100" placeholder="Employer Name 4" onkeydown="return /[a-z_ ]/i.test(event.key)"/>
+                                                <input asp-for="EmployerName4" class="form-control" maxlength="100" placeholder="Employer Name 4" onkeydown="return /[a-z_ ]/i.test(event.key)" />
                                                 <span asp-validation-for="EmployerName4" class="text-danger"></span>
                                             </div>
 
@@ -289,7 +299,7 @@
                                             <div class="col-lg-4 col-sm-12">
                                                 <label asp-for="EmployerName5" class="control-label">Employer Name 5</label>
 
-                                                <input asp-for="EmployerName5" class="form-control" maxlength="100" placeholder="Employer Name 5" onkeydown="return /[a-z_ ]/i.test(event.key)"/>
+                                                <input asp-for="EmployerName5" class="form-control" maxlength="100" placeholder="Employer Name 5" onkeydown="return /[a-z_ ]/i.test(event.key)" />
                                                 <span asp-validation-for="EmployerName5" class="text-danger"></span>
                                             </div>
 

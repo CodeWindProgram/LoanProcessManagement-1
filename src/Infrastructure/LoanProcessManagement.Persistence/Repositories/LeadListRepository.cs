@@ -261,15 +261,15 @@ namespace LoanProcessManagement.Persistence.Repositories
                         return response;
 
                     }
-                    //if (leadAddedApplicants.isGstRequired && leadAddedApplicants.EmploymentType == "SelfEmployment" && leadAddedApplicants.LpmLeadMaster.AnnualTurnOverInLastFy > 4000000
-                    //    && !leadAddedApplicants.isGstSubmitSuccess)
-                    //{
-                    //    response.Message = "GST is pending for " + message;
-                    //    response.Succeeded = false;
-                    //    response.Lead_Id = request.lead_Id;
-                    //    return response;
+                    if (leadAddedApplicants.isGstRequired && leadAddedApplicants.EmploymentType == "SelfEmployment" && leadAddedApplicants.LpmLeadMaster.AnnualTurnOverInLastFy > 4000000
+                        && !leadAddedApplicants.isGstSubmitSuccess)
+                    {
+                        response.Message = "GST is pending for " + message;
+                        response.Succeeded = false;
+                        response.Lead_Id = request.lead_Id;
+                        return response;
 
-                    //}
+                    }
                     if (leadAddedApplicants.isPerfiosRequired && leadAddedApplicants.LpmLeadMaster.NationalityType == "Resident Indian"
                         && !leadAddedApplicants.isPerfiosSubmitSuccess)
                     {
@@ -432,7 +432,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 userProcessCycle.LastModifiedDate = DateTime.Today;
                 userProcessCycle.LastModifiedBy = request.LgId;
                 await _dbContext.SaveChangesAsync();
-                response.Message = "Lead Data Has Been Updated Successfully !!";
+                response.Message = "Lead Data Has Been Updated Successfully.";
                 response.Succeeded = true;
                 response.Lead_Id = request.lead_Id;
                 return response;
@@ -559,7 +559,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 newLeadEntry.lead.CurrentStatus = request.CurrentStatus;
                 newLeadEntry.lead.ProductID = (int)request.LoanProductID;
                 await _dbContext.SaveChangesAsync();
-                response.Message = "Lead Data Has Been Added Successfully !!";
+                response.Message = "Lead Data Has Been Updated Successfully.";
                 response.Succeeded = true;
                 response.Lead_Id = request.lead_Id;
                 return response;
