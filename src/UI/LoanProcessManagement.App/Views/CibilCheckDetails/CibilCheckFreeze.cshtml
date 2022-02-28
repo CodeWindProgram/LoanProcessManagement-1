@@ -1083,5 +1083,13 @@
                 //$(id).show();
             }
         });
+        //debugger
+        if ('@TempData["cibilCheckIsSuccess"]' == 'True') {
+            toastr.success('@TempData["cibilCheckMessage"]', "Success");
+
+        }
+        else if ('@TempData["cibilCheckIsSuccess"]' == 'False') {
+            toastr.error('@TempData["cibilCheckMessage"]', "Error");
+        }
     });
 </script>

@@ -136,11 +136,14 @@ namespace LoanProcessManagement.App.Controllers
             {                
                 var response = await _leadITRDetails.UpdateLeadITRDetails(leadITRDetailsVm);
 
-                TempData["leadItrIsSuccess"] = true;
-                TempData["leadItrMessage"] = response.Message;
+                TempData["leadItrIsSuccess"] = response.Data.Succeeded;
+                TempData["leadItrMessage"] = response.Data.Message;
             }
-            var temp = "Lead_" + leadITRDetailsVm.lead_Id;
-            return RedirectToAction("LeadSummary", "LeadList", new { lead_Id = temp });
+            //var temp = "Lead_" + leadITRDetailsVm.lead_Id;
+            //return RedirectToAction("LeadSummary", "LeadList", new { lead_Id = temp });
+            var appType = leadITRDetailsVm.ApplicantType;
+            var lead_Id = leadITRDetailsVm.lead_Id;
+            return RedirectToAction("Index", new { lead_Id = lead_Id, applicantType = appType});
 
         }
         #endregion

@@ -957,7 +957,7 @@
 
 <script>
 
-    
+
 
     $(document).ready(function () {
         $('form').submit(function () {
@@ -968,13 +968,22 @@
             }
         });
         
-        if ('@ViewBag.isSuccess' == 'True') {
+        @*if ('@ViewBag.isSuccess' == 'True') {
             toastr.success('@ViewBag.Message', "Success");
         }
         else if ('@ViewBag.isSuccess' == 'False') {
             toastr.error('@ViewBag.Message', "Error");
 
+        }*@
+
+        if ('@TempData["applicantDetailIsSuccess"]' == 'True') {
+            toastr.success('@TempData["applicantDetailMessage"]', "Success");
+
         }
+        else if ('@TempData["applicantDetailIsSuccess"]' == 'False') {
+            toastr.error('@TempData["applicantDetailMessage "]', "Error");
+        }
+
     });
     function fnCheckValidateIDs() {
         //debugger;
@@ -1021,6 +1030,8 @@
             //buttonImageOnly: true,
             changeMonth: true,
             changeYear: true,
+            startDate: '-60y',
+            endDate: '-18y',
             //format: "dd-mm-yyyy",
             format: "dd/mm/yyyy",
             //dateFormat: 'dd-mm-yy',
