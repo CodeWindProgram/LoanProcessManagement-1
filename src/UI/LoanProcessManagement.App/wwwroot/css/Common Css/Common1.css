@@ -1,4 +1,24 @@
 ﻿
+.AppTabs_AppDetails {
+    display: inline-block;
+    /*margin-right: 3px;*/
+    padding: 5px 30px;
+    color: white;
+}
+
+.AppTabs_AppDetails:hover {
+    background: #adb5bd;
+    color: black;
+}
+
+.AppTabs {
+    display: inline-block;
+    margin-right: 3px;
+    padding: 5px 30px;
+    color: white;
+    pointer-events: none;
+}
+
 #btnClear {
     width: inherit;
     justify-content: center;

@@ -29,7 +29,8 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string RoleMap = "api/v1/Menu/CreateMenuMaps";
         public const string DeleteRoleMapById = "api/v1/Menu/DeleteMenuMapsById/";
         public const string SubmitToAgency = "api/v1/Agency/SubmitToAgency";
-
+        //ChangePassword/VerifyOldPassword?OldPassword=Welcome2loan&LgId=LG_99
+        public const string VerifyOldPassword = "api/v1/ChangePassword/VerifyOldPassword?OldPassword={0}&LgId={1}";
 
         #region Maintaining the Url EndPoint - Pratiksha Poshe - 10/11/2021
         public const string GetAllLoanProducts = "api/v1/LoanProducts/GetAllLoanProducts";
@@ -129,6 +130,8 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string BrancheById = "api/v1/Branch/GetBrancheById/";
         public const string LeadByBranchId = "api/v1/LeadList/LeadStatus/";
         public const string LeadByLgId = "api/v1/LeadList/LeadByName/";
+        public const string FormNo = "api/v1/LeadList/VerifyFormNo?formNo=";
+
 
         #region added url Endpoints ITR, GST and Cibil enquiry Details List- Ramya Guduru - 14/02/2022
         public const string CreditITRDetailsList = "api/v1/CreditITRDetails/GetCreditITRDetailsList";

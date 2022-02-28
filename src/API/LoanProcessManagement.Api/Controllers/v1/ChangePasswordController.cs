@@ -1,5 +1,6 @@
 ﻿using LoanProcessManagement.Application.Features.ChangePassword.Commands.ChangePassword;
 using LoanProcessManagement.Application.Features.ChangePassword.Commands.ResetPassword;
+using LoanProcessManagement.Application.Features.ChangePassword.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -49,5 +50,17 @@ namespace LoanProcessManagement.Api.Controllers.v1
         }
 
         #endregion
+
+
+        [HttpGet("VerifyOldPassword")]
+        public async Task<IActionResult> VerifyOldPassword(string OldPassword,string LgId)
+        {
+            VerifyOldPasswordQuery oldpass = new VerifyOldPasswordQuery();
+            oldpass.OldPassword = OldPassword;
+            oldpass.LgId = LgId;
+            var result = await _mediator.Send(oldpass);
+            return Ok(result);
+        }
+
     }
 }

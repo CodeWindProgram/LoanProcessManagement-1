@@ -124,6 +124,20 @@ namespace LoanProcessManagement.Persistence.Repositories
 
             return ResetPassword;
         }
+        public async Task<bool> VerifyOldPassword(string oldPassword, string LgId)
+        {
+            var encryptOldPassword = EncryptionDecryption.EncryptString(oldPassword);
+            var userDetails = _dbContext.LpmUserMasters.Where(x => x.Password == encryptOldPassword && x.LgId == LgId).FirstOrDefault();
+            if (userDetails != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
 
     }
 }

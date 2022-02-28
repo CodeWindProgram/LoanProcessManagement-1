@@ -28,6 +28,7 @@ namespace LoanProcessManagement.App.Services.Interfaces
     {
         #region added account service for change password - Ramya Guduru -28/10/2021
         Task<Response<ChangePasswordDto>> ChangePassword(ChangePasswordCommand changePassword);
+        Task<bool> VerifyOldPassword(string oldPass, string LgId);
         #endregion
 
         Task<UserAuthenticationResponse> AuthenticateUser(UserAuthenticationRequestVM user);

@@ -167,17 +167,17 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-lg-4 col-sm-12">
-                                            <label class="">Customer Name</label><br />
+                                            <label class="">Name</label>
                                             <p>@Model.CustomerName</p>
                                         </div>
 
                                         <div class="col-lg-4 col-sm-12">
-                                            <label class="">Customer Email</label><br />
+                                            <label class="">Email Id</label>
                                             <p>@Model.CustomerEmail</p>
                                         </div>
 
                                         <div class="col-lg-4 col-sm-12">
-                                            <label class="">Customer Mobile</label>
+                                            <label class="">Contact No</label>
                                             <p>@Model.CustomerPhone</p>
                                         </div>
                                     </div>
@@ -257,18 +257,14 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-lg-4 col-sm-12">
-                                                <label class="">Phone 1</label><span style="color: Red">&nbsp;*</span>
-                                                <input asp-for="PhoneNumber1" placeholder="Phone 1" type="text" maxlength="10" id="ContentPlaceHolder1_txtPhone" class="form-control noTxtInput">
-                                                <span asp-validation-for="PhoneNumber1" style="color:Red;display:block;"></span>
-                                                <span id="ContentPlaceHolder1_RegularExpressionValidator5" style="color:Red;display:none;">Invalid Phone No.</span>
+                                                <label class="">Phone No</label>
+                                                <p>@Model.PhoneNumber1</p>
                                             </div>
 
 
                                             <div class="col-lg-4 col-sm-12">
-                                                <label class="">Phone 2</label>
-                                                <input asp-for="PhoneNumber2" placeholder="Phone 2" type="text" maxlength="10" id="ContentPlaceHolder1_txtPhone" class="form-control noTxtInput">
-                                                <span asp-validation-for="PhoneNumber2" style="color:Red;display:block;"></span>
-                                                <span id="ContentPlaceHolder1_RegularExpressionValidator5" style="color:Red;display:none;">Invalid Phone No.</span>
+                                                <label class="">Alternate Phone No </label>
+                                                <p>@Model.PhoneNumber2</p>
                                             </div>
                                         </div>
                                     </div>
@@ -1076,5 +1072,15 @@
             applicant0.style.color = "#343A40";
         }
 
+        //debugger
+        $(function () {
+            var jsArray = @Html.Raw(Json.Serialize(Model.AppTypeList));
+            for (var i = 0; i < jsArray.length; i++) {
+                var id = "#lnkCoApp_" + jsArray[i];
+                $(id).css('pointer-events', 'auto');
+                //$(id).css("display", "inline-block");
+                //$(id).show();
+            }
+        });
     });
 </script>

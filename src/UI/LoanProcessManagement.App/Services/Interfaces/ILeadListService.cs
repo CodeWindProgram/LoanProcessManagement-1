@@ -31,6 +31,7 @@ namespace LoanProcessManagement.App.Services.Interfaces
         Task<List<ProcessModel>> InPrincipleSanctionList(GetInPrincipleSanctionListQuery SanctionList);
         Task<List<ProcessModel>> HOSanctionList(GetHOSanctionListQuery SanctionList);
         Task<IEnumerable<LeadListByIdModel>> GetLeadListById(GetLeadListByIdQuery leadListByIdQuery);
+        Task<bool> VerifyFormNo(string formNo);
     }
     #endregion
 }

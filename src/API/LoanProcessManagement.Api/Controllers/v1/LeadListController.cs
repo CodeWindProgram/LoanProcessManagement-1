@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadStatus;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadByLGID;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadNameByLgId;
+using LoanProcessManagement.Application.Features.LeadList.Query.VerifyFormNo;
 
 namespace LoanProcessManagement.Api.Controllers.v1
 {
@@ -105,6 +106,16 @@ namespace LoanProcessManagement.Api.Controllers.v1
             return Ok(dtos);
         }
         #endregion
+
+        [HttpGet("VerifyFormNo")]
+        public async Task<ActionResult> VerifyFormNo(string formNo)
+        {
+            VerifyFormNoQuery formNumber = new VerifyFormNoQuery();
+            formNumber.FormNo = formNo;
+            var result = await _mediator.Send(formNumber);
+            return Ok(result);
+        }
+
 
         [HttpGet("LeadStatus/{BranchId}")]
         public async Task<ActionResult> LeadStatus(long BranchId)

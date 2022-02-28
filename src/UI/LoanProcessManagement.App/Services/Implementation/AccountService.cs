@@ -72,9 +72,30 @@ namespace LoanProcessManagement.App.Services.Implementation
             var model = System.Text.Json.JsonSerializer.Deserialize<Response<ChangePasswordDto>>(jsonString, options);
 
             return model;
-        } 
+        }
         #endregion
+        public async Task<bool> VerifyOldPassword(string oldPass,string LgId)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
+           
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.GetAsync
+                (
+                    BaseUrl + APIEndpoints.VerifyOldPassword.Replace("{0}", oldPass).Replace("{1}", LgId)
+                    
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<bool>(jsonString, options);
+
+            return model;
+        }
         #region This method will call authenticate api and return response to action method by - Akshay Pawar - 28/10/2021
         /// <summary>
         /// 2021/10/28 - While calling api we have to pass user object 

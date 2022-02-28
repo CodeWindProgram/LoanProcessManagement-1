@@ -74,6 +74,13 @@ namespace LoanProcessManagement.App.Controllers
             //return RedirectToAction()
             return RedirectToAction("UpdateUser","Login",new { lgid = lg_id });
         }
+        [HttpGet]
+        public async Task<bool> VerifyOldPassword(string oldPass)
+        {
+            var Lg_Id = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value;
+            var result = await _accountService.VerifyOldPassword(oldPass, Lg_Id);
+            return result;
+        }
 
         #region This action method will authenticate user and return view by - Akshay Pawar - 28/10/2021, User login using Cookie Authentication Added by - Pratiksha, Akshay - 05/11/2021
         /// <summary>
@@ -151,6 +158,7 @@ namespace LoanProcessManagement.App.Controllers
         [HttpGet("/ChangePasswordUI")]
         public IActionResult ChangePassword()
         {
+            
             return View();
         }
         [Authorize(AuthenticationSchemes = "Cookies")]
