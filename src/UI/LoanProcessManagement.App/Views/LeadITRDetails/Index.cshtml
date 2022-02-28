@@ -491,16 +491,22 @@
 
 <script>
     $(document).ready(function () {
+        if ('@TempData["leadItrIsSuccess"]' == 'True') {
+            toastr.success('@TempData["leadItrMessage"]', "Success");
 
-        if ('@ViewBag.isSuccess' == 'True') {
+        }
+        else if ('@TempData["leadItrIsSuccess"]' == 'False') {
+            toastr.error('@TempData["leadItrMessage"]', "Error");
+
+        }
+
+        @*if ('@ViewBag.isSuccess' == 'True') {
             toastr.success('@ViewBag.Message', "Success");
         }
         else if ('@ViewBag.isSuccess' == 'False') {
             toastr.error('@ViewBag.Message', "Error");
 
         }
-
-
 
         if ('@ViewBag.isSuccess' == 'True') {
 
@@ -513,7 +519,7 @@
                  location.href = "/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=@Model.ApplicantType";
              }, 1000);
 
-        }
+        }*@
     });
 
 

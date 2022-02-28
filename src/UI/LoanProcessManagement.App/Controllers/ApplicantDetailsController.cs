@@ -104,10 +104,13 @@ namespace LoanProcessManagement.App.Controllers
                 //ViewBag.isSuccess = response.Succeeded;
                 //ViewBag.Message = response.Data.Message;
                 TempData["applicantDetailIsSuccess"] = true;
-                TempData["applicantDetailMessage"] = response.Message;
+                TempData["applicantDetailMessage"] = response.Data.Message;
             }
-            var temp = "Lead_" + applicantDetailsCommandVM.lead_Id;
-            return RedirectToAction("LeadSummary", "LeadList", new { lead_Id = temp });
+            //var temp = "Lead_" + applicantDetailsCommandVM.lead_Id;
+            //return RedirectToAction("LeadSummary", "LeadList", new { lead_Id = temp });
+            var appType = applicantDetailsCommandVM.ApplicantType;
+            var lead_Id = applicantDetailsCommandVM.lead_Id;
+            return RedirectToAction("Index", new { lead_Id = lead_Id, applicantType = appType });
         }
         #endregion
     }

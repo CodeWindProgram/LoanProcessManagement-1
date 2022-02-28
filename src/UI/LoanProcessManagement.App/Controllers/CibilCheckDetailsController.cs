@@ -118,10 +118,11 @@ namespace LoanProcessManagement.App.Controllers
                 //     return View(cibilCheckDetailsVm);
                 //}
             }
-            var temp ="Lead_" + cibilCheckDetailsVm.lead_Id;
-            return RedirectToAction("LeadSummary", "LeadList", new { lead_Id = temp });
-
-
+            //var temp ="Lead_" + cibilCheckDetailsVm.lead_Id;
+            //return RedirectToAction("LeadSummary", "LeadList", new { lead_Id = temp });
+            var appType = cibilCheckDetailsVm.ApplicantType;
+            var lead_Id = cibilCheckDetailsVm.lead_Id;
+            return RedirectToAction("Index", new { lead_Id = lead_Id, applicantType = appType});
         }
         #endregion
     }
