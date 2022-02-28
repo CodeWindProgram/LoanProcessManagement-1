@@ -155,7 +155,8 @@ namespace LoanProcessManagement.App.Controllers
             var leadResponse = await _leadListService.GetLeadByLeadId(lead_Id);
             ViewBag.lead_Id = lead_Id;
             ModifyLeadVM lead = null;
-            TempData["PreviousState"] = leadResponse.Data.CurrentStatus;
+            var temp = leadResponse.Data.CurrentStatus;
+            //  TempData["PreviousState"] = leadResponse.Data.CurrentStatus;
             if (leadResponse.Data.QueryStatus == 'R')
             {
                 if (leadResponse.Data.HoQueryStatus == 'R')
@@ -277,7 +278,7 @@ namespace LoanProcessManagement.App.Controllers
 
             var modifyLeadResponse = await _leadListService.ModifyLead(lead);
 
-            if (modifyLeadResponse.Succeeded && lead.CurrentStatus== 10 && lead.CurrentStatus != int.Parse(TempData["PreviousState"].ToString()))
+            if (modifyLeadResponse.Succeeded && lead.CurrentStatus== 10 /*&& lead.CurrentStatus != int.Parse(TempData["PreviousState"].ToString())*/)
             {
                 var SendMail = new SendMailServiceQuery();
                 SendMail.FormNo = lead.FormNo;
