@@ -29,7 +29,7 @@ namespace LoanProcessManagement.App.Models
         public string Email { get; set; }
 
         [Display(Name = "Branch")]
-        [Required(ErrorMessage = "Branch is Required .")]
+        [Required(ErrorMessage = "Please Select a Branch")]
         public long BranchId { get; set; }
 
         [Display(Name = "Phone Number")]
@@ -39,7 +39,7 @@ namespace LoanProcessManagement.App.Models
         public string PhoneNumber { get; set; }
 
         [Display(Name = "Role")]
-        [Required(ErrorMessage = "Role is Required .")]
+        [Required(ErrorMessage = "Please Select a Role")]
         public long UserRoleId { get; set; }
     }
 }

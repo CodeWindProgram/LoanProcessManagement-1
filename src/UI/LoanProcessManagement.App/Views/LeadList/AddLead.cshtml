@@ -728,7 +728,7 @@
                                                 <option value="4">NO - Greater than 300 Sq.mt. (For Delhi NCR only)</option>
                                                 <option value="5">YES</option>
                                             </select>
-                                            <span asp-validation-for="ProjectAddress" class="text-danger"></span>
+                                            <span asp-validation-for="IsSanctionedPlanReceivedID" class="text-danger"></span>
                                         </div>
 
 
@@ -966,7 +966,7 @@
                                     <div class="col-lg-4 col-sm-12">
                                         <label asp-for="SchemeID">Scheme Choosen <span style="color: red; width: 10%;">*</span></label>
 
-                                        <select id="ddl_Scheme" asp-for="SchemeID" asp-items="ViewBag.loanSchemes" class="form-control">
+                                        <select id="ddl_Scheme" asp-for="SchemeID"  asp-items="ViewBag.loanSchemes" class="form-control">
                                             <option>Select Scheme</option>
                                         </select>
                                         <span asp-validation-for="SchemeID" class="text-danger"></span>
@@ -1092,7 +1092,7 @@
             dataType: 'json',
             success: function (data) {
                 //debugger;
-                var s = '<option value="-1">Please Select a Scheme</option>';
+                var s = '<option value="">Please Select a Scheme</option>';
                 if (data != null && data.data != null) {
                     for (var i = 0; i < data.data.length; i++) {
                         s += '<option value="' + data.data[i].schemeID + '">' + data.data[i].schemeName + '</option>';
@@ -1110,6 +1110,24 @@
 
         
 
+
+    });
+    //$(document).ready(function () {
+    //    $("#FormNo").inputFilter(function (value) {
+    //        return /^\d*$/.test(value);    // Allow digits only, using a RegExp
+    //    });
+    //});
+    $(document).ready(function () {
+
+        $('#FormNo').keypress(function (e) {
+
+            var charCode = (e.which) ? e.which : event.keyCode
+
+            if (String.fromCharCode(charCode).match(/[^0-9]/g))
+
+                return false;
+
+        });
 
     });
 </script>

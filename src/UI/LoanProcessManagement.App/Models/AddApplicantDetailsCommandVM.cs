@@ -24,7 +24,7 @@ namespace LoanProcessManagement.App.Models
         [Required(ErrorMessage = "Last Name is Required")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "AddressLine1 is Required")]
+        [Required(ErrorMessage = "Address Line 1 is Required")]
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
         public string AddressLine3 { get; set; }
@@ -53,7 +53,7 @@ namespace LoanProcessManagement.App.Models
         public string CustomerEmail { get; set; }
 
         [RegularExpression(@"^[6-9]\d{9}$", ErrorMessage = "Please Enter Valid Phone Number.")]
-        [Required(ErrorMessage = "Phone No is Required")]
+        [Required(ErrorMessage = "Contact No is Required")]
         public string CustomerPhone { get; set; }
         [Required(ErrorMessage = "Employment Type is Required")]
         public string EmploymentType { get; set; }
