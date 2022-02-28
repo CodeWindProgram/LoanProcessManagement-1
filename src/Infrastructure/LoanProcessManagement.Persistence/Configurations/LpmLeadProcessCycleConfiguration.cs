@@ -14,8 +14,9 @@ namespace LoanProcessManagement.Persistence.Configurations
             builder
               .HasOne(b => b.lead)
               .WithMany(b => b.LpmLeadProcessCycle)
-              .HasForeignKey(b => b.lead_Id)
-              .OnDelete(DeleteBehavior.NoAction);
+              .OnDelete(DeleteBehavior.NoAction)
+              .IsRequired()
+              .HasForeignKey(b => b.lead_Id);
 
             builder
               .HasOne(b => b.LeadStatus)
