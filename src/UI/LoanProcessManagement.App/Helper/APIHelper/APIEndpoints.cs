@@ -32,6 +32,8 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         //ChangePassword/VerifyOldPassword?OldPassword=Welcome2loan&LgId=LG_99
         public const string VerifyOldPassword = "api/v1/ChangePassword/VerifyOldPassword?OldPassword={0}&LgId={1}";
 
+        public const string MailService = "api/EmailService/SendMail?api-version=1";
+
         #region Maintaining the Url EndPoint - Pratiksha Poshe - 10/11/2021
         public const string GetAllLoanProducts = "api/v1/LoanProducts/GetAllLoanProducts";
         public const string AddLead = "api/v1/LeadList/AddLead";
