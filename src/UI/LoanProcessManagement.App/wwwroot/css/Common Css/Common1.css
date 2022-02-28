@@ -1,10 +1,10 @@
 ﻿
-.AppTabs_AppDetails {
-    display: inline-block;
+/*.AppTabs_AppDetails {
+    display: inline-block;*/
     /*margin-right: 3px;*/
-    padding: 5px 30px;
+    /*padding: 5px 30px;
     color: white;
-}
+}*/
 
 .AppTabs_AppDetails:hover {
     background: #adb5bd;
@@ -12,9 +12,9 @@
 }
 
 .AppTabs {
-    display: inline-block;
-    margin-right: 3px;
-    padding: 5px 30px;
+   /* display: inline-block;*/
+   /* margin-right: 3px;
+    padding: 5px 30px;*/
     color: white;
     pointer-events: none;
 }

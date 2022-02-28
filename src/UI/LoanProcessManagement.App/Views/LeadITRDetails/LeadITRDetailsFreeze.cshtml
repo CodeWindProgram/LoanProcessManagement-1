@@ -92,16 +92,28 @@
                         <input type="hidden" asp-for="LastModifiedBy" value=@User.FindFirst("lg_id").Value />
                         <input type="hidden" asp-for="AppTypeList" />
                         <div style="height: 15px;"></div>
-                        <div class="btnDiv pt-4 pl-4 pr-4">
-                            <ul>
-                                <li><a href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=0" class="AppTabs btn-sm selected" id="lnkCoApp_0" style="background: #adb5bd;">Applicant</a></li>
-                                <li><a id="lnkCoApp_1" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=1" style="background: #343a40;">Co-Applicant-1</a></li>
-                                <li><a id="lnkCoApp_2" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=2" style="background: #343a40;">Co-Applicant-2</a></li>
-                                <li><a id="lnkCoApp_3" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=3" style="background: #343a40;">Co-Applicant-3</a></li>
-                                <li><a id="lnkCoApp_4" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=4" style="background: #343a40;">Co-Applicant-4</a></li>
-                                <li><a id="lnkCoApp_5" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=5" style="background: #343a40;">Co-Applicant-5</a></li>
+
+                        <div class="btnDiv mt-4 ml-4">
+                            <ul class="row text-center rounded-nav pl-5">
+                                <li><a href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=0" class="nav-link border-1 text-uppercase font-weight-bold AppTabs btn-sm" id="lnkCoApp_0" style="background-color: #343A40;color:white;">&nbsp;&nbsp;&nbsp;Applicant&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a id="lnkCoApp_1" class="nav-link border-1 text-uppercase font-weight-bold AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=1" style="background-color: white; color: #343A40;">Co-Applicant-1</a></li>
+                                <li><a id="lnkCoApp_2" class="nav-link border-1 text-uppercase font-weight-bold AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=2" style="background-color: white; color: #343A40;">Co-Applicant-2</a></li>
+                                <li><a id="lnkCoApp_3" class="nav-link border-1 text-uppercase font-weight-bold AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=3" style="background-color: white; color: #343A40;">Co-Applicant-3</a></li>
+                                <li><a id="lnkCoApp_4" class="nav-link border-1 text-uppercase font-weight-bold AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=4" style="background-color: white; color: #343A40;">Co-Applicant-4</a></li>
+                                <li><a id="lnkCoApp_5" class="nav-link border-1 text-uppercase font-weight-bold AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=5" style="background-color: white; color: #343A40;">Co-Applicant-5</a></li>
                             </ul>
                         </div>
+
+                                @*<div class="btnDiv pt-4 pl-4 pr-4">
+                    <ul>
+                        <li><a href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=0" class="AppTabs btn-sm selected" id="lnkCoApp_0" style="background: #adb5bd;">Applicant</a></li>
+                        <li><a id="lnkCoApp_1" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=1" style="background: #343a40;">Co-Applicant-1</a></li>
+                        <li><a id="lnkCoApp_2" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=2" style="background: #343a40;">Co-Applicant-2</a></li>
+                        <li><a id="lnkCoApp_3" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=3" style="background: #343a40;">Co-Applicant-3</a></li>
+                        <li><a id="lnkCoApp_4" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=4" style="background: #343a40;">Co-Applicant-4</a></li>
+                        <li><a id="lnkCoApp_5" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=5" style="background: #343a40;">Co-Applicant-5</a></li>
+                    </ul>
+                </div>*@
 
                         <span id="ContentPlaceHolder1_spanMessage" style="color: red;"></span>
 

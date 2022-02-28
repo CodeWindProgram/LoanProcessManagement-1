@@ -127,14 +127,15 @@
                         <input type="hidden" asp-for="LastModifiedBy" value=@User.FindFirst("lg_id").Value />
                         <input type="hidden" asp-for="AppTypeList" />
                         <div style="height: 15px;"></div>
+
                         <div class="btnDiv mt-5 ml-4">
                             <ul class="row text-center rounded-nav pl-5">
-                                <li><a href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=0" class="nav-link border-1 text-uppercase font-weight-bold AppTabs_AppDetails btn-sm " style="background-color: #343A40;color:white;" id="lnkCoApp_0">&nbsp;&nbsp;&nbsp;Applicant&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a id="lnkCoApp_1" class="nav-link border-1 text-uppercase font-weight-bold AppTabs_AppDetails btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=1" style="background-color: white; color: #343A40;">Co-Applicant-1</a></li>
-                                <li><a id="lnkCoApp_2" class="nav-link border-1 text-uppercase font-weight-bold AppTabs_AppDetails btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=2" style="background-color: white; color: #343A40;">Co-Applicant-2</a></li>
-                                <li><a id="lnkCoApp_3" class="nav-link border-1 text-uppercase font-weight-bold AppTabs_AppDetails btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=3" style="background-color: white; color: #343A40;">Co-Applicant-3</a></li>
-                                <li><a id="lnkCoApp_4" class="nav-link border-1 text-uppercase font-weight-bold AppTabs_AppDetails btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=4" style="background-color: white; color: #343A40;">Co-Applicant-4</a></li>
-                                <li><a id="lnkCoApp_5" class="nav-link border-1 text-uppercase font-weight-bold AppTabs_AppDetails btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=5" style="background-color: white; color: #343A40;">Co-Applicant-5</a></li>
+                                <li><a href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=0" class="nav-link border-1 text-uppercase font-weight-bold AppTabs btn-sm " style="background-color: #343A40;color:white;" id="lnkCoApp_0">&nbsp;&nbsp;&nbsp;Applicant&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a id="lnkCoApp_1" class="nav-link border-1 text-uppercase font-weight-bold AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=1" style="background-color: white; color: #343A40;">Co-Applicant-1</a></li>
+                                <li><a id="lnkCoApp_2" class="nav-link border-1 text-uppercase font-weight-bold AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=2" style="background-color: white; color: #343A40;">Co-Applicant-2</a></li>
+                                <li><a id="lnkCoApp_3" class="nav-link border-1 text-uppercase font-weight-bold AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=3" style="background-color: white; color: #343A40;">Co-Applicant-3</a></li>
+                                <li><a id="lnkCoApp_4" class="nav-link border-1 text-uppercase font-weight-bold AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=4" style="background-color: white; color: #343A40;">Co-Applicant-4</a></li>
+                                <li><a id="lnkCoApp_5" class="nav-link border-1 text-uppercase font-weight-bold AppTabs btn-sm" href="/CibilCheckDetails/Index?lead_Id=@Model.lead_Id&applicantType=5" style="background-color: white; color: #343A40;">Co-Applicant-5</a></li>
                             </ul>
                         </div>
 
