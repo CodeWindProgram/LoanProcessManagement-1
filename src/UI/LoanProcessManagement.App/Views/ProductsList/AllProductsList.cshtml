@@ -64,6 +64,8 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
+                                if (item.ProductName != null)
+                                {
                                 <tr>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.ProductName)
@@ -76,6 +78,9 @@
                                     </td>
 
                                 </tr>
+                                }
+                                if (item.InsuranceName != null)
+                                {
                                 <tr>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.InsuranceName)
@@ -88,6 +93,7 @@
                                     </td>
 
                                 </tr>
+                                }
                             }
                         </tbody>
                     </table>
