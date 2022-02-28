@@ -6,8 +6,42 @@
         //ViewData["Title"] = "ITR Details Details";
     }
 
-    <style>
-            /*.tab {
+<style>  
+    .AppTabs:hover {
+        background: #adb5bd;
+        color: black;
+    }
+
+    .btnDiv ul li {
+        list-style: none;
+    }
+
+        .btnDiv ul li a {
+            text-decoration: none;
+            color: #343A40;
+            border: 1px solid lightgray;
+        }
+
+        .btnDiv ul li.active a {
+            color: #ffffff;
+            background: #343A40;
+        }
+
+    .rounded-nav {
+        border-radius: 50rem !important;
+    }
+
+        .rounded-nav .nav-link {
+            border-radius: 50rem !important;
+        }
+
+    .text-uppercase {
+        letter-spacing: 0.1em;
+    }
+</style>
+
+    @*<style>
+            .tab {
             padding-left: 15px;
         }
 
@@ -48,22 +82,22 @@
             border-top-right-radius: 0.25rem;
         }
 
-        .card {*/
-            /*background-color:slategray;*/
-            /*background: linear-gradient(to bottom, rgba(251,251,251,10) 0%,rgba(242,242,242,10) 100%);
+        .card {
+            background-color:slategray;
+            background: linear-gradient(to bottom, rgba(251,251,251,10) 0%,rgba(242,242,242,10) 100%);
             font-family: sans-serif;
             font-size: 18px;
             border: 1px solid;
             margin-top: 20px;
             margin-bottom: 20px;
-        }*/
-            /* h5 {
+        }
+             h5 {
             font-size: 1.25rem;
             margin-left: 1rem;
             padding-top: 5px;
             font-weight: 600;
-        }*/
-            /*.btnDiv {
+        }
+            .btnDiv {
             text-align: center;
         }
 
@@ -76,8 +110,8 @@
 
         u {
             font-weight: 600;
-        }*/
-    </style>
+        }
+    </style>*@
 
 
 
@@ -96,7 +130,19 @@
                             <input type="hidden" asp-for="CreatedBy" value=@User.FindFirst("lg_id").Value />
                             <input type="hidden" asp-for="LastModifiedBy" value=@User.FindFirst("lg_id").Value />
                             <div style="height: 15px;"></div>
-                            <div class="btnDiv pt-4 pl-4 pr-4">
+
+                            <div class="btnDiv mt-4 ml-4">
+                                <ul class="row text-center rounded-nav pl-5">
+                                    <li><a href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=0" class="nav-link border-1 text-uppercase font-weight-bold AppTabs_AppDetails btn-sm" id="lnkCoApp_0" style="background-color: #343A40;color:white;">&nbsp;&nbsp;&nbsp;Applicant&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a id="lnkCoApp_1" class="nav-link border-1 text-uppercase font-weight-bold AppTabs_AppDetails btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=1" style="background-color: white; color: #343A40;">Co-Applicant-1</a></li>
+                                    <li><a id="lnkCoApp_2" class="nav-link border-1 text-uppercase font-weight-bold AppTabs_AppDetails btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=2" style="background-color: white; color: #343A40;">Co-Applicant-2</a></li>
+                                    <li><a id="lnkCoApp_3" class="nav-link border-1 text-uppercase font-weight-bold AppTabs_AppDetails btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=3" style="background-color: white; color: #343A40;">Co-Applicant-3</a></li>
+                                    <li><a id="lnkCoApp_4" class="nav-link border-1 text-uppercase font-weight-bold AppTabs_AppDetails btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=4" style="background-color: white; color: #343A40;">Co-Applicant-4</a></li>
+                                    <li><a id="lnkCoApp_5" class="nav-link border-1 text-uppercase font-weight-bold AppTabs_AppDetails btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=5" style="background-color: white; color: #343A40;">Co-Applicant-5</a></li>
+                                </ul>
+                            </div>
+
+                            @*<div class="btnDiv pt-4 pl-4 pr-4">
                                 <ul>
                                     <li><a href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=0" class="AppTabs btn-sm selected" id="lnkCoApp_0" style="background: #adb5bd;">Applicant</a></li>
                                     <li><a id="lnkCoApp_1" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=1" style="background: #343a40;">Co-Applicant-1</a></li>
@@ -105,7 +151,7 @@
                                     <li><a id="lnkCoApp_4" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=4" style="background: #343a40;">Co-Applicant-4</a></li>
                                     <li><a id="lnkCoApp_5" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=5" style="background: #343a40;">Co-Applicant-5</a></li>
                                 </ul>
-                            </div>
+                            </div>*@
 
                             <span id="ContentPlaceHolder1_spanMessage" style="color: red;"></span>
 
@@ -161,7 +207,7 @@
 
                                     <div class="form-group pl-2">
                                         <div class="row">
-                                            
+
                                             <div class="col-lg-4 col-sm-12">
                                                 <label class="">Employee Type</label><br />
                                                 @*<input style="border: none; background-color: #f4f6f9;" id="selfEmployee" checked>*@
@@ -202,40 +248,40 @@
                                                     <label class="">User Name</label><br />
                                                     <p>@Model.UserName</p>
                                                 </div>
-                                            
+
                                             </div>
                                         </div>
 
 
                                         <div class="col-lg-4 col-sm-12">
-                                            <div class="row">          
-                                                    <label class="" id="PasswordBoxLabel">Password</label>
-                                                    <span style="color: Red" id="FieldMark">&nbsp;*</span>                                                
-                                                        <input asp-for="Password" type="password" maxlength="20" id="PasswordBoxNode" class="form-control">
-                                                        <span asp-validation-for="Password" style="color:Red;display:block;"></span>                                                   
-                                                </div>
+                                            <div class="row">
+                                                <label class="" id="PasswordBoxLabel">Password</label>
+                                                <span style="color: Red" id="FieldMark">&nbsp;*</span>
+                                                <input asp-for="Password" type="password" maxlength="20" id="PasswordBoxNode" class="form-control">
+                                                <span asp-validation-for="Password" style="color:Red;display:block;"></span>
                                             </div>
-                                          
                                         </div>
 
-                                        <div id="accountDv">
+                                    </div>
+
+                                    <div id="accountDv">
 
 
-                                            <br />
-                                            <div class="row tab">
-                                                <div class="col-md-12 mb-3">
-                                                    <center>
+                                        <br />
+                                        <div class="row tab">
+                                            <div class="col-md-12 mb-3">
+                                                <center>
 
-                                                        <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="SubmitButton" class="btn" style="background-color: #343a40; color:white;">&nbsp
-                                                        @{ var leadId = "Lead_" + Model.lead_Id;}
+                                                    <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="SubmitButton" class="btn" style="background-color: #343a40; color:white;">&nbsp
+                                                    @{ var leadId = "Lead_" + Model.lead_Id;}
 
-                                                        <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@leadId">Cancel</a>
+                                                    <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@leadId">Cancel</a>
 
-                                                    </center>
-                                                </div>
+                                                </center>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -481,24 +527,34 @@
         var applicant5 = document.getElementById("lnkCoApp_5");
 
          if (@Model.ApplicantType == 1) {
-             applicant1.style.backgroundColor = "#adb5bd";
-             applicant0.style.backgroundColor = "#343a40";
+             applicant1.style.backgroundColor = "#343A40";
+             applicant1.style.color = "white";
+             applicant0.style.backgroundColor = "white";
+             applicant0.style.color = "#343A40";
         }
         else if (@Model.ApplicantType == 2) {
-             applicant2.style.backgroundColor = "#adb5bd";
-             applicant0.style.backgroundColor = "#343a40";
+             applicant2.style.backgroundColor = "#343A40";
+             applicant2.style.color = "white";
+             applicant0.style.backgroundColor = "white";
+             applicant0.style.color = "#343A40";
          }
          else if (@Model.ApplicantType == 3) {
-             applicant3.style.backgroundColor = "#adb5bd";
-             applicant0.style.backgroundColor = "#343a40";
+             applicant3.style.backgroundColor = "#343A40";
+             applicant3.style.color = "white";
+             applicant0.style.backgroundColor = "white";
+             applicant0.style.color = "#343A40";
          }
          else if (@Model.ApplicantType == 4) {
-             applicant4.style.backgroundColor = "#adb5bd";
-             applicant0.style.backgroundColor = "#343a40";
+             applicant4.style.backgroundColor = "#343A40";
+             applicant4.style.color = "white";
+             applicant0.style.backgroundColor = "white";
+             applicant0.style.color = "#343A40";
          }
          else if (@Model.ApplicantType == 5) {
-             applicant5.style.backgroundColor = "#adb5bd";
-             applicant0.style.backgroundColor = "#343a40";
+             applicant5.style.backgroundColor = "#343A40";
+             applicant5.style.color = "white";
+             applicant0.style.backgroundColor = "white";
+             applicant0.style.color = "#343A40";
         }
 
     });
