@@ -181,6 +181,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 applicantsDetails.isCibilCheckRequired = request.isCibilCheckRequired;
                 applicantsDetails.isItrRequired = request.isItrRequired;
                 applicantsDetails.isGstRequired = request.isGstRequired;
+                applicantsDetails.IsActive = true;
 
                 await _dbContext.LpmLeadApplicantsDetails.AddAsync(applicantsDetails);
                 await _dbContext.SaveChangesAsync();

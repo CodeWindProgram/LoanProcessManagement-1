@@ -127,6 +127,7 @@ namespace LoanProcessManagement.App.Controllers
         public async Task<IActionResult> LeadSummary(string lead_Id)
         {
             var leadResponse = await _leadListService.GetLeadByLeadId(lead_Id);
+            leadResponse.Data.UserRoleId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value);
             ViewBag.lead_Id = lead_Id;
             return View(leadResponse.Data);
         }
