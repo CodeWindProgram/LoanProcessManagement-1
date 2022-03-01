@@ -358,7 +358,7 @@
                                                 Scanned Document
                                                 &nbsp;&nbsp;&nbsp;
                                                 <input id="radStatement" asp-for="DocumentType" type="radio" name="DocumentType" value="e-Statement" />
-                                                e-Statement&nbsp;&nbsp;
+                                                e-Statement<br />
                                                 <span asp-validation-for="DocumentType" class="text-danger"></span>
                                             </div>
 
@@ -375,7 +375,7 @@
                                             </div>
 
                                             <div class="col-lg-4 col-sm-12">
-                                                <label asp-for="FilePassword" class="control-label">PDF File Passwords (if any) <span style="color: Red">&nbsp;*</span></label>
+                                                <label asp-for="FilePassword" class="control-label">PDF File Passwords (if any) @*<span style="color: Red">&nbsp;*</span>*@</label>
 
                                                 <input type="password" asp-for="FilePassword" class="form-control" placeholder="Pdf Password" />
                                                 <span asp-validation-for="FilePassword" class="text-danger"></span>
