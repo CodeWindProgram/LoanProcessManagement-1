@@ -24,21 +24,29 @@ namespace LoanProcessManagement.Persistence.Repositories
         }
         public async Task<bool> SendMail(SendMailServiceQuery data)
         {
-           // var userDetails = await _dbContext.LpmLeadMasters.Where(x => x.FormNo == data.FormNo).FirstOrDefaultAsync();
-            var results = from a in _dbContext.LpmLeadMasters 
-                         join b in _dbContext.LpmLeadProcessCycles 
-                         on a.Id equals b.lead_Id 
-                         where (a.FormNo == data.FormNo && a.CurrentStatus == b.CurrentStatus)
-                         select new
-                         {
-                             Email = a.CustomerEmail,
-                             LoanAmount = b.LoanAmount.ToString(),
-                             Name = a.FirstName + " " + a.LastName,
-                             FormNo = a.FormNo
+            var splits = new string[2];
+            long LgId =0;
+            if (data.Lg_Id != null)
+            {
+                splits = data.Lg_Id.Split("_");
+                LgId = long.Parse(splits[1]);
+            }
+            
+            // var userDetails = await _dbContext.LpmLeadMasters.Where(x => x.FormNo == data.FormNo).FirstOrDefaultAsync();
+            var results = from a in _dbContext.LpmLeadMasters
+                          join b in _dbContext.LpmLeadProcessCycles
+                          on a.Id equals b.lead_Id
+                          where (a.FormNo == data.FormNo && a.CurrentStatus == b.CurrentStatus)
+                          select new
+                          {
+                              Email = a.CustomerEmail,
+                              LoanAmount = b.LoanAmount.ToString(),
+                              Name = a.FirstName + " " + a.LastName,
+                              FormNo = a.FormNo
 
-                         };
+                          };
             var result = results.FirstOrDefault();
-            var templates = new List<EmailTemplate>(2)
+            var templates = new List<EmailTemplate>(5)
             {
                new EmailTemplate
                {
@@ -50,40 +58,118 @@ namespace LoanProcessManagement.Persistence.Repositories
                {
                    TemplateTypeId = 2,
                    Subject = "Disbursed Lead",
-                   Body ="Dear {0},<br><br>For application ref. file no {1}, Loan amount Rs. {2} has been disbursed. Please check or visit your respective branch office.<br><br>Thanks & Regards,<br>LOS Team."
+                   Body ="Dear {0},<br><br>For application ref. File no {1}, Loan amount Rs. {2} has been disbursed. Please check or visit your respective branch office.<br><br>Thanks & Regards,<br>LOS Team."
+               },
+                 new EmailTemplate
+               {
+                   TemplateTypeId = 3,
+                   Subject = "Sanctioned Lead",
+                   Body ="Dear {0},<br><br>For application ref. File no {1}, Loan amount Rs. {2} has been sanctioned. Please check or visit your respective branch office.<br><br>Thanks & Regards,<br>LOS Team."
+               },
+                 new EmailTemplate
+               {
+                   TemplateTypeId = 4,
+                   Subject = "Rejected Lead",
+                   Body ="Dear {0},<br><br>For application ref. File no {1} has been rejected. Please check with respective branch for further queries.<br><br>Thanks & Regards,<br>LOS Team."
+               },
+                  new EmailTemplate
+               {
+                   TemplateTypeId = 5,
+                   Subject = "Password Changed",
+                   Body ="Dear {0},<br><br>Password has been changed Successfully. <br><br>Thanks & Regards,<br>LOS Team."
+               },
+                    new EmailTemplate
+               {
+                   TemplateTypeId = 6,
+                   Subject = "Account locked",
+                   Body ="Dear {0},<br><br>Your account has been locked due to multiple wrong attempts. Please visit branch for further queries. <br><br>Thanks & Regards,<br>LOS Team."
                }
+
             };
             var details = new EmailTemplate();
-         
+            var UserEmail = "";
             if (data.MailTypeId == 2)
             {
-                details = templates.Where(x => x.TemplateTypeId ==2).FirstOrDefault();
-               
+                details = templates.Where(x => x.TemplateTypeId == 2).FirstOrDefault();
+
                 details.Body = details.Body.Replace("{0}", result.Name);
                 details.Body = details.Body.Replace("{1}", result.FormNo);
                 details.Body = details.Body.Replace("{2}", result.LoanAmount);
             }
-            else if(data.MailTypeId == 1)
+            else if (data.MailTypeId == 1)
             {
                 details = templates.Where(x => x.TemplateTypeId == 1).FirstOrDefault();
                 details.Body = details.Body.Replace("{0}", result.Name);
                 details.Body = details.Body.Replace("{1}", result.FormNo);
             }
-            var SendEmail = new Email()
+            else if (data.MailTypeId == 3)
             {
-                To = result.Email,
-                Subject = details.Subject,
-                Body = details.Body
-            };
-            var email =  _emailService.SendEmail(SendEmail);
-            
-            if (email.Result == true)
+                details = templates.Where(x => x.TemplateTypeId == 3).FirstOrDefault();
+
+                details.Body = details.Body.Replace("{0}", result.Name);
+                details.Body = details.Body.Replace("{1}", result.FormNo);
+                details.Body = details.Body.Replace("{2}", result.LoanAmount);
+            }
+            else if (data.MailTypeId == 4)
             {
-                return true;
+                details = templates.Where(x => x.TemplateTypeId == 4).FirstOrDefault();
+                details.Body = details.Body.Replace("{0}", result.Name);
+                details.Body = details.Body.Replace("{1}", result.FormNo);
+            }
+            else if (data.MailTypeId == 5)
+            {
+                var Names = _dbContext.LpmUserMasters.Where(x => x.Id == LgId).FirstOrDefault();
+                details = templates.Where(x => x.TemplateTypeId == 5).FirstOrDefault();
+                UserEmail = Names.Email;
+                details.Body = details.Body.Replace("{0}", Names.Name);
+
+            }
+            else if (data.MailTypeId == 5)
+            {
+                var Names = _dbContext.LpmUserMasters.Where(x => x.Id == LgId).FirstOrDefault();
+                details = templates.Where(x => x.TemplateTypeId == 6).FirstOrDefault();
+                UserEmail = Names.Email;
+                details.Body = details.Body.Replace("{0}", Names.Name);
+
+            }
+
+            if (data.MailTypeId == 5 || data.MailTypeId == 6)
+            {
+                var SendEmail = new Email()
+                {
+                    To = UserEmail,
+                    Subject = details.Subject,
+                    Body = details.Body
+                };
+                var email = _emailService.SendEmail(SendEmail);
+                if (email.Result == true)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
             }
             else
             {
-                return false;
+                var SendEmail = new Email()
+                {
+                    To = result.Email,
+                    Subject = details.Subject,
+                    Body = details.Body
+                };
+                var email = _emailService.SendEmail(SendEmail);
+                if (email.Result == true)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
             }
 
         }

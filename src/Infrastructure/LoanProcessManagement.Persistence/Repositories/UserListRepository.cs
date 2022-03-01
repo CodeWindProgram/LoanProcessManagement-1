@@ -30,24 +30,26 @@ namespace LoanProcessManagement.Persistence.Repositories
         /// <returns>UserListResponse</returns>
         public async Task<IEnumerable<UserMasterListModel>> GetUserList()
         {
-            var result = await (from A in _dbContext.LpmUserMasters
-                                join B in _dbContext.LpmBranchMasters on A.BranchId equals B.Id
-                                
-                                select new UserMasterListModel
-                                {
-                                    Id = A.Id,
-                                    BranchId = A.BranchId,
-                                    LgId = A.LgId,
-                                    EmployeeId = A.EmployeeId,
-                                    Name = A.Name,
-                                    Email = A.Email,
-                                    BranchName = B.branchname,
-                                    PhoneNumber = A.PhoneNumber,
-                                    StaffType = A.StaffType,
-                                    IsActive = A.IsActive,
-                                    IsLocked = A.IsLocked
-                                }).ToListAsync();
-            return result;
+            var result = (from A in _dbContext.LpmUserMasters
+                          join B in _dbContext.LpmBranchMasters on A.BranchId equals B.Id
+
+                          select new UserMasterListModel
+                          {
+                              Id = A.Id,
+                              BranchId = A.BranchId,
+                              LgId = A.LgId,
+                              EmployeeId = A.EmployeeId,
+                              Name = A.Name,
+                              Email = A.Email,
+                              BranchName = B.branchname,
+                              PhoneNumber = A.PhoneNumber,
+                              StaffType = A.StaffType,
+                              IsActive = A.IsActive,
+                              IsLocked = A.IsLocked
+                          });
+            var res = await result.OrderByDescending(x => x.Id).ToListAsync();
+
+            return res;
         }
         #endregion
 

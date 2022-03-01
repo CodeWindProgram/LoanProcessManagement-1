@@ -24,6 +24,7 @@ using LoanProcessManagement.Application.Features.UnlockUserAccountAdmin.Queries.
 using LoanProcessManagement.Application.Features.ChangePassword.Commands.ResetPassword;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using LoanProcessManagement.Application.Features.MailService.Query;
 
 namespace LoanProcessManagement.App.Controllers
 {
@@ -33,13 +34,15 @@ namespace LoanProcessManagement.App.Controllers
         private readonly IAccountService _accountService;
         private readonly IUserListService _userListService;
         private readonly ICommonServices _commonService;
+        private readonly IEmailService _emailService;
         //private readonly IPropertyDetailsService _propertyDetailsService;
 
-        public LoginController(IAccountService accountService, ICommonServices commonService,IUserListService userListService)
+        public LoginController(IAccountService accountService, ICommonServices commonService,IUserListService userListService,IEmailService emailService)
         {
             _accountService = accountService;
             _commonService = commonService;
             _userListService = userListService;
+            _emailService = emailService;
         }
 
         [Route("~/")]
@@ -185,6 +188,12 @@ namespace LoanProcessManagement.App.Controllers
 
                 if (changePasswordResponse.Succeeded)
                 {
+
+                    var SendMail = new SendMailServiceQuery();
+                    SendMail.FormNo = null;
+                    SendMail.MailTypeId = 5;
+                    SendMail.Lg_Id = User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value;
+                    var mail = await _emailService.SendMail(SendMail);
                     message = changePasswordResponse.Message;
                     ViewBag.Issuccesflag = true;
                     ViewBag.Message = message;

@@ -8,7 +8,7 @@ namespace LoanProcessManagement.Application.Features.MailService.Query
 {
     public class SendMailServiceQuery : IRequest<bool>
     {
-       
+       public string Lg_Id { get; set; }
         public string FormNo { get; set; }
         public int MailTypeId { get; set; }
     }

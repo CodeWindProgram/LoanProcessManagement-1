@@ -100,7 +100,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                     Subject = "Your reset password Code is",
                     //Body = emailSecretPassCode,
                     //Name=userDetails.Name
-                    Body = "Dear User <br><br> Your Loan system Login Password has been Reset Successfully. Please try to Login with Updated Password. <br><br> Password: " + emailSecretPassCode + "<br><br>Thanks, <br> Loan Process Team."
+                    Body = "Dear "+ userDetails.Name +",<br><br> Password has been reset successfully. Please try to login with below provided credentials.<br><br>Username "+userDetails.EmployeeId +"<br>Password: " + emailSecretPassCode + "<br><br>Thanks & Regards,<br> LOS Support Team."
                 };
 
                 var email = _emailService.SendEmail(SendEmail);

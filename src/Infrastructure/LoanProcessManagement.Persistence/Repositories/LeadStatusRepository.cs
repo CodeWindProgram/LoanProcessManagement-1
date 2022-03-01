@@ -361,8 +361,6 @@ namespace LoanProcessManagement.Persistence.Repositories
                                   QueryStatus = LQ == null ? "Pending With HO" : (LQ.Query_Status.Equals('Q') ? "Pending With Branch" : "Pending with HO"),
                                   QueryCount = HO.hoLeadQuery.Count()
                               };
-
-
                 return Process.ToList();
 
 

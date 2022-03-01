@@ -286,6 +286,22 @@ namespace LoanProcessManagement.App.Controllers
 
                 var mail = await _emailService.SendMail(SendMail);
             }
+            else if (modifyLeadResponse.Succeeded && lead.CurrentStatus == 9 /*&& lead.CurrentStatus != int.Parse(TempData["PreviousState"].ToString())*/)
+            {
+                var SendMail = new SendMailServiceQuery();
+                SendMail.FormNo = lead.FormNo;
+                SendMail.MailTypeId = 3;
+
+                var mail = await _emailService.SendMail(SendMail);
+            }
+            else if (modifyLeadResponse.Succeeded && lead.CurrentStatus == 8 /*&& lead.CurrentStatus != int.Parse(TempData["PreviousState"].ToString())*/)
+            {
+                var SendMail = new SendMailServiceQuery();
+                SendMail.FormNo = lead.FormNo;
+                SendMail.MailTypeId = 4;
+
+                var mail = await _emailService.SendMail(SendMail);
+            }
             ModifyLeadVM currentLead = null;
 
             //ViewBag.isSuccess = modifyLeadResponse.Succeeded;

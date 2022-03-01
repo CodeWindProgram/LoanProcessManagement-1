@@ -66,7 +66,13 @@
                                                 @Html.DisplayFor(modelItem => item.LeadStatus)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.Appointment_Date)
+                                                @{
+                                                    var date = item.Appointment_Date.ToString().Split(" ");
+
+
+
+                                                    }
+                                                @date[0]
                                             </td>
                                             <td>
                                                 @Html.ActionLink("Edit", "LeadSummary", "LeadList", new { lead_Id = item.lead_Id }, new { @Class = "btn btn-primary btn-sm" })

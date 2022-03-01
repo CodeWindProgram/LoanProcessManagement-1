@@ -11,7 +11,7 @@ namespace LoanProcessManagement.Application.Features.QueryHistory.Queries
         public char Query_Status { get; set; }
         public string FormNo { get; set; }
         public string Query_Comment { get; set; }
-        public int? Tat { get; set; }
+        //public int? Tat { get; set; }
         public string IPSQueryType1 { get; set; }
         public string IPSQueryType2 { get; set; }
         public string IPSQueryType3 { get; set; }
