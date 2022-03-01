@@ -184,8 +184,11 @@ namespace LoanProcessManagement.App.Controllers
             var thirdPartyDetailsResponse = await _agencyService.SubmitToAgency(req);
             if (thirdPartyDetailsResponse != null && thirdPartyDetailsResponse.Data!=null) 
             {
-                ViewBag.isSuccess = thirdPartyDetailsResponse.Data.Succeeded;
-                ViewBag.Message = thirdPartyDetailsResponse.Data.Message;
+                TempData["AgencyResponseMessage"] = thirdPartyDetailsResponse.Data.Message;
+                TempData["AgencyResponseIsSuccess"] = thirdPartyDetailsResponse.Data.Succeeded;
+
+                //ViewBag.isSuccess = thirdPartyDetailsResponse.Data.Succeeded;
+                //ViewBag.Message = thirdPartyDetailsResponse.Data.Message;
                 ViewBag.leadIdString = req.leadIdString;
                 List<AgencyDocumentVm> ValuerAgencyDocs = new List<AgencyDocumentVm>()
                 {
@@ -319,7 +322,8 @@ namespace LoanProcessManagement.App.Controllers
                     ViewBag.legalAgencyName = new SelectList(allAgencyNameResponse.Data.LegalAgency, "Id", "AgencyName");
                     ViewBag.fiAgencyName = new SelectList(allAgencyNameResponse.Data.FiAgency, "Id", "AgencyName");
                 }
-                return View(thirdPartyCheckDetailsResponse);
+                //return View(thirdPartyCheckDetailsResponse);
+                return RedirectToAction("Index","Agency",new { Lead_Id= req.leadIdString});
 
             }
              
