@@ -6,6 +6,10 @@
 }
 
 <style>
+    .sumLbl{
+
+        font-weight:bold;
+    }
     .panel-heading {
         color: white;
         background-color: #343a40;
@@ -53,52 +57,52 @@
                 <div class="panel-heading"><h5>Lead Summary</h5></div>
                 <div class="card-body">
                     <div class="d-flex flex-row justify-content-around row ">
-                        <div class="col-sm-6"><div class="form-group"><p>Form No.</p></div></div>
+                        <div class="col-sm-6"><div class="form-group sumLbl" ><p>Form No.</p></div></div>
                         <div class="col-sm-6"><div class="form-group"><p>@Model.FormNo</p></div></div>
                     </div>
                     <div class="d-flex flex-row justify-content-around row ">
-                        <div class="col-sm-6"><div class="form-group"><p>Full Name</p></div></div>
+                        <div class="col-sm-6"><div class="form-group sumLbl"><p>Full Name</p></div></div>
                         <div class="col-sm-6"><div class="form-group"><p>@Model.CustomerName</p></div></div>
                     </div>
                     <div class="d-flex flex-row justify-content-around row">
-                        <div class="col-sm-6"><div class="form-group"><p>Phone</p></div></div>
+                        <div class="col-sm-6"><div class="form-group sumLbl"><p>Phone</p></div></div>
                         <div class="col-sm-6"><div class="form-group"><p>@Model.CustomerPhone</p></div></div>
                     </div>
                     <div class="d-flex flex-row justify-content-around row">
-                        <div class="col-sm-6"><div class="form-group"><p>Product Chosen</p></div></div>
+                        <div class="col-sm-6"><div class="form-group sumLbl"><p>Product Chosen</p></div></div>
                         <div class="col-sm-6"><div class="form-group"><p>@Model.Product</p></div></div>
                     </div>
                     <div class="d-flex flex-row justify-content-around row">
-                        <div class="col-sm-6"><div class="form-group"><p>Appointment Date</p></div></div>
+                        <div class="col-sm-6"><div class="form-group sumLbl"><p>Appointment Date</p></div></div>
                         <div class="col-sm-6"><div class="form-group"><p>@Model.Appointment_Date.ToShortDateString()</p></div></div>
                     </div>
                     <div class="d-flex flex-row justify-content-around row">
-                        <div class="col-sm-6"><div class="form-group"><p>Current Status</p></div></div>
+                        <div class="col-sm-6"><div class="form-group sumLbl"><p>Current Status</p></div></div>
                         <div class="col-sm-6"><div class="form-group"><p>@Model.LeadStatus</p></div></div>
                     </div>
                     <div class="d-flex flex-row justify-content-around row">
-                        <div class="col-sm-6"><div class="form-group"><p>Is Exempted from GST? (> 40L turnover)</p></div></div>
+                        <div class="col-sm-6"><div class="form-group sumLbl"><p>Is Exempted from GST? (> 40L turnover)</p></div></div>
                         <div class="col-sm-6"><div class="form-group"><p>NA</p></div></div>
                     </div>
                     <div id="forBranch" style="display:none">
                         <div class="d-flex flex-row justify-content-around row">
-                            <div class="col-sm-6"><div class="form-group"><p>Applicant Details</p></div></div>
+                            <div class="col-sm-6"><div class="form-group sumLbl"><p>Applicant Details</p></div></div>
                             <div class="col-sm-6"><div class="form-group"><p><a href="/ApplicantDetails/Index?lead_Id=@Model.Id&applicantType=0">Click here</a></p></div></div>
                         </div>
                         <div class="d-flex flex-row justify-content-around row">
-                            <div class="col-sm-6"><div class="form-group"><p>Add Income Assessment Details</p></div></div>
+                            <div class="col-sm-6"><div class="form-group sumLbl"><p>Add Income Assessment Details</p></div></div>
                             <div class="col-sm-6"><div class="form-group"><p><a href="/IncomeAssesment/Index?applicantType=0&lead_Id=@Model.Id">Click here</a></p></div></div>
                         </div>
                         <div class="d-flex flex-row justify-content-around row">
-                            <div class="col-sm-6"><div class="form-group"><p>Cibil Check Details</p></div></div>
+                            <div class="col-sm-6"><div class="form-group sumLbl"><p>Cibil Check Details</p></div></div>
                             <div class="col-sm-6"><div class="form-group"><p><a href="/CibilCheckDetails/Index?lead_Id=@Model.Id&applicantType=0">Click here</a></p></div></div>
                         </div>
                         <div class="d-flex flex-row justify-content-around row">
-                            <div class="col-sm-6"><div class="form-group"><p>Lead ITR Details</p></div></div>
+                            <div class="col-sm-6"><div class="form-group sumLbl"><p>Lead ITR Details</p></div></div>
                             <div class="col-sm-6"><div class="form-group"><p><a href="/LeadITRDetails/Index?lead_Id=@Model.Id&applicantType=0">Click here</a></p></div></div>
                         </div>
                         <div class="d-flex flex-row justify-content-around row" >
-                            <div class="col-sm-6"><div class="form-group" ><p>Add GST Details</p></div></div>
+                            <div class="col-sm-6"><div class="form-group sumLbl" ><p>Add GST Details</p></div></div>
                             <div class="col-sm-6"><div class="form-group" ><p><a href="/IncomeAssesment/CreateEnquiry?applicantType=0&lead_Id=@Model.Id">Click here</a></p></div></div>
                         </div>
                     </div>
