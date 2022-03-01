@@ -187,18 +187,19 @@
                                                 <div class="col-2"></div>
                                                 <div class="col-lg-4 col-sm-12">
                                                     <label asp-for="valuerAgencyId">Name</label><span style="color: Red">&nbsp;*</span>
-                                                    <div class="input-control text">
-                                                        <select id="ContentPlaceHolder1_ddlValuerAgency" asp-for="valuerAgencyId" asp-items=" ViewBag.valuerAgencyName" class="form-control">
-                                                            <option value="">Select Name</option>
-                                                        </select>
-                                                        <span asp-validation-for="valuerAgencyId" class="text-danger"></span>
-                                                    </div>
+                                                                                                <div class="input-control text">
+                                                                                                    <select id="ContentPlaceHolder1_ddlValuerAgency" asp-for="valuerAgencyId" asp-items=" ViewBag.valuerAgencyName" class="form-control">
+                                                                                                        <option value="">Select Name</option>
+                                                                                                    </select>
+                                                                                                    <span asp-validation-for="valuerAgencyId" class="text-danger"></span>
+
+                                                                                                </div>
                                                 </div>
                                                 <div class="col-lg-4 col-sm-12">
                                                     <label asp-for="ValuerDocumentOut_Date">Document Outdate : </label><span style="color: Red">&nbsp;*</span>
 
                                                     <div class="input-control text">
-                                                        <input asp-for="ValuerDocumentOut_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocOutdate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                        <input asp-for="ValuerDocumentOut_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="ValuerDocOutdate" placeholder="dd/mm/yyyy" class="form-control datepicker" autocomplete="off" />
                                                         <span asp-validation-for="ValuerDocumentOut_Date" class="text-danger"></span>
                                                     </div>
                                                 </div>
@@ -384,7 +385,7 @@
                                                 <div class="col-lg-4 col-sm-12">
                                                     <label asp-for="fiDocumentOut_Date">Document Outdate : </label><span style="color: Red">&nbsp;*</span>
                                                     <div class="input-control text">
-                                                        <input asp-for="fiDocumentOut_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="fiDocOutdate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                        <input asp-for="fiDocumentOut_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="fiDocOutdate" placeholder="dd/mm/yyyy" class="form-control datepicker" autocomplete="off" />
                                                         <span asp-validation-for="fiDocumentOut_Date" class="text-danger"></span>
                                                     </div>
                                                 </div>
@@ -427,7 +428,7 @@
                                                     <div class="col-lg-4 col-sm-12">
                                                         <label asp-for="fiDocumentIn_Date">Document Indate : </label><span style="color: Red">&nbsp;*</span>
                                                         <div class="input-control text">
-                                                            <input asp-for="fiDocumentIn_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="fiDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" />
+                                                            <input asp-for="fiDocumentIn_Date" asp-format="{0:dd/MM/yyyy}" type="text" id="fiDocIndate" placeholder="dd/mm/yyyy" class="form-control datepicker" autocomplete="off" />
                                                             <span asp-validation-for="fiDocumentIn_Date" class="text-danger"></span>
                                                         </div>
                                                     </div>
@@ -901,7 +902,7 @@
                 $('#GFG_DOWN').text(chklist);
                 $('#valuerAgencyDoc').val(chklist);
                 $('#tabValueForValuer').val("Valuer");
-               
+
             }
         });
         $("#legalForm").submit(function () {
@@ -938,18 +939,12 @@
         });
 
         $(document).ready(function () {
-            if ('@ViewBag.isSuccess' == 'True') {
-                toastr.success('@ViewBag.Message', "Success");
-                setTimeout(function () {
-                    location.href = "/agency/index/@ViewBag.leadIdString";
-                }, 1000);
+            if ('@TempData["AgencyResponseIsSuccess"]' == 'True') {
+                toastr.success('@TempData["AgencyResponseMessage"]', "Success");     
             }
-            else if ('@ViewBag.isSuccess' == 'False') {
-                toastr.error('@ViewBag.Message', "Error");
-                setTimeout(function () {
-                    location.href = "/agency/index/@ViewBag.leadIdString";
-                }, 1000);
-
+            else if ('@TempData["AgencyResponseIsSuccess"]' == 'False') {
+                toastr.error('@TempData["AgencyResponseMessage"]', "Error");
+        
             }
 
         })
@@ -1014,9 +1009,9 @@
                 $('#FiTab').prop('disabled', true);
                 $('#fiDocIndate').prop('disabled', true);
                 $('#FIComment').prop('disabled', true);
-                $('#FiTabs').prop('disabled', true);            
-            
-            
+                $('#FiTabs').prop('disabled', true);
+
+
         }
 
 </script>
