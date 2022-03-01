@@ -124,7 +124,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 details.Body = details.Body.Replace("{0}", Names.Name);
 
             }
-            else if (data.MailTypeId == 5)
+            else if (data.MailTypeId == 6)
             {
                 var Names = _dbContext.LpmUserMasters.Where(x => x.Id == LgId).FirstOrDefault();
                 details = templates.Where(x => x.TemplateTypeId == 6).FirstOrDefault();
