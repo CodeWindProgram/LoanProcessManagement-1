@@ -42,6 +42,7 @@ namespace LoanProcessManagement.Persistence
             services.AddScoped<ICibilCheckDetailsRepository, CibilCheckDetailsRepository>();
             services.AddScoped<IAgencyRepository, AgencyRepository>();
             services.AddScoped<ICreditDetailsRepository, CreditDetailsRepository>();
+            services.AddTransient<IMailServiceRepository, MailServiceRepository>();
 
 
 

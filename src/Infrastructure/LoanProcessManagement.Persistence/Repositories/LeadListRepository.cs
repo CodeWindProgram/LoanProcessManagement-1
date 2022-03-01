@@ -696,6 +696,10 @@ namespace LoanProcessManagement.Persistence.Repositories
             lpmLeadApplicantsDetails.EmploymentType = request.EmploymentType;
             lpmLeadApplicantsDetails.IsActive = request.IsActive;
             lpmLeadApplicantsDetails.CustomerEmail = request.CustomerEmail;
+            lpmLeadApplicantsDetails.isCibilCheckRequired = true;
+            lpmLeadApplicantsDetails.isGstRequired = true;
+            lpmLeadApplicantsDetails.isPerfiosRequired = true;
+            lpmLeadApplicantsDetails.isItrRequired = true;
             await _dbContext.LpmLeadApplicantsDetails.AddAsync(lpmLeadApplicantsDetails);
             await _dbContext.SaveChangesAsync();
 

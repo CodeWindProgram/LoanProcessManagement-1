@@ -5,6 +5,7 @@ using LoanProcessManagement.Application.Features.LeadList.Queries;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetHOSanctionListQuery;
+using LoanProcessManagement.Application.Features.MailService.Query;
 using LoanProcessManagement.Application.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,10 +24,12 @@ namespace LoanProcessManagement.App.Controllers
     {
         private readonly ILeadListService _leadListService;
         private readonly ICommonServices _commonService;
-        public LeadListController(ILeadListService leadListService, ICommonServices commonService)
+        private readonly IEmailService _emailService;
+        public LeadListController(ILeadListService leadListService, ICommonServices commonService,IEmailService emailService)
         {
             _leadListService = leadListService;
             _commonService = commonService;
+            _emailService = emailService;
         }
         #region Lead List Module Controller API - Saif Khan - 02/11/2021
         ///<summary>
@@ -152,6 +155,8 @@ namespace LoanProcessManagement.App.Controllers
             var leadResponse = await _leadListService.GetLeadByLeadId(lead_Id);
             ViewBag.lead_Id = lead_Id;
             ModifyLeadVM lead = null;
+            var temp = leadResponse.Data.CurrentStatus;
+            //  TempData["PreviousState"] = leadResponse.Data.CurrentStatus;
             if (leadResponse.Data.QueryStatus == 'R')
             {
                 if (leadResponse.Data.HoQueryStatus == 'R')
@@ -272,6 +277,15 @@ namespace LoanProcessManagement.App.Controllers
         {
 
             var modifyLeadResponse = await _leadListService.ModifyLead(lead);
+
+            if (modifyLeadResponse.Succeeded && lead.CurrentStatus== 10 /*&& lead.CurrentStatus != int.Parse(TempData["PreviousState"].ToString())*/)
+            {
+                var SendMail = new SendMailServiceQuery();
+                SendMail.FormNo = lead.FormNo;
+                SendMail.MailTypeId = 2;
+
+                var mail = await _emailService.SendMail(SendMail);
+            }
             ModifyLeadVM currentLead = null;
 
             //ViewBag.isSuccess = modifyLeadResponse.Succeeded;
@@ -452,6 +466,11 @@ namespace LoanProcessManagement.App.Controllers
                 if (response.Succeeded)
                 {
                     ModelState.Clear();
+                    var SendMail = new SendMailServiceQuery();
+                    SendMail.FormNo = leadCommandVM.FormNo;
+                    SendMail.MailTypeId = 1;
+                    
+                    var mail = await _emailService.SendMail(SendMail);
                 }
             }
             var loanProducts = await _commonService.GetAllLoanProducts();

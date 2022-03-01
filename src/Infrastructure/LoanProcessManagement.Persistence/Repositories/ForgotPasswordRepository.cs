@@ -53,7 +53,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 if (email.Result)
                 {
                     forgotPassword.Issuccess = true;
-                    forgotPassword.Message = "We Sent a Message to Registered Email Address. Check it out to Reset Your Password.";
+                    forgotPassword.Message = "We have sent updated password on registered Email ID. Please try to login with shared Credentials.";
                 }
                 else
                 {

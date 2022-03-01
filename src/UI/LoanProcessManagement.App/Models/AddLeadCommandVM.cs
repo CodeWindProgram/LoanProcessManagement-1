@@ -10,7 +10,7 @@ namespace LoanProcessManagement.App.Models
     public class AddLeadCommandVM
     {
         [StringLength(6)]
-        [Remote("VerifyFormNo", "LeadList", ErrorMessage = "Email already exists!")]
+        [Remote("VerifyFormNo", "LeadList", ErrorMessage = "Form No already exist.")]
 
         [RegularExpression(@"^[0-9]\d{5}$", ErrorMessage = "Please Enter Valid Form Number.")]
         [Required(ErrorMessage = "Form No is Required")]
@@ -96,7 +96,8 @@ namespace LoanProcessManagement.App.Models
         [MaxLength(100)]
         public string ProjectAddress { get; set; }
 
-        [Required(ErrorMessage = "Please Select Appropriate Option")]
+
+        [Required(ErrorMessage = "Please Select  Plan")]
         public long? IsSanctionedPlanReceivedID { get; set; }
 
         [Required(ErrorMessage = "Please Select Property Type")]

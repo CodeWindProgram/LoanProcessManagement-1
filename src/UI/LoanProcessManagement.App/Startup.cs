@@ -69,6 +69,8 @@ namespace LoanProcessManagement.App
             services.AddScoped<ICibilCheckService, CibilCheckService>();
             services.AddScoped<IAgencyService, AgencyService>();
             services.AddScoped<ICreditDetailsService, CreditDetailsService>();
+            services.AddScoped<IEmailService, EmailService>();
+            
             services.Configure<APIConfiguration>(Configuration.GetSection("APIConfiguration"));
             services.AddSession();
         }
