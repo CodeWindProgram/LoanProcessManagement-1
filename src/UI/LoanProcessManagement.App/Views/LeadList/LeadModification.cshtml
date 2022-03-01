@@ -1070,7 +1070,7 @@
             </div>
         </div>*@
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
 
         var statusValue = $('#status_lead').val();
@@ -1188,9 +1188,12 @@
                 if (UserRole == 2) {
                     $("#lblSwitchName").css("display", "inline-block");
                     $("#QueryStatusHidden").val('Q');
+                    toastr.success('Query raised', "Success");
+
 
                 } else {
-                    alert("only Ho can raise a query");
+                    /*alert("only Ho can raise a query");*/
+                    toastr.error('Only Ho can raise a query', "Error");
                     $("#chkQuery").prop("checked", false);
                 }
             }
@@ -1198,10 +1201,11 @@
                 if (UserRole == 3) {
                     $("#QueryStatusHidden").val('R');
                     $("#lblSwitchName").css("display", "none");
-
+                    toastr.success('Query resolved', "Success");
                 }
                 else {
-                    alert("only Branch can resolve a query");
+                    //alert("only Branch can resolve a query");
+                    toastr.error('Only Branch can resolve a query', "Error");
                     $("#chkQuery").prop("checked", true);
 
                 }
@@ -1215,9 +1219,11 @@
                 if (UserRole == 2) {
                     $("#hoLblSwitchName").css("display", "inline-block");
                     $("#HoQueryStatusHidden").val('Q');
+                    toastr.success('Query raised', "Success");
 
                 } else {
-                    alert("only Ho can raise a query");
+                    
+                    toastr.error('Only Ho can raise a query', "Error");
                     $("#chkHoQuery").prop("checked", false);
                 }
             }
@@ -1225,10 +1231,11 @@
                 if (UserRole == 3) {
                     $("#HoQueryStatusHidden").val('R');
                     $("#hoLblSwitchName").css("display", "none");
-
+                    toastr.success('Query resolved', "Success");
                 }
                 else {
-                    alert("only Branch can resolve a query");
+                    
+                    toastr.error('Only Branch can resolve a query', "Error");
                     $("#chkHoQuery").prop("checked", true);
 
                 }
@@ -1276,7 +1283,7 @@
             $("#hoQueryInput").prop('disabled', true);
 
         }
-  
+
 
     /*----------------------------------------------------------------------------------------------------------------------*/
 
@@ -1308,4 +1315,4 @@
     });
 
 
-    </script>
+</script>
