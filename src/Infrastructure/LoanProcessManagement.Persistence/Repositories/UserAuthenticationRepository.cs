@@ -170,7 +170,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 response.Succeeded = false;
                 return response;
             }
-            var pwd = "welcome2gichf";
+            var pwd = "Welcome2loan";
             var encryptedPwd = EncryptionDecryption.EncryptString(pwd);
             request.Password = encryptedPwd;
             request.SaltKey = "key";
