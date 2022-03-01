@@ -4,6 +4,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "CreateMenu";
 }
+<style>
+    .error-msg {
+        width: 100%;
+        color: #dc3545;
+        display: none;
+        margin-left: 10px;
+        margin-top:10px;
+    }
+</style>
 @*<style>
         #act1 {
             color: white;
@@ -149,22 +158,23 @@
                                         </div>*@
 
 
-                                    <div class="col-lg-4 col-sm-12">
-                                        <label id="txtlab">Menu Is Being Created For<span style="color: Red">&nbsp;*</span> </label>
+                                <div class="col-lg-4 col-sm-12">
+                                    <label id="txtlab">Menu Is Being Created For<span style="color: Red">&nbsp;*</span> </label>
 
 
-                                        <div id="checkings">
-                                            @for (int i = 0; i < Model.ListVms.Count(); i++)
-                                            {
-                                                <div class="">
-                                                    <tr id="lblcheck">
-                                                        <td><input asp-for="@Model.ListVms[i].Id" hidden /></td>
-                                                        <td><input asp-for="@Model.ListVms[i].Checkbox" id="inpcheck" type="checkbox" />&nbsp;@Model.ListVms[i].Name</td>
-                                                    </tr>
-                                                </div>
-                                            }
-                                        </div>
+                                    <div id="checkings">
+                                        @for (int i = 0; i < Model.ListVms.Count(); i++)
+                                        {
+                                            <div class="">
+                                                <tr id="lblcheck">
+                                                    <td><input asp-for="@Model.ListVms[i].Id" hidden /></td>
+                                                    <td><input asp-for="@Model.ListVms[i].Checkbox" id="inpcheck" type="checkbox"/>&nbsp;@Model.ListVms[i].Name</td>
+                                                </tr>
+                                            </div>
+                                        }
                                     </div>
+                                    <p class="error-msg"></p>
+                                </div>
 
                                     <div class="col-lg-4 col-sm-12">
                                         <label>Is Parent Menu?<span style="color: Red">&nbsp;*</span></label><br />
@@ -206,7 +216,7 @@
                                     <div class="col-md-1"></div>
                                     <div class="col-md-1"></div>
                                     <div class="col-md-1"></div>
-                                    <div class="col-md-1"><button type="submit" style="background-color: #343a40;color:white" class="btn">Submit</button></div>
+                                    <div class="col-md-1"><button onclick="validate()" type="submit" id="submit" style="background-color: #343a40;color:white" class="btn">Submit</button></div>
                                     <div class="col-md-2"><a asp-action="Menulist" id="btn2" type="button" value="Cancel" class="btn btn-danger">Cancel</a></div>
                                 </div>
                             </div>
@@ -354,6 +364,18 @@
     </div>*@
 
 <script>
+     function validate() {
+            var checked_checkboxes = $("#inpcheck input[type=checkbox]:checked");
+            if (checked_checkboxes.length != 0) {
+                $(".error-msg").html("").hide();
+            }
+            else {               
+                $(".error-msg").html("Please Select Atleast One Option.").show();
+            }      
+    };
+   
+    
+
     function hideStudentChildren() {
         if ($("#Yes").is(":checked")) {
             check();

@@ -51,13 +51,13 @@ namespace LoanProcessManagement.Persistence.Repositories
                new EmailTemplate
                {
                    TemplateTypeId = 1,
-                   Subject = "Added Lead",
+                   Subject = "Loan Application Registration in LOS",
                    Body ="Dear {0},<br><br>Loan application has been added successfully in LOS system. Please use File no. {1} for future references.<br><br>Thanks & Regards,<br>LOS Team."
                },
                 new EmailTemplate
                {
                    TemplateTypeId = 2,
-                   Subject = "Disbursed Lead",
+                   Subject = "Loan Application Status in LOS",
                    Body ="Dear {0},<br><br>For application ref. File no {1}, Loan amount Rs. {2} has been disbursed. Please check or visit your respective branch office.<br><br>Thanks & Regards,<br>LOS Team."
                },
                  new EmailTemplate

@@ -474,8 +474,19 @@
                                     <div class="row tab">
                                         <div class="col-md-12">
                                             <center>
-                                                <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="SubmitButton" class="btn" style="background-color: #343a40; color:white;">&nbsp
-                                                <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@Model.LeadID">Cancel</a>
+                                                @if (Model.IsSubmit)
+                                                {
+                                                    <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="SubmitButton" class="btn"
+                                                           style="background-color: #343a40; color:white;" disabled="disabled">
+                                                }
+                                                else
+                                                {
+
+                                                    <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="SubmitButton" class="btn"
+                                                           style="background-color: #343a40; color:white;">
+                                                }
+
+                                                &nbsp<a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@Model.LeadID">Cancel</a>
                                             </center>
                                         </div>
                                     </div>

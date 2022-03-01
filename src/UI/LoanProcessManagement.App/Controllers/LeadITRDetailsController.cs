@@ -136,7 +136,7 @@ namespace LoanProcessManagement.App.Controllers
             {                
                 var response = await _leadITRDetails.UpdateLeadITRDetails(leadITRDetailsVm);
 
-                TempData["leadItrIsSuccess"] = response.Data.Succeeded;
+                TempData["leadItrIsSuccess"] = true;
                 TempData["leadItrMessage"] = response.Data.Message;
             }
             //var temp = "Lead_" + leadITRDetailsVm.lead_Id;

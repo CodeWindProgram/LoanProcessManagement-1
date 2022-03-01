@@ -43,7 +43,7 @@ namespace LoanProcessManagement.App.Models
         public string DocumentType { get; set; }
         
         public string PdfFileName { get; set; }
-        [Required(ErrorMessage = "Please Enter Password")]
+        //[Required(ErrorMessage = "Please Enter Password")]
         public string FilePassword { get; set; }
         public long ApplicantDetailId { get; set; }
         public int NoOfBankAccounts { get; set; }
