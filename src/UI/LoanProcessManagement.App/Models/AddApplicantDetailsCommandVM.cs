@@ -52,37 +52,38 @@ namespace LoanProcessManagement.App.Models
         [Required(ErrorMessage = "Email ID is Required")]
         public string CustomerEmail { get; set; }
 
-        [RegularExpression(@"^[6-9]\d{9}$", ErrorMessage = "Please Enter Valid Phone Number.")]
-        [Required(ErrorMessage = "Contact No is Required")]
+        [RegularExpression(@"^[6-9]\d{9}$", ErrorMessage = "Please Enter Valid Contact No.")]
+        [Required(ErrorMessage = "Contact No. is Required")]
         public string CustomerPhone { get; set; }
         [Required(ErrorMessage = "Employment Type is Required")]
         public string EmploymentType { get; set; }
 
-        [RegularExpression("^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$", ErrorMessage = "Please enter valid GST No")]
+        [RegularExpression("^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$", ErrorMessage = "Please enter valid GST No.")]
         public string GstNo { get; set; }
 
         [StringLength(10)]
-        [RegularExpression("^([A-Z]){5}([0-9]){4}([A-Z]){1}$", ErrorMessage = "Please enter valid PAN No" )]
+        [RegularExpression("^([A-Z]){5}([0-9]){4}([A-Z]){1}$", ErrorMessage = "Please enter valid PAN No." )]
         public string PanCardNo { get; set; }
 
-        [RegularExpression("^[A-PR-WYa-pr-wy][1-9]\\d" + "\\s?\\d{4}[1-9]$",ErrorMessage = "Please enter valid Passport No")]
+        [RegularExpression("^[A-PR-WYa-pr-wy][1-9]\\d" + "\\s?\\d{4}[1-9]$",ErrorMessage = "Please enter valid Passport No.")]
         public string PassportNo { get; set; }
 
         [RegularExpression("^([a-zA-Z]){3}([0-9]){7}$", ErrorMessage = "Please enter valid Voter Id")]
         //[Range(1,10, ErrorMessage = "Voter Id should contain 10 alphanumeric numbers")]
         public string VoterId { get; set; }
-        [StringLength(10, ErrorMessage = "Ration card No should be of 10 digits")]
+        //[StringLength(10, ErrorMessage = "Ration card No. should be of 10 digits")]
         public string RationCardNo { get; set; }
 
-        [RegularExpression("^(([A-Z]{2}[0-9]{2})( )|([A-Z]{2}-[0-9]{2}))((19|20)[0-9][0-9])[0-9]{7}$", ErrorMessage = "Please enter valid Driving Liscence No")]
+        [RegularExpression("^(([A-Z]{2}[0-9]{2})( )|([A-Z]{2}-[0-9]{2}))((19|20)[0-9][0-9])[0-9]{7}$", ErrorMessage = "Please enter valid Driving Licence No.")]
         public string DrivingLiscenceNo { get; set; }
 
-        [RegularExpression("^[2-9]{1}[0-9]{3}\\s[0-9]{4}\\s[0-9]{4}$" , ErrorMessage = "Please enter valid Universal Id")]
+        //[RegularExpression("^[2-9]{1}[0-9]{3}\\s[0-9]{4}\\s[0-9]{4}$" , ErrorMessage = "Please enter valid Universal Id")]  //to allow spaces
+        [RegularExpression("^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$" , ErrorMessage = "Please enter valid Universal Id")]
         public string AadharId { get; set; }
 
         public int ApplicantType { get; set; }  
         
-        [Required(ErrorMessage = "No of Bank Accounts is Required")]
+        [Required(ErrorMessage = "No. of Bank Accounts is Required")]
         public int NoOfBankAccounts { get; set; }
 
         public bool isItrRequired { get; set; }

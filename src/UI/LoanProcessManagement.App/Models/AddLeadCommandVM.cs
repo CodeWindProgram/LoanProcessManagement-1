@@ -10,10 +10,10 @@ namespace LoanProcessManagement.App.Models
     public class AddLeadCommandVM
     {
         [StringLength(6)]
-        [Remote("VerifyFormNo", "LeadList", ErrorMessage = "Form No already exist.")]
+        [Remote("VerifyFormNo", "LeadList", ErrorMessage = "Form No. already exist.")]
 
-        [RegularExpression(@"^[0-9]\d{5}$", ErrorMessage = "Please Enter Valid Form Number.")]
-        [Required(ErrorMessage = "Form No is Required")]
+        [RegularExpression(@"^[0-9]\d{5}$", ErrorMessage = "Please Enter Valid Form No.")]
+        [Required(ErrorMessage = "Form No. is Required")]
         public string FormNo { get; set; }
         public string CreatedBy { get; set; }
         public string LastModifiedBy { get; set; }
@@ -44,11 +44,11 @@ namespace LoanProcessManagement.App.Models
         public string CustomerOfficePincode { get; set; }
 
         //[RegularExpression(@"^(\d{10})$", ErrorMessage = "Phone number should contain 10 digits .")]
-        [RegularExpression(@"^[6-9]\d{9}$", ErrorMessage = "Please Enter Valid Phone Number.")]
-        [Required(ErrorMessage = "Phone Number is Required")]
+        [RegularExpression(@"^[6-9]\d{9}$", ErrorMessage = "Please Enter Valid Phone No..")]
+        [Required(ErrorMessage = "Phone No. is Required")]
         public string CustomerPhone { get; set; }
 
-        [RegularExpression(@"^[6-9]\d{9}$", ErrorMessage = "Please Enter Valid Phone Number.")]
+        [RegularExpression(@"^[6-9]\d{9}$", ErrorMessage = "Please Enter Valid Phone No.")]
         public string CustomerPhone_Alternate { get; set; }
 
         [EmailAddress(ErrorMessage = "Please Provide Valid Email Id")]

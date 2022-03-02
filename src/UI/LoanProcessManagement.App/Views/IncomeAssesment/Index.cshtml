@@ -214,8 +214,13 @@
                                         </div>
 
                                         <div class="col-lg-4 col-sm-12">
-                                            <label class="">No of Bank Accounts</label>
+                                            <label class="">No. of Bank Accounts</label>
                                             <p id="idNoOfBankAccounts">@Model.NoOfBankAccounts</p>
+                                        </div>
+
+                                        <div class="col-lg-4 col-sm-12">
+                                            <label class="">No. of Bank Details Uploaded</label>
+                                            <p id="idNoOfBankAccUpld">@Model.IncomeRecords</p>
                                         </div>
                                     </div>
                                 </div>
@@ -761,7 +766,7 @@
                 $('#endDate').val('');
 
         });
-        
+
         $(function () {
             //debugger
             var jsArray = @Html.Raw(Json.Serialize(Model.AppTypeList));
@@ -769,7 +774,7 @@
                 var id = "#lnkCoApp_" + jsArray[i];
                 $(id).css('pointer-events', 'auto');
                 //$(id).css("display", "inline-block");
-                //$(id).show();               
+                //$(id).show();
             }
         });
     });
@@ -862,6 +867,7 @@
             return false;
         }
     }
+
 </script>
 
 

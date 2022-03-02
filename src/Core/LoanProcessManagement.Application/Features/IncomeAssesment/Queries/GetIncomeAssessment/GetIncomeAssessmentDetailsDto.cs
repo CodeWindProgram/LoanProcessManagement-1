@@ -36,5 +36,6 @@ namespace LoanProcessManagement.Application.Features.IncomeAssesment.Queries.Get
         public string Message { get; set; }
         public bool Succeeded { get; set; }
         public List<int> AppTypeList { get; set; }
+        public int IncomeRecords { get; set; }
     }
 }

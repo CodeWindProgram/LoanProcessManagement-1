@@ -164,7 +164,7 @@
 
                                         <div class="col-lg-4 col-sm-12">
                                             <label>Customer Mobile</label>
-                                            <input asp-for="gstAddEnquiryCommandDto.MobileNo" style="border: none; background-color: #f4f6f9;" maxlength="10" readonly="readonly" id="ContentPlaceHolder1_txtMobile" type="number" class="form-control" placeholder="Mobile No">
+                                            <input asp-for="gstAddEnquiryCommandDto.MobileNo" style="border: none; background-color: #f4f6f9;" maxlength="10" readonly="readonly" id="ContentPlaceHolder1_txtMobile" type="number" class="form-control" placeholder="Mobile No.">
                                         </div>
 
 
@@ -512,7 +512,7 @@
             //}
             if (type == 'Mobile') {
                 if ($("#ContentPlaceHolder1_txtMobile").val() == "") {
-                    alert('Customer Mobile No is Mandatory');
+                    alert('Customer Mobile No. is Mandatory');
                     return false;
                 }
 
@@ -520,7 +520,7 @@
                 var mobile = $("#ContentPlaceHolder1_txtMobile").val();
                 if (filter.test(mobile) == false) {
                     console.log(filter);
-                    alert('Please Enter Mobile No in Proper Format');
+                    alert('Please Enter Mobile No. in Proper Format');
 
                     return false;
                 }
@@ -624,7 +624,7 @@
                 var mobile = $("#ContentPlaceHolder1_txtMobile").val();
                 if (filter.test(mobile) == false) {
                     console.log(filter);
-                    alert('Please Enter Mobile No in Proper Format');
+                    alert('Please Enter Mobile No. in Proper Format');
 
                     return false;
                 }
@@ -632,13 +632,13 @@
                 var gstno = $("#ContentPlaceHolder1_txtGstNumber").val();
                 if (patterngst.test(gstno) == false) {
                     //alert(pattern);
-                    alert('Please Enter GST Number in Proper Format');
+                    alert('Please Enter GST No. in Proper Format');
                     e.preventDefault();
                     return false;
                 }
 
                 if ($("#ContentPlaceHolder1_txtMobile").val() == "") {
-                    alert('Customer Mobile No is Mandatory');
+                    alert('Customer Mobile No. is Mandatory');
                     e.preventDefault();
                     return false;
                 }
@@ -647,7 +647,7 @@
                 var mobile = $("#ContentPlaceHolder1_txtMobile").val();
                 if (filter.test(mobile) == false) {
                     console.log(filter);
-                    alert('Please Enter Mobile No in Proper Format');
+                    alert('Please Enter Mobile No. in Proper Format');
                     e.preventDefault();
                     return false;
                 }

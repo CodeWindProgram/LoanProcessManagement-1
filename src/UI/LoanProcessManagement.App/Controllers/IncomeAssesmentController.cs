@@ -127,6 +127,7 @@ namespace LoanProcessManagement.App.Controllers
                     LeadID = getIncomeDetailsServiceResponse.Data.LeadID,
                     IsSubmitCount = getIncomeDetailsServiceResponse.Data.IsSubmitCount,
                     AppTypeList = getIncomeDetailsServiceResponse.Data.AppTypeList,
+                    IncomeRecords = getIncomeDetailsServiceResponse.Data.IncomeRecords,
                 };
                 ViewBag.applicantTypeNo = applicantType;
 
