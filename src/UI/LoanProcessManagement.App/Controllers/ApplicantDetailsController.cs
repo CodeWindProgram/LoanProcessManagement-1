@@ -71,12 +71,12 @@ namespace LoanProcessManagement.App.Controllers
                     DateOfBirth = applicantResponse.Data.DateOfBirth,
                     isPerfiosRequired = applicantResponse.Data.isPerfiosRequired,
                     isCibilCheckRequired = applicantResponse.Data.isCibilCheckRequired,
-                    isItrRequired = applicantResponse.Data.isCibilCheckRequired,
+                    isItrRequired = applicantResponse.Data.isItrRequired,
                     isGstRequired = applicantResponse.Data.isGstRequired
                 };
 
                 ViewBag.applicantTypeNo = applicantType;
-
+                ViewBag.Succeeded = applicantResponse.Data.Succeeded;
                 return View(applicant);
             }
 
