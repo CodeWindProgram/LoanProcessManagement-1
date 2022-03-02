@@ -119,7 +119,7 @@
                                     Email
                                 </th>
                                 <th>
-                                    Created Date
+                                    Enquiry Date
                                 </th>
 
                             </tr>
@@ -128,12 +128,12 @@
                             @foreach (var item in Model)
                             {
                             <tr>
-                                <!--<td>-->
-                                    @*@Html.ActionLink(item.FormNo, "userGstDetails", "CreditDetails",new { FormNo = item.FormNo })*@
-                                <!--</td>-->
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.FormNo )
+                                    @Html.ActionLink(item.FormNo, "userGstDetails", "CreditDetails",new { FormNo = item.FormNo })
                                 </td>
+                                <!--<td>-->
+                                    @*@Html.DisplayFor(modelItem => item.FormNo )*@
+                                <!--</td>-->
                                 <td>
                                     @Html.DisplayFor(modelItem => item.CustomerName)
                                 </td>
@@ -144,7 +144,9 @@
                                     @Html.DisplayFor(modelItem => item.EmailId)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                                    @{var date = item.CreatedDate.ToString().Split(" ");
+                                    }
+                                    @date[0]
                                 </td>
                                 @*<td>
             @Html.DisplayFor(modelItem => item.FormNo)
