@@ -85,8 +85,8 @@
                                         <label asp-for="BranchID">Branch Name :</label>
                                     </div>
                                     <div class="col-6">
-                                        <label id="empId" value=@User.FindFirst("Branch" ).Value>@User.FindFirst("Branch").Value</label>
-                                        <input type="hidden" asp-for="BranchID" value="@User.FindFirst("BranchID").Value" />
+                                        <label id="empId" value=User.FindFirst("Branch" ).Value>User.FindFirst("Branch").Value</label>
+                                        <input type="hidden" asp-for="BranchID" value="User.FindFirst("BranchID").Value" />
                                     </div>
                                 </div>
                             </div>
@@ -110,10 +110,10 @@
                                         <label asp-for="CreatedBy">Employee Name :</label>
                                     </div>
                                     <div class="col-6">
-                                        <label id="empId" value=@User.Identity.Name>@User.Identity.Name </label>
-                                        <input type="hidden" asp-for="CreatedBy" value=@User.FindFirst("lg_id").Value />
-                                        <input type="hidden" asp-for="LastModifiedBy" value=@User.FindFirst("lg_id").Value />
-                                        <input type="hidden" asp-for="Lead_assignee_Id" value=@User.FindFirst("lg_id").Value />
+                                        <label id="empId" value=User.Identity.Name>User.Identity.Name </label>
+                                        <input type="hidden" asp-for="CreatedBy" value=User.FindFirst("lg_id").Value />
+                                        <input type="hidden" asp-for="LastModifiedBy" value=User.FindFirst("lg_id").Value />
+                                        <input type="hidden" asp-for="Lead_assignee_Id" value=User.FindFirst("lg_id").Value />
                                     </div>
                                 </div>
                             </div>
@@ -836,12 +836,12 @@
                                             <div>
                                                 <input type="radio" asp-for="IsApplicantExemptedFromGst" name="IsApplicantExemptedFromGst" id="yes_IsExempted" value="Yes" />
                                                 <label for="yes_IsExempted">
-                                                    <span id="normal">Yes</span>
+                                                    <span id="normal" style="font-weight:normal;">Yes</span>
                                                 </label>
                                                 &nbsp;&nbsp;&nbsp;
                                                 <input type="radio" asp-for="IsApplicantExemptedFromGst" name="IsApplicantExemptedFromGst" id="no_IsExempted" value="No" checked="checked" />
                                                 <label for="no_IsExempted">
-                                                    <span id="normal">No</span>
+                                                    <span id="normal" style="font-weight:normal;">No</span>
                                                 </label>
                                                 <div><span style="color: red;font-size:0.8rem;">[ Note : Misreporting Of GST will be Penalized. ]</span></div>
                                             </div>

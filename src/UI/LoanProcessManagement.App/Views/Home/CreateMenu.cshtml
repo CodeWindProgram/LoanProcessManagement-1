@@ -168,7 +168,7 @@
                                             <div class="">
                                                 <tr id="lblcheck">
                                                     <td><input asp-for="@Model.ListVms[i].Id" hidden /></td>
-                                                    <td><input asp-for="@Model.ListVms[i].Checkbox" id="inpcheck" type="checkbox"/>&nbsp;@Model.ListVms[i].Name</td>
+                                                    <td><input asp-for="@Model.ListVms[i].Checkbox" onclick="validate()" id="inpcheck" type="checkbox"/>&nbsp;@Model.ListVms[i].Name</td>
                                                 </tr>
                                             </div>
                                         }
@@ -216,7 +216,7 @@
                                     <div class="col-md-1"></div>
                                     <div class="col-md-1"></div>
                                     <div class="col-md-1"></div>
-                                    <div class="col-md-1"><button onclick="validate()" type="submit" id="submit" style="background-color: #343a40;color:white" class="btn">Submit</button></div>
+                                    <div class="col-md-1"><button type="submit" onclick="validate()" id="submit" style="background-color: #343a40;color:white" class="btn">Submit</button></div>
                                     <div class="col-md-2"><a asp-action="Menulist" id="btn2" type="button" value="Cancel" class="btn btn-danger">Cancel</a></div>
                                 </div>
                             </div>
@@ -365,12 +365,14 @@
 
 <script>
      function validate() {
-            var checked_checkboxes = $("#inpcheck input[type=checkbox]:checked");
-            if (checked_checkboxes.length != 0) {
-                $(".error-msg").html("").hide();
+         var checked_checkboxes = $("#inpcheck:checked");
+         if (checked_checkboxes.length == 0) {
+             $(".error-msg").html("Please Select Atleast One Option.").show();
+             $("#submit").attr('disabled', 'disabled');
             }
             else {               
-                $(".error-msg").html("Please Select Atleast One Option.").show();
+             $(".error-msg").html("").hide();
+             $("#submit").removeAttr('disabled');
             }      
     };
    

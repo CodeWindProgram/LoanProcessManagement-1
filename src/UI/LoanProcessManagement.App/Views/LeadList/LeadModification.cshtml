@@ -4,7 +4,15 @@
         Layout = "~/Views/Shared/_Layout.cshtml";
         ViewData["Title"] = "LeadModification";
     }
-
+<style>
+    .error-msg {
+        width: 100%;
+        font-family: 'nobelregular';
+        color: #ff0002;
+        display: none;
+        margin-left: 10px;
+    }
+</style>
     @*<style>
             /*h5 {
                 font-size: 1.25rem;
@@ -482,8 +490,9 @@
                             <div class="col-lg-4 col-sm-12">
                                 <label for="amount_insurance">Amount(in INR)</label>
 
-                                <input type="text" class="form-control amt" placeholder="Enter Amount" asp-for="insuranceAmount" maxlength="6">
+                                <input type="text" id="insuranceAmm" class="form-control amt" onkeyup="validate()" placeholder="Enter Amount" asp-for="insuranceAmount" maxlength="6">
                                 <span asp-validation-for="insuranceAmount" class="text-danger"></span>
+                                <p class="error-msg"></p>
                             </div>
                         </div>
 
@@ -558,7 +567,7 @@
                             </div>
                         </div>
                         <div class="d-flex flex-row justify-content-end col-7">
-                            <input id="button12" type="submit" value="Submit" class="btn btn-default-submit mr-2" />
+                            <input id="button12" type="submit" value="Submit" onclick="validate()" class="btn btn-default-submit mr-2" />
                             <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@Model.lead_Id">Cancel</a>
                         </div>
                     </form>
@@ -1072,6 +1081,20 @@
 
 <script type="text/javascript">
 
+        function validate() {
+            var Amount = $("#insuranceAmm").val();
+            var prop = $("#property_purchase_insurance").val();
+            if (Amount <= 0 && prop != 0) {
+                $(".error-msg").html("Enter Valid Amount.").show();
+                $("#button12").attr('disabled', 'disabled');
+                return false;
+            }
+            else {
+                $(".error-msg").html("").hide();
+                $("#button12").removeAttr('disabled');
+            }
+        }
+        
 
         var statusValue = $('#status_lead').val();
         //if (statusValue == 2) {
