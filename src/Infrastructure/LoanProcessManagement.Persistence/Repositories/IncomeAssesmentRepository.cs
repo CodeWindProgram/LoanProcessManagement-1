@@ -101,7 +101,9 @@ namespace LoanProcessManagement.Persistence.Repositories
 
             List<int> applicantTypeList = await _dbContext.LpmLeadApplicantsDetails.Where(x => x.lead_Id == lead_id).OrderBy(x => x.ApplicantType).Select(x => x.ApplicantType).ToListAsync();
 
-            var isSubmitCount = _dbContext.LpmLeadIncomeAssessmentDetails.Include(x => x.LeadApplicantDetails).Where(x => x.lead_Id == lead_id && x.ApplicantType == ApplicantType && x.IsActive).Count();
+            var isSubmitCount = _dbContext.LpmLeadIncomeAssessmentDetails.Include(x => x.LeadApplicantDetails).Where(x => x.lead_Id == lead_id && x.ApplicantType == ApplicantType && x.IsActive).Count();    //to fetch all applicant types under a particular lead 
+
+            var incomeRecordsCount = _dbContext.LpmLeadIncomeAssessmentDetails.Include(x => x.LeadApplicantDetails).Where(x => x.lead_Id == lead_id && x.ApplicantType == ApplicantType).Count();             //to count existing income details records
 
             GetIncomeAssessmentDetailsDto response = new GetIncomeAssessmentDetailsDto();
 
@@ -120,7 +122,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 response.LeadID = lead.lead_Id;
                 response.IsSubmitCount = isSubmitCount;
                 response.AppTypeList = applicantTypeList;
-
+                response.IncomeRecords = incomeRecordsCount;     
                 response.Message = "Income Assessment Details fetched";
                 response.Succeeded = true;
                 return response;

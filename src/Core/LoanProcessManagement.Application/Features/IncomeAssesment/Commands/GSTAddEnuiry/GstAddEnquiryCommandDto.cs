@@ -9,15 +9,15 @@ namespace LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GS
     {
         public int Lead_Id { get; set; }
         public long ID { get; set; }
-        [DisplayName("Form No")]
+        [DisplayName("Form No.")]
         public long FormNo { get; set; }
         [DisplayName("Customer Name")]
         public string CustomerName { get; set; }
-        [DisplayName("Mobile No")]
+        [DisplayName("Mobile No.")]
         public string MobileNo { get; set; }
         [DisplayName("E-Mail")]
         public string Email { get; set; }
-        [DisplayName("GST No")]
+        [DisplayName("GST No.")]
         public string GstNo { get; set; }
         [DisplayName("Employment Type")]
         public string EmploymentType { get; set; }

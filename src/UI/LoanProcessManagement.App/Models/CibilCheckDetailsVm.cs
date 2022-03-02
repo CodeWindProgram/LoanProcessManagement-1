@@ -37,11 +37,11 @@ namespace LoanProcessManagement.App.Models
         public string CustomerPhone { get; set; }
         public string EmploymentType { get; set; }
 
-        [RegularExpression(@"^[6-9]\d{9}$", ErrorMessage = "Please Enter Valid Phone Number.")]
+        [RegularExpression(@"^[6-9]\d{9}$", ErrorMessage = "Please Enter Valid Phone No.")]
         [Required(ErrorMessage = "Phone No.1 is Required")]
         public string PhoneNumber1 { get; set; }
 
-        [RegularExpression(@"^[6-9]\d{9}$", ErrorMessage = "Please Enter Valid Phone Number.")]
+        [RegularExpression(@"^[6-9]\d{9}$", ErrorMessage = "Please Enter Valid Phone No.")]
         public string PhoneNumber2 { get; set; }
         public string PanCardNo { get; set; }
         public string PassportNo { get; set; }

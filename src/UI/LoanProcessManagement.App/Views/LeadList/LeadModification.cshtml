@@ -5,6 +5,12 @@
         ViewData["Title"] = "LeadModification";
     }
 <style>
+    #button12:hover {
+        background-color: #808080;
+        color: white;
+    }
+</style>
+<style>
     .error-msg {
         width: 100%;
         font-family: 'nobelregular';
@@ -157,7 +163,7 @@
                         <div class="form-group ">
                             <div class="row">
                                 <div class="col-lg-4 col-sm-12">
-                                    <label for="Form_No">Form No <span style="color: Red">&nbsp;*</span></label>
+                                    <label for="Form_No">Form No. <span style="color: Red">&nbsp;*</span></label>
                                     <input type="text" class="form-control" asp-for="FormNo" readonly>
                                 </div>
                                 <div class="col-lg-4 col-sm-12">
@@ -1211,7 +1217,7 @@
                 if (UserRole == 2) {
                     $("#lblSwitchName").css("display", "inline-block");
                     $("#QueryStatusHidden").val('Q');
-                    toastr.success('Query raised', "Success");
+                    //toastr.success('Query raised', "Success");
 
 
                 } else {
@@ -1224,7 +1230,7 @@
                 if (UserRole == 3) {
                     $("#QueryStatusHidden").val('R');
                     $("#lblSwitchName").css("display", "none");
-                    toastr.success('Query resolved', "Success");
+                    /*toastr.success('Query resolved', "Success");*/
                 }
                 else {
                     //alert("only Branch can resolve a query");
@@ -1242,10 +1248,10 @@
                 if (UserRole == 2) {
                     $("#hoLblSwitchName").css("display", "inline-block");
                     $("#HoQueryStatusHidden").val('Q');
-                    toastr.success('Query raised', "Success");
+                    /*toastr.success('Query raised', "Success");*/
 
                 } else {
-                    
+
                     toastr.error('Only Ho can raise a query', "Error");
                     $("#chkHoQuery").prop("checked", false);
                 }
@@ -1254,10 +1260,10 @@
                 if (UserRole == 3) {
                     $("#HoQueryStatusHidden").val('R');
                     $("#hoLblSwitchName").css("display", "none");
-                    toastr.success('Query resolved', "Success");
+                    /*toastr.success('Query resolved', "Success");*/
                 }
                 else {
-                    
+
                     toastr.error('Only Branch can resolve a query', "Error");
                     $("#chkHoQuery").prop("checked", true);
 
@@ -1306,6 +1312,17 @@
             $("#hoQueryInput").prop('disabled', true);
 
         }
+        $(document).ready(function () {
+        $("#anch_summary").addClass("selected");
+
+    })
+    if ('@Model.CurrentStatus' == '2' && ('@Model.UserRoleId'=='2' || '@Model.UserRoleId'=='3')) {
+         $("#forBranch").css("display", "block");
+     }
+     if('@Model.CurrentStatus' == '5') {
+         $("#ThirdPartyCheck").css("display", "inline-block");
+     }
+
 
 
     /*----------------------------------------------------------------------------------------------------------------------*/
