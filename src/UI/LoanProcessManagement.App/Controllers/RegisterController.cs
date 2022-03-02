@@ -66,8 +66,8 @@ namespace LoanProcessManagement.App.Controllers
             if (ViewBag.isSuccess)
             {
                 ModelState.Clear();
-            }
-            return View();
+            }           
+           return View();
         } 
         #endregion
     }

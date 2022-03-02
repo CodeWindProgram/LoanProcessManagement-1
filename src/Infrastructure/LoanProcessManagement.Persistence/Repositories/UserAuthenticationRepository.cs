@@ -58,7 +58,7 @@ namespace LoanProcessManagement.Persistence.Repositories
             if (user == null)
             {
                 response.IsAuthenticated = false;
-                response.Message = "User does not exist .";
+                response.Message = "Invalid Credentials";
                 _logger.LogInformation("User Authentication failed");
                 return response;
             }
@@ -84,7 +84,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 }
                 await _dbContext.SaveChangesAsync();
                 response.IsAuthenticated = false;
-                response.Message = "Invalid credentials .";
+                response.Message = "Invalid credentials";
                 _logger.LogInformation("User Authentication failed");
 
                 return response;

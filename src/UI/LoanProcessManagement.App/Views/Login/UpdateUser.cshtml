@@ -103,8 +103,11 @@
                                     <a id="cancelbutton" class="btn btn-danger" href="/UserList/Index">Cancel</a>
                                     @if (Model != null)
                                     {
-                                    <a id="cancelbutton" class="btn btn-primary" asp-controller="Login" asp-action="ResetPassword" 
-                                       asp-route-lg_id="@Model.LgId">Reset Password</a>
+                               
+                                <a id="cancelbutton1" class="btn btn-primary" asp-controller="Login" asp-action="ResetPassword"
+                                   asp-route-lg_id="@Model.LgId">Reset Password
+                                    
+                                </a>
                                     }
                                 </div>
                             </div>
@@ -117,10 +120,9 @@
 </div>
 
 
-<script>
-    $(document).ready(function () {
-
-
+<script>   
+    const fewSeconds = 5
+    $(document).ready(function () {    
         if ('@TempData["UpdateSuccess"]' == 'True') {
             toastr.success('@TempData["UpdateMessage"]', "Success");
 
@@ -129,20 +131,19 @@
             toastr.error('@TempData["UpdateMessage"]', "Error");
 
         }
-
-
+        
         var resetSuccess = '@TempData["Success"]';
         if (resetSuccess == 'True') {
             toastr.success('@TempData["Message"]', "Success");
-
+            $("#cancelbutton1").addClass('disabled').removeAttr("href");
+            setTimeout(() => {
+                $("#cancelbutton1").removeClass("disabled").attr("href");
+            }, fewSeconds * 1000)
         }
         else if (resetSuccess == 'False') {
             toastr.error('@TempData["Message"]', "Error");
 
         }
-
-
-
 
     })
 </script>
