@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using LoanProcessManagement.Application.Contracts.Persistence;
+using LoanProcessManagement.Application.Features.MailService.Query;
 using LoanProcessManagement.Application.Features.User.Commands.CreateUser;
 using LoanProcessManagement.Application.Features.User.Commands.RemoveUser;
 using LoanProcessManagement.Application.Features.User.Commands.UpdateUser;
@@ -26,15 +27,18 @@ namespace LoanProcessManagement.Persistence.Repositories
         protected readonly ApplicationDbContext _dbContext;
         private readonly ILogger<UserAuthenticationRepository> _logger;
         private readonly JwtSettings _jwtSettings;
+        private readonly IMailServiceRepository _mailServiceRepository;
         public UserAuthenticationRepository(IMapper mapper,
             ApplicationDbContext dbContext,
             IOptions<JwtSettings> jwtSettings,
-            ILogger<UserAuthenticationRepository> logger)
+            ILogger<UserAuthenticationRepository> logger,
+            IMailServiceRepository mailServiceRepository)
         {
             _mapper = mapper;
             _dbContext = dbContext;
             _logger = logger;
             _jwtSettings = jwtSettings.Value;
+            _mailServiceRepository = mailServiceRepository;
             
         }
 
@@ -67,8 +71,16 @@ namespace LoanProcessManagement.Persistence.Repositories
                 user.WrongLoginAttempt = user.WrongLoginAttempt + 1;
                 if (user.WrongLoginAttempt >= 5)
                 {
+
                     user.IsLocked = true;
                     user.IsActive = false;
+                }
+                if (user.WrongLoginAttempt == 5)
+                {
+                    SendMailServiceQuery sendMail = new SendMailServiceQuery();
+                    sendMail.Lg_Id = user.LgId;
+                    sendMail.MailTypeId = 6;
+                    await _mailServiceRepository.SendMail(sendMail);
                 }
                 await _dbContext.SaveChangesAsync();
                 response.IsAuthenticated = false;
