@@ -125,7 +125,7 @@
                                     Loan Amount
                                 </th>
                                 <th>
-                                    Created Date
+                                    Enquiry Date
                                 </th>
 
                             </tr>
@@ -150,7 +150,9 @@
                                     ₹  @Html.DisplayFor(modelItem => item.LoanAmount)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                                    @{var date = item.CreatedDate.ToString().Split(" ");
+                                    }
+                                    @date[0]
                                 </td>
 
 

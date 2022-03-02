@@ -54,7 +54,7 @@
                                    Applicant Type
                                 </th>
                                 <th>
-                                    Created Date
+                                    Enquiry Date
                                 </th>
                                 @*<th>
                                     Download(Pdf)
@@ -76,7 +76,9 @@
                                     
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                                    @{var date = item.CreatedDate.ToString().Split(" ");
+                                    }
+                                    @date[0]
                                 </td>
                                 @*<td>
                                     <button class="btn btn-primary btn-sm">Download</button>
