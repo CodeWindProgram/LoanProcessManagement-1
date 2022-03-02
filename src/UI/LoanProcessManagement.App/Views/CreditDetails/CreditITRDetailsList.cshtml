@@ -21,15 +21,23 @@
         margin-bottom: 5px;
     }*/
 
-        .btn:hover {
-            background-color: #adb5bd;
-            color: black;
-            margin-bottom: 5px;
-        }
+    .btn:hover {
+        background-color: #adb5bd;
+        color: black;
+        margin-bottom: 5px;
+    }
 
     .selected {
         background: #adb5bd;
         color: #FFF;
+    }
+    .no-sort::after {
+        display: none !important;
+    }
+
+    .no-sort {
+        pointer-events: none !important;
+        cursor: default !important;
     }
 </style>
 
@@ -62,7 +70,7 @@
         </div>
 </div>*@
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
-            <div class="panel-heading"><h5>ITR Report List</h5></div>
+            <div class="panel-heading"><h5>Credit Report</h5></div>
             
             <div class="panel-body">
                 <div id="alertMsg" visible="false" runat="server">
@@ -98,13 +106,13 @@
                     <table id="CreditDetailsList" class="display table-responsive-lg">
                         <thead>
                             <tr>
-                                <th>
+                                <th class="no-sort">
                                     Form No
                                 </th>
                                 <th>
                                     Name
                                 </th>
-                                <th>
+                                <th class="no-sort">
                                     Contact Number
                                 </th>
                                 <th>

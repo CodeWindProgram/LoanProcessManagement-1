@@ -5,7 +5,16 @@
     ViewData["Title"] = "LeadStatus";
     var Records = (List<ProcessModel>)ViewData["HOSanctionReport"];
 }
+<style>
+    .no-sort::after {
+        display: none !important;
+    }
 
+    .no-sort {
+        pointer-events: none !important;
+        cursor: default !important;
+    }
+</style>
 <div class="container app">
     <div class="col-sm-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
@@ -22,13 +31,13 @@
                                     <table class="display table table-responsive-lg" id="tblLoginReport">
                                         <thead>
                                             <tr>
-                                                <th>Form No.</th>
+                                                <th class="no-sort">Form No.</th>
                                                 <th>Name</th>
                                                 <th>DSA Name</th>
                                                 <th>Branch</th>
-                                                <th>Loan Amount</th>
+                                                <th class="no-sort">Loan Amount</th>
                                                 <th>Submission Date</th>
-                                                <th>Query Count</th>
+                                                <th class="no-sort">Query Count</th>
                                                 @*<th hidden>Ageing HO</th>
                                                     <th hidden>Ageing Branch</th>*@
                                                 <th>Status</th>

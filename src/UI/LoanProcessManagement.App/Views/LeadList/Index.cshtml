@@ -11,6 +11,16 @@
 
 
 }
+<style>
+    .no-sort::after {
+        display: none !important;
+    }
+
+    .no-sort {
+        pointer-events: none !important;
+        cursor: default !important;
+    }
+</style>
 <div class="container app mb-4">
     <div class="col-sm-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
@@ -23,13 +33,13 @@
                             <table id="tblLeadList" class="display table table-responsive-lg">
                                 <thead>
                                     <tr>
-                                        <th>
+                                        <th class="no-sort">
                                             Form No
                                         </th>
                                         <th>
                                             Name
                                         </th>
-                                        <th>
+                                        <th class="no-sort">
                                             Contact Number
                                         </th>
                                         <th>
