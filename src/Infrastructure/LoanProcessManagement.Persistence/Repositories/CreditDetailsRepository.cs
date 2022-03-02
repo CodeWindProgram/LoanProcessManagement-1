@@ -29,128 +29,154 @@ namespace LoanProcessManagement.Persistence.Repositories
         #region added Repository methods  to get user cibil, ITR and Gst credit and user details  - Ramya Guduru - 15/02/2022
         public async Task<IEnumerable<GetCreditCibilDetailsVm>> GetCreditCibilDetailsList()
         {
-            var result = await(from D in _dbContext.LpmLeadProcessCycles
-                               join A in _dbContext.LpmLeadMasters on D.lead_Id equals A.Id 
-                               join B in _dbContext.LpmUserMasters on A.Lead_assignee_Id equals B.LgId
-                               join C in _dbContext.LpmCibilCheckDetails on A.FormNo equals C.FormNo
-                               
-                               where C.IsSubmit == true && C.ApplicantType == 0 && D.CurrentStatus == 2
+            var result = await (from D in _dbContext.LpmLeadProcessCycles
+                                join A in _dbContext.LpmLeadMasters on D.lead_Id equals A.Id
+                                join B in _dbContext.LpmUserMasters on A.Lead_assignee_Id equals B.LgId
+                                join C in _dbContext.LpmCibilCheckDetails on A.FormNo equals C.FormNo
 
-                               select new GetCreditCibilDetailsVm
-                               {
-                                   FormNo = C.FormNo,
-                                   CustomerName = B.Name,
-                                   MobileNumber = B.PhoneNumber,
-                                   CreatedDate = C.CreatedDate,//.ToShortDateString().ToString(),  
-                                   EmailId = B.Email,
-                                   LoanAmount = D.LoanAmount.ToString(),
-                                   Issuccess = true,
-                                   Message = "data fetched"
+                                where C.IsSubmit == true && C.ApplicantType == 0 && D.CurrentStatus == 2
 
-                               }).ToListAsync();
+                                select new GetCreditCibilDetailsVm
+                                {
+                                    FormNo = C.FormNo,
+                                    CustomerName = A.FirstName + " "+A.LastName,
+                                    MobileNumber = A.CustomerPhone,
+                                    CreatedDate = C.CreatedDate,//.ToShortDateString().ToString(),  
+                                    EmailId = B.Email,
+                                    LoanAmount = D.LoanAmount.ToString(),
+                                    Issuccess = true,
+                                    Message = "data fetched"
+
+                                }).ToListAsync();
             return result;
         }
 
         public async Task<IEnumerable<GetCreditCibilUserDetailsVm>> GetCreditCibilUserDetailsList(string FormNo)
         {
-            var result = await(from A in _dbContext.LpmLeadApplicantsDetails
-                               join C in _dbContext.LpmCibilCheckDetails on A.Id equals C.ApplicantDetailId
-                               where C.IsSuccess == true &&  C.FormNo == FormNo
+            var result = await (from A in _dbContext.LpmLeadApplicantsDetails
+                                join C in _dbContext.LpmCibilCheckDetails on A.Id equals C.ApplicantDetailId
+                                where C.IsSuccess == true && C.FormNo == FormNo
 
-                               select new GetCreditCibilUserDetailsVm
-                               {
-                                   FormNo = FormNo,
-                                   ApplicantName = A.FirstName + " " + A.LastName,
-                                   ApplicantType = A.ApplicantType,
-                                   CreatedDate = C.CreatedDate,                                   
-                                   Issuccess = true,
-                                   Message = "customer cibil data fetched"
+                                select new GetCreditCibilUserDetailsVm
+                                {
+                                    FormNo = FormNo,
+                                    ApplicantName = A.FirstName + " " + A.LastName,
+                                    ApplicantType = A.ApplicantType,
+                                    CreatedDate = C.CreatedDate,
+                                    Issuccess = true,
+                                    Message = "customer cibil data fetched"
 
-                               }).ToListAsync();
+                                }).ToListAsync();
             return result;
         }
 
         public async Task<IEnumerable<GetCreditGstDetailsVm>> GetCreditGstDetailsList()
         {
-            var result = await(from A in _dbContext.LpmLeadMasters
-                               join B in _dbContext.LpmUserMasters on A.Lead_assignee_Id equals B.LgId
-                               join C in _dbContext.LPMGSTEnquiryDetails on A.FormNo equals C.FormNumber
-                               
-                               where C.IsActive == true && C.ApplicantType == 0
+            var result = await (from A in _dbContext.LpmLeadMasters
+                                join B in _dbContext.LpmUserMasters on A.Lead_assignee_Id equals B.LgId
+                                join C in _dbContext.LPMGSTEnquiryDetails on A.FormNo equals C.FormNumber
 
-                               select new GetCreditGstDetailsVm
-                               {
-                                   FormNo = A.FormNo,
-                                   CustomerName = B.Name,
-                                   MobileNumber = B.PhoneNumber,
-                                   CreatedDate = C.CreatedDate,
-                                   EmailId = B.Email,
-                                   Issuccess = true,
-                                   Message = "data fetched"
+                                where C.IsActive == true && C.ApplicantType == 0
 
-                               }).ToListAsync();
+                                select new GetCreditGstDetailsVm
+                                {
+                                    FormNo = A.FormNo,
+                                    CustomerName = C.CustomerName,
+                                    MobileNumber =C.MobileNo,
+                                    CreatedDate = C.CreatedDate,
+                                    EmailId = C.Email,
+                                    Issuccess = true,
+                                    Message = "data fetched"
+
+                                }).ToListAsync();
             return result;
         }
         public async Task<IEnumerable<GetCreditGstUserDetailsVm>> GetCreditGstUserDetailsList(string FormNo)
         {
-            var result = await(from A in _dbContext.LpmLeadApplicantsDetails
-                               join C in _dbContext.LPMGSTEnquiryDetails on A.FormNo equals C.FormNumber
+            //var temp = _dbContext.LpmLeadMasters;
+            //var gst = _dbContext.LPMGSTEnquiryDetails;
+            var result = _dbContext.LPMGSTEnquiryDetails.Where(x => x.FormNumber == FormNo).Select(x=> new GetCreditGstUserDetailsVm()
+            {
+                FormNo = x.FormNumber,
+                ApplicantName = x.CustomerName,
+                CreatedDate = x.CreatedDate,
+                Issuccess = true,
+                Message = "Customer Data Fetched"
 
-                               where C.IsActive == true &&  C.FormNumber == FormNo
+            });
+            
 
-                               select new GetCreditGstUserDetailsVm
-                               {
-                                   FormNo = (C.FormNo).ToString(),
-                                   ApplicantName = A.FirstName + " " + A.LastName,
-                                   ApplicantType = A.ApplicantType,
-                                   CreatedDate = A.CreatedDate,
-                                   Issuccess = true,
-                                   Message = "customer data fetched"
+            //var result = await (from A in _dbContext.LpmLeadMasters
+            //                     join C in _dbContext.LPMGSTEnquiryDetails on A.FormNo equals C.FormNumber
+            //                     where C.ApplicantType == 0
+            //                     select new GetCreditGstUserDetailsVm
+            //                     {
+            //                         FormNo = (C.FormNo).ToString(),
+            //                         ApplicantName = A.FirstName + " " + A.LastName,
 
-                               }).ToListAsync();
+            //                         CreatedDate = A.CreatedDate,
+            //                         Issuccess = true,
+            //                         Message = "customer data fetched"
+            //                     }).ToListAsync();
+
+            //var result = await (from A in _dbContext.LpmLeadApplicantsDetails
+            //                    join C in _dbContext.LPMGSTEnquiryDetails on A.FormNo equals C.FormNumber
+            //                    where C.IsActive == true && C.FormNumber == FormNo
+
+            //                    select new GetCreditGstUserDetailsVm
+            //                    {
+            //                        FormNo = (C.FormNo).ToString(),
+            //                        ApplicantName = A.FirstName + " " + A.LastName,
+            //                        ApplicantType = A.ApplicantType,
+            //                        CreatedDate = A.CreatedDate,
+            //                        Issuccess = true,
+            //                        Message = "customer data fetched"
+
+            //                    }).ToListAsync();
+
             return result;
         }
 
         public async Task<IEnumerable<CreditITRDetailsListModel>> GetCreditITRDetailsList()
         {
-            var result = await(from A in _dbContext.LpmLeadMasters
-                               join B in _dbContext.LpmUserMasters on A.Lead_assignee_Id equals B.LgId
-                               join C in _dbContext.LpmLeadITRDetails on A.FormNo equals C.FormNo
-                               
-                               where C.IsSuccess == true && C.ApplicantType == 0 
+            var result = await (from A in _dbContext.LpmLeadMasters
+                                join B in _dbContext.LpmUserMasters on A.Lead_assignee_Id equals B.LgId
+                                join C in _dbContext.LpmLeadITRDetails on A.FormNo equals C.FormNo
 
-                               select new CreditITRDetailsListModel
-                               {
-                                   FormNo = C.FormNo,
-                                   CustomerName = B.Name,
-                                   MobileNumber = B.PhoneNumber,
-                                   CreatedDate = C.CreatedDate,
-                                   EmailId = B.Email,
-                                   ApplicantType = C.ApplicantType,
-                                   Issuccess = true,
-                                   Message = "data fetched"
+                                where C.IsSuccess == true && C.ApplicantType == 0
 
-                               }).ToListAsync();
+                                select new CreditITRDetailsListModel
+                                {
+                                    FormNo = C.FormNo,
+                                    CustomerName = A.FirstName +" "+A.LastName,
+                                    MobileNumber = A.CustomerPhone,
+                                    CreatedDate = C.CreatedDate,
+                                    EmailId = A.CustomerEmail,
+                                    ApplicantType = C.ApplicantType,
+                                    Issuccess = true,
+                                    Message = "data fetched"
+
+                                }).ToListAsync();
             return result;
         }
 
         public async Task<IEnumerable<GetCreditITRUserDetailsVm>> GetCreditITRUserDetailsList(string FormNo)
         {
-            var result = await(from A in _dbContext.LpmLeadApplicantsDetails
-                               join C in _dbContext.LpmLeadITRDetails on A.Id equals C.ApplicantDetailId
-                               where /*C.IsSuccess == true && */ C.FormNo == FormNo 
+            var result = await (from A in _dbContext.LpmLeadApplicantsDetails
+                                join C in _dbContext.LpmLeadITRDetails on A.Id equals C.ApplicantDetailId
+                                where /*C.IsSuccess == true && */ C.FormNo == FormNo
 
-                               select new GetCreditITRUserDetailsVm
-                               {
-                                   FormNo = FormNo,
-                                   ApplicantName = A.FirstName + " " + A.LastName,
-                                   ApplicantType = C.ApplicantType,
-                                   CreatedDate = A.CreatedDate,
-                                   Status = C.IsSuccess,
-                                   Issuccess = true,
-                                   Message = "data fetched"
+                                select new GetCreditITRUserDetailsVm
+                                {
+                                    FormNo = FormNo,
+                                    ApplicantName = A.FirstName + " " + A.LastName,
+                                    ApplicantType = C.ApplicantType,
+                                    CreatedDate = A.CreatedDate,
+                                    Status = C.IsSuccess,
+                                    Issuccess = true,
+                                    Message = "data fetched"
 
-                               }).ToListAsync();
+                                }).ToListAsync();
             return result;
         }
         #endregion

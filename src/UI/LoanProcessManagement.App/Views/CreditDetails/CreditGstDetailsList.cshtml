@@ -119,12 +119,12 @@
                             @foreach (var item in Model)
                             {
                             <tr>
-                                <!--<td>-->
-                                    @*@Html.ActionLink(item.FormNo, "userGstDetails", "CreditDetails",new { FormNo = item.FormNo })*@
-                                <!--</td>-->
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.FormNo )
+                                    @Html.ActionLink(item.FormNo, "userGstDetails", "CreditDetails",new { FormNo = item.FormNo })
                                 </td>
+                                <!--<td>-->
+                                    @*@Html.DisplayFor(modelItem => item.FormNo )*@
+                                <!--</td>-->
                                 <td>
                                     @Html.DisplayFor(modelItem => item.CustomerName)
                                 </td>
