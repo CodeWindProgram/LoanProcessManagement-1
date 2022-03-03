@@ -65,6 +65,7 @@ namespace LoanProcessManagement.App.Controllers
         /// </summary>
         /// <returns>view</returns>
         [HttpGet("/CreditCibilDetailsList")]
+        [Authorize(AuthenticationSchemes = "Cookies",Roles ="HO,Branch")]
         public async Task<IActionResult> CreditCibilDetailsList()
         {
             var cibilDetailsListServiceResponse = await _creditService.CreditCibilDetailsList();
