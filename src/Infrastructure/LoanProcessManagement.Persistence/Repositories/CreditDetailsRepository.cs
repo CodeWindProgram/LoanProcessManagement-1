@@ -42,7 +42,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                                     CustomerName = A.FirstName + " "+A.LastName,
                                     MobileNumber = A.CustomerPhone,
                                     CreatedDate = C.CreatedDate,//.ToShortDateString().ToString(),  
-                                    EmailId = B.Email,
+                                    EmailId = A.CustomerEmail,
                                     LoanAmount = D.LoanAmount.ToString(),
                                     Issuccess = true,
                                     Message = "data fetched"
@@ -95,15 +95,17 @@ namespace LoanProcessManagement.Persistence.Repositories
         {
             //var temp = _dbContext.LpmLeadMasters;
             //var gst = _dbContext.LPMGSTEnquiryDetails;
-            var result = _dbContext.LPMGSTEnquiryDetails.Where(x => x.FormNumber == FormNo).Select(x=> new GetCreditGstUserDetailsVm()
+            var result = _dbContext.LPMGSTEnquiryDetails.Where(x => x.FormNumber == FormNo).Select(x => new GetCreditGstUserDetailsVm()
             {
                 FormNo = x.FormNumber,
                 ApplicantName = x.CustomerName,
                 CreatedDate = x.CreatedDate,
+                PdfFile = x.PdfFilePath,
+                ExcelFile=x.ExcelFilePath,
                 Issuccess = true,
                 Message = "Customer Data Fetched"
 
-            });
+            }); ;
             
 
             //var result = await (from A in _dbContext.LpmLeadMasters

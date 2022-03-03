@@ -36,7 +36,7 @@
 <div class="container app">
     <div class="col-sm-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
-            <div class="panel-heading"><h5>Credit Report</h5></div>
+            <div class="panel-heading"><h5>GST Enquiry Details</h5></div>
             <div class="panel-body">
                 @*<div id="alertMsg" visible="false" runat="server">
                     <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
@@ -56,12 +56,12 @@
                                 <th>
                                     Enquiry Date
                                 </th>
-                                @*<th>
+                                <th>
                                     Download(Pdf)
                                 </th>
                                 <th>
                                     Download(Excel)
-                                </th>*@                              
+                                </th>                              
                             </tr>
                         </thead>
                         <tbody>
@@ -79,6 +79,14 @@
                                     @{var date = item.CreatedDate.ToString().Split(" ");
                                     }
                                     @date[0]
+                                </td>
+                                <td>
+                                    <button type="button" onclick="downloadFile(event, '@item.PdfFile', '@item.FormNo')">@item.PdfFile</button>
+                                    
+                                </td>
+                                <td>
+                                    <button type="button" onclick="downloadFile(event, '@item.ExcelFile', '@item.FormNo')">@item.ExcelFile</button>
+                                    
                                 </td>
                                 @*<td>
                                     <button class="btn btn-primary btn-sm">Download</button>
@@ -98,6 +106,7 @@
 </div>
 
 <script>
+
     $(document).ready(function () {
 
         var usrTable = $('#CreditDetailsList').dataTable({
@@ -114,4 +123,11 @@
             "bDestroy": true
         });
     });
+
+    function downloadFile(e,fileName,formNo) {
+        console.log(fileName);
+        e.preventDefault();
+        url = '/CreditDetails/Download/' + fileName + "/" + formNo;
+        location.href = url;
+    }
 </script>

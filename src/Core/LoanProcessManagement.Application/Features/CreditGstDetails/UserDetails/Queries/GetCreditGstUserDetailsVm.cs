@@ -10,6 +10,8 @@ namespace LoanProcessManagement.Application.Features.CreditGstDetails.UserDetail
         public string ApplicantName { get; set; }
         public int ApplicantType { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string PdfFile { get; set; }
+        public string ExcelFile { get; set; }
         public bool Issuccess { get; set; }
         public string Message { get; set; }
     }
