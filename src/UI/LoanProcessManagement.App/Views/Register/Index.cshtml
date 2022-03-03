@@ -213,12 +213,13 @@
         });
     });
     $(document).ready(function () {
-        if ('@ViewBag.isSuccess' == 'True') {
-            toastr.success('@ViewBag.Message', "Success");
-        }
-        else if ('@ViewBag.isSuccess' == 'False') {
-            toastr.error('@ViewBag.Message', "Error");
 
+        if ('@TempData["AddUserSuccess"]' == 'True') {
+            toastr.success('@TempData["AddUserMessage"]', "Success");
+
+        }
+        else if('@TempData["AddUserSuccess"]' == 'False') {
+            toastr.error('@TempData["AddUserMessage"]', "Error");
         }
 
     })

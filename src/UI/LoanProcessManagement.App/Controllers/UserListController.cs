@@ -29,7 +29,6 @@ namespace LoanProcessManagement.App.Controllers
         /// </summary>
         /// <returns>UserListServiceResponse</returns>
         [Authorize(AuthenticationSchemes = "Cookies")]
-
         public async Task<IActionResult> Index(string flag = "1")
         {
             GetUserListQuery UserList = new GetUserListQuery();

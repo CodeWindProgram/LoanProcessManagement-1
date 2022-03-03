@@ -344,12 +344,16 @@
         }
     });
 
-        @*if ('@ViewBag.Issuccesflag' == 'True') {
-            toastr.success('@ViewBag.Message', "Success");
-        }
-        else if (!string.IsNullOrEmpty('@ViewBag.Message')) {
-            toastr.error('@ViewBag.Message', "Error");
+     $(document).ready(function () {
 
-        }*@
+        if ('@TempData["AddUserSuccess"]' == 'True') {
+            toastr.success('@TempData["AddUserMessage"]', "Success");
+
+        }
+        else if('@TempData["AddUserSuccess"]' == 'False') {
+            toastr.error('@TempData["AddUserMessage"]', "Error");
+        }
+
+    })
 
 </script>

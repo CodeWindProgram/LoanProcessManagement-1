@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace LoanProcessManagement.Domain.CustomModels
@@ -29,7 +30,6 @@ namespace LoanProcessManagement.Domain.CustomModels
         
 
         public long BranchID { get; set; }
-
 
         public DateTime Appointment_Date { get; set; }
 

@@ -55,19 +55,21 @@ namespace LoanProcessManagement.App.Controllers
             if (ModelState.IsValid)
             {
                 var response = await _accountService.RegisterUser(user);
-                ViewBag.isSuccess = response.Succeeded;
-                ViewBag.Message = response.Data.Message;
+                TempData["AddUserSuccess"] = response.Succeeded;
+                TempData["AddUserMessage"] = response.Data.Message;
+                //ViewBag.isSuccess = response.Succeeded;
+                //ViewBag.Message = response.Data.Message;
             }
             var roles = await _commonService.GetAllRoles();
             ViewBag.roles = new SelectList(roles, "Id", "Rolename");
 
             var branches = await _commonService.GetAllBranches();
             ViewBag.branches = new SelectList(branches, "Id", "branchname");
-            if (ViewBag.isSuccess)
+            if ((bool)TempData["AddUserSuccess"])
             {
-                ModelState.Clear();
-            }           
-           return View();
+                return RedirectToAction("Index", "UserList");
+            }
+            return View();
         } 
         #endregion
     }
