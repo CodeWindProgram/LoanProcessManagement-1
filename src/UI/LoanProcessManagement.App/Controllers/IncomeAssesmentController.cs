@@ -119,6 +119,7 @@ namespace LoanProcessManagement.App.Controllers
                 {
                     FormNo = getIncomeDetailsServiceResponse.Data.FormNo,
                     lead_Id = getIncomeDetailsServiceResponse.Data.lead_Id,
+                    ApplicantType = getIncomeDetailsServiceResponse.Data.ApplicantType,
                     CustomerName = getIncomeDetailsServiceResponse.Data.CustomerName,
                     CustomerEmail = getIncomeDetailsServiceResponse.Data.CustomerEmail,
                     CustomerPhone = getIncomeDetailsServiceResponse.Data.CustomerPhone,
@@ -130,6 +131,7 @@ namespace LoanProcessManagement.App.Controllers
                     IncomeRecords = getIncomeDetailsServiceResponse.Data.IncomeRecords,
                 };
                 ViewBag.applicantTypeNo = applicantType;
+                ViewBag.lead_Id = lead_Id;
 
                 return View(incomeAssessmentDetailsVm);
             }

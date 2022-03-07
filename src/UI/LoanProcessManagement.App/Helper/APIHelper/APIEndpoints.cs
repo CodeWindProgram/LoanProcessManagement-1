@@ -50,6 +50,7 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string GetThirdPartyCheckDetailsByLeadId = "api/v1/Agency/getThirdPartyCheckDetails/";
         public const string GetIncomeAssessmentDetails = "api/v1/IncomeAssesment/GetIncomeAssessmentDetailsByLeadId?applicantType={0}&lead_Id={1}";
         public const string AddIncomeAssessmentDetails = "api/v1/IncomeAssesment/AddIncomeAssessmentDetailsByLeadId/";
+        public const string GetIncomeAssessmentRecordsList = "api/v1/IncomeAssesment/GetIncomeAssessmentRecordsList?applicantType={0}&lead_Id={1}";
         #endregion
 
         #region Maintaining the Url EndPoint - Saif Khan - 28/10/2021
