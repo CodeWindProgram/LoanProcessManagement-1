@@ -1,4 +1,6 @@
-﻿using LoanProcessManagement.Application.Features.Branch.GetBranchNameById;
+﻿using LoanProcessManagement.Application.Features.Branch.Commands.CreateBranch;
+using LoanProcessManagement.Application.Features.Branch.Commands.DeleteBranch;
+using LoanProcessManagement.Application.Features.Branch.GetBranchNameById;
 using LoanProcessManagement.Application.Features.Branch.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -49,6 +51,24 @@ namespace LoanProcessManagement.Api.Controllers.v1
             _logger.LogInformation("GetBranches Initiated");
             var dtos = await _mediator.Send(new GetBranchNameByIdQuery(Id));
             _logger.LogInformation("GetBranches Completed");
+            return Ok(dtos);
+        }
+
+        [HttpPost("CreateBranch")]
+        public async Task<ActionResult> CreateBranch(CreateBranchCommand req)
+        {
+            _logger.LogInformation("CreateBranch Initiated");
+            var dtos = await _mediator.Send(req);
+            _logger.LogInformation("CreateBranch Completed");
+            return Ok(dtos);
+        }
+
+        [HttpDelete("DeleteBranch/{id}")]
+        public async Task<ActionResult> DeleteBranch(long id)
+        {
+            _logger.LogInformation("DeleteBranch Initiated");
+            var dtos = await _mediator.Send(new DeleteBranchCommand(id));
+            _logger.LogInformation("DeleteBranch Completed");
             return Ok(dtos);
         }
     }

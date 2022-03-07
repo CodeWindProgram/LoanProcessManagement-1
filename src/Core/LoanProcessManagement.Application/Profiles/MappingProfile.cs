@@ -69,6 +69,7 @@ using LoanProcessManagement.Application.Features.CreditCibilDetails.UserDetails.
 using LoanProcessManagement.Application.Features.CreditGstDetails.CreditGstCheckDetails.Queries;
 using LoanProcessManagement.Application.Features.CreditGstDetails.UserDetails.Queries;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.AddIncomeAssessment;
+using LoanProcessManagement.Application.Features.Branch.Commands.CreateBranch;
 
 namespace LoanProcessManagement.Application.Profiles
 {
@@ -231,7 +232,10 @@ namespace LoanProcessManagement.Application.Profiles
             CreateMap<CreditITRDetailsListModel, GetCreditCibilDetailsVm>().ReverseMap();
             CreateMap<CreditITRDetailsListModel, GetCreditCibilUserDetailsVm>().ReverseMap();
             CreateMap<CreditITRDetailsListModel, GetCreditGstDetailsVm>().ReverseMap();
+
             CreateMap<CreditITRDetailsListModel, GetCreditGstUserDetailsVm>().ReverseMap();
+            CreateMap<CreateBranchCommand, LpmBranchMaster>().ReverseMap();
+
         }
     }
 }

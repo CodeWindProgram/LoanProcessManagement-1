@@ -36,7 +36,7 @@
 <div class="container app">
     <div class="col-sm-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
-            <div class="panel-heading"><h5>Credit Report</h5></div>
+            <div class="panel-heading"><h5>Cibil Enquiry Details</h5></div>
             <div class="panel-body">
                 <div id="alertMsg" visible="false" runat="server">
                     <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
@@ -54,7 +54,7 @@
                                 </th>
 
                                 <th>
-                                    Created  Date
+                                    Enquiry  Date
                                 </th>
                             </tr>
                         </thead>
@@ -71,7 +71,9 @@
                                     </td>
 
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                                        @{var date = item.CreatedDate.ToString().Split(" ");
+                                        }
+                                        @date[0]
                                     </td>
                                     
                                 </tr>

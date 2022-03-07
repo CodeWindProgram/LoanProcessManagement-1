@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -64,6 +65,7 @@ namespace LoanProcessManagement.App.Controllers
         /// </summary>
         /// <returns>view</returns>
         [HttpGet("/CreditCibilDetailsList")]
+        [Authorize(AuthenticationSchemes = "Cookies",Roles ="HO,Branch")]
         public async Task<IActionResult> CreditCibilDetailsList()
         {
             var cibilDetailsListServiceResponse = await _creditService.CreditCibilDetailsList();
@@ -130,5 +132,43 @@ namespace LoanProcessManagement.App.Controllers
             return View(leadResponse.Data);
         }
         #endregion
+        [HttpGet("Download/{filename}/{formNo}")]
+        public async Task<IActionResult> Download(string filename,string formNo)
+        {
+            var basedirectory = Directory.GetCurrentDirectory();
+            if (filename == null)
+                return Content("filename not present");
+
+            var path = Path.Combine(basedirectory, @"..\..\API\\LoanProcessManagement.Api\\Uploadfiles\\GSTfiles\\"
+                           , formNo,filename);
+
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(path, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, GetContentType(path), Path.GetFileName(path));
+        }
+        private string GetContentType(string path)
+        {
+            var types = GetMimeTypes();
+            var ext = Path.GetExtension(path).ToLowerInvariant();
+            return types[ext];
+        }
+
+        private Dictionary<string, string> GetMimeTypes()
+        {
+            return new Dictionary<string, string>
+            {
+                {".txt", "text/plain"},
+                {".pdf", "application/pdf"},
+                {".doc", "application/vnd.ms-word"},
+                {".docx", "application/vnd.ms-word"},
+                {".xls", "application/vnd.ms-excel"},
+                {".xlsx", "application/vnd.openxmlformatsofficedocument.spreadsheetml.sheet"},  
+                
+            };
+        }
     }
 }

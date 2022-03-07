@@ -476,12 +476,12 @@
                                                 <div class="row">
                                                     <div class="col-lg-6 col-sm-12">
 
-                                                        <input type="checkbox" asp-for="isPerfiosRequired" checked/> Is perfios income assessment required<br />
+                                                        <input type="checkbox" asp-for="isPerfiosRequired" id="idPerfiosRequired"/> Is perfios income assessment required<br />
                                                         <span asp-validation-for="isPerfiosRequired" style="color:Red;display:block;"></span>
                                                     </div>
                                                     <div class="col-lg-6 col-sm-12">
 
-                                                        <input type="checkbox" asp-for="isCibilCheckRequired" checked/> Is cibil check required<br />
+                                                        <input type="checkbox" asp-for="isCibilCheckRequired" id="idCibilCheckRequired"/> Is cibil check required<br />
                                                         <span asp-validation-for="isCibilCheckRequired" style="color:Red;display:block;"></span>
                                                     </div>
                                                 </div>
@@ -491,12 +491,12 @@
                                                 <div class="row">
                                                     <div class="col-lg-6 col-sm-12">
 
-                                                        <input type="checkbox" asp-for="isItrRequired" checked/> Is lead ITR check required<br />
+                                                        <input type="checkbox" asp-for="isItrRequired" id="idItrRequired"/> Is lead ITR check required<br />
                                                         <span asp-validation-for="isItrRequired" style="color:Red;display:block;"></span>
                                                     </div>
                                                     <div class="col-lg-6 col-sm-12">
 
-                                                        <input type="checkbox" asp-for="isGstRequired" checked/> Is GST check required<br />
+                                                        <input type="checkbox" asp-for="isGstRequired" id="idGstRequired"/> Is GST check required<br />
                                                         <span asp-validation-for="isGstRequired" style="color:Red;display:block;"></span>
                                                     </div>
                                                 </div>
@@ -1128,6 +1128,16 @@
         }
         else {
             $("#detailsDiv").hide();
+        }
+    });
+
+    $(function () {
+        debugger
+        if ('@ViewBag.Succeeded' == 'False') {
+            $('#idPerfiosRequired').attr("checked", "checked");
+            $('#idCibilCheckRequired').attr("checked", "checked");
+            $('#idItrRequired').attr("checked", "checked");
+            $('#idGstRequired').attr("checked", "checked");
         }
     });
 </script>

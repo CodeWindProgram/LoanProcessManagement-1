@@ -237,7 +237,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 return response;
 
             }
-            if (request.CurrentStatus == 3)
+            if (request.CurrentStatus == 3 && user.CurrentStatus==2)
             {
                 var leadAddedApplicantsList = await _dbContext.LpmLeadApplicantsDetails
                     .Where(x => x.lead_Id == user.Id).Include(x => x.LpmLeadMaster).ToListAsync();

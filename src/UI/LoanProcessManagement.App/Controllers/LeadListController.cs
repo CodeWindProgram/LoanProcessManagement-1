@@ -37,7 +37,7 @@ namespace LoanProcessManagement.App.Controllers
         ///Commented By - Saif Khan 
         ///<returns>leadlistresponse.data</returns>
         ///</summary>
-        [Authorize(AuthenticationSchemes = "Cookies")]
+        [Authorize(AuthenticationSchemes = "Cookies",Roles ="HO,Branch,DSA")]
         public async Task<IActionResult> Index(LeadListCommand leadListCommand)
         {
             string message = "";
@@ -101,7 +101,8 @@ namespace LoanProcessManagement.App.Controllers
         /// <returns>View</returns>
         [Route("[controller]/[action]/{LeadId}")]
         [HttpGet]
-        [Authorize(AuthenticationSchemes = "Cookies")]
+        [Authorize(AuthenticationSchemes = "Cookies", Roles = "HO,Branch")]
+
 
         public async Task<IActionResult> LeadHistory(string LeadId)
         {
@@ -125,7 +126,8 @@ namespace LoanProcessManagement.App.Controllers
         /// <returns>View</returns>
         [Route("[controller]/[action]/{lead_Id}")]
         [HttpGet]
-        [Authorize(AuthenticationSchemes = "Cookies")]
+        [Authorize(AuthenticationSchemes = "Cookies", Roles = "HO,Branch")]
+
 
         public async Task<IActionResult> LeadSummary(string lead_Id)
         {
@@ -149,6 +151,7 @@ namespace LoanProcessManagement.App.Controllers
         /// <param name="lead_id">lead_id</param>
         /// <returns>View</returns>
         [Route("[controller]/[action]/{lead_Id}")]
+        [Authorize(AuthenticationSchemes = "Cookies",Roles ="HO,Branch")]
         [HttpGet]
         public async Task<IActionResult> LeadModification(string lead_Id)
         {
@@ -430,7 +433,8 @@ namespace LoanProcessManagement.App.Controllers
         /// <returns>Add Lead View</returns>
         //[Route("[controller]/[action]")]
         //[Route("/AddLead")]
-        [Authorize(Roles = "DSA, Branch")]
+        [Authorize(AuthenticationSchemes = "Cookies", Roles = "Branch,DSA")]
+
         public async Task<IActionResult> AddLead()
         {
             //var loanProducts = await _commonService.GetAllLoanProducts();
@@ -514,6 +518,7 @@ namespace LoanProcessManagement.App.Controllers
         
         [Route("[controller]/[action]")]
         [HttpGet]
+        [Authorize(Roles ="HO")]
         public async Task<IActionResult> LeadStatus()
         {
             var leadstatus = new LeadStatusVm();
@@ -659,6 +664,8 @@ namespace LoanProcessManagement.App.Controllers
         }
 
         #region HO-Inprinciple Sanction Report List - 14/02/2022 - Raj Bhosale
+        [Authorize(Roles = "HO,Branch")]
+
         public async Task<IActionResult> InprincipleSanctionReport()
         {
             GetInPrincipleSanctionListQuery SanctionList = new GetInPrincipleSanctionListQuery();
@@ -674,6 +681,8 @@ namespace LoanProcessManagement.App.Controllers
         #endregion
 
         #region HO-Sanction Report List - 14/02/2022 - Raj Bhosale
+        [Authorize(AuthenticationSchemes = "Cookies",Roles = "HO,Branch")]
+
         public async Task<IActionResult> HOSanctionReport()
         {
             GetHOSanctionListQuery SanctionList = new GetHOSanctionListQuery();

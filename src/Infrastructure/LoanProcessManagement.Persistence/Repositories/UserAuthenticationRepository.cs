@@ -73,7 +73,6 @@ namespace LoanProcessManagement.Persistence.Repositories
                 {
 
                     user.IsLocked = true;
-                    user.IsActive = false;
                 }
                 if (user.WrongLoginAttempt == 5)
                 {

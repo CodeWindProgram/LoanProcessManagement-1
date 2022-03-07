@@ -72,13 +72,14 @@ namespace LoanProcessManagement.Persistence.Repositories
                 response.isCibilCheckRequired = applicant.isCibilCheckRequired;
                 response.isItrRequired = applicant.isItrRequired;
                 response.isGstRequired = applicant.isGstRequired;
+                response.Succeeded = true;
                 return response;
             }
             else
             {
                 response.FormNo = lead.FormNo;
                 response.LeadID = lead.lead_Id;
-                //response.Succeeded = false;
+                response.Succeeded = false;
                 //response.Message = $"Co-Applicant{ApplicantType} does not exist";
                 return response;
             }
