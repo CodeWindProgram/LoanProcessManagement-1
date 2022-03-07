@@ -11,6 +11,7 @@ using LoanProcessManagement.Application.Features.LeadList.Query.LeadNameByLgId;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadStatus;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetHOSanctionListQuery;
+using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetPerformanceSummary;
 using LoanProcessManagement.Application.Responses;
 using LoanProcessManagement.Domain.CustomModels;
 using Microsoft.Extensions.Options;
@@ -347,6 +348,28 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             var model = System.Text.Json.JsonSerializer.Deserialize<bool>(jsonString, options);
             model = !model;
+            return model;
+        }
+
+        public async Task<List<GetPerformanceSummaryQueryDTO>> MyProposal(GetPerformanceSummaryQuery proposal)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+            var content = JsonConvert.SerializeObject(proposal);
+
+            var httpResponse = await _client.PostAsync
+                (
+                    BaseUrl + APIEndpoints.myProposal, new StringContent(content, Encoding.Default,
+                    "application/json")
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<List<GetPerformanceSummaryQueryDTO>>(jsonString, options);
+
             return model;
         }
     }

@@ -105,7 +105,7 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         #region Added Url Endpoints for Ho-InPrinciple List Report- Raj Bhosale - 15-02-2022
         public const string InPrincipleList = "api/v1/LeadStatus/GetSanctionList";
         #endregion
-
+        public const string myProposal = "api/v1/LeadStatus/PerformanceSummary";
         #region Added Url Endpoints for Ho-InPrinciple List Report- Raj Bhosale - 15-02-2022
         public const string HOSanctionList = "api/v1/LeadStatus/GetHOSanctionList";
         #endregion

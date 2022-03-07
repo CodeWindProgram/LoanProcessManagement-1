@@ -5,6 +5,7 @@ using LoanProcessManagement.Application.Features.LeadList.Queries;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetHOSanctionListQuery;
+using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetPerformanceSummary;
 using LoanProcessManagement.Application.Features.MailService.Query;
 using LoanProcessManagement.Application.Responses;
 using Microsoft.AspNetCore.Authorization;
@@ -696,5 +697,27 @@ namespace LoanProcessManagement.App.Controllers
             return View();
         }
         #endregion
+        [Authorize(AuthenticationSchemes = "Cookies", Roles = "HO,Branch,Dsa")]
+
+        public async Task<IActionResult> MyProposal()
+        {
+            GetPerformanceSummaryQuery proposal = new GetPerformanceSummaryQuery();
+
+            proposal.RoleId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "UserRoleId").Value);
+            if (proposal.RoleId == 4 || proposal.RoleId == 3)
+            {
+                proposal.branchId = long.Parse(User.Claims.FirstOrDefault(c => c.Type == "BranchID").Value);
+                proposal.LgId = (User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value);
+            }
+            else if(proposal.RoleId == 2)
+            {
+                proposal.branchId = 1;
+                proposal.LgId = (User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value);
+            }
+
+            var Report = await _leadListService.MyProposal(proposal); ;
+            ViewData["MyProposal"] = Report;
+            return View();
+        }
     }
 }

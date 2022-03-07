@@ -13,6 +13,7 @@ using LoanProcessManagement.Application.Features.LeadList.Query.LeadNameByLgId;
 using LoanProcessManagement.Domain.CustomModels;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetHOSanctionListQuery;
+using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetPerformanceSummary;
 
 namespace LoanProcessManagement.App.Services.Interfaces
 {
@@ -32,6 +33,8 @@ namespace LoanProcessManagement.App.Services.Interfaces
         Task<List<ProcessModel>> HOSanctionList(GetHOSanctionListQuery SanctionList);
         Task<IEnumerable<LeadListByIdModel>> GetLeadListById(GetLeadListByIdQuery leadListByIdQuery);
         Task<bool> VerifyFormNo(string formNo);
+
+        Task<List<GetPerformanceSummaryQueryDTO>> MyProposal(GetPerformanceSummaryQuery proposal);
     }
     #endregion
 }

@@ -1,5 +1,6 @@
 ﻿using LoanProcessManagement.Application.Features.LeadStatus.Queries;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetHOSanctionListQuery;
+using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetPerformanceSummary;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -60,6 +61,13 @@ namespace LoanProcessManagement.Api.Controllers.v1
 
         [HttpPost("GetHOSanctionList")]
         public async Task<ActionResult> GetHOSanctionList([FromBody] GetHOSanctionListQuery req)
+        {
+            var dtos = await _mediator.Send(req);
+            return Ok(dtos);
+        }
+
+        [HttpPost("PerformanceSummary")]
+        public async Task<ActionResult> PerformanceSummary([FromBody] GetPerformanceSummaryQuery req)
         {
             var dtos = await _mediator.Send(req);
             return Ok(dtos);
