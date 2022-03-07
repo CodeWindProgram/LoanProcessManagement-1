@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Queries.GetIsSubmitFromGst;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.UpdateSubmitGst;
+using LoanProcessManagement.Application.Features.IncomeAssesment.Queries.GetIncomeAssessmentRecordsList;
 
 namespace LoanProcessManagement.Api.Controllers.v1
 {
@@ -82,6 +83,23 @@ namespace LoanProcessManagement.Api.Controllers.v1
         }
         #endregion
 
+        #region Get Income Assessment Records List Api - Pratiksh Poshe - 03/03/2022
+        /// <summary>
+        /// 03/03/2022 - Get Income Assessment Records List Api
+        /// commented by Pratiksha Poshe
+        /// </summary>
+        /// <param name="ApplicantType"></param>
+        /// <param name="Lead_Id"></param>
+        /// <returns></returns>
+        [HttpGet("GetIncomeAssessmentRecordsList")]
+        public async Task<ActionResult> GetIncomeAssessmentRecordsList([FromQuery] int ApplicantType, [FromQuery]long lead_Id)
+        {
+            _logger.LogInformation("GetIncomeAssessmentRecordsList intiated");
+            var dtos = await _mediator.Send(new GetIncomeAssessmentRecordsListQuery(ApplicantType, lead_Id));
+            _logger.LogInformation("GetIncomeAssessmentRecordsList completed");
+            return Ok(dtos);
+        }
+        #endregion
 
         [HttpGet("GetSubmit/{Id}")]
         public async Task<ActionResult> GetSubmit([FromRoute]long Id)

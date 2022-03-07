@@ -39,6 +39,7 @@
                                         <input type="checkbox" class="ch2" name="userType" value="4">
                                         DSA
                                     </div>
+                                    <span id="Err_Msg_divUserType" class="text-danger"></span>
                                 </div>
                                 <div class="col-1"></div>
                                 <div class="col-3">
@@ -141,4 +142,21 @@
             }
         });
     };
+
+    $("#divUserType").change(function () {
+        var array = [];
+        $("#divUserType input:checked").each(function () {
+            array.push($(this).val());
+        });
+        var chklist = array.toString();
+        if (chklist == "") {
+            $("#Err_Msg_divUserType").html("Please Select Atleast One Option.").show();
+            $("#btnSubmit").attr('disabled', 'disabled');
+            return false;
+        }
+        else {
+            $("#Err_Msg_divUserType").html("").hide();
+            $("#btnSubmit").removeAttr('disabled');
+        }
+    });
 </script>

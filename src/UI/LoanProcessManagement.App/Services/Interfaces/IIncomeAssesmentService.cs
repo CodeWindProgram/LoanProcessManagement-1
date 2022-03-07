@@ -1,4 +1,5 @@
-﻿using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.AddIncomeAssessment;
+﻿using LoanProcessManagement.App.Models;
+using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.AddIncomeAssessment;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTAddEnuiry;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTCreateEnquiry;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.UpdateSubmitGst;
@@ -26,5 +27,9 @@ namespace LoanProcessManagement.App.Services.Interfaces
 
         Task<UpdateSubmitGstCommandDto> PostIsSubmit(UpdateSubmitGstCommand gstCreateEnquiryCommand);
         Task<Response<GetIsSubmitFromGstQueryDto>> GetIsSubmit(long Id);
+
+        #region Interface Methods For Income Assessment Records Listing - Pratiksha Poshe - 03/03/2022
+        Task<Response<IEnumerable<IncomeAssessmentRecordsListVM>>> GetIncomeAssessmentRecordsList(int applicantType, long lead_Id);
+        #endregion
     }
 }

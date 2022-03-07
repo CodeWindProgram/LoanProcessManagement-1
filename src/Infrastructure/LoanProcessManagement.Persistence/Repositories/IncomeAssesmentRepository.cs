@@ -16,6 +16,7 @@ using System;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Queries.GetIsSubmitFromGst;
 using LoanProcessManagement.Application.Responses;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.UpdateSubmitGst;
+using LoanProcessManagement.Application.Features.IncomeAssesment.Queries.GetIncomeAssessmentRecordsList;
 
 namespace LoanProcessManagement.Persistence.Repositories
 {
@@ -141,6 +142,12 @@ namespace LoanProcessManagement.Persistence.Repositories
         #endregion
 
         #region this repository method will add IncomeAssessment Details - Pratiksha Poshe - 14/02/2021
+        /// <summary>
+        /// 14/02/2021 - this repository method will add IncomeAssessment Details 
+        /// commented by Pratiksha Poshe.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<IncomeAssessmentDetailsModel> AddIncomeAssessmentDetailsAsync(IncomeAssessmentDetailsModel request)
         {
             var applicantDetails = await _dbContext.LpmLeadApplicantsDetails.Include(x => x.LpmLeadMaster)
@@ -178,6 +185,39 @@ namespace LoanProcessManagement.Persistence.Repositories
             request.Succeeded = true;
 
             return request;
+        }
+        #endregion
+
+        #region Method to fetch income assessment records list from db - Pratiksha Poshe - 03/03/2022
+        /// <summary>
+        /// 03/03/2022 - Method to fetch income assessment records list from db
+        /// commented by Pratiksha Poshe
+        /// </summary>
+        /// <param name="ApplicantType"></param>
+        /// <param name="lead_id"></param>
+        /// <returns></returns>
+        public async Task<IEnumerable<GetIncomeAssessmentRecordsListDto>> GetIncomeAssessmentRecordsList (int ApplicantType, long lead_id)
+        {
+            var incomeAssessmentRecords = await _dbContext.LpmLeadIncomeAssessmentDetails.Where(x => x.ApplicantType == ApplicantType && x.lead_Id == lead_id).Include(x => x.LeadApplicantDetails).OrderByDescending(x => x.Id)
+                .Select( x => new GetIncomeAssessmentRecordsListDto()
+                {
+                    CreatedDate = x.CreatedDate,
+                    StartDate = x.StartDate,
+                    EndDate = x.EndDate,
+                    EmployerName1 = x.EmployerName1,
+                    EmployerName2 = x.EmployerName2,
+                    EmployerName3 = x.EmployerName3,
+                    EmployerName4 = x.EmployerName4,
+                    EmployerName5 = x.EmployerName5,
+                    FileType = x.FileType,
+                    Institution_Id = x.Institution_Id,
+                    DocumentType = x.DocumentType,
+                    IsActive = x.IsActive,
+                    Succeeded = true,
+                    Message = "Income assessment records fetched successfully"
+                }).ToListAsync();
+
+            return incomeAssessmentRecords;
         }
         #endregion
 
