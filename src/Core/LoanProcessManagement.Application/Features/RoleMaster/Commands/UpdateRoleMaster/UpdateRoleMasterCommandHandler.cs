@@ -34,35 +34,18 @@ namespace LoanProcessManagement.Application.Features.RoleMaster.Commands.UpdateR
 
         public async Task<Response<UpdateRoleMasterDto>> Handle(UpdateRoleMasterCommand request, CancellationToken cancellationToken)
         {
-            var roleMasterCommandResponse = new Response<UpdateRoleMasterDto>();
-            var roleMaster = new LpmUserRoleMaster()
-            {
-                Rolename = request.RoleName,
-                Id=request.Id,
-                CreatedDate = DateTime.Now,
-                IsActive=true
-            };
-            var roleMasterToUpdate = await _roleMasterRepository.GetByIdAsync(request.Id);
             
-
-            if (roleMasterToUpdate != null)
-            {
-                var result =  _roleMasterRepository.UpdateRoleMaster(roleMaster);
-                if (result!=null) {
-                    roleMasterCommandResponse.Succeeded = true;
-                    roleMasterCommandResponse.Message = "Role Master Updated";
-                }
-                else
+                var result = await _roleMasterRepository.UpdateRoleMaster(request.Id,request);
+                 if (result.Succeeded)
                 {
-                    roleMasterCommandResponse.Succeeded = false;
-                    roleMasterCommandResponse.Message = "Unable to update";
+                    return new Response<UpdateRoleMasterDto>(result, "success");
                 }
-            }
-            else {
-                roleMasterCommandResponse.Succeeded = false;
-                roleMasterCommandResponse.Message = "Role Master Not Found";
-            }
-            return roleMasterCommandResponse;
+                 else{
+                var res = new Response<UpdateRoleMasterDto>(result, "Failed");
+                res.Succeeded = false;
+                 return res;
+        }
+            
         }
         #endregion
     }

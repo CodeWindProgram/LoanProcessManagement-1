@@ -2,6 +2,7 @@
 using MediatR;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace LoanProcessManagement.Application.Features.RoleMaster.Commands.CreateRoleMaster
@@ -9,6 +10,7 @@ namespace LoanProcessManagement.Application.Features.RoleMaster.Commands.CreateR
     #region added Master command to create role. By Ramya Guduru-10-11-2021
     public class CreateRoleMasterCommand: IRequest<Response<CreateRoleMasterCommandDto>>
     {
+        [Required]
         public string RoleName { get; set; }
     }
     #endregion

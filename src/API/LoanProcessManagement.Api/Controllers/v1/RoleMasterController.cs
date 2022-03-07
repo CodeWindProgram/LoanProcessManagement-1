@@ -1,6 +1,7 @@
 ﻿using LoanProcessManagement.Application.Features.RoleMaster.Commands.CreateRoleMaster;
 using LoanProcessManagement.Application.Features.RoleMaster.Commands.DeleteRoleMaster;
 using LoanProcessManagement.Application.Features.RoleMaster.Commands.UpdateRoleMaster;
+using LoanProcessManagement.Application.Features.RoleMaster.Queries.GetRoleMaster;
 using LoanProcessManagement.Application.Features.RoleMaster.Queries.GetRoleMasterList;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -43,7 +44,6 @@ namespace LoanProcessManagement.Api.Controllers.v1
         }
 
         [HttpPut(Name = "UpdateRoleMaster")]
-        //[ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
         public async Task<ActionResult> Update([FromBody] UpdateRoleMasterCommand updateRoleMasterCommand)
@@ -75,5 +75,14 @@ namespace LoanProcessManagement.Api.Controllers.v1
         }
 
         #endregion
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetById([FromRoute] long id)
+        {
+            var creatorQuery = new GetRoleMasterByIdQuery {id = id };
+            var data = await _mediator.Send(creatorQuery);
+            return Ok(data);
+        }
+
     }
 }

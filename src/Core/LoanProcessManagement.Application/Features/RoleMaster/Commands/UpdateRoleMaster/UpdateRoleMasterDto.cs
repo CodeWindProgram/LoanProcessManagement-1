@@ -8,8 +8,10 @@ namespace LoanProcessManagement.Application.Features.RoleMaster.Commands.UpdateR
     public class UpdateRoleMasterDto
     {
         public long Id { get; set; }
-        public string RoleName { get; set; }
-       
+        public string Message { get; set; }
+        public bool Succeeded { get; set; }
+
+
     }
     #endregion
 }

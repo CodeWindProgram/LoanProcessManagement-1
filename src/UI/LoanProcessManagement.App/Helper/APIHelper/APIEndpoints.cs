@@ -25,6 +25,7 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string GetInsuranceProducts = "api/v1/Product/GetInsuranceProducts";
         public const string ModifyLead = "api/v1/LeadList/ModifyLead";
         public const string RoleList = "api/v1/RoleMaster";
+        public const string Role = "api/v1/RoleMaster/";
         public const string GetAllMenuMaps = "api/v1/Menu/GetAllMenuMaps";
         public const string RoleMap = "api/v1/Menu/CreateMenuMaps";
         public const string DeleteRoleMapById = "api/v1/Menu/DeleteMenuMapsById/";

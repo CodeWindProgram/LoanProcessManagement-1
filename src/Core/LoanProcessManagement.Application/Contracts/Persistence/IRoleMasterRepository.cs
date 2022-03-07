@@ -1,4 +1,5 @@
 ﻿using LoanProcessManagement.Application.Features.RoleMaster.Commands.UpdateRoleMaster;
+using LoanProcessManagement.Application.Features.RoleMaster.Queries.GetRoleMaster;
 using LoanProcessManagement.Domain.CustomModels;
 using LoanProcessManagement.Domain.Entities;
 using System;
@@ -17,8 +18,11 @@ namespace LoanProcessManagement.Application.Contracts.Persistence
         /// </summary>
         /// <param name="RoleMasterRepository">RoleMasterRepository</param>
         /// <returns>RoleMasterRepository</returns>
+        /// 
 
-        Task UpdateRoleMaster(LpmUserRoleMaster lpmUserRoleMaster);
+        
+        Task <LpmUserRoleMaster> GetRoleMasterByIdAsync(long id);
+        Task <UpdateRoleMasterDto>UpdateRoleMaster(long id,UpdateRoleMasterCommand request);
         Task GetByRoleName(string RoleName);
     }
     #endregion

@@ -12,6 +12,7 @@ using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenuMaps.Query
 using LoanProcessManagement.Application.Features.Menu.Query.GetAllMenus;
 using LoanProcessManagement.Application.Features.Menu.Query.GetMenuByID;
 using LoanProcessManagement.Application.Features.Menu.Query.MenuList;
+using LoanProcessManagement.Application.Features.RoleMaster.Commands.DeleteRoleMaster;
 using LoanProcessManagement.Application.Features.RoleMaster.Queries.GetRoleMasterList;
 using LoanProcessManagement.Application.Responses;
 using Microsoft.AspNetCore.Authorization;
@@ -393,21 +394,14 @@ namespace LoanProcessManagement.App.Controllers
             return RedirectToAction("MenuList");
 
         }
+        [HttpGet]
+        [Route("/RoleMaster")]
+        public async Task<Response<IEnumerable<RoleMasterListVm>>> GetRoleMaster()
+        {
+            var roleMaster = await _roleMasterService.RoleListProcess();
+            return roleMaster;
+        }
 
-        //[HttpGet("/MenuDelete/{Id}")]
-        //public async Task<IActionResult> DeleteMenu(long Id)
-        //{
-        //    var res = await _menuService.MenuById(Id);
-
-        //    return View(res.Data);
-        //}
-        //[HttpPost("/MenuDelete/{Id}")]
-        //public async Task<IActionResult> DeleteMenu(GetMenuByIdQueryVm deleteMenuCommand)
-        //{
-        //    var response = await _menuService.DeleteMenu(deleteMenuCommand.Id);
-        //    //var ReturnsTo = ViewBag.UserId = HttpContext.Request.Cookies["Id"];
-        //    return RedirectToAction("Menulist");
-        //}
         #endregion
     }
 }

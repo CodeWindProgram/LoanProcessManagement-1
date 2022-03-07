@@ -36,7 +36,10 @@ namespace LoanProcessManagement.Application.Features.RoleMaster.Commands.CreateR
 
             var roleMaster = new LpmUserRoleMaster() { 
                 Rolename = request.RoleName, 
-                CreatedDate = DateTime.Now, 
+                CreatedDate = DateTime.Now,
+                LastModifiedBy="Admin",
+                CreatedBy="Admin",
+                LastModifiedDate=DateTime.Now,
                 IsActive = true 
             };
 
