@@ -476,28 +476,31 @@ namespace LoanProcessManagement.Persistence.Repositories
                 var joins = from LD in LeadDetails
                             join LPC in ProcessCycle
                             on LD.Id equals LPC.lead_Id
+                            join UM in _dbContext.LpmUserMasters
+                            on LD.Lead_assignee_Id equals UM.LgId
                             join LProd in _dbContext.LpmLoanProductMasters
                             on LPC.LoanProductID equals LProd.Id
                             join LS in _dbContext.LpmLeadStatusMasters
                             on LD.CurrentStatus equals LS.Id
                             select new GetPerformanceSummaryQueryDTO
                             {
+                                DSAName = UM.Name,
                                 Lead_Id = LD.Id,
                                 FormNo = LD.FormNo,
                                 CustomerName = LD.FirstName + " " + LD.LastName,
                                 Status = LS.StatusDescription,
                                 sanctionTAT = null,
                                 ProductName = LProd.ProductName,
-                                LoanAmount = LPC.LoanAmount,
-                                InsuaranceAmount = LPC.InsuranceAmount,
-                                convertedLead = "",
-                                BranchDataEntry = "",
-                                InPrincipleSanction = "",
-                                BranchProcess = "",
-                                ThirdPartyCheck = "",
-                                Sanction = "",
-                                Disbursement = "",
-                                Rejection = ""
+                                LoanAmount =LPC.LoanAmount==null?0: Math.Round((double)(LPC.LoanAmount+0.0) /(float)10000000,2),
+                                InsuaranceAmount = LPC.InsuranceAmount==null?0:Math.Round((double)(LPC.InsuranceAmount + 0.0) / 1000,2),
+                                convertedLead = "-",
+                                BranchDataEntry = "-",
+                                InPrincipleSanction = "-",
+                                BranchProcess = "-",
+                                ThirdPartyCheck = "-",
+                                Sanction = "-",
+                                Disbursement = "-",
+                                Rejection = "-"
 
                             };
                 joinn = joins.ToList();
@@ -506,37 +509,45 @@ namespace LoanProcessManagement.Persistence.Repositories
                     var data = allProcess.Where(x => x.lead_Id == joinn[i].Lead_Id).ToList();
                     for (int j = 0; j < data.Count(); j++)
                     {
-                        if (data[j].CurrentStatus == 1)
+                        if (data[j].CurrentStatus == 1 && data[j].CreatedDate != null)
                         {
-                            joinn[i].convertedLead = data[j].LastModifiedDate.ToString();
+                            var temps = data[j].CreatedDate.ToString().Split(" ");
+                            joinn[i].convertedLead = temps[0];
                         }
-                        else if (data[j].CurrentStatus == 2)
+                        else if (data[j].CurrentStatus == 2 && data[j].CreatedDate != null)
                         {
-                            joinn[i].BranchDataEntry = data[j].LastModifiedDate.ToString();
+                            var temps = data[j].CreatedDate.ToString().Split(" ");
+                            joinn[i].BranchDataEntry = temps[0];
                         }
-                        else if (data[j].CurrentStatus == 3)
+                        else if (data[j].CurrentStatus == 3 && data[j].CreatedDate != null)
                         {
-                            joinn[i].InPrincipleSanction = data[j].LastModifiedDate.ToString();
+                            var temps = data[j].CreatedDate.ToString().Split(" ");
+                            joinn[i].InPrincipleSanction = temps[0];
                         }
-                        else if (data[j].CurrentStatus == 4)
+                        else if (data[j].CurrentStatus == 4 && data[j].CreatedDate != null)
                         {
-                            joinn[i].BranchProcess = data[j].LastModifiedDate.ToString();
+                            var temps = data[j].CreatedDate.ToString().Split(" ");
+                            joinn[i].BranchProcess = temps[0];
                         }
-                        else if (data[j].CurrentStatus == 5)
+                        else if (data[j].CurrentStatus == 5 && data[j].CreatedDate != null)
                         {
-                            joinn[i].ThirdPartyCheck = data[j].LastModifiedDate.ToString();
+                            var temps = data[j].CreatedDate.ToString().Split(" ");
+                            joinn[i].ThirdPartyCheck = temps[0];
                         }
-                        else if (data[j].CurrentStatus == 9)
+                        else if (data[j].CurrentStatus == 9 && data[j].CreatedDate != null)
                         {
-                            joinn[i].Sanction = data[j].LastModifiedDate.ToString();
+                            var temps = data[j].CreatedDate.ToString().Split(" ");
+                            joinn[i].Sanction = temps[0];
                         }
-                        else if (data[j].CurrentStatus == 10)
+                        else if (data[j].CurrentStatus == 10 && data[j].CreatedDate != null)
                         {
-                            joinn[i].Disbursement = data[j].LastModifiedDate.ToString();
+                            var temps = data[j].CreatedDate.ToString().Split(" ");
+                            joinn[i].Disbursement = temps[0];
                         }
-                        else if (data[j].CurrentStatus == 11)
+                        else if (data[j].CurrentStatus == 11 && data[j].CreatedDate != null)
                         {
-                            joinn[i].Rejection = data[j].LastModifiedDate.ToString();
+                            var temps = data[j].CreatedDate.ToString().Split(" ");
+                            joinn[i].Rejection = temps[0];
                         }
 
 
@@ -547,7 +558,7 @@ namespace LoanProcessManagement.Persistence.Repositories
             {
 
 
-                var LeadDetails = _dbContext.LpmLeadMasters.Where(x => x.BranchID == req.branchId).ToList();
+                var LeadDetails = _dbContext.LpmLeadMasters.Where(x => x.BranchID == req.branchId).Include(y => y.Branch).ToList();
                 var qs = _dbContext.LpmLeadProcessCycles.OrderByDescending(x => x.CreatedDate).ToList();
                 var temp = from element in qs
                            group element by element.lead_Id
@@ -561,28 +572,32 @@ namespace LoanProcessManagement.Persistence.Repositories
                 var joins = from LD in LeadDetails
                             join LPC in ProcessCycle
                             on LD.Id equals LPC.lead_Id
+                            join UM in _dbContext.LpmUserMasters
+                           on LD.Lead_assignee_Id equals UM.LgId
                             join LProd in _dbContext.LpmLoanProductMasters
                             on LPC.LoanProductID equals LProd.Id
                             join LS in _dbContext.LpmLeadStatusMasters
                             on LD.CurrentStatus equals LS.Id
                             select new GetPerformanceSummaryQueryDTO
                             {
+                                DSAName = UM.Name,
                                 Lead_Id = LD.Id,
                                 FormNo = LD.FormNo,
+                                BranchName = LD.Branch.branchname,
                                 CustomerName = LD.FirstName + " " + LD.LastName,
                                 Status = LS.StatusDescription,
                                 sanctionTAT = null,
                                 ProductName = LProd.ProductName,
-                                LoanAmount = LPC.LoanAmount,
-                                InsuaranceAmount = LPC.InsuranceAmount,
-                                convertedLead = "",
-                                BranchDataEntry = "",
-                                InPrincipleSanction = "",
-                                BranchProcess = "",
-                                ThirdPartyCheck = "",
-                                Sanction = "",
-                                Disbursement = "",
-                                Rejection = ""
+                                LoanAmount = LPC.LoanAmount == null ? 0 : Math.Round((double)(LPC.LoanAmount + 0.0) / (float)10000000, 2),
+                                InsuaranceAmount =LPC.InsuranceAmount==null?0:Math.Round((double)(LPC.InsuranceAmount + 0.0) / 1000,2),
+                                convertedLead = "-",
+                                BranchDataEntry = "-",
+                                InPrincipleSanction = "-",
+                                BranchProcess = "-",
+                                ThirdPartyCheck = "-",
+                                Sanction = "-",
+                                Disbursement = "-",
+                                Rejection = "-"
 
                             };
                 joinn = joins.ToList();
@@ -591,37 +606,45 @@ namespace LoanProcessManagement.Persistence.Repositories
                     var data = allProcess.Where(x => x.lead_Id == joinn[i].Lead_Id).ToList();
                     for (int j = 0; j < data.Count(); j++)
                     {
-                        if (data[j].CurrentStatus == 1)
+                        if (data[j].CurrentStatus == 1 && data[j].CreatedDate != null)
                         {
-                            joinn[i].convertedLead = data[j].LastModifiedDate.ToString();
+                            var temps = data[j].CreatedDate.ToString().Split(" ");
+                            joinn[i].convertedLead = temps[0];
                         }
-                        else if (data[j].CurrentStatus == 2)
+                        else if (data[j].CurrentStatus == 2 && data[j].CreatedDate != null)
                         {
-                            joinn[i].BranchDataEntry = data[j].LastModifiedDate.ToString();
+                            var temps = data[j].CreatedDate.ToString().Split(" ");
+                            joinn[i].BranchDataEntry = temps[0];
                         }
-                        else if (data[j].CurrentStatus == 3)
+                        else if (data[j].CurrentStatus == 3 && data[j].CreatedDate != null)
                         {
-                            joinn[i].InPrincipleSanction = data[j].LastModifiedDate.ToString();
+                            var temps = data[j].CreatedDate.ToString().Split(" ");
+                            joinn[i].InPrincipleSanction = temps[0];
                         }
-                        else if (data[j].CurrentStatus == 4)
+                        else if (data[j].CurrentStatus == 4 && data[j].CreatedDate != null)
                         {
-                            joinn[i].BranchProcess = data[j].LastModifiedDate.ToString();
+                            var temps = data[j].CreatedDate.ToString().Split(" ");
+                            joinn[i].BranchProcess = temps[0];
                         }
-                        else if (data[j].CurrentStatus == 5)
+                        else if (data[j].CurrentStatus == 5 && data[j].CreatedDate != null)
                         {
-                            joinn[i].ThirdPartyCheck = data[j].LastModifiedDate.ToString();
+                            var temps = data[j].CreatedDate.ToString().Split(" ");
+                            joinn[i].ThirdPartyCheck = temps[0];
                         }
-                        else if (data[j].CurrentStatus == 9)
+                        else if (data[j].CurrentStatus == 9 && data[j].CreatedDate != null)
                         {
-                            joinn[i].Sanction = data[j].LastModifiedDate.ToString();
+                            var temps = data[j].CreatedDate.ToString().Split(" ");
+                            joinn[i].Sanction = temps[0];
                         }
-                        else if (data[j].CurrentStatus == 10)
+                        else if (data[j].CurrentStatus == 10 && data[j].CreatedDate != null)
                         {
-                            joinn[i].Disbursement = data[j].LastModifiedDate.ToString();
+                            var temps = data[j].CreatedDate.ToString().Split(" ");
+                            joinn[i].Disbursement = temps[0];
                         }
-                        else if (data[j].CurrentStatus == 11)
+                        else if (data[j].CurrentStatus == 11 && data[j].CreatedDate != null)
                         {
-                            joinn[i].Rejection = data[j].LastModifiedDate.ToString();
+                            var temps = data[j].CreatedDate.ToString().Split(" ");
+                            joinn[i].Rejection = temps[0];
                         }
 
 
@@ -632,7 +655,7 @@ namespace LoanProcessManagement.Persistence.Repositories
 
             else if (req.RoleId == 2)
             {
-                var LeadDetails = _dbContext.LpmLeadMasters.Where(x => x.BranchID == req.branchId).ToList();
+                var LeadDetails = _dbContext.LpmLeadMasters.Where(x => x.BranchID == req.branchId).Include(y => y.Branch).ToList();
                 var qs = _dbContext.LpmLeadProcessCycles.OrderByDescending(x => x.CreatedDate).ToList();
                 var temp = from element in qs
                            group element by element.lead_Id
@@ -646,28 +669,33 @@ namespace LoanProcessManagement.Persistence.Repositories
                 var joins = from LD in LeadDetails
                             join LPC in ProcessCycle
                             on LD.Id equals LPC.lead_Id
+
+                            join UM in _dbContext.LpmUserMasters
+                           on LD.Lead_assignee_Id equals UM.LgId
                             join LProd in _dbContext.LpmLoanProductMasters
                             on LPC.LoanProductID equals LProd.Id
                             join LS in _dbContext.LpmLeadStatusMasters
                             on LD.CurrentStatus equals LS.Id
                             select new GetPerformanceSummaryQueryDTO
                             {
+                                DSAName = UM.Name,
                                 Lead_Id = LD.Id,
                                 FormNo = LD.FormNo,
+                                BranchName = LD.Branch.branchname,
                                 CustomerName = LD.FirstName + " " + LD.LastName,
                                 Status = LS.StatusDescription,
                                 sanctionTAT = null,
                                 ProductName = LProd.ProductName,
-                                LoanAmount = LPC.LoanAmount,
-                                InsuaranceAmount = LPC.InsuranceAmount,
-                                convertedLead = "",
-                                BranchDataEntry = "",
-                                InPrincipleSanction = "",
-                                BranchProcess = "",
-                                ThirdPartyCheck = "",
-                                Sanction = "",
-                                Disbursement = "",
-                                Rejection = ""
+                                LoanAmount = LPC.LoanAmount == null ? 0 : Math.Round((double)(LPC.LoanAmount + 0.0) / (float)10000000, 2),
+                                InsuaranceAmount = LPC.InsuranceAmount==null?0:Math.Round((double)(LPC.InsuranceAmount+0.0) / 1000,2),
+                                convertedLead = "-",
+                                BranchDataEntry = "-",
+                                InPrincipleSanction = "-",
+                                BranchProcess = "-",
+                                ThirdPartyCheck = "-",
+                                Sanction = "-",
+                                Disbursement = "-",
+                                Rejection = "-"
 
                             };
                 joinn = joins.ToList();
@@ -676,37 +704,45 @@ namespace LoanProcessManagement.Persistence.Repositories
                     var data = allProcess.Where(x => x.lead_Id == joinn[i].Lead_Id).ToList();
                     for (int j = 0; j < data.Count(); j++)
                     {
-                        if (data[j].CurrentStatus == 1)
+                        if (data[j].CurrentStatus == 1 && data[j].CreatedDate != null)
                         {
-                            joinn[i].convertedLead = data[j].LastModifiedDate.ToString();
+                            var temps = data[j].CreatedDate.ToString().Split(" ");
+                            joinn[i].convertedLead = temps[0];
                         }
-                        else if (data[j].CurrentStatus == 2)
+                        else if (data[j].CurrentStatus == 2 && data[j].CreatedDate != null)
                         {
-                            joinn[i].BranchDataEntry = data[j].LastModifiedDate.ToString();
+                            var temps = data[j].CreatedDate.ToString().Split(" ");
+                            joinn[i].BranchDataEntry = temps[0];
                         }
-                        else if (data[j].CurrentStatus == 3)
+                        else if (data[j].CurrentStatus == 3 && data[j].CreatedDate != null)
                         {
-                            joinn[i].InPrincipleSanction = data[j].LastModifiedDate.ToString();
+                            var temps = data[j].CreatedDate.ToString().Split(" ");
+                            joinn[i].InPrincipleSanction = temps[0];
                         }
-                        else if (data[j].CurrentStatus == 4)
+                        else if (data[j].CurrentStatus == 4 && data[j].CreatedDate != null)
                         {
-                            joinn[i].BranchProcess = data[j].LastModifiedDate.ToString();
+                            var temps = data[j].CreatedDate.ToString().Split(" ");
+                            joinn[i].BranchProcess = temps[0];
                         }
-                        else if (data[j].CurrentStatus == 5)
+                        else if (data[j].CurrentStatus == 5 && data[j].CreatedDate != null)
                         {
-                            joinn[i].ThirdPartyCheck = data[j].LastModifiedDate.ToString();
+                            var temps = data[j].CreatedDate.ToString().Split(" ");
+                            joinn[i].ThirdPartyCheck = temps[0];
                         }
-                        else if (data[j].CurrentStatus == 9)
+                        else if (data[j].CurrentStatus == 9 && data[j].CreatedDate != null)
                         {
-                            joinn[i].Sanction = data[j].LastModifiedDate.ToString();
+                            var temps = data[j].CreatedDate.ToString().Split(" ");
+                            joinn[i].Sanction = temps[0];
                         }
-                        else if (data[j].CurrentStatus == 10)
+                        else if (data[j].CurrentStatus == 10 && data[j].CreatedDate != null)
                         {
-                            joinn[i].Disbursement = data[j].LastModifiedDate.ToString();
+                            var temps = data[j].CreatedDate.ToString().Split(" ");
+                            joinn[i].Disbursement = temps[0];
                         }
-                        else if (data[j].CurrentStatus == 11)
+                        else if (data[j].CurrentStatus == 11 && data[j].CreatedDate != null)
                         {
-                            joinn[i].Rejection = data[j].LastModifiedDate.ToString();
+                            var temps = data[j].CreatedDate.ToString().Split(" ");
+                            joinn[i].Rejection = temps[0];
                         }
 
 

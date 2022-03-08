@@ -1,98 +1,182 @@
 ﻿@using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetPerformanceSummary;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
- ViewData["Title"] = "LeadStatus";
- var Records = (List<GetPerformanceSummaryQueryDTO>)ViewData["MyProposal"];
+    ViewData["Title"] = "LeadStatus";
+    var Records = (List<GetPerformanceSummaryQueryDTO>)ViewData["MyProposal"];
+    var Role = ViewData["Role"].ToString();
 }
+<div>
 
+</div>
 <div class="container app">
     <div class="col-sm-12 col-lg-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
-            <div class="panel-heading"><h5>Lead Status</h5></div>
+            <div class="panel-heading"><h5>Proposal Summary</h5></div>
             <div class="panel-body ">
                 <div class="card" style="padding:5px;">
                     <div class="filters">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-1"></div>
-                                <div class="col-3">
-                                    <label>Branch</label><span style="color: Red">&nbsp;*</span>
-                                </div>
-                                <div class="col-3">
-                                    <div id="divBranch" class="input-control text">
-                                        <select id="DDLBranch" asp-items=Model.getAllBranchesDto class="form-control">
-                                            @*<option value="-1">Select</option>*@
-                                        </select>
+                        @if (Role == "2")
+                        {
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-1"></div>
+                                    <div class="col-3">
+                                        <label>Branch</label><span style="color: Red">&nbsp;*</span>
+                                    </div>
+                                    <div class="col-3">
+                                        <div id="divBranch" class="input-control text">
+                                            <select id="DDLBranch" class="form-control">
+                                                <option value="1">Head Office</option>
+                                                <option value="2">Thane</option>
+                                                <option value="3">Navi Mumbai</option>
+                                                <option value="4">Mumbai</option>
+                                                <option value="5">Punjab</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-1"></div>
-                                <div class="col-3">
-                                    <label>Select Role : </label>
-                                </div>
-                                <div class="col-3">
-                                    <div id="divUserType">
-                                        <input type="checkbox" class="ch1" name="userType" value="3" checked>
-                                        Branch
-                                        <input type="checkbox" class="ch2" name="userType" value="4">
-                                        DSA
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-1"></div>
+                                    <div class="col-3">
+                                        <label>Select Role : </label>
                                     </div>
-                                </div>
-                                <div class="col-1"></div>
-                                <div class="col-3">
-                                    @*<input type="button" asp-action="FilterSearch" class="btn btn-primary  btn-sm" onclick="myfun()" value="Submit" id="btnSubmit">*@
+                                    <div class="col-3">
+                                        <div id="divUserType">
+                                            <input type="checkbox" class="ch1" name="userType" value="3" checked>
+                                            Branch
+                                            <input type="checkbox" class="ch2" name="userType" value="4">
+                                            DSA
+                                        </div>
+                                    </div>
+                                    <div class="col-1"></div>
+                                    @*<div class="col-3">
+                                            <input type="button" asp-action="FilterSearch" class="btn btn-primary  btn-sm" onclick="myfun()" value="Submit" id="btnSubmit">
+                                        </div>*@
                                 </div>
                             </div>
-                        </div>
+                        }
                         <hr />
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <table class="display table table-responsive-xl" id="tblLoginReport">
+                                    <table class="display table table-responsive-lg" id="tblLoginReport">
                                         <thead>
-                                            <tr>
-                                                <th>FormNo</th>
-                                                <th>Customer Name</th>
-                                                <th>Status</th>
-                                                <th style="display:none">SanctionTAT</th>
-                                                <th>In-Prin. Sanc.</th>
-                                                <th>Branch Processing</th>
-                                                <th>Product Name</th>
-                                                <th>Loan Amt.(In Crores)</th>
-                                                <th>Insurance Amt.(In Thousands)</th>
-                                                <th>Converted Leads</th>
-                                                <th>Branch Data Entry Leads</th>
-                                                <th>In. Principle Sanction List</th>
-                                                <th>Branch Process</th>
-                                                <th>3rd Party Check</th>
-                                                <th>Sanction</th>
-                                                <th>Disbursed</th>
-                                                <th>Rejected/Lost Lead</th>
-                                            </tr>
+                                            @if (Role == "3" || Role == "2")
+                                            {
+                                                <tr>
+                                                    <th>DSA Name</th>
+                                                    <th>Form No.</th>
+                                                    <th>Customer Name</th>
+                                                    <th>Branch Name</th>
+                                                    <th>Status</th>
+                                                    <th style="display:none">SanctionTAT.</th>
+                                                    <th>Product Name</th>
+                                                    <th>Loan Amt.(In Cr.)</th>
+                                                    <th>Insurance Amt.(In Thousands)</th>
+                                                    <th>Converted Leads</th>
+                                                    <th>Branch Data Entry</th>
+                                                    <th>In. Principle Sanction</th>
+                                                    <th>Branch Processing</th>
+                                                    <th>3rd Party Check</th>
+                                                    <th>Sanction</th>
+                                                    <th>Disbursed</th>
+                                                    <th>Rejected/Lost Lead</th>
+                                                </tr>
+
+                                            }
+                                            else
+                                            {
+
+                                                <tr>
+                                                    <th>DSA Name</th>
+                                                    <th>Form No.</th>
+                                                    <th>Customer Name</th>
+                                                    <th>Status</th>
+                                                    <th style="display:none">SanctionTAT</th>
+                                                    <th>Product Name</th>
+                                                    <th>Loan Amt.(In Cr.)</th>
+                                                    <th>Insurance Amt.(In Thousands)</th>
+                                                    <th>Converted Leads</th>
+                                                    <th>Branch Data Entry</th>
+                                                    <th>In. Principle Sanction</th>
+                                                    <th>Branch Processing</th>
+                                                    <th>3rd Party Check</th>
+                                                    <th>Sanction</th>
+                                                    <th>Disbursed</th>
+                                                    <th>Rejected/Lost Lead</th>
+                                                </tr>
+                                            }
+
                                         </thead>
                                         <tbody>
-                                            @foreach (var record in Records)
+                                            @if (Role == "3" || Role == "2")
                                             {
-                                            <tr>
-                                                <td>@record.FormNo</td>
-                                                <td>@record.CustomerName</td>
-                                                <td>@record.Status</td>
-                                                <td style="display:none">@record.sanctionTAT</td>
-                                                <td>@record.ProductName</td>
-                                                <td>@record.LoanAmount</td>
-                                                <td>@record.InsuaranceAmount</td>
-                                                <td>@record.convertedLead</td>
-                                                <td>@record.BranchDataEntry</td>
-                                                <td>@record.InPrincipleSanction</td>
-                                                <td>@record.BranchProcess</td>
-                                                <td>@record.ThirdPartyCheck</td>
-                                                <td>@record.Sanction</td>
-                                                <td>@record.Disbursement</td>
-                                                <td>@record.Rejection</td>
-                                            </tr>
+                                                @foreach (var record in Records)
+                                                {
+                                                    if (record.LoanAmount == null)
+                                                    {
+                                                        record.LoanAmount = 0;
+                                                    }
+                                                    if (record.InsuaranceAmount == null)
+                                                    {
+                                                        record.InsuaranceAmount = 0;
+                                                    }
+
+                                                    <tr>
+                                                        <td>@record.DSAName</td>
+                                                        <td>@record.FormNo</td>
+                                                        <td>@record.CustomerName</td>
+                                                        <td>@record.BranchName</td>
+                                                        <td>@record.Status</td>
+                                                        <td style="display:none">@record.sanctionTAT</td>
+                                                        <td>@record.ProductName</td>
+                                                        <td>@record.LoanAmount</td>
+                                                        <td>@record.InsuaranceAmount</td>
+                                                        <td>@record.convertedLead</td>
+                                                        <td>@record.BranchDataEntry</td>
+                                                        <td>@record.InPrincipleSanction</td>
+                                                        <td>@record.BranchProcess</td>
+                                                        <td>@record.ThirdPartyCheck</td>
+                                                        <td>@record.Sanction</td>
+                                                        <td>@record.Disbursement</td>
+                                                        <td>@record.Rejection</td>
+                                                    </tr>
+                                                }
+
+                                            }
+                                            else
+                                            {
+                                                @foreach (var record in Records)
+                                                {
+                                                    if (record.LoanAmount == null)
+                                                    {
+                                                        record.LoanAmount = 0;
+                                                    }
+                                                    if (record.InsuaranceAmount == null)
+                                                    {
+                                                        record.InsuaranceAmount = 0;
+                                                    }
+                                                    <tr>
+                                                        <td>@record.DSAName</td>
+                                                        <td>@record.FormNo</td>
+                                                        <td>@record.CustomerName</td>
+                                                        <td>@record.Status</td>
+                                                        <td style="display:none">@record.sanctionTAT</td>
+                                                        <td>@record.ProductName</td>
+                                                        <td>@record.LoanAmount</td>
+                                                        <td>@record.InsuaranceAmount</td>
+                                                        <td>@record.convertedLead</td>
+                                                        <td>@record.BranchDataEntry</td>
+                                                        <td>@record.InPrincipleSanction</td>
+                                                        <td>@record.BranchProcess</td>
+                                                        <td>@record.ThirdPartyCheck</td>
+                                                        <td>@record.Sanction</td>
+                                                        <td>@record.Disbursement</td>
+                                                        <td>@record.Rejection</td>
+                                                    </tr>
+                                                }
                                             }
                                         </tbody>
                                     </table>
@@ -105,23 +189,39 @@
         </div>
     </div>
 </div>
-
 <script type="text/javascript">
-    function myfun() {
-        var user1 = 0;
-        var user2 = 0;
-        if ($(".ch1").prop('checked') == true) {
-            user1 = ($('.ch1').val());
-        }
-        if ($(".ch2").prop('checked') == true) {
-            user2 = ($('.ch2').val());
-        }
+    $(document).ready(function () {
+        $(".display").dataTable({
+            "oLanguage": {
+                "sZeroRecords": "No Records to Display",
+                "sSearch": "Search "
+            },
+            "columnDefs": [{
+                width: 90,
+                
+            }],
+        
+            "scrollX": true,
+            "iDisplayLength": 5,
+            "aLengthMenu": [[10, 50, 100, 200, 500], [10, 50, 100, 200, 500]],
+            "bSortClasses": false,
+            "bPaginate": true,
+            "bAutoWidth": false,
+            "bProcessing": true,
+            "bDestroy": true
+        });
+    });
+
+    $("input[type='checkbox']").click(function () {
+
+        var Branch = $("#DDLBranch option:selected").val();
+        console.log(Branch);
         $.ajax({
             type: "POST",
-            url: "/Leadlist/FilterSearch",
-            data: { "Id": $('#DDLBranch').find('option:selected').val(), "userId": user1, "UserId2": user2 },
+            url: "/Leadlist/ProposalAjax",
+            data: { "branchId": Branch },
             success: function (data) {
-
+                console.log(data);
                 var table = $('#tblLoginReport').DataTable();
                 table.destroy();
 
@@ -129,21 +229,36 @@
 
 
                 $.each(data, function (i, item) {
+                    if (item.loanAmount == null) {
+                        item.loanAmount = 0;
+                    }
+                    if (item.insuaranceAmount == null) {
+                        item.insuaranceAmount = 0;
+                    }
                     var rows = "<tr>" +
                         "<td>" + item.dsaName + "</td>" +
-                        "<td>" + item.totalLead + "</td>" +
+                        "<td>" + item.formNo + "</td>" +
+                        "<td>" + item.customerName + "</td>" +
+                        "<td>" + item.branchName + "</td>" +
+                        "<td>" + item.status + "</td>" +
+                        "<td style=display:none>" + item.sanctionTAT + "</td>" +
+                        "<td>" + item.productName + "</td>" +
+
+                        "<td>" + item.loanAmount + "</td>" +
+
+
+                        "<td>" + item.insuaranceAmount + "</td>" +
+
                         "<td>" + item.convertedLead + "</td>" +
                         "<td>" + item.branchDataEntry + "</td>" +
-                        "<td>" + item.hoInPrinSanction + "</td>" +
-                        "<td>" + item.branchCustProcessing + "</td>" +
-                        "<td>" + item.branch3rdPartyCheck + "</td>" +
-                        "<td>" + item.branchRecord + "</td>" +
-                        "<td>" + item.hoSanction + "</td>" +
-                        "<td>" + item.rejectedLead + "</td>" +
-                        "<td>" + item.sanctionedLead + "</td>" +
-                        "<td>" + item.disbursedLead + "</td>" +
-                        "<td>" + item.lostLead + "</td>" +
-                        "<td>" + item.rejectionPercent + "</td>" +
+                        "<td>" + item.inPrincipleSanction + "</td>" +
+                        "<td>" + item.branchProcess + "</td>" +
+                        "<td>" + item.thirdPartyCheck + "</td>" +
+
+                        "<td>" + item.sanction + "</td>" +
+                        "<td>" + item.disbursement + "</td>" +
+                        "<td>" + item.rejection + "</td>" +
+
                         "</tr>";
                     $('#tblLoginReport tbody').append(rows);
                 })
@@ -152,5 +267,120 @@
 
             }
         });
-    };
+
+
+        $(".display").dataTable({
+            "oLanguage": {
+                "sZeroRecords": "No Records to Display",
+                "sSearch": "Search "
+            },
+            "columnDefs": [{
+                width: 90,
+                targets: 0,
+                data: null,
+                orderable: false,
+                autoWidth: false,
+                defaultContent: '',
+            }],
+
+            "scrollX": true,
+            "iDisplayLength": 5,
+            "aLengthMenu": [[10, 50, 100, 200, 500], [10, 50, 100, 200, 500]],
+            "bSortClasses": false,
+            "bPaginate": true,
+            "bAutoWidth": false,
+            "bProcessing": true,
+            "bDestroy": true
+        });
+    });
+
+
+
+
+
+    $("#DDLBranch").change(function () {
+
+        var Branch = $("#DDLBranch option:selected").val();
+        console.log(Branch);
+        $.ajax({
+            type: "POST",
+            url: "/Leadlist/ProposalAjax",
+            data: { "branchId": Branch },
+            success: function (data) {
+                console.log(data);
+                var table = $('#tblLoginReport').DataTable();
+                table.destroy();
+
+                $('#tblLoginReport tbody').empty();
+
+
+                $.each(data, function (i, item) {
+                    if (item.loanAmount == null) {
+                        item.loanAmount = 0;
+                    }
+                    if (item.insuaranceAmount == null) {
+                        item.insuaranceAmount = 0;
+                    }
+                    var rows = "<tr>" +
+                        "<td>" + item.dsaName + "</td>" +
+                        "<td>" + item.formNo + "</td>" +
+                        "<td>" + item.customerName + "</td>" +
+                        "<td>" + item.branchName + "</td>" +
+                        "<td>" + item.status + "</td>" +
+                        "<td style=display:none>" + item.sanctionTAT + "</td>" +
+                        "<td>" + item.productName + "</td>" +
+
+                        "<td>" + item.loanAmount + "</td>" +
+
+
+                        "<td>" + item.insuaranceAmount + "</td>" +
+
+                        "<td>" + item.convertedLead + "</td>" +
+                        "<td>" + item.branchDataEntry + "</td>" +
+                        "<td>" + item.inPrincipleSanction + "</td>" +
+                        "<td>" + item.branchProcess + "</td>" +
+                        "<td>" + item.thirdPartyCheck + "</td>" +
+
+                        "<td>" + item.sanction + "</td>" +
+                        "<td>" + item.disbursement + "</td>" +
+                        "<td>" + item.rejection + "</td>" +
+
+                        "</tr>";
+                    $('#tblLoginReport tbody').append(rows);
+                })
+
+                $('#tblLoginReport').DataTable();
+
+            }
+        });
+
+
+        $(".display").dataTable({
+            "oLanguage": {
+                "sZeroRecords": "No Records to Display",
+                "sSearch": "Search "
+            },
+            "columnDefs": [{
+                width: 90,
+                targets: 0,
+                data: null,
+                orderable: false,
+                autoWidth: false,
+                defaultContent: '',
+            }],
+
+            "scrollX": true,
+            "iDisplayLength": 5,
+            "aLengthMenu": [[10, 50, 100, 200, 500], [10, 50, 100, 200, 500]],
+            "bSortClasses": false,
+            "bPaginate": true,
+            "bAutoWidth": false,
+            "bProcessing": true,
+            "bDestroy": true
+        });
+    });
+
+
+
+
 </script>

@@ -697,7 +697,7 @@ namespace LoanProcessManagement.App.Controllers
             return View();
         }
         #endregion
-        [Authorize(AuthenticationSchemes = "Cookies", Roles = "HO,Branch,Dsa")]
+        [Authorize(AuthenticationSchemes = "Cookies", Roles = "HO,Branch,DSA")]
 
         public async Task<IActionResult> MyProposal()
         {
@@ -714,10 +714,33 @@ namespace LoanProcessManagement.App.Controllers
                 proposal.branchId = 1;
                 proposal.LgId = (User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value);
             }
-
-            var Report = await _leadListService.MyProposal(proposal); ;
-            ViewData["MyProposal"] = Report;
+            List<GetPerformanceSummaryQueryDTO> result = new List<GetPerformanceSummaryQueryDTO>();
+            var Report = await _leadListService.MyProposal(proposal); 
+            if(proposal.RoleId  == 2)
+            {
+                ViewData["Role"] = "2";
+            }
+            else if(proposal.RoleId == 3)
+            {
+                ViewData["Role"] = "3";
+            }
+            else if(proposal.RoleId == 4)
+            {
+                ViewData["Role"] = "4";
+            }
+            if (Report != null)
+                ViewData["MyProposal"] = Report;
+            else
+                ViewData["MyProposal"] = result;
             return View();
+        }
+        public async Task<JsonResult> ProposalAjax(long branchId)
+        {
+            GetPerformanceSummaryQuery proposal = new GetPerformanceSummaryQuery();
+            proposal.RoleId = 2;
+            proposal.branchId = branchId;
+            var Report = await _leadListService.MyProposal(proposal);
+            return Json(Report);
         }
     }
 }

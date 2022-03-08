@@ -6,14 +6,16 @@ namespace LoanProcessManagement.Application.Features.LeadStatus.Queries.GetPerfo
 {
     public class GetPerformanceSummaryQueryDTO
     {
+        public string DSAName { get; set; }
         public long Lead_Id { get; set; }
         public string FormNo { get; set; }
+        public string BranchName { get; set; }
         public string CustomerName { get; set; }
         public string Status { get; set; }
         public string sanctionTAT { get; set; }
         public string ProductName { get; set; }
-        public long? LoanAmount { get; set; }
-        public long? InsuaranceAmount { get; set; }
+        public double? LoanAmount { get; set; }
+        public double? InsuaranceAmount { get; set; }
         public string convertedLead { get; set; }
         public string BranchDataEntry { get; set; }
         public string InPrincipleSanction { get; set; }
