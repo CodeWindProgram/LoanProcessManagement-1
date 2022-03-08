@@ -1,20 +1,22 @@
 ﻿@model LoanProcessManagement.Application.Features.RoleMaster.Commands.CreateRoleMaster.CreateRoleMasterCommandDto
-
+<script src="~/js/jquery/jquery-1.10.1.min.js"></script>
+@*<script src="~/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/plugins/jquery/jquery.min.js"></script>*@
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+
     ViewData["Title"] = "AddRole";
 }
 
-<div class="container app">
-    <div class="col-sm-12 col-lg-12">
+<div class="container app" style="border: 1px solid lightGray">
+    <div class="col-sm-12 col-lg-12 ">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in ">
-            <div style="border: 1px solid #343a40" class="border">
-                <div class="panel-heading">
-                    <h5>Add Role</h5>
-                </div>
+            <div>
+                <h5 class="ml-2 mt-3"><u><b>Add Role</b></u></h5>
                 <div class="panel-body">
                     <div class="border-part">
-                        <form asp-action="AddRole" method="post" enctype="multipart/form-data">
+                        <form id="MyForm" asp-action="AddRole" method="post" enctype="multipart/form-data">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div><br />
                             <div style="text-align:end" class="form-group"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
                             <div class="form-group">
@@ -23,11 +25,12 @@
                                     <div class="col-lg-4 col-sm-12 ">
                                         <label asp-for="RoleName" class="control-label">Role Name<span style="color: Red">&nbsp;*</span></label>
 
-                                        <input asp-for="RoleName" class="form-control" maxlength="50" placeholder="Role Name" required/>
+                                        <input asp-for="RoleName" name="RoleName" class="form-control" maxlength="50" placeholder="Role Name" />
                                         <span asp-validation-for="RoleName" class="text-danger"></span>
                                     </div>
 
-                                </div></div>    
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <div class="row">
@@ -37,13 +40,42 @@
                                     <div class="col-md-1"></div>
                                     <div class="col-md-1"></div>
                                     <div class="col-md-1"><button type="submit" id="submit" style="background-color: #343a40;color:white" class="btn">Submit</button></div>
-                                    <div class="col-md-2"><a asp-action="Index" id="btn2" type="button" value="Cancel" class="btn btn-danger">Cancel</a></div>
+                                    <div class="col-md-2"><a onclick="loadPage()" id="btn2" type="button" value="Cancel" class="btn btn-danger">Cancel</a></div>
                                 </div>
                             </div>
 
                         </form>
                     </div>
                 </div>
-            
 
-                </div></div></div></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function loadPage() {
+
+        $("#div_dynamicTables").load("../Master/GetRoleMaster");
+    }
+    $("#MyForm").on("submit", function (e) {
+        var dataString = $(this).serialize();
+        var modelStatus = $(this).valid();
+        if (modelStatus) {
+            
+            $.ajax({
+                type: "POST",
+                url: "/Master/AddRole",
+                data: dataString,
+                success: function () {
+                    toastr.success("UserRole Added SuccessFully.");
+                    $("#div_dynamicTables").load("../Master/GetRoleMaster");
+                }
+            });
+            e.preventDefault();
+        }
+      
+    });
+
+</script>
+

@@ -1,0 +1,121 @@
+﻿@model IEnumerable<LoanProcessManagement.Application.Features.RoleMaster.Queries.GetRoleMasterList.RoleMasterListVm>
+<script src="~/js/Master.js"></script>
+<script src="~/js/jquery/jquery.dataTables.js"></script>
+
+@{
+    ViewData["Title"] = "GetRoleMaster";
+    var records =ViewData["RoleMasterList"];
+}
+<style>
+    td{
+        text-align:center;
+    }
+    th{
+        text-align:center;
+    }
+</style>
+
+<div class="container app">
+    <h5 class="ml-2 mt-3"><u><b>User Role List</b></u></h5>
+    <div id="div" class="col-lg-6 pt-4 pb-4">
+
+        <button class="btn-default-submit float-left ml-1" id="act1">Add New Role</button>
+    </div>
+    <hr />
+    <table id="tblUserList" class="display table table-responsive-lg">
+        <thead>
+            <tr>
+                <th>
+
+                    Id
+                </th>
+                <th>
+
+                    RoleName
+                </th>
+
+                <th>
+                    isActive
+                </th>
+                <th hidden>
+                    modified On
+                </th>
+
+                <th hidden>
+                    Created date
+                </th>
+                <th>
+                    Action
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+
+                <tr>
+
+                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                    <td> @Html.DisplayFor(modelItem => item.RoleName)</td>
+                    <td> @Html.DisplayFor(modelItem => item.IsActive)</td>
+                    <td hidden> @Html.DisplayFor(modelItem => item.LastModifiedDate)</td>
+                    <td hidden> @Html.DisplayFor(modelItem => item.CreatedDate)</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" onclick="loadPage(@Html.DisplayFor(modelItem => item.Id))" id="updateBtn">Update</button>
+                        <button class="btn btn-danger btn-sm" onclick="loadDelete(@Html.DisplayFor(modelItem => item.Id))" id="deleteBtn">Delete</button>
+
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        $(".display").dataTable({
+            "oLanguage": {
+                "sZeroRecords": "No Records to Display",
+                "sSearch": "Search "
+            },
+            "iDisplayLength": 10,
+            "aLengthMenu": [[10, 50, 100, 200, 500], [10, 50, 100, 200, 500]],
+            "bSortClasses": false,
+            "bPaginate": true,
+            "bAutoWidth": false,
+            "bProcessing": true,
+            "bDestroy": true
+           
+        });
+    });
+
+    function loadPage(id) {
+
+        $("#div_dynamicTables").load("../Master/UpdateRole/" + id);
+    }
+    $('#act1').click(function () {
+        $("#div_dynamicTables").load("../Master/AddRole");
+    });
+
+    function loadDelete(id){
+       $.ajax({
+            type: "POST",
+            url: "/Master/DeleteRole/" + id,
+           beforeSend: function () {
+               return confirm("Are you sure you want to delete?");
+           },
+           success: function () {
+              
+                toastr.success("UserRole deleted SuccessFully.")
+
+                $("#div_dynamicTables").load("../Master/GetRoleMaster");
+            }
+        });
+        e.preventDefault();
+    };
+</script>
+
+
+

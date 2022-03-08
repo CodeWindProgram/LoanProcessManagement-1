@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<LoanProcessManagement.Application.Features.UserList.Query.GetUserListQueryVm>
 <script src="~/js/Master.js"></script>
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     TempData["Title"] = "Index";
@@ -11,22 +12,23 @@
 
         #act1:hover {
             color: white;
+        }
 </style>
 <div class="container app pb-5">
     <div class="col-sm-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s">
-            <div class="panel-heading"><h5>Role List</h5></div>
+            <div class="panel-heading"><h5>Master</h5></div>
             <div class="panel-body">
-                
+
                 <div id="alertMsg" visible="false" runat="server">
                     <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
                 </div>
                 <div class="card" style="padding:15px;">
                     <div>
                         <div class="row">
-                            
-                            <div class="col-lg-3">
-                                
+
+                            <div class="col-lg-3 mb-3">
+
 
                                 <select class="form-control mt-4 mr-0 w3-right" aria-label="Default select example" name="sorts" id="selectVideo" required>
                                     <option value="0" selected>Select</option>
@@ -38,52 +40,10 @@
                                 </select>
                             </div>
 
-
-                            <div id="div" class="col-lg-6 mt-4">
-
-
-                            </div>
                         </div>
                     </div>
                     <hr />
-                    @*<div class="row d-flex flex-wrap">
-            <div class="col-lg-10  d-flex flex-wrap">*@
-                    <table id="tblUserList" class="display table table-responsive-lg">
-                        <thead>
-                            <tr>
-                                <th>
-
-                                    Id
-                                </th>
-                                <th>
-
-                                    RoleName
-                                </th>
-
-                                <th>
-                                    isActive
-                                </th>
-                                <th>
-                                    modified On
-                                </th>
-
-                                <th>
-                                    Created date
-                                </th>
-                                <th>
-                                    Action
-                                </th>
-                                <th>
-
-                                </th>
-
-                            </tr>
-                        </thead>
-                        <tbody id="showTable">
-                        </tbody>
-                    </table>
-                    @*</div>
-            </div>*@
+                    <div id="div_dynamicTables"></div>
                 </div>
 
             </div>
