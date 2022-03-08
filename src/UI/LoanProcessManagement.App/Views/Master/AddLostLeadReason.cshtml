@@ -1,0 +1,65 @@
+﻿@model LoanProcessManagement.Application.Features.LostLeadMaster.Commands.CreateLostLeadReasonMaster.CreateLostLeadReasonMasterCommandDto
+
+@{
+    ViewData["Title"] = "AddLostLeadReason";
+}
+
+<hr />
+<div class="container app">
+    <div class="col-sm-12 col-lg-12">
+        <div data-effect="helix" id="panels" class="panel panel-info effect-helix in ">
+            <div style="border: 1px solid #343a40" class="border">
+                <h4>Add LostLead Reason</h4>
+                <div class="panel-body">
+                    <div class="border-part">
+                        <form id="MyForm" asp-action="AddLostLeadReason" method="post" enctype="multipart/form-data">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div style="text-align:end" class="form-group"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
+                            <div class="form-group">
+                                <div class="row pl-5">
+                                    <div class="col-lg-4 col-sm-12 ">
+                                        <label asp-for="LostLeadReason" class="control-label"></label>
+                                        <input asp-for="LostLeadReason" class="form-control" />
+                                        <span asp-validation-for="LostLeadReason" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1"><button type="submit" value="Create" class="btn btn-default" id="submit" style="background-color: #343a40;color:white">Submit</button></div>
+                                    <div class="col-md-2"><a onclick="loadPage()" id="btn2" type="button" value="Cancel" class="btn btn-danger">Cancel</a></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function loadPage() {
+
+        $("#div_dynamicTables").load("../Master/GetLostLeadReasonMaster");
+    }
+    $("#MyForm").on("submit", function (e) {
+        var dataString = $(this).serialize();
+        $.ajax({
+            type: "POST",
+            url: "/Master/AddLostLeadReason",
+            data: dataString,
+            success: function () {
+                toastr.success("Lost Lead Reason Added SuccessFully.");
+                $("#div_dynamicTables").load("../Master/GetLostLeadReasonMaster");
+            }
+        });
+        e.preventDefault();
+    });
+
+</script>
+

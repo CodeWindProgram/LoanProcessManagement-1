@@ -48,7 +48,12 @@ $(document).ready(function () {
             //    }
             //});
         }
-        
+        else if ($('#selectVideo').val() == 5) {
+            $("#div_dynamicTables").load("../Master/GetLostLeadReasonMaster");
+        }
+        else if ($('#selectVideo').val() == 6) {
+            $("#div_dynamicTables").load("../Master/GetRejectLeadReasonMaster");
+        }
     });
     
 });

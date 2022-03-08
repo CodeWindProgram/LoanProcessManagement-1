@@ -26,6 +26,10 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string ModifyLead = "api/v1/LeadList/ModifyLead";
         public const string RoleList = "api/v1/RoleMaster";
         public const string Role = "api/v1/RoleMaster/";
+        public const string LostDelete = "api/v1/LostLeadReasonMaster/";
+        public const string Lost = "api/v1/LostLeadReasonMaster";
+        public const string RejectDelete = "api/v1/RejectedLeadReasonMaster/";
+        public const string Reject = "api/v1/RejectedLeadReasonMaster";
         public const string GetAllMenuMaps = "api/v1/Menu/GetAllMenuMaps";
         public const string RoleMap = "api/v1/Menu/CreateMenuMaps";
         public const string DeleteRoleMapById = "api/v1/Menu/DeleteMenuMapsById/";
@@ -151,5 +155,7 @@ namespace LoanProcessManagement.App.Helper.APIHelper
 
         public const string GetSubmit = "api/v1/IncomeAssesment/GetSubmit/";
         public const string PostSubmit = "api/v1/IncomeAssesment/UpdateSubmitGst";
+
+
     }
 }

@@ -75,6 +75,14 @@
     <Compile Remove="Migrations\20220228121104_Initial_24.Designer.cs" />
     <Compile Remove="Migrations\20220228122325_Initial_24.cs" />
     <Compile Remove="Migrations\20220228122325_Initial_24.Designer.cs" />
+    <Compile Remove="Migrations\20220307061747_initial_25.cs" />
+    <Compile Remove="Migrations\20220307061747_initial_25.Designer.cs" />
+    <Compile Remove="Migrations\20220307063108_initial_25.cs" />
+    <Compile Remove="Migrations\20220307063108_initial_25.Designer.cs" />
+    <Compile Remove="Migrations\20220307070024_initial_25.cs" />
+    <Compile Remove="Migrations\20220307070024_initial_25.Designer.cs" />
+    <Compile Remove="Migrations\20220307072051_initial_25.cs" />
+    <Compile Remove="Migrations\20220307072051_initial_25.Designer.cs" />
     <Compile Remove="Migrations\GloboTicketDbContextModelSnapshot.cs" />
   </ItemGroup>
 

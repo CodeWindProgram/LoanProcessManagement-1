@@ -1,0 +1,103 @@
+﻿@model IEnumerable<LoanProcessManagement.Application.Features.LostLeadMaster.Queries.GetLostLeadMasterList.LostLeadMasterListVm>
+<script src="~/js/Master.js"></script>
+<script src="~/js/jquery/jquery.dataTables.js"></script>
+@{
+    ViewData["Title"] = "GetLostLeadReasonMaster";
+    var records = ViewData["GetByLostLeadReason"];
+
+}
+<style>
+    td {
+        text-align: center;
+    }
+
+    th {
+        text-align: center;
+    }
+</style>
+<div class="container app">
+    <div id="div" class="col-lg-6 pt-4 pb-4">
+
+        <button class="btn-default-submit float-left ml-1" id="act1">Add New Lost Lead Reason</button>
+    </div>
+    <hr />
+    <table id="tblUserList" class="display table table-responsive-lg">
+        <thead>
+            <tr>
+                
+                <th>
+                    @Html.DisplayNameFor(model => model.LostLeadReason)
+                </th>
+                
+                <th>
+                    @Html.DisplayNameFor(model => model.IsActive)
+                </th>
+                
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.LostLeadReason)
+                </td>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    <button class="btn btn-primary btn-sm" onclick="loadPage(@Html.DisplayFor(modelItem => item.LostLeadReasonID))" id="updateBtn">Update</button>
+                    @Html.ActionLink("Delete", "DeleteLostLeadReason", "Master",
+                            new { id = item.LostLeadReasonID },
+                            new { onclick = "return confirm('Are you sure you want to delete ?');", @Class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(".display").dataTable({
+            "oLanguage": {
+                "sZeroRecords": "No Records to Display",
+                "sSearch": "Search "
+            },
+            "iDisplayLength": 10,
+            "aLengthMenu": [[10, 50, 100, 200, 500], [10, 50, 100, 200, 500]],
+            "bSortClasses": false,
+            "bPaginate": true,
+            "bAutoWidth": false,
+            "bProcessing": true,
+            "bDestroy": true
+
+        });
+    });
+
+    function loadPage(id) {
+
+        $("#div_dynamicTables").load("../Master/UpdateLostLeadReason/" + id);
+    }
+    $('#act1').click(function () {
+        $("#div_dynamicTables").load("../Master/AddLostLeadReason");
+    });
+
+    function loadDelete(id) {
+        $.ajax({
+            type: "POST",
+            url: "/Master/DeleteLostLeadReason/" + id,
+            data: dataString,
+            success: function () {
+                toastr.success("LostLeadReason deleted SuccessFully.")
+
+                $("#div_dynamicTables").load("../LostLeadReasonMaster");
+            }
+        });
+        e.preventDefault();
+    };
+</script>
+

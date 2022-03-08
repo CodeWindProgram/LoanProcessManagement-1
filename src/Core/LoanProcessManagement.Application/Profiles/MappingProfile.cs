@@ -70,6 +70,12 @@ using LoanProcessManagement.Application.Features.CreditGstDetails.CreditGstCheck
 using LoanProcessManagement.Application.Features.CreditGstDetails.UserDetails.Queries;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.AddIncomeAssessment;
 using LoanProcessManagement.Application.Features.Branch.Commands.CreateBranch;
+using LoanProcessManagement.Application.Features.LostLeadMaster.Queries.GetLostLeadMasterList;
+using LoanProcessManagement.Application.Features.LostLeadMaster.Commands.CreateLostLeadReasonMaster;
+using LoanProcessManagement.Application.Features.LostLeadMaster.Commands.UpdateLostLeadReasonMaster;
+using LoanProcessManagement.Application.Features.RejectedLeadMaster.Queries.GetRejectedLeadMasterbyId;
+using LoanProcessManagement.Application.Features.RejectedLeadMaster.Commands.CreateRejectedLeadReasonMaster;
+using LoanProcessManagement.Application.Features.RejectedLeadMaster.Queries.GetRejectLeadMasterList;
 
 namespace LoanProcessManagement.Application.Profiles
 {
@@ -234,6 +240,15 @@ namespace LoanProcessManagement.Application.Profiles
             CreateMap<CreditITRDetailsListModel, GetCreditGstDetailsVm>().ReverseMap();
 
             CreateMap<CreditITRDetailsListModel, GetCreditGstUserDetailsVm>().ReverseMap();
+
+            CreateMap<LpmLostLeadReasonMaster, LostLeadMasterListVm>().ReverseMap();
+            CreateMap<LpmLostLeadReasonMaster, CreateLostLeadReasonMasterCommandDto>().ReverseMap();
+            CreateMap<LpmLostLeadReasonMaster, UpdateLostLeadReasonMasterDto>().ReverseMap();
+            CreateMap<LpmRejectedLeadReasonMaster, RejectLeadMasterListVm>().ReverseMap();
+            CreateMap<LpmRejectedLeadReasonMaster, CreateRejectedLeadReasonMasterCommandDto>().ReverseMap();
+            CreateMap<LpmLostLeadReasonMaster, GetRejectedLeadReasonMasterByIdDto>().ReverseMap();
+
+            
             CreateMap<CreateBranchCommand, LpmBranchMaster>().ReverseMap();
 
         }
