@@ -13,6 +13,8 @@ namespace LoanProcessManagement.Application.Features.RoleMaster.Commands.UpdateR
         public string RoleName { get; set; }
         public DateTime LastModifiedDate { get; set; }
 
+        public bool IsActive { get; set; }
+
     }
     #endregion
 }

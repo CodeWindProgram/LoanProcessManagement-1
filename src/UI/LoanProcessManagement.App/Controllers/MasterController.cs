@@ -36,8 +36,17 @@ namespace LoanProcessManagement.App.Controllers
             return View();
             
         }
+        [HttpGet]
+       
+        public async Task<IActionResult> GetRoleMaster()
+        {
+            var roleMaster = await _roleMasterService.RoleListProcess();
+            var data=roleMaster.Data;
+            ViewData["RoleMasterList"] = data;
+            return View(data);
+        }
 
-        
+
         [HttpGet("/Master/AddRole")]
         public async Task<IActionResult> AddRole()
         {
@@ -52,7 +61,7 @@ namespace LoanProcessManagement.App.Controllers
             
                 var response = await _roleMasterService.CreateRoleMaster(createRoleMasterCommand);
                 
-            return RedirectToAction("Index");
+            return View();
         }
 
         [HttpGet]
@@ -71,9 +80,10 @@ namespace LoanProcessManagement.App.Controllers
         {
             UpdateRoleMasterCommand rolemaster = new UpdateRoleMasterCommand()
             {
-                Id = roleMasterVm.getRoleMasterByIdQueryVm.Id,
+                Id = id,
                 RoleName = roleMasterVm.getRoleMasterByIdQueryVm.RoleName,
-                LastModifiedDate = DateTime.Now
+                LastModifiedDate = DateTime.Now,
+                IsActive=roleMasterVm.getRoleMasterByIdQueryVm.IsActive
             };
             var response = await _roleMasterService.UpdateRoleMaster(rolemaster);
             

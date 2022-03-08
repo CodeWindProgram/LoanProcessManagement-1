@@ -31,6 +31,7 @@ namespace LoanProcessManagement.Application.Features.RoleMaster.Queries.GetRoleM
             role.Id = data.Id;
             role.RoleName = data.Rolename;
             role.LastModifiedDate = (DateTime)data.LastModifiedDate;
+            role.IsActive = data.IsActive;
             return role;
         }
 

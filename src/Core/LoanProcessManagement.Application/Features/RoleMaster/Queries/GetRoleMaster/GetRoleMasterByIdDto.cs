@@ -9,6 +9,7 @@ namespace LoanProcessManagement.Application.Features.RoleMaster.Queries.GetRoleM
         public long Id { get; set; }
         public string RoleName { get; set; }
         public DateTime LastModifiedDate { get; set; }
+        public bool IsActive { get; set; }
 
         
     }

@@ -53,6 +53,7 @@ namespace LoanProcessManagement.Persistence.Repositories
             if (userDetails!=null) {
                 userDetails.Rolename = request.RoleName;
                 userDetails.CreatedDate = DateTime.Now;
+                userDetails.IsActive = request.IsActive;
                 _dbContext.SaveChanges();
                 response.Message = "Menu details Updated Successfully";
                 response.Succeeded = true;

@@ -394,13 +394,14 @@ namespace LoanProcessManagement.App.Controllers
             return RedirectToAction("MenuList");
 
         }
-        [HttpGet]
-        [Route("/RoleMaster")]
-        public async Task<Response<IEnumerable<RoleMasterListVm>>> GetRoleMaster()
-        {
-            var roleMaster = await _roleMasterService.RoleListProcess();
-            return roleMaster;
-        }
+        //[HttpGet]
+        //[Route("/RoleMaster")]
+        //public async Task<IActionResult> GetRoleMaster()
+        //{
+        //    var roleMaster = await _roleMasterService.RoleListProcess();
+        //    ViewData["RoleMasterList"]= roleMaster;
+        //    return View();
+        //}
 
         #endregion
     }

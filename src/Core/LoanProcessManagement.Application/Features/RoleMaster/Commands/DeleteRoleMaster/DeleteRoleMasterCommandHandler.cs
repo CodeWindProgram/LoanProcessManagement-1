@@ -41,7 +41,8 @@ namespace LoanProcessManagement.Application.Features.RoleMaster.Commands.DeleteR
 
             if (eventToDelete != null)
             {
-                await _roleMasterRepository.DeleteAsync(eventToDelete);
+                eventToDelete.IsActive = false;
+                await _roleMasterRepository.UpdateAsync(eventToDelete);
                 deleteRoleMasterCommandResponse.Succeeded = true;
                 deleteRoleMasterCommandResponse.Message = "successfully Role Master deleted";
             }
