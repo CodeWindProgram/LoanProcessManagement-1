@@ -39,6 +39,7 @@
                                         <input type="checkbox" class="ch2" name="userType" value="4">
                                         DSA
                                     </div>
+                                    <span id="Err_Msg_divUserType" class="text-danger"></span>
                                 </div>
                                 <div class="col-1"></div>
                                 <div class="col-3">
@@ -72,9 +73,9 @@
                                                 <th>Converted Leads</th>
                                                 <th>Data Entry</th>
                                                 <th>In-Prin. Sanc.</th>
-                                                <th>Branch Processing</th>
+                                                @*<th>Branch Processing</th>
                                                 <th>3rd Party Check</th>
-                                                <th>Recomendation</th>
+                                                <th>Recomendation</th>*@
                                                 <th>HO (Sanction)</th>
                                                 <th>Sanctioned Leads</th>
                                                 <th>Disbursed Leads</th>
@@ -123,9 +124,9 @@
                         "<td>" + item.convertedLead + "</td>" +
                         "<td>" + item.branchDataEntry + "</td>" +
                         "<td>" + item.hoInPrinSanction + "</td>" +
-                        "<td>" + item.branchCustProcessing + "</td>" +
-                        "<td>" + item.branch3rdPartyCheck + "</td>" +
-                        "<td>" + item.branchRecord + "</td>" +
+                        //"<td>" + item.branchCustProcessing + "</td>" +
+                        //"<td>" + item.branch3rdPartyCheck + "</td>" +
+                        //"<td>" + item.branchRecord + "</td>" +
                         "<td>" + item.hoSanction + "</td>" +
                         "<td>" + item.rejectedLead + "</td>" +
                         "<td>" + item.sanctionedLead + "</td>" +
@@ -141,4 +142,21 @@
             }
         });
     };
+
+    $("#divUserType").change(function () {
+        var array = [];
+        $("#divUserType input:checked").each(function () {
+            array.push($(this).val());
+        });
+        var chklist = array.toString();
+        if (chklist == "") {
+            $("#Err_Msg_divUserType").html("Please Select Atleast One Option.").show();
+            $("#btnSubmit").attr('disabled', 'disabled');
+            return false;
+        }
+        else {
+            $("#Err_Msg_divUserType").html("").hide();
+            $("#btnSubmit").removeAttr('disabled');
+        }
+    });
 </script>

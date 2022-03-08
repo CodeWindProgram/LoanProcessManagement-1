@@ -1,4 +1,5 @@
 ﻿using LoanProcessManagement.App.Helper.APIHelper;
+using LoanProcessManagement.App.Models;
 using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.AddIncomeAssessment;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTAddEnuiry;
@@ -181,5 +182,34 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             return model;
         }
+
+        #region GetIncomeAssessmentRecordsListService - Pratiksha - 03/03/2022
+        /// <summary>
+        /// 03/03/20222 - GetIncomeAssessmentRecordsListService
+        /// commented by Pratiksha Poshe
+        /// </summary>
+        /// <param name="applicantType"></param>
+        /// <param name="lead_Id"></param>
+        /// <returns></returns>
+        public async Task<Response<IEnumerable<IncomeAssessmentRecordsListVM>>> GetIncomeAssessmentRecordsList(int applicantType, long lead_Id)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.GetAsync
+                (
+                    BaseUrl + APIEndpoints.GetIncomeAssessmentRecordsList.Replace("{0}", applicantType.ToString()).Replace("{1}", lead_Id.ToString())
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var response = System.Text.Json.JsonSerializer.Deserialize<Response<IEnumerable<IncomeAssessmentRecordsListVM>>>(jsonString, options);
+
+            return response;
+        }
+        #endregion
     }
 }

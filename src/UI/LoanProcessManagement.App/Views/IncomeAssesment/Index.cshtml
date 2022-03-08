@@ -397,6 +397,16 @@
                                         </center>
                                     </div>
                                 </div>
+
+                                <div id="divIncomeRecords">
+                                    <div>
+                                        <hr />
+                                        <h4><u><b>Income Assessment Records</b></u></h4>
+                                    </div>
+                                    <div>
+                                        @await Component.InvokeAsync("IncomeAssessmentRecordsList", new { applicantType = Model.ApplicantType, lead_Id = Model.lead_Id })
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -868,6 +878,12 @@
         }
     }
 
+    if (@Model.IncomeRecords == 0) {
+        $("#divIncomeRecords").hide()
+    }
+    else {
+        $("#divIncomeRecords").show()
+    }
 </script>
 
 

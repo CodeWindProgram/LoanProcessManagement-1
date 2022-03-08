@@ -2,6 +2,7 @@
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTCreateEnquiry;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.UpdateSubmitGst;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Queries.GetIncomeAssessment;
+using LoanProcessManagement.Application.Features.IncomeAssesment.Queries.GetIncomeAssessmentRecordsList;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Queries.GetIsSubmitFromGst;
 using LoanProcessManagement.Application.Responses;
 using LoanProcessManagement.Domain.CustomModels;
@@ -21,6 +22,7 @@ namespace LoanProcessManagement.Application.Contracts.Persistence
         #region Interface Method - Pratiksha Poshe - 14-02-2022
         Task<GetIncomeAssessmentDetailsDto> GetIncomeAssessmentDetailsAsync(int ApplicantType, long lead_id);
         Task<IncomeAssessmentDetailsModel> AddIncomeAssessmentDetailsAsync(IncomeAssessmentDetailsModel request);
+        Task<IEnumerable<GetIncomeAssessmentRecordsListDto>> GetIncomeAssessmentRecordsList(int ApplicantType, long lead_id);
         #endregion
 
     }

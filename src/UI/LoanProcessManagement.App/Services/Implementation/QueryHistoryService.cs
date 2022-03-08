@@ -26,13 +26,13 @@ namespace LoanProcessManagement.App.Services.Implementation
         }
 
 
-        #region This method will get add applicant details api by - Pratiksha Poshe - 19/11/2021
+        #region This method will get query history details api by - Pratiksha Poshe - 19/11/2021
         /// <summary>
-        /// 19/11/2021 - This method will get add applicant details api
+        /// 19/11/2021 - This method will get query history details api
         //	commented by Pratiksha Poshe
         /// </summary>
-        /// <param name="leadId">leadId</param>
-        /// <returns>response</returns>
+        /// <param name="lead_Id"></param>
+        /// <returns></returns>
         public async Task<Response<IEnumerable<QueryHistoryCommandVM>>> GetQueryHistoryByLeadId(string lead_Id)
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;

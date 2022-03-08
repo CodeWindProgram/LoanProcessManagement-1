@@ -101,7 +101,7 @@ namespace LoanProcessManagement.App.Controllers
         /// <returns>View</returns>
         [Route("[controller]/[action]/{LeadId}")]
         [HttpGet]
-        [Authorize(AuthenticationSchemes = "Cookies", Roles = "HO,Branch")]
+        [Authorize(AuthenticationSchemes = "Cookies", Roles = "HO,Branch,DSA")]
 
 
         public async Task<IActionResult> LeadHistory(string LeadId)
@@ -126,7 +126,7 @@ namespace LoanProcessManagement.App.Controllers
         /// <returns>View</returns>
         [Route("[controller]/[action]/{lead_Id}")]
         [HttpGet]
-        [Authorize(AuthenticationSchemes = "Cookies", Roles = "HO,Branch")]
+        [Authorize(AuthenticationSchemes = "Cookies", Roles = "HO,Branch,DSA")]
 
 
         public async Task<IActionResult> LeadSummary(string lead_Id)
@@ -151,7 +151,7 @@ namespace LoanProcessManagement.App.Controllers
         /// <param name="lead_id">lead_id</param>
         /// <returns>View</returns>
         [Route("[controller]/[action]/{lead_Id}")]
-        [Authorize(AuthenticationSchemes = "Cookies",Roles ="HO,Branch")]
+        [Authorize(AuthenticationSchemes = "Cookies",Roles ="HO,Branch,DSA")]
         [HttpGet]
         public async Task<IActionResult> LeadModification(string lead_Id)
         {
@@ -664,7 +664,7 @@ namespace LoanProcessManagement.App.Controllers
         }
 
         #region HO-Inprinciple Sanction Report List - 14/02/2022 - Raj Bhosale
-        [Authorize(Roles = "HO,Branch")]
+        [Authorize(Roles = "HO,Branch,DSA")]
 
         public async Task<IActionResult> InprincipleSanctionReport()
         {
@@ -681,7 +681,7 @@ namespace LoanProcessManagement.App.Controllers
         #endregion
 
         #region HO-Sanction Report List - 14/02/2022 - Raj Bhosale
-        [Authorize(AuthenticationSchemes = "Cookies",Roles = "HO,Branch")]
+        [Authorize(AuthenticationSchemes = "Cookies",Roles = "HO,Branch,DSA")]
 
         public async Task<IActionResult> HOSanctionReport()
         {

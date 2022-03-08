@@ -87,11 +87,11 @@ namespace LoanProcessManagement.Domain.Entities
         public long? IsSanctionedPlanReceivedID { get; set; }
         public LpmLoanSanctionedPlan SanctionedPlans { get; set; }
 
-        public long LostLeadReasonID { get; set; }
+        public long? LostLeadReasonID { get; set; }
 
         public string LostLeadComment { get; set; }
 
-        public long RejectLeadReasonID { get; set; }
+        public long? RejectLeadReasonID { get; set; }
 
         public string RejectedLeadComment { get; set; }
 
