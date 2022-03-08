@@ -96,17 +96,20 @@
     }
     $("#MyForm").on("submit", function (e) {
         var dataString = $(this).serialize();
-        $.ajax({
-            type: "POST",
-            url: "/Master/UpdateRole/" + @record.Id,
-            data: dataString,
-            success: function () {
-                toastr.success("UserRole Updated SuccessFully.")
+        var ModelStatus = $(this).validate();
+        if (ModelStatus) {
+            $.ajax({
+                type: "POST",
+                url: "/Master/UpdateRole/" + @record.Id,
+                data: dataString,
+                success: function () {
+                    toastr.success("UserRole Updated SuccessFully.")
 
-                $("#div_dynamicTables").load("../Master/GetRoleMaster");
-            }
-        });
-        e.preventDefault();
+                    $("#div_dynamicTables").load("../Master/GetRoleMaster");
+                }
+            });
+            e.preventDefault();
+        }
     });
 
     </script>
