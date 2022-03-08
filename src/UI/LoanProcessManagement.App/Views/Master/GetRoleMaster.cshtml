@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<LoanProcessManagement.Application.Features.RoleMaster.Queries.GetRoleMasterList.RoleMasterListVm>
 <script src="~/js/Master.js"></script>
 <script src="~/js/jquery/jquery.dataTables.js"></script>
+
 @{
     ViewData["Title"] = "GetRoleMaster";
     var records =ViewData["RoleMasterList"];
@@ -15,6 +16,7 @@
 </style>
 
 <div class="container app">
+    <h5 class="ml-2 mt-3"><u><b>User Role List</b></u></h5>
     <div id="div" class="col-lg-6 pt-4 pb-4">
 
         <button class="btn-default-submit float-left ml-1" id="act1">Add New Role</button>
@@ -55,14 +57,15 @@
 
                 <tr>
 
-                    <td >@Html.DisplayFor(modelItem => item.Id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
                     <td> @Html.DisplayFor(modelItem => item.RoleName)</td>
                     <td> @Html.DisplayFor(modelItem => item.IsActive)</td>
                     <td hidden> @Html.DisplayFor(modelItem => item.LastModifiedDate)</td>
                     <td hidden> @Html.DisplayFor(modelItem => item.CreatedDate)</td>
-                    <td> <button class="btn btn-primary btn-sm" onclick="loadPage(@Html.DisplayFor(modelItem => item.Id))" id="updateBtn">Update</button>
-                         <button class="btn btn-danger btn-sm" onclick="loadDelete(@Html.DisplayFor(modelItem => item.Id))" id="deleteBtn">Delete</button>
-                        
+                    <td>
+                        <button class="btn btn-primary btn-sm" onclick="loadPage(@Html.DisplayFor(modelItem => item.Id))" id="updateBtn">Update</button>
+                        <button class="btn btn-danger btn-sm" onclick="loadDelete(@Html.DisplayFor(modelItem => item.Id))" id="deleteBtn">Delete</button>
+
                     </td>
                 </tr>
             }
