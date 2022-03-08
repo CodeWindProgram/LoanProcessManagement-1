@@ -72,8 +72,13 @@
                                     @Html.DisplayFor(modelItem => item.ApplicantName)
                                 </td>
                                 <td>
-                                    Applicant-@Html.DisplayFor(modelItem => item.ApplicantType)
-                                    
+                                    @*Applicant-@Html.DisplayFor(modelItem => item.ApplicantType)*@
+                                    @if (item.ApplicantType > 0){
+                                        <span>Co-Applicant-</span>@Html.DisplayFor(modelItem => item.ApplicantType);
+                                    }
+                                    else{
+                                        <span>Applicant</span>
+                                    }
                                 </td>
                                 <td>
                                     @{var date = item.CreatedDate.ToString().Split(" ");
@@ -81,11 +86,11 @@
                                     @date[0]
                                 </td>
                                 <td>
-                                    <button type="button" onclick="downloadFile(event, '@item.PdfFile', '@item.FormNo')">@item.PdfFile</button>
+                                    <button type="button" onclick="downloadFile(event, '@item.PdfFile', '@item.FormNo')">Click Here</button>
                                     
                                 </td>
                                 <td>
-                                    <button type="button" onclick="downloadFile(event, '@item.ExcelFile', '@item.FormNo')">@item.ExcelFile</button>
+                                    <button type="button" onclick="downloadFile(event, '@item.ExcelFile', '@item.FormNo')">Click Here</button>
                                     
                                 </td>
                                 @*<td>

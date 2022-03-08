@@ -55,7 +55,11 @@
                                         @Html.DisplayFor(modelItem => item.PhoneNo)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.FirstMeeting)
+                                        @*@Html.DisplayFor(modelItem => item.FirstMeeting)*@
+                                        @{
+                                            var date = item.FirstMeeting.ToString().Split(" ");
+                                        }
+                                        @date[0]
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Status)

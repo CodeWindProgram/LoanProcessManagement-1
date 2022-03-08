@@ -71,9 +71,15 @@
                                     @Html.DisplayFor(modelItem => item.ApplicantName)
                                 </td>
                                 <td id="applicantId">
-                                    Applicant-@Html.DisplayFor(modelItem => item.ApplicantType)
-                                   @*<p id="ApplicantTypeValue"></p>
-                                   <style onload="applicantTypeFun(@Html.DisplayFor(modelItem => item.ApplicantType))"></style>*@
+                                    @*Applicant-@Html.DisplayFor(modelItem => item.ApplicantType)*@
+                                    @*<p id="ApplicantTypeValue"></p>
+        <style onload="applicantTypeFun(@Html.DisplayFor(modelItem => item.ApplicantType))"></style>*@
+                                    @if (item.ApplicantType > 0){
+                                        <span>Co-Applicant-</span>@Html.DisplayFor(modelItem => item.ApplicantType);
+                                    }
+                                    else{
+                                        <span>Applicant</span>
+                                    }
                                 </td>
 
                                 <td>

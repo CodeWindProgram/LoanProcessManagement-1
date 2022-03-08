@@ -44,7 +44,7 @@
                                     <div class="col-lg-4 col-sm-12">
                                         <label asp-for="EmployeeId">Username <span style="color: Red">&nbsp;*</span></label>
 
-                                        <input asp-for="EmployeeId" class="form-control" type="text" placeholder="Username" autofocus />
+                                        <input asp-for="EmployeeId" class="form-control" type="text" placeholder="Username" onkeydown="return /[a-z0-9]/i.test(event.key)" autofocus />
                                         <span asp-validation-for="EmployeeId" class="text-danger"></span>
                                     </div>
                                     <div class="col-lg-4 col-sm-12">

@@ -43,9 +43,9 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.StartDate)
                                 </th>
-                                <th>
+                                @*<th>
                                     @Html.DisplayNameFor(model => model.EndDate)
-                                </th>
+                                </th>*@
                                 <th>
                                     @Html.DisplayNameFor(model => model.Description)
                                 </th>
@@ -68,11 +68,14 @@
                                         @Html.DisplayFor(modelItem => item.Stage)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.StartDate)
+                                        @{
+                                            var date = item.StartDate.ToString().Split(" ");
+                                        }
+                                        @date[0]
                                     </td>
-                                    <td>
+                                    @*<td>
                                         @Html.DisplayFor(modelItem => item.EndDate)
-                                    </td>
+                                    </td>*@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Description)
                                     </td>

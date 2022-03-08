@@ -51,7 +51,8 @@ namespace LoanProcessManagement.App.Models
         [RegularExpression(@"^[6-9]\d{9}$", ErrorMessage = "Please Enter Valid Phone No.")]
         public string CustomerPhone_Alternate { get; set; }
 
-        [EmailAddress(ErrorMessage = "Please Provide Valid Email Id")]
+        //[EmailAddress(ErrorMessage = "Please Provide Valid Email Id")]
+        [RegularExpression(@"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}", ErrorMessage = "Please Enter Valid Email Id")]
         [Required(ErrorMessage = "Email-Id is Required")]
         public string CustomerEmail { get; set; }
 

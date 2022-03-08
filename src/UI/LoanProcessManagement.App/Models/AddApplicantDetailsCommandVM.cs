@@ -48,7 +48,8 @@ namespace LoanProcessManagement.App.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateOfBirth { get; set; }
 
-        [EmailAddress(ErrorMessage = "Please Provide Valid Email Id")]
+        //[EmailAddress(ErrorMessage = "Please Provide Valid Email Id")]
+        [RegularExpression(@"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}", ErrorMessage = "Please Enter Valid Email Id")]
         [Required(ErrorMessage = "Email ID is Required")]
         public string CustomerEmail { get; set; }
 
