@@ -45,6 +45,9 @@ namespace LoanProcessManagement.Persistence
             services.AddScoped<IBranchRepository, BranchRepository>();
             
             services.AddTransient<IMailServiceRepository, MailServiceRepository>();
+            services.AddScoped<IQueryTypeRepository, QueryTypeRepository>();
+
+            
 
 
 

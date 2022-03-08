@@ -155,6 +155,28 @@ namespace LoanProcessManagement.App.Helper.APIHelper
 
         public const string GetSubmit = "api/v1/IncomeAssesment/GetSubmit/";
         public const string PostSubmit = "api/v1/IncomeAssesment/UpdateSubmitGst";
+        public const string AddBranch = "api/v1/Branch/CreateBranch";
+        public const string DeleteBranch = "api/v1/Branch/DeleteBranch/";
+        public const string GetBranchById = "api/v1/Branch/GetBrancheById/";
+        public const string UpdateBranch = "api/v1/Branch/UpdateBranch";
+        public const string GetQueries = "api/v1/QueryType/GetAllQueries";
+        public const string AddQuery = "api/v1/QueryType/CreateQuery";
+        public const string DeleteQuery = "api/v1/QueryType/DeleteQuery/";
+        public const string GetQueryTypeById = "api/v1/QueryType/GetQueryTypeById/";
+        public const string UpdateQuery = "api/v1/QueryType/UpdateQuery";
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     }

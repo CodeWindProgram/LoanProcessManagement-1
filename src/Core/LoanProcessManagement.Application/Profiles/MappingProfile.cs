@@ -70,6 +70,10 @@ using LoanProcessManagement.Application.Features.CreditGstDetails.CreditGstCheck
 using LoanProcessManagement.Application.Features.CreditGstDetails.UserDetails.Queries;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.AddIncomeAssessment;
 using LoanProcessManagement.Application.Features.Branch.Commands.CreateBranch;
+using LoanProcessManagement.Application.Features.Branch.Commands.UpdateBranch;
+using LoanProcessManagement.Application.Features.QueryType.Commands.CreateQuery;
+using LoanProcessManagement.Application.Features.QueryType.Queries.GetQueryType;
+using LoanProcessManagement.Application.Features.QueryType.Queries.GetQueryTypeById;
 using LoanProcessManagement.Application.Features.LostLeadMaster.Queries.GetLostLeadMasterList;
 using LoanProcessManagement.Application.Features.LostLeadMaster.Commands.CreateLostLeadReasonMaster;
 using LoanProcessManagement.Application.Features.LostLeadMaster.Commands.UpdateLostLeadReasonMaster;
@@ -250,6 +254,24 @@ namespace LoanProcessManagement.Application.Profiles
 
             
             CreateMap<CreateBranchCommand, LpmBranchMaster>().ReverseMap();
+            CreateMap<UpdateBranchCommand, LpmBranchMaster>().ReverseMap();
+            CreateMap<CreateQueryCommand, LpmQueryTypeMaster>().ReverseMap();
+
+            CreateMap<GetAllQueryTypeQueryDto, LpmQueryTypeMaster>().ReverseMap();
+            CreateMap<LpmQueryTypeMaster, GetQueryTypeByIdQueryDto>().ReverseMap();
+
+            
+
+
+
+
+
+
+
+
+
+
+
 
         }
     }

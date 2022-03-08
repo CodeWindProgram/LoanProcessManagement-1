@@ -1,6 +1,7 @@
 ﻿using LoanProcessManagement.Application.Contracts.Persistence;
 using LoanProcessManagement.Application.Features.Branch.Commands.CreateBranch;
 using LoanProcessManagement.Application.Features.Branch.Commands.DeleteBranch;
+using LoanProcessManagement.Application.Features.Branch.Commands.UpdateBranch;
 using LoanProcessManagement.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -51,7 +52,8 @@ namespace LoanProcessManagement.Persistence.Repositories
             var result = await _dbContext.LpmBranchMasters.FirstOrDefaultAsync(x => x.Id==id);
             if (result != null)
             {
-                 _dbContext.LpmBranchMasters.Remove(result);
+                result.IsActive = false;
+                 //_dbContext.LpmBranchMasters.Remove(result);
                 await _dbContext.SaveChangesAsync();
                 res.Message = $"Brnach {result.branchname} removed successfully.";
                 res.Succeeded = true;
@@ -63,6 +65,39 @@ namespace LoanProcessManagement.Persistence.Repositories
                 res.Succeeded = false;
             }
             return res;
+        }
+
+        public async  Task<UpdateBranchDto> UpdateBranch(LpmBranchMaster req)
+        {
+            UpdateBranchDto response = new UpdateBranchDto();
+            var result = await _dbContext.LpmBranchMasters.FirstOrDefaultAsync(x => x.branchname == req.branchname && x.Id != req.Id);
+            if (result != null)
+            {
+                response.Message = "Branch name already exists.";
+                response.Succeeded = false;
+                return response;
+
+            }
+            var branchToUpdate= await _dbContext.LpmBranchMasters.FirstOrDefaultAsync(x =>x.Id == req.Id);
+
+            if (branchToUpdate != null)
+            {
+                branchToUpdate.branchname = req.branchname;
+                branchToUpdate.IsActive = req.IsActive;
+                await _dbContext.SaveChangesAsync();
+                response.Message = "Branch details updated successfully.";
+                response.Succeeded = true;
+                return response;
+
+            }
+            else
+            {
+                response.Message = "Invalid Id.";
+                response.Succeeded = true;
+                return response;
+            }
+    
+
         }
     }
 }

@@ -8,5 +8,7 @@ namespace LoanProcessManagement.Application.Features.Branch.GetBranchNameById
     {
         public long Id { get; set; }
         public string branchname { get; set; }
+        public bool IsActive { get; set; }
+
     }
 }

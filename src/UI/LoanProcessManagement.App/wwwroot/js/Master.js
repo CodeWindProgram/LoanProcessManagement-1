@@ -1,5 +1,5 @@
-﻿var masterData = 0;
-var len = 0;
+﻿
+
 $(document).ready(function () {
     $('#selectVideo').click(function () {
         if ($('#selectVideo').val() == 1) {
@@ -54,6 +54,13 @@ $(document).ready(function () {
         else if ($('#selectVideo').val() == 6) {
             $("#div_dynamicTables").load("../Master/GetRejectLeadReasonMaster");
         }
+        else if ($('#selectVideo').val() == 2) {
+            $("#div_dynamicTables").load("/Master/GetAllBranches");
+        }
+        else if ($('#selectVideo').val() == 7) {
+            $("#div_dynamicTables").load("/Master/GetAllQueryType");
+        }
+        
     });
-    
+
 });

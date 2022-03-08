@@ -1,6 +1,10 @@
 ﻿
 using LoanProcessManagement.App.Models;
 using LoanProcessManagement.App.Services.Interfaces;
+using LoanProcessManagement.Application.Features.Branch.Commands.CreateBranch;
+using LoanProcessManagement.Application.Features.Branch.Commands.UpdateBranch;
+using LoanProcessManagement.Application.Features.QueryType.Commands.CreateQuery;
+using LoanProcessManagement.Application.Features.QueryType.Commands.UpdateQuery;
 using LoanProcessManagement.Application.Features.LostLeadMaster.Commands.CreateLostLeadReasonMaster;
 using LoanProcessManagement.Application.Features.LostLeadMaster.Commands.UpdateLostLeadReasonMaster;
 using LoanProcessManagement.Application.Features.LostLeadMaster.Queries.GetLostLeadMasterList;
@@ -27,14 +31,33 @@ namespace LoanProcessManagement.App.Controllers
     {
         private IUserListService _userListService;
         private IRoleMasterService _roleMasterService;
+        private readonly ICommonServices _commonService;
+        private readonly IBranchService _branchService;
+        private readonly IQueryTypeService _queryTypeService;
         private ILostLeadReasonMasterService _lostLeadReasonMasterService;
         private IRejectLeadReasonMasterService _rejectLeadReasonMasterService;
 
 
-        public MasterController(IUserListService userListService, IRoleMasterService roleMasterService, ILostLeadReasonMasterService lostLeadReasonMasterService, IRejectLeadReasonMasterService rejectLeadReasonMasterService)
+
+        //public MasterController(IUserListService userListService,IRoleMasterService roleMasterService, 
+        //    ICommonServices commonService, IBranchService branchService, IQueryTypeService queryTypeService)
+   
+
+
+        public MasterController(IUserListService userListService,
+            IRoleMasterService roleMasterService,
+            ILostLeadReasonMasterService lostLeadReasonMasterService,
+            IRejectLeadReasonMasterService rejectLeadReasonMasterService,
+            ICommonServices commonService,
+            IBranchService branchService,
+            IQueryTypeService queryTypeService)
         {
             _userListService = userListService;
             _roleMasterService = roleMasterService;
+            _commonService = commonService;
+            _branchService = branchService;
+            _queryTypeService = queryTypeService;
+
             _lostLeadReasonMasterService = lostLeadReasonMasterService;
             _rejectLeadReasonMasterService = rejectLeadReasonMasterService;
         }
@@ -63,6 +86,7 @@ namespace LoanProcessManagement.App.Controllers
 
             return View();
         }
+
 
 
         [HttpPost("/Master/AddRole")]
@@ -107,6 +131,15 @@ namespace LoanProcessManagement.App.Controllers
         {
             var response = await _roleMasterService.DeleteRoleMaster(Id);
             return RedirectToAction("Index");
+        }
+
+  
+
+        [HttpGet("/Master/GetAllBranches")]
+        public async Task<IActionResult> GetAllBranch()
+        {
+            var branches = await _commonService.GetAllBranches();
+            return View(branches);
 
         }
 
@@ -203,6 +236,119 @@ namespace LoanProcessManagement.App.Controllers
             return View();
         }
 
+        [HttpGet("/Master/AddBranch")]
+        public async Task<IActionResult> AddBranch()
+        {
+            return View();
+        }
+
+        [HttpPost("/Master/AddBranch")]
+        public async Task<IActionResult> AddBranch(CreateBranchCommand req)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _branchService.AddBranch(req);
+                //TempData["AddUserSuccess"] = response.Succeeded;
+                //TempData["AddUserMessage"] = response.Data.Message;
+                return Json(response);
+
+            }
+            return View();
+
+        }
+
+        [HttpGet("/Master/UpdateBranch/{id}")]
+        public async Task<IActionResult> UpdateBranch(long id)
+        {
+            var result = await _branchService.GetBranchById(id);
+            var res = new UpdateBranchCommand() { 
+                Id=result.Id,
+                branchname=result.branchname,
+                IsActive=result.IsActive
+            };
+
+            return View(res);
+        }
+
+        [HttpPut("/Master/UpdateBranch")]
+        public async Task<IActionResult> UpdateBranch(UpdateBranchCommand req)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _branchService.UpdateBranch(req);
+                return Json(result);
+            }
+            return View();
+           
+        }
+
+
+
+        [HttpGet("/Master/DeleteBranch/{id}")]
+        public async Task<IActionResult> DeleteBranch([FromRoute]long id)
+        {
+            var response = await _branchService.DeleteBranch(id);
+            return Json(response);
+        }
+
+        [HttpGet("/Master/GetAllQueryType")]
+        public async Task<IActionResult> GetAllQueryType()
+        {
+            var queries = await _queryTypeService.GetAllQueryTypes();
+            return View(queries.Data);
+        }
+
+        
+        [HttpGet("/Master/AddQueryType")]
+        public async Task<IActionResult> AddQueryType()
+        {
+            return View();
+        }
+
+        [HttpPost("/Master/AddQueryType")]
+        public async Task<IActionResult> AddQueryType(CreateQueryCommand req)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _queryTypeService.AddQueryType(req);
+                return Json(result);
+            }
+            return View();
+        }
+
+        [HttpGet("/Master/DeleteQueryType/{id}")]
+        public async Task<IActionResult> DeleteQueryType([FromRoute] long id)
+        {
+            var response = await _queryTypeService.DeleteQueryType(id);
+            return Json(response);
+        }
+
+        [HttpGet("/Master/UpdateQuery/{id}")]
+        public async Task<IActionResult> UpdateQuery(long id)
+        {
+            var result = await _queryTypeService.GetQueryTypeById(id);
+            var res = new UpdateQueryCommand()
+            {
+                Id = result.Data.Id,
+                QueryType = result.Data.QueryType,
+                QueryName = result.Data.QueryName,
+                IsActive = result.Data.IsActive
+            };
+
+            return View(res);
+        }
+
+        [HttpPut("/Master/UpdateQuery")]
+        public async Task<IActionResult> UpdateQuery(UpdateQueryCommand req)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _queryTypeService.UpdateQuery(req);
+                return Json(result);
+            }
+            return View();
+         
+        }
 
         [HttpPost]
         public async Task<IActionResult> UpdateRejectLeadReason([FromRoute] long id, UpdateRejectLeadReasonMasterVm roleMasterVm)

@@ -73,7 +73,15 @@ namespace LoanProcessManagement.App
             services.AddScoped<IRejectLeadReasonMasterService, RejectLeadReasonMasterService>();
 
             services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IBranchService, BranchService>();
+            services.AddScoped<IQueryTypeService, QueryTypeService>();
+
             
+
+
+
+
+
             services.Configure<APIConfiguration>(Configuration.GetSection("APIConfiguration"));
             services.AddSession();
         }
