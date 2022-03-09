@@ -9,7 +9,7 @@ namespace LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory
     {
         public string Stage { get; set; }
 
-        [DisplayName("Start Date")]
+        [DisplayName("Action Date")]
         public DateTime? StartDate { get; set; }
 
         [DisplayName("End Date")]

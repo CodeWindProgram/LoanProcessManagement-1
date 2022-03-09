@@ -114,7 +114,7 @@ namespace LoanProcessManagement.App.Controllers
         {
             UpdateRoleMasterCommand rolemaster = new UpdateRoleMasterCommand()
             {
-                Id = roleMasterVm.getRoleMasterByIdQueryVm.Id,
+                Id = roleMasterVm.Id,
                 RoleName = roleMasterVm.getRoleMasterByIdQueryVm.RoleName,
                 LastModifiedDate = DateTime.Now
             };
