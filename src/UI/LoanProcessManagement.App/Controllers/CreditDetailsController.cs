@@ -132,16 +132,44 @@ namespace LoanProcessManagement.App.Controllers
             return View(leadResponse.Data);
         }
         #endregion
-        [HttpGet("Download/{filename}/{formNo}")]
-        public async Task<IActionResult> Download(string filename,string formNo)
+
+        [HttpGet("/IncomeDetailsList")]
+        public async Task<IActionResult> IncomeDetailsList()
+        {
+            var incomeDetailsListServiceResponse = await _creditService.IncomeDetailsList();
+
+            if (incomeDetailsListServiceResponse != null && incomeDetailsListServiceResponse.Data != null && incomeDetailsListServiceResponse.Succeeded)
+            {
+                return View(incomeDetailsListServiceResponse.Data);
+            }
+            return View("Error");
+        }
+
+        [HttpGet("/IncomeDetailsList/userIncomeDetails/{FormNo}")]
+        public async Task<IActionResult> userIncomeDetailsByFormNo(string FormNo)
+        {
+            var leadResponse = await _creditService.userIncomeDetailsByFormNo(FormNo);
+            ViewBag.FormNo = FormNo;
+            return View(leadResponse.Data);
+        }
+
+        [HttpGet("Download/{filename}/{formNo}/{num}")]
+        public async Task<IActionResult> Download(string filename, string formNo, int num)
         {
             var basedirectory = Directory.GetCurrentDirectory();
             if (filename == null)
                 return Content("filename not present");
-
-            var path = Path.Combine(basedirectory, @"..\..\API\\LoanProcessManagement.Api\\Uploadfiles\\GSTfiles\\"
-                           , formNo,filename);
-
+            var path="";
+            if (num == 1)
+            {
+                path = Path.Combine(basedirectory, @"..\..\API\\LoanProcessManagement.Api\\Uploadfiles\\GSTfiles\\"
+                              , formNo, filename);
+            }
+            else if (num == 2)
+            {
+                 path = Path.Combine(basedirectory, @"..\..\API\\LoanProcessManagement.Api\\Uploadfiles\\IncomeAssessmentFiles\\"
+                               , formNo, filename);
+            }
             var memory = new MemoryStream();
             using (var stream = new FileStream(path, FileMode.Open))
             {

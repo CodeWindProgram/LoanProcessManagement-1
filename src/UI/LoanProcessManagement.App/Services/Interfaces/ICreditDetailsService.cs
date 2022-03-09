@@ -2,6 +2,8 @@
 using LoanProcessManagement.Application.Features.CreditCibilDetails.UserDetails.Queries;
 using LoanProcessManagement.Application.Features.CreditGstDetails.CreditGstCheckDetails.Queries;
 using LoanProcessManagement.Application.Features.CreditGstDetails.UserDetails.Queries;
+using LoanProcessManagement.Application.Features.CreditIncomeDetails.Queries;
+using LoanProcessManagement.Application.Features.CreditIncomeDetails.UserDetails.Queries;
 using LoanProcessManagement.Application.Features.CreditITRDetails.Queries;
 using LoanProcessManagement.Application.Features.CreditITRDetails.UserDetails.Queries;
 using LoanProcessManagement.Application.Responses;
@@ -22,6 +24,8 @@ namespace LoanProcessManagement.App.Services.Interfaces
 
         Task<Response<IEnumerable<GetCreditGstDetailsVm>>> CreditGstDetailsList();
         Task<Response<IEnumerable<GetCreditGstUserDetailsVm>>> userGstDetailsByFormNo(string FormNo);
+        Task<Response<IEnumerable<GetIncomeDetailsVm>>> IncomeDetailsList();
+        Task<Response<IEnumerable<GetIncomeUserDetailsVm>>> userIncomeDetailsByFormNo(string FormNo);
     }
     #endregion
 }

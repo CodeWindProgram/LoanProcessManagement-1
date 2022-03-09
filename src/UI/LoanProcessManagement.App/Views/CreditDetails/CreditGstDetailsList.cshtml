@@ -93,6 +93,7 @@
                                             <option value="cibil" id="cibil">Cibil Enquiry Details</option>
                                             <option value="gst" id="gst" selected>GST Enquiry Details</option>
                                             <option value="itr" id="itr">ITR Enquiry Details</option>
+                                            <option value="inc" id="inc">Income Enquiry Details</option>
                                         </select>
                                     </div>
                                 </div>
@@ -197,6 +198,11 @@
             if ($("#enquiryVal").val() == "gst") {
                 setTimeout(function () {
                     location.href = "/CreditGstDetailsList";
+                }, 500);
+            }
+            if ($("#enquiryVal").val() == "inc") {
+                setTimeout(function () {
+                    location.href = "/IncomeDetailsList";
                 }, 500);
             }
         });

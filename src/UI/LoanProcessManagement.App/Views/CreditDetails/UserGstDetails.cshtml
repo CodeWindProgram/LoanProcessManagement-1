@@ -86,11 +86,11 @@
                                     @date[0]
                                 </td>
                                 <td>
-                                    <button type="button" onclick="downloadFile(event, '@item.PdfFile', '@item.FormNo')">Click Here</button>
+                                    <button type="button" onclick="downloadFile(event, '@item.PdfFile', '@item.FormNo',1)">Click Here</button>
                                     
                                 </td>
                                 <td>
-                                    <button type="button" onclick="downloadFile(event, '@item.ExcelFile', '@item.FormNo')">Click Here</button>
+                                    <button type="button" onclick="downloadFile(event, '@item.ExcelFile', '@item.FormNo',1)">Click Here</button>
                                     
                                 </td>
                                 @*<td>
@@ -129,10 +129,10 @@
         });
     });
 
-    function downloadFile(e,fileName,formNo) {
+    function downloadFile(e,fileName,formNo,num) {
         console.log(fileName);
         e.preventDefault();
-        url = '/CreditDetails/Download/' + fileName + "/" + formNo;
+        url = '/CreditDetails/Download/' + fileName + "/" + formNo + "/" + num;
         location.href = url;
     }
 </script>

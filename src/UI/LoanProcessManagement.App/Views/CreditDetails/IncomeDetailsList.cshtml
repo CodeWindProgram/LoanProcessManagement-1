@@ -1,9 +1,8 @@
-﻿@model IEnumerable<LoanProcessManagement.Application.Features.CreditCibilDetails.CreditCibilCheckDetails.Queries.GetCreditCibilDetailsVm>
+﻿@model IEnumerable<LoanProcessManagement.Application.Features.CreditIncomeDetails.Queries.GetIncomeDetailsVm>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "CreditITRDetailsList";
+    ViewData["Title"] = "IncomeDetailsList";
 }
-
 <style>
     .panel-heading {
         color: white;
@@ -14,68 +13,27 @@
         border-top-left-radius: 0.25rem;
         border-top-right-radius: 0.25rem;
     }
-
-    /*.btn {
-        background-color: #343a40;
-        color: white;
-        margin-bottom: 5px;
-    }*/
-
     .btn:hover {
         background-color: #adb5bd;
         color: black;
         margin-bottom: 5px;
     }
-
     .selected {
         background: #adb5bd;
         color: #FFF;
     }
-
-    
     .no-sort::after {
         display: none !important;
     }
-
     .no-sort {
         pointer-events: none !important;
         cursor: default !important;
     }
 </style>
-
 <div class="container app pb-5">
     <div class="col-sm-12">
-        <!--<div>
-        <div class="row">
-            <div class="col-3">
-                <label>Credit Report</label><span style="color: Red">&nbsp;*</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-5">
-                    <div id="divBranch" class="input-control text">
-                        <select id="enquiryVal" class="form-control">
-                            <option value="choice" selected>Select</option>
-                            <option value="cibil" id="cibil">Cibil Enquiry Details</option>
-                            <option value="gst" id="gst">GST Enquiry Details</option>
-                            <option value="itr" id="itr">ITR Enquiry Details</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-3">
-                    <input type="button" class="btn btn-primary  btn-md"--> @*onclick="myfun()"*@ <!--value="Submit" id="btnSubmit">
-                </div>
-            </div>
-        </div>
-            </div>-->
-
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
             <div class="panel-heading"><h5>Credit Report</h5></div>
-
-            
-
             <div class="panel-body">
                 <div id="alertMsg" visible="false" runat="server">
                     <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
@@ -93,85 +51,80 @@
                                 <div class="col-5">
                                     <div id="divBranch" class="input-control text">
                                         <select id="enquiryVal" class="form-control">
-                                            <option value="cibil" id="cibil" selected>Cibil Enquiry Details</option>
+                                            <option value="cibil" id="cibil">Cibil Enquiry Details</option>
                                             <option value="gst" id="gst">GST Enquiry Details</option>
                                             <option value="itr" id="itr">ITR Enquiry Details</option>
-                                            <option value="inc" id="inc">Income Enquiry Details</option>
+                                            <option value="inc" id="inc" selected>Income Enquiry Details</option>
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="col-3">
                                     <input type="button" class="btn btn-dark  btn-md" @*onclick="myfun()"*@ value="Submit" id="btnSubmit">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <table id="CreditDetailsList" class="display table-responsive-lg">
+                    <table id="IncomeDetailsList" class="display table-responsive-lg">
                         <thead>
                             <tr>
-                                <th class="no-sort">
-                                    Form No.
+                                <th>
+                                    FormNo.
                                 </th>
                                 <th>
                                     Name
                                 </th>
-                                <th class="no-sort">
-                                    Contact No.
-                                </th>
                                 <th>
                                     Email
                                 </th>
-                                <th class="no-sort">
-                                    Loan Amount
+                                <th>
+                                    ContactNo.
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.EmploymentType)
                                 </th>
                                 <th>
                                     Enquiry Date
                                 </th>
-
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
-                            <tr>
-                                <td>
-                                    @Html.ActionLink(item.FormNo, "userCibilDetails", @*"CreditDetails",*@new { FormNo = item.FormNo })
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CustomerName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.MobileNumber)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.EmailId)
-                                </td>
-                                <td>
-                                    ₹  @Html.DisplayFor(modelItem => item.LoanAmount)
-                                </td>
-                                <td>
-                                    @{var date = item.CreatedDate.ToString().Split(" ");
-                                    }
-                                    @date[0]
-                                </td>
+                                <tr>
+                                    <td>
+                                        @Html.ActionLink(item.FormNo, "userIncomeDetailsByFormNo", @*"CreditDetails",*@new { FormNo = item.FormNo })
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CustomerName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EmailId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MobileNumber)
+                                    </td>
 
-
-                            </tr>
-
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EmploymentType)
+                                    </td>
+                                    <td>
+                                        @{var date = item.StartDate.ToString().Split(" ");
+                                        }
+                                        @date[0]
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        @*@await Html.PartialAsync("~/Views/Shared/_Tabs.cshtml", (string)@ViewBag.lead_Id)*@
     </div>
 </div>
 <script>
     $(document).ready(function () {
 
-        var usrTable = $('#CreditDetailsList').dataTable({
+        var usrTable = $('#IncomeDetailsList').dataTable({
             "oLanguage": {
                 "sZeroRecords": "No Records to Display",
                 "sSearch": "Search "
@@ -186,25 +139,9 @@
         });
     });
 
-    //$(document).ready(function () {
-    //    $('#enquiryVal').on('change', function () {
-    //        if (this.value == 'itr') {
-    //            setTimeout(function () {
-    //                location.href = "/CreditITRDetailsList";
-    //            }, 500);
-    //        }
-    //        if (this.value == 'cibil') {
-    //            setTimeout(function () {
-    //                location.href = "/CreditCibilDetailsList";
-    //            }, 500);
-    //        }
-    //    });
-    //});
-
     $(document).ready(function () {
         $("#btnSubmit").click(function () {
-            //alert('hello'); 
-            if ($("#enquiryVal").val() == "itr"){
+            if ($("#enquiryVal").val() == "itr") {
                 setTimeout(function () {
                     location.href = "/CreditITRDetailsList";
                 }, 500);
@@ -227,5 +164,3 @@
         });
     });
 </script>
-
-

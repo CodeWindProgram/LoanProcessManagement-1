@@ -1,0 +1,242 @@
+﻿@model IEnumerable<LoanProcessManagement.Application.Features.CreditIncomeDetails.UserDetails.Queries.GetIncomeUserDetailsVm>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "userIncomeDetailsByFormNo";
+}
+<style>
+    .panel-heading {
+        color: white;
+        background-color: #343a40;
+        border-bottom: 1px solid rgba(0,0,0,.125);
+        padding: 0.75rem 1.25rem;
+        position: relative;
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+    }
+    .btn:hover {
+        background-color: #adb5bd;
+        color: black;
+        margin-bottom: 5px;
+    }
+    .selected {
+        background: #adb5bd;
+        color: #FFF;
+    }
+</style>
+<div class="container app">
+    <div class="col-sm-12">
+        <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
+            <div class="panel-heading"><h5>Income Enquiry Details</h5></div>
+            <div class="panel-body">
+                <div id="alertMsg" visible="false" runat="server">
+                    <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
+                </div>
+                <div class="card" style="padding:15px;">
+                    <h5>Form No. : @ViewBag.FormNo</h5>
+                    <table id="IncomeDetailsList" class="display table-responsive-lg">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ApplicantType)
+                                </th>
+                                <th>
+                                    Report Type
+                                </th>
+                                <th>
+                                File Name                                
+                                </th>
+                                <th>
+                                    Bank Name
+                                </th>
+                                <th>
+                                    Download(Pdf)
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Enquiry Date
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td hidden>
+                                        @Html.DisplayFor(modelItem => item.ApplicantName)
+                                    </td>
+                                    <td>
+                                        @if (item.ApplicantType > 0)
+                                        {
+                                            <span>Co-Applicant-</span>@Html.DisplayFor(modelItem => item.ApplicantType);
+                                        }
+                                        else
+                                        {
+                                            <span>Applicant</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FileType)
+                                    </td>
+                                    <td>
+                                        @if (item.FileType == "GenerateLink")
+                                        {<span>--</span>}
+                                        else
+                                        @Html.DisplayFor(modelItem => item.PdfFile)
+                                    </td>
+                                    <td>
+                                        @if (item.Institution_Id == 0)
+                                        {
+                                            <span>Any</span>
+                                        }
+                                        else
+                                        {
+                                            <span>Error</span>
+                                        }
+                                    </td>
+                                    <th>
+                                        @if (item.PdfFile == "") {<span class="text-danger">File Not Present</span> }
+                                        else
+                                        {
+                                        <button type="button" onclick="downloadFile(event, '@item.PdfFile', '@item.FormNo',2)">Click Here</button>
+                                        }
+                                    </th>
+                                    <td>
+                                        @if (item.Issuccess == true)
+                                        {
+                                            <span>Success</span>
+                                        }
+                                        else
+                                        {
+                                            <span>Error</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @{var date = item.CreatedDate.ToString().Split(" ");
+                                        }
+                                        @date[0]
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card" style="padding:15px;">
+                    <table id="IncomeDetailsList" class="display table-responsive-lg">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ApplicantType)
+                                </th>
+                                <th>
+                                    Bank Name
+                                </th>
+                                <th>
+                                Report Type                                
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Employer1
+                                </th>
+                                <th>
+                                    Employer2
+                                </th>
+                                <th>
+                                    Employer3
+                                </th>
+                                <th>
+                                    Employer4
+                                </th>
+                                <th>
+                                    Employer5
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @if (item.ApplicantType > 0)
+                                        {
+                                            <span>Co-Applicant-</span>@Html.DisplayFor(modelItem => item.ApplicantType);
+                                        }
+                                        else
+                                        {
+                                            <span>Applicant</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.Institution_Id == 0)
+                                        {
+                                            <span>Any</span>
+                                        }
+                                        else
+                                        {
+                                            <span>Error</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FileType)
+                                    </td>
+                                <td>
+                                    @if (item.Issuccess ==true)
+                                    {
+                                        <span>Success</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Error</span>
+                                    }
+                                </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EmployerName1)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EmployerName2)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EmployerName3)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EmployerName4)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EmployerName5)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        var usrTable = $('#IncomeDetailsList').dataTable({
+            "oLanguage": {
+                "sZeroRecords": "No Records to Display",
+                "sSearch": "Search "
+            },
+            "iDisplayLength": 10,
+            "aLengthMenu": [[10, 50, 100, 200, 500], [10, 50, 100, 200, 500]],
+            "bSortClasses": false,
+            "bPaginate": true,
+            "bAutoWidth": false,
+            "bProcessing": true,
+            "bDestroy": true
+        });
+    });
+    function downloadFile(e, fileName, formNo,num) {
+        console.log(fileName);
+        e.preventDefault();
+        url = '/CreditDetails/Download/' + fileName + "/" + formNo + "/" + num;
+        location.href = url;
+    }
+</script>

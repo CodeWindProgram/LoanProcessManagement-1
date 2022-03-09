@@ -13,6 +13,8 @@ using LoanProcessManagement.Application.Features.CreditCibilDetails.CreditCibilC
 using LoanProcessManagement.Application.Features.CreditCibilDetails.UserDetails.Queries;
 using LoanProcessManagement.Application.Features.CreditGstDetails.CreditGstCheckDetails.Queries;
 using LoanProcessManagement.Application.Features.CreditGstDetails.UserDetails.Queries;
+using LoanProcessManagement.Application.Features.CreditIncomeDetails.Queries;
+using LoanProcessManagement.Application.Features.CreditIncomeDetails.UserDetails.Queries;
 
 namespace LoanProcessManagement.Persistence.Repositories
 {
@@ -182,5 +184,51 @@ namespace LoanProcessManagement.Persistence.Repositories
             return result;
         }
         #endregion
+        public async Task<IEnumerable<GetIncomeDetailsVm>> GetIncomeDetailsList()
+        {
+            var result = await (from A in _dbContext.LpmLeadMasters
+                                join B in _dbContext.LpmUserMasters on A.Lead_assignee_Id equals B.LgId
+                                join C in _dbContext.LpmLeadApplicantsDetails on A.FormNo equals C.FormNo
+
+                                where C.IsActive == true && C.ApplicantType == 0 && C.isPerfiosSubmitSuccess==true
+                                select new GetIncomeDetailsVm
+                                {
+                                    FormNo = C.FormNo,
+                                    CustomerName = A.FirstName + " " + A.LastName,
+                                    MobileNumber = A.CustomerPhone,
+                                    StartDate = C.CreatedDate,//.ToShortDateString().ToString(),  
+                                    EmailId = A.CustomerEmail,
+                                    EmploymentType=A.EmploymentType,
+                                    Issuccess = true,
+                                    Message = "data fetched"
+
+                                }).ToListAsync();
+            return result;
+        }
+        public async Task<IEnumerable<GetIncomeUserDetailsVm>> GetIncomeUserDetailsList(string FormNo)
+        {
+            var result1 = _dbContext.LpmLeadApplicantsDetails.Where(x => x.FormNo == FormNo).FirstOrDefault();
+
+             var result = _dbContext.LpmLeadIncomeAssessmentDetails.Where(x => x.FormNo == FormNo).Select(x => new GetIncomeUserDetailsVm()
+            {
+                FormNo = x.FormNo,
+                ApplicantName = result1.FirstName+" "+result1.LastName,
+                ApplicantType=x.ApplicantType,
+                CreatedDate = x.CreatedDate,
+                PdfFile = x.PdfFileName,
+                FileType=x.FileType,
+                Institution_Id=x.Institution_Id,
+                EmployerName1=x.EmployerName1,
+                EmployerName2=x.EmployerName2,
+                EmployerName3=x.EmployerName3,
+                EmployerName4=x.EmployerName4,
+                EmployerName5=x.EmployerName5,
+                Issuccess = true,
+                Message = "Customer Data Fetched"
+
+            });
+            return result;
+        }
+
     }
 }

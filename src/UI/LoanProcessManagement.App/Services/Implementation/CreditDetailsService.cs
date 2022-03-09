@@ -4,6 +4,8 @@ using LoanProcessManagement.Application.Features.CreditCibilDetails.CreditCibilC
 using LoanProcessManagement.Application.Features.CreditCibilDetails.UserDetails.Queries;
 using LoanProcessManagement.Application.Features.CreditGstDetails.CreditGstCheckDetails.Queries;
 using LoanProcessManagement.Application.Features.CreditGstDetails.UserDetails.Queries;
+using LoanProcessManagement.Application.Features.CreditIncomeDetails.Queries;
+using LoanProcessManagement.Application.Features.CreditIncomeDetails.UserDetails.Queries;
 using LoanProcessManagement.Application.Features.CreditITRDetails.Queries;
 using LoanProcessManagement.Application.Features.CreditITRDetails.UserDetails.Queries;
 using LoanProcessManagement.Application.Responses;
@@ -152,5 +154,43 @@ namespace LoanProcessManagement.App.Services.Implementation
         }
 
         #endregion
+        public async Task<Response<IEnumerable<GetIncomeDetailsVm>>> IncomeDetailsList()
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.GetAsync
+                (
+                    BaseUrl + APIEndpoints.Income
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<Response<IEnumerable<GetIncomeDetailsVm>>>(jsonString, options);
+
+            return model;
+        }
+        public async Task<Response<IEnumerable<GetIncomeUserDetailsVm>>> userIncomeDetailsByFormNo(string FormNo)
+        {
+            BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+
+            var _client = clientfact.CreateClient("LoanService");
+
+            var httpResponse = await _client.GetAsync
+                (
+                    BaseUrl + APIEndpoints.Incomeid + FormNo
+                );
+
+            var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var options = new JsonSerializerOptions();
+
+            var model = System.Text.Json.JsonSerializer.Deserialize<Response<IEnumerable<GetIncomeUserDetailsVm>>>(jsonString, options);
+
+            return model;
+        }
     }
 }

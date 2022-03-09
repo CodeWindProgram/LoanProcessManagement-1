@@ -2,6 +2,8 @@
 using LoanProcessManagement.Application.Features.CreditCibilDetails.UserDetails.Queries;
 using LoanProcessManagement.Application.Features.CreditGstDetails.CreditGstCheckDetails.Queries;
 using LoanProcessManagement.Application.Features.CreditGstDetails.UserDetails.Queries;
+using LoanProcessManagement.Application.Features.CreditIncomeDetails.Queries;
+using LoanProcessManagement.Application.Features.CreditIncomeDetails.UserDetails.Queries;
 using LoanProcessManagement.Application.Features.CreditITRDetails.UserDetails.Queries;
 using LoanProcessManagement.Domain.CustomModels;
 using System;
@@ -24,6 +26,9 @@ namespace LoanProcessManagement.Application.Contracts.Persistence
 
         Task<IEnumerable<GetCreditGstDetailsVm>> GetCreditGstDetailsList();
         Task<IEnumerable<GetCreditGstUserDetailsVm>> GetCreditGstUserDetailsList(string FormNo);
+
+        Task<IEnumerable<GetIncomeDetailsVm>> GetIncomeDetailsList();
+        Task<IEnumerable<GetIncomeUserDetailsVm>> GetIncomeUserDetailsList(string FormNo);
     }
     #endregion
 }
