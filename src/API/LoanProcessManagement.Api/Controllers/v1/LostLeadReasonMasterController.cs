@@ -48,7 +48,9 @@ namespace LoanProcessManagement.Api.Controllers.v1
         [HttpPost(Name = "AddLostLeadReasonMaster")]
         public async Task<ActionResult> Create([FromBody] CreateLostLeadReasonMasterCommand createLostLeadReasonMasterCommand)
         {
+            _logger.LogInformation("CreateQuery Initiated");
             var response = await _mediator.Send(createLostLeadReasonMasterCommand);
+            _logger.LogInformation("CreateQuery Completed");
             return Ok(response);
         }
 

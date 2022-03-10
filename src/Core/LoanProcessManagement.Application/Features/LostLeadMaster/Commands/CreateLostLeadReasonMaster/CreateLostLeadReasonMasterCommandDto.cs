@@ -8,10 +8,9 @@ namespace LoanProcessManagement.Application.Features.LostLeadMaster.Commands.Cre
     public class CreateLostLeadReasonMasterCommandDto
     {
         public long LostLeadReasonID { get; set; }
-
-        [Required(ErrorMessage = "LostLeadReason is required.")]
         public string LostLeadReason { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreatedDate { get; set; }
+        public bool Succeeded { get; set; }
     }
 }

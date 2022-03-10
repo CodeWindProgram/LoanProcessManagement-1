@@ -83,10 +83,10 @@ namespace LoanProcessManagement.Persistence.Repositories
                                 select new GetCreditGstDetailsVm
                                 {
                                     FormNo = A.FormNo,
-                                    CustomerName = C.CustomerName,
-                                    MobileNumber =C.MobileNo,
+                                    CustomerName = A.FirstName+""+A.LastName,
+                                    MobileNumber =A.CustomerPhone,
                                     CreatedDate = C.CreatedDate,
-                                    EmailId = C.Email,
+                                    EmailId = A.CustomerEmail,
                                     Issuccess = true,
                                     Message = "data fetched"
 

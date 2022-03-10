@@ -698,7 +698,7 @@ namespace LoanProcessManagement.App.Controllers
         }
         #endregion
         [Authorize(AuthenticationSchemes = "Cookies", Roles = "HO,Branch,DSA")]
-
+        [HttpGet("/ProposalReport")]
         public async Task<IActionResult> MyProposal()
         {
             GetPerformanceSummaryQuery proposal = new GetPerformanceSummaryQuery();

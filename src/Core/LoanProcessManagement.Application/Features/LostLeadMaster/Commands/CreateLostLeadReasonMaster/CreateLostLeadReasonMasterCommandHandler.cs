@@ -3,6 +3,7 @@ using LoanProcessManagement.Application.Contracts.Persistence;
 using LoanProcessManagement.Application.Responses;
 using LoanProcessManagement.Domain.Entities;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,10 +16,13 @@ namespace LoanProcessManagement.Application.Features.LostLeadMaster.Commands.Cre
     {
         private readonly ILostLeadReasonMasterRepository _lostLeadReasonMasterRepository;
         private readonly IMapper _mapper;
+        private readonly ILogger<CreateLostLeadReasonMasterCommandHandler> _logger;
 
-        public CreateLostLeadReasonMasterCommandHandler(IMapper mapper, ILostLeadReasonMasterRepository lostLeadReasonMasterRepository)
+        public CreateLostLeadReasonMasterCommandHandler(IMapper mapper, ILostLeadReasonMasterRepository lostLeadReasonMasterRepository,
+            ILogger<CreateLostLeadReasonMasterCommandHandler> logger)
         {
             _mapper = mapper;
+            _logger = logger;
             _lostLeadReasonMasterRepository = lostLeadReasonMasterRepository;
         }
         public async Task<Response<CreateLostLeadReasonMasterCommandDto>> Handle(CreateLostLeadReasonMasterCommand request, CancellationToken cancellationToken)

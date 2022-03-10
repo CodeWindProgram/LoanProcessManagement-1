@@ -9,6 +9,7 @@ namespace LoanProcessManagement.Application.Features.LostLeadMaster.Commands.Cre
 {
     public class CreateLostLeadReasonMasterCommand : IRequest<Response<CreateLostLeadReasonMasterCommandDto>>
     {
+        [Required(ErrorMessage = "LostLeadReason is required.")]
         public string LostLeadReason { get; set; }
     }
 }
