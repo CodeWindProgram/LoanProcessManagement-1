@@ -57,8 +57,7 @@ namespace LoanProcessManagement.App.Controllers
                 var response = await _accountService.RegisterUser(user);
                 TempData["AddUserSuccess"] = response.Succeeded;
                 TempData["AddUserMessage"] = response.Data.Message;
-                //ViewBag.isSuccess = response.Succeeded;
-                //ViewBag.Message = response.Data.Message;
+   
             }
             var roles = await _commonService.GetAllRoles();
             ViewBag.roles = new SelectList(roles, "Id", "Rolename");

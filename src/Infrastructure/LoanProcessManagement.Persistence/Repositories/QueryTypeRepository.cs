@@ -68,12 +68,12 @@ namespace LoanProcessManagement.Persistence.Repositories
 
         public async Task<IEnumerable<LpmQueryTypeMaster>> GetAllQueryType()
         {
-            return await _dbContext.LpmQueryTypeMasters.Where(x=>x.IsActive==true).ToListAsync();
+            return await _dbContext.LpmQueryTypeMasters.ToListAsync();
         }
 
         public async Task<LpmQueryTypeMaster> GetQueryTypeById(long id)
         {
-            return await _dbContext.LpmQueryTypeMasters.FirstOrDefaultAsync(x => x.Id==id && x.IsActive == true);
+            return await _dbContext.LpmQueryTypeMasters.FirstOrDefaultAsync(x => x.Id==id);
         }
 
         public async Task<UpdateQueryCommandDto> UpdateQuery(UpdateQueryCommand req)

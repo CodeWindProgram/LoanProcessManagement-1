@@ -6,6 +6,7 @@ using LoanProcessManagement.Api.SwaggerHelper;
 using LoanProcessManagement.Api.Utility;
 using LoanProcessManagement.Application;
 using LoanProcessManagement.Application.Contracts;
+using LoanProcessManagement.Application.Models.Mail;
 using LoanProcessManagement.Identity;
 using LoanProcessManagement.Infrastructure;
 using LoanProcessManagement.Persistence;
@@ -33,8 +34,10 @@ namespace LoanProcessManagement.Api
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            configuration.GetSection("environmentVariables").Bind(MySettings.Setting);
         }
         public IConfiguration Configuration { get; }
+
         public void ConfigureServices(IServiceCollection services)
         {
             string Urls = Configuration.GetSection("URLWhiteListings").GetSection("URLs").Value;

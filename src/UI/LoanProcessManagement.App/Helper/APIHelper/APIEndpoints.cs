@@ -164,6 +164,7 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string DeleteQuery = "api/v1/QueryType/DeleteQuery/";
         public const string GetQueryTypeById = "api/v1/QueryType/GetQueryTypeById/";
         public const string UpdateQuery = "api/v1/QueryType/UpdateQuery";
+        public const string GetInstitution = "api/v1/Institution/GetInstitutions";
         public const string Income = "api/v1/IncomeDetails/GetIncomeDetailsList";
         public const string Incomeid = "api/v1/IncomeDetails/GetIncomeUserDetailsList/";
 

@@ -75,8 +75,12 @@ namespace LoanProcessManagement.App
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IBranchService, BranchService>();
             services.AddScoped<IQueryTypeService, QueryTypeService>();
+            services.AddScoped<IInstitutionServices, InstitutionServices>();
 
             
+
+
+
 
 
 

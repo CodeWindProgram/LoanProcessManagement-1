@@ -1,3 +1,5 @@
+using AutoMapper.Configuration;
+using LoanProcessManagement.Application.Models.Mail;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,10 +10,12 @@ namespace LoanProcessManagement.Infrastructure.EncryptDecrypt
 {
     public static class EncryptionDecryption
     {
+
         //This function for Encryption which accepts the plain text and Key and return Encrypted string
         public static string EncryptString(string clearText)
         {
-            string EncryptionKey = Environment.GetEnvironmentVariable("EncryptionDeckryptionKey")?.ToString().Length > 0 ? Environment.GetEnvironmentVariable("EncryptionDeckryptionKey") : "";
+            string EncryptionKey = MySettings.Setting.EncryptionDeckryptionKey;
+            //string EncryptionKey = Environment.GetEnvironmentVariable("EncryptionDeckryptionKey")?.ToString().Length > 0 ? Environment.GetEnvironmentVariable("EncryptionDeckryptionKey") : "";
             byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
             using (Aes encryptor = Aes.Create())
             {
@@ -36,7 +40,8 @@ namespace LoanProcessManagement.Infrastructure.EncryptDecrypt
         //This function for Decryption which accepts Encrypted string and Key and return plain text string
         public static string DecryptString(string cipherText)
         {
-            string EncryptionKey = Environment.GetEnvironmentVariable("EncryptionDeckryptionKey")?.ToString().Length > 0 ? Environment.GetEnvironmentVariable("EncryptionDeckryptionKey") : "";
+            string EncryptionKey = MySettings.Setting.EncryptionDeckryptionKey;
+            //string EncryptionKey = Environment.GetEnvironmentVariable("EncryptionDeckryptionKey")?.ToString().Length > 0 ? Environment.GetEnvironmentVariable("EncryptionDeckryptionKey") : "";
             byte[] cipherBytes = Convert.FromBase64String(cipherText);
             using (Aes encryptor = Aes.Create())
             {

@@ -6,7 +6,10 @@ using LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetHOSanctionListQuery;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetPerformanceSummary;
+using LoanProcessManagement.Application.Features.LostLeadMaster.Queries.GetLostLeadMasterList;
 using LoanProcessManagement.Application.Features.MailService.Query;
+using LoanProcessManagement.Application.Features.QueryType.Queries.GetQueryType;
+using LoanProcessManagement.Application.Features.RejectedLeadMaster.Queries.GetRejectLeadMasterList;
 using LoanProcessManagement.Application.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,11 +29,23 @@ namespace LoanProcessManagement.App.Controllers
         private readonly ILeadListService _leadListService;
         private readonly ICommonServices _commonService;
         private readonly IEmailService _emailService;
-        public LeadListController(ILeadListService leadListService, ICommonServices commonService,IEmailService emailService)
+        private readonly IQueryTypeService _queryTypeService;
+        private readonly ILostLeadReasonMasterService _lostLeadReasonMasterService;
+        private readonly IRejectLeadReasonMasterService _rejectLeadReasonMasterService;
+
+        public LeadListController(ILeadListService leadListService,
+            ICommonServices commonService,
+            IEmailService emailService,
+            IQueryTypeService queryTypeService,
+            ILostLeadReasonMasterService lostLeadReasonMasterService,
+            IRejectLeadReasonMasterService rejectLeadReasonMasterService)
         {
             _leadListService = leadListService;
             _commonService = commonService;
             _emailService = emailService;
+            _queryTypeService = queryTypeService;
+            _lostLeadReasonMasterService = lostLeadReasonMasterService;
+            _rejectLeadReasonMasterService = rejectLeadReasonMasterService;
         }
         #region Lead List Module Controller API - Saif Khan - 02/11/2021
         ///<summary>
@@ -249,20 +264,52 @@ namespace LoanProcessManagement.App.Controllers
             var statusResponse = await _commonService.GetAllStatus(role);
             var loanProductsResponse = await _commonService.GetAllLoanProduct();
             var insuranceProductsResponse = await _commonService.GetAllInsuranceProducts();
-            var queries = new List<QueryDemo>()
+            var allQueries = await _queryTypeService.GetAllQueryTypes();
+            List<GetAllQueryTypeQueryDto> requestQueries = new List<GetAllQueryTypeQueryDto>();
+            List<GetAllQueryTypeQueryDto> responseQueries = new List<GetAllQueryTypeQueryDto>();
+            List<LostLeadMasterListVm> lostLeadReasons = new List<LostLeadMasterListVm>();
+            List<RejectLeadMasterListVm> rejectLeadReasons = new List<RejectLeadMasterListVm>();
+
+            
+
+
+            foreach (var item in allQueries.Data)
             {
-                new QueryDemo(){id=1,QueryName="APPLICATION FORM NOT UPLOADED"},
-                new QueryDemo(){id=2,QueryName="APPLICATION FORM HAS NO DSA SEAL AND SIGNATURE"},
-                new QueryDemo(){id=3,QueryName="PD SHEET NOT UPLOADED"},
-                new QueryDemo(){id=4,QueryName="PROCESSING FEES NOT ENTERED IN SYSTEM"},
-                new QueryDemo(){id=5,QueryName="DEPENDENT DETAILS NOT UPDATED"},
-            };
+                if (item.QueryType == 'Q' && item.IsActive)
+                {
+                    requestQueries.Add(item);
+                }
+                else if (item.QueryType == 'R' && item.IsActive)
+                {
+                    responseQueries.Add(item);
+                }
+            }
 
             ViewBag.leadStatus = new SelectList(statusResponse.Data, "Id", "StatusDescription");
             ViewBag.loanProducts = new SelectList(loanProductsResponse.Data, "Id", "ProductName");
             ViewBag.insuranceProducts = new SelectList(insuranceProductsResponse.Data, "Id", "ProductName");
-            ViewBag.leadQuery = new SelectList(queries, "QueryName", "QueryName");
+            ViewBag.reqQueries = new SelectList(requestQueries, "QueryName", "QueryName");
+            ViewBag.resQueries = new SelectList(responseQueries, "QueryName", "QueryName");
+            var lostLeadReasonsResponse = await _lostLeadReasonMasterService.GetByLostLeadReason();
+            foreach(var x in lostLeadReasonsResponse.Data)
+            {
+                if (x.IsActive)
+                {
+                    lostLeadReasons.Add(x);
 
+                }
+            }
+            var rejectLeadReasonsResponse = await _rejectLeadReasonMasterService.GetByRejectLeadReason();
+            foreach(var x in rejectLeadReasonsResponse.Data)
+            {
+                if (x.IsActive)
+                {
+                    rejectLeadReasons.Add(x);
+
+                }
+            }
+            ViewBag.lostLeadReasonsList = new SelectList(lostLeadReasons, "LostLeadReasonID", "LostLeadReason");
+            ViewBag.rejectLeadReasonsList = new SelectList(rejectLeadReasons, "RejectLeadReasonID", "RejectLeadReason");
             return View(lead);
         }
         #endregion

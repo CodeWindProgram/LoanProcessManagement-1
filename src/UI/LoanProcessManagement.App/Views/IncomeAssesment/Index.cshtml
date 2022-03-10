@@ -344,13 +344,13 @@
                                                 <label asp-for="Institution_Id" class="control-label">Institution Name<span style="color: Red">&nbsp;*</span></label>
 
                                                 <div class="input-control text">
-                                                    <select asp-for="Institution_Id" class="form-control">
+                                                    <select asp-for="Institution_Id" class="form-control" asp-items="ViewBag.institutions">
                                                         <option value="">Select Institution</option>
-                                                        <option value="1">AU Small Finance Bank</option>
+                                                        @*<option value="1">AU Small Finance Bank</option>
                                                         <option value="2">Acme Bank Ltd</option>
                                                         <option value="3">Adarsh Bank</option>
                                                         <option value="4">Ahmedabad District Co-Op</option>
-                                                        <option value="5">Airtel Payments Bank</option>
+                                                        <option value="5">Airtel Payments Bank</option>*@
                                                     </select>
                                                     <span asp-validation-for="Institution_Id" class="text-danger"></span>
                                                 </div>

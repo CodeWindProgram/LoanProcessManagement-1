@@ -80,6 +80,7 @@ using LoanProcessManagement.Application.Features.LostLeadMaster.Commands.UpdateL
 using LoanProcessManagement.Application.Features.RejectedLeadMaster.Queries.GetRejectedLeadMasterbyId;
 using LoanProcessManagement.Application.Features.RejectedLeadMaster.Commands.CreateRejectedLeadReasonMaster;
 using LoanProcessManagement.Application.Features.RejectedLeadMaster.Queries.GetRejectLeadMasterList;
+using LoanProcessManagement.Application.Features.InstitutionMasters.Queries.GetInstitutionMasters;
 
 namespace LoanProcessManagement.Application.Profiles
 {
@@ -259,8 +260,12 @@ namespace LoanProcessManagement.Application.Profiles
 
             CreateMap<GetAllQueryTypeQueryDto, LpmQueryTypeMaster>().ReverseMap();
             CreateMap<LpmQueryTypeMaster, GetQueryTypeByIdQueryDto>().ReverseMap();
+            CreateMap<LpmLeadInstitutionMaster, GetInstitutionMastersQueryDto>().ReverseMap();
 
             
+
+
+
 
 
 

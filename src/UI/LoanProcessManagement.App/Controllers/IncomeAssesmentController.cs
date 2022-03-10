@@ -7,6 +7,7 @@ using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.Update
 using LoanProcessManagement.Application.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -18,9 +19,12 @@ namespace LoanProcessManagement.App.Controllers
     public class IncomeAssesmentController : Controller
     {
         private readonly IIncomeAssesmentService _incomeAssesmentService;
-        public IncomeAssesmentController(IIncomeAssesmentService incomeAssesmentService)
+        private readonly IInstitutionServices _institutionServices;
+
+        public IncomeAssesmentController(IIncomeAssesmentService incomeAssesmentService, IInstitutionServices InstitutionServices)
         {
             _incomeAssesmentService = incomeAssesmentService;
+            _institutionServices = InstitutionServices;
         }
 
         #region IncomeAssesment - Add Gst Enquiry - Saif Khan
@@ -132,7 +136,8 @@ namespace LoanProcessManagement.App.Controllers
                 };
                 ViewBag.applicantTypeNo = applicantType;
                 ViewBag.lead_Id = lead_Id;
-
+                var allInstitutions = await _institutionServices.GetAllInstitutions();
+                ViewBag.institutions = new SelectList(allInstitutions.Data, "Id", "Institution_Name");
                 return View(incomeAssessmentDetailsVm);
             }
             return View();
