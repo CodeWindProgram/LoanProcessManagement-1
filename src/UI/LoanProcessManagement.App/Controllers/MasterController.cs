@@ -23,6 +23,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using LoanProcessManagement.Application.Features.SchemeMaster.Commands.CreateScheme;
+using LoanProcessManagement.Application.Features.SchemeMaster.Commands.UpdateScheme;
 
 namespace LoanProcessManagement.App.Controllers
 {
@@ -36,12 +38,13 @@ namespace LoanProcessManagement.App.Controllers
         private readonly IQueryTypeService _queryTypeService;
         private ILostLeadReasonMasterService _lostLeadReasonMasterService;
         private IRejectLeadReasonMasterService _rejectLeadReasonMasterService;
+        private readonly ISchemeService _schemeService;
 
 
 
         //public MasterController(IUserListService userListService,IRoleMasterService roleMasterService, 
         //    ICommonServices commonService, IBranchService branchService, IQueryTypeService queryTypeService)
-   
+
 
 
         public MasterController(IUserListService userListService,
@@ -50,14 +53,15 @@ namespace LoanProcessManagement.App.Controllers
             IRejectLeadReasonMasterService rejectLeadReasonMasterService,
             ICommonServices commonService,
             IBranchService branchService,
-            IQueryTypeService queryTypeService)
+            IQueryTypeService queryTypeService,
+            ISchemeService schemeService)
         {
             _userListService = userListService;
             _roleMasterService = roleMasterService;
             _commonService = commonService;
             _branchService = branchService;
             _queryTypeService = queryTypeService;
-
+            _schemeService = schemeService;
             _lostLeadReasonMasterService = lostLeadReasonMasterService;
             _rejectLeadReasonMasterService = rejectLeadReasonMasterService;
         }
@@ -365,5 +369,64 @@ namespace LoanProcessManagement.App.Controllers
             ViewBag.Message = response.Data.Message;
             return RedirectToAction("Index");
         }
+
+        [HttpGet("/Master/GetAllScheme")]
+        public async Task<IActionResult> GetAllScheme()
+        {
+            var queries = await _schemeService.GetAllScheme();
+            return View(queries.Data);
+        }
+
+
+        [HttpGet("/Master/AddScheme")]
+        public async Task<IActionResult> AddScheme()
+        {
+            return View();
+        }
+
+        [HttpPost("/Master/AddScheme")]
+        public async Task<IActionResult> AddScheme(CreateSchemeCommand req)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _schemeService.AddScheme(req);
+                return Json(result);
+            }
+            return View();
+        }
+
+        [HttpGet("/Master/DeleteScheme/{id}")]
+        public async Task<IActionResult> DeleteScheme([FromRoute] long id)
+        {
+            var response = await _schemeService.DeleteScheme(id);
+            return Json(response);
+        }
+
+        [HttpGet("/Master/UpdateScheme/{id}")]
+        public async Task<IActionResult> UpdateScheme(long id)
+        {
+            var result = await _schemeService.GetSchemeById(id);
+            var res = new UpdateSchemeCommand()
+            {
+                Id = result.Data.Id,
+                SchemeName = result.Data.SchemeName,
+                IsActive = result.Data.IsActive
+            };
+
+            return View(res);
+        }
+
+        [HttpPut("/Master/UpdateScheme")]
+        public async Task<IActionResult> UpdateScheme(UpdateSchemeCommand req)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _schemeService.UpdateScheme(req);
+                return Json(result);
+            }
+            return View();
+
+        }
+
     }
 }

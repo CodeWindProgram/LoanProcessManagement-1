@@ -60,6 +60,9 @@ $(document).ready(function () {
         else if ($('#selectVideo').val() == 7) {
             $("#div_dynamicTables").load("/Master/GetAllQueryType");
         }
+        else if ($('#selectVideo').val() == 8) {
+            $("#div_dynamicTables").load("/Master/GetAllScheme");
+        }
         
     });
 

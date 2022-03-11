@@ -167,6 +167,11 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string GetInstitution = "api/v1/Institution/GetInstitutions";
         public const string Income = "api/v1/IncomeDetails/GetIncomeDetailsList";
         public const string Incomeid = "api/v1/IncomeDetails/GetIncomeUserDetailsList/";
+        public const string GetScheme = "api/v1/Scheme/GetAllScheme";
+        public const string AddScheme = "api/v1/Scheme/CreateScheme";
+        public const string DeleteScheme = "api/v1/Scheme/DeleteScheme/";
+        public const string GetSchemeById = "api/v1/Scheme/GetSchemeById/";
+        public const string UpdateScheme = "api/v1/Scheme/UpdateScheme";
 
 
 
