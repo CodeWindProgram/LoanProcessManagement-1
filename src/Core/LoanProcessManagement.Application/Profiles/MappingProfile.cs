@@ -81,6 +81,9 @@ using LoanProcessManagement.Application.Features.RejectedLeadMaster.Queries.GetR
 using LoanProcessManagement.Application.Features.RejectedLeadMaster.Commands.CreateRejectedLeadReasonMaster;
 using LoanProcessManagement.Application.Features.RejectedLeadMaster.Queries.GetRejectLeadMasterList;
 using LoanProcessManagement.Application.Features.InstitutionMasters.Queries.GetInstitutionMasters;
+using LoanProcessManagement.Application.Features.LpmCategories.Queries.GetAllCategories;
+using LoanProcessManagement.Application.Features.LpmCategories.Commands.CreateLpmCategory;
+using LoanProcessManagement.Application.Features.LpmCategories.Queries.GetLpmCategoryById;
 using LoanProcessManagement.Application.Features.SchemeMaster.Queries.GetSchemeList;
 using LoanProcessManagement.Application.Features.SchemeMaster.Queries.GetSchemeById;
 using LoanProcessManagement.Application.Features.SchemeMaster.Commands.CreateScheme;
@@ -264,6 +267,19 @@ namespace LoanProcessManagement.Application.Profiles
             CreateMap<GetAllQueryTypeQueryDto, LpmQueryTypeMaster>().ReverseMap();
             CreateMap<LpmQueryTypeMaster, GetQueryTypeByIdQueryDto>().ReverseMap();
             CreateMap<LpmLeadInstitutionMaster, GetInstitutionMastersQueryDto>().ReverseMap();
+            CreateMap<LpmCategory, GetAllCategoriesQueryDto>().ReverseMap();
+            CreateMap<CreateLpmCategoryCommand, LpmCategory>().ReverseMap();
+            CreateMap<LpmCategory, GetLpmCategoryByIdCommandDto>().ReverseMap();
+
+            
+
+
+
+
+
+
+
+
 
             CreateMap<GetAllSchemeDto, LpmLoanSchemeMaster>().ReverseMap();
             CreateMap<LpmLoanSchemeMaster, GetSchemeByIdDto>().ReverseMap();

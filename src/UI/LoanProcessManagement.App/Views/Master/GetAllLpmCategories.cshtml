@@ -1,0 +1,125 @@
+﻿
+
+@model IEnumerable<LoanProcessManagement.Application.Features.LpmCategories.Queries.GetAllCategories.GetAllCategoriesQueryDto>
+<script src="~/js/Master.js"></script>
+<script src="~/js/jquery/jquery.dataTables.js"></script>
+@{
+    //ViewData["Title"] = "GetRoleMaster";
+    //var records = ViewData["RoleMasterList"];
+}
+<style>
+    td {
+        text-align: center;
+    }
+
+    th {
+        text-align: center;
+    }
+</style>
+
+<div class="container app">
+    <div id="div" class="col-lg-6 pt-4 pb-4">
+
+        <button class="btn-default-submit float-left ml-1" id="act1">Add Category</button>
+    </div>
+    <hr />
+    <table id="tblUserList" class="display table table-responsive-lg">
+        <thead>
+            <tr>
+
+                <th>
+
+                    Category Name
+                </th>
+
+                <th>
+                    isActive
+                </th>
+                <th hidden>
+                    modified On
+                </th>
+
+                <th hidden>
+                    Created date
+                </th>
+                <th>
+                    Action
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+
+                <tr>
+
+                    <td> @Html.DisplayFor(modelItem => item.categoryName)</td>
+                    <td> @Html.DisplayFor(modelItem => item.IsActive)</td>
+                    <td hidden> @Html.DisplayFor(modelItem => item.IsActive)</td>
+                    <td hidden> @Html.DisplayFor(modelItem => item.IsActive)</td>
+
+                    <td>
+                        <button class="btn btn-primary btn-sm" onclick="loadPage(@Html.DisplayFor(modelItem => item.Id))" id="updateBtn">Update</button>
+                        <button class="btn btn-danger btn-sm" onclick="loadDelete(@Html.DisplayFor(modelItem => item.Id))" id="deleteBtn">Delete</button>
+
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        $(".display").dataTable({
+            "oLanguage": {
+                "sZeroRecords": "No Records to Display",
+                "sSearch": "Search "
+            },
+            "iDisplayLength": 10,
+            "aLengthMenu": [[10, 50, 100, 200, 500], [10, 50, 100, 200, 500]],
+            "bSortClasses": false,
+            "bPaginate": true,
+            "bAutoWidth": false,
+            "bProcessing": true,
+            "bDestroy": true
+
+        });
+    });
+
+    function loadPage(id) {
+
+        $("#div_dynamicTables").load("/Master/UpdateLpmCategory/" + id);
+    }
+    $('#act1').click(function () {
+        $("#div_dynamicTables").load("/Master/AddLpmCategory");
+    });
+
+    function loadDelete(id) {
+        $.ajax({
+            type: "GET",
+            url: "/Master/DeleteCategory/" + id,
+            beforeSend: function () {
+                return confirm("Are you sure you want to delete?");
+            },
+            success: function (result) {
+                if (result.data.succeeded) {
+                    toastr.success(result.data.message)
+                }
+
+                $("#div_dynamicTables").load("/Master/GetAllLpmCategories");
+            }
+        });
+        e.preventDefault();
+    };
+</script>
+
+
+
+
+
+
+
+

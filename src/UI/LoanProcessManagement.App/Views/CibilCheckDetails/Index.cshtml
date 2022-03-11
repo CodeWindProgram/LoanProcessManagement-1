@@ -383,12 +383,12 @@
                                             <label class="">Category</label><span style="color: Red">&nbsp;*</span>
 
 
-                                            <select asp-for="Category" class="form-control">
-                                                <option value="">----Select----</option>
-                                                <option value="1">Permanent Address</option>
+                                            <select asp-for="Category" class="form-control" asp-items="ViewBag.LpmCategories">
+                                                <option value="">Select Category</option>
+                                                @*<option value="1">Permanent Address</option>
                                                 <option value="2">Residence Address</option>
                                                 <option value="3">Office Address</option>
-                                                <option value="4">Not Categorized</option>
+                                                <option value="4">Not Categorized</option>*@
                                             </select>
                                             <span asp-validation-for="Category" style="color:Red;display:block;"></span>
 

@@ -23,6 +23,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using LoanProcessManagement.Application.Features.LpmCategories.Commands.CreateLpmCategory;
+using LoanProcessManagement.Application.Features.LpmCategories.Commands.UpdateLpmCategory;
 using LoanProcessManagement.Application.Features.SchemeMaster.Commands.CreateScheme;
 using LoanProcessManagement.Application.Features.SchemeMaster.Commands.UpdateScheme;
 
@@ -36,6 +38,7 @@ namespace LoanProcessManagement.App.Controllers
         private readonly ICommonServices _commonService;
         private readonly IBranchService _branchService;
         private readonly IQueryTypeService _queryTypeService;
+        private readonly ILpmCategoryServices _lpmCategoryServices;
         private ILostLeadReasonMasterService _lostLeadReasonMasterService;
         private IRejectLeadReasonMasterService _rejectLeadReasonMasterService;
         private readonly ISchemeService _schemeService;
@@ -54,6 +57,7 @@ namespace LoanProcessManagement.App.Controllers
             ICommonServices commonService,
             IBranchService branchService,
             IQueryTypeService queryTypeService,
+            ILpmCategoryServices lpmCategoryServices,
             ISchemeService schemeService)
         {
             _userListService = userListService;
@@ -61,6 +65,7 @@ namespace LoanProcessManagement.App.Controllers
             _commonService = commonService;
             _branchService = branchService;
             _queryTypeService = queryTypeService;
+            _lpmCategoryServices = lpmCategoryServices;
             _schemeService = schemeService;
             _lostLeadReasonMasterService = lostLeadReasonMasterService;
             _rejectLeadReasonMasterService = rejectLeadReasonMasterService;
@@ -368,6 +373,64 @@ namespace LoanProcessManagement.App.Controllers
             ViewBag.isSuccess = response.Succeeded;
             ViewBag.Message = response.Data.Message;
             return RedirectToAction("Index");
+        }
+
+        
+        [HttpGet("/Master/GetAllLpmCategories")]
+        public async Task<IActionResult> GetAllLpmCategories()
+        {
+            var categories = await _lpmCategoryServices.GetAllLpmCategories();
+            return View(categories.Data);
+        }
+        
+        [HttpGet("/Master/AddLpmCategory")]
+        public async Task<IActionResult> AddCategory()
+        {
+            return View();
+        }
+
+        [HttpPost("/Master/AddLpmCategory")]
+        public async Task<IActionResult> AddCategory(CreateLpmCategoryCommand req)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _lpmCategoryServices.AddLpmCategory(req);           
+                return Json(response);
+
+            }
+            return View();
+        }
+
+        [HttpGet("/Master/DeleteCategory/{id}")]
+        public async Task<IActionResult> DeleteCategory([FromRoute] long id)
+        {
+            var response = await _lpmCategoryServices.DeleteLpmCategory(id);
+            return Json(response);
+        }
+
+        [HttpGet("/Master/UpdateLpmCategory/{id}")]
+        public async Task<IActionResult> UpdateLpmCategory(long id)
+        {
+            var result = await _lpmCategoryServices.GetLpmCategoryById(id);
+            var res = new UpdateLpmCategoryCommand()
+            {
+                Id = result.Data.Id,
+                categoryName = result.Data.categoryName,
+                IsActive = result.Data.IsActive
+            };
+
+            return View(res);
+        }
+
+        [HttpPut("/Master/UpdateLpmCategory")]
+        public async Task<IActionResult> UpdateLpmCategory(UpdateLpmCategoryCommand req)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _lpmCategoryServices.UpdateLpmCategory(req);
+                return Json(result);
+            }
+            return View();
         }
 
         [HttpGet("/Master/GetAllScheme")]

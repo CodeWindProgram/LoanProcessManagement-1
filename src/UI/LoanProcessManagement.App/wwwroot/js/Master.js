@@ -63,6 +63,9 @@ $(document).ready(function () {
         else if ($('#selectVideo').val() == 8) {
             $("#div_dynamicTables").load("/Master/GetAllScheme");
         }
+        else if ($('#selectVideo').val() == 9) {
+            $("#div_dynamicTables").load("/Master/GetAllLpmCategories");
+        }
         
     });
 

@@ -59,6 +59,9 @@ namespace LoanProcessManagement.Persistence
             services.AddScoped<IGSTLeadListRepository, GSTLeadListRepository>();
             services.AddScoped<ILostLeadReasonMasterRepository, LostLeadReasonMasterRepository>();
             services.AddScoped<IRejectedLeadReasonMasterRepository, RejectedLeadReasonMasterRepository>();
+            services.AddScoped<ILpmCategoryRepository, LpmCategoryRepository>();
+
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {

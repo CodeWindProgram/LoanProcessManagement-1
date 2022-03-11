@@ -1,8 +1,10 @@
 ﻿using LoanProcessManagement.App.Models;
 using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.CibilCheck.Commands.AddCibilCheckDetails;
+using LoanProcessManagement.Application.Features.LpmCategories.Queries.GetAllCategories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +16,13 @@ namespace LoanProcessManagement.App.Controllers
     public class CibilCheckDetailsController : Controller
     {
         private readonly ICibilCheckService _cibilCheckService;
+        private readonly ILpmCategoryServices _lpmCategoryServices;
 
-        public CibilCheckDetailsController(ICibilCheckService cibilCheckService)
+        public CibilCheckDetailsController(ICibilCheckService cibilCheckService, ILpmCategoryServices lpmCategoryServices)
         {
 
             _cibilCheckService = cibilCheckService;
+            _lpmCategoryServices = lpmCategoryServices;
         }
         #region This action method will internally call cibil check applicant api by - Ramya Guduru - 16/12/2021
         /// <summary>
@@ -67,6 +71,18 @@ namespace LoanProcessManagement.App.Controllers
                 Succeeded = applicantResponse.Data.Succeeded,
                 AppTypeList = applicantResponse.Data.AppTypeList
             };
+            List<GetAllCategoriesQueryDto> activeCategories = new List<GetAllCategoriesQueryDto>();
+            var AllCategories =await _lpmCategoryServices.GetAllLpmCategories();
+            foreach (var x in AllCategories.Data)
+            {
+                if (x.IsActive)
+                {
+                    activeCategories.Add(x);
+
+                }
+            }
+            ViewBag.LpmCategories = new SelectList(activeCategories, "Id", "categoryName");
+
             if (applicant.IsSubmit)
             {
                 return View("CibilCheckFreeze", applicant);
