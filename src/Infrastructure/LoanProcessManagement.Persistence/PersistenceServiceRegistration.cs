@@ -48,6 +48,7 @@ namespace LoanProcessManagement.Persistence
             services.AddScoped<IQueryTypeRepository, QueryTypeRepository>();
             services.AddScoped<ILpmInstitutionMastersRepository, LpmInstitutionMastersRepository>();
             services.AddScoped<ISchemeRepository, SchemeRepository>();
+            services.AddScoped<IDsaDashboardReportRepository, DsaDashboardReportRepository>();
 
 
 
