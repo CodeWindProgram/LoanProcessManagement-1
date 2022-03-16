@@ -1,0 +1,229 @@
+﻿@model LoanProcessManagement.Application.Features.DsaDashboardReport.Queries.DsaDashboardReport.DsaDashboardReportQuery;
+@using LoanProcessManagement.Application.Features.DsaDashboardReport.Queries.DsaDashboardReport
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "DsaDashboardReport";
+    var Records = (List<DsaDashboardReportDto>)ViewData["DsaDashboardReport"];
+}
+<style>
+    .panel-heading {
+        color: white;
+        background-color: #343a40;
+        border-bottom: 1px solid rgba(0,0,0,.125);
+        padding: 0.75rem 1.25rem;
+        position: relative;
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+    }
+
+    /*.btn:hover {
+        background-color: #adb5bd;
+        color: black;
+        margin-bottom: 5px;
+    }*/
+
+    .selected {
+        background: #adb5bd;
+        color: #FFF;
+    }
+
+    .no-sort::after {
+        display: none !important;
+    }
+
+    .no-sort {
+        pointer-events: none !important;
+        cursor: default !important;
+    }
+</style>
+<div class="container app pb-5">
+    <div class="col-sm-12">
+        <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
+            <div class="panel-heading"><h5>DSA Dashboard Report</h5></div>
+            <div class="panel-body">
+                <form asp-action="DsaDashboardReport" method="post">
+                    <input type="hidden" asp-for="RoleId" value="@ViewBag.RoleId"/>
+                    <input type="hidden" asp-for="LgId" value="@User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value"/>
+                    <div class="card" style="padding:15px;">
+                        <div>
+                            @*<div class="row">
+                                <div class="col-3">
+                                    <br>
+                                    <label>Select Filter</label>
+                                </div>
+                            </div>*@
+                            <div class="form-group">
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-sm-12">
+                                        <label asp-for="BranchID">Branch Name <span style="color: Red">&nbsp;*</span></label>
+                                        @if (@ViewBag.RoleId == 3 || @ViewBag.RoleId == 4)
+                                        {
+                                            <select asp-for="BranchID" class="form-control">
+                                                <option value="@ViewBag.Id">@ViewBag.branchname</option>
+                                            </select>
+                                            <span asp-validation-for="BranchID" class="text-danger"></span>
+                                        }
+                                        else
+                                        {
+                                            <select asp-for="BranchID" class="form-control" asp-items="ViewBag.branches" id="divBranch">
+                                                <option value="">Select Branch</option>
+                                            </select>
+                                            <span asp-validation-for="BranchID" class="text-danger"></span>
+                                        }
+
+                                    </div>
+                                    <div class="col-lg-3 col-sm-12">
+                                        <label asp-for="StartDate">Start Date<span style="color: Red">&nbsp;*</span></label>
+
+                                        <input asp-for="StartDate" class="form-control" type="text" placeholder="dd-mm-yyyy" id="startDatePicker" autocomplete="off" />
+                                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-12">
+                                        <label asp-for="EndDate">End Date <span style="color: Red">&nbsp;*</span></label>
+
+                                        <input asp-for="EndDate" class="form-control" type="text" placeholder="dd-mm-yyyy" id="endDatePicker" autocomplete="off">
+                                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-lg-3 col-sm-12 d-flex align-items-end">
+                                        <input type="submit" class="btn btn-dark btn-md" id="btnSubmit" />
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                        </div>
+                        <table class="table" id="reportTable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Branch
+                                    </th>
+                                    <th>
+                                        Branch Data Entry Amount
+                                    </th>
+                                    <th>
+                                        Ho-InPrin Sanction Amount
+                                    </th>
+                                    <th>
+                                        Branch Recomm- Amount
+                                    </th>
+                                    <th>
+                                        Ho-Sanction Amount
+                                    </th>
+                                    <th>
+                                        Undisbursed Amount
+                                    </th>
+                                    <th>
+                                        Disbursed Amount
+                                    </th>
+                                    <th>
+                                        Sanction Amount TAT
+                                    </th>
+                                    <th>
+                                        File Age(days)
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Records)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.UserName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.BranchName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.BranchDataEntryAmount)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.HoInPrinSanctionAmount)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.BranchRecommendationAmount)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.HoSanctionAmount)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.UndisbursedAmount)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DisbursedAmount)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SanctionAmountTAT)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FileAge)
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        var usrTable = $('#reportTable').dataTable({
+            "oLanguage": {
+                "sZeroRecords": "No Records to Display",
+                "sSearch": "Search "
+            },
+            "iDisplayLength": 10,
+            "aLengthMenu": [[10, 50, 100, 200, 500], [10, 50, 100, 200, 500]],
+            "bSortClasses": false,
+            "bPaginate": true,
+            "bAutoWidth": false,
+            "bProcessing": true,
+            "bDestroy": true
+        });
+    });
+    $(document).ready(function () {
+
+        $("#startDatePicker").datepicker({
+            orientation:'bottom',
+            changeMonth: true,
+            changeYear: true,
+            //startDate: '-60y',
+            endDate: '+0d',
+            format: "dd-mm-yyyy",
+            yearRange: "-100:+0"
+        }).on('changeDate', function (ev) {
+            var date = ev.date.getDate();
+            var month = ev.date.getMonth();
+            var year = ev.date.getFullYear();
+            var selectedDate = new Date(year, month, date, 1);
+            var minDate = new Date(selectedDate);
+            minDate.setDate(minDate.getDate() + 1);
+            $('#endDatePicker').datepicker('setStartDate', minDate);
+        });
+        $("#endDatePicker").datepicker({
+            orientation: 'bottom',
+            changeMonth: true,
+            changeYear: true,
+            //startDate: '-60y',
+            endDate: '+0d',
+            format: "dd-mm-yyyy",
+            yearRange: "-100:+0"
+        }).on('changeDate', function (selected) {
+            var minDate = new Date(selected.date);
+            minDate.setDate(minDate.getDate() - 1);
+            $('#startDatePicker').datepicker('setEndDate', minDate);
+        });
+
+        $(function () {
+            $('#divBranch option[value="Head Office"]').remove();
+        });
+    });
+</script>

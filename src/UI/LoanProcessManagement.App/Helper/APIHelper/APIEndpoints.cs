@@ -55,6 +55,7 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string GetIncomeAssessmentDetails = "api/v1/IncomeAssesment/GetIncomeAssessmentDetailsByLeadId?applicantType={0}&lead_Id={1}";
         public const string AddIncomeAssessmentDetails = "api/v1/IncomeAssesment/AddIncomeAssessmentDetailsByLeadId/";
         public const string GetIncomeAssessmentRecordsList = "api/v1/IncomeAssesment/GetIncomeAssessmentRecordsList?applicantType={0}&lead_Id={1}";
+        public const string DsaDashboardReport = "api/v1/DsaDashboardReport/DsaDashboardReport";
         #endregion
 
         #region Maintaining the Url EndPoint - Saif Khan - 28/10/2021

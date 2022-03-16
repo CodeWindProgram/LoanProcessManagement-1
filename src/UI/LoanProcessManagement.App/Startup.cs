@@ -77,7 +77,7 @@ namespace LoanProcessManagement.App
             services.AddScoped<IQueryTypeService, QueryTypeService>();
             services.AddScoped<IInstitutionServices, InstitutionServices>();
             services.AddScoped<ILpmCategoryServices, LpmCategoryServices>();
-
+            services.AddScoped<IDsaDashboardReportService, DsaDashboardReportService>();
             
 
 
