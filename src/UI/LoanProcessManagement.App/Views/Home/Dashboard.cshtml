@@ -340,7 +340,38 @@
                 options: pieOptions
             })
 
-            var myChart = new Chart(lineChart, {
+            @*var myChart = new Chart(lineChart, {
+                type: 'line',
+                data: {
+                    labels: ['@ViewBag.lastSixMonths[0]', '@ViewBag.lastSixMonths[1]', '@ViewBag.lastSixMonths[2]',
+                        '@ViewBag.lastSixMonths[3]', '@ViewBag.lastSixMonths[4]', '@ViewBag.lastSixMonths[5]'],
+                    datasets: [{
+                        label: 'Disbursement', // Name the series
+                        data: ['@ViewBag.LoanAmounts[0]', '@ViewBag.LoanAmounts[1]', '@ViewBag.LoanAmounts[2]', '@ViewBag.LoanAmounts[3]', '@ViewBag.LoanAmounts[4]', '@ViewBag.LoanAmounts[5]'], // Specify the data values array
+                        fill: false,
+                        borderColor: '#2196f3', // Add custom color border (Line)
+                        backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
+                        borderWidth: 1 // Specify bar border width
+                    }]
+                },
+                options: {
+                    responsive: true, // Instruct chart js to respond nicely.
+                    maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                callback: function (val, index, array) {
+                                    if (val >= 10000000) val = (val / 10000000).toFixed(2) + ' Cr';
+                                    else if (val >= 100000) val = (val / 100000).toFixed(2) + ' Lac';
+                                    else if (val >= 1000) val = (val / 1000).toFixed(2) + ' K';
+                                    return val;
+                                }
+                            }
+                        }]
+                    }
+                }
+            });*@
+        var myChart = new Chart(lineChart, {
                 type: 'line',
                 data: {
                     labels: ['@ViewBag.lastSixMonths[0]', '@ViewBag.lastSixMonths[1]', '@ViewBag.lastSixMonths[2]',
@@ -371,7 +402,6 @@
                     }
                 }
             });
-       
 
 
 

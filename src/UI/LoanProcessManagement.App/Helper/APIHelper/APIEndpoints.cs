@@ -180,7 +180,7 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string GetLpmCategoryById = "api/v1/LpmCategory/GetCategoryTypeById/";
         public const string UpdateLpmCategory = "api/v1/LpmCategory/UpdateLpmCategory";
 
-
+        public const string GetLoan = "api/v1/LeadStatus/GetLoanAmount/";
 
 
 

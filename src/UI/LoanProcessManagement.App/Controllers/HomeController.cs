@@ -2,6 +2,7 @@
 using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.DSACorner.Query.DSACornerList;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries;
+using LoanProcessManagement.Application.Features.LineChart.Queries.GetLoanByCurrentStatus;
 using LoanProcessManagement.Application.Features.Menu.Commands.CreateCommands;
 using LoanProcessManagement.Application.Features.Menu.Commands.DeleteCommand;
 using LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand;
@@ -93,7 +94,14 @@ namespace LoanProcessManagement.App.Controllers
             ViewBag.lastSixMonths = Enumerable.Range(0, 6)
                               .Select(i => DateTime.Now.AddMonths(i - 6))
                               .Select(date => date.ToString("MMMM")).ToList();
-            //var menu =await _menuService.GetChildMenuById(53);
+            const long V = 10;
+            //GetLoanByCurrentStatusQuery red = new GetLoanByCurrentStatusQuery(V)
+            //{
+            //    CurrentStatus = (long)10
+            //};
+            //var incoming = await _commonService.GetLoanAmount(red);
+            //ViewBag.LoanAmounts = incoming.Skip(Math.Max(0, incoming.Count() - 6)).Take(6).ToList();
+            ////var menu =await _menuService.GetChildMenuById(53);
             return View(res.Data);
         }
 

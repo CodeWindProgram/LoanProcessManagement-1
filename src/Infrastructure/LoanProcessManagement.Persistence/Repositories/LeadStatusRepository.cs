@@ -2,6 +2,7 @@
 using LoanProcessManagement.Application.Features.LeadStatus.Queries;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetHOSanctionListQuery;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetPerformanceSummary;
+using LoanProcessManagement.Application.Features.LineChart.Queries.GetLoanByCurrentStatus;
 using LoanProcessManagement.Domain.CustomModels;
 using LoanProcessManagement.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -752,6 +753,11 @@ namespace LoanProcessManagement.Persistence.Repositories
 
             return joinn;
 
+        }
+        public async Task<List<long?>> GetLoanAmount(GetLoanByCurrentStatusQuery request)
+        {
+            var gettingstatus = await _dbContext.LpmLeadProcessCycles.Where(a => a.CurrentStatus == request.CurrentStatus).Select(a => a.LoanAmount).ToListAsync();
+            return gettingstatus;
         }
     }
 }

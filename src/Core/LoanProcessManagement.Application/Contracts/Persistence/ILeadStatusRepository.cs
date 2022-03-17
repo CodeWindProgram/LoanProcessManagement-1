@@ -1,6 +1,7 @@
 ﻿using LoanProcessManagement.Application.Features.LeadStatus.Queries;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetHOSanctionListQuery;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetPerformanceSummary;
+using LoanProcessManagement.Application.Features.LineChart.Queries.GetLoanByCurrentStatus;
 using LoanProcessManagement.Domain.CustomModels;
 using LoanProcessManagement.Domain.Entities;
 using System;
@@ -17,6 +18,7 @@ namespace LoanProcessManagement.Application.Contracts.Persistence
         Task<List<ProcessModel>> GetInPrincipleSanctionLists(GetInPrincipleSanctionListQuery req);
         Task<List<GetPerformanceSummaryQueryDTO>> PerformanceSummary(GetPerformanceSummaryQuery req);
         Task<List<ProcessModel>> GetHOSanctionLists(GetHOSanctionListQuery req);
+        Task<List<long?>> GetLoanAmount(GetLoanByCurrentStatusQuery request);
 
     }
 }

@@ -2,6 +2,7 @@
 using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.Branch.Queries;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries;
+using LoanProcessManagement.Application.Features.LineChart.Queries.GetLoanByCurrentStatus;
 using LoanProcessManagement.Application.Features.LoanProducts.Queries;
 using LoanProcessManagement.Application.Features.LoanSchemes;
 using LoanProcessManagement.Application.Features.LoanSchemes.Queries;
@@ -275,5 +276,27 @@ namespace LoanProcessManagement.App.Services.Implementation
             return response;
         }
         #endregion
+        //public async Task<List<long?>> GetLoanAmount(GetLoanByCurrentStatusQuery req)
+        //{
+        //    BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
+        //    //var pointer = 10;
+
+        //    var content = JsonConvert.SerializeObject(req);
+
+        //    var _client = clientfact.CreateClient("LoanService");
+
+        //    var httpResponse = await _client.GetAsync
+        //        (
+        //            BaseUrl + APIEndpoints.GetLoan + req.CurrentStatus
+        //        );
+
+        //    var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+
+        //    var options = new JsonSerializerOptions();
+
+        //    var response = System.Text.Json.JsonSerializer.Deserialize<List<long?>>(jsonString, options);
+
+        //    return response;
+        //}
     }
 }

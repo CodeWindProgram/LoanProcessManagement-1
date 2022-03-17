@@ -1,6 +1,7 @@
 ﻿using LoanProcessManagement.Application.Features.LeadStatus.Queries;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetHOSanctionListQuery;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetPerformanceSummary;
+using LoanProcessManagement.Application.Features.LineChart.Queries.GetLoanByCurrentStatus;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -70,6 +71,14 @@ namespace LoanProcessManagement.Api.Controllers.v1
         public async Task<ActionResult> PerformanceSummary([FromBody] GetPerformanceSummaryQuery req)
         {
             var dtos = await _mediator.Send(req);
+            return Ok(dtos);
+        }
+        [HttpGet("GetLoanAmount/{currentstatus}")]
+        public async Task<ActionResult> GetLoanAmount([FromRoute] long currentstatus)
+        {
+            _logger.LogInformation("GetStatus Initiated");
+            var dtos = await _mediator.Send(new GetLoanByCurrentStatusQuery(currentstatus));
+            _logger.LogInformation("GetStatus Completed");
             return Ok(dtos);
         }
 

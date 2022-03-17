@@ -87,6 +87,7 @@ using LoanProcessManagement.Application.Features.LpmCategories.Queries.GetLpmCat
 using LoanProcessManagement.Application.Features.SchemeMaster.Queries.GetSchemeList;
 using LoanProcessManagement.Application.Features.SchemeMaster.Queries.GetSchemeById;
 using LoanProcessManagement.Application.Features.SchemeMaster.Commands.CreateScheme;
+using LoanProcessManagement.Application.Features.LineChart.Queries.GetLoanByCurrentStatus;
 
 namespace LoanProcessManagement.Application.Profiles
 {
@@ -271,7 +272,11 @@ namespace LoanProcessManagement.Application.Profiles
             CreateMap<CreateLpmCategoryCommand, LpmCategory>().ReverseMap();
             CreateMap<LpmCategory, GetLpmCategoryByIdCommandDto>().ReverseMap();
 
-            
+            CreateMap<LpmLeadProcessCycle, GetLoanByCurrentStatusQuery>().ReverseMap();
+            CreateMap<LpmLeadProcessCycle, GetLoanByCurrentStatusQueryDto>().ReverseMap();
+
+
+
 
 
 
