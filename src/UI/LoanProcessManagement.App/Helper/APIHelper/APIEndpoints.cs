@@ -180,6 +180,18 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string GetLpmCategoryById = "api/v1/LpmCategory/GetCategoryTypeById/";
         public const string UpdateLpmCategory = "api/v1/LpmCategory/UpdateLpmCategory";
 
+        public const string GetAllProducts = "api/v1/Product/GetAllProducts";
+        public const string AddProduct = "api/v1/Product/CreateProduct";
+        public const string DeleteProduct = "api/v1/Product/DeleteProduct/";
+        public const string GetProductById = "api/v1/Product/GetProductById/";
+        public const string UpdateProduct = "api/v1/Product/UpdateProduct";
+
+
+
+
+
+
+
         public const string AddInstitution = "api/v1/Institution/CreateInstitions";
         public const string DeleteInstitution = "api/v1/Institution/DeleteInstitions/";
         public const string GetByIdInstitution = "api/v1/Institution/GetInstitutionMasterById/";

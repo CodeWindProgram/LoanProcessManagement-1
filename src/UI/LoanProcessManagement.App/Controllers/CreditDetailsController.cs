@@ -1,6 +1,7 @@
 ﻿using LoanProcessManagement.App.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,9 +16,12 @@ namespace LoanProcessManagement.App.Controllers
     {
 
         private readonly ICreditDetailsService _creditService;
-        public CreditDetailsController(ICreditDetailsService creditService)
+        private readonly IConfiguration _configuration;
+
+        public CreditDetailsController(ICreditDetailsService creditService, IConfiguration configuration)
         {
             _creditService = creditService;
+            _configuration = configuration;
         }
 
         #region This method will call get ITR details api by - Ramya Guduru - 14/02/2022
@@ -162,12 +166,12 @@ namespace LoanProcessManagement.App.Controllers
             var path="";
             if (num == 1)
             {
-                path = Path.Combine(basedirectory, @"..\..\API\\LoanProcessManagement.Api\\Uploadfiles\\GSTfiles\\"
+                path = Path.Combine(basedirectory, _configuration["FilePaths:GstUploadFolder"].ToString()
                               , formNo, filename);
             }
             else if (num == 2)
             {
-                 path = Path.Combine(basedirectory, @"..\..\API\\LoanProcessManagement.Api\\Uploadfiles\\IncomeAssessmentFiles\\"
+                 path = Path.Combine(basedirectory, _configuration["FilePaths:IncomeAssessmentFolder"].ToString()
                                , formNo, filename);
             }
             var memory = new MemoryStream();

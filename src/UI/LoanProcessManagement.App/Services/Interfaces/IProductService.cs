@@ -1,4 +1,9 @@
-﻿using LoanProcessManagement.Application.Features.ProductsList.Queries;
+﻿using LoanProcessManagement.Application.Features.Product.Commands.CreateProductCommand;
+using LoanProcessManagement.Application.Features.Product.Commands.DeleteProductCommand;
+using LoanProcessManagement.Application.Features.Product.Commands.UpdateProductCommand;
+using LoanProcessManagement.Application.Features.Product.Queries.GetAllProducts;
+using LoanProcessManagement.Application.Features.Product.Queries.GetProductById;
+using LoanProcessManagement.Application.Features.ProductsList.Queries;
 using LoanProcessManagement.Application.Responses;
 using System;
 using System.Collections.Generic;
@@ -12,6 +17,11 @@ namespace LoanProcessManagement.App.Services.Interfaces
     {
         //Task<Response<IEnumerable<GetProductsListQueryVm>>> ProductsListProcess(GetProductsListQuery productsList);
         Task<Response<IEnumerable<GetProductsListQueryVm>>> ProductsListProcess(string lead_Id);
+        Task<Response<IEnumerable<GetAllProductsQueryDto>>> GetAllProducts();
+        Task<Response<CreateProductCommandDto>> AddProduct(CreateProductCommand req);
+        Task<Response<DeleteProductCommandDto>> DeleteProduct(long id);
+        Task<Response<GetProductByIdQueryDto>> GetProductById(long id);
+        Task<Response<UpdateProductCommandDto>> UpdateProduct(UpdateProductCommand req);
 
     }
     #endregion

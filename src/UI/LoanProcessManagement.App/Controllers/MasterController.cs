@@ -26,6 +26,9 @@ using LoanProcessManagement.Application.Features.LpmCategories.Commands.CreateLp
 using LoanProcessManagement.Application.Features.LpmCategories.Commands.UpdateLpmCategory;
 using LoanProcessManagement.Application.Features.SchemeMaster.Commands.CreateScheme;
 using LoanProcessManagement.Application.Features.SchemeMaster.Commands.UpdateScheme;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using LoanProcessManagement.Application.Features.Product.Commands.CreateProductCommand;
+using LoanProcessManagement.Application.Features.Product.Commands.UpdateProductCommand;
 using LoanProcessManagement.Application.Features.InstitutionMasters.Commands.CreateInstitutionMasters;
 using LoanProcessManagement.Application.Features.InstitutionMasters.Commands.UpdateInstitutionMasters;
 using LoanProcessManagement.Application.Features.LeadStatus.Commands.CreateLeadStatus;
@@ -47,6 +50,7 @@ namespace LoanProcessManagement.App.Controllers
         private ILostLeadReasonMasterService _lostLeadReasonMasterService;
         private IRejectLeadReasonMasterService _rejectLeadReasonMasterService;
         private readonly ISchemeService _schemeService;
+        private readonly IProductService _productService;
         private readonly IInstitutionServices _institutionServices;
         private readonly ILeadStatusService _leadStatusService;
         private readonly IQualificationService _qualificationService;
@@ -67,6 +71,7 @@ namespace LoanProcessManagement.App.Controllers
             IQueryTypeService queryTypeService,
             ILpmCategoryServices lpmCategoryServices,
             ISchemeService schemeService,
+            IProductService productService,
             IInstitutionServices InstitutionServices,
             ILeadStatusService leadStatusService,
             IQualificationService qualificationService)
@@ -78,12 +83,14 @@ namespace LoanProcessManagement.App.Controllers
             _queryTypeService = queryTypeService;
             _lpmCategoryServices = lpmCategoryServices;
             _schemeService = schemeService;
+            _productService = productService;
             _institutionServices = InstitutionServices;
             _lostLeadReasonMasterService = lostLeadReasonMasterService;
             _rejectLeadReasonMasterService = rejectLeadReasonMasterService;
             _leadStatusService = leadStatusService;
             _qualificationService = qualificationService;
         }
+
 
 
         public async Task<IActionResult> Index()
@@ -640,6 +647,71 @@ namespace LoanProcessManagement.App.Controllers
             if (ModelState.IsValid)
             {
                 var result = await _leadStatusService.UpdateLeadStatus(req);
+                return Json(result);
+            }
+            return View();
+
+        }
+
+        [HttpGet("/Master/Getallproducts")]
+        public async Task<IActionResult> GetAllProducts()
+        {
+            var products = await _productService.GetAllProducts();
+            return View(products.Data);
+
+        }
+
+        [HttpGet("/Master/AddProduct")]
+        public async Task<IActionResult> AddProduct()
+        {
+            var scheme = await _schemeService.GetAllScheme();
+            ViewBag.schemes = new SelectList(scheme.Data, "Id", "SchemeName");
+            return View();
+        }
+
+        [HttpPost("/Master/AddProduct")]
+        public async Task<IActionResult> AddProduct(CreateProductCommand req)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _productService.AddProduct(req);
+                return Json(response);
+
+            }
+            return View();
+        }
+        [HttpGet("/Master/DeleteProduct/{id}")]
+        public async Task<IActionResult> DeleteProduct([FromRoute] long id)
+        {
+            var response = await _productService.DeleteProduct(id);
+            return Json(response);
+        }
+
+        [HttpGet("/Master/UpdateProduct/{id}")]
+        public async Task<IActionResult> UpdateProduct(long id)
+        {
+            var result = await _productService.GetProductById(id);
+            var scheme = await _schemeService.GetAllScheme();
+            ViewBag.schemes = new SelectList(scheme.Data, "Id", "SchemeName");
+            var res = new UpdateProductCommand()
+            {
+                Id = result.Data.Id,
+                ProductName = result.Data.ProductName,
+                ProducDescription=result.Data.ProducDescription,
+                ProductType=result.Data.ProductType,
+                Schemes=result.Data.Schemes,
+                IsActive = result.Data.IsActive
+            };
+
+            return View(res);
+        }
+
+        [HttpPut("/Master/UpdateProduct")]
+        public async Task<IActionResult> UpdateProduct(UpdateProductCommand req)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _productService.UpdateProduct(req);
                 return Json(result);
             }
             return View();

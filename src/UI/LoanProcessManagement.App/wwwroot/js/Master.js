@@ -1,8 +1,7 @@
 ﻿
 
 $(document).ready(function () {
-    $('#selectVideo').click(function () {
-        console.log($('#selectVideo').val())
+    $('#selectVideo').change(function () {
         if ($('#selectVideo').val() == 1) {
             $("#div_dynamicTables").load("../Master/GetRoleMaster");
             //$.ajax({
@@ -75,6 +74,9 @@ $(document).ready(function () {
         }
         else if ($('#selectVideo').val() == 12) {
             $("#div_dynamicTables").load("/Master/GetAllQualification");
+        }
+        else if ($('#selectVideo').val() == 15) {
+            $("#div_dynamicTables").load("/Master/Getallproducts");
         }
         
     });

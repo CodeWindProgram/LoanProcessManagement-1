@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -38,14 +39,19 @@ namespace LoanProcessManagement.App.Controllers
         private readonly ICommonServices _commonService;
         private readonly IMenuService _menuService;
         private readonly IRoleMasterService _roleMasterService;
+        private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public HomeController(IAccountService accountService, ICommonServices commonService,IWebHostEnvironment webHostEnvironment, IMenuService menuService, IRoleMasterService roleMasterService)
+        public HomeController(IAccountService accountService, ICommonServices commonService,IWebHostEnvironment webHostEnvironment, IMenuService menuService,
+            IRoleMasterService roleMasterService,
+            IConfiguration configuration)
         {
             _roleMasterService = roleMasterService;
+            _configuration = configuration;
             _accountService = accountService;
             _commonService = commonService;
             _menuService = menuService;
             _webHostEnvironment = webHostEnvironment;
+
         }
 
         #region Calling the API for the MenuMaster - Saif Khan - 28/10/2021
@@ -176,7 +182,7 @@ namespace LoanProcessManagement.App.Controllers
 
             var ReturnsTomenulist = ViewBag.UserId = HttpContext.Request.Cookies["Id"];
             var IconPath = UniqueName(checkboxfunctionVm.Icons);
-            checkboxfunctionVm.createMenuCommand.Icon = IconPath;
+            checkboxfunctionVm.createMenuCommand.Icon = "/"+IconPath;
             if (checkboxfunctionVm.Icons != null && IconPath != null && checkboxfunctionVm.createMenuCommand.Icon != null)
                 ModelState.Clear();
             if (ModelState.IsValid)
@@ -302,7 +308,7 @@ namespace LoanProcessManagement.App.Controllers
             else
             {
                 var IconPath = UniqueName(updateCheckboxfunctionVm.Icons);
-                updateCheckboxfunctionVm.getMenuByIdQueryVm.Icon = IconPath;
+                updateCheckboxfunctionVm.getMenuByIdQueryVm.Icon = "/"+IconPath;
                
 
             }
@@ -376,9 +382,12 @@ namespace LoanProcessManagement.App.Controllers
             var Guids = Guid.NewGuid().ToString();
             if (nameFile != null)
             {
-                Directory.CreateDirectory("css/images/icon/MenuIcons");
-                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "css/images/icon/MenuIcons/");
-                thumbnail = "/css/images/icon/MenuIcons/" + Guids + "_" + nameFile.FileName;
+                //Directory.CreateDirectory("css/images/icon/MenuIcons");
+                //string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "css/images/icon/MenuIcons/");
+                //thumbnail = "/css/images/icon/MenuIcons/" + Guids + "_" + nameFile.FileName;
+                Directory.CreateDirectory(_configuration["FilePaths:IconsDirectoryPath"].ToString());
+                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, _configuration["FilePaths:IconsPath"].ToString());
+                thumbnail = _configuration["FilePaths:IconsPath"].ToString() + Guids + "_" + nameFile.FileName;
                 var temp = Guids + "_" + nameFile.FileName;
                 string filePath = Path.Combine(uploadsFolder, temp);
                 using (var fileStream = new FileStream(filePath, FileMode.Create))

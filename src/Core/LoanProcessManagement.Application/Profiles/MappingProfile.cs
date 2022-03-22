@@ -87,6 +87,8 @@ using LoanProcessManagement.Application.Features.LpmCategories.Queries.GetLpmCat
 using LoanProcessManagement.Application.Features.SchemeMaster.Queries.GetSchemeList;
 using LoanProcessManagement.Application.Features.SchemeMaster.Queries.GetSchemeById;
 using LoanProcessManagement.Application.Features.SchemeMaster.Commands.CreateScheme;
+using LoanProcessManagement.Application.Features.Product.Queries.GetAllProducts;
+using LoanProcessManagement.Application.Features.Product.Queries.GetProductById;
 using LoanProcessManagement.Application.Features.LineChart.Queries.GetLoanByCurrentStatus;
 using LoanProcessManagement.Application.Features.InstitutionMasters.Commands.CreateInstitutionMasters;
 using LoanProcessManagement.Application.Features.InstitutionMasters.Commands.UpdateInstitutionMasters;
@@ -307,6 +309,13 @@ namespace LoanProcessManagement.Application.Profiles
             CreateMap<GetAllSchemeDto, LpmLoanSchemeMaster>().ReverseMap();
             CreateMap<LpmLoanSchemeMaster, GetSchemeByIdDto>().ReverseMap();
             CreateMap<CreateSchemeCommand, LpmLoanSchemeMaster>().ReverseMap();
+            CreateMap<LpmLoanProductMaster, GetAllProductsQueryDto>().ReverseMap();
+            CreateMap<LpmLoanProductMaster, GetProductByIdQueryDto>().ReverseMap();
+
+            
+
+
+
 
 
 

@@ -19,8 +19,5 @@ namespace LoanProcessManagement.App.Services.Interfaces
         Task<Response<GetQueryTypeByIdQueryDto>> GetQueryTypeById(long id);
         Task<Response<UpdateQueryCommandDto>> UpdateQuery(UpdateQueryCommand req);
 
-
-        //Task<GetBranchNameByIdQueryVm> GetBranchById(long id);
-        //Task<Response<UpdateBranchDto>> UpdateBranch(UpdateBranchCommand req);
     }
 }

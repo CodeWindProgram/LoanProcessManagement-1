@@ -1,4 +1,9 @@
-﻿using LoanProcessManagement.Application.Features.Product.Queries;
+﻿using LoanProcessManagement.Application.Features.Product.Commands.CreateProductCommand;
+using LoanProcessManagement.Application.Features.Product.Commands.DeleteProductCommand;
+using LoanProcessManagement.Application.Features.Product.Commands.UpdateProductCommand;
+using LoanProcessManagement.Application.Features.Product.Queries;
+using LoanProcessManagement.Application.Features.Product.Queries.GetAllProducts;
+using LoanProcessManagement.Application.Features.Product.Queries.GetProductById;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -53,8 +58,52 @@ namespace LoanProcessManagement.Api.Controllers.v1
             var dtos = await _mediator.Send(new GetInsuranceProductsQuery());
             _logger.LogInformation("GetLoanProducts Completed");
             return Ok(dtos);
-        } 
+        }
         #endregion
+
+       
+        [HttpGet("GetAllProducts")]
+        public async Task<ActionResult> GetAllProducts()
+        {
+            _logger.LogInformation("GetAllProducts Initiated");
+            var dtos = await _mediator.Send(new GetAllProductsQuery());
+            _logger.LogInformation("GetAllProducts Completed");
+            return Ok(dtos);
+        }
+        [HttpGet("GetProductById/{id}")]
+        public async Task<ActionResult> GetProductById(long id)
+        {
+            _logger.LogInformation("GetProductById Initiated");
+            var dtos = await _mediator.Send(new GetProductByIdQuery(id));
+            _logger.LogInformation("GetProductById Completed");
+            return Ok(dtos);
+        }
+        
+        [HttpPost("CreateProduct")]
+        public async Task<ActionResult> CreateProduct(CreateProductCommand req)
+        {
+            _logger.LogInformation("CreateProduct Initiated");
+            var dtos = await _mediator.Send(req);
+            _logger.LogInformation("CreateProduct Completed");
+            return Ok(dtos);
+        }
+
+        [HttpDelete("DeleteProduct/{id}")]
+        public async Task<ActionResult> DeleteProduct(long id)
+        {
+            _logger.LogInformation("DeleteProduct Initiated");
+            var dtos = await _mediator.Send(new DeleteProductCommand(id));
+            _logger.LogInformation("DeleteProduct Completed");
+            return Ok(dtos);
+        }
+        [HttpPut("UpdateProduct")]
+        public async Task<ActionResult> UpdateProduct(UpdateProductCommand req)
+        {
+            _logger.LogInformation("UpdateProduct Initiated");
+            var dtos = await _mediator.Send(req);
+            _logger.LogInformation("UpdateProduct Completed");
+            return Ok(dtos);
+        }
 
     }
 }
