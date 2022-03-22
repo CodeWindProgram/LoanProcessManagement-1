@@ -2,6 +2,7 @@
 
 $(document).ready(function () {
     $('#selectVideo').click(function () {
+        console.log($('#selectVideo').val())
         if ($('#selectVideo').val() == 1) {
             $("#div_dynamicTables").load("../Master/GetRoleMaster");
             //$.ajax({
@@ -65,6 +66,15 @@ $(document).ready(function () {
         }
         else if ($('#selectVideo').val() == 9) {
             $("#div_dynamicTables").load("/Master/GetAllLpmCategories");
+        }
+        else if ($('#selectVideo').val() == 10) {
+            $("#div_dynamicTables").load("/Master/GetAllInstitution");
+        }
+        else if ($('#selectVideo').val() == 11) {
+            $("#div_dynamicTables").load("/Master/GetAllLeadStatus");
+        }
+        else if ($('#selectVideo').val() == 12) {
+            $("#div_dynamicTables").load("/Master/GetAllQualification");
         }
         
     });

@@ -88,6 +88,17 @@ using LoanProcessManagement.Application.Features.SchemeMaster.Queries.GetSchemeL
 using LoanProcessManagement.Application.Features.SchemeMaster.Queries.GetSchemeById;
 using LoanProcessManagement.Application.Features.SchemeMaster.Commands.CreateScheme;
 using LoanProcessManagement.Application.Features.LineChart.Queries.GetLoanByCurrentStatus;
+using LoanProcessManagement.Application.Features.InstitutionMasters.Commands.CreateInstitutionMasters;
+using LoanProcessManagement.Application.Features.InstitutionMasters.Commands.UpdateInstitutionMasters;
+using LoanProcessManagement.Application.Features.InstitutionMasters.Queries.GetInstitutionMastersById;
+using LoanProcessManagement.Application.Features.LeadStatus.Commands.CreateLeadStatus;
+using LoanProcessManagement.Application.Features.LeadStatus.Commands.UpdateLeadStatus;
+using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetLeadStautsById;
+using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetLeadStatusList;
+using LoanProcessManagement.Application.Features.Qualification.Commands.CreateQualification;
+using LoanProcessManagement.Application.Features.Qualification.Commands.UpdateQualification;
+using LoanProcessManagement.Application.Features.Qualification.Queries.GetQualificationById;
+using LoanProcessManagement.Application.Features.Qualification.Queries.GetQualificationList;
 
 namespace LoanProcessManagement.Application.Profiles
 {
@@ -272,37 +283,30 @@ namespace LoanProcessManagement.Application.Profiles
             CreateMap<CreateLpmCategoryCommand, LpmCategory>().ReverseMap();
             CreateMap<LpmCategory, GetLpmCategoryByIdCommandDto>().ReverseMap();
 
+            CreateMap<CreateInstitutionMastersCommand, LpmLeadInstitutionMaster>().ReverseMap();
+            CreateMap<UpdateInstitutionMastersCommand, LpmLeadInstitutionMaster>().ReverseMap();
+            CreateMap<LpmLeadInstitutionMaster, GetInstitutionMastersByIdQueryVm>().ReverseMap();
+
             CreateMap<LpmLeadProcessCycle, GetLoanByCurrentStatusQuery>().ReverseMap();
             CreateMap<LpmLeadProcessCycle, GetLoanByCurrentStatusQueryDto>().ReverseMap();
 
 
 
 
+            CreateMap<CreateLeadStatusCommand, LpmLeadStatusMaster>().ReverseMap();
+            CreateMap<UpdateLeadStatusCommand, LpmLeadStatusMaster>().ReverseMap();
+            CreateMap<LpmLeadStatusMaster, GetLeadStatusByIdQueryVm>().ReverseMap();
+            CreateMap<LpmLeadStatusMaster, GetAllLeadStatusQueryDto>().ReverseMap();
 
-
-
-
-
-
+            CreateMap<CreateQualificationCommand, LpmQualification>().ReverseMap();
+            CreateMap<UpdateQualificationCommand, LpmQualification>().ReverseMap();
+            CreateMap<LpmQualification, GetQualificationByIdDto>().ReverseMap();
+            CreateMap<LpmQualification, GetQualificationListDto>().ReverseMap();
 
 
             CreateMap<GetAllSchemeDto, LpmLoanSchemeMaster>().ReverseMap();
             CreateMap<LpmLoanSchemeMaster, GetSchemeByIdDto>().ReverseMap();
             CreateMap<CreateSchemeCommand, LpmLoanSchemeMaster>().ReverseMap();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

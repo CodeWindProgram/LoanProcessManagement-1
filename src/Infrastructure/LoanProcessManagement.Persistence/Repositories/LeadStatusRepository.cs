@@ -1,4 +1,7 @@
 ﻿using LoanProcessManagement.Application.Contracts.Persistence;
+using LoanProcessManagement.Application.Features.LeadStatus.Commands.CreateLeadStatus;
+using LoanProcessManagement.Application.Features.LeadStatus.Commands.DeleteLeadStatus;
+using LoanProcessManagement.Application.Features.LeadStatus.Commands.UpdateLeadStatus;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetHOSanctionListQuery;
 using LoanProcessManagement.Application.Features.LeadStatus.Queries.GetPerformanceSummary;
@@ -492,8 +495,8 @@ namespace LoanProcessManagement.Persistence.Repositories
                                 Status = LS.StatusDescription,
                                 sanctionTAT = null,
                                 ProductName = LProd.ProductName,
-                                LoanAmount =LPC.LoanAmount==null?0: Math.Round((double)(LPC.LoanAmount+0.0) /(float)10000000,2),
-                                InsuaranceAmount = LPC.InsuranceAmount==null?0:Math.Round((double)(LPC.InsuranceAmount + 0.0) / 1000,2),
+                                LoanAmount = LPC.LoanAmount == null ? 0 : Math.Round((double)(LPC.LoanAmount + 0.0) / (float)10000000, 2),
+                                InsuaranceAmount = LPC.InsuranceAmount == null ? 0 : Math.Round((double)(LPC.InsuranceAmount + 0.0) / 1000, 2),
                                 convertedLead = "-",
                                 BranchDataEntry = "-",
                                 InPrincipleSanction = "-",
@@ -590,7 +593,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                                 sanctionTAT = null,
                                 ProductName = LProd.ProductName,
                                 LoanAmount = LPC.LoanAmount == null ? 0 : Math.Round((double)(LPC.LoanAmount + 0.0) / (float)10000000, 2),
-                                InsuaranceAmount =LPC.InsuranceAmount==null?0:Math.Round((double)(LPC.InsuranceAmount + 0.0) / 1000,2),
+                                InsuaranceAmount = LPC.InsuranceAmount == null ? 0 : Math.Round((double)(LPC.InsuranceAmount + 0.0) / 1000, 2),
                                 convertedLead = "-",
                                 BranchDataEntry = "-",
                                 InPrincipleSanction = "-",
@@ -688,7 +691,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                                 sanctionTAT = null,
                                 ProductName = LProd.ProductName,
                                 LoanAmount = LPC.LoanAmount == null ? 0 : Math.Round((double)(LPC.LoanAmount + 0.0) / (float)10000000, 2),
-                                InsuaranceAmount = LPC.InsuranceAmount==null?0:Math.Round((double)(LPC.InsuranceAmount+0.0) / 1000,2),
+                                InsuaranceAmount = LPC.InsuranceAmount == null ? 0 : Math.Round((double)(LPC.InsuranceAmount + 0.0) / 1000, 2),
                                 convertedLead = "-",
                                 BranchDataEntry = "-",
                                 InPrincipleSanction = "-",
@@ -754,6 +757,130 @@ namespace LoanProcessManagement.Persistence.Repositories
             return joinn;
 
         }
+
+        #region Repository method  for CRUD  lead status - Dipti Pandhram - 17/03/2022
+        /// <summary>
+        /// Repository method to create lead status - 18/03/2022
+        /// commented by Dipti 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public async Task<LeadStatusDto> CreateLeadStatusCommand(LpmLeadStatusMaster request)
+        {
+            LeadStatusDto res = new LeadStatusDto();
+            var result = await _dbContext.LpmLeadStatusMasters.FirstOrDefaultAsync(x => x.StatusDescription == request.StatusDescription && x.SerialOrder == request.SerialOrder);
+            if (result == null)
+            {
+                request.IsActive = true;
+                await _dbContext.LpmLeadStatusMasters.AddAsync(request);
+                await _dbContext.SaveChangesAsync();
+                res.Id = request.Id;
+                res.Message = "New Lead Stauts added successfully.";
+                res.Succeeded = true;
+
+            }
+            else
+            {
+                res.Id = request.Id;
+                res.Message = $"Lead Status already exists.";
+                res.Succeeded = false;
+
+            }
+            return res;
+        }
+
+        /// <summary>
+        ///  Repository method to Delete lead status - 18/03/2022
+        /// commented by Dipti
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<DeleteLeadStatusDto> DeleteLeadStatus(long id)
+        {
+            DeleteLeadStatusDto res = new DeleteLeadStatusDto();
+            var result = await _dbContext.LpmLeadStatusMasters.FirstOrDefaultAsync(x => x.Id == id);
+            if (result != null)
+            {
+                result.IsActive = false;
+                await _dbContext.SaveChangesAsync();
+                res.Message = $"Lead Status {result.Id} removed successfully.";
+                res.Succeeded = true;
+
+            }
+            else
+            {
+                res.Message = "Invalid Id.";
+                res.Succeeded = false;
+            }
+            return res;
+        }
+
+
+        /// <summary>
+        /// Repository method to Update lead status - 18/03/2022
+        /// commented by Dipti
+        /// </summary>
+        /// <param name="req"></param>
+        /// <returns></returns>
+
+        public async Task<UpdateLeadStatusDto> UpdateLeadStatus(LpmLeadStatusMaster req)
+        {
+            UpdateLeadStatusDto response = new UpdateLeadStatusDto();
+            var result = await _dbContext.LpmLeadStatusMasters.FirstOrDefaultAsync(x => x.StatusDescription == req.StatusDescription && x.SerialOrder == req.SerialOrder && x.Id != req.Id);
+            if (result != null)
+            {
+                response.Message = "Lead Status already exists.";
+                response.Succeeded = false;
+                return response;
+
+            }
+            var leadToUpdate = await _dbContext.LpmLeadStatusMasters.FirstOrDefaultAsync(x => x.Id == req.Id);
+
+            if (leadToUpdate != null)
+            {
+                leadToUpdate.StatusDescription = req.StatusDescription;
+                leadToUpdate.SerialOrder = req.SerialOrder;
+                leadToUpdate.IsActive = req.IsActive;
+                await _dbContext.SaveChangesAsync();
+                response.Message = "Lead Status details updated successfully.";
+                response.Succeeded = true;
+                return response;
+
+            }
+            else
+            {
+                response.Message = "Invalid Id.";
+                response.Succeeded = false;
+                return response;
+            }
+
+
+
+        }
+
+
+        /// <summary>
+        /// Repository method to Get lead status by Id  - 18/03/2022
+        /// commented by Dipti
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<LpmLeadStatusMaster> GetLeadStatusById(long id)
+        {
+            return await _dbContext.LpmLeadStatusMasters.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        /// <summary>
+        /// Repository method to Get All lead status - 18/03/2022
+        /// commented by Dipti
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IEnumerable<LpmLeadStatusMaster>> GetAllLeadStatus()
+        {
+            return await _dbContext.LpmLeadStatusMasters.ToListAsync();
+        }
+        #endregion
+
         public async Task<List<long?>> GetLoanAmount(GetLoanByCurrentStatusQuery request)
         {
             var gettingstatus = await _dbContext.LpmLeadProcessCycles.Where(a => a.CurrentStatus == request.CurrentStatus).Select(a => a.LoanAmount).ToListAsync();

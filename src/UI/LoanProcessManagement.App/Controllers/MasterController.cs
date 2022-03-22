@@ -1,5 +1,4 @@
-﻿
-using LoanProcessManagement.App.Models;
+﻿using LoanProcessManagement.App.Models;
 using LoanProcessManagement.App.Services.Interfaces;
 using LoanProcessManagement.Application.Features.Branch.Commands.CreateBranch;
 using LoanProcessManagement.Application.Features.Branch.Commands.UpdateBranch;
@@ -27,6 +26,12 @@ using LoanProcessManagement.Application.Features.LpmCategories.Commands.CreateLp
 using LoanProcessManagement.Application.Features.LpmCategories.Commands.UpdateLpmCategory;
 using LoanProcessManagement.Application.Features.SchemeMaster.Commands.CreateScheme;
 using LoanProcessManagement.Application.Features.SchemeMaster.Commands.UpdateScheme;
+using LoanProcessManagement.Application.Features.InstitutionMasters.Commands.CreateInstitutionMasters;
+using LoanProcessManagement.Application.Features.InstitutionMasters.Commands.UpdateInstitutionMasters;
+using LoanProcessManagement.Application.Features.LeadStatus.Commands.CreateLeadStatus;
+using LoanProcessManagement.Application.Features.LeadStatus.Commands.UpdateLeadStatus;
+using LoanProcessManagement.Application.Features.Qualification.Commands.CreateQualification;
+using LoanProcessManagement.Application.Features.Qualification.Commands.UpdateQualification;
 
 namespace LoanProcessManagement.App.Controllers
 {
@@ -42,6 +47,9 @@ namespace LoanProcessManagement.App.Controllers
         private ILostLeadReasonMasterService _lostLeadReasonMasterService;
         private IRejectLeadReasonMasterService _rejectLeadReasonMasterService;
         private readonly ISchemeService _schemeService;
+        private readonly IInstitutionServices _institutionServices;
+        private readonly ILeadStatusService _leadStatusService;
+        private readonly IQualificationService _qualificationService;
 
 
 
@@ -58,7 +66,10 @@ namespace LoanProcessManagement.App.Controllers
             IBranchService branchService,
             IQueryTypeService queryTypeService,
             ILpmCategoryServices lpmCategoryServices,
-            ISchemeService schemeService)
+            ISchemeService schemeService,
+            IInstitutionServices InstitutionServices,
+            ILeadStatusService leadStatusService,
+            IQualificationService qualificationService)
         {
             _userListService = userListService;
             _roleMasterService = roleMasterService;
@@ -67,8 +78,11 @@ namespace LoanProcessManagement.App.Controllers
             _queryTypeService = queryTypeService;
             _lpmCategoryServices = lpmCategoryServices;
             _schemeService = schemeService;
+            _institutionServices = InstitutionServices;
             _lostLeadReasonMasterService = lostLeadReasonMasterService;
             _rejectLeadReasonMasterService = rejectLeadReasonMasterService;
+            _leadStatusService = leadStatusService;
+            _qualificationService = qualificationService;
         }
 
 
@@ -488,8 +502,220 @@ namespace LoanProcessManagement.App.Controllers
                 return Json(result);
             }
             return View();
+        }
+
+        #region CRUD of Institution , Lead Status and Qualification By Dipti Pandhram- 22/03/20222
+
+        /// <summary>
+        /// CRUD Institution Master in db -18/03/2022
+        ///	commented by Dipti P.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("/Master/GetAllInstitution")]
+        public async Task<IActionResult> GetAllInstitution()
+        {
+            var insti = await _institutionServices.GetAllInstitutions();
+            return View(insti.Data);
 
         }
 
+        [HttpGet("/Master/AddInstitutionMaster")]
+        public async Task<IActionResult> AddInstitutionMaster()
+        {
+
+            return View();
+        }
+
+        [HttpPost("/Master/AddInstitutionMaster")]
+        public async Task<IActionResult> AddInstitutionMaster(CreateInstitutionMastersCommand req)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var response = await _institutionServices.CreateInstitutionMastersCommand(req);
+
+                return Json(response);
+
+            }
+            return View();
+        }
+
+        [HttpGet("/Master/DeleteInstitutionMaster/{id}")]
+        public async Task<IActionResult> DeleteInstitutionMaster([FromRoute] long id)
+        {
+            var response = await _institutionServices.DeleteInstitutionMasters(id);
+            return Json(response);
+        }
+
+
+        [HttpGet("/Master/UpdateInstitutionMaster/{id}")]
+        public async Task<IActionResult> UpdateInstitutionMaster(long id)
+        {
+            var result = await _institutionServices.GetInstitutionMastersById(id);
+            var res = new UpdateInstitutionMastersCommand()
+            {
+                Id = result.Data.Id,
+                Institution_Name = result.Data.Institution_Name,
+                Institution_Type = result.Data.Institution_Type,
+                IsActive = result.Data.IsActive
+            };
+
+            return View(res);
+        }
+
+        [HttpPut("/Master/UpdateInstitutionMaster/")]
+        public async Task<IActionResult> UpdateInstitutionMaster(UpdateInstitutionMastersCommand req)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _institutionServices.UpdateInstitutionMasters(req);
+                return Json(result);
+            }
+            return View();
+
+        }
+
+
+        /// <summary>
+        /// CRUD of Lead Status in db -18/03/2022
+        ///	commented by Dipti P.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("/Master/GetAllLeadStatus")]
+        public async Task<IActionResult> GetAllLeadStatus()
+        {
+            var insti = await _leadStatusService.GetAllLeadStatus();
+            return View(insti.Data);
+
+        }
+        [HttpGet("/Master/AddLeadStatus")]
+
+        public async Task<IActionResult> AddLeadStatus()
+        {
+
+            return View();
+        }
+
+        [HttpPost("/Master/AddLeadStatus")]
+        public async Task<IActionResult> AddLeadSt(CreateLeadStatusCommand req)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var response = await _leadStatusService.AddLeadSt(req);
+
+                return Json(response);
+
+            }
+            return View();
+        }
+
+
+        [HttpGet("/Master/DeleteLeadStatus/{id}")]
+        public async Task<IActionResult> DeleteLeadSt([FromRoute] long id)
+        {
+            var response = await _leadStatusService.DeleteLeadSt(id);
+            return Json(response);
+        }
+
+
+        [HttpGet("/Master/UpdateLeadStatus/{id}")]
+        public async Task<IActionResult> UpdateLeadStatus(long id)
+        {
+            var result = await _leadStatusService.GetLeadStatusById(id);
+            var res = new UpdateLeadStatusCommand()
+            {
+                Id = result.Data.Id,
+                SerialOrder = result.Data.SerialOrder,
+                StatusDescription = result.Data.StatusDescription,
+                IsActive = result.Data.IsActive,
+            };
+
+            return View(res);
+        }
+
+        [HttpPut("/Master/UpdateLeadStatus/")]
+        public async Task<IActionResult> UpdateLeadStatus(UpdateLeadStatusCommand req)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _leadStatusService.UpdateLeadStatus(req);
+                return Json(result);
+            }
+            return View();
+
+        }
+
+
+        /// <summary>
+        ///  CRUD of Qualification in db -18/03/2022
+        ///	commented by Dipti P.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("/Master/GetAllQualification")]
+        public async Task<IActionResult> GetAllQualification()
+        {
+            var qual = await _qualificationService.GetAllQualification();
+            return View(qual.Data);
+
+        }
+
+        [HttpGet("/Master/AddQualification")]
+        public async Task<IActionResult> AddQualification()
+        {
+
+            return View();
+        }
+
+        [HttpPost("/Master/AddQualification")]
+        public async Task<IActionResult> AddQualification(CreateQualificationCommand req)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var response = await _qualificationService.AddQualification(req);
+
+                return Json(response);
+
+            }
+            return View();
+        }
+
+
+        [HttpGet("/Master/DeleteQualification/{id}")]
+        public async Task<IActionResult> DeleteQualification([FromRoute] long id)
+        {
+            var response = await _qualificationService.DeleteQualification(id);
+            return Json(response);
+        }
+
+
+        [HttpGet("/Master/UpdateQualification/{id}")]
+        public async Task<IActionResult> UpdateQualification(long id)
+        {
+            var result = await _qualificationService.GetQualificationById(id);
+            var res = new UpdateQualificationCommand()
+            {
+                Id = result.Data.Id,
+                QualificationName = result.Data.QualificationName,
+                IsActive = result.Data.IsActive,
+            };
+
+            return View(res);
+        }
+
+
+        [HttpPut("/Master/UpdateQualification")]
+        public async Task<IActionResult> UpdateQualification(UpdateQualificationCommand req)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _qualificationService.UpdateQualification(req);
+                return Json(result);
+            }
+            return View();
+
+        } 
+        #endregion
     }
 }

@@ -83,6 +83,10 @@ namespace LoanProcessManagement.App
 
 
             services.AddScoped<ISchemeService, SchemeService>();
+            services.AddScoped<ILeadStatusService, LeadStatusService>();
+            services.AddScoped<IQualificationService, QualificationService>();
+
+            
 
 
 

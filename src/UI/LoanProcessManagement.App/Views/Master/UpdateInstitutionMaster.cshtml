@@ -1,0 +1,133 @@
+﻿@*@using LoanProcessManagement.Application.Features.RoleMaster.Queries.GetRoleMaster;*@
+@model LoanProcessManagement.Application.Features.InstitutionMasters.Commands.UpdateInstitutionMasters.UpdateInstitutionMastersCommand
+@{
+
+    //var record = (GetRoleMasterByIdDto)ViewData["data"];
+
+}
+
+
+<script src="~/js/jquery/jquery-1.10.1.min.js"></script>
+<script src="~/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="~/plugins/jquery/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
+<div class="container app">
+    <div class="col-sm-12 col-lg-12">
+        <div data-effect="helix" id="panels" class="panel panel-info effect-helix in ">
+            <div style="border: 1px solid #343a40" class="border">
+                <h5 class="ml-2 mt-3"><u><b>Update Institution Masters</b></u></h5>
+                <div class="panel-body">
+                    <div class="border-part">
+                        <form id="MyForm" asp-controller="Master" method="post" enctype="multipart/form-data">
+
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div><br />
+                            <div style="text-align:end" class="form-group"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
+                            <div class="form-group">
+                                <div class="row pl-5">
+
+
+                                    <input type="hidden" asp-for="Id" />
+
+                                    <div class="col-lg-4 col-sm-12">
+                                        <label asp-for="Institution_Name" class="control-label">Institution Master Name<span style="color: Red">&nbsp;*</span></label>
+
+                                        <input asp-for="Institution_Name" class="form-control" maxlength="50" />
+                                        <span asp-validation-for="Institution_Name" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-12">
+                                        <label asp-for="Institution_Type" class="control-label">Institution Master Type<span style="color: Red">&nbsp;*</span></label>
+
+                                        <select asp-for="Institution_Type" class="form-control">
+                                            <option value="">Select Insitution Type</option>
+                                            <option value="Bank">Bank</option>
+                                            <option value="FI">FI</option>
+                                        </select>                                       
+                                        <span asp-validation-for="Institution_Type" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-lg-4 col-sm-12">
+
+                                        <label asp-for="IsActive" class="control-label"></label><span style="color: Red">&nbsp;*</span><br />
+
+                                        &nbsp;<input type="checkbox" asp-for="IsActive" id="myCheckbox" />
+
+                                        <div id="checkDiv"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1"><button type="submit" id="submit" style="background-color: #343a40;color:white" class="btn">Update</button></div>
+                                    <div class="col-md-2"><a onclick="loadPage()" id="btn2" type="button" value="Cancel" class="btn btn-danger">Cancel</a></div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //$(document).ready(function () {
+    //    var check = $('#myCheckbox').val();
+    //    console.log(check)
+    //    var ch = check.toString();
+    //console.log(ch);
+    //    console.log(check);
+    //    if (check != "true") {
+    //    console.log("Unchecked");
+    //    $('#myCheckbox').prop('checked', false);
+    //    }
+    //    else if (check == "true") {
+    //    console.log("checked");
+    //        $('#myCheckbox').prop('checked', true);
+    //    }
+    //});
+
+
+    //function BtnClick() {
+    //    $('#myCheckbox').prop('checked', true);
+    //}
+    function loadPage() {
+
+        $("#div_dynamicTables").load("/Master/GetAllInstitution");
+    }
+    $("#MyForm").on("submit", function (e) {
+        var dataString = $(this).serialize();
+        $.ajax({
+            type: "PUT",
+            url: "/Master/UpdateInstitutionMaster",
+            data: dataString,
+            success: function (result) {
+                if (result.data.succeeded) {
+                    toastr.success(result.data.message);
+                    $("#div_dynamicTables").load("/Master/GetAllInstitution");
+
+                }
+                else {
+                    toastr.error(result.data.message);
+
+                }
+
+            }
+        });
+        e.preventDefault();
+    });
+
+</script>
+
+
+
+
+

@@ -10,5 +10,6 @@ namespace LoanProcessManagement.Application.Features.InstitutionMasters.Queries.
         public long Institution_Id { get; set; }
         public string Institution_Type { get; set; }
         public string Institution_Name { get; set; }
+        public bool IsActive { get; set; }
     }
 }

@@ -180,6 +180,23 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string GetLpmCategoryById = "api/v1/LpmCategory/GetCategoryTypeById/";
         public const string UpdateLpmCategory = "api/v1/LpmCategory/UpdateLpmCategory";
 
+        public const string AddInstitution = "api/v1/Institution/CreateInstitions";
+        public const string DeleteInstitution = "api/v1/Institution/DeleteInstitions/";
+        public const string GetByIdInstitution = "api/v1/Institution/GetInstitutionMasterById/";
+        public const string UpdateInstitution = "api/v1/Institution/UpdateInstitution";
+
+        public const string AddLeadStatus = "api/v1/LeadStatus/CreateLeadStatusMaster";
+        public const string DeleteLeadStatus = "api/v1/LeadStatus/DeleteLeadStatus/";
+        public const string GetByIdLeadStatus = "api/v1/LeadStatus/GetLeadStatusById/";
+        public const string UpdateLeadStatus = "api/v1/LeadStatus/UpdateLeadStatus";
+        public const string GetAllLeadStatus = "api/v1/LeadStatus/GetAllLeadStatus";
+
+        public const string AddQualification = "api/v1/Qualification/CreateQualification";
+        public const string DeleteQualification = "api/v1/Qualification/DeleteQualification/";
+        public const string GetByIdQualification = "api/v1/Qualification/GetQualificationById/";
+        public const string UpdateQualification = "api/v1/Qualification/UpdateQualification";
+        public const string GetAllQualification = "api/v1/Qualification/GetAllQualification";
+
         public const string GetLoan = "api/v1/LeadStatus/GetLoanAmount/";
 
 

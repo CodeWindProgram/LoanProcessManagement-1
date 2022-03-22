@@ -53,8 +53,9 @@ namespace LoanProcessManagement.Persistence
         public DbSet<LpmRejectedLeadReasonMaster> LpmRejectedLeadReasonMasters { get; set; }
         public DbSet<LpmQueryTypeMaster> LpmQueryTypeMasters { get; set; }
         public DbSet<LpmCategory> LpmCategories { get; set; }
+        public DbSet<LpmQualification> LpmQualifications { get; set; }
 
-        
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
