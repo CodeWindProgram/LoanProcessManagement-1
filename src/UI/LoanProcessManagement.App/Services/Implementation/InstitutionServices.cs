@@ -29,6 +29,8 @@ namespace LoanProcessManagement.App.Services.Implementation
             clientfact = client;
             _apiDetails = apiDetails;
         }
+
+        #region  This method will call Institution Master CRUD api by - Dipti Pandhram - 23/03/2022
         public async Task<Response<IEnumerable<GetInstitutionMastersQueryDto>>> GetAllInstitutions()
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
@@ -73,7 +75,7 @@ namespace LoanProcessManagement.App.Services.Implementation
             return response;
         }
 
-       public async Task<Response<DeleteInstitutionMastersDto>> DeleteInstitutionMasters(long id)
+        public async Task<Response<DeleteInstitutionMastersDto>> DeleteInstitutionMasters(long id)
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
@@ -137,6 +139,8 @@ namespace LoanProcessManagement.App.Services.Implementation
             var response = System.Text.Json.JsonSerializer.Deserialize<Response<UpdateInstitutionMastersDto>>(jsonString, options);
 
             return response;
-        }
+        } 
+        #endregion
+    
     }
 }

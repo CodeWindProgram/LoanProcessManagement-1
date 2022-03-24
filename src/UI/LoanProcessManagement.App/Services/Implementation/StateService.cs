@@ -1,10 +1,10 @@
 ﻿using LoanProcessManagement.App.Helper.APIHelper;
 using LoanProcessManagement.App.Services.Interfaces;
-using LoanProcessManagement.Application.Features.Qualification.Commands.CreateQualification;
-using LoanProcessManagement.Application.Features.Qualification.Commands.DeleteQualification;
-using LoanProcessManagement.Application.Features.Qualification.Commands.UpdateQualification;
-using LoanProcessManagement.Application.Features.Qualification.Queries.GetQualificationById;
-using LoanProcessManagement.Application.Features.Qualification.Queries.GetQualificationList;
+using LoanProcessManagement.Application.Features.State.Commands.CreateState;
+using LoanProcessManagement.Application.Features.State.Commands.DeleteState;
+using LoanProcessManagement.Application.Features.State.Commands.UpdateState;
+using LoanProcessManagement.Application.Features.State.Queries.GetStateById;
+using LoanProcessManagement.Application.Features.State.Queries.GetStateList;
 using LoanProcessManagement.Application.Responses;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -18,20 +18,20 @@ using System.Threading.Tasks;
 
 namespace LoanProcessManagement.App.Services.Implementation
 {
-    public class QualificationService :IQualificationService
+    public class StateService : IStateService
     {
         private string BaseUrl = "";
         private readonly IHttpClientFactory clientfact;
         readonly IOptions<APIConfiguration> _apiDetails;
 
-        public QualificationService(IHttpClientFactory client, IOptions<APIConfiguration> apiDetails)
+        public StateService(IHttpClientFactory client, IOptions<APIConfiguration> apiDetails)
         {
             clientfact = client;
             _apiDetails = apiDetails;
         }
-        #region This method will call Qualification CRUD api by - Dipti Pandhram - 23/03/2022
+        #region  This method will call State CRUD api by - Dipti Pandhram - 23/03/2022
 
-        public async Task<Response<QualificationDto>> AddQualification(CreateQualificationCommand req)
+        public async Task<Response<CreateStateDto>> AddState(CreateStateCommand req)
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
@@ -41,7 +41,7 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             var httpResponse = await _client.PostAsync
                 (
-                    BaseUrl + APIEndpoints.AddQualification,
+                    BaseUrl + APIEndpoints.AddState,
                     new StringContent(content, Encoding.Default,
                     "application/json")
                 );
@@ -50,12 +50,13 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             var options = new JsonSerializerOptions();
 
-            var response = System.Text.Json.JsonSerializer.Deserialize<Response<QualificationDto>>(jsonString, options);
+            var response = System.Text.Json.JsonSerializer.Deserialize<Response<CreateStateDto>>(jsonString, options);
 
             return response;
+
         }
 
-        public async Task<Response<DeleteQualificationDto>> DeleteQualification(long id)
+        public async Task<Response<DeleteStateDto>> DeleteState(long id)
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
@@ -63,7 +64,7 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             var httpResponse = await _client.DeleteAsync
                 (
-                    BaseUrl + APIEndpoints.DeleteQualification + id
+                    BaseUrl + APIEndpoints.DeleteState + id
 
                 );
 
@@ -71,12 +72,12 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             var options = new JsonSerializerOptions();
 
-            var response = System.Text.Json.JsonSerializer.Deserialize<Response<DeleteQualificationDto>>(jsonString, options);
+            var response = System.Text.Json.JsonSerializer.Deserialize<Response<DeleteStateDto>>(jsonString, options);
 
             return response;
         }
 
-        public async Task<Response<GetQualificationByIdDto>> GetQualificationById(long id)
+        public async Task<Response<GetStateByIdDto>> GetStateById(long id)
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
@@ -84,7 +85,7 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             var httpResponse = await _client.GetAsync
                 (
-                    BaseUrl + APIEndpoints.GetByIdQualification + id
+                    BaseUrl + APIEndpoints.GetStateById + id
 
                 );
 
@@ -92,12 +93,13 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             var options = new JsonSerializerOptions();
 
-            var response = System.Text.Json.JsonSerializer.Deserialize<Response<GetQualificationByIdDto>>(jsonString, options);
+            var response = System.Text.Json.JsonSerializer.Deserialize<Response<GetStateByIdDto>>(jsonString, options);
 
             return response;
+
         }
 
-        public async Task<Response<UpdateQualificationDto>> UpdateQualification(UpdateQualificationCommand req)
+        public async Task<Response<UpdateStateDto>> UpdateState(UpdateStateCommand req)
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
@@ -107,7 +109,7 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             var httpResponse = await _client.PutAsync
                 (
-                    BaseUrl + APIEndpoints.UpdateQualification,
+                    BaseUrl + APIEndpoints.UpdateState,
                     new StringContent(content, Encoding.Default,
                     "application/json")
                 );
@@ -116,12 +118,13 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             var options = new JsonSerializerOptions();
 
-            var response = System.Text.Json.JsonSerializer.Deserialize<Response<UpdateQualificationDto>>(jsonString, options);
+            var response = System.Text.Json.JsonSerializer.Deserialize<Response<UpdateStateDto>>(jsonString, options);
 
             return response;
+
         }
 
-        public async Task<Response<IEnumerable<GetQualificationListDto>>> GetAllQualification()
+        public async Task<Response<IEnumerable<GetStateListDto>>> GetAllState()
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
@@ -129,18 +132,17 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             var httpResponse = await _client.GetAsync
                 (
-                    BaseUrl + APIEndpoints.GetAllQualification
+                    BaseUrl + APIEndpoints.GetAllState
                 );
 
             var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
 
             var options = new JsonSerializerOptions();
 
-            var response = System.Text.Json.JsonSerializer.Deserialize<Response<IEnumerable<GetQualificationListDto>>>(jsonString, options);
+            var response = System.Text.Json.JsonSerializer.Deserialize<Response<IEnumerable<GetStateListDto>>>(jsonString, options);
 
             return response;
         } 
         #endregion
-    
     }
 }

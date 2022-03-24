@@ -35,6 +35,8 @@ using LoanProcessManagement.Application.Features.LeadStatus.Commands.CreateLeadS
 using LoanProcessManagement.Application.Features.LeadStatus.Commands.UpdateLeadStatus;
 using LoanProcessManagement.Application.Features.Qualification.Commands.CreateQualification;
 using LoanProcessManagement.Application.Features.Qualification.Commands.UpdateQualification;
+using LoanProcessManagement.Application.Features.State.Commands.UpdateState;
+using LoanProcessManagement.Application.Features.State.Commands.CreateState;
 
 namespace LoanProcessManagement.App.Controllers
 {
@@ -54,6 +56,7 @@ namespace LoanProcessManagement.App.Controllers
         private readonly IInstitutionServices _institutionServices;
         private readonly ILeadStatusService _leadStatusService;
         private readonly IQualificationService _qualificationService;
+        private readonly IStateService _stateService;
 
 
 
@@ -74,7 +77,8 @@ namespace LoanProcessManagement.App.Controllers
             IProductService productService,
             IInstitutionServices InstitutionServices,
             ILeadStatusService leadStatusService,
-            IQualificationService qualificationService)
+            IQualificationService qualificationService,
+            IStateService stateService)
         {
             _userListService = userListService;
             _roleMasterService = roleMasterService;
@@ -89,6 +93,7 @@ namespace LoanProcessManagement.App.Controllers
             _rejectLeadReasonMasterService = rejectLeadReasonMasterService;
             _leadStatusService = leadStatusService;
             _qualificationService = qualificationService;
+            _stateService = stateService;
         }
 
 
@@ -787,7 +792,74 @@ namespace LoanProcessManagement.App.Controllers
             }
             return View();
 
-        } 
+        }
         #endregion
+
+        [HttpGet("/Master/GetAllState")]
+        public async Task<IActionResult> GetAllState()
+        {
+            var stat = await _stateService.GetAllState();
+            return View(stat.Data);
+
+        }
+
+
+        [HttpGet("/Master/AddState")]
+        public async Task<IActionResult> AddState()
+        {
+
+            return View();
+        }
+
+        [HttpPost("/Master/AddState")]
+        public async Task<IActionResult> AddState(CreateStateCommand req)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var response = await _stateService.AddState(req);
+
+                return Json(response);
+
+            }
+            return View();
+        }
+
+
+        [HttpGet("/Master/DeleteState/{id}")]
+        public async Task<IActionResult> DeleteState([FromRoute] long id)
+        {
+            var response = await _stateService.DeleteState(id);
+            return Json(response);
+        }
+
+
+        [HttpGet("/Master/UpdateState/{id}")]
+        public async Task<IActionResult> UpdateState(long id)
+        {
+            var result = await _stateService.GetStateById(id);
+            var res = new UpdateStateCommand()
+            {
+                Id = result.Data.Id,
+                StateName =result.Data.StateName,
+                IsActive = result.Data.IsActive,
+            };
+
+            return View(res);
+        }
+
+
+        [HttpPut("/Master/UpdateState")]
+        public async Task<IActionResult> UpdateState(UpdateStateCommand req)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _stateService.UpdateState(req);
+                return Json(result);
+            }
+            return View();
+
+        }
+
     }
 }

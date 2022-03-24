@@ -51,6 +51,8 @@ namespace LoanProcessManagement.Persistence
             services.AddScoped<IDsaDashboardReportRepository, DsaDashboardReportRepository>();
 
             services.AddScoped<IQualificationRepository, QualificationRepository>();
+            services.AddScoped<IStateRepository, StateRepository>();
+          //  services.AddScoped<ICityRepository, CityRepository>();
 
 
 

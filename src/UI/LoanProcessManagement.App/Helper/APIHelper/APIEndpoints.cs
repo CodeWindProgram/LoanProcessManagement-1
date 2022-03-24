@@ -209,6 +209,13 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string UpdateQualification = "api/v1/Qualification/UpdateQualification";
         public const string GetAllQualification = "api/v1/Qualification/GetAllQualification";
 
+        public const string AddState = "api/v1/State/CreateState";
+        public const string DeleteState = "api/v1/State/DeleteState/";
+        public const string GetStateById = "api/v1/State/GetStateById/";
+        public const string UpdateState = "api/v1/State/UpdateState";
+        public const string GetAllState = "api/v1/State/GetAllState";
+
+
         public const string GetLoan = "api/v1/LeadStatus/GetLoanAmount/";
 
 

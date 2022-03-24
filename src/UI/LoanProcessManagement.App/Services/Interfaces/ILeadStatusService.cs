@@ -13,12 +13,14 @@ namespace LoanProcessManagement.App.Services.Interfaces
 {
     public interface ILeadStatusService
     {
+        #region  added service to call Lead status api added by - Dipti Pandhram - 23/03/2022
+  
         Task<Response<LeadStatusDto>> AddLeadSt(CreateLeadStatusCommand req);
         Task<Response<DeleteLeadStatusDto>> DeleteLeadSt(long id);
         Task<Response<GetLeadStatusByIdQueryVm>> GetLeadStatusById(long id);
         Task<Response<UpdateLeadStatusDto>> UpdateLeadStatus(UpdateLeadStatusCommand req);
         Task<Response<IEnumerable<GetAllLeadStatusQueryDto>>> GetAllLeadStatus();
-
+        #endregion
 
     }
 }

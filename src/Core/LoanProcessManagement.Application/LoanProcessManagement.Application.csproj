@@ -23,6 +23,11 @@
   </ItemGroup>
 	
   <ItemGroup>
+    <Folder Include="Features\City\Commands\CreateCity\" />
+    <Folder Include="Features\City\Commands\DeleteCity\" />
+    <Folder Include="Features\City\Commands\UpdateCity\" />
+    <Folder Include="Features\City\Queries\GetCityById\" />
+    <Folder Include="Features\City\Queries\GetCityList\" />
     <Folder Include="Features\ForgotPassword\Queries\" />
   </ItemGroup>
 

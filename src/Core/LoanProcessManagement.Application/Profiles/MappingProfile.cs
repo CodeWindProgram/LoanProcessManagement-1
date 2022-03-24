@@ -101,6 +101,10 @@ using LoanProcessManagement.Application.Features.Qualification.Commands.CreateQu
 using LoanProcessManagement.Application.Features.Qualification.Commands.UpdateQualification;
 using LoanProcessManagement.Application.Features.Qualification.Queries.GetQualificationById;
 using LoanProcessManagement.Application.Features.Qualification.Queries.GetQualificationList;
+using LoanProcessManagement.Application.Features.State.Commands.CreateState;
+using LoanProcessManagement.Application.Features.State.Commands.UpdateState;
+using LoanProcessManagement.Application.Features.State.Queries.GetStateById;
+using LoanProcessManagement.Application.Features.State.Queries.GetStateList;
 
 namespace LoanProcessManagement.Application.Profiles
 {
@@ -304,6 +308,12 @@ namespace LoanProcessManagement.Application.Profiles
             CreateMap<UpdateQualificationCommand, LpmQualification>().ReverseMap();
             CreateMap<LpmQualification, GetQualificationByIdDto>().ReverseMap();
             CreateMap<LpmQualification, GetQualificationListDto>().ReverseMap();
+
+            CreateMap<CreateStateCommand, LpmState>().ReverseMap();
+            CreateMap<UpdateStateCommand, LpmState>().ReverseMap();
+            CreateMap<LpmState, GetStateByIdDto>().ReverseMap();
+            CreateMap<LpmState, GetStateListDto>().ReverseMap();
+
 
 
             CreateMap<GetAllSchemeDto, LpmLoanSchemeMaster>().ReverseMap();

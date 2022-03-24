@@ -79,21 +79,11 @@ namespace LoanProcessManagement.App
             services.AddScoped<ILpmCategoryServices, LpmCategoryServices>();
             services.AddScoped<IDsaDashboardReportService, DsaDashboardReportService>();
             
-
-
-
             services.AddScoped<ISchemeService, SchemeService>();
             services.AddScoped<ILeadStatusService, LeadStatusService>();
             services.AddScoped<IQualificationService, QualificationService>();
-
+            services.AddScoped<IStateService, StateService>();
             
-
-
-
-
-
-
-
 
 
             services.Configure<APIConfiguration>(Configuration.GetSection("APIConfiguration"));
