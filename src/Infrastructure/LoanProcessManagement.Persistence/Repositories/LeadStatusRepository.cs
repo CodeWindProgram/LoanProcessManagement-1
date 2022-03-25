@@ -39,11 +39,11 @@ namespace LoanProcessManagement.Persistence.Repositories
                     "Branch (Data Entry)",
                     "Lost Lead"
                 };
-                return await _dbContext.LpmLeadStatusMasters.Where(y => status.Contains(y.StatusDescription)).ToListAsync();
+                return await _dbContext.LpmLeadStatusMasters.Where(y => status.Contains(y.StatusDescription) && y.IsActive).ToListAsync();
             }
             else
             {
-                return await _dbContext.LpmLeadStatusMasters.ToListAsync();
+                return await _dbContext.LpmLeadStatusMasters.Where(x => x.IsActive).ToListAsync();
             }
 
         }
@@ -881,10 +881,85 @@ namespace LoanProcessManagement.Persistence.Repositories
         }
         #endregion
 
+        #region Repository method for line chart of disbursement ratio - Pratiksha - 18/03/2022
+        /// <summary>
+        /// 18/03/2022 - Repository method for line chart of disbursement ratio
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<List<long?>> GetLoanAmount(GetLoanByCurrentStatusQuery request)
         {
-            var gettingstatus = await _dbContext.LpmLeadProcessCycles.Where(a => a.CurrentStatus == request.CurrentStatus).Select(a => a.LoanAmount).ToListAsync();
-            return gettingstatus;
+            //var gettingstatus = await _dbContext.LpmLeadProcessCycles.Where(a => a.CurrentStatus == request.CurrentStatus).Select(a => a.LoanAmount).ToListAsync();
+            //return gettingstatus;
+            Dictionary<string, long?> LoanAmountList = new Dictionary<string, long?>();
+
+            var lastSixMonths = Enumerable.Range(0, 6)
+                              .Select(i => DateTime.Now.AddMonths(i - 6))
+                              .Select(date => date.ToString("MMMM")).ToList();
+
+            foreach (var x in lastSixMonths)
+            {
+                LoanAmountList.Add(x, 0);
+            }
+
+            if (request.UserRoleId == 1 || request.UserRoleId == 2)
+            {
+
+                var leadProcess = await _dbContext.LpmLeadProcessCycles.Where(x => x.CurrentStatus == 10).Select(x => new { x.DateOfAction, x.LoanAmount }).ToListAsync();
+                long? Sum = 0;
+
+                foreach (var x in leadProcess)
+                {
+                    var convertedDate = (x.DateOfAction.Value).ToString("MMMM");
+                    if (LoanAmountList.ContainsKey(convertedDate))
+                    {
+                        Sum = LoanAmountList[convertedDate];
+                        Sum += x.LoanAmount;
+                        LoanAmountList[convertedDate] = Sum;
+                    }
+                }
+            }
+            else if (request.UserRoleId == 4)
+            {
+                var lead = await _dbContext.LpmLeadMasters.Where(x => x.CurrentStatus == 10).Include(x => x.LpmLeadProcessCycle).ToListAsync();
+                var userList = await _dbContext.LpmUserMasters.Where(x => x.UserRoleId == request.UserRoleId && x.LgId == request.LgId).ToListAsync();
+                var leadProcess = await _dbContext.LpmLeadProcessCycles.Where(x => x.CurrentStatus == 10).ToListAsync();
+                var leadByUser = (from A in lead join B in userList on A.Lead_assignee_Id equals B.LgId join C in leadProcess on A.Id equals C.lead_Id select new { C.DateOfAction, C.LoanAmount, });
+
+                long? Sum = 0;
+                foreach (var x in leadByUser)
+                {
+                    var convertedDate = (x.DateOfAction.Value).ToString("MMMM");
+                    if (LoanAmountList.ContainsKey(convertedDate))
+                    {
+                        Sum = LoanAmountList[convertedDate];
+                        Sum += x.LoanAmount;
+                        LoanAmountList[convertedDate] = Sum;
+                    }
+                }
+            }
+            else if (request.UserRoleId == 3)
+            {
+                var lead = await _dbContext.LpmLeadMasters.Where(x => x.CurrentStatus == 10).Include(x => x.LpmLeadProcessCycle).ToListAsync();
+                var userList = await _dbContext.LpmUserMasters.Where(x => x.UserRoleId == request.UserRoleId && x.LgId == request.LgId && x.BranchId == request.BranchId).ToListAsync();
+                var leadProcess = await _dbContext.LpmLeadProcessCycles.Where(x => x.CurrentStatus == 10).ToListAsync();
+                var leadByUser = (from A in lead join B in userList on A.Lead_assignee_Id equals B.LgId join C in leadProcess on A.Id equals C.lead_Id select new { C.DateOfAction, C.LoanAmount, });
+                long? Sum = 0;
+                foreach (var x in leadByUser)
+                {
+                    var convertedDate = (x.DateOfAction.Value).ToString("MMMM");
+                    if (LoanAmountList.ContainsKey(convertedDate))
+                    {
+                        Sum = LoanAmountList[convertedDate];
+                        Sum += x.LoanAmount;
+                        LoanAmountList[convertedDate] = Sum;
+                    }
+                }
+
+            }
+            var list = LoanAmountList.Values.ToList();
+            return list;
         }
-    }
+    } 
+    #endregion
 }

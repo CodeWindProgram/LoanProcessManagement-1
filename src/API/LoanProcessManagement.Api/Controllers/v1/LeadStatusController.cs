@@ -80,6 +80,14 @@ namespace LoanProcessManagement.Api.Controllers.v1
             return Ok(dtos);
         }
 
+        [HttpPost("GetLoanAmount")]
+        public async Task<ActionResult> GetLoanAmount([FromBody] GetLoanByCurrentStatusQuery req)
+        {
+            _logger.LogInformation("GetStatus Initiated");
+            var dtos = await _mediator.Send(req);
+            _logger.LogInformation("GetStatus Completed");
+            return Ok(dtos);
+        }
 
         #region Api's for CRUD Lead Status in db by Dipti Pandhram - 18-03-2022
         /// <summary>
@@ -141,16 +149,7 @@ namespace LoanProcessManagement.Api.Controllers.v1
             _logger.LogInformation("Get Lead Status ById Completed");
             return Ok(dtos);
         }
-        [HttpGet("GetLoanAmount/{currentstatus}")]
-        public async Task<ActionResult> GetLoanAmount([FromRoute] long currentstatus)
-        {
-            _logger.LogInformation("GetStatus Initiated");
-            var dtos = await _mediator.Send(new GetLoanByCurrentStatusQuery(currentstatus));
-            _logger.LogInformation("GetStatus Completed");
-            return Ok(dtos);
-        }
-
-
+        
         /// <summary>
         /// Api which will Get All Lead Staus in db-18/03/2022
         ///	commented by Dipti P.

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTAddEnuiry
@@ -18,6 +19,8 @@ namespace LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GS
         [DisplayName("E-Mail")]
         public string Email { get; set; }
         [DisplayName("GST No.")]
+        [Required(ErrorMessage ="Please Enter GST No.")]
+        [RegularExpression("^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$", ErrorMessage = "Please enter valid GST No.")]
         public string GstNo { get; set; }
         [DisplayName("Employment Type")]
         public string EmploymentType { get; set; }

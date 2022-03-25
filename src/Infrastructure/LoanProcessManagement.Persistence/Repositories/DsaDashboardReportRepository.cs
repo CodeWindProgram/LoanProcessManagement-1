@@ -69,6 +69,10 @@ namespace LoanProcessManagement.Persistence.Repositories
                         var BranchDataEntryDate = Convert.ToDateTime(finalresult.Where(x => x.CurrentStatus == 2).Select(x => x.CreatedDate.Date).FirstOrDefault());
                         //var SanctionDate = Convert.ToDateTime(finalresult.Where(x => x.CurrentStatus == 9).Select(x => x.CreatedDate.Date).FirstOrDefault());
                         var SanctionDate = Convert.ToDateTime(finalresult.LastOrDefault().CreatedDate);
+                        if (BranchDataEntryDate.Year != 0001)
+                        {
+                            result.SanctionAmountTAT = Convert.ToInt64((SanctionDate - BranchDataEntryDate).TotalDays);
+                        }
                         result.SanctionAmountTAT = Convert.ToInt64((SanctionDate - BranchDataEntryDate).TotalDays);
                         var leadCreationDate = Convert.ToDateTime(finalresult.Where(x => x.CurrentStatus == 1).Select(x => x.CreatedDate.Date).FirstOrDefault());
                         //var disbursementDate = Convert.ToDateTime(finalresult.Where(x => x.CurrentStatus == 10).Select(x => x.CreatedDate.Date).FirstOrDefault());
@@ -175,6 +179,10 @@ namespace LoanProcessManagement.Persistence.Repositories
                         var BranchDataEntryDate = Convert.ToDateTime(finalresult.Where(x => x.CurrentStatus == 2).Select(x => x.CreatedDate.Date).FirstOrDefault());
                         //var SanctionDate = Convert.ToDateTime(finalresult.Where(x => x.CurrentStatus == 9).Select(x => x.CreatedDate.Date).FirstOrDefault());
                         var SanctionDate = Convert.ToDateTime(finalresult.LastOrDefault().CreatedDate);
+                        if (BranchDataEntryDate.Year != 0001)
+                        {
+                            result.SanctionAmountTAT = Convert.ToInt64((SanctionDate - BranchDataEntryDate).TotalDays);
+                        }
                         result.SanctionAmountTAT = Convert.ToInt64((SanctionDate - BranchDataEntryDate).TotalDays);
                         var leadCreationDate = Convert.ToDateTime(finalresult.Where(x => x.CurrentStatus == 1).Select(x => x.CreatedDate.Date).FirstOrDefault());
                         //var disbursementDate = Convert.ToDateTime(finalresult.Where(x => x.CurrentStatus == 10).Select(x => x.CreatedDate.Date).FirstOrDefault());

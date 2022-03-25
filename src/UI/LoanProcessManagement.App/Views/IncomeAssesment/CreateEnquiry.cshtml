@@ -192,6 +192,7 @@
                                         <div class="col-lg-4 col-sm-12">
                                             <label>GST Number</label>
                                             <input asp-for="gstAddEnquiryCommandDto.GstNo" type="text" maxlength="15" id="ContentPlaceHolder1_txtGstNumber" class="form-control uppercase" placeholder="GST Number">
+                                            <span asp-validation-for="gstAddEnquiryCommandDto.GstNo" class="text-danger"></span>
                                         </div>
 
 
@@ -216,12 +217,14 @@
                                         <div class="col-lg-4 col-sm-12 mb-3">
                                             <label class="col-md-4">Excel File<span style="color: Red">&nbsp;*</span></label>
                                             <input class="form-control" type="file" asp-for="IExcel" id="ContentPlaceHolder1_fileUploadExcel" accept=".xls,.xlsx" onchange="validate_fileupload(this,&#39;xls,xlsx&#39;);">
+                                            <span asp-validation-for="IExcel" class="text-danger" id="idPdfFile"></span>
                                         </div>
 
 
                                         <div class="col-lg-4 col-sm-12 mb-3">
                                             <label class="col-md-6">Pdf file<span style="color: Red">&nbsp;*</span></label>
                                             <input class="form-control" type="file" asp-for="IPdf" id="ContentPlaceHolder1_fileUploadPdf" accept=".pdf" onchange="validate_fileupload(this,&#39;pdf&#39;);">
+                                            <span asp-validation-for="IPdf" class="text-danger" id="idExcelFile"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -477,56 +480,56 @@
             }
         });
 
-        function ValidateUpdate(type) {
-            if (type == 'Name') {
-                if ($("#ContentPlaceHolder1_txtCustomerName").val() == "") {
-                    alert('Customer Name is Mandatory');
-                    return false;
-                }
-                var namefilter = /^[a-z A-Z]+$/;
-                var name = $("#ContentPlaceHolder1_txtCustomerName").val();
-                if (namefilter.test(name) == false) {
-                    //alert(pattern);
-                    alert('Please Enter Name in Proper Format');
+        //function ValidateUpdate(type) {
+        //    if (type == 'Name') {
+        //        if ($("#ContentPlaceHolder1_txtCustomerName").val() == "") {
+        //            alert('Customer Name is Mandatory');
+        //            return false;
+        //        }
+        //        var namefilter = /^[a-z A-Z]+$/;
+        //        var name = $("#ContentPlaceHolder1_txtCustomerName").val();
+        //        if (namefilter.test(name) == false) {
+        //            //alert(pattern);
+        //            alert('Please Enter Name in Proper Format');
 
-                    return false;
-                }
-            }
+        //            return false;
+        //        }
+        //    }
 
-            //if (type == 'Email') {
-            //    if ($("#ContentPlaceHolder1_txtEmail").val() == "") {
-            //        {
-            //            alert('Customer Email is Mandatory');
-            //            return false;
-            //        }
-            //    }
+        //    //if (type == 'Email') {
+        //    //    if ($("#ContentPlaceHolder1_txtEmail").val() == "") {
+        //    //        {
+        //    //            alert('Customer Email is Mandatory');
+        //    //            return false;
+        //    //        }
+        //    //    }
 
-            //    var pattern = new RegExp(/^[+a-zA-Z0-9._-]+[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
-            //    var emailid = $("#ContentPlaceHolder1_txtEmail").val();
-            //    if (pattern.test(emailid) == false) {
-            //        //alert(pattern);
-            //        alert('Please Enter Email in proper format');
+        //    //    var pattern = new RegExp(/^[+a-zA-Z0-9._-]+[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+        //    //    var emailid = $("#ContentPlaceHolder1_txtEmail").val();
+        //    //    if (pattern.test(emailid) == false) {
+        //    //        //alert(pattern);
+        //    //        alert('Please Enter Email in proper format');
 
-            //        return false;
-            //    }
-            //}
-            if (type == 'Mobile') {
-                if ($("#ContentPlaceHolder1_txtMobile").val() == "") {
-                    alert('Customer Mobile No. is Mandatory');
-                    return false;
-                }
+        //    //        return false;
+        //    //    }
+        //    //}
+        //    if (type == 'Mobile') {
+        //        if ($("#ContentPlaceHolder1_txtMobile").val() == "") {
+        //            alert('Customer Mobile No. is Mandatory');
+        //            return false;
+        //        }
 
-                var filter = /^\d{10}$/;
-                var mobile = $("#ContentPlaceHolder1_txtMobile").val();
-                if (filter.test(mobile) == false) {
-                    console.log(filter);
-                    alert('Please Enter Mobile No. in Proper Format');
+        //        var filter = /^\d{10}$/;
+        //        var mobile = $("#ContentPlaceHolder1_txtMobile").val();
+        //        if (filter.test(mobile) == false) {
+        //            console.log(filter);
+        //            alert('Please Enter Mobile No. in Proper Format');
 
-                    return false;
-                }
-            }
+        //            return false;
+        //        }
+        //    }
 
-        }
+        //}
 
         //$(function () {
         //    $("li").click(function (e) {
@@ -586,21 +589,21 @@
             console.log('validate');
             // GetProductList();
             //$("#btnAddEnquiry").validate();
-            $("#ContentPlaceHolder1_btnAddEnquiry").click(function (e) {
+            //$("#ContentPlaceHolder1_btnAddEnquiry").click(function (e) {
                 //debugger;
-                if ($("#ContentPlaceHolder1_txtCustomerName").val() == "") {
-                    alert('Customer Name is Mandatory');
-                    e.preventDefault();
-                    return false;
-                }
-                var namefilter = /^[a-z A-Z]+$/;
-                var name = $("#ContentPlaceHolder1_txtCustomerName").val();
-                if (namefilter.test(name) == false) {
-                    //alert(pattern);
-                    alert('Please Enter Name in Proper Format');
-                    e.preventDefault();
-                    return false;
-                }
+                //if ($("#ContentPlaceHolder1_txtCustomerName").val() == "") {
+                //    alert('Customer Name is Mandatory');
+                //    e.preventDefault();
+                //    return false;
+                //}
+                //var namefilter = /^[a-z A-Z]+$/;
+                //var name = $("#ContentPlaceHolder1_txtCustomerName").val();
+                //if (namefilter.test(name) == false) {
+                //    //alert(pattern);
+                //    alert('Please Enter Name in Proper Format');
+                //    e.preventDefault();
+                //    return false;
+                //}
 
 
                 //if ($("#ContentPlaceHolder1_txtEmail").val() == "") {
@@ -620,54 +623,56 @@
                 //    return false;
                 //}
 
-                var filter = /^\d{10}$/;
-                var mobile = $("#ContentPlaceHolder1_txtMobile").val();
-                if (filter.test(mobile) == false) {
-                    console.log(filter);
-                    alert('Please Enter Mobile No. in Proper Format');
+                //var filter = /^\d{10}$/;
+                //var mobile = $("#ContentPlaceHolder1_txtMobile").val();
+                //if (filter.test(mobile) == false) {
+                //    console.log(filter);
+                //    alert('Please Enter Mobile No. in Proper Format');
 
-                    return false;
-                }
-                var patterngst = new RegExp("^([0][1-9]|[1-2][0-9]|[3][0-7])([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$");
-                var gstno = $("#ContentPlaceHolder1_txtGstNumber").val();
-                if (patterngst.test(gstno) == false) {
-                    //alert(pattern);
-                    alert('Please Enter GST No. in Proper Format');
-                    e.preventDefault();
-                    return false;
-                }
+                //    return false;
+                //}
+                //var patterngst = new RegExp("^([0][1-9]|[1-2][0-9]|[3][0-7])([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$");
+                //var gstno = $("#ContentPlaceHolder1_txtGstNumber").val();
+                //if (patterngst.test(gstno) == false) {
+                //    //alert(pattern);
+                //    alert('Please Enter GST No. in Proper Format');
+                //    e.preventDefault();
+                //    return false;
+                //}
 
-                if ($("#ContentPlaceHolder1_txtMobile").val() == "") {
-                    alert('Customer Mobile No. is Mandatory');
-                    e.preventDefault();
-                    return false;
-                }
+                //if ($("#ContentPlaceHolder1_txtMobile").val() == "") {
+                //    alert('Customer Mobile No. is Mandatory');
+                //    e.preventDefault();
+                //    return false;
+                //}
 
-                var filter = /^\d{10}$/;
-                var mobile = $("#ContentPlaceHolder1_txtMobile").val();
-                if (filter.test(mobile) == false) {
-                    console.log(filter);
-                    alert('Please Enter Mobile No. in Proper Format');
-                    e.preventDefault();
-                    return false;
-                }
+                //var filter = /^\d{10}$/;
+                //var mobile = $("#ContentPlaceHolder1_txtMobile").val();
+                //if (filter.test(mobile) == false) {
+                //    console.log(filter);
+                //    alert('Please Enter Mobile No. in Proper Format');
+                //    e.preventDefault();
+                //    return false;
+                //}
                 //excel file validation
-                var fileExcelvalue = $('input[id*="fileUploadExcel"]').val();
-                if (fileExcelvalue == "" || fileExcelvalue == null) {
-                    console.log(fileExcelvalue);
-                    alert('Please Select Excel File to Upload');
-                    e.preventDefault();
-                    return false;
-                }
-                //Pdf file validation
-                var filePdfvalue = $('input[id*="fileUploadPdf"]').val();
-                if (filePdfvalue == "" || filePdfvalue == null) {
-                    console.log(filePdfvalue);
-                    alert('Please Select PDF File to Upload');
-                    e.preventDefault();
-                    return false;
-                }
-            })
+                //var fileExcelvalue = $('input[id*="fileUploadExcel"]').val();
+                //if (fileExcelvalue == "" || fileExcelvalue == null) {
+                //    console.log(fileExcelvalue);
+                //    //alert('Please Select Excel File to Upload');
+                //    $("#idExcelFile").html("Please Select Excel File to Upload").show();
+                //    e.preventDefault();
+                //    return false;
+                //}
+                ////Pdf file validation
+                //var filePdfvalue = $('input[id*="fileUploadPdf"]').val();
+                //if (filePdfvalue == "" || filePdfvalue == null) {
+                //    console.log(filePdfvalue);
+                //    //alert('Please Select PDF File to Upload');
+                //    $("#idPdfFile").html("Please Select Excel File to Upload").show();
+                //    e.preventDefault();
+                //    return false;
+                //}
+            //})
 
 
             $(function () {

@@ -64,9 +64,9 @@
                                             </select>
                                             <span asp-validation-for="BranchID" class="text-danger"></span>
                                         }
-                                        else
+                                        else if(@ViewBag.RoleId == 2)
                                         {
-                                            <select asp-for="BranchID" class="form-control" asp-items="ViewBag.branches" id="divBranch">
+                                            <select asp-for="BranchID" class="form-control" asp-items="ViewBag.branches" id="divHoBranch">
                                                 <option value="">Select Branch</option>
                                             </select>
                                             <span asp-validation-for="BranchID" class="text-danger"></span>
@@ -223,7 +223,7 @@
         });
 
         $(function () {
-            $('#divBranch option[value="Head Office"]').remove();
+            $("#divHoBranch").children("option[value^='1']").hide();
         });
     });
 </script>

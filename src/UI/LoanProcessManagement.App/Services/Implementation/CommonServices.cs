@@ -279,15 +279,20 @@ namespace LoanProcessManagement.App.Services.Implementation
         //public async Task<List<long?>> GetLoanAmount(GetLoanByCurrentStatusQuery req)
         //{
         //    BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
-        //    //var pointer = 10;
 
         //    var content = JsonConvert.SerializeObject(req);
 
         //    var _client = clientfact.CreateClient("LoanService");
 
-        //    var httpResponse = await _client.GetAsync
+        //    //var httpResponse = await _client.GetAsync
+        //    //    (
+        //    //        BaseUrl + APIEndpoints.GetLoan + req.LgId + req.
+        //    //    );
+        //    var httpResponse = await _client.PostAsync
         //        (
-        //            BaseUrl + APIEndpoints.GetLoan + req.CurrentStatus
+        //            BaseUrl + APIEndpoints.GetLoan,
+        //             new StringContent(content, Encoding.Default,
+        //            "application/json")
         //        );
 
         //    var jsonString = httpResponse.Content.ReadAsStringAsync().Result;

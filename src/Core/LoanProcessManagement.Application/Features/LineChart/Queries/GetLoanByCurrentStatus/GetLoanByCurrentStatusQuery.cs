@@ -7,11 +7,16 @@ namespace LoanProcessManagement.Application.Features.LineChart.Queries.GetLoanBy
 {
     public class GetLoanByCurrentStatusQuery : IRequest<List<long?>>
     {
-        public GetLoanByCurrentStatusQuery(long currentstatus)
-        {
-            CurrentStatus = currentstatus;
-        }
+        //public GetLoanByCurrentStatusQuery(string lgId, long userRoleId)
+        //{
+        //    //CurrentStatus = currentstatus;
+        //    LgId = lgId;
+        //    UserRoleId = userRoleId;
+        //}
 
-        public long CurrentStatus { get; set; }
+        //public long CurrentStatus { get; set; }
+        public long UserRoleId { get; set; }
+        public string LgId { get; set; }
+        public long BranchId { get; set; }
     }
 }

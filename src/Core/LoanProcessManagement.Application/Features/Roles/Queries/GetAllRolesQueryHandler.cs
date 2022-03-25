@@ -37,7 +37,16 @@ namespace LoanProcessManagement.Application.Features.Roles.Queries
 
             _logger.LogInformation("Handle Initiated");
             var roles = await _baseRepository.ListAllAsync();
-            var mappedRoles = _mapper.Map<IEnumerable<GetAllRolesDto>>(roles);
+            List<LpmUserRoleMaster> ActiveRoles = new List<LpmUserRoleMaster>();
+            foreach (var item in roles)
+            {
+                if (item.IsActive)
+                {
+                    ActiveRoles.Add(item);
+                }
+
+            }
+            var mappedRoles = _mapper.Map<IEnumerable<GetAllRolesDto>>(ActiveRoles);
             _logger.LogInformation("Hanlde Completed");
             return mappedRoles;
         } 

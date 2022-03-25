@@ -101,12 +101,16 @@ namespace LoanProcessManagement.App.Controllers
                               .Select(i => DateTime.Now.AddMonths(i - 6))
                               .Select(date => date.ToString("MMMM")).ToList();
             const long V = 10;
-            //GetLoanByCurrentStatusQuery red = new GetLoanByCurrentStatusQuery(V)
+            //GetLoanByCurrentStatusQuery red = new GetLoanByCurrentStatusQuery()
             //{
-            //    CurrentStatus = (long)10
+            //    //CurrentStatus = (long)10,
+            //    LgId = userLgId,
+            //    UserRoleId = long.Parse(userRoleId),
+            //    BranchId = long.Parse(userBranchId),
             //};
             //var incoming = await _commonService.GetLoanAmount(red);
-            //ViewBag.LoanAmounts = incoming.Skip(Math.Max(0, incoming.Count() - 6)).Take(6).ToList();
+            //ViewBag.LoanAmounts = incoming;
+            ////ViewBag.LoanAmounts = incoming.Skip(Math.Max(0, incoming.Count() - 6)).Take(6).ToList();
             ////var menu =await _menuService.GetChildMenuById(53);
             return View(res.Data);
         }

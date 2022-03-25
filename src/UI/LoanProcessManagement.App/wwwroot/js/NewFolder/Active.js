@@ -49,7 +49,14 @@
         var element = $(".nav-item a[href='" + path + "']");
         element.addClass("active");
     }
-
+    else if (temp[1] == 'ProposalReport') {
+        var element = $(".nav-item a[href='" + path + "']");
+        element.addClass("active");
+    }
+    else if (temp[2] == 'DsaDashboardReport') {
+        var element = $(".nav-item a[href='" + path + "']");
+        element.addClass("active");
+    }
 
     var parentEle = $(".nav-item a[href='" + path + "']")[0]?.parentElement.parentElement;
 
