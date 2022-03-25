@@ -30,7 +30,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 var lead = await _dbContext.LpmLeadMasters.Include(x => x.Branch).Include(x => x.LeadStatus)
                     .Include(x => x.LpmLeadProcessCycle)
                     .Where(x => x.BranchID == req.BranchID && (x.CreatedDate.Date >= req.StartDate.Date && x.CreatedDate.Date <= req.EndDate.Date)).ToListAsync();
-                var userList = await _dbContext.LpmUserMasters.Where(x => x.BranchId == req.BranchID && x.UserRoleId == req.RoleId).ToListAsync();
+                var userList = await _dbContext.LpmUserMasters.Where(x => x.BranchId == req.BranchID && x.UserRoleId == req.RoleId && x.LgId == req.LgId).ToListAsync();
                 //var userList = await _dbContext.LpmUserMasters.Where(x => x.BranchId == req.BranchID && x.UserRoleId == req.RoleId && x.LgId == req.LgId).ToListAsync();
 
                 foreach (var itm in userList)
