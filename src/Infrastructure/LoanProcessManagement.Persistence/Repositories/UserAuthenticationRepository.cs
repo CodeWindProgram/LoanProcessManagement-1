@@ -73,6 +73,12 @@ namespace LoanProcessManagement.Persistence.Repositories
                 {
 
                     user.IsLocked = true;
+                    response.Message = "This account has been locked .";
+
+                }
+                else
+                {
+                    response.Message = "Invalid credentials";
                 }
                 if (user.WrongLoginAttempt == 5)
                 {
@@ -83,7 +89,6 @@ namespace LoanProcessManagement.Persistence.Repositories
                 }
                 await _dbContext.SaveChangesAsync();
                 response.IsAuthenticated = false;
-                response.Message = "Invalid credentials";
                 _logger.LogInformation("User Authentication failed");
 
                 return response;
