@@ -888,7 +888,6 @@
         //});
 
         $("#valuerForm").submit(function () {
-            if ($('#valuerForm').valid()) {
                 var array = [];
                 $(".valuerDocs input:checked").each(function () {
                     array.push($(this).val());
@@ -903,10 +902,8 @@
                 $('#valuerAgencyDoc').val(chklist);
                 $('#tabValueForValuer').val("Valuer");
 
-            }
         });
         $("#legalForm").submit(function () {
-            if ($('#legalForm').valid()) {
                 var array = [];
                 $(".legalDocs input:checked").each(function () {
                     array.push($(this).val());
@@ -919,10 +916,8 @@
                 }
                 $('#legalAgencyDoc').val(chklist);
                 $('#tabValueForLegal').val("Legal");
-            }
         });
         $("#fiForm").submit(function () {
-            if ($('#fiForm').valid()) {
                 var array = [];
                 $(".fiDocs input:checked").each(function () {
                     array.push($(this).val());
@@ -935,7 +930,6 @@
                 }
                 $('#fiAgencyDoc').val(chklist);
                 $('#tabValueForFi').val("Fi");
-            }
         });
 
         $(document).ready(function () {
@@ -1001,7 +995,7 @@
                $("#fiIndateCommentDiv").css("display", "block");
                $('#FiTab').prop('disabled', true);
         }
-        if ('@Model.fiAgencyStatus' == 2) {
+        if('@Model.fiAgencyStatus' == 2) {
                $("#ContentPlaceHolder1_ddlFIAgency").prop('disabled', true);
                $("#fiDocOutdate").prop('disabled', true);
                $("#fiAgencyDiv input[type=checkbox]").prop("disabled", true);
