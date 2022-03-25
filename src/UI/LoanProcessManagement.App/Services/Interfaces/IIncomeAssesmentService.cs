@@ -17,7 +17,8 @@ namespace LoanProcessManagement.App.Services.Interfaces
     {
         Task<Response<GstAddEnquiryCommandDto>> AddEnquiry(int applicantType, int lead_Id);
 
-        Task<GstAddEnquiryCommandDto> CreateEnquiry(GstCreateEnquiryCommand gstCreateEnquiryCommand);
+        Task<Response<GstCreateEnquiryCommandDto>> CreateEnquiry(GstCreateEnquiryCommand gstCreateEnquiryCommand);
+        //Task<GstAddEnquiryCommandDto> CreateEnquiry(GstCreateEnquiryCommand gstCreateEnquiryCommand);
 
         #region Interface Methods For Income Assessment Details - Pratiksha Poshe - 15/02/2022
         Task<Response<GetIncomeAssessmentDetailsDto>> GetIncomeDetailsService(int applicantType, int lead_Id);

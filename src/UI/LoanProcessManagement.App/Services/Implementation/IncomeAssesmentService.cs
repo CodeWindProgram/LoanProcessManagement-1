@@ -52,7 +52,7 @@ namespace LoanProcessManagement.App.Services.Implementation
             return response;
         }
 
-        public async Task<GstAddEnquiryCommandDto> CreateEnquiry(GstCreateEnquiryCommand gstCreateEnquiryCommand)
+        public async Task<Response<GstCreateEnquiryCommandDto>> CreateEnquiry(GstCreateEnquiryCommand gstCreateEnquiryCommand)
         {
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
@@ -71,7 +71,7 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             var options = new JsonSerializerOptions();
 
-            var model = System.Text.Json.JsonSerializer.Deserialize<GstAddEnquiryCommandDto>(jsonString, options);
+            var model = System.Text.Json.JsonSerializer.Deserialize<Response<GstCreateEnquiryCommandDto>>(jsonString, options);
 
             return model;
         }

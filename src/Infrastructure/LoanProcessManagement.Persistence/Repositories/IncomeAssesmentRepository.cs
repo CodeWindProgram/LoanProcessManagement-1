@@ -32,11 +32,12 @@ namespace LoanProcessManagement.Persistence.Repositories
 
         }
 
-        public async Task<LPMGSTEnquiryDetail> CreateGstEnquiry(GstCreateEnquiryCommand request)
+        public async Task<GstCreateEnquiryCommandDto> CreateGstEnquiry(GstCreateEnquiryCommand request)
         {
             var lead = _dbContext.LpmLeadMasters.Where(a => a.lead_Id == (request.Lead_IdId).ToString()).FirstOrDefault();
             var applicantDetails = await _dbContext.LpmLeadApplicantsDetails
             .Where(x => x.lead_Id == request.Lead_IdId && x.ApplicantType == request.ApplicantType).FirstOrDefaultAsync();
+            GstCreateEnquiryCommandDto response = new GstCreateEnquiryCommandDto();
             var gstCreateEnquiryCommandDto = new LPMGSTEnquiryDetail()
             {
                 FormNumber = request.FormNo.ToString(),
@@ -55,7 +56,12 @@ namespace LoanProcessManagement.Persistence.Repositories
             var obj = await _dbContext.LPMGSTEnquiryDetails.AddAsync(gstCreateEnquiryCommandDto);
             applicantDetails.isGstSubmitSuccess = true;
             _dbContext.SaveChanges();
-            return obj.Entity;
+            response.ApplicantDetailId = request.ApplicantDetailId;
+            response.ApplicantType = request.ApplicantType;
+            response.GstNo = request.GstNo;
+            response.Succeeded = true;
+            response.Message = "GST details added successfully";
+            return response;
         }
 
         public async Task<GstAddEnquiryCommandDto> AddGstEnquiry(int ApplicantType, int Lead_Id)

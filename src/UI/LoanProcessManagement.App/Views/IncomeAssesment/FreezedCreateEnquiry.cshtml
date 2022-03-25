@@ -583,6 +583,13 @@
         $(document).ready(function () {
             //debugger;
             console.log('validate');
+            if ('@TempData["isGstSuccess"]' == 'True') {
+            toastr.success('@TempData["isGstSuccessMessage"]', "Success");
+
+            }
+            else if ('@TempData["isGstSuccess"]' == 'False') {
+                toastr.error('@TempData["isGstSuccessMessage"]', "Error");
+            }
             // GetProductList();
             //$("#btnAddEnquiry").validate();
             $("#ContentPlaceHolder1_btnAddEnquiry").click(function (e) {

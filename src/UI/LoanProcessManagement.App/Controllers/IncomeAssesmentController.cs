@@ -112,6 +112,8 @@ namespace LoanProcessManagement.App.Controllers
             };
             var submitgoal = _incomeAssesmentService.PostIsSubmit(updateSubmitGstCommand);
             //var toreturn = lead + app;
+            TempData["isGstSuccess"] = createmenuresponse.Data.Succeeded;
+            TempData["isGstSuccessMessage"] = createmenuresponse.Data.Message;
             return RedirectToAction("CreateEnquiry",new { applicantType=app, lead_Id = lead});
         }
         #endregion
