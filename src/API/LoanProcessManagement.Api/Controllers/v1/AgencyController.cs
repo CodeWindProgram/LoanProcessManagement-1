@@ -9,6 +9,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LoanProcessManagement.Application.Features.Agency.Commands.CreateAgency;
+using LoanProcessManagement.Application.Features.Agency.Commands.DeleteAgency;
+using LoanProcessManagement.Application.Features.Agency.Queries.GetAgencyById;
+using LoanProcessManagement.Application.Features.Agency.Commands.UpdateAgency;
+using LoanProcessManagement.Application.Features.Agency.Queries.GetAgencyList;
 
 namespace LoanProcessManagement.Api.Controllers.v1
 {
@@ -58,5 +63,55 @@ namespace LoanProcessManagement.Api.Controllers.v1
             _logger.LogInformation("SubmitToAgency Completed");
             return Ok(dtos);
         }
+
+        [HttpPost("CreateAgency")]
+        public async Task<ActionResult> CreateAgency(CreateAgencyCommand req)
+        {
+            _logger.LogInformation("Create Agency Initiated");
+            var dtos = await _mediator.Send(req);
+            _logger.LogInformation("Create Agency Completed");
+            return Ok(dtos);
+        }
+
+
+        [HttpDelete("DeleteAgency/{id}")]
+        public async Task<ActionResult> DeleteAgency(long id)
+        {
+            _logger.LogInformation("Delete Agency Initiated");
+            var dtos = await _mediator.Send(new DeleteAgencyCommand(id));
+            _logger.LogInformation("Delete Agency Completed");
+            return Ok(dtos);
+        }
+
+        [HttpPut("UpdateAgency")]
+        public async Task<ActionResult> UpdateAgency(UpdateAgencyCommand req)
+        {
+            _logger.LogInformation("Update Agency Initiated");
+            var dtos = await _mediator.Send(req);
+            _logger.LogInformation("Update Agency Completed");
+            return Ok(dtos);
+        }
+
+
+        [HttpGet("GetAgencyById/{Id}")]
+        public async Task<ActionResult> GetAgencyById(long Id)
+        {
+            _logger.LogInformation("Get Agency By Id Initiated");
+            var dtos = await _mediator.Send(new GetAgencyByIdQuery(Id));
+            _logger.LogInformation("Get Agency ById Completed");
+            return Ok(dtos);
+        }
+
+        [HttpGet("GetAgencyList")]
+        public async Task<ActionResult> GetAgencyList()
+        {
+            _logger.LogInformation("GetAgencyList Initiated");
+            var dtos = await _mediator.Send(new GetAgencyListQuery());
+            _logger.LogInformation("GetAgencyList Completed");
+            return Ok(dtos);
+        }
+
+
+
     }
 }

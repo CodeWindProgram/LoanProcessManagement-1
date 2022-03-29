@@ -216,17 +216,16 @@ namespace LoanProcessManagement.App.Helper.APIHelper
         public const string GetAllState = "api/v1/State/GetAllState";
 
 
+        public const string AddAgency = "api/v1/Agency/CreateAgency";
+        public const string DeleteAgency = "api/v1/Agency/DeleteAgency/";
+        public const string GetAgencyeById = "api/v1/Agency/GetAgencyById/";
+        public const string UpdateAgency = "api/v1/Agency/UpdateAgency";
+        public const string AgencyList = "api/v1/Agency/GetAgencyList";
+
+
+
+
         public const string GetLoan = "api/v1/LeadStatus/GetLoanAmount/";
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -105,6 +105,10 @@ using LoanProcessManagement.Application.Features.State.Commands.CreateState;
 using LoanProcessManagement.Application.Features.State.Commands.UpdateState;
 using LoanProcessManagement.Application.Features.State.Queries.GetStateById;
 using LoanProcessManagement.Application.Features.State.Queries.GetStateList;
+using LoanProcessManagement.Application.Features.Agency.Commands.CreateAgency;
+using LoanProcessManagement.Application.Features.Agency.Commands.UpdateAgency;
+using LoanProcessManagement.Application.Features.Agency.Queries.GetAgencyById;
+using LoanProcessManagement.Application.Features.Agency.Queries.GetAgencyList;
 
 namespace LoanProcessManagement.Application.Profiles
 {
@@ -313,6 +317,11 @@ namespace LoanProcessManagement.Application.Profiles
             CreateMap<UpdateStateCommand, LpmState>().ReverseMap();
             CreateMap<LpmState, GetStateByIdDto>().ReverseMap();
             CreateMap<LpmState, GetStateListDto>().ReverseMap();
+
+            CreateMap<CreateAgencyCommand, LpmAgencyMaster>().ReverseMap();
+            CreateMap<UpdateAgencyCommand, LpmAgencyMaster>().ReverseMap();
+            CreateMap<LpmAgencyMaster, GetAgencyByIdQueryVm>().ReverseMap();
+            CreateMap<LpmAgencyMaster, GetAgencyListQueryVm>().ReverseMap();
 
 
 

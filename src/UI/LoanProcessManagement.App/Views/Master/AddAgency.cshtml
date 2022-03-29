@@ -1,4 +1,4 @@
-﻿@model LoanProcessManagement.Application.Features.LeadStatus.Commands.CreateLeadStatus.CreateLeadStatusCommand
+﻿@model LoanProcessManagement.Application.Features.Agency.Commands.CreateAgency.CreateAgencyCommand
 <script src="~/js/jquery/jquery-1.10.1.min.js"></script>
 <script src="~/plugins/jquery-ui/jquery-ui.min.js"></script>
 <script src="~/plugins/jquery/jquery.min.js"></script>
@@ -9,20 +9,30 @@
     <div class="col-sm-12 col-lg-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in ">
             <div style="border: 1px solid #343a40" class="border">
-                <h4>Add Lead Status</h4>
+                <h4>Add Agency</h4>
                 <div class="panel-body">
                     <div class="border-part">
-                        <form id="MyForm"  method="post" enctype="multipart/form-data">
+                        <form id="MyForm" method="post" enctype="multipart/form-data">
                             @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@<br />
                             <div style="text-align:end" class="form-group"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
                             <div class="form-group">
                                 <div class="row pl-5">
 
                                     <div class="col-lg-4 col-sm-12 ">
-                                        <label asp-for="StatusDescription" class="control-label">Lead Status Name<span style="color: Red">&nbsp;*</span></label>
+                                        <label asp-for="AgencyName" class="control-label">Agency Name<span style="color: Red">&nbsp;*</span></label>
 
-                                        <input asp-for="StatusDescription" class="form-control" maxlength="20" placeholder="Enter Lead Status Name" />
-                                        <span asp-validation-for="StatusDescription" class="text-danger"></span>
+                                        <input asp-for="AgencyName" class="form-control" onkeydown="return /[a-z ]/i.test(event.key)" maxlength="20" placeholder="Enter Agency Name" />
+                                        <span asp-validation-for="AgencyName" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-12 ">
+                                        <label asp-for="Agency_type" class="control-label">Agency Type<span style="color: Red">&nbsp;*</span></label>
+                                        <select asp-for="Agency_type" class="form-control">
+                                            <option value="">Select Agency type</option>
+                                            <option value="V">V</option>
+                                            <option value="F">F</option>
+                                            <option value="L">L</option>
+                                         </select>           
+                                        <span asp-validation-for="Agency_type" class="text-danger"></span>
                                     </div>
 
                                 </div>
@@ -52,19 +62,19 @@
 <script>
     function loadPage() {
 
-        $("#div_dynamicTables").load("/Master/GetAllLeadStatus");
+        $("#div_dynamicTables").load("/Master/GetAgencyList");
     }
     $("#MyForm").on("submit", function (e) {
         if ($("#MyForm").valid()) {
             var dataString = $(this).serialize();
             $.ajax({
                 type: "POST",
-                url: "/Master/AddLeadStatus",
+                url: "/Master/AddAgency",
                 data: dataString,
                 success: function (result) {
                     if (result.data.succeeded) {
                         toastr.success(result.data.message);
-                        $("#div_dynamicTables").load("/Master/GetAllLeadStatus");
+                        $("#div_dynamicTables").load("/Master/GetAgencyList");
 
                     }
                     else {

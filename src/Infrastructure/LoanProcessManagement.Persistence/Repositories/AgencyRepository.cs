@@ -11,6 +11,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LoanProcessManagement.Application.Features.Agency.Commands.CreateAgency;
+using LoanProcessManagement.Application.Features.Agency.Commands.DeleteAgency;
+using LoanProcessManagement.Application.Features.Agency.Commands.UpdateAgency;
 
 namespace LoanProcessManagement.Persistence.Repositories
 {
@@ -240,6 +243,93 @@ namespace LoanProcessManagement.Persistence.Repositories
             }
             
         }
+
         #endregion
+
+        public async Task<CreateAgencyDto> CreateAgencyCommand(LpmAgencyMaster request)
+        {
+            CreateAgencyDto res = new CreateAgencyDto();
+            var result = await _dbContext.lpmAgencyMasters.FirstOrDefaultAsync(x => x.AgencyName == request.AgencyName && x.Agency_type == request.Agency_type);
+            if (result == null)
+            {
+                request.IsActive = true;
+                await _dbContext.lpmAgencyMasters.AddAsync(request);
+                await _dbContext.SaveChangesAsync();
+                res.Id = request.Id;
+                res.Message = "New Agency added successfully.";
+                res.Succeeded = true;
+
+            }
+            else
+            {
+                res.Id = request.Id;
+                res.Message = $"Agency {request.Id} already exists.";
+                res.Succeeded = false;
+
+            }
+            return res;
+        }
+
+        public async Task<DeleteAgencyDto> DeleteAgency(long id)
+        {
+            DeleteAgencyDto res = new DeleteAgencyDto();
+            var result = await _dbContext.lpmAgencyMasters.FirstOrDefaultAsync(x => x.Id == id);
+            if (result != null)
+            {
+                result.IsActive = false;
+                await _dbContext.SaveChangesAsync();
+                res.Message = $"Agency {result.Id} removed successfully.";
+                res.Succeeded = true;
+
+            }
+            else
+            {
+                res.Message = "Invalid Id.";
+                res.Succeeded = false;
+            }
+            return res;
+        }
+
+        public async Task<UpdateAgencyDto> UpdateAgency(LpmAgencyMaster req)
+        {
+            UpdateAgencyDto response = new UpdateAgencyDto();
+            var result = await _dbContext.lpmAgencyMasters.FirstOrDefaultAsync(x => x.AgencyName == req.AgencyName && x.Agency_type == req.Agency_type && x.Id != req.Id);
+            if (result != null)
+            {
+                response.Message = "Agency already exists.";
+                response.Succeeded = false;
+                return response;
+
+            }
+            var leadToUpdate = await _dbContext.lpmAgencyMasters.FirstOrDefaultAsync(x => x.Id == req.Id);
+
+            if (leadToUpdate != null)
+            {
+                leadToUpdate.AgencyName = req.AgencyName;
+                leadToUpdate.Agency_type = req.Agency_type;
+                leadToUpdate.IsActive = req.IsActive;
+                await _dbContext.SaveChangesAsync();
+                response.Message = "Agency details updated successfully.";
+                response.Succeeded = true;
+                return response;
+
+            }
+            else
+            {
+                response.Message = "Invalid Id.";
+                response.Succeeded = false;
+                return response;
+            }
+        }
+
+        public async Task<LpmAgencyMaster> GetAgencyById(long id)
+        {
+            return await _dbContext.lpmAgencyMasters.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<IEnumerable<LpmAgencyMaster>> GetAgencyList()
+        {
+            return await _dbContext.lpmAgencyMasters.ToListAsync();
+        }
     }
 }

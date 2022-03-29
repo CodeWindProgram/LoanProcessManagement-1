@@ -37,6 +37,8 @@ using LoanProcessManagement.Application.Features.Qualification.Commands.CreateQu
 using LoanProcessManagement.Application.Features.Qualification.Commands.UpdateQualification;
 using LoanProcessManagement.Application.Features.State.Commands.UpdateState;
 using LoanProcessManagement.Application.Features.State.Commands.CreateState;
+using LoanProcessManagement.Application.Features.Agency.Commands.CreateAgency;
+using LoanProcessManagement.Application.Features.Agency.Commands.UpdateAgency;
 
 namespace LoanProcessManagement.App.Controllers
 {
@@ -57,6 +59,7 @@ namespace LoanProcessManagement.App.Controllers
         private readonly ILeadStatusService _leadStatusService;
         private readonly IQualificationService _qualificationService;
         private readonly IStateService _stateService;
+        private readonly IAgencyService _agencyService;
 
 
 
@@ -78,7 +81,8 @@ namespace LoanProcessManagement.App.Controllers
             IInstitutionServices InstitutionServices,
             ILeadStatusService leadStatusService,
             IQualificationService qualificationService,
-            IStateService stateService)
+            IStateService stateService,
+            IAgencyService agencyService)
         {
             _userListService = userListService;
             _roleMasterService = roleMasterService;
@@ -94,6 +98,7 @@ namespace LoanProcessManagement.App.Controllers
             _leadStatusService = leadStatusService;
             _qualificationService = qualificationService;
             _stateService = stateService;
+            _agencyService = agencyService;
         }
 
 
@@ -246,6 +251,8 @@ namespace LoanProcessManagement.App.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet("/Master/GetRejectLeadReasonMaster")]
         public async Task<IActionResult> GetRejectLeadReasonMaster()
         {
             var roleMaster = await _rejectLeadReasonMasterService.GetByRejectLeadReason();
@@ -855,6 +862,74 @@ namespace LoanProcessManagement.App.Controllers
             if (ModelState.IsValid)
             {
                 var result = await _stateService.UpdateState(req);
+                return Json(result);
+            }
+            return View();
+
+        }
+
+
+        [HttpGet("/Master/GetAgencyList")]
+        public async Task<IActionResult> GetAgencyList()
+        {
+            var stat = await _agencyService.GetAgencyList();
+            return View(stat.Data);
+
+        }
+
+
+        [HttpGet("/Master/AddAgency")]
+
+        public async Task<IActionResult> AddAgency()
+        {
+
+            return View();
+        }
+
+        [HttpPost("/Master/AddAgency")]
+        public async Task<IActionResult> AddAgency(CreateAgencyCommand req)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var response = await _agencyService.AddAgency(req);
+
+                return Json(response);
+
+            }
+            return View();
+        }
+
+
+        [HttpGet("/Master/DeleteAgency/{id}")]
+        public async Task<IActionResult> DeleteAgency([FromRoute] long id)
+        {
+            var response = await _agencyService.DeleteAgency(id);
+            return Json(response);
+        }
+
+
+        [HttpGet("/Master/UpdateAgency/{id}")]
+        public async Task<IActionResult> UpdateAgency(long id)
+        {
+            var result = await _agencyService.GetAgencyById(id);
+            var res = new UpdateAgencyCommand()
+            {
+                Id = result.Data.Id,
+                AgencyName = result.Data.AgencyName,
+                Agency_type = result.Data.Agency_type,
+                IsActive = result.Data.IsActive,
+            };
+
+            return View(res);
+        }
+
+        [HttpPut("/Master/UpdateAgency/")]
+        public async Task<IActionResult> UpdateAgency(UpdateAgencyCommand req)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _agencyService.UpdateAgency(req);
                 return Json(result);
             }
             return View();

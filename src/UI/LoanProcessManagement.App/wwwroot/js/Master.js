@@ -2,7 +2,7 @@
 
 $(document).ready(function () {
     $('#selectVideo').change(function () {
-        if ($('#selectVideo').val() == 1) {
+              if ($('#selectVideo').val() == 1) {
             $("#div_dynamicTables").load("../Master/GetRoleMaster");
             //$.ajax({
             //    type: 'GET',
@@ -48,15 +48,19 @@ $(document).ready(function () {
             //    }
             //});
         }
+         else if ($('#selectVideo').val() == 2) {
+                  $("#div_dynamicTables").load("/Master/GetAllBranches");
+         }
+         else if ($('#selectVideo').val() == 3) {
+                  $("#div_dynamicTables").load("/Master/GetAgencyList");
+         }
         else if ($('#selectVideo').val() == 5) {
             $("#div_dynamicTables").load("../Master/GetLostLeadReasonMaster");
         }
         else if ($('#selectVideo').val() == 6) {
-            $("#div_dynamicTables").load("../Master/GetRejectLeadReasonMaster");
+                  $("#div_dynamicTables").load("/Master/GetRejectLeadReasonMaster");
         }
-        else if ($('#selectVideo').val() == 2) {
-            $("#div_dynamicTables").load("/Master/GetAllBranches");
-        }
+       
         else if ($('#selectVideo').val() == 7) {
             $("#div_dynamicTables").load("/Master/GetAllQueryType");
         }
@@ -73,7 +77,8 @@ $(document).ready(function () {
             $("#div_dynamicTables").load("/Master/GetAllLeadStatus");
         }
         else if ($('#selectVideo').val() == 12) {
-            $("#div_dynamicTables").load("/Master/GetAllQualification");
+           $("#div_dynamicTables").load("/Master/GetAllQualification");
+            
         }
         else if ($('#selectVideo').val() == 13) {
             $("#div_dynamicTables").load("/Master/GetAllState");
