@@ -1,7 +1,5 @@
-﻿
-
-@model IEnumerable<LoanProcessManagement.Application.Features.Qualification.Queries.GetQualificationList.GetQualificationListDto>
-<script src="~/js/Master.js"></script>.
+﻿@model IEnumerable<LoanProcessManagement.Application.Features.Qualification.Queries.GetQualificationList.GetQualificationListDto>
+<script src="~/js/Master.js"></script>
 <script src="~/js/jquery/jquery.dataTables.js"></script>
 @{
     //ViewData["Title"] = "GetRoleMaster";
@@ -20,7 +18,6 @@
 <div class="container app">
     <h5 class="ml-2 mt-3"><u><b> Qualification List</b></u></h5>
     <div id="div" class="col-lg-6 pt-4 pb-4">
-
         <button class="btn-default-submit float-left ml-1" id="act1">Add Qualification</button>
     </div>
     <hr />
@@ -31,15 +28,12 @@
                 <th>
                     Qualification Name
                 </th>
-               
-
                 <th>
                     isActive
                 </th>
                 <th hidden>
                     modified On
                 </th>
-
                 <th hidden>
                     Created date
                 </th>
@@ -52,12 +46,9 @@
         <tbody>
             @foreach (var item in Model)
             {
-
-
                 <tr>
 
                     <td> @Html.DisplayFor(modelItem => item.QualificationName)</td>
-                   
                     <td> @Html.DisplayFor(modelItem => item.IsActive)</td>
 
                     <td hidden> @Html.DisplayFor(modelItem => item.QualificationName)</td>

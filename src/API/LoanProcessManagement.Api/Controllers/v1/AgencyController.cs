@@ -63,7 +63,13 @@ namespace LoanProcessManagement.Api.Controllers.v1
             _logger.LogInformation("SubmitToAgency Completed");
             return Ok(dtos);
         }
-
+       
+        #region CRUD Of Agency - Dipti Pandhram - 29/03/2020
+        /// <summary>
+        /// CURD api's of Agency 
+        /// </summary>
+        /// <param name="req"></param>
+        /// <returns></returns>
         [HttpPost("CreateAgency")]
         public async Task<ActionResult> CreateAgency(CreateAgencyCommand req)
         {
@@ -109,7 +115,8 @@ namespace LoanProcessManagement.Api.Controllers.v1
             var dtos = await _mediator.Send(new GetAgencyListQuery());
             _logger.LogInformation("GetAgencyList Completed");
             return Ok(dtos);
-        }
+        } 
+        #endregion
 
 
 

@@ -245,6 +245,14 @@ namespace LoanProcessManagement.Persistence.Repositories
         }
 
         #endregion
+       
+        
+        #region Method for CRUD Agency -Dipti Pandhram- 28/03/2022
+        /// <summary>
+        /// CRUD of Agency
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
 
         public async Task<CreateAgencyDto> CreateAgencyCommand(LpmAgencyMaster request)
         {
@@ -330,6 +338,7 @@ namespace LoanProcessManagement.Persistence.Repositories
         public async Task<IEnumerable<LpmAgencyMaster>> GetAgencyList()
         {
             return await _dbContext.lpmAgencyMasters.ToListAsync();
-        }
+        } 
+        #endregion
     }
 }

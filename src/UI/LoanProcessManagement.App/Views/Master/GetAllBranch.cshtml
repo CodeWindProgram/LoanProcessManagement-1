@@ -18,8 +18,8 @@
 </style>
 
 <div class="container app">
-    <div id="div" class="col-lg-6 pt-4 pb-4">
-
+    <h5 class="ml-2 mt-3"><u><b>Branch List</b></u></h5>
+   <div id="div" class="col-lg-6 pt-4 pb-4">
         <button class="btn-default-submit float-left ml-1" id="act1">Add Branch</button>
     </div>
     <hr />
@@ -53,19 +53,19 @@
             {
 
 
-            <tr>
+                <tr>
 
-                <td> @Html.DisplayFor(modelItem => item.branchname)</td>
-                <td> @Html.DisplayFor(modelItem => item.IsActive)</td>
-                <td hidden> @Html.DisplayFor(modelItem => item.IsActive)</td>
-                <td hidden> @Html.DisplayFor(modelItem => item.IsActive)</td>
-           
-                <td>
-                    <button class="btn btn-primary btn-sm" onclick="loadPage(@Html.DisplayFor(modelItem => item.Id))" id="updateBtn">Update</button>
-                    <button class="btn btn-danger btn-sm" onclick="loadDelete(@Html.DisplayFor(modelItem => item.Id))" id="deleteBtn">Delete</button>
+                    <td> @Html.DisplayFor(modelItem => item.branchname)</td>
+                    <td> @Html.DisplayFor(modelItem => item.IsActive)</td>
+                    <td hidden> @Html.DisplayFor(modelItem => item.IsActive)</td>
+                    <td hidden> @Html.DisplayFor(modelItem => item.IsActive)</td>
 
-                </td>
-            </tr>
+                    <td>
+                        <button class="btn btn-primary btn-sm" onclick="loadPage(@Html.DisplayFor(modelItem => item.Id))" id="updateBtn">Update</button>
+                        <button class="btn btn-danger btn-sm" onclick="loadDelete(@Html.DisplayFor(modelItem => item.Id))" id="deleteBtn">Delete</button>
+
+                    </td>
+                </tr>
             }
 
         </tbody>
