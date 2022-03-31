@@ -16,45 +16,45 @@
     }
 </style>
 <div class="container app">
+    <h5 class="ml-2 mt-3"><u><b>Lost Lead Reason Master List</b></u></h5>
     <div id="div" class="col-lg-6 pt-4 pb-4">
-
-        <button class="btn-default-submit float-left ml-1" id="act1">Add New Lost Lead Reason</button>
+      <button class="btn-default-submit float-left ml-1" id="act1">Add New Lost Lead Reason</button>
     </div>
     <hr />
     <table id="tblUserList" class="display table table-responsive-lg">
         <thead>
             <tr>
-                
+
                 <th>
                     @Html.DisplayNameFor(model => model.LostLeadReason)
                 </th>
-                
+
                 <th>
                     @Html.DisplayNameFor(model => model.IsActive)
                 </th>
-                
+
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                
-                <td>
-                    @Html.DisplayFor(modelItem => item.LostLeadReason)
-                </td>
-                
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsActive)
-                </td>
-                <td>
-                    <button class="btn btn-primary btn-sm" onclick="loadPage(@Html.DisplayFor(modelItem => item.LostLeadReasonID))" id="updateBtn">Update</button>
-                    @Html.ActionLink("Delete", "DeleteLostLeadReason", "Master",
-                            new { id = item.LostLeadReasonID },
-                            new { onclick = "return confirm('Are you sure you want to delete ?');", @Class = "btn btn-danger btn-sm" })
-                </td>
-            </tr>
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LostLeadReason)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsActive)
+                    </td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" onclick="loadPage(@Html.DisplayFor(modelItem => item.LostLeadReasonID))" id="updateBtn">Update</button>
+                        @Html.ActionLink("Delete", "DeleteLostLeadReason", "Master",
+                                new { id = item.LostLeadReasonID },
+                                new { onclick = "return confirm('Are you sure you want to delete ?');", @Class = "btn btn-danger btn-sm" })
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

@@ -9,7 +9,7 @@
     <div class="col-sm-12 col-lg-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in ">
             <div style="border: 1px solid #343a40" class="border">
-                <h4>Add State</h4>
+                <h5 class="ml-2 mt-3"><u><b>Add State</b></u></h5>
                 <div class="panel-body">
                     <div class="border-part">
                         <form id="MyForm" method="post" enctype="multipart/form-data">
@@ -21,7 +21,7 @@
                                     <div class="col-lg-4 col-sm-12 ">
                                         <label asp-for="StateName" class="control-label">State Name<span style="color: Red">&nbsp;*</span></label>
 
-                                        <input asp-for="StateName" class="form-control" maxlength="50" placeholder="Enter State Name" onkeydown="return /[a-z ]/i.test(event.key)"/>
+                                        <input asp-for="StateName" class="form-control" maxlength="50" placeholder="Enter State Name" onkeydown="return /[a-z ]/i.test(event.key)" />
                                         <span asp-validation-for="StateName" class="text-danger"></span>
                                     </div>
 
@@ -31,7 +31,7 @@
                             <div class="form-group">
                                 <div class="d-flex justify-content-center">
                                     <div class="mr-2"><input type="submit" id="submit" style="background-color: #343a40;color:white" class="btn" value="Add" /></div>
-                                    <div><a onclick="loadPage()" id="btn2" type="button" value="Cancel" class="btn btn-danger">Cancel</a></div>
+                                    <div><a onclick="loadPage()" id="btn2" value="Cancel" class="btn btn-danger">Cancel</a></div>
                                 </div>
                             </div>
 

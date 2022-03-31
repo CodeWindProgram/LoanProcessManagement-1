@@ -9,7 +9,7 @@
     <div class="col-sm-12 col-lg-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in ">
             <div style="border: 1px solid #343a40" class="border">
-                <h4>Add Agency</h4>
+                <h5 class="ml-2 mt-3"><u><b>Add Agency</b></u></h5>
                 <div class="panel-body">
                     <div class="border-part">
                         <form id="MyForm" method="post" enctype="multipart/form-data">
@@ -31,7 +31,7 @@
                                             <option value="V">V</option>
                                             <option value="F">F</option>
                                             <option value="L">L</option>
-                                         </select>           
+                                        </select>
                                         <span asp-validation-for="Agency_type" class="text-danger"></span>
                                     </div>
 
@@ -41,7 +41,7 @@
                             <div class="form-group">
                                 <div class="d-flex justify-content-center">
                                     <div class="mr-2"><input type="submit" id="submit" style="background-color: #343a40;color:white" class="btn" value="Add" /></div>
-                                    <div><a onclick="loadPage()" id="btn2" type="button" value="Cancel" class="btn btn-danger">Cancel</a></div>
+                                    <div><a onclick="loadPage()" id="btn2" value="Cancel" class="btn btn-danger">Cancel</a></div>
                                 </div>
                             </div>
 

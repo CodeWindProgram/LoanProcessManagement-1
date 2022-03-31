@@ -18,6 +18,7 @@
 </style>
 
 <div class="container app">
+    <h5 class="ml-2 mt-3"><u><b>Query Type List</b></u></h5>
     <div id="div" class="col-lg-6 pt-4 pb-4">
 
         <button class="btn-default-submit float-left ml-1" id="act1">Add Query</button>
@@ -26,7 +27,7 @@
     <table id="tblUserList" class="display table table-responsive-lg">
         <thead>
             <tr>
-               
+
                 <th>
 
                     Query Type
@@ -57,21 +58,21 @@
             {
 
 
-            <tr>
+                <tr>
 
-                <td> @Html.DisplayFor(modelItem => item.QueryType)</td>
-                <td> @Html.DisplayFor(modelItem => item.QueryName)</td>
-                <td> @Html.DisplayFor(modelItem => item.IsActive)</td>
+                    <td> @Html.DisplayFor(modelItem => item.QueryType)</td>
+                    <td> @Html.DisplayFor(modelItem => item.QueryName)</td>
+                    <td> @Html.DisplayFor(modelItem => item.IsActive)</td>
 
-                <td hidden> @Html.DisplayFor(modelItem => item.IsActive)</td>
-                <td hidden> @Html.DisplayFor(modelItem => item.IsActive)</td>
-         
-                <td>
-                    <button class="btn btn-primary btn-sm" onclick="loadPage(@Html.DisplayFor(modelItem => item.Id))" id="updateBtn">Update</button>
-                    <button class="btn btn-danger btn-sm" onclick="loadDelete(@Html.DisplayFor(modelItem => item.Id))" id="deleteBtn">Delete</button>
+                    <td hidden> @Html.DisplayFor(modelItem => item.IsActive)</td>
+                    <td hidden> @Html.DisplayFor(modelItem => item.IsActive)</td>
 
-                </td>
-            </tr>
+                    <td>
+                        <button class="btn btn-primary btn-sm" onclick="loadPage(@Html.DisplayFor(modelItem => item.Id))" id="updateBtn">Update</button>
+                        <button class="btn btn-danger btn-sm" onclick="loadDelete(@Html.DisplayFor(modelItem => item.Id))" id="deleteBtn">Delete</button>
+
+                    </td>
+                </tr>
             }
 
         </tbody>
