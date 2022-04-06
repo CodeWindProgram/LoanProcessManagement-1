@@ -27,6 +27,7 @@ namespace LoanProcessManagement.App.Models
         [DisplayName("Type of File")]
         public string FileType { get; set; }
         [DisplayName("Institution Name")]
+        public string InstitutionName { get; set; }
         public long Institution_Id { get; set; }
         [DisplayName("Document Type")]
         public string DocumentType { get; set; }

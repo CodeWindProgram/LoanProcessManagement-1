@@ -32,7 +32,6 @@ namespace LoanProcessManagement.Persistence.Repositories
                 LgId = long.Parse(splits[1]);
             }
             
-            // var userDetails = await _dbContext.LpmLeadMasters.Where(x => x.FormNo == data.FormNo).FirstOrDefaultAsync();
             var results = from a in _dbContext.LpmLeadMasters
                           join b in _dbContext.LpmLeadProcessCycles
                           on a.Id equals b.lead_Id
@@ -90,7 +89,7 @@ namespace LoanProcessManagement.Persistence.Repositories
             var UserEmail = "";
             if (data.MailTypeId == 2)
             {
-                details = templates.Where(x => x.TemplateTypeId == 2).FirstOrDefault();
+                details = templates.FirstOrDefault(x => x.TemplateTypeId == 2);
 
                 details.Body = details.Body.Replace("{0}", result.Name);
                 details.Body = details.Body.Replace("{1}", result.FormNo);
@@ -98,13 +97,13 @@ namespace LoanProcessManagement.Persistence.Repositories
             }
             else if (data.MailTypeId == 1)
             {
-                details = templates.Where(x => x.TemplateTypeId == 1).FirstOrDefault();
+                details = templates.FirstOrDefault(x => x.TemplateTypeId == 1);
                 details.Body = details.Body.Replace("{0}", result.Name);
                 details.Body = details.Body.Replace("{1}", result.FormNo);
             }
             else if (data.MailTypeId == 3)
             {
-                details = templates.Where(x => x.TemplateTypeId == 3).FirstOrDefault();
+                details = templates.FirstOrDefault(x => x.TemplateTypeId == 3);
 
                 details.Body = details.Body.Replace("{0}", result.Name);
                 details.Body = details.Body.Replace("{1}", result.FormNo);
@@ -112,22 +111,22 @@ namespace LoanProcessManagement.Persistence.Repositories
             }
             else if (data.MailTypeId == 4)
             {
-                details = templates.Where(x => x.TemplateTypeId == 4).FirstOrDefault();
+                details = templates.FirstOrDefault(x => x.TemplateTypeId == 4);
                 details.Body = details.Body.Replace("{0}", result.Name);
                 details.Body = details.Body.Replace("{1}", result.FormNo);
             }
             else if (data.MailTypeId == 5)
             {
                 var Names = _dbContext.LpmUserMasters.Where(x => x.Id == LgId).FirstOrDefault();
-                details = templates.Where(x => x.TemplateTypeId == 5).FirstOrDefault();
+                details = templates.FirstOrDefault(x => x.TemplateTypeId == 5);
                 UserEmail = Names.Email;
                 details.Body = details.Body.Replace("{0}", Names.Name);
 
             }
             else if (data.MailTypeId == 6)
             {
-                var Names = _dbContext.LpmUserMasters.Where(x => x.Id == LgId).FirstOrDefault();
-                details = templates.Where(x => x.TemplateTypeId == 6).FirstOrDefault();
+                var Names = await _dbContext.LpmUserMasters.Where(x => x.Id == LgId).FirstOrDefaultAsync();
+                details = templates.FirstOrDefault(x => x.TemplateTypeId == 6);
                 UserEmail = Names.Email;
                 details.Body = details.Body.Replace("{0}", Names.Name);
 
@@ -142,7 +141,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                     Body = details.Body
                 };
                 var email = _emailService.SendEmail(SendEmail);
-                if (email.Result == true)
+                if (email.Result)
                 {
                     return true;
                 }
@@ -161,7 +160,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                     Body = details.Body
                 };
                 var email = _emailService.SendEmail(SendEmail);
-                if (email.Result == true)
+                if (email.Result)
                 {
                     return true;
                 }

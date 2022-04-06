@@ -16,21 +16,14 @@ namespace LoanProcessManagement.Persistence.Repositories
 {
     public class PropertyDetailsRepository : IPropertyDetailsRepository
     {
-
-        private readonly IMapper _mapper;
         protected readonly ApplicationDbContext _dbContext;
         private readonly ILogger<PropertyDetailsRepository> _logger;
-        private readonly JwtSettings _jwtSettings;
-        public PropertyDetailsRepository(IMapper mapper,
+        public PropertyDetailsRepository(
             ApplicationDbContext dbContext,
-            IOptions<JwtSettings> jwtSettings,
             ILogger<PropertyDetailsRepository> logger)
         {
-            _mapper = mapper;
             _dbContext = dbContext;
-            _logger = logger;
-            _jwtSettings = jwtSettings.Value;
-            
+            _logger = logger;            
         }
         #region This method will send response to IPropertyDetailsRepository methods. by - Ramya Guduru - 12/11/2021
         /// <summary>
@@ -69,15 +62,15 @@ namespace LoanProcessManagement.Persistence.Repositories
                 
                 return response;
             }
-            _logger.LogInformation("GetPropertyAsync With Events completed");
+
         }
 
         public async Task<LpmLeadMaster> GetPropertyAsync(string lead_Id)
         {
             _logger.LogInformation("GetPropertyAsync With Events Initiated");
             var user = await _dbContext.LpmLeadMasters.Where(x => x.lead_Id == lead_Id).FirstOrDefaultAsync();
-            return user;
             _logger.LogInformation("GetPropertyAsync With Events completed");
+            return user;
         }
         #endregion
     }

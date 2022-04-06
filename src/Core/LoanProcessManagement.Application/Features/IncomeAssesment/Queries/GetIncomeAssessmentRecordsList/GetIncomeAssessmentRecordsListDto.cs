@@ -16,6 +16,7 @@ namespace LoanProcessManagement.Application.Features.IncomeAssesment.Queries.Get
         public string EmployerName5 { get; set; }
         public string FileType { get; set; }
         public long Institution_Id { get; set; }
+        public string InstitutionName { get; set; }
         public string DocumentType { get; set; }
         public bool IsActive { get; set; }
         public string Message { get; set; }

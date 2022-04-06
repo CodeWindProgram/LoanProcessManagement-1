@@ -3,27 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "LeadHistory";
 }
-@*<style>
-    /*.panel-heading {
-        color: white;
-        background-color: #343a40;
-        border-bottom: 1px solid rgba(0,0,0,.125);
-        padding: 0.75rem 1.25rem;
-        position: relative;
-        border-top-left-radius: 0.25rem;
-        border-top-right-radius: 0.25rem;
-    }
-    
-    .btn:hover {
-        background-color: #adb5bd;
-        color: black;
-        margin-bottom: 5px;
-    }
-    .selected {
-        background: #adb5bd;
-        color: #FFF;
-    }*/
-</style>*@
+
 <div class="container app">
     <div class="col-sm-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
@@ -43,9 +23,6 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.StartDate)
                                 </th>
-                                @*<th>
-                                    @Html.DisplayNameFor(model => model.EndDate)
-                                </th>*@
                                 <th>
                                     @Html.DisplayNameFor(model => model.Description)
                                 </th>
@@ -73,9 +50,6 @@
                                         }
                                         @date[0]
                                     </td>
-                                    @*<td>
-                                        @Html.DisplayFor(modelItem => item.EndDate)
-                                    </td>*@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Description)
                                     </td>
@@ -97,14 +71,6 @@
         </div>
         @await Html.PartialAsync("~/Views/Shared/_Tabs.cshtml", (string)@ViewBag.lead_Id)
 
-        @*<div class="d-flex flex-row justify-content-around">
-            <a class="btn " asp-controller="LeadList" asp-action="LeadSummary">Summary</a>
-            <a class="btn " asp-controller="LeadList" asp-action="LeadModification" target="_blank">Modification</a>
-            <a class="btn selected" asp-controller="LeadList" asp-action="LeadHistory" target="_blank">History</a>
-            <a class="btn " asp-controller="ProductsList" asp-action="AllProductsList" target="_blank">Products</a>
-            <a class="btn " asp-controller="Login" asp-action="UpdatePropertyDetails" target="_blank">Property Details</a>
-
-        </div>*@
     </div>
 </div>
 <script>

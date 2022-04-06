@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace LoanProcessManagement.App.Controllers
 {
-    //[Route("[controller]/[action]")]
     [Authorize(AuthenticationSchemes = "Cookies")]
     public class LeadITRDetailsController : Controller
     {
@@ -88,35 +87,7 @@ namespace LoanProcessManagement.App.Controllers
                     return View("LeadITRDetailsFreeze", applicantResult);
                 }
 
-            }
-
-
-            //var result = await _leadITRDetails.GetLeadITRDetails(lead_Id, applicantType);
-
-            //var applicantResult = new LeadITRDetailsVm()
-            //{
-            //    lead_Id = lead_Id,
-            //    ApplicantType = applicantType,
-            //    FormNo = result.Data.FormNo,
-            //    CustomerName = result.Data.CustomerName,
-            //    CustomerEmail = result.Data.CustomerEmail,
-            //    CustomerPhone = result.Data.CustomerPhone,
-            //    EmploymentType = result.Data.EmploymentType,
-            //    UserName = result.Data.UserName,
-            //    PanCardNo = result.Data.PanCardNo,
-            //    Consent = result.Data.Consent,
-            //    IsSuccess = result.Data.IsSuccess,
-            //    Succeeded = result.Data.Succeeded
-            //};
-
-            //if (result.Data.Succeeded)
-            //{
-            //    return View(applicantResult);
-            //}
-            //else
-            //{
-            //    return View("LeadITRDetailsFreeze", applicantResult);
-            //}
+            }            
         }
         #endregion
 
@@ -139,8 +110,6 @@ namespace LoanProcessManagement.App.Controllers
                 TempData["leadItrIsSuccess"] = true;
                 TempData["leadItrMessage"] = response.Data.Message;
             }
-            //var temp = "Lead_" + leadITRDetailsVm.lead_Id;
-            //return RedirectToAction("LeadSummary", "LeadList", new { lead_Id = temp });
             var appType = leadITRDetailsVm.ApplicantType;
             var lead_Id = leadITRDetailsVm.lead_Id;
             return RedirectToAction("Index", new { lead_Id = lead_Id, applicantType = appType});

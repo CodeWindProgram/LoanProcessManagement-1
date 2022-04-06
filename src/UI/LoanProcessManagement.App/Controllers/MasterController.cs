@@ -45,14 +45,14 @@ namespace LoanProcessManagement.App.Controllers
     [Authorize(AuthenticationSchemes = "Cookies")]
     public class MasterController : Controller
     {
-        private IUserListService _userListService;
-        private IRoleMasterService _roleMasterService;
+        private readonly IUserListService _userListService;
+        private readonly IRoleMasterService _roleMasterService;
         private readonly ICommonServices _commonService;
         private readonly IBranchService _branchService;
         private readonly IQueryTypeService _queryTypeService;
         private readonly ILpmCategoryServices _lpmCategoryServices;
-        private ILostLeadReasonMasterService _lostLeadReasonMasterService;
-        private IRejectLeadReasonMasterService _rejectLeadReasonMasterService;
+        private readonly ILostLeadReasonMasterService _lostLeadReasonMasterService;
+        private readonly IRejectLeadReasonMasterService _rejectLeadReasonMasterService;
         private readonly ISchemeService _schemeService;
         private readonly IProductService _productService;
         private readonly IInstitutionServices _institutionServices;
@@ -103,7 +103,7 @@ namespace LoanProcessManagement.App.Controllers
 
 
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
 
             return View();
@@ -121,9 +121,8 @@ namespace LoanProcessManagement.App.Controllers
 
 
         [HttpGet("/Master/AddRole")]
-        public async Task<IActionResult> AddRole()
+        public IActionResult AddRole()
         {
-
             return View();
         }
 
@@ -133,7 +132,7 @@ namespace LoanProcessManagement.App.Controllers
         public async Task<IActionResult> AddRole(CreateRoleMasterCommand createRoleMasterCommand)
         {
 
-            var response = await _roleMasterService.CreateRoleMaster(createRoleMasterCommand);
+            await _roleMasterService.CreateRoleMaster(createRoleMasterCommand);
 
             return RedirectToAction("Index");
         }
@@ -169,7 +168,7 @@ namespace LoanProcessManagement.App.Controllers
 
         public async Task<IActionResult> DeleteRole([FromRoute] long Id)
         {
-            var response = await _roleMasterService.DeleteRoleMaster(Id);
+            await _roleMasterService.DeleteRoleMaster(Id);
             return RedirectToAction("Index");
         }
 
@@ -184,16 +183,14 @@ namespace LoanProcessManagement.App.Controllers
         }
 
         [HttpGet("/Master/AddLostLeadReason")]
-        public async Task<IActionResult> AddLostLeadReason()
+        public IActionResult AddLostLeadReason()
         {
             return View();
         }
         [HttpPost("/Master/AddLostLeadReason")]
         public async Task<IActionResult> AddLostLeadReason(CreateLostLeadReasonMasterCommand createLostLeadReasonMasterCommand)
         {
-
-            var response = await _lostLeadReasonMasterService.CreateLostLeadReasonMaster(createLostLeadReasonMasterCommand);
-
+            await _lostLeadReasonMasterService.CreateLostLeadReasonMaster(createLostLeadReasonMasterCommand);
             return RedirectToAction("Index");
         }
 
@@ -225,7 +222,7 @@ namespace LoanProcessManagement.App.Controllers
         }
         public async Task<IActionResult> DeleteLostLeadReason([FromRoute] long Id)
         {
-            var response = await _lostLeadReasonMasterService.DeleteLostLeadReasonMaster(Id);
+            await _lostLeadReasonMasterService.DeleteLostLeadReasonMaster(Id);
             return RedirectToAction("Index");
 
         }
@@ -239,7 +236,7 @@ namespace LoanProcessManagement.App.Controllers
             return View(data);
         }
         [HttpGet("/Master/AddRejectLeadReason")]
-        public async Task<IActionResult> AddRejectLeadReason()
+        public IActionResult AddRejectLeadReason()
         {
             return View();
         }
@@ -247,7 +244,7 @@ namespace LoanProcessManagement.App.Controllers
         public async Task<IActionResult> AddRejectLeadReason(CreateRejectedLeadReasonMasterCommand createRejectLeadReasonMasterCommand)
         {
 
-            var response = await _rejectLeadReasonMasterService.CreateRejectLeadReasonMaster(createRejectLeadReasonMasterCommand);
+            await _rejectLeadReasonMasterService.CreateRejectLeadReasonMaster(createRejectLeadReasonMasterCommand);
 
             return RedirectToAction("Index");
         }
@@ -263,23 +260,13 @@ namespace LoanProcessManagement.App.Controllers
 
         public async Task<IActionResult> DeleteRejectLeadReason([FromRoute] long Id)
         {
-            var response = await _rejectLeadReasonMasterService.DeleteRejectLeadReasonMaster(Id);
+            await _rejectLeadReasonMasterService.DeleteRejectLeadReasonMaster(Id);
             return RedirectToAction("Index");
 
         }
 
-        [HttpGet]
-        public IActionResult UpdateRejectLeadReason([FromRoute] long id)
-        {
-            var Roledata = _rejectLeadReasonMasterService.GetRejectLeadReasonMasterByIdAsync(id);
-            ViewData["data"] = Roledata;
-            ViewData["lastDate"] = Roledata.LastModifiedDate;
-
-            return View();
-        }
-
         [HttpGet("/Master/AddBranch")]
-        public async Task<IActionResult> AddBranch()
+        public IActionResult AddBranch()
         {
             return View();
         }
@@ -290,8 +277,6 @@ namespace LoanProcessManagement.App.Controllers
             if (ModelState.IsValid)
             {
                 var response = await _branchService.AddBranch(req);
-                //TempData["AddUserSuccess"] = response.Succeeded;
-                //TempData["AddUserMessage"] = response.Data.Message;
                 return Json(response);
 
             }
@@ -340,9 +325,9 @@ namespace LoanProcessManagement.App.Controllers
             return View(queries.Data);
         }
 
-        
+
         [HttpGet("/Master/AddQueryType")]
-        public async Task<IActionResult> AddQueryType()
+        public IActionResult AddQueryType()
         {
             return View();
         }
@@ -392,6 +377,16 @@ namespace LoanProcessManagement.App.Controllers
          
         }
 
+        [HttpGet]
+        public IActionResult UpdateRejectLeadReason([FromRoute] long id)
+        {
+            var Roledata = _rejectLeadReasonMasterService.GetRejectLeadReasonMasterByIdAsync(id);
+            ViewData["data"] = Roledata;
+            ViewData["lastDate"] = Roledata.LastModifiedDate;
+
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> UpdateRejectLeadReason([FromRoute] long id, UpdateRejectLeadReasonMasterVm roleMasterVm)
         {
@@ -415,9 +410,9 @@ namespace LoanProcessManagement.App.Controllers
             var categories = await _lpmCategoryServices.GetAllLpmCategories();
             return View(categories.Data);
         }
-        
+
         [HttpGet("/Master/AddLpmCategory")]
-        public async Task<IActionResult> AddCategory()
+        public IActionResult AddCategory()
         {
             return View();
         }
@@ -475,7 +470,7 @@ namespace LoanProcessManagement.App.Controllers
 
 
         [HttpGet("/Master/AddScheme")]
-        public async Task<IActionResult> AddScheme()
+        public IActionResult AddScheme()
         {
             return View();
         }
@@ -539,9 +534,8 @@ namespace LoanProcessManagement.App.Controllers
         }
 
         [HttpGet("/Master/AddInstitutionMaster")]
-        public async Task<IActionResult> AddInstitutionMaster()
+        public IActionResult AddInstitutionMaster()
         {
-
             return View();
         }
 
@@ -609,9 +603,8 @@ namespace LoanProcessManagement.App.Controllers
         }
         [HttpGet("/Master/AddLeadStatus")]
 
-        public async Task<IActionResult> AddLeadStatus()
+        public IActionResult AddLeadStatus()
         {
-
             return View();
         }
 
@@ -745,7 +738,7 @@ namespace LoanProcessManagement.App.Controllers
         }
 
         [HttpGet("/Master/AddQualification")]
-        public async Task<IActionResult> AddQualification()
+        public IActionResult AddQualification()
         {
 
             return View();
@@ -812,9 +805,8 @@ namespace LoanProcessManagement.App.Controllers
 
 
         [HttpGet("/Master/AddState")]
-        public async Task<IActionResult> AddState()
+        public IActionResult AddState()
         {
-
             return View();
         }
 
@@ -880,7 +872,7 @@ namespace LoanProcessManagement.App.Controllers
 
         [HttpGet("/Master/AddAgency")]
 
-        public async Task<IActionResult> AddAgency()
+        public IActionResult AddAgency()
         {
 
             return View();

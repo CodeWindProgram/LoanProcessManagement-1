@@ -1,9 +1,6 @@
-﻿@*@using LoanProcessManagement.Application.Features.RoleMaster.Queries.GetRoleMaster;*@
-@model LoanProcessManagement.Application.Features.Branch.Commands.UpdateBranch.UpdateBranchCommand
+﻿@model LoanProcessManagement.Application.Features.Branch.Commands.UpdateBranch.UpdateBranchCommand
 @{
-
-    //var record = (GetRoleMasterByIdDto)ViewData["data"];
-
+    ViewData["Title"] = "UpdateBranch";
 }
 
 
@@ -27,7 +24,7 @@
                             <div class="form-group">
                                 <div class="row pl-5">
 
-           
+
                                     <input type="hidden" asp-for="Id" />
 
                                     <div class="col-lg-4 col-sm-12">
@@ -63,26 +60,7 @@
     </div>
 </div>
 <script>
-    //$(document).ready(function () {
-    //    var check = $('#myCheckbox').val();
-    //    console.log(check)
-    //    var ch = check.toString();
-    //console.log(ch);
-    //    console.log(check);
-    //    if (check != "true") {
-    //    console.log("Unchecked");
-    //    $('#myCheckbox').prop('checked', false);
-    //    }
-    //    else if (check == "true") {
-    //    console.log("checked");
-    //        $('#myCheckbox').prop('checked', true);
-    //    }
-    //});
 
-
-    //function BtnClick() {
-    //    $('#myCheckbox').prop('checked', true);
-    //}
     function loadPage() {
 
         $("#div_dynamicTables").load("/Master/GetAllBranches");
@@ -103,7 +81,7 @@
                     toastr.error(result.data.message);
 
                 }
-              
+
             }
         });
         e.preventDefault();

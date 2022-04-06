@@ -137,8 +137,6 @@ namespace LoanProcessManagement.Persistence.Repositories
 
                 return response;
             }
-
-            //return response;
         }
         #endregion
     }

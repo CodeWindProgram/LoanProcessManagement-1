@@ -17,19 +17,6 @@ namespace LoanProcessManagement.Persistence.Configurations
                 .WithMany(b => b.LpmLeadApplicantsDetails)
                 .HasForeignKey(b => b.lead_Id)
                 .OnDelete(DeleteBehavior.Cascade);
-
-            //builder
-            //    .Property(b => b.isItrRequired)
-            //    .HasDefaultValue(true);
-            //builder
-            //  .Property(b => b.isCibilCheckRequired)
-            //  .HasDefaultValue(true);
-            //builder
-            //  .Property(b => b.isGstRequired)
-            //  .HasDefaultValue(true);
-            //builder
-            //  .Property(b => b.isPerfiosRequired)
-            //  .HasDefaultValue(true);
         }
     }
 }

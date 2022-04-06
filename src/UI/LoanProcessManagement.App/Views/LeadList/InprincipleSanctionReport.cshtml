@@ -38,11 +38,7 @@ var Records = (List<ProcessModel>)ViewData["Report"];
                                                 <th class="no-sort">Loan Amount</th>
                                                 <th>Submission Date</th>
                                                 <th class="no-sort">Query Count</th>
-                                                @*<th hidden>Ageing HO</th>
-                                                <th hidden>Ageing Branch</th>*@
                                                 <th>Status</th>
-                                                @*<th style="display:none">Processing Officer Name</th>
-                                                <th style="display:none">Sanctioning Officer Name</th>*@
 
                                             </tr>
                                         </thead>
@@ -64,11 +60,7 @@ var Records = (List<ProcessModel>)ViewData["Report"];
                                                 <td>₹  @loanAmt</td>
                                                 <td>@temp1[0]</td>
                                                 <td>@record.QueryCount</td>
-                                                @*<td hidden>0</td>
-                                                <td hidden>0</td>*@
                                                 <td>@record.QueryStatus</td>
-                                                @*<td style="display:none">No One</td>
-                                                <td style="display:none">No One</td>*@
                                                     </tr>
                                             }
 

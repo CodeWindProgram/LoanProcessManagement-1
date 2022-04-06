@@ -15,16 +15,9 @@
         border-top-right-radius: 0.25rem;
     }
 
-    /*.btn {
-        background-color: #343a40;
-        color: white;
-        margin-bottom: 5px;
-    }*/
-
     .btn:hover {
         background-color: #adb5bd;
         color: black;
-        /*margin-bottom: 5px;*/
     }
 
     .selected {
@@ -43,32 +36,7 @@
 
 <div class="container app">
     <div class="col-sm-12">
-        @*<div>
-            <div class="row">
-                <div class="col-3">
-                    <label>Credit Report</label><span style="color: Red">&nbsp;*</span>
-                </div>
-            </div>
-        
-        <div class="form-group">
-            <div class="row">
-                <div class="col-5">
-                    <div id="divBranch" class="input-control text">
-                        <select id="enquiryVal" class="form-control">
-                            <option value="choice">Select</option>
-                            <option value="cibil" id="cibil">Cibil Enquiry Details</option>
-                            <option value="gst" id="gst">GST Enquiry Details</option>
-                            <option value="itr" id="itr">ITR Enquiry Details</option>
-                        </select>
-                    </div>
-                </div>
 
-                <div class="col-3">
-                    <input type="button" asp-action="" class="btn btn-primary  btn-md" onclick="myfun()" value="Submit" id="btnSubmit">
-                </div>
-            </div>
-        </div>
-</div>*@
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
             <div class="panel-heading"><h5>Credit Report</h5></div>
             
@@ -149,10 +117,6 @@
                                     }
                                     @date[0]
                                 </td>
-                                @*<td>
-            @Html.DisplayFor(modelItem => item.FormNo)
-        </td>*@
-
                             </tr>
 
                             }
@@ -161,7 +125,6 @@
                 </div>
             </div>
         </div>
-        @*@await Html.PartialAsync("~/Views/Shared/_Tabs.cshtml", (string)@ViewBag.lead_Id)*@
     </div>
 </div>
 <script>
@@ -182,28 +145,9 @@
         });
     });
 
-    //$(document).ready(function () {
-    //    $('#enquiryVal').on('change', function () {
-    //        if (this.value == 'itr') {
-    //            setTimeout(function () {
-    //                location.href = "/CreditITRDetailsList";
-    //            }, 500);
-    //        }
-    //    });
-    //});
-    //$(document).ready(function () {
-    //    $('#enquiryVal').on('change', function () {
-    //        if (this.value == 'cibil') {
-    //            setTimeout(function () {
-    //                location.href = "/CreditCibilDetailsList";
-    //            }, 500);
-    //        }
-    //    });
-    //});
-
     $(document).ready(function () {
         $("#btnSubmit").click(function () {
-            //alert('hello'); 
+
             if ($("#enquiryVal").val() == "itr") {
                 setTimeout(function () {
                     location.href = "/CreditITRDetailsList";

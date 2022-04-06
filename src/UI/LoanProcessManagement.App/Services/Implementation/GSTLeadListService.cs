@@ -17,8 +17,8 @@ namespace LoanProcessManagement.App.Services.Implementation
     {
 
         private string BaseUrl = "";
-        private IHttpClientFactory clientfact;
-        IOptions<APIConfiguration> _apiDetails;
+        private readonly IHttpClientFactory clientfact;
+        readonly IOptions<APIConfiguration> _apiDetails;
 
 
         public GSTLeadListService(IHttpClientFactory client, IOptions<APIConfiguration> apiDetails)
@@ -35,7 +35,7 @@ namespace LoanProcessManagement.App.Services.Implementation
         /// <returns>Response</returns>
         public async Task<Response<IEnumerable<GetGSTLeadListQueryVm>>> GSTLeadListingProcess(long BranchID)
         {
-            //throw new NotImplementedException();
+
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
             var content = JsonConvert.SerializeObject(BranchID);

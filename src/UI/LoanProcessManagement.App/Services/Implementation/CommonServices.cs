@@ -24,8 +24,8 @@ namespace LoanProcessManagement.App.Services.Implementation
     public class CommonServices : ICommonServices
     {
         private string BaseUrl = "";
-        private IHttpClientFactory clientfact;
-        IOptions<APIConfiguration> _apiDetails;
+        private readonly IHttpClientFactory clientfact;
+        readonly IOptions<APIConfiguration> _apiDetails;
 
         public CommonServices(IHttpClientFactory client, IOptions<APIConfiguration> apiDetails)
         {

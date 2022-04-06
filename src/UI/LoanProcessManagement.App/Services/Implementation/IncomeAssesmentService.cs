@@ -23,8 +23,8 @@ namespace LoanProcessManagement.App.Services.Implementation
     public class IncomeAssesmentService : IIncomeAssesmentService
     {
         private string BaseUrl = "";
-        private IHttpClientFactory clientfact;
-        IOptions<APIConfiguration> _apiDetails;
+        private readonly IHttpClientFactory clientfact;
+        readonly IOptions<APIConfiguration> _apiDetails;
 
         public IncomeAssesmentService(IHttpClientFactory client, IOptions<APIConfiguration> apiDetails)
         {
@@ -40,7 +40,7 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             var httpResponse = await _client.GetAsync
                 (
-                    BaseUrl + APIEndpoints.AddEnquiry + applicantType + "/" + lead_Id 
+                    $"{BaseUrl}{APIEndpoints.AddEnquiry}{applicantType}/{lead_Id}"
                 );
 
             var jsonString = httpResponse.Content.ReadAsStringAsync().Result;

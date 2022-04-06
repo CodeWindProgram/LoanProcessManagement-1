@@ -21,7 +21,7 @@ namespace LoanProcessManagement.App.Controllers
     {
         private readonly IIncomeAssesmentService _incomeAssesmentService;
         private readonly IInstitutionServices _institutionServices;
-        private IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
 
         public IncomeAssesmentController(IIncomeAssesmentService incomeAssesmentService,
             IInstitutionServices InstitutionServices,
@@ -48,11 +48,11 @@ namespace LoanProcessManagement.App.Controllers
             gstFileSaveVm.gstAddEnquiryCommandDto = AddEnquiryServiceResponse.Data;
             var newws = gstFileSaveVm.gstAddEnquiryCommandDto.ID;
             var submitted = await _incomeAssesmentService.GetIsSubmit(newws);
-            if (gstFileSaveVm != null)
+            if (gstFileSaveVm.gstAddEnquiryCommandDto != null)
             {
                 ViewBag.LeadId = "Lead_" + lead_Id;
                 ViewBag.incomeTypeNo = applicantType;
-                if(submitted.Data.IsSubmit == true) { return View("FreezedCreateEnquiry",gstFileSaveVm);}
+                if(submitted.Data.IsSubmit) { return View("FreezedCreateEnquiry",gstFileSaveVm);}
                 return View(gstFileSaveVm);
             }
             return View("Error");
@@ -61,24 +61,17 @@ namespace LoanProcessManagement.App.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateEnquiry(GstFileSaveVM gstFileSaveVM)
         {
-            var message = "";
+            
             var basedirectory = Directory.GetCurrentDirectory();
-            var excelfileExtension = System.IO.Path.GetExtension(gstFileSaveVM.IExcel.FileName);
-            var pdffileExtension = System.IO.Path.GetExtension(gstFileSaveVM.IPdf.FileName);
+            var excelfileExtension = Path.GetExtension(gstFileSaveVM.IExcel.FileName);
+            var pdffileExtension = Path.GetExtension(gstFileSaveVM.IPdf.FileName);
             var newFileNameExcel = DateTime.Now.ToString("ddMMyyyyhhmmss_") + gstFileSaveVM.gstAddEnquiryCommandDto.FormNo + excelfileExtension;
             var newFileNamePdf = DateTime.Now.ToString("ddMMyyyyhhmmss_") + gstFileSaveVM.gstAddEnquiryCommandDto.FormNo + pdffileExtension;
 
-            //var dirPath = Path.GetFullPath(Path.Combine(basedirectory, @"..\..\API\\LoanProcessManagement.Api\\Uploadfiles\\GSTfiles\\" + gstFileSaveVM.gstAddEnquiryCommandDto.FormNo));
-            //if (dirPath != null)
-            //{
-            //    System.IO.Directory.CreateDirectory(Path.Combine(basedirectory, @"..\..\API\\LoanProcessManagement.Api\\Uploadfiles\\GSTfiles\\" + gstFileSaveVM.gstAddEnquiryCommandDto.FormNo));
-            //}
-            //var filePathExc = Path.Combine(basedirectory, @"..\..\API\\LoanProcessManagement.Api\\Uploadfiles\\GSTfiles\\" + gstFileSaveVM.gstAddEnquiryCommandDto.FormNo, newFileNameExcel);
-            //var filePathPdf = Path.Combine(basedirectory, @"..\..\API\\LoanProcessManagement.Api\\Uploadfiles\\GSTfiles\\" + gstFileSaveVM.gstAddEnquiryCommandDto.FormNo, newFileNamePdf);
             var dirPath = Path.GetFullPath(Path.Combine(basedirectory, _configuration["FilePaths:GstUploadFolder"].ToString() + gstFileSaveVM.gstAddEnquiryCommandDto.FormNo));
             if (dirPath != null)
             {
-                System.IO.Directory.CreateDirectory(Path.Combine(basedirectory, _configuration["FilePaths:GstUploadFolder"].ToString() + gstFileSaveVM.gstAddEnquiryCommandDto.FormNo));
+                Directory.CreateDirectory(Path.Combine(basedirectory, _configuration["FilePaths:GstUploadFolder"].ToString() + gstFileSaveVM.gstAddEnquiryCommandDto.FormNo));
             }
             var filePathExc = Path.Combine(basedirectory, _configuration["FilePaths:GstUploadFolder"].ToString() + gstFileSaveVM.gstAddEnquiryCommandDto.FormNo, newFileNameExcel);
             var filePathPdf = Path.Combine(basedirectory, _configuration["FilePaths:GstUploadFolder"].ToString() + gstFileSaveVM.gstAddEnquiryCommandDto.FormNo, newFileNamePdf);
@@ -87,7 +80,6 @@ namespace LoanProcessManagement.App.Controllers
 
             var gstCreateEnquiryCommandDto = new GstCreateEnquiryCommand()
             {
-                //ID = gstFileSaveVM.gstAddEnquiryCommandDto.ID,
                 CustomerName = gstFileSaveVM.gstAddEnquiryCommandDto.CustomerName,
                 MobileNo = gstFileSaveVM.gstAddEnquiryCommandDto.MobileNo,
                 Email = gstFileSaveVM.gstAddEnquiryCommandDto.Email,
@@ -110,8 +102,7 @@ namespace LoanProcessManagement.App.Controllers
                 Id = newws,
                 IsSubmit = true
             };
-            var submitgoal = _incomeAssesmentService.PostIsSubmit(updateSubmitGstCommand);
-            //var toreturn = lead + app;
+            await _incomeAssesmentService.PostIsSubmit(updateSubmitGstCommand);
             TempData["isGstSuccess"] = createmenuresponse.Data.Succeeded;
             TempData["isGstSuccessMessage"] = createmenuresponse.Data.Message;
             return RedirectToAction("CreateEnquiry",new { applicantType=app, lead_Id = lead});
@@ -180,14 +171,14 @@ namespace LoanProcessManagement.App.Controllers
             {
                 var basedirectory = Directory.GetCurrentDirectory();
 
-                var pdffileExtension = System.IO.Path.GetExtension(incomeAssessmentDetailsVm.IPdf.FileName);
+                var pdffileExtension = Path.GetExtension(incomeAssessmentDetailsVm.IPdf.FileName);
 
                 newFileNamePdf = DateTime.Now.ToString("ddMMyyyyhhmmss_") + incomeAssessmentDetailsVm.FormNo + pdffileExtension;
 
                 var dirPath = Path.GetFullPath(Path.Combine(basedirectory, _configuration["FilePaths:IncomeAssessmentFolder"].ToString() + incomeAssessmentDetailsVm.FormNo));
                 if (dirPath != null)
                 {
-                    System.IO.Directory.CreateDirectory(Path.Combine(basedirectory, _configuration["FilePaths:IncomeAssessmentFolder"].ToString() + incomeAssessmentDetailsVm.FormNo));
+                    Directory.CreateDirectory(Path.Combine(basedirectory, _configuration["FilePaths:IncomeAssessmentFolder"].ToString() + incomeAssessmentDetailsVm.FormNo));
                 }
 
                 var filePathPdf = Path.Combine(basedirectory, _configuration["FilePaths:IncomeAssessmentFolder"].ToString() + incomeAssessmentDetailsVm.FormNo, newFileNamePdf);
@@ -225,4 +216,3 @@ namespace LoanProcessManagement.App.Controllers
         #endregion
     }
 }
-//Previous File Save location --- ("wwwroot\\Documents\\GST\\").

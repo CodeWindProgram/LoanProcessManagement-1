@@ -4,6 +4,7 @@ using LoanProcessManagement.Application.Helper;
 using LoanProcessManagement.Application.Models.Mail;
 using LoanProcessManagement.Domain.CustomModels;
 using LoanProcessManagement.Infrastructure.EncryptDecrypt;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -27,11 +28,9 @@ namespace LoanProcessManagement.Persistence.Repositories
         public async Task<ForgotPasswordModel> ForgotPasswordWithEvents(ForgotPasswordModel forgotPassword)
         {
             _logger.LogInformation("Forgot Password With Events Initiated");
-            var userDetails = _dbContext.LpmUserMasters.Where(x => x.EmployeeId == forgotPassword.EmployeeId).FirstOrDefault();
+            var userDetails = await _dbContext.LpmUserMasters.Where(x => x.EmployeeId == forgotPassword.EmployeeId).FirstOrDefaultAsync();
             if (userDetails != null)
             {
-                //userDetails.Name = "Vishal Sir";
-                //_dbContext.SaveChanges();
 
                 var dynamicPassword = DynamicCodeGeneration.GeneratePassword(); //"welcome2loan";
                 var encryptPassword = EncryptionDecryption.EncryptString(dynamicPassword);
@@ -43,8 +42,6 @@ namespace LoanProcessManagement.Persistence.Repositories
                 {
                     To = userDetails.Email,
                     Subject = "Reset Password Code of Loan Process Management",
-                    //Body = emailSecretPassCode,
-                    //Name=userDetails.Name
                     Body = "Dear User <br><br> Your Loan system Login Password has been Reset Successfully. Please try to Login with Updated Password. <br><br> Password: " + emailSecretPassCode + "<br><br>Thanks, <br> Loan Process Team."
 
                 };

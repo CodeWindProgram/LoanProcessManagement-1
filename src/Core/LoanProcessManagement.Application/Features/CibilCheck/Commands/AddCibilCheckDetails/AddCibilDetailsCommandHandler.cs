@@ -30,8 +30,6 @@ namespace LoanProcessManagement.Application.Features.CibilCheck.Commands.AddCibi
         {
             
             _logger.LogInformation("Handle Inititated");
-            //var applicantDetails = _mapper.Map<LpmCibilCheckDetails>(request);
-            //var applicantDetailsDto = await _cibilCheckDetailsRepository.UpdateApplicantDetailsByLeadId(applicantDetails);
 
             var cibilCheckDetailsCommandResponse = new Response<AddCibilDetailsDto>();
             var cibilCheckDetails = new CibilCheckDetailsModel() {
@@ -55,16 +53,6 @@ namespace LoanProcessManagement.Application.Features.CibilCheck.Commands.AddCibi
             var applicantDetailsDto = await _cibilCheckDetailsRepository.UpdateApplicantDetailsByLeadId(cibilCheckDetails);
 
             _logger.LogInformation("Handle Completed");
-            //if (applicantDetailsDto.Succeeded)
-            //{
-            //    return new Response<AddCibilDetailsDto>(applicantDetailsDto, "success");
-            //}
-            //else
-            //{
-            //    var res = new Response<AddCibilDetailsDto>(applicantDetailsDto, "Failed");
-            //    res.Succeeded = false;
-            //    return res;
-            //}
 
             if (applicantDetailsDto.Succeeded)
             {

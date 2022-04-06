@@ -4,18 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using LoanProcessManagement.Domain.Entities;
 using LoanProcessManagement.Application.Features.LeadList.Commands.UpdateLead;
 using LoanProcessManagement.Application.Features.LeadList.Queries;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadHistory;
-using System.Text.RegularExpressions;
 using LoanProcessManagement.Application.Features.LeadList.Commands.AddLead;
 using System;
-using LoanProcessManagement.Application.Responses;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadStatus;
-using LoanProcessManagement.Application.Features.LeadList.Query.LeadByLGID;
 using LoanProcessManagement.Application.Features.LeadList.Query.LeadNameByLgId;
 
 namespace LoanProcessManagement.Persistence.Repositories
@@ -60,7 +56,7 @@ namespace LoanProcessManagement.Persistence.Repositories
         {
             if (request.UserRoleId == 3)
             {
-                var result = (from A in _dbContext.LpmLeadMasters.Where(x => x.BranchID == request.BranchId)
+                var result = await (from A in _dbContext.LpmLeadMasters.Where(x => x.BranchID == request.BranchId)
                               join B in _dbContext.LpmLoanProductMasters on A.ProductID equals B.Id
                               join C in _dbContext.LpmLeadStatusMasters on A.CurrentStatus equals C.Id
 
@@ -75,7 +71,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                                   LeadStatus = C.StatusDescription,
                                   lead_Id = A.lead_Id
 
-                              });
+                              }).ToListAsync();
                 return result;
             }
             else if (request.UserRoleId == 4)
@@ -577,12 +573,11 @@ namespace LoanProcessManagement.Persistence.Repositories
         {
             string input = lead_id;
             var onlyid = input.Split("_");
-            int res = 0;
-            bool success = int.TryParse(new string(input
+            int.TryParse(new string(input
                                  .SkipWhile(x => !char.IsDigit(x))
                                  .TakeWhile(x => char.IsDigit(x))
-                                 .ToArray()), out res);
-            var temp = _dbContext.LpmLeadProcessCycles.Where(x => x.lead_Id == long.Parse(onlyid[1]));
+                                 .ToArray()), out int res);
+            _dbContext.LpmLeadProcessCycles.Where(x => x.lead_Id == long.Parse(onlyid[1]));
             var result = await (from A in _dbContext.LpmLeadProcessCycles
                                 where A.lead_Id == long.Parse(onlyid[1])
                                 join B in _dbContext.LpmLeadStatusMasters on A.CurrentStatus equals B.Id
@@ -629,7 +624,6 @@ namespace LoanProcessManagement.Persistence.Repositories
             }
 
             response.CreatedBy = request.CreatedBy;
-            //response.CreatedDate = request.CreatedDate;
             response.FormNo = request.FormNo;
             response.FirstName = request.FirstName;
             response.MiddleName = request.MiddleName;
@@ -729,9 +723,9 @@ namespace LoanProcessManagement.Persistence.Repositories
             return result;
         }
 
-        public IEnumerable<LpmLeadMaster> getLeadByLeadAssigneeId(string lead_assignee_Id)
+        public async Task<IEnumerable<LpmLeadMaster>> getLeadByLeadAssigneeId(string lead_assignee_Id)
         {
-            return _dbContext.LpmLeadMasters.Where(i => i.Lead_assignee_Id == lead_assignee_Id).ToList();
+            return await _dbContext.LpmLeadMasters.Where(i => i.Lead_assignee_Id == lead_assignee_Id).ToListAsync();
         }
 
         public async Task<IEnumerable<GetLeadNameByLgIdQueryVm>> LeadByName(string LgId)

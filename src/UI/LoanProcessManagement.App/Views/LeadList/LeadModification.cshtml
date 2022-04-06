@@ -19,123 +19,6 @@
         margin-left: 10px;
     }
 </style>
-@*<style>
-        /*h5 {
-            font-size: 1.25rem;
-            margin-left: 1rem;
-            padding-top: 5px;
-            font-weight: 600;
-        }*/
-
-        /*input[type=text], textarea, select {
-            width: 100%;
-        }*/
-
-        .switch {
-            position: relative;
-            /*display: inline-block;*/
-            width: 60px;
-            height: 34px;
-        }
-
-            .switch input {
-                opacity: 0;
-                width: 0;
-                height: 0;
-            }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
-
-            .slider:before {
-                position: absolute;
-                content: "";
-                height: 26px;
-                width: 26px;
-                left: 4px;
-                bottom: 4px;
-                background-color: white;
-                -webkit-transition: .4s;
-                transition: .4s;
-            }
-
-        input:checked + .slider {
-            background-color: #2196F3;
-        }
-
-        input:focus + .slider {
-            box-shadow: 0 0 1px #2196F3;
-        }
-
-        input:checked + .slider:before {
-            -webkit-transform: translateX(26px);
-            -ms-transform: translateX(26px);
-            transform: translateX(26px);
-        }
-
-        /* Rounded sliders */
-        .slider.round {
-            border-radius: 34px;
-        }
-
-            .slider.round:before {
-                border-radius: 50%;
-            }
-        .card {
-            /*background-color:slategray;*/
-            background: linear-gradient(to bottom, rgba(251,251,251,10) 0%,rgba(242,242,242,10) 100%);
-            font-family: sans-serif;
-            font-size: 18px;
-            border: 1px solid;
-            margin-top:20px;
-            margin-bottom:20px;
-        }
-        /*select {
-        border-radius:4px;
-        height:30px;
-        }*/
-        /*input {
-            border-radius: 5px;
-        }*/
-        /*.buttons {
-        display:flex;
-        flex-direction:row;
-        }*/
-        /*.selected {
-            background: #0d7db5;
-            color: #FFF;
-        }*/
-
-        /*.QueryInput{
-            display:flex;
-            justify-content:space-between;
-        }
-        .QueryInput select{
-            width:72%;
-        }*/
-        /*.selected {
-            background: #adb5bd;
-            color: #FFF;
-        }*/
-        /*.panel-heading {
-            color: white;
-            background-color: #343a40;
-            border-bottom: 1px solid rgba(0,0,0,.125);
-            padding: 0.75rem 1.25rem;
-            position: relative;
-            border-top-left-radius: 0.25rem;
-            border-top-right-radius: 0.25rem;
-        }*/
-    </style>*@
 
 <div class="container app" id="maindiv">
     <div class="col-sm-12 col-lg-12">
@@ -197,8 +80,6 @@
                         </div>
                     </div>
 
-
-
                     <div class="hoQueryDiv" style="display:none">
                         <div class="form-group " id="holeadQueryDiv">
                             <div class="row">
@@ -240,9 +121,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
 
                         <div id="divQueryType" style="display:none">
                             <div class="form-group " id="div_IPSQueryType">
@@ -532,16 +410,6 @@
                                 <label>Select Reason </label>
                                 <select id="RejectReasonList" asp-for="RejectLeadReasonID" class="form-control" asp-items="ViewBag.rejectLeadReasonsList">
                                     <option value="">Select Reason</option>
-                                    @*<option value="1">Delinquency in CIBIL report</option>
-                                    <option value="2">Existing GICHFL Housing loan track irregular</option>
-                                    <option value="3">Fraud documents detected</option>
-                                    <option value="4">Income not sufficient</option>
-                                    <option value="5">ITR rejected/invalid as per income tax dept.</option>
-                                    <option value="6">ITRs being irregularly filed</option>
-                                    <option value="7">No plan approval for proposed property </option>
-                                    <option value="8">The income combination of applicant and co-applicant being considered like (cousins/ brother -in -law/sister-in -law)</option>
-                                    <option value="9">Title of the property not clear</option>
-                                    <option value="10">Other</option>*@
                                 </select>
                             </div>
                             <div class="col-lg-4 col-sm-12" id="rejectLeadComment" style="display:none">
@@ -560,15 +428,6 @@
                                 <label>Select Reason </label>
                                 <select id="LostReasonList" class="form-control" asp-for="LostLeadReasonID" asp-items="ViewBag.lostLeadReasonsList">
                                     <option value="">Select Reason</option>
-                                    @*<option value="1">Customer has availed loan from other institutions</option>
-                                    <option value="2">Customer not interested in availing loan and did not revert</option>
-                                    <option value="3">Loan eligibility not being fulfilled by applicant</option>
-                                    <option value="4">Manual ITRs/Irregular ITRs</option>
-                                    <option value="5">NRIs with business income</option>
-                                    <option value="6">Property not being identified/customer has deferred the purchase</option>
-                                    <option value="7">Required documents unavailable with the customer</option>
-                                    <option value="8">Tie up of builder for certain projects with other NBFCs and banks</option>
-                                    <option value="9">Other</option>*@
                                 </select>
                             </div>
 
@@ -608,11 +467,7 @@
             }
         }
 
-
         var statusValue = $('#status_lead').val();
-        //if (statusValue == 2) {
-        //    $("#emp_classification").removeAttr("disabled");
-        //}
 
         $('#status_lead').change(function () {
             var currentStatusValue = $('#status_lead').val();
@@ -687,13 +542,6 @@
           }
 
 
-
-
-        //if (statusValue != 7) {
-        //    $("#leadQueryDiv").css("display", "none");
-        //    $("#divQueryType").css("display", "none");
-        //}
-
         function show_IPSQueryType_ForBtn(QueryNumber,currenInputId){
             let divFormat = "#div_IPSQueryType";
             let divId = divFormat + QueryNumber;
@@ -712,15 +560,6 @@
         }
 
 
-
-
-        @*$(document).ready(function () {
-            if (@ViewBag.Message == 'Lead Data Has Been Added Successfully !!') {
-                setTimeout(function () {
-                    location.href = "/home";
-                }, 5000);
-            }
-        })*@
     $("#ddl_IPSQueryType").change(function (e) {
         var currentRe = $("#ddl_IPSQueryType").val();
         console.log(currentRe);
@@ -742,11 +581,9 @@
                     $("#QueryStatusHidden").val('Q');
                     $("#ddl_IPSQueryType").attr('required', true);
                     $("#que").css("display", "block");
-                    //toastr.success('Query raised', "Success");
 
 
                 } else {
-                    /*alert("only Ho can raise a query");*/
                     toastr.error('Only Ho can raise a query', "Error");
                     $("#chkQuery").prop("checked", false);
                 }
@@ -755,10 +592,8 @@
                 if (UserRole == 3) {
                     $("#QueryStatusHidden").val('R');
                     $("#lblSwitchName").css("display", "none");
-                    /*toastr.success('Query resolved', "Success");*/
                 }
                 else {
-                    //alert("only Branch can resolve a query");
                     toastr.error('Only Branch can resolve a query', "Error");
                     $("#chkQuery").prop("checked", true);
 
@@ -773,7 +608,6 @@
                 if (UserRole == 2) {
                     $("#hoLblSwitchName").css("display", "inline-block");
                     $("#HoQueryStatusHidden").val('Q');
-                    /*toastr.success('Query raised', "Success");*/
 
                 } else {
 
@@ -785,7 +619,6 @@
                 if (UserRole == 3) {
                     $("#HoQueryStatusHidden").val('R');
                     $("#hoLblSwitchName").css("display", "none");
-                    /*toastr.success('Query resolved', "Success");*/
                 }
                 else {
 
@@ -849,27 +682,6 @@
      }
 
 
-
-    /*----------------------------------------------------------------------------------------------------------------------*/
-
-    @*$(document).ready(function () {
-        if ('@ViewBag.isSuccess' == 'True') {
-            toastr.success('@ViewBag.Message', "Success");
-            setTimeout(function () {
-                location.href = "/LeadList/LeadSummary/@Model.lead_Id";
-            }, 4000);
-        }
-        else if ('@ViewBag.isSuccess' == 'False') {
-            toastr.error('@ViewBag.Message', "Error");
-             setTimeout(function () {
-                location.href = "/LeadList/LeadModification/@Model.lead_Id";
-            }, 4000);
-
-        }
-
-    })*@
-    /*----------------------------------------------------------------------------------------------------------------------*/
-
         $(".QueryType").change(function (e) {
             var element = $(e.target)
             var selectedVal = $(e.target).val();
@@ -893,6 +705,4 @@
             }
         });
     });
-
-
 </script>

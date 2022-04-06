@@ -34,8 +34,8 @@ namespace LoanProcessManagement.App.Services.Implementation
     public class AccountService : IAccountService
     {
         private string BaseUrl = "";
-        private IHttpClientFactory clientfact;
-        IOptions<APIConfiguration> _apiDetails;
+        private readonly IHttpClientFactory clientfact;
+        readonly IOptions<APIConfiguration> _apiDetails;
 
         public AccountService(IHttpClientFactory client, IOptions<APIConfiguration> apiDetails)
         {
@@ -415,7 +415,6 @@ namespace LoanProcessManagement.App.Services.Implementation
 
         public async Task<IEnumerable<GetAllpropertyTypeDto>> GetAllPropertyType()
         {
-            //throw new NotImplementedException();
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
             var _client = clientfact.CreateClient("LoanService");
@@ -436,7 +435,6 @@ namespace LoanProcessManagement.App.Services.Implementation
 
         public async Task<IEnumerable<GetSanctionedPlanDto>> GetSanctionedPlan()
         {
-            //throw new NotImplementedException();
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
             var _client = clientfact.CreateClient("LoanService");
@@ -489,7 +487,6 @@ namespace LoanProcessManagement.App.Services.Implementation
 
         public async Task<Response<IEnumerable<GetAllUsersQueryVm>>> UsersList( )
         {
-            //throw new System.NotImplementedException();
             BaseUrl = _apiDetails.Value.LoanProcessAPIUrl;
 
             var _client = clientfact.CreateClient("LoanService");

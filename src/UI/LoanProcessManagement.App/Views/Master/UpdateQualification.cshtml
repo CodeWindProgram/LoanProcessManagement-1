@@ -1,9 +1,6 @@
-﻿@*@using LoanProcessManagement.Application.Features.RoleMaster.Queries.GetRoleMaster;*@
-@model LoanProcessManagement.Application.Features.Qualification.Commands.UpdateQualification.UpdateQualificationCommand
+﻿@model LoanProcessManagement.Application.Features.Qualification.Commands.UpdateQualification.UpdateQualificationCommand
 @{
-
-    //var record = (GetRoleMasterByIdDto)ViewData["data"];
-
+    ViewData["Title"] = "UpdateQualification";
 }
 
 
@@ -36,7 +33,7 @@
                                         <input asp-for="QualificationName" class="form-control" maxlength="50" />
                                         <span asp-validation-for="QualificationName" class="text-danger"></span>
                                     </div>
-                                   
+
 
                                     <div class="col-lg-4 col-sm-12">
 
@@ -65,26 +62,7 @@
     </div>
 </div>
 <script>
-    //$(document).ready(function () {
-    //    var check = $('#myCheckbox').val();
-    //    console.log(check)
-    //    var ch = check.toString();
-    //console.log(ch);
-    //    console.log(check);
-    //    if (check != "true") {
-    //    console.log("Unchecked");
-    //    $('#myCheckbox').prop('checked', false);
-    //    }
-    //    else if (check == "true") {
-    //    console.log("checked");
-    //        $('#myCheckbox').prop('checked', true);
-    //    }
-    //});
 
-
-    //function BtnClick() {
-    //    $('#myCheckbox').prop('checked', true);
-    //}
     function loadPage() {
 
         $("#div_dynamicTables").load("/Master/GetAllQualification");
@@ -117,4 +95,3 @@
 
 
 
- 

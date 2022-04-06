@@ -14,12 +14,13 @@ namespace LoanProcessManagement.Application.Features.Menu.Query
     {
         private readonly IMenuRepository MenuRepository;
         private readonly IMapper _mapper;
-        private readonly ILogger _logger;
+        private readonly ILogger<GetMenuMasterServicesHandler> _logger;
 
-        public GetMenuMasterServicesHandler(IMapper mapper, IMenuRepository menuRepository)
+        public GetMenuMasterServicesHandler(IMapper mapper, IMenuRepository menuRepository, ILogger<GetMenuMasterServicesHandler> logger)
         {
             _mapper = mapper;
             MenuRepository = menuRepository;
+            _logger = logger;
         }
         #region Logger For the Menu Services - Saif Khan - 28/10/2021
         /// <summary>

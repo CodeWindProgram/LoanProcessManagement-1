@@ -2,9 +2,7 @@
 using LoanProcessManagement.Application.Contracts.Persistence;
 using LoanProcessManagement.Domain.CustomModels;
 using Microsoft.Extensions.Logging;
-using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -36,14 +34,14 @@ namespace LoanProcessManagement.Persistence.Repositories
                                 join B in _dbContext.LpmUserMasters on A.Lead_assignee_Id equals B.LgId
                                 join C in _dbContext.LpmCibilCheckDetails on A.FormNo equals C.FormNo
 
-                                where C.IsSubmit == true && C.ApplicantType == 0 && D.CurrentStatus == 2
+                                where C.IsSubmit && C.ApplicantType == 0 && D.CurrentStatus == 2
 
                                 select new GetCreditCibilDetailsVm
                                 {
                                     FormNo = C.FormNo,
                                     CustomerName = A.FirstName + " "+A.LastName,
                                     MobileNumber = A.CustomerPhone,
-                                    CreatedDate = C.CreatedDate,//.ToShortDateString().ToString(),  
+                                    CreatedDate = C.CreatedDate, 
                                     EmailId = A.CustomerEmail,
                                     LoanAmount = D.LoanAmount.ToString(),
                                     Issuccess = true,
@@ -57,7 +55,7 @@ namespace LoanProcessManagement.Persistence.Repositories
         {
             var result = await (from A in _dbContext.LpmLeadApplicantsDetails
                                 join C in _dbContext.LpmCibilCheckDetails on A.Id equals C.ApplicantDetailId
-                                where C.IsSuccess == true && C.FormNo == FormNo
+                                where C.IsSuccess && C.FormNo == FormNo
 
                                 select new GetCreditCibilUserDetailsVm
                                 {
@@ -78,7 +76,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                                 join B in _dbContext.LpmUserMasters on A.Lead_assignee_Id equals B.LgId
                                 join C in _dbContext.LPMGSTEnquiryDetails on A.FormNo equals C.FormNumber
 
-                                where C.IsActive == true && C.ApplicantType == 0
+                                where C.IsActive && C.ApplicantType == 0
 
                                 select new GetCreditGstDetailsVm
                                 {
@@ -95,9 +93,7 @@ namespace LoanProcessManagement.Persistence.Repositories
         }
         public async Task<IEnumerable<GetCreditGstUserDetailsVm>> GetCreditGstUserDetailsList(string FormNo)
         {
-            //var temp = _dbContext.LpmLeadMasters;
-            //var gst = _dbContext.LPMGSTEnquiryDetails;
-            var result = _dbContext.LPMGSTEnquiryDetails.Where(x => x.FormNumber == FormNo).Select(x => new GetCreditGstUserDetailsVm()
+            var result = await _dbContext.LPMGSTEnquiryDetails.Where(x => x.FormNumber == FormNo).Select(x => new GetCreditGstUserDetailsVm()
             {
                 FormNo = x.FormNumber,
                 ApplicantName = x.CustomerName,
@@ -107,36 +103,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 Issuccess = true,
                 Message = "Customer Data Fetched"
 
-            }); ;
-            
-
-            //var result = await (from A in _dbContext.LpmLeadMasters
-            //                     join C in _dbContext.LPMGSTEnquiryDetails on A.FormNo equals C.FormNumber
-            //                     where C.ApplicantType == 0
-            //                     select new GetCreditGstUserDetailsVm
-            //                     {
-            //                         FormNo = (C.FormNo).ToString(),
-            //                         ApplicantName = A.FirstName + " " + A.LastName,
-
-            //                         CreatedDate = A.CreatedDate,
-            //                         Issuccess = true,
-            //                         Message = "customer data fetched"
-            //                     }).ToListAsync();
-
-            //var result = await (from A in _dbContext.LpmLeadApplicantsDetails
-            //                    join C in _dbContext.LPMGSTEnquiryDetails on A.FormNo equals C.FormNumber
-            //                    where C.IsActive == true && C.FormNumber == FormNo
-
-            //                    select new GetCreditGstUserDetailsVm
-            //                    {
-            //                        FormNo = (C.FormNo).ToString(),
-            //                        ApplicantName = A.FirstName + " " + A.LastName,
-            //                        ApplicantType = A.ApplicantType,
-            //                        CreatedDate = A.CreatedDate,
-            //                        Issuccess = true,
-            //                        Message = "customer data fetched"
-
-            //                    }).ToListAsync();
+            }).ToListAsync();            
 
             return result;
         }
@@ -147,7 +114,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                                 join B in _dbContext.LpmUserMasters on A.Lead_assignee_Id equals B.LgId
                                 join C in _dbContext.LpmLeadITRDetails on A.FormNo equals C.FormNo
 
-                                where C.IsSuccess == true && C.ApplicantType == 0
+                                where C.IsSuccess && C.ApplicantType == 0
 
                                 select new CreditITRDetailsListModel
                                 {
@@ -190,13 +157,13 @@ namespace LoanProcessManagement.Persistence.Repositories
                                 join B in _dbContext.LpmUserMasters on A.Lead_assignee_Id equals B.LgId
                                 join C in _dbContext.LpmLeadApplicantsDetails on A.FormNo equals C.FormNo
 
-                                where C.IsActive == true && C.ApplicantType == 0 && C.isPerfiosSubmitSuccess==true
+                                where C.IsActive && C.ApplicantType == 0 && C.isPerfiosSubmitSuccess
                                 select new GetIncomeDetailsVm
                                 {
                                     FormNo = C.FormNo,
                                     CustomerName = A.FirstName + " " + A.LastName,
                                     MobileNumber = A.CustomerPhone,
-                                    StartDate = C.CreatedDate,//.ToShortDateString().ToString(),  
+                                    StartDate = C.CreatedDate,  
                                     EmailId = A.CustomerEmail,
                                     EmploymentType=A.EmploymentType,
                                     Issuccess = true,
@@ -207,7 +174,7 @@ namespace LoanProcessManagement.Persistence.Repositories
         }
         public async Task<IEnumerable<GetIncomeUserDetailsVm>> GetIncomeUserDetailsList(string FormNo)
         {
-            var result1 = _dbContext.LpmLeadApplicantsDetails.Where(x => x.FormNo == FormNo).FirstOrDefault();
+            var result1 = await _dbContext.LpmLeadApplicantsDetails.Where(x => x.FormNo == FormNo).FirstOrDefaultAsync();
 
              var result = _dbContext.LpmLeadIncomeAssessmentDetails.Where(x => x.FormNo == FormNo).Select(x => new GetIncomeUserDetailsVm()
             {

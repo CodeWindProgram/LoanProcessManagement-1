@@ -4,7 +4,6 @@ using LoanProcessManagement.Application.Features.ThirdPartyCheckDetails.Command;
 using LoanProcessManagement.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using LoanProcessManagement.Application.Features.ThirdPartyCheckDetails.Queries;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -20,11 +19,9 @@ namespace LoanProcessManagement.Persistence.Repositories
     public class AgencyRepository : IAgencyRepository
     {
         protected readonly ApplicationDbContext _dbContext;
-        private readonly ILogger<AgencyRepository> _logger;
-        public AgencyRepository(ApplicationDbContext dbContext, ILogger<AgencyRepository> logger)
+        public AgencyRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
-            _logger = logger;
 
         }
         public async Task<GetAllAgencyDto> GetAllAgency()
@@ -55,7 +52,7 @@ namespace LoanProcessManagement.Persistence.Repositories
 
         public async Task<AddThirdPartyCheckDetailsDto> SubmitToAgency(AddThirdPartyCheckDetailsCommand req)
         {
-            var user = await _dbContext.LpmLeadMasters.Include(x => x.Product).Include(x => x.LeadStatus).Include(z => z.Branch)
+            await _dbContext.LpmLeadMasters.Include(x => x.Product).Include(x => x.LeadStatus).Include(z => z.Branch)
                 .Where(x => x.Id == req.leadIdLong).FirstOrDefaultAsync();
             var ThirdPartyDetails = await _dbContext.lpmThirdPartyCheckDetails.Include(x => x.ValuerAgency).
                 Include(x => x.fiAgency).Include(x => x.legalAgency)

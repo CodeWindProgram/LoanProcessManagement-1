@@ -16,12 +16,13 @@ namespace LoanProcessManagement.Application.Features.Menu.Query.MenuList
     {
         private readonly IMenuRepository MenuRepository;
         private readonly IMapper _mapper;
-        private readonly ILogger _logger;
+        private readonly ILogger<MenuListQueryHandler> _logger;
 
-        public MenuListQueryHandler(IMapper mapper, IMenuRepository menuRepository)
+        public MenuListQueryHandler(IMapper mapper, IMenuRepository menuRepository, ILogger<MenuListQueryHandler> logger)
         {
             _mapper = mapper;
             MenuRepository = menuRepository;
+            _logger = logger;
         }
         public async Task<Response<IEnumerable<MenuListQueryVm>>> Handler(MenuListQuery request, CancellationToken cancellationToken)
         {

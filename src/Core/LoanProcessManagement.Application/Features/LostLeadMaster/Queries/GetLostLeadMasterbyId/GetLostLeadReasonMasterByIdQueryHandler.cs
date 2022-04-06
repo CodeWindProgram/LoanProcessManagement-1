@@ -14,25 +14,28 @@ namespace LoanProcessManagement.Application.Features.LostLeadMaster.Queries.GetL
     public class GetLostLeadReasonMasterByIdQueryHandler : IRequestHandler<GetLostLeadReasonMasterByIdQuery,GetLostLeadReasonMasterByIdDto>
     {
         private readonly ILostLeadReasonMasterRepository _lostLeadReasonMasterRepository;
-        private readonly IMapper _mapper;
-        private readonly ILogger _logger;
+        private readonly ILogger<GetLostLeadReasonMasterByIdQueryHandler> _logger;
 
-        public GetLostLeadReasonMasterByIdQueryHandler(IMapper mapper, ILostLeadReasonMasterRepository lostLeadReasonMasterRepository)
+        public GetLostLeadReasonMasterByIdQueryHandler(ILostLeadReasonMasterRepository lostLeadReasonMasterRepository, ILogger<GetLostLeadReasonMasterByIdQueryHandler> logger)
         {
-            _mapper = mapper;
             _lostLeadReasonMasterRepository = lostLeadReasonMasterRepository;
+            _logger = logger;
         }
         public async Task<GetLostLeadReasonMasterByIdDto> Handle(GetLostLeadReasonMasterByIdQuery request, CancellationToken cancellationToken)
         {
+            _logger.LogInformation("Handle Intiated");
             var data = await _lostLeadReasonMasterRepository.GetLostLeadReasonMasterByIdAsync(request.id);
-            GetLostLeadReasonMasterByIdDto role = new GetLostLeadReasonMasterByIdDto();
-            role.LostLeadReasonId= data.LostLeadReasonID;
-            role.LostLeadReason = data.LostLeadReason;
+            GetLostLeadReasonMasterByIdDto role = new GetLostLeadReasonMasterByIdDto
+            {
+                LostLeadReasonId = data.LostLeadReasonID,
+                LostLeadReason = data.LostLeadReason
+            };
             if (data.LastModifiedDate != null)
             {
                 role.LastModifiedDate = (DateTime)data.LastModifiedDate;
             }
             role.IsActive = data.IsActive;
+            _logger.LogInformation("Handle Completed");
             return role;
         }
     }

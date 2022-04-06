@@ -33,18 +33,10 @@ namespace LoanProcessManagement.Persistence.Repositories
         public async Task<UnlockUserAccountModel> ActivateUserAccountWithEvents(UnlockUserAccountModel unlockUserAccount)
         {
             _logger.LogInformation("activate user account With Events started");
-            var userDetails = _dbContext.LpmUserMasters.Where(x => x.EmployeeId == unlockUserAccount.EmployeeId).FirstOrDefault();
+            var userDetails = await _dbContext.LpmUserMasters.Where(x => x.EmployeeId == unlockUserAccount.EmployeeId).FirstOrDefaultAsync();
 
             if (userDetails != null)
             {
-                //userDetails.IsActive = true;
-                //userDetails.ActivatedOn = DateTime.Now;
-
-                //_dbContext.SaveChanges();
-                //unlockUserAccount.Issuccess = true;
-                //unlockUserAccount.Message = "User account have been Activated Successfully";
-
-
                 if (userDetails.IsActive)
                 {
                     unlockUserAccount.Issuccess = false;
@@ -73,7 +65,7 @@ namespace LoanProcessManagement.Persistence.Repositories
         public async Task<UnlockUserAccountModel> UnlockAndResetPasswordWithEvents(UnlockUserAccountModel unlockUserAccount)
         {
             _logger.LogInformation("unlock user account and reset password With Events Initiated");
-            var userDetails = _dbContext.LpmUserMasters.Where(x => x.EmployeeId == unlockUserAccount.EmployeeId).FirstOrDefault();
+            var userDetails = await _dbContext.LpmUserMasters.Where(x => x.EmployeeId == unlockUserAccount.EmployeeId).FirstOrDefaultAsync();
 
             if (userDetails != null)
             {
@@ -99,13 +91,11 @@ namespace LoanProcessManagement.Persistence.Repositories
                     {
                         To = userDetails.Email,
                         Subject = "Your reset password Code is",
-                        //Body = emailSecretPassCode,
-                        //Name=userDetails.Name
                         Body = "Dear User <br><br> Your Loan system Login Password has been Reset Successfully. Please try to Login with Updated Password. <br><br> Password: " + emailSecretPassCode + "<br><br>Thanks, <br> Loan Process Team."
                     };
 
                     var email = _emailService.SendEmail(SendEmail);
-                    if (email.Result == true)
+                    if (email.Result)
                     {
                         unlockUserAccount.Issuccess = true;
                         unlockUserAccount.Message = "Successfully unlocked account And check your Registered Email Address to Reset your Password.";
@@ -128,21 +118,7 @@ namespace LoanProcessManagement.Persistence.Repositories
         public async Task<UnlockUserAccountModel> UnlockUserAccountWithEvents(UnlockUserAccountModel unlockUserAccount)
         {
             _logger.LogInformation("Unlock User With Events Initiated");
-            var userDetails = _dbContext.LpmUserMasters.Where(x => x.EmployeeId == unlockUserAccount.EmployeeId).FirstOrDefault();
-
-            //if (userDetails != null)
-            //{
-            //    userDetails.WrongLoginAttempt = 0;
-            //    userDetails.IsLocked = false;
-
-            //    _dbContext.SaveChanges();
-            //    unlockUserAccount.Issuccess = true;
-            //    unlockUserAccount.Message = "User account unlocked successfully";
-            //}
-            //else {
-            //    unlockUserAccount.Issuccess = false;
-            //    unlockUserAccount.Message = "User does not exist, please try with correct Employee ID.";
-            //}
+            var userDetails = await _dbContext.LpmUserMasters.Where(x => x.EmployeeId == unlockUserAccount.EmployeeId).FirstOrDefaultAsync();
 
             if (userDetails != null) {
                 if (!userDetails.IsLocked)

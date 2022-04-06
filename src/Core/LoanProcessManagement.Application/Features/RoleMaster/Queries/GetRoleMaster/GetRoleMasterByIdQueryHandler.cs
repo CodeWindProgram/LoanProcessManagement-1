@@ -15,23 +15,26 @@ namespace LoanProcessManagement.Application.Features.RoleMaster.Queries.GetRoleM
     public class GetRoleMasterByIdQueryHandler : IRequestHandler<GetRoleMasterByIdQuery,GetRoleMasterByIdDto>
     {
         private readonly IRoleMasterRepository _roleMasterRepository;
-        private readonly IMapper _mapper;
-        private readonly ILogger _logger;
+        private readonly ILogger<GetRoleMasterByIdQueryHandler> _logger;
 
-        public GetRoleMasterByIdQueryHandler(IMapper mapper, IRoleMasterRepository roleMasterRepository)
+        public GetRoleMasterByIdQueryHandler(IRoleMasterRepository roleMasterRepository, ILogger<GetRoleMasterByIdQueryHandler> logger)
         {
-            _mapper = mapper;
             _roleMasterRepository = roleMasterRepository;
+            _logger = logger;
         }
         
         public async Task<GetRoleMasterByIdDto> Handle(GetRoleMasterByIdQuery request, CancellationToken cancellationToken)
         {
+            _logger.LogInformation("Handle Intiated");
             var data = await _roleMasterRepository.GetRoleMasterByIdAsync(request.id);
-            GetRoleMasterByIdDto role = new GetRoleMasterByIdDto();
-            role.Id = data.Id;
-            role.RoleName = data.Rolename;
-            role.LastModifiedDate = (DateTime)data.LastModifiedDate;
-            role.IsActive = data.IsActive;
+            GetRoleMasterByIdDto role = new GetRoleMasterByIdDto
+            {
+                Id = data.Id,
+                RoleName = data.Rolename,
+                LastModifiedDate = (DateTime)data.LastModifiedDate,
+                IsActive = data.IsActive
+            };
+            _logger.LogInformation("Handle Completed");
             return role;
         }
 

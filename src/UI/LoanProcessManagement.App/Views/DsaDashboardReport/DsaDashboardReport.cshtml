@@ -16,12 +16,6 @@
         border-top-right-radius: 0.25rem;
     }
 
-    /*.btn:hover {
-        background-color: #adb5bd;
-        color: black;
-        margin-bottom: 5px;
-    }*/
-
     .selected {
         background: #adb5bd;
         color: #FFF;
@@ -46,12 +40,7 @@
                     <input type="hidden" asp-for="LgId" value="@User.Claims.FirstOrDefault(c => c.Type == "Lg_id").Value"/>
                     <div class="card" style="padding:15px;">
                         <div>
-                            @*<div class="row">
-                                <div class="col-3">
-                                    <br>
-                                    <label>Select Filter</label>
-                                </div>
-                            </div>*@
+
                             <div class="form-group">
 
                                 <div class="row">
@@ -195,7 +184,6 @@
             orientation:'bottom',
             changeMonth: true,
             changeYear: true,
-            //startDate: '-60y',
             endDate: '+0d',
             format: "dd-mm-yyyy",
             yearRange: "-100:+0"
@@ -212,7 +200,6 @@
             orientation: 'bottom',
             changeMonth: true,
             changeYear: true,
-            //startDate: '-60y',
             endDate: '+0d',
             format: "dd-mm-yyyy",
             yearRange: "-100:+0"

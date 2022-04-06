@@ -25,12 +25,6 @@
                                 <div class="form-group">
                                     <div class="row pl-5">
 
-                                        @*<div class="col-lg-4 col-sm-12 ">
-                                                <label hidden asp-for="getRoleMasterByIdQueryVm.Id" class="control-label"></label>
-                                                <input hidden asp-for="getRoleMasterByIdQueryVm.Id" value="@record.Id" class="form-control" />
-                                                <span asp-validation-for="getRoleMasterByIdQueryVm.Id" class="text-danger"></span>
-                                            </div>*@
-
                                         <div class="col-lg-4 col-sm-12">
                                             <label asp-for="getRoleMasterByIdQueryVm.RoleName" class="control-label">Role Name<span style="color: Red">&nbsp;*</span></label>
 
@@ -81,10 +75,6 @@
         }
     });
 
-
-    //function BtnClick() {
-    //    $('#myCheckbox').prop('checked', true);
-    //}
     function loadPage() {
 
         $("#div_dynamicTables").load("../Master/GetRoleMaster");

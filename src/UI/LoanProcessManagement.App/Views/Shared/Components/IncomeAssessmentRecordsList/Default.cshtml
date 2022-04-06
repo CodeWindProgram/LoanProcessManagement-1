@@ -13,26 +13,11 @@
                 <th>
                     @Html.DisplayNameFor(model => model.EndDate)
                 </th>
-                @*<th>
-                    @Html.DisplayNameFor(model => model.EmployerName1)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EmployerName2)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EmployerName3)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EmployerName4)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EmployerName5)
-                </th>*@
                 <th >
                     @Html.DisplayNameFor(model => model.FileType)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Institution_Id)
+                    @Html.DisplayNameFor(model => model.InstitutionName)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.DocumentType)
@@ -56,44 +41,11 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.EndDate)
                     </td>
-                    @*<td>
-                        @Html.DisplayFor(modelItem => item.EmployerName1)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EmployerName2)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EmployerName3)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EmployerName4)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EmployerName5)
-                    </td>*@
                     <td>
                         @Html.DisplayFor(modelItem => item.FileType)
                     </td>
                     <td>
-                        @*@Html.DisplayFor(modelItem => item.Institution_Id)*@
-                        @if(item.Institution_Id == 0){
-                        <span> </span>
-                        }
-                        @if(item.Institution_Id == 1){
-                        <span>AU Small Finance Bank</span>
-                        }
-                        @if(item.Institution_Id == 2){
-                        <span>Acme Bank Ltd</span>
-                        }
-                        @if(item.Institution_Id == 3){
-                        <span>Adarsh Bank</span>
-                        }
-                        @if(item.Institution_Id == 4){
-                        <span>Ahmedabad District Co-Op</span>
-                        }
-                        @if(item.Institution_Id == 5){
-                        <span>Airtel Payments Bank</span>
-                        }
+                        @Html.DisplayFor(modelItem => item.InstitutionName)                        
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.DocumentType)

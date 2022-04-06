@@ -26,7 +26,7 @@ namespace LoanProcessManagement.Persistence.Repositories
         public async Task GetByLostLeadReason(string LostLead)
         {
             _logger.LogInformation("GetByLostLeadReason With Events Initiated");
-            var userDetails = _dbContext.LpmLostLeadReasonMasters.Where(x => x.LostLeadReason == LostLead).FirstOrDefault();
+            await _dbContext.LpmLostLeadReasonMasters.Where(x => x.LostLeadReason == LostLead).FirstOrDefaultAsync();
             _logger.LogInformation("GetByLostLeadReason With Events completed");
         }
         public async Task<LpmLostLeadReasonMaster> GetLostLeadReasonMasterByIdAsync(long id)
@@ -37,7 +37,7 @@ namespace LoanProcessManagement.Persistence.Repositories
         {
             UpdateLostLeadReasonMasterDto response = new UpdateLostLeadReasonMasterDto();
             _logger.LogInformation("UpdateRoleMaster With Events Initiated");
-            var userDetails = _dbContext.LpmLostLeadReasonMasters.Where(x => x.LostLeadReasonID == id).FirstOrDefault();
+            var userDetails = await _dbContext.LpmLostLeadReasonMasters.Where(x => x.LostLeadReasonID == id).FirstOrDefaultAsync();
             if (userDetails != null)
             {
                 userDetails.IsActive = request.IsActive;
@@ -53,7 +53,7 @@ namespace LoanProcessManagement.Persistence.Repositories
             {
                 response.Message = "Lost Lead Reason doesn't exists .";
                 response.Succeeded = false;
-                response.LostLeadReasonId = userDetails.LostLeadReasonID;
+                response.LostLeadReasonId = id;
                 return response;
             }
         }

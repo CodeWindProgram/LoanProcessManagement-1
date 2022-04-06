@@ -47,15 +47,12 @@
                         <thead>
                             <tr>
                                 <th>
-                                    @*@Html.DisplayNameFor(model => model.ProductName)*@
                                     Product
                                 </th>
                                 <th>
-                                    @*@Html.DisplayNameFor(model => model.FormNo)*@
                                     Form No.
                                 </th>
                                 <th>
-                                    @*@Html.DisplayNameFor(model => model.Amount)*@
                                     Amount
                                 </th>
 
@@ -101,14 +98,6 @@
             </div>
         </div>
         @await Html.PartialAsync("~/Views/Shared/_Tabs.cshtml", (string)@ViewBag.lead_Id)
-
-        @*<div class="d-flex flex-row justify-content-around">
-            <a class="btn" asp-controller="LeadList" asp-action="LeadSummary">Summary</a>
-            <a class="btn" asp-controller="LeadList" asp-action="LeadModification" target="_blank">Modification</a>
-            <a class="btn" asp-controller="LeadList" asp-action="LeadHistory" target="_blank">History</a>
-            <a class="btn selected" asp-controller="ProductsList" asp-action="AllProductsList" target="_blank">Products</a>
-            <a class="btn" asp-controller="Login" asp-action="UpdatePropertyDetails" target="_blank">Property Details</a>
-        </div>*@
     </div>
 </div>
 <script>

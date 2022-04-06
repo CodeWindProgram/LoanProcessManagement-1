@@ -25,8 +25,8 @@ namespace LoanProcessManagement.App.Services.Implementation
     public class MenuService : IMenuService
     {
         private string BaseUrl = "";
-        private IHttpClientFactory clientfact;
-        IOptions<APIConfiguration> _apiDetails;
+        private readonly IHttpClientFactory clientfact;
+        readonly IOptions<APIConfiguration> _apiDetails;
 
 
         public MenuService(IHttpClientFactory client, IOptions<APIConfiguration> apiDetails)
@@ -239,7 +239,7 @@ namespace LoanProcessManagement.App.Services.Implementation
 
             var httpResponse = await _client.GetAsync
                 (
-                    BaseUrl + APIEndpoints.ChildMenu + Id + "/" + userRoleId
+                    $"{BaseUrl}{APIEndpoints.ChildMenu}{Id}/{userRoleId}"
                 );
 
             var jsonString = httpResponse.Content.ReadAsStringAsync().Result;

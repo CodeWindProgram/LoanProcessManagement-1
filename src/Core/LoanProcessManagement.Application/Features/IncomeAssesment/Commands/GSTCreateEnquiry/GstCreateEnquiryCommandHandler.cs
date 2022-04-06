@@ -32,7 +32,7 @@ namespace LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GS
             _logger.LogInformation("Handle Initiated");
             var user = _mapper.Map<GstCreateEnquiryCommand>(request);
             var response = await _incomeAssesmentRepository.CreateGstEnquiry(user);
-            //var user2 = _mapper.Map<GstCreateEnquiryCommandDto>(user);
+            _logger.LogInformation("Handle Completed");
             return new Response<GstCreateEnquiryCommandDto>(response);
         }
     }

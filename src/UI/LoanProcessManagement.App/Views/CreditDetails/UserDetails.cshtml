@@ -16,16 +16,15 @@
     }
 
     .btn {
-/*        background-color: #343a40;
-*/        color: white;
-        margin-bottom: 5px;
+       color: white;
+       margin-bottom: 5px;
     }
 
-        .btn:hover {
-            background-color: #adb5bd;
-            color: black;
-            margin-bottom: 5px;
-        }
+    .btn:hover {
+        background-color: #adb5bd;
+        color: black;
+        margin-bottom: 5px;
+    }
 
     .selected {
         background: #adb5bd;
@@ -52,15 +51,10 @@
                                 </th>
                                 <th>
                                    Applicant Type
-                                </th>
-                                
+                                </th>                               
                                 <th>
                                     Enquiry Date
-                                </th>
-                                @*<th>
-                                    Action
-                                </th>*@
-                                
+                                </th>    
                             </tr>
                         </thead>
                         <tbody>
@@ -71,9 +65,7 @@
                                     @Html.DisplayFor(modelItem => item.ApplicantName)
                                 </td>
                                 <td id="applicantId">
-                                    @*Applicant-@Html.DisplayFor(modelItem => item.ApplicantType)*@
-                                    @*<p id="ApplicantTypeValue"></p>
-        <style onload="applicantTypeFun(@Html.DisplayFor(modelItem => item.ApplicantType))"></style>*@
+
                                     @if (item.ApplicantType > 0){
                                         <span>Co-Applicant-</span>@Html.DisplayFor(modelItem => item.ApplicantType);
                                     }
@@ -85,13 +77,8 @@
                                 <td>
                                     @{var date = item.CreatedDate.ToString().Split(" ");
                                     }
-                                    @*@Html.DisplayFor(modelItem => item.CreatedDate)*@
                                     @date[0]
                                 </td>
-                                @*<td>
-                                    <button class="btn btn-primary btn-sm">Download</button>
-                                    <button class="btn btn-primary btn-sm">View Details</button>
-                                </td>*@
                             </tr>
                             }
                         </tbody>
@@ -121,29 +108,5 @@
             "bDestroy": true
         });
     });
-
-    //$(document).ready(function () {
-    //    var value = $('#applicantId').text();
-    //    if (value == "Applicant-0") {
-    //        debugger
-    //        $('#applicantId').val("Applicant");
-    //    }
-    //});
 </script>
 
-@*<script type="text/javascript" language="JavaScript">
-    function applicantTypeFun(applicant) {
-        if (applicant == 0) {
-            document.getElementById("ApplicantTypeValue").innerHTML = "Applicant";
-        }
-        if (applicant == 1) {
-            document.getElementById("ApplicantTypeValue").innerHTML = "Applicant-1";
-        }
-        if (applicant == 2) {
-            document.getElementById("ApplicantTypeValue").innerHTML = "Applicant-2";
-        }
-        if (applicant == 3) {
-            document.getElementById("ApplicantTypeValue").innerHTML = "Applicant-3";
-        }
-    }
-</script>*@

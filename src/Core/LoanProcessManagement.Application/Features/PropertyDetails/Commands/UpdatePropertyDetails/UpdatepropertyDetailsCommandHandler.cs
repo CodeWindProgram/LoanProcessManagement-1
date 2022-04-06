@@ -16,15 +16,12 @@ namespace LoanProcessManagement.Application.Features.PropertyDetails.Commands.Up
 
         private readonly IPropertyDetailsRepository _propertyDetailsRepository;
         private readonly ILogger<UpdatepropertyDetailsCommandHandler> _logger;
-        private readonly IMapper _mapper;
 
         public UpdatepropertyDetailsCommandHandler(IPropertyDetailsRepository propertyDetailsRepository,
-            ILogger<UpdatepropertyDetailsCommandHandler> logger,
-            IMapper mapper)
+            ILogger<UpdatepropertyDetailsCommandHandler> logger)
         {
             _propertyDetailsRepository = propertyDetailsRepository;
             _logger = logger;
-            _mapper = mapper;
         }
 
         #region This method will call update property details api by - Ramya Guduru - 15/11/2021
@@ -45,8 +42,10 @@ namespace LoanProcessManagement.Application.Features.PropertyDetails.Commands.Up
             }
             else
             {
-                var res = new Response<UpdatePropertyDetailsDto>(propertyDto, "Failed");
-                res.Succeeded = false;
+                var res = new Response<UpdatePropertyDetailsDto>(propertyDto, "Failed")
+                {
+                    Succeeded = false
+                };
                 return res;
             }
         }

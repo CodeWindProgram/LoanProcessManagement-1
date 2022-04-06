@@ -37,7 +37,7 @@ namespace LoanProcessManagement.Persistence.Repositories
         public async Task GetByRoleName(string RoleName)
         {
             _logger.LogInformation("GetByRoleName With Events Initiated");
-            var userDetails = _dbContext.LpmUserRoleMasters.Where(x => x.Rolename == RoleName).FirstOrDefault();
+            var userDetails = await _dbContext.LpmUserRoleMasters.Where(x => x.Rolename == RoleName).FirstOrDefaultAsync();
             _logger.LogInformation("GetByRoleName With Events completed");
         }
         public async Task<LpmUserRoleMaster> GetRoleMasterByIdAsync(long id)
@@ -49,7 +49,7 @@ namespace LoanProcessManagement.Persistence.Repositories
         {
             UpdateRoleMasterDto response = new UpdateRoleMasterDto();
             _logger.LogInformation("UpdateRoleMaster With Events Initiated");
-            var userDetails = _dbContext.LpmUserRoleMasters.Where(x => x.Id == id).FirstOrDefault();
+            var userDetails = await _dbContext.LpmUserRoleMasters.Where(x => x.Id == id).FirstOrDefaultAsync();
             if (userDetails!=null) {
                 userDetails.Rolename = request.RoleName;
                 userDetails.CreatedDate = DateTime.Now;
@@ -64,18 +64,11 @@ namespace LoanProcessManagement.Persistence.Repositories
             {
                 response.Message = "Menu doesn't exists .";
                 response.Succeeded = false;
-                response.Id =userDetails.Id;
+                response.Id = id;
                 return response;
             }
             
         }
-
-
-        //public Task GetByName(string roleName)
-        //{
-        //    var userDetails = _dbContext.LpmUserRoleMasters.Where(x => x.Rolename == roleName).FirstOrDefault();
-        //    return userDetails; 
-        //}
         #endregion
     }
 }

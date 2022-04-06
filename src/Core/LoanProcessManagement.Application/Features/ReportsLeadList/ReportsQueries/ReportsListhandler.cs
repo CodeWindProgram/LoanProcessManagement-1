@@ -15,12 +15,13 @@ namespace LoanProcessManagement.Application.Features.ReportsLeadList.ReportsQuer
     {
         private readonly IReportsLeadListRepository _reportsLeadListRepository;
         private readonly IMapper _mapper;
-        private readonly ILogger _logger;
+        private readonly ILogger<ReportsListhandler> _logger;
 
-        public ReportsListhandler(IMapper mapper, IReportsLeadListRepository reportsLeadListRepository)
+        public ReportsListhandler(IMapper mapper, IReportsLeadListRepository reportsLeadListRepository, ILogger<ReportsListhandler> logger)
         {
             _mapper = mapper;
             _reportsLeadListRepository = reportsLeadListRepository;
+            _logger = logger;
         }
         #region Logger For the get all Reports Tiles Services - Ramya Guduru - 2/12/2021
         /// <summary>
@@ -32,9 +33,11 @@ namespace LoanProcessManagement.Application.Features.ReportsLeadList.ReportsQuer
         /// <returns>Response</returns>
         public async Task<Response<IEnumerable<ReportsListVm>>> Handle(ReportsListQuery request, CancellationToken cancellationToken)
         {
+            _logger.LogInformation("Handle Intiated");
             var reportsList = await _reportsLeadListRepository.ReportsList(request.ParentId);
             var reportsDto = _mapper.Map<IEnumerable<ReportsListVm>>(reportsList);
             var response = new Response<IEnumerable<ReportsListVm>>(reportsDto);
+            _logger.LogInformation("Handle Completed");
             return response;
         }
         #endregion

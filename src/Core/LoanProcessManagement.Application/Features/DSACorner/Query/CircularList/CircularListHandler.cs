@@ -15,19 +15,22 @@ namespace LoanProcessManagement.Application.Features.DSACorner.Query.CircularLis
     {
         private readonly IDSACornerRepository _dsaCornerRepository;
         private readonly IMapper _mapper;
-        private readonly ILogger _logger;
+        private readonly ILogger<CircularListHandler> _logger;
 
-        public CircularListHandler(IMapper mapper, IDSACornerRepository dsaCornerRepository)
+        public CircularListHandler(IMapper mapper, IDSACornerRepository dsaCornerRepository, ILogger<CircularListHandler> logger)
         {
             _mapper = mapper;
             _dsaCornerRepository = dsaCornerRepository;
+            _logger = logger;
         }
         #region added handler to get all dsa circular list - Ramya Guduru - 25-11-2021
         public async Task<Response<IEnumerable<CircularListVm>>> Handle(CircularListQuery request, CancellationToken cancellationToken)
         {
+            _logger.LogInformation("Handle initiated");
             var circularList = await _dsaCornerRepository.CircularList(request.ParentId);
             var circularDto = _mapper.Map<IEnumerable<CircularListVm>>(circularList);
             var response = new Response<IEnumerable<CircularListVm>>(circularDto);
+            _logger.LogInformation("Handle completed");
             return response;
         }
         #endregion

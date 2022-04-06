@@ -25,7 +25,7 @@ namespace LoanProcessManagement.Application.Features.IncomeAssesment.Queries.Get
             _logger.LogInformation("Handle Initiated");
             var response = await _incomeAssessmentRepository.GetIncomeAssessmentRecordsList(request.ApplicantType, request.lead_Id);
             var mappedResponse = _mapper.Map <List<GetIncomeAssessmentRecordsListDto>>(response);
-            _logger.LogInformation("Handle Completed");
+            _logger.LogInformation("Handle Completed");           
             return new Response<List<GetIncomeAssessmentRecordsListDto>>(mappedResponse, "Success");
         }
     }

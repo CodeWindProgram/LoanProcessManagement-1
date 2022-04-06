@@ -1,11 +1,7 @@
-﻿using AutoMapper;
-using LoanProcessManagement.Application.Contracts.Persistence;
+﻿using LoanProcessManagement.Application.Contracts.Persistence;
 using LoanProcessManagement.Application.Responses;
 using LoanProcessManagement.Domain.CustomModels;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,10 +10,8 @@ namespace LoanProcessManagement.Application.Features.ChangePassword.Commands.Res
     public class ResetPasswordCommandHandler : IRequestHandler<ResetPasswordCommand, Response<ResetPasswordCommandDTO>>
     {
         private readonly IChangePasswordRepository _changepasswordRepository;
-        private readonly IMapper _mapper;
-        public ResetPasswordCommandHandler(IMapper mapper, IChangePasswordRepository changepasswordRepository)
+        public ResetPasswordCommandHandler(IChangePasswordRepository changepasswordRepository)
         {
-            _mapper = mapper;
             _changepasswordRepository = changepasswordRepository;
         }
 
@@ -29,7 +23,7 @@ namespace LoanProcessManagement.Application.Features.ChangePassword.Commands.Res
             {
                 Lg_id = request.Lg_id
             };
-            var result = _changepasswordRepository.ResetPassword(resetPass,request.ModifiedBy);
+            var result = await _changepasswordRepository.ResetPassword(resetPass,request.ModifiedBy);
 
             if (result.Issuccess)
             {

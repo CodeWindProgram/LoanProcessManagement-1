@@ -226,7 +226,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                                   LoanAmount = PC.LoanAmount,
                                   SubmissionDate = PC.DateOfAction,
                                   QueryStatus = LQ == null ? "Pending With HO" : (LQ.Query_Status.Equals('Q') ? "Pending With Branch" : "Pending with HO"),
-                                  QueryCount = HO.leadquery.Count()
+                                  QueryCount = HO.leadquery.Count
                               };
 
 
@@ -270,7 +270,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                                   LoanAmount = PC.LoanAmount,
                                   SubmissionDate = PC.DateOfAction,
                                   QueryStatus = LQ == null ? "Pending With HO" : (LQ.Query_Status.Equals('Q') ? "Pending With Branch" : "Pending with HO"),
-                                  QueryCount = HO.leadquery.Count()
+                                  QueryCount = HO.leadquery.Count
                               };
                 return Process.ToList();
 
@@ -312,7 +312,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                                   LoanAmount = PC.LoanAmount,
                                   SubmissionDate = PC.DateOfAction,
                                   QueryStatus = LQ == null ? "Pending With HO" : (LQ.Query_Status.Equals('Q') ? "Pending With Branch" : "Pending with HO"),
-                                  QueryCount = HO.leadquery.Count()
+                                  QueryCount = HO.leadquery.Count
                               };
                 return Process.ToList();
 
@@ -356,15 +356,15 @@ namespace LoanProcessManagement.Persistence.Repositories
                               select new ProcessModel
                               {
                                   Id = HO.Id == null ? 0 : HO.Id,
-                                  FormNo = HO.FormNo == null ? "Null" : HO.FormNo,
-                                  FirstName = HO.FirstName == null ? "Null" : HO.FirstName,
-                                  LastName = HO.LastName == null ? "Null" : HO.LastName,
-                                  DsaName = U.Name == null ? "Null" : U.Name,
-                                  BranchName = HO.Branch.branchname == null ? "Null" : HO.Branch.branchname,
+                                  FormNo = HO.FormNo ?? "Null",
+                                  FirstName = HO.FirstName ?? "Null",
+                                  LastName = HO.LastName ?? "Null",
+                                  DsaName = U.Name ?? "Null",
+                                  BranchName = HO.Branch.branchname ?? "Null",
                                   LoanAmount = PC.LoanAmount == null ? 0 : PC.LoanAmount,
                                   SubmissionDate = PC.DateOfAction,
                                   QueryStatus = LQ == null ? "Pending With HO" : (LQ.Query_Status.Equals('Q') ? "Pending With Branch" : "Pending with HO"),
-                                  QueryCount = HO.hoLeadQuery.Count()
+                                  QueryCount = HO.hoLeadQuery.Count
                               };
                 return Process.ToList();
 
@@ -406,7 +406,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                                   LoanAmount = PC.LoanAmount,
                                   SubmissionDate = PC.DateOfAction,
                                   QueryStatus = LQ == null ? "Pending With HO" : (LQ.Query_Status.Equals('Q') ? "Pending With Branch" : "Pending with HO"),
-                                  QueryCount = HO.hoLeadQuery.Count()
+                                  QueryCount = HO.hoLeadQuery.Count
                               };
                 return Process.ToList();
 
@@ -448,7 +448,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                                   LoanAmount = PC.LoanAmount,
                                   SubmissionDate = PC.DateOfAction,
                                   QueryStatus = LQ == null ? "Pending With HO" : (LQ.Query_Status.Equals('Q') ? "Pending With Branch" : "Pending with HO"),
-                                  QueryCount = HO.hoLeadQuery.Count()
+                                  QueryCount = HO.hoLeadQuery.Count
                               };
                 return Process.ToList();
 
@@ -467,7 +467,7 @@ namespace LoanProcessManagement.Persistence.Repositories
             if (req.RoleId == 4)
             {
                 var LeadDetails = _dbContext.LpmLeadMasters.Where(x => x.Lead_assignee_Id == req.LgId).ToList();
-                var qs = _dbContext.LpmLeadProcessCycles.OrderByDescending(x => x.CreatedDate).ToList();
+                var qs = await _dbContext.LpmLeadProcessCycles.OrderByDescending(x => x.CreatedDate).ToListAsync();
                 var temp = from element in qs
                            group element by element.lead_Id
                  into groups
@@ -508,10 +508,10 @@ namespace LoanProcessManagement.Persistence.Repositories
 
                             };
                 joinn = joins.ToList();
-                for (int i = 0; i < joinn.Count(); i++)
+                for (int i = 0; i < joinn.Count; i++)
                 {
                     var data = allProcess.Where(x => x.lead_Id == joinn[i].Lead_Id).ToList();
-                    for (int j = 0; j < data.Count(); j++)
+                    for (int j = 0; j < data.Count; j++)
                     {
                         if (data[j].CurrentStatus == 1 && data[j].CreatedDate != null)
                         {
@@ -605,10 +605,10 @@ namespace LoanProcessManagement.Persistence.Repositories
 
                             };
                 joinn = joins.ToList();
-                for (int i = 0; i < joinn.Count(); i++)
+                for (int i = 0; i < joinn.Count; i++)
                 {
                     var data = allProcess.Where(x => x.lead_Id == joinn[i].Lead_Id).ToList();
-                    for (int j = 0; j < data.Count(); j++)
+                    for (int j = 0; j < data.Count; j++)
                     {
                         if (data[j].CurrentStatus == 1 && data[j].CreatedDate != null)
                         {
@@ -703,10 +703,10 @@ namespace LoanProcessManagement.Persistence.Repositories
 
                             };
                 joinn = joins.ToList();
-                for (int i = 0; i < joinn.Count(); i++)
+                for (int i = 0; i < joinn.Count; i++)
                 {
                     var data = allProcess.Where(x => x.lead_Id == joinn[i].Lead_Id).ToList();
-                    for (int j = 0; j < data.Count(); j++)
+                    for (int j = 0; j < data.Count; j++)
                     {
                         if (data[j].CurrentStatus == 1 && data[j].CreatedDate != null)
                         {
@@ -889,8 +889,6 @@ namespace LoanProcessManagement.Persistence.Repositories
         /// <returns></returns>
         public async Task<List<long?>> GetLoanAmount(GetLoanByCurrentStatusQuery request)
         {
-            //var gettingstatus = await _dbContext.LpmLeadProcessCycles.Where(a => a.CurrentStatus == request.CurrentStatus).Select(a => a.LoanAmount).ToListAsync();
-            //return gettingstatus;
             Dictionary<string, long?> LoanAmountList = new Dictionary<string, long?>();
 
             var lastSixMonths = Enumerable.Range(0, 6)

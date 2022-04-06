@@ -1,11 +1,7 @@
-﻿@*@using LoanProcessManagement.Application.Features.RoleMaster.Queries.GetRoleMaster;*@
-@model LoanProcessManagement.Application.Features.Agency.Commands.UpdateAgency.UpdateAgencyCommand
+﻿@model LoanProcessManagement.Application.Features.Agency.Commands.UpdateAgency.UpdateAgencyCommand
 @{
-
-    //var record = (GetRoleMasterByIdDto)ViewData["data"];
-
+    ViewData["Title"] = "UpdateAgency";
 }
-
 
 <script src="~/js/jquery/jquery-1.10.1.min.js"></script>
 <script src="~/plugins/jquery-ui/jquery-ui.min.js"></script>
@@ -62,7 +58,7 @@
                             <div class="form-group">
                                 <div class="d-flex justify-content-center">
                                     <div class="mr-2"><button type="submit" id="submit" style="background-color: #343a40;color:white" class="btn">Update</button></div>
-                                    <div><a onclick="loadPage()" id="btn2"  value="Cancel" class="btn btn-danger">Cancel</a></div>
+                                    <div><a onclick="loadPage()" id="btn2" value="Cancel" class="btn btn-danger">Cancel</a></div>
                                 </div>
                             </div>
 
@@ -74,26 +70,7 @@
     </div>
 </div>
 <script>
-    //$(document).ready(function () {
-    //    var check = $('#myCheckbox').val();
-    //    console.log(check)
-    //    var ch = check.toString();
-    //console.log(ch);
-    //    console.log(check);
-    //    if (check != "true") {
-    //    console.log("Unchecked");
-    //    $('#myCheckbox').prop('checked', false);
-    //    }
-    //    else if (check == "true") {
-    //    console.log("checked");
-    //        $('#myCheckbox').prop('checked', true);
-    //    }
-    //});
 
-
-    //function BtnClick() {
-    //    $('#myCheckbox').prop('checked', true);
-    //}
     function loadPage() {
 
         $("#div_dynamicTables").load("/Master/GetAgencyList");
@@ -114,7 +91,6 @@
                     toastr.error(result.data.message);
 
                 }
-
             }
         });
         e.preventDefault();
@@ -126,4 +102,3 @@
 
 
 
- n

@@ -8,10 +8,10 @@
     #act1 {
         color: white;
     }
-    
+
         #act1:hover {
             color: white;
-       
+        }
 </style>
 <div class="container app pb-3">
     <div class="col-sm-12">
@@ -36,9 +36,6 @@
                                 <th class="col-lg-3 col-sm-12">
                                     @Html.DisplayNameFor(model => model.MenuName)
                                 </th>
-                                @*<th>
-                                        @Html.DisplayNameFor(model => model.Link)
-                                    </th>*@
                                 <th class="col-lg-5 col-sm-12">
                                     @Html.DisplayNameFor(model => model.Link)
                                 </th>
@@ -56,9 +53,6 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.MenuName)
                                     </td>
-                                    @*<td>
-                                            @Html.DisplayFor(modelItem => item.Link)
-                                        </td>*@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Link)
                                     </td>
@@ -77,7 +71,6 @@
                                     </td>
                                     <td>
                                         @Html.ActionLink("Modify", "UpdateMenu", new { id = item.Id }, new { @Class = "btn btn-primary btn-sm" })
-                                        @*@Html.ActionLink("Remove", "DeleteMenu", new { id = item.Id }, new { @Class = "btn btn-danger btn-sm" })*@
                                         @Html.ActionLink("Remove", "DeleteMenu", "Home", new { id = item.Id },
                                        new { onclick = "return confirm('Are you sure you want to delete ?');", @Class = "btn btn-danger btn-sm" })
 

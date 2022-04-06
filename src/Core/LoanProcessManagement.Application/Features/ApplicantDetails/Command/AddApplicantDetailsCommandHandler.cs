@@ -4,9 +4,6 @@ using LoanProcessManagement.Application.Responses;
 using LoanProcessManagement.Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -37,8 +34,10 @@ namespace LoanProcessManagement.Application.Features.ApplicantDetails.Command
             }
             else
             {
-                var res = new Response<AddApplicantDetailsDto>(applicantDetailsDto, "Failed");
-                res.Succeeded = false;
+                var res = new Response<AddApplicantDetailsDto>(applicantDetailsDto, "Failed")
+                {
+                    Succeeded = false
+                };
                 return res;
             }
         }

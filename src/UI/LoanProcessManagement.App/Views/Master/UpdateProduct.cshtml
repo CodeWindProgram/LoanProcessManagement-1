@@ -13,7 +13,7 @@
                 <div class="panel-body">
                     <div class="border-part">
                         <form id="MyForm" asp-action="AddQueryType" method="post" enctype="multipart/form-data">
-                            @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@<br />
+                            <br />
                             <div style="text-align:end" class="form-group"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
                             <div class="form-group">
                                 <div class="row pl-5">
@@ -75,20 +75,7 @@
     </div>
 </div>
 <script>
-    //$(document).ready(function () {
-    //    var check = $('#myCheckbox').val();
-    //    var ch = check.toString();
-    //    console.log(ch);
-    //    console.log(check);
-    //    if (check != "true") {
-    //        console.log("Unchecked");
-    //        $('#myCheckbox').prop('checked', false);
-    //    }
-    //    else if (check == "true") {
-    //        console.log("checked");
-    //        $('#myCheckbox').prop('checked', true);
-    //    }
-    //});
+
     function loadPage() {
 
         $("#div_dynamicTables").load("/Master/Getallproducts");

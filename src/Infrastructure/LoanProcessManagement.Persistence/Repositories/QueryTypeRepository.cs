@@ -17,11 +17,9 @@ namespace LoanProcessManagement.Persistence.Repositories
     public class QueryTypeRepository : IQueryTypeRepository
     {
         protected readonly ApplicationDbContext _dbContext;
-        private readonly ILogger _logger;
-        public QueryTypeRepository(ApplicationDbContext dbContext, ILogger<QueryTypeRepository> logger)
+        public QueryTypeRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
-            _logger = logger;
         }
         public async Task<CreateQueryCommandDto> CreateQueryType(LpmQueryTypeMaster request)
         {
@@ -68,7 +66,6 @@ namespace LoanProcessManagement.Persistence.Repositories
 
         public async Task<IEnumerable<LpmQueryTypeMaster>> GetAllQueryType()
         {
-            //return await _dbContext.LpmQueryTypeMasters.ToListAsync();
             return await _dbContext.LpmQueryTypeMasters.Where(x => x.IsActive).ToListAsync();
         }
 

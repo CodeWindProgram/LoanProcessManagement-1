@@ -1,17 +1,13 @@
 ﻿using LoanProcessManagement.Application.Contracts.Infrastructure;
 using LoanProcessManagement.Application.Contracts.Persistence;
-using LoanProcessManagement.Application.Features.ChangePassword.Commands.ResetPassword;
 using LoanProcessManagement.Application.Helper;
 using LoanProcessManagement.Application.Models.Mail;
 using LoanProcessManagement.Domain.CustomModels;
-using LoanProcessManagement.Domain.Entities;
 using LoanProcessManagement.Infrastructure.EncryptDecrypt;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LoanProcessManagement.Persistence.Repositories
@@ -33,26 +29,16 @@ namespace LoanProcessManagement.Persistence.Repositories
 
             if (changePassword != null)
             {
-                //var userDetails = await _dbContext.LpmUserMasters.Include(x=>x.Branch).Include(x=>x.UserRole)
-                //    .Where(x => x.LgId == changePassword.lg_id).FirstOrDefaultAsync();
-
-                //var userDetails = _dbContext.LpmUserMasters.Where(x => x.LgId==changePassword.lg_id).FirstOrDefault();
-                // var userDetails = _dbContext.LpmUserMasters.Where(x=>x.Password==changePassword.OldPassword).FirstOrDefault();
-                //var encryptPassword = "";
-                // var decryptPassword = "";
-                //if (userDetails!=null) {
                 var encryptOldPassword = EncryptionDecryption.EncryptString(changePassword.OldPassword);
                 var encryptNewPassword = EncryptionDecryption.EncryptString(changePassword.NewPassword);
-                // var decryptPassword = EncryptionDecryption.DecryptString(changePassword.Password);
-                // }
-                //var userDetails = _dbContext.LpmUserMasters.Where(x => x.Password == encryptOldPassword).FirstOrDefault();
-                var userDetails = _dbContext.LpmUserMasters.Where(x => x.Password == encryptOldPassword && x.LgId == changePassword.lg_id).FirstOrDefault();
+
+                var userDetails = await _dbContext.LpmUserMasters.Where(x => x.Password == encryptOldPassword && x.LgId == changePassword.lg_id).FirstOrDefaultAsync();
                 //here we need to check old password is correct or not - with encryption
                 //if matched encrypt new password with key
 
                 if (userDetails != null && !string.IsNullOrEmpty(changePassword.NewPassword) && encryptOldPassword == userDetails.Password) /*&& decryptPassword==changePassword.OldPassword*/
                 {
-                    userDetails.Password = encryptNewPassword;//changePassword.NewPassword;
+                    userDetails.Password = encryptNewPassword;
                     userDetails.LastModifiedBy = changePassword.ModifiedBy;
                     userDetails.LastModifiedDate = DateTime.Now;
                     _dbContext.SaveChanges();
@@ -77,9 +63,9 @@ namespace LoanProcessManagement.Persistence.Repositories
 
 
 
-        public ResetPasswordModel ResetPassword(ResetPasswordModel ResetPassword,string LastModified)
+        public async Task<ResetPasswordModel> ResetPassword(ResetPasswordModel ResetPassword,string LastModified)
         {
-            var userDetails = _dbContext.LpmUserMasters.Where(x => x.LgId == ResetPassword.Lg_id).FirstOrDefault();
+            var userDetails = await _dbContext.LpmUserMasters.Where(x => x.LgId == ResetPassword.Lg_id).FirstOrDefaultAsync();
 
             if (userDetails != null)
             {
@@ -98,13 +84,11 @@ namespace LoanProcessManagement.Persistence.Repositories
                 {
                     To = userDetails.Email,
                     Subject = "Your reset password Code is",
-                    //Body = emailSecretPassCode,
-                    //Name=userDetails.Name
                     Body = "Dear "+ userDetails.Name +",<br><br> Password has been reset successfully. Please try to login with below provided credentials.<br><br>Username "+userDetails.EmployeeId +"<br>Password: " + emailSecretPassCode + "<br><br>Thanks & Regards,<br> LOS Support Team."
                 };
 
                 var email = _emailService.SendEmail(SendEmail);
-                if (email.Result == true)
+                if (email.Result)
                 {
                     ResetPassword.Issuccess = true;
                     ResetPassword.Message = " Password Successfully Send To Registered Email Address.";
@@ -127,7 +111,7 @@ namespace LoanProcessManagement.Persistence.Repositories
         public async Task<bool> VerifyOldPassword(string oldPassword, string LgId)
         {
             var encryptOldPassword = EncryptionDecryption.EncryptString(oldPassword);
-            var userDetails = _dbContext.LpmUserMasters.Where(x => x.Password == encryptOldPassword && x.LgId == LgId).FirstOrDefault();
+            var userDetails = await _dbContext.LpmUserMasters.Where(x => x.Password == encryptOldPassword && x.LgId == LgId).FirstOrDefaultAsync();
             if (userDetails != null)
             {
                 return true;

@@ -1,6 +1,4 @@
-﻿
-
-@model LoanProcessManagement.Application.Features.LpmCategories.Commands.CreateLpmCategory.CreateLpmCategoryCommand
+﻿@model LoanProcessManagement.Application.Features.LpmCategories.Commands.CreateLpmCategory.CreateLpmCategoryCommand
 <script src="~/js/jquery/jquery-1.10.1.min.js"></script>
 <script src="~/plugins/jquery-ui/jquery-ui.min.js"></script>
 <script src="~/plugins/jquery/jquery.min.js"></script>
@@ -15,7 +13,7 @@
                 <div class="panel-body">
                     <div class="border-part">
                         <form id="MyForm" asp-action="AddBranch" method="post" enctype="multipart/form-data">
-                            @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@<br />
+                            <br />
                             <div style="text-align:end" class="form-group"><label><span style="color: Red">&nbsp;All * marked fields are mandatory</span></label></div>
                             <div class="form-group">
                                 <div class="row pl-5">
@@ -40,7 +38,6 @@
                         </form>
                     </div>
                 </div>
-
 
             </div>
         </div>
@@ -72,8 +69,6 @@
             });
             e.preventDefault();
         }
-
-
     });
 
 </script>

@@ -16,26 +16,20 @@
                     <table id="ReportsLeadListing" class="display table-responsive-lg">
                         <thead>
                             <tr>
-
                                 <th>
-                                    @*@Html.DisplayNameFor(model => model.FormNo)*@
                                     Form No.
 
                                 </th>
                                 <th>
-                                    @*@Html.DisplayNameFor(model => model.CustomerName)*@
                                     Name
                                 </th>
                                 <th>
-                                    @*@Html.DisplayNameFor(model => model.DSAName)*@
                                     Contact Number
                                 </th>
                                 <th>
-                                    @*@Html.DisplayNameFor(model => model.ProductName)*@
                                     First Meeting
                                 </th>
                                 <th>
-                                    @*@Html.DisplayNameFor(model => model.Amount)*@
                                     Status
                                 </th>
                             </tr>
@@ -55,7 +49,6 @@
                                         @Html.DisplayFor(modelItem => item.PhoneNo)
                                     </td>
                                     <td>
-                                        @*@Html.DisplayFor(modelItem => item.FirstMeeting)*@
                                         @{
                                             var date = item.FirstMeeting.ToString().Split(" ");
                                         }

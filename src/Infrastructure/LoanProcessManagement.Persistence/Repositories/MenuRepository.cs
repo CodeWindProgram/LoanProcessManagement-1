@@ -64,7 +64,7 @@ namespace LoanProcessManagement.Persistence.Repositories
         {
             var result = await (from A in _dbContext.LpmUserRoleMenuMaps
                                 join B in _dbContext.LpmMenuMasters on A.MenuId equals B.Id
-                                where A.UserRoleId == UserRoleId && A.IsActive == true
+                                where A.UserRoleId == UserRoleId && A.IsActive
                                 orderby B.Position
                                 select new LpmMenuMaster
                                 {
@@ -155,7 +155,7 @@ namespace LoanProcessManagement.Persistence.Repositories
             {
                 response.Message = "Menu doesn't exists .";
                 response.Succeeded = false;
-                response.Id = menuToUpdate.Id;
+                response.Id = Id;
                 return response;
             }
         }
@@ -183,7 +183,7 @@ namespace LoanProcessManagement.Persistence.Repositories
         /// <returns></returns>
         public async Task<LpmUserRoleMenuMap> DeleteMenumapById(long Id)
         {
-            var result = _dbContext.LpmUserRoleMenuMaps.FirstOrDefault(e => e.Id == Id);
+            var result = await _dbContext.LpmUserRoleMenuMaps.FirstOrDefaultAsync(e => e.Id == Id);
             if (result != null)
             {
                 _dbContext.LpmUserRoleMenuMaps.Remove(result);
@@ -212,13 +212,13 @@ namespace LoanProcessManagement.Persistence.Repositories
             return result;
         }
 
-        public AlterMenuStatusCommandDTO AlterStatus(int id,string LgId)
+        public async Task<AlterMenuStatusCommandDTO> AlterStatus(int id,string LgId)
         {
             AlterMenuStatusCommandDTO response = new AlterMenuStatusCommandDTO();
-            var result =  _dbContext.LpmMenuMasters.Where(x => x.Id == id).FirstOrDefault();
+            var result = await _dbContext.LpmMenuMasters.Where(x => x.Id == id).FirstOrDefaultAsync();
             if (result != null)
             {
-                if(result.IsActive == true)
+                if(result.IsActive)
                 {
                     result.IsActive = false;
                     result.LastModifiedBy = LgId;

@@ -14,25 +14,28 @@ namespace LoanProcessManagement.Application.Features.RejectedLeadMaster.Queries.
     public class GetRejectedLeadReasonMasterByIdQueryHandler : IRequestHandler<GetRejectedLeadReasonMasterByIdQuery,GetRejectedLeadReasonMasterByIdDto>
     {
         private readonly IRejectedLeadReasonMasterRepository _rejectedLeadReasonMasterRepository;
-        private readonly IMapper _mapper;
-        private readonly ILogger _logger;
+        private readonly ILogger<GetRejectedLeadReasonMasterByIdQueryHandler> _logger;
 
-        public GetRejectedLeadReasonMasterByIdQueryHandler(IMapper mapper, IRejectedLeadReasonMasterRepository rejectedLeadReasonMasterRepository)
+        public GetRejectedLeadReasonMasterByIdQueryHandler(IRejectedLeadReasonMasterRepository rejectedLeadReasonMasterRepository, ILogger<GetRejectedLeadReasonMasterByIdQueryHandler> logger)
         {
-            _mapper = mapper;
             _rejectedLeadReasonMasterRepository = rejectedLeadReasonMasterRepository;
+            _logger = logger;
         }
         public async Task<GetRejectedLeadReasonMasterByIdDto> Handle(GetRejectedLeadReasonMasterByIdQuery request, CancellationToken cancellationToken)
         {
+            _logger.LogInformation("Handle Initiated");
             var data = await _rejectedLeadReasonMasterRepository.GetRejectedLeadReasonMasterByIdAsync(request.id);
-            GetRejectedLeadReasonMasterByIdDto role = new GetRejectedLeadReasonMasterByIdDto();
-            role.RejectLeadReasonId = data.RejectLeadReasonID;
-            role.RejectLeadReason = data.RejectLeadReason;
+            GetRejectedLeadReasonMasterByIdDto role = new GetRejectedLeadReasonMasterByIdDto
+            {
+                RejectLeadReasonId = data.RejectLeadReasonID,
+                RejectLeadReason = data.RejectLeadReason
+            };
             if (data.LastModifiedDate != null)
             {
                 role.LastModifiedDate = (DateTime)data.LastModifiedDate;
             }
             role.IsActive = data.IsActive;
+            _logger.LogInformation("Handle Completed");
             return role;
         }
     }

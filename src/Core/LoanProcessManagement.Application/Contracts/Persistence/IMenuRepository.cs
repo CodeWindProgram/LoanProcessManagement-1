@@ -33,7 +33,7 @@ namespace LoanProcessManagement.Application.Contracts.Persistence
         Task<LpmUserRoleMenuMap> DeleteMenumapById(long Id);
         Task<IEnumerable<MenuListQueryVm>> GetChildMenuyById(long ParentId,long UserRoleId);
 
-        AlterMenuStatusCommandDTO AlterStatus(int id, string LgId);
+        Task<AlterMenuStatusCommandDTO> AlterStatus(int id, string LgId);
     }
     #endregion
 }

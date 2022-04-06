@@ -3,7 +3,6 @@
 
     @{
         Layout = "~/Views/Shared/_Layout.cshtml";
-        //ViewData["Title"] = "ITR Details Details";
     }
 
 <style>  
@@ -40,81 +39,6 @@
     }
 </style>
 
-    @*<style>
-            .tab {
-            padding-left: 15px;
-        }
-
-    .AppTabs {
-        display: none;
-        margin-right: 3px;
-        padding: 5px 30px;
-        background: #191970;
-        color: #FFF;
-    }
-
-        .btn {
-            width: inherit;
-            justify-content: center;
-        }
-
-        .AppTabs:hover {
-            background: #adb5bd;
-            color: black;
-        }
-
-        .AppTabs:visited {
-            text-decoration: none;
-        }
-
-        .selected {
-            background: #0d7db5;
-            color: #FFF;
-        }
-
-        .panel-heading {
-            color: white;
-            background-color: #343a40;
-            border-bottom: 1px solid rgba(0,0,0,.125);
-            padding: 0.75rem 1.25rem;
-            position: relative;
-            border-top-left-radius: 0.25rem;
-            border-top-right-radius: 0.25rem;
-        }
-
-        .card {
-            background-color:slategray;
-            background: linear-gradient(to bottom, rgba(251,251,251,10) 0%,rgba(242,242,242,10) 100%);
-            font-family: sans-serif;
-            font-size: 18px;
-            border: 1px solid;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-             h5 {
-            font-size: 1.25rem;
-            margin-left: 1rem;
-            padding-top: 5px;
-            font-weight: 600;
-        }
-            .btnDiv {
-            text-align: center;
-        }
-
-        .formDiv {
-            border: 1px solid #343a40;
-            padding-bottom: 5px;
-            padding-left: 1%;
-            padding-right: 1%;
-        }
-
-        u {
-            font-weight: 600;
-        }
-    </style>*@
-
-
-
     <div class="container pb-5">
         <div class="container app">
             <div class="col-sm-12 col-lg-12">
@@ -141,17 +65,6 @@
                                     <li><a id="lnkCoApp_5" class="nav-link border-1 text-uppercase font-weight-bold AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=5" style="background-color: white; color: #343A40;">Co-Applicant-5</a></li>
                                 </ul>
                             </div>
-
-                            @*<div class="btnDiv pt-4 pl-4 pr-4">
-                                <ul>
-                                    <li><a href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=0" class="AppTabs btn-sm selected" id="lnkCoApp_0" style="background: #adb5bd;">Applicant</a></li>
-                                    <li><a id="lnkCoApp_1" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=1" style="background: #343a40;">Co-Applicant-1</a></li>
-                                    <li><a id="lnkCoApp_2" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=2" style="background: #343a40;">Co-Applicant-2</a></li>
-                                    <li><a id="lnkCoApp_3" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=3" style="background: #343a40;">Co-Applicant-3</a></li>
-                                    <li><a id="lnkCoApp_4" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=4" style="background: #343a40;">Co-Applicant-4</a></li>
-                                    <li><a id="lnkCoApp_5" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=5" style="background: #343a40;">Co-Applicant-5</a></li>
-                                </ul>
-                            </div>*@
 
                             <span id="ContentPlaceHolder1_spanMessage" style="color: red;"></span>
 
@@ -187,9 +100,6 @@
                                                 <p>@Model.CustomerName</p>
                                             </div>
 
-
-
-
                                             <div class="col-lg-4 col-sm-12">
                                                 <label class="">Customer Email</label><br />
                                                 <p>@Model.CustomerEmail</p>
@@ -210,16 +120,11 @@
 
                                             <div class="col-lg-4 col-sm-12">
                                                 <label class="">Employee Type</label><br />
-                                                @*<input style="border: none; background-color: #f4f6f9;" id="selfEmployee" checked>*@
                                                 <label style="font-weight:normal;" for="selfEmployee">Self-Employee</label>
                                             </div>
 
-
-
-
                                             <div class="col-lg-4 col-sm-12">
                                                 <label class="">Consent</label><br />
-                                                @*<input type="checkbox" id="ConsentValue" checked>*@
                                                 <label style="font-weight:normal;" for="ConsentValue"> Yes </label><br>
                                             </div>
 
@@ -240,9 +145,6 @@
                                                     <label class="">PAN</label><br />
                                                     <p>@Model.PanCardNo</p>
                                                 </div>
-
-
-
 
                                                 <div class="col-lg-4 col-sm-12">
                                                     <label class="">User Name</label><br />
@@ -265,7 +167,6 @@
                                     </div>
 
                                     <div id="accountDv">
-
 
                                         <br />
                                         <div class="row tab">
@@ -290,205 +191,6 @@
         </div>
     </div>
 
-
-
-    @*<div class="container pb-5">
-            <div class="container app">
-                <div class="col-sm-12 col-lg-12">
-                    <div data-effect="helix" id="panels" class="panel panel-info effect-helix in">
-                        <div class="panel-heading">
-                            <h5>Add ITR Enquiry</h5>
-                        </div>
-                        <div class="formDiv">
-                            <form method="post" action="/LeadITRDetails/index">
-
-                                <input type="hidden" asp-for="lead_Id" id="hdnLeadId">
-                                <input type="hidden" asp-for="ApplicantType" id="hdnApplicantType">
-                                <input type="hidden" asp-for="CreatedBy" value=@User.FindFirst("lg_id").Value />
-                                <input type="hidden" asp-for="LastModifiedBy" value=@User.FindFirst("lg_id").Value />
-                                <div style="height: 15px;"></div>
-                                <div class="btnDiv pt-4 pl-4 pr-4">
-                                    <a href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=0" class="AppTabs btn-sm selected" id="tabProcess0" style="background: #adb5bd;">Applicant</a>
-                                    <a id="ContentPlaceHolder1_lnkCoApp1" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=1" style="background: #343a40;">Co-Applicant-1</a>
-                                    <a id="ContentPlaceHolder1_lnkCoApp2" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=2" style="background: #343a40;">Co-Applicant-2</a>
-                                    <a id="ContentPlaceHolder1_lnkCoApp3" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=3" style="background: #343a40;">Co-Applicant-3</a>
-                                    <a id="ContentPlaceHolder1_lnkCoApp4" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=4" style="background: #343a40;">Co-Applicant-4</a>
-                                    <a id="ContentPlaceHolder1_lnkCoApp5" class="AppTabs btn-sm" href="/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=5" style="background: #343a40;">Co-Applicant-5</a>
-                                </div>
-
-                                <span id="ContentPlaceHolder1_spanMessage" style="color: red;"></span>
-
-                                <div class="frames">
-                                    <div class="panel-body">
-                                              <div id="ContentPlaceHolder1_alertMsg">
-                                            <div class="row tab pt-3 pr-1">
-                                                <div class="col-md-12 text-center">
-                                                    <label class="h4">Form No.</label>
-                                                 <span id="ContentPlaceHolder1_lblFormNo" class="h4" style="color: black; border:none">
-                                                        <label>@Model.FormNo</label>
-                                                        <input type="hidden" asp-for="FormNo" />
-
-                                                    </span>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <hr />
-
-                                        <div>
-                                            <h4><u>Customer Details</u></h4>
-                                        </div>
-
-                                        <div style="height: 5px;"></div>
-                                        <div class="row tab">
-                                            <div class="col-md-5">
-                                                <label class="">Customer Name</label>
-
-                                            </div>
-                                            <div class="col-md-5">
-                                                <div class="input-control text">
-
-                                                    <label>@Model.CustomerName</label>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div style="height: 5px;"></div>
-                                        <div class="row tab">
-                                            <div class="col-md-5">
-                                                <label class="">Customer Email</label>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <div class="input-control text">
-
-                                                    <label>@Model.CustomerEmail</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div style="height: 5px;"></div>
-                                        <div class="row tab">
-                                            <div class="col-md-5">
-                                                <label class="">Customer Mobile</label>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <div class="input-control text">
-
-                                                    <label>@Model.CustomerPhone</label>
-                                                    <span asp-validation-for="CustomerPhone" style="color:Red;display:block;"></span>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div style="height: 5px;"></div>
-                                        <div class="row tab">
-                                            <div class="col-md-5">
-                                                <label class="">Employee Type</label>
-                                            </div>
-                                            <div class="col-md-5" id="selfEmployeeNode">
-                                                <div class="input-control text">
-                                                    <input type="radio" id="selfEmployee" checked>
-                                                    <label for="selfEmployee">Self-Employee</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div style="height: 5px;"></div>
-                                        <div class="row tab">
-                                            <div class="col-md-5">
-                                                <label class="">Consent</label>
-                                            </div>
-                                            <div class="col-md-5" id="consentNode">
-                                                <div class="input-control text">
-                                                    <input type="checkbox" id="ConsentValue" checked>
-                                                    <label for="ConsentValue"> Yes </label><br>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div style="height: 5px;"></div>
-                                        <div id="IdentificationDv">
-                                            <div style="height: 5px;"></div>
-                                            <hr />
-                                            <div id="divIdentification">
-                                                <h4><u>ITR Details</u></h4>
-
-                                            </div>
-                                            <div style="height: 5px;"></div>
-                                            <div class="row tab">
-                                                <div class="col-md-5">
-                                                    <label class="">PAN</label>
-                                                </div>
-                                                <div class="col-md-5">
-                                                    <div class="input-control text">
-
-                                                        <label>@Model.PanCardNo</label>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div style="height: 5px;"></div>
-                                            <div class="row tab">
-                                                <div class="col-md-5">
-                                                    <label class="">User Name</label>
-                                                </div>
-                                                <div class="col-md-5">
-                                                    <div class="input-control text">
-
-                                                        <label>@Model.UserName</label>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div style="height: 5px;"></div>
-                                            <div class="row tab">
-                                                <div class="col-md-5">
-                                                    <label class="" id="PasswordBoxLabel">Password</label>
-                                                    <span style="color: Red" id="FieldMark">&nbsp;*</span>
-                                                </div>
-                                                <div class="col-md-5">
-                                                    <div class="input-control text">
-                                                        <input asp-for="Password" type="password" maxlength="20" id="PasswordBoxNode" class="form-control">
-                                                        <span asp-validation-for="Password" style="color:Red;display:block;"></span>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div id="accountDv">
-
-
-                                            <br />
-                                            <div class="row tab">
-                                                <div class="col-md-12">
-                                                    <center>
-
-                                                <input type="submit" name="ctl00$ContentPlaceHolder1$btnAddEnquiry" value="Submit" id="SubmitButton" class="btn" style="background-color: #343a40; color:white;">&nbsp
-                                                @{ var leadId = "Lead_" + Model.lead_Id;}
-
-                                                <a id="cancelbutton" class="btn btn-danger" href="/LeadList/LeadSummary/@leadId">Cancel</a>
-                                                @*<input type="submit" name="ctl00$ContentPlaceHolder1$btnExit" value="Cancel" id="ContentPlaceHolder1_btnExit" class="btn btn-danger" asp-controller="Home" asp-action="Index">*@
-                                            @*</center>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>*@
-
 <script>
     $(document).ready(function () {
         if ('@TempData["leadItrIsSuccess"]' == 'True') {
@@ -500,26 +202,6 @@
 
         }
 
-        @*if ('@ViewBag.isSuccess' == 'True') {
-            toastr.success('@ViewBag.Message', "Success");
-        }
-        else if ('@ViewBag.isSuccess' == 'False') {
-            toastr.error('@ViewBag.Message', "Error");
-
-        }
-
-        if ('@ViewBag.isSuccess' == 'True') {
-
-            setTimeout(function () {
-                location.href = "/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=@Model.ApplicantType";
-            }, 3000);
-        }
-        else if('@ViewBag.isSuccess' == 'False'){
-             setTimeout(function () {
-                 location.href = "/LeadITRDetails/Index?lead_Id=@Model.lead_Id&applicantType=@Model.ApplicantType";
-             }, 1000);
-
-        }*@
     });
 
 
@@ -565,23 +247,6 @@
 
     });
 
-    @*$(document).ready(function () {
-        var buttonNode = $('#SubmitButton');                                       //ContentPlaceHolder1_btnAddEnquiry
-        if (@Model.IsSuccess) {
-            setTimeout(function () {
-                //buttonNode.prop('disabled', true);
-                $("#SubmitButton").prop("disabled", true);
-            }, 1000);
-        }
-
-        if (@Model.IsSuccess) {
-            $("#SubmitButton").hide();
-            $("#PasswordBoxNode").hide();
-            $("#PasswordBoxLabel").hide();
-        }
-    });*@
-
-
     $(document).ready(function () {
         var button = document.getElementById("SubmitButton");
         var passwordBox = document.getElementById("PasswordBoxNode");
@@ -596,13 +261,11 @@
     });
 
     $(document).ready(function () {
-        //var button = document.getElementById("SubmitButton");
         //debugger;
         if (@Model.Succeeded.ToString().ToLower() == false) {
             $("#SubmitButton").attr("disabled", "disabled");
             $("#selfEmployeeNode").hide();
             $("#consentNode").hide();
-            //$("#FieldMark").hide();
         }
 
         //debugger
@@ -611,8 +274,6 @@
             for (var i = 0; i < jsArray.length; i++) {
                 var id = "#lnkCoApp_" + jsArray[i];
                 $(id).css('pointer-events', 'auto');
-                //$(id).css("display", "inline-block");
-                //$(id).show();
             }
         });
     });

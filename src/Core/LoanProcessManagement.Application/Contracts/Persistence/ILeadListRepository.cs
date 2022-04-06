@@ -20,7 +20,7 @@ namespace LoanProcessManagement.Application.Contracts.Persistence
         Task<IEnumerable<LeadListModel>> GetAllLeadList();
         Task<IEnumerable<GetLeadStatusQueryVm>> GetAllLeadStatus(long BranchId);
         Task<IEnumerable<GetLeadNameByLgIdQueryVm>> LeadByName(string LgId);
-        IEnumerable<LpmLeadMaster> getLeadByLeadAssigneeId(string lead_assignee_Id);
+        Task<IEnumerable<LpmLeadMaster>> getLeadByLeadAssigneeId(string lead_assignee_Id);
         Task<IEnumerable<LeadHistoryQueryVm>> GetLeadhistory(string lead_id);
         Task<AddLeadDto> AddLeadAsync(LpmLeadMaster request);
         Task<GetLeadByLeadIdDto> GetLeadByLeadId(string lead_id);

@@ -16,16 +16,15 @@
     }
 
     .btn {
-        /*background-color: #343a40;*/
         color: white;
         margin-bottom: 5px;
     }
 
-        .btn:hover {
-            background-color: #adb5bd;
-            color: black;
-            margin-bottom: 5px;
-        }
+    .btn:hover {
+        background-color: #adb5bd;
+        color: black;
+        margin-bottom: 5px;
+    }
 
     .selected {
         background: #adb5bd;
@@ -38,10 +37,7 @@
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
             <div class="panel-heading"><h5>GST Enquiry Details</h5></div>
             <div class="panel-body">
-                @*<div id="alertMsg" visible="false" runat="server">
-                    <asp:Label ID="lblAlert" runat="server" Style="color: red"></asp:Label>
-                    <div style="margin-bottom: 10px"></div>
-                </div>*@
+
                 <div class="card" style="padding:5px;">
                     <table id="CreditDetailsList" class="display table-responsive-lg">
                         <h5><b>Form No. : @ViewBag.FormNo</b></h5>
@@ -72,7 +68,6 @@
                                     @Html.DisplayFor(modelItem => item.ApplicantName)
                                 </td>
                                 <td>
-                                    @*Applicant-@Html.DisplayFor(modelItem => item.ApplicantType)*@
                                     @if (item.ApplicantType > 0){
                                         <span>Co-Applicant-</span>@Html.DisplayFor(modelItem => item.ApplicantType);
                                     }
@@ -93,12 +88,6 @@
                                     <button type="button" onclick="downloadFile(event, '@item.ExcelFile', '@item.FormNo',1)">Click Here</button>
                                     
                                 </td>
-                                @*<td>
-                                    <button class="btn btn-primary btn-sm">Download</button>
-                                </td>
-                                <td>
-                                    <button class="btn btn-primary btn-sm">Download</button>
-                                </td>*@
                             </tr>
                             }
                         </tbody>

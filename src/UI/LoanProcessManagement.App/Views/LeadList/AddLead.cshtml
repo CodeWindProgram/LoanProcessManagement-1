@@ -1,7 +1,5 @@
 ﻿@model LoanProcessManagement.App.Models.AddLeadCommandVM
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "AddLead";
@@ -12,558 +10,7 @@
         color: white;
     }
 </style>
-@*<style>
-        .group1 {
-            padding-left: 4px;
-            float: left;
-        }
 
-        .group2 {
-            float: right;
-            width: 65%;
-            padding-right: 4px;
-        }
-
-        input[type=text], textarea, select {
-            width: 100%;
-        }
-
-        .row {
-            margin-left: 5px;
-            margin-right: 5px;
-        }
-
-        #btnSignIn {
-            margin-left: 5px;
-        }
-        #normal{
-            font-weight:normal;
-        }
-
-
-
-        /*.panel-heading {
-            color: white;
-            background-color: #343a40;
-            border-bottom: 1px solid rgba(0,0,0,.125);
-            padding: 0.75rem 1.25rem;
-            position: relative;
-            border-top-left-radius: 0.25rem;
-            border-top-right-radius: 0.25rem;
-        }*/
-    </style>*@
-
-<!--<div class="container app pb-5">
-    <div class="col-sm-12 col-lg-12">
-        <div data-effect="helix" id="panels" class="panel panel-info effect-helix in">
-            <div class="panel-heading" id="adduplead">
-                <h5>New Lead Details</h5>
-            </div>
-            <div style="border: 1px solid #343a40; padding-left: 2%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;">
-                <div class="panel-body">
-                    <div class="border-part">-->
-@*@if (ViewBag.isSuccess == true)
-    {
-        <div class="alert alert-success" role="alert">
-            @ViewBag.Message
-        </div>
-    }
-    else if (ViewBag.isSuccess == false)
-    {
-        <div class="alert alert-danger" role="alert">
-            <strong>Error!</strong> @ViewBag.Message
-        </div>
-
-    }*@
-<!--<div style="text-align:end" class="form-group">
-                            <div class="row">
-                                <div class="col-12">
-                                    <label><span class="text-danger">Note: All * Marked Fields Are Mandatory</span></label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <form asp-controller="LeadList" asp-action="AddLead" method="post">
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-1"></div>
-                                    <div class="col-3">
-                                        <label asp-for="BranchID">Branch Name :</label>
-                                    </div>
-                                    <div class="col-6">
-                                        <label id="empId" value=User.FindFirst("Branch" ).Value>User.FindFirst("Branch").Value</label>
-                                        <input type="hidden" asp-for="BranchID" value="User.FindFirst("BranchID").Value" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-1"></div>
-                                    <div class="col-3">
-                                        <label for="dates">Date :</label>
-                                    </div>
-                                    <div class="col-6">
-                                        <label id="dates"></label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-1"></div>
-                                    <div class="col-3">
-                                        <label asp-for="CreatedBy">Employee Name :</label>
-                                    </div>
-                                    <div class="col-6">
-                                        <label id="empId" value=User.Identity.Name>User.Identity.Name </label>
-                                        <input type="hidden" asp-for="CreatedBy" value=User.FindFirst("lg_id").Value />
-                                        <input type="hidden" asp-for="LastModifiedBy" value=User.FindFirst("lg_id").Value />
-                                        <input type="hidden" asp-for="Lead_assignee_Id" value=User.FindFirst("lg_id").Value />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-1"></div>
-                                    <div class="col-3">
-                                        <label asp-for="FormNo">Form Number :<span style="color: red; width: 10%;">*</span></label>
-                                    </div>
-                                    <div class="col-6">
-                                        <input asp-for="FormNo" class="form-control" type="text" name="FormNo" placeholder="Enter Form Number" />
-                                        <span asp-validation-for="FormNo" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-1"></div>
-                                    <div class="col-3">
-                                        <label asp-for="IsPropertyIdentified">Property Identified :<span style="color: red; width: 10%;">*</span></label>
-                                    </div>
-                                    <div class="col-6">
-                                        <select asp-for="IsPropertyIdentified" id="DDL_PropId" class="form-control">
-                                            <option value="">Select</option>
-                                            <option value="YES">Yes</option>
-                                            <option value="NO">No</option>
-                                        </select>
-                                        <span asp-validation-for="IsPropertyIdentified" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="PropertyDiv" style="display: none">
-
-
-
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-1"></div>
-                                        <div class="col-3">
-                                            <label asp-for="PropertyID">Property Type :<span style="color: red; width: 10%;">*</span></label>
-                                        </div>
-                                        <div class="col-6">
-                                            <select asp-for="PropertyID" class="form-control" id="val_PropertyID" required>
-                                                <option value="">Select Property Type</option>
-                                                <option value="2">Plot</option>
-                                                <option value="3">Flat</option>
-                                                <option value="4">Independent House</option>
-                                            </select>
-                                            <span asp-validation-for="PropertyID" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-1"></div>
-                                        <div class="col-3">
-                                            <label asp-for="PropertyPincode">Pincode of Identified Property : <span style="color: red; width: 10%;">*</span></label>
-                                        </div>
-                                        <div class="col-6">
-                                            <input asp-for="PropertyPincode" class="form-control noTxtInput" type="text" placeholder="Enter Pincode" maxlength="6" />
-                                            <span asp-validation-for="PropertyPincode" id="val_PropertyPincode" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-1"></div>
-                                        <div class="col-3">
-                                            <label asp-for="PropertyUnderConstruction">a.Under-Construction : <span style="color: red; width: 10%;">*</span></label>
-                                        </div>
-                                        <div class="col-6">
-                                            <div>
-                                                <input asp-for="PropertyUnderConstruction" type="radio" autofocus value="Yes" id="yes" required />
-                                                Yes
-                                                <input asp-for="PropertyUnderConstruction" type="radio" value="No" id="No" />
-                                                No
-                                            </div>
-                                            <span asp-validation-for="PropertyUnderConstruction" id="val_PropertyUnderConstruction" class="text-danger"></span>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-1"></div>
-                                        <div class="col-3">
-                                            <label asp-for="ProjectName">b.Project Name : <span style="color: red; width: 10%;">*</span></label>
-                                        </div>
-                                        <div class="col-6">
-                                            <input asp-for="ProjectName" class="form-control" placeholder="Enter Project Name" id="val_ProjectName" maxlength="50" autofocus required />
-                                            <span asp-validation-for="ProjectName" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-1"></div>
-                                        <div class="col-3">
-                                            <label asp-for="UnitName">c.Unit Name : <span style="color: red; width: 10%;">*</span></label>
-                                        </div>
-                                        <div class="col-6">
-                                            <input asp-for="UnitName" class="form-control" type="text" placeholder="Enter Unit Name" id="val_UnitName" maxlength="30" autofocus required />
-                                            <span asp-validation-for="UnitName" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-1"></div>
-                                        <div class="col-3">
-                                            <label asp-for="ProjectAddress">d.Project Address : <span style="color: red; width: 10%;">*</span></label>
-                                        </div>
-                                        <div class="col-6">
-                                            <textarea asp-for="ProjectAddress" placeholder="Enter Project Address" id="val_ProjectAddress" class="form-control" maxlength="120" autofocus></textarea>
-                                            <span asp-validation-for="ProjectAddress" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-1"></div>
-                                        <div class="col-3">
-                                            <label asp-for="IsSanctionedPlanReceivedID">e.Does The Property Have a Sanctioned/Approved Plan ? <span style="color: red; width: 10%;">*</span></label>
-                                        </div>
-                                        <div class="col-6">
-                                            <select asp-for="IsSanctionedPlanReceivedID" id="val_IsSanctionedPlanReceivedID" class="form-control" required>
-                                                <option value="">Select Plan</option>
-                                                <option value="1">NO - Less than 120 Sq.mt. (For Delhi NCR only)</option>
-                                                <option value="4">NO - Greater than 300 Sq.mt. (For Delhi NCR only)</option>
-                                                <option value="5">YES</option>
-                                            </select>
-                                            <span asp-validation-for="ProjectAddress" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-1"></div>
-                                    <div class="col-3">
-                                        <label asp-for="FirstName">First Name :<span style="color: red; width: 10%;">*</span></label>
-                                    </div>
-                                    <div class="col-6">
-                                        <input asp-for="FirstName" class="form-control" type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="Enter First Name" maxlength="25"/>
-                                        <span asp-validation-for="FirstName" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-1"></div>
-                                    <div class="col-3">
-                                        <label asp-for="MiddleName">Middle Name :</label>
-                                    </div>
-                                    <div class="col-6">
-                                        <input asp-for="MiddleName" class="form-control" onkeydown="return /[a-z]/i.test(event.key)" type="text" placeholder="Enter Middle Name" maxlength="25"/>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-1"></div>
-                                    <div class="col-3">
-                                        <label asp-for="LastName">Last Name :<span style="color: red; width: 10%;">*</span></label>
-                                    </div>
-                                    <div class="col-6">
-                                        <input asp-for="LastName" class="form-control" type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="Enter Last Name" maxlength="25"/>
-                                        <span asp-validation-for="LastName" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-1"></div>
-                                    <div class="col-3">
-                                        <label asp-for="EmploymentType">Employment Type :</label>
-                                    </div>
-                                    <div class="col-6">
-                                        <div>
-                                            <input id="chkSalaried" asp-for="EmploymentType" type="radio" name="employmentType" value="Salaried" checked="checked" />
-                                            Salaried
-                                            &nbsp;&nbsp;&nbsp;
-                                            <input id="chkSelfEmployment" asp-for="EmploymentType" type="radio" name="employmentType" value="SelfEmployment" />
-                                            Self Employed
-                                        </div>
-                                        <span asp-validation-for="EmploymentType" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="enableOnSlfEmployment1" style="display : none">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-1"></div>
-                                        <div class="col-3">
-                                            <label asp-for="AnnualTurnOverInLastFy">Annual Turnover In Last FY (Applicant Only) : <span style="color: red; width: 10%;">*</span></label>
-                                        </div>
-                                        <div class="col-6">
-                                            <input asp-for="AnnualTurnOverInLastFy" class="form-control noTxtInput" id="annualIncomeFy" type="text" maxlength="10" placeholder="Enter Annual Turnover" />
-                                            <span asp-validation-for="AnnualTurnOverInLastFy" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-1"></div>
-                                    <div class="col-3">
-                                        <label asp-for="TypeOfFirms">Type Of Firm :<span style="color: red; width: 10%;">*</span></label>
-                                    </div>
-                                    <div class="col-6">
-                                        <select id="DDL_typeoffirms" class="form-control" asp-for="TypeOfFirms">
-                                            <option value="">Select Firm</option>
-                                            <option value="1">Sole Proprietorship</option>
-                                            <option value="2">Partnership</option>
-                                            <option value="3">Private Limited</option>
-                                        </select>
-                                        <span asp-validation-for="TypeOfFirms" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="enableOnSlfEmployment2" style="display : none">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-1"></div>
-                                        <div class="col-3">
-                                            <label asp-for="IsApplicantExemptedFromGst">Is Applicant Exempted From GST? (> 40L Turnover) :</label>
-                                        </div>
-                                        <div class="col-6">
-                                            <div>
-                                                <input type="radio" asp-for="IsApplicantExemptedFromGst" name="IsApplicantExemptedFromGst" id="yes_IsExempted" value="Yes" />
-                                                Yes
-                                                &nbsp;&nbsp;&nbsp;
-                                                <input type="radio" asp-for="IsApplicantExemptedFromGst" name="IsApplicantExemptedFromGst" id="no_IsExempted" value="No" checked="checked" />
-                                                No
-                                                <div><span style="color: red; font-weight: bold;">[ Please Note That Misreporting Of GST Exemption will be Penalized. ]</span></div>
-                                            </div>
-                                            <span asp-validation-for="IsApplicantExemptedFromGst" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="enableOnYes" style="display : none">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-1"></div>
-                                        <div class="col-3">
-                                            <label asp-for="ExemptedCategory">Exempted Category : <span style="color: red; width: 10%;">*</span></label>
-                                        </div>
-                                        <div class="col-6">
-                                            <input asp-for="ExemptedCategory" class="form-control" type="text" maxlength="300" placeholder="Write your reason" />
-                                            <span asp-validation-for="ExemptedCategory" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-1"></div>
-                                    <div class="col-3">
-                                        <label asp-for="CustomerPhone">Phone Number 1 : <span style="color: red; width: 10%;">*</span></label>
-                                    </div>
-                                    <div class="col-6">
-                                        <input asp-for="CustomerPhone" class="form-control noTxtInput" type="text" placeholder="Phone No 1(Should be 10 digits)" maxlength="10" required="" />
-                                        <span asp-validation-for="CustomerPhone" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-1"></div>
-                                    <div class="col-3">
-                                        <label asp-for="CustomerPhone_Alternate">Phone Number 2 :</label>
-                                    </div>
-                                    <div class="col-6">
-                                        <input asp-for="CustomerPhone_Alternate" class="form-control noTxtInput" type="text" placeholder="Phone No 2(Should be 10 digits)" maxlength="10" />
-                                        <span asp-validation-for="CustomerPhone_Alternate" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-1"></div>
-                                    <div class="col-3">
-                                        <label asp-for="CustomerEmail">Email Address : <span style="color: red; width: 10%;">*</span></label>
-                                    </div>
-                                    <div class="col-6">
-                                        <input asp-for="CustomerEmail" class="form-control" type="text" maxlength="30" placeholder="Enter Email Address" />
-                                        <span asp-validation-for="CustomerEmail" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-1"></div>
-                                    <div class="col-3">
-                                        <label asp-for="NationalityType">Residental Status : <span style="color: red; width: 10%;">*</span></label>
-                                    </div>
-                                    <div class="col-6">
-                                        <select id="DDL_ResidentialStatus" class="form-control" asp-for="NationalityType">
-                                            <option value="Resident Indian">Resident Indian</option>
-                                            <option value="Non-Resident Indian">Non-Resident Indian</option>
-                                        </select>
-                                        <span asp-validation-for="NationalityType" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-1"></div>
-                                    <div class="col-3">
-                                        <label asp-for="CustomerResidenceaddress"> Residence Address : <span style="color: red; width: 10%;">*</span></label>
-                                    </div>
-                                    <div class="col-6">
-                                        <input asp-for="CustomerResidenceaddress" class="form-control" type="text" placeholder="Enter Residence Address" maxlength="300" />
-                                        <span asp-validation-for="CustomerResidenceaddress" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-1"></div>
-                                    <div class="col-3">
-                                        <label asp-for="CustomerResidencePincode"> Residence Pincode : <span style="color: red; width: 10%;">*</span></label>
-                                    </div>
-                                    <div class="col-6">
-                                        <input asp-for="CustomerResidencePincode" class="form-control noTxtInput" type="text" placeholder="Enter Residence Pincode" maxlength="6" />
-                                        <span asp-validation-for="CustomerResidencePincode" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-1"></div>
-                                    <div class="col-3">
-                                        <label asp-for="CustomerOfficeaddress"> Business/Employee Address : <span style="color: red; width: 10%;">*</span></label>
-                                    </div>
-                                    <div class="col-6">
-                                        <input asp-for="CustomerOfficeaddress" class="form-control" type="text" placeholder="Enter Business/Employee Address" maxlength="300" />
-                                        <span asp-validation-for="CustomerOfficeaddress" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-1"></div>
-                                    <div class="col-3">
-                                        <label asp-for="CustomerOfficePincode">Business/Employee Pincode : <span style="color: red; width: 10%;">*</span></label>
-                                    </div>
-                                    <div class="col-6">
-                                        <input asp-for="CustomerOfficePincode" class="form-control noTxtInput" type="text" placeholder="Enter Business/Employee Pincode" maxlength="6" />
-                                        <span asp-validation-for="CustomerOfficePincode" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-1"></div>
-                                    <div class="col-3">
-                                        <label asp-for="ProductID">Product Chosen : <span style="color: red; width: 10%;">*</span></label>
-                                    </div>
-                                    <div class="col-6">
-                                        <select id="DDL_ProductInterest" class="form-control" asp-for="ProductID" asp-items="ViewBag.loanProducts">
-                                            <option value="">Select Product</option>
-                                        </select>
-                                        <span asp-validation-for="ProductID" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-1"></div>
-                                    <div class="col-3">
-                                        <label asp-for="SchemeID">Scheme Chosen : <span style="color: red; width: 10%;">*</span></label>
-                                    </div>
-                                    <div class="col-6">
-                                        <select id="ddl_Scheme" asp-for="SchemeID" asp-items="ViewBag.loanSchemes" class="form-control">
-                                            <option value="">Select Scheme</option>
-                                        </select>
-                                        <span asp-validation-for="SchemeID" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-1"></div>
-                                    <div class="col-3">
-                                        <label asp-for="Comment">Comments : </label>
-                                    </div>
-                                    <div class="col-6">
-                                        <textarea asp-for="Comment" class="form-control" placeholder="Enter Comments" maxlength="300"></textarea>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="justify-content:center;display:flex">
-                                <div class="row-tab">
-                                    <div style="display:inline-flex" class="col-md-12">
-                                        <center>
-                                            <input id="button1" type="submit" value="Add Lead" class="btn btn-default-submit" />
-                                        </center>
-                                    </div>
-                                </div>
-                                <div class="row-tab">
-                                    <div style="display:inline-flex" class="col-md-12">
-                                        <center><a href="/home/dashboard" type="button" value="Cancel" id="btnSignIn" class="btn btn-danger">Cancel</a></center>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>-->
 <div class="container app pb-5">
     <div class="col-sm-12 col-lg-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in">
@@ -573,19 +20,7 @@
             <div style="border: 1px solid #343a40; padding-left: 2%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;">
                 <div class="panel-body">
                     <div class="border-part">
-                        @*@if (ViewBag.isSuccess == true)
-                            {
-                                <div class="alert alert-success" role="alert">
-                                    @ViewBag.Message
-                                </div>
-                            }
-                            else if (ViewBag.isSuccess == false)
-                            {
-                                <div class="alert alert-danger" role="alert">
-                                    <strong>Error!</strong> @ViewBag.Message
-                                </div>
 
-                            }*@
                         <div style="text-align:end" class="form-group">
                             <div class="row">
                                 <div class="col-12">
@@ -631,17 +66,6 @@
                                         <span id="FormNospanFalse" class="text-success"></span>
                                     </div>
 
-
-                                    @*<div class="col-lg-4 col-sm-12">
-                                            <label asp-for="IsPropertyIdentified">Property Identified :<span style="color: red; width: 10%;">*</span></label>
-
-                                            <select asp-for="IsPropertyIdentified" id="DDL_PropId" class="form-control">
-                                                <option value="">Select</option>
-                                                <option value="YES">Yes</option>
-                                                <option value="NO">No</option>
-                                            </select>
-                                            <span asp-validation-for="IsPropertyIdentified" class="text-danger"></span>
-                                        </div>*@
                                 </div>
                             </div>
                             <hr />
@@ -662,8 +86,6 @@
                                 </div>
                             </div>
                             <div id="PropertyDiv" style="display: none">
-
-
 
                                 <div class="form-group pl-1 pr-1 pb-1">
                                     <div class="row">
@@ -805,9 +227,6 @@
                                         <span asp-validation-for="EmploymentType" class="text-danger"></span>
                                     </div>
 
-
-
-
                                     <div class="col-md-4">
                                         <label asp-for="TypeOfFirms">Type Of Firm <span style="color: red; width: 10%;">*</span></label>
 
@@ -826,15 +245,12 @@
                                 <div class="form-group pl-1 pr-1 pb-1">
                                     <div class="row">
 
-                                        @*<div id="enableOnSlfEmployment1" style="display : none">*@
-
                                         <div id="enableOnSlfEmployment1" class="col-lg-4 col-sm-12" style="display : none">
                                             <label asp-for="AnnualTurnOverInLastFy">Annual Turnover In Last FY (Applicant Only) <span style="color: red; width: 10%;">*</span></label>
 
                                             <input asp-for="AnnualTurnOverInLastFy" class="form-control noTxtInput" id="annualIncomeFy" type="text" maxlength="8" placeholder="Enter Annual Turnover" />
                                             <span asp-validation-for="AnnualTurnOverInLastFy" class="text-danger"></span>
                                         </div>
-                                        @*</div>*@
 
                                         <div class="col-lg-4 col-sm-12">
 
@@ -943,16 +359,12 @@
                                         <span asp-validation-for="CustomerOfficeaddress" class="text-danger"></span>
                                     </div>
 
-
-
                                     <div class="col-lg-4 col-sm-12">
                                         <label asp-for="CustomerOfficePincode">Business / Employer Pincode <span style="color: red; width: 10%;">*</span></label>
 
                                         <input asp-for="CustomerOfficePincode" class="form-control noTxtInput" type="text" placeholder="Enter Business / Employer Pincode" maxlength="6" />
                                         <span asp-validation-for="CustomerOfficePincode" class="text-danger"></span>
                                     </div>
-
-
 
                                 </div>
                             </div>
@@ -1113,16 +525,9 @@
         })
         });
         $('#DDL_ProductInterest').trigger("change");
-
         
-
-
     });
-    //$(document).ready(function () {
-    //    $("#FormNo").inputFilter(function (value) {
-    //        return /^\d*$/.test(value);    // Allow digits only, using a RegExp
-    //    });
-    //});
+
     $(document).ready(function () {
 
         $('#FormNo').keypress(function (e) {
@@ -1134,6 +539,5 @@
                 return false;
 
         });
-
     });
 </script>

@@ -19,7 +19,7 @@ namespace LoanProcessManagement.Application.Features.Menu.Commands.UpdateCommand
         }
         public async Task<AlterMenuStatusCommandDTO> Handle(AlterMenuStatusCommand request, CancellationToken cancellationToken)
         {
-            var response =  _menuRepository.AlterStatus(request.Id, request.LgId);
+            var response = await _menuRepository.AlterStatus(request.Id, request.LgId);
             return response;
         }
     }

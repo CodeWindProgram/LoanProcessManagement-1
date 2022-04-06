@@ -19,9 +19,6 @@
                     <table class="display table-responsive-lg" id="tblQueryHistory" width="100%">
                         <thead>
                             <tr>
-                                @*<th>
-                                        @Html.DisplayNameFor(model => model.Id)
-                                </th>*@
                                 <th>
                                     @Html.DisplayNameFor(model => model.SerialNumber)
                                 </th>
@@ -37,61 +34,27 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.Query_Status)
                                 </th>
-
-                                @*<th>
-                                    @Html.DisplayNameFor(model => model.Query_Comment)
-                                </th>*@
-                                @*<th>
-                                    @Html.DisplayNameFor(model => model.Tat)
-                                </th>*@
                                 <th>
-                                    @*@Html.DisplayNameFor(model => model.IPSQueryType1)*@
                                     Query 1
                                 </th>
                                 <th>
-                                    @*@Html.DisplayNameFor(model => model.IPSQueryType2)*@
                                     Query 2
                                 </th>
                                 <th>
-                                    @*@Html.DisplayNameFor(model => model.IPSQueryType3)*@
                                     Query 3
                                 </th>
                                 <th>
-                                    @*@Html.DisplayNameFor(model => model.IPSQueryType4)*@
                                     Query 4
                                 </th>
                                 <th>
-                                    @*@Html.DisplayNameFor(model => model.IPSQueryType5)*@
                                     Query 5
                                 </th>
-                                @*<th>
-                                @Html.DisplayNameFor(model => model.IPSQueryType_Comment)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.IPSResponseType1)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.IPSResponseType2)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.IPSResponseType3)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.IPSResponseType4)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.IPSResponseType5)
-                                </th>
-                                <th></th>*@
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    @*<td>
-                                        @Html.DisplayFor(modelItem => item.Id)
-                                    </td>*@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.SerialNumber)
                                     </td>
@@ -114,13 +77,6 @@
                                         }
                                         @Html.DisplayFor(modelItem => status)
                                     </td>
-
-                                    @*<td>
-                                        @Html.DisplayFor(modelItem => item.Query_Comment)
-                                    </td>*@
-                                    @*<td>
-                                        @Html.DisplayFor(modelItem => item.Tat)
-                                    </td>*@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.IPSQueryType1)
                                     </td>
@@ -135,30 +91,7 @@
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.IPSQueryType5)
-                                    </td>
-                                    @*<td>
-                                        @Html.DisplayFor(modelItem => item.IPSQueryType_Comment)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.IPSResponseType1)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.IPSResponseType2)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.IPSResponseType3)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.IPSResponseType4)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.IPSResponseType5)
-                                    </td>
-                                    <td>
-                                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                                    </td>*@
+                                    </td>                                    
                                 </tr>
                             }
                         </tbody>
@@ -189,10 +122,6 @@
                 $("td:first", nRow).html(iDisplayIndex + 1);
                 return nRow;
             },
-            //"autoWidth": true
-            //"columnDefs": [
-            //    { "width": "20%", "targets": 0 }
-            //]
         });
     });
 </script>

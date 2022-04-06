@@ -1,10 +1,6 @@
-﻿using AutoMapper;
-using LoanProcessManagement.Application.Contracts.Persistence;
+﻿using LoanProcessManagement.Application.Contracts.Persistence;
 using LoanProcessManagement.Application.Responses;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,10 +9,8 @@ namespace LoanProcessManagement.Application.Features.LeadList.Commands.UpdateLea
     class UpdateLeadCommandHandler : IRequestHandler<UpdateLeadCommand, Response<UpdateLeadDto>>
     {
         private readonly ILeadListRepository _leadListRepository;
-        private readonly IMapper _mapper;
-        public UpdateLeadCommandHandler(IMapper mapper, ILeadListRepository leadListRepository)
+        public UpdateLeadCommandHandler(ILeadListRepository leadListRepository)
         {
-            _mapper = mapper;
             _leadListRepository = leadListRepository;
         }
         #region This method will call repository method by - Akshay Pawar - 18/11/2021
@@ -35,8 +29,10 @@ namespace LoanProcessManagement.Application.Features.LeadList.Commands.UpdateLea
             }
             else
             {
-                var res=new Response<UpdateLeadDto>(leadDto, "failure");
-                res.Succeeded = false;
+                var res = new Response<UpdateLeadDto>(leadDto, "failure")
+                {
+                    Succeeded = false
+                };
                 return res;
             }
         } 

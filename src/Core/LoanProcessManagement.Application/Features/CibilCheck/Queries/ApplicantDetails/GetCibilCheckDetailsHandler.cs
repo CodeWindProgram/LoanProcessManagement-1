@@ -13,10 +13,8 @@ namespace LoanProcessManagement.Application.Features.CibilCheck.Queries.Applican
     public class GetCibilCheckDetailsHandler : IRequestHandler<GetCibilCheckDetailsQuery, Response<GetCibilCheckDetailsDto>>
     {
         private readonly ICibilCheckDetailsRepository _cibilDetailsRepository;
-        private readonly IMapper _mapper;
-        public GetCibilCheckDetailsHandler(IMapper mapper, ICibilCheckDetailsRepository cibilDetailsRepository)
+        public GetCibilCheckDetailsHandler(ICibilCheckDetailsRepository cibilDetailsRepository)
         {
-            _mapper = mapper;
             _cibilDetailsRepository = cibilDetailsRepository;
         }
 

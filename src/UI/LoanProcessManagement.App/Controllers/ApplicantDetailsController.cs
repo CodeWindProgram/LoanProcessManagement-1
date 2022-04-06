@@ -97,20 +97,20 @@ namespace LoanProcessManagement.App.Controllers
             if (applicantDetailsCommandVM != null)
             {
                 ModelState.Remove("UserRoleId");
+                if (ModelState.IsValid)
+                {
+                    var response = await _applicantDetailsService.UpdateApplicantDetails(applicantDetailsCommandVM);
+                    TempData["applicantDetailIsSuccess"] = true;
+                    TempData["applicantDetailMessage"] = response.Data.Message;
+                }
+                var appType = applicantDetailsCommandVM.ApplicantType;
+                var lead_Id = applicantDetailsCommandVM.lead_Id;
+                return RedirectToAction("Index", new { lead_Id, applicantType = appType });
             }
-            if (ModelState.IsValid)
+            else
             {
-                var response = await _applicantDetailsService.UpdateApplicantDetails(applicantDetailsCommandVM);
-                //ViewBag.isSuccess = response.Succeeded;
-                //ViewBag.Message = response.Data.Message;
-                TempData["applicantDetailIsSuccess"] = true;
-                TempData["applicantDetailMessage"] = response.Data.Message;
+                return View();
             }
-            //var temp = "Lead_" + applicantDetailsCommandVM.lead_Id;
-            //return RedirectToAction("LeadSummary", "LeadList", new { lead_Id = temp });
-            var appType = applicantDetailsCommandVM.ApplicantType;
-            var lead_Id = applicantDetailsCommandVM.lead_Id;
-            return RedirectToAction("Index", new { lead_Id = lead_Id, applicantType = appType });
         }
         #endregion
     }

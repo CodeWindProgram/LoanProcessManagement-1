@@ -3,9 +3,6 @@ using LoanProcessManagement.Application.Contracts.Persistence;
 using LoanProcessManagement.Application.Responses;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,12 +12,13 @@ namespace LoanProcessManagement.Application.Features.Menu.Query.GetMenuByID
     {
         private readonly IMenuRepository MenuRepository;
         private readonly IMapper _mapper;
-        private readonly ILogger _logger;
+        private readonly ILogger<GetMenuByIdQueryHandler> _logger;
 
-        public GetMenuByIdQueryHandler(IMapper mapper, IMenuRepository menuRepository)
+        public GetMenuByIdQueryHandler(IMapper mapper, IMenuRepository menuRepository, ILogger<GetMenuByIdQueryHandler> logger)
         {
             _mapper = mapper;
             MenuRepository = menuRepository;
+            _logger = logger;
         }
         public async Task<Response<GetMenuByIdQueryVm>> Handler(GetMenuByIdQuery request, CancellationToken cancellationToken)
         {

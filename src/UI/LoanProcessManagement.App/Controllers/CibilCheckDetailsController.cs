@@ -1,13 +1,10 @@
 ﻿using LoanProcessManagement.App.Models;
 using LoanProcessManagement.App.Services.Interfaces;
-using LoanProcessManagement.Application.Features.CibilCheck.Commands.AddCibilCheckDetails;
 using LoanProcessManagement.Application.Features.LpmCategories.Queries.GetAllCategories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace LoanProcessManagement.App.Controllers
@@ -116,8 +113,6 @@ namespace LoanProcessManagement.App.Controllers
                 var response = await _cibilCheckService.UpdateCibilCheckDetailsDetails(cibilCheckDetailsVm);
                 if (response.Succeeded)
                 {
-                    //ViewBag.isSuccess = true;
-                    //ViewBag.Message = response.Message;
                     TempData["cibilCheckIsSuccess"] = true;
                     TempData["cibilCheckMessage"] = response.Message;
                 }
@@ -125,17 +120,7 @@ namespace LoanProcessManagement.App.Controllers
                     TempData["cibilCheckIsSuccess"] = false;
                     TempData["cibilCheckMessage"] = response.Message;
                 }
-                //if (response.Succeeded)
-                //{
-                //     return View(cibilCheckDetailsVm);
-                ////return RedirectToAction("Index", new { lead_Id = cibilCheckDetailsVm.lead_Id, applicantType = cibilCheckDetailsVm.ApplicantType });
-                //}
-                //else {
-                //     return View(cibilCheckDetailsVm);
-                //}
             }
-            //var temp ="Lead_" + cibilCheckDetailsVm.lead_Id;
-            //return RedirectToAction("LeadSummary", "LeadList", new { lead_Id = temp });
             var appType = cibilCheckDetailsVm.ApplicantType;
             var lead_Id = cibilCheckDetailsVm.lead_Id;
             return RedirectToAction("Index", new { lead_Id = lead_Id, applicantType = appType});

@@ -15,21 +15,23 @@ namespace LoanProcessManagement.Application.Features.DSACorner.Query.TrainingVid
     {
         private readonly IDSACornerRepository _dsaCornerRepository;
         private readonly IMapper _mapper;
-        private readonly ILogger _logger;
+        private readonly ILogger<TrainingVideosListHandler> _logger;
 
-        public TrainingVideosListHandler(IMapper mapper, IDSACornerRepository dsaCornerRepository)
+        public TrainingVideosListHandler(IMapper mapper, IDSACornerRepository dsaCornerRepository, ILogger<TrainingVideosListHandler> logger)
         {
             _mapper = mapper;
             _dsaCornerRepository = dsaCornerRepository;
+            _logger = logger;
         }
 
         #region added handler to get all dsa training videos list - Ramya Guduru - 25-11-2021
         public async Task<Response<IEnumerable<TrainingVideosListVm>>> Handle(TrainingVideosListQuery request, CancellationToken cancellationToken)
         {
-           
+            _logger.LogInformation("Handle Initited");
             var trainingVideosList = await _dsaCornerRepository.TrainingVideosList(request.ParentId);
             var trainingVideosrDto = _mapper.Map<IEnumerable<TrainingVideosListVm>>(trainingVideosList);
             var response = new Response<IEnumerable<TrainingVideosListVm>>(trainingVideosrDto);
+            _logger.LogInformation("Handle Completed");
             return response;
         }
         #endregion

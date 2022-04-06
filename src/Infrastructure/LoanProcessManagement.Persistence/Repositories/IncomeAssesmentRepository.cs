@@ -4,7 +4,6 @@ using LoanProcessManagement.Domain.Entities;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.GSTCreateEnquiry;
@@ -13,7 +12,6 @@ using LoanProcessManagement.Application.Features.IncomeAssesment.Queries.GetInco
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.AddIncomeAssessment;
 using LoanProcessManagement.Domain.CustomModels;
 using System;
-using LoanProcessManagement.Application.Features.IncomeAssesment.Queries.GetIsSubmitFromGst;
 using LoanProcessManagement.Application.Responses;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Commands.UpdateSubmitGst;
 using LoanProcessManagement.Application.Features.IncomeAssesment.Queries.GetIncomeAssessmentRecordsList;
@@ -22,14 +20,10 @@ namespace LoanProcessManagement.Persistence.Repositories
 {
     public class IncomeAssesmentRepository : BaseRepository<LPMGSTEnquiryDetail>, IIncomeAssesmentRepository
     {
-        //protected readonly ApplicationDbContext _dbContext;
-        private readonly IEmailService emailService;
-        private readonly ILogger _logger;
-        //private readonly IIncomeAssesmentRepository _incomeAssesmentRepository;
-        public IncomeAssesmentRepository(ApplicationDbContext dbContext, ILogger<LPMGSTEnquiryDetail> logger, IEmailService emailService) : base(dbContext, logger, emailService)
+        private readonly ILpmInstitutionMastersRepository _lpmInstitutionMastersRepository;
+        public IncomeAssesmentRepository(ApplicationDbContext dbContext, ILogger<LPMGSTEnquiryDetail> logger, IEmailService emailService, ILpmInstitutionMastersRepository lpmInstitutionMastersRepository) : base(dbContext, logger, emailService)
         {
-            _logger = logger;
-
+            _lpmInstitutionMastersRepository = lpmInstitutionMastersRepository;
         }
 
         public async Task<GstCreateEnquiryCommandDto> CreateGstEnquiry(GstCreateEnquiryCommand request)
@@ -53,7 +47,7 @@ namespace LoanProcessManagement.Persistence.Repositories
                 EmploymentType = request.EmploymentType,
                 ApplicantDetailId = request.ApplicantDetailId
             };
-            var obj = await _dbContext.LPMGSTEnquiryDetails.AddAsync(gstCreateEnquiryCommandDto);
+            await _dbContext.LPMGSTEnquiryDetails.AddAsync(gstCreateEnquiryCommandDto);
             applicantDetails.isGstSubmitSuccess = true;
             _dbContext.SaveChanges();
             response.ApplicantDetailId = request.ApplicantDetailId;
@@ -67,26 +61,58 @@ namespace LoanProcessManagement.Persistence.Repositories
         public async Task<GstAddEnquiryCommandDto> AddGstEnquiry(int ApplicantType, int Lead_Id)
         {
             List<int> applicantTypeList = await _dbContext.LpmLeadApplicantsDetails.Where(x => x.lead_Id == Lead_Id).OrderBy(x => x.ApplicantType).Select(x => x.ApplicantType).ToListAsync();      //represent list of applicant types under particular lead
-               var res = await (from A in _dbContext.LpmLeadApplicantsDetails
-                                 //join B in _dbContext.LPMGSTEnquiryDetails on A.Id equals B.ApplicantDetailId
-                             where A.ApplicantType == ApplicantType && A.lead_Id == Lead_Id && A.IsActive == true
-                             select new GstAddEnquiryCommandDto
-                             {
-                                 Lead_Id = Lead_Id,
-                                 ID = A.Id,
-                                 FormNo = long.Parse(A.FormNo),
-                                 CustomerName = A.FirstName + " " + A.LastName,
-                                 Email = A.CustomerEmail,
-                                 MobileNo = A.CustomerPhone,
-                                 GstNo = A.GstNo,
-                                 EmploymentType = A.EmploymentType,
-                                 //ExcelFilePath = B.ExcelFilePath,
-                                 //PdfFilePath = B.PdfFilePath,
-                                 IsActive = A.IsActive,
-                                 ApplicantType = A.ApplicantType,
-                                 ApplicantDetailId = A.Id,
-                                 AppTypeList = applicantTypeList
-                             }).FirstOrDefaultAsync();
+            //var res = await (from A in _dbContext.LpmLeadApplicantsDetails
+            //                  //join B in _dbContext.LPMGSTEnquiryDetails on A.Id equals B.ApplicantDetailId
+            //              where A.ApplicantType == ApplicantType && A.lead_Id == Lead_Id //&& A.IsActive
+            //              select new GstAddEnquiryCommandDto 
+            //              {
+            //                  Lead_Id = Lead_Id,
+            //                  ID = A.Id,
+            //                  FormNo = long.Parse(A.FormNo),
+            //                  CustomerName = A.FirstName + " " + A.LastName,
+            //                  Email = A.CustomerEmail,
+            //                  MobileNo = A.CustomerPhone,
+            //                  //GstNo = B.GstNo,
+            //                  EmploymentType = A.EmploymentType,
+            //                  //ExcelFilePath = B.ExcelFilePath,
+            //                  //PdfFilePath = B.PdfFilePath,
+            //                  IsActive = A.IsActive,
+            //                  ApplicantType = A.ApplicantType,
+            //                  ApplicantDetailId = A.Id,
+            //                  AppTypeList = applicantTypeList
+            //              }).FirstOrDefaultAsync();
+            var applicantDetails = await _dbContext.LpmLeadApplicantsDetails.Where(x => x.ApplicantType == ApplicantType && x.lead_Id == Lead_Id).FirstOrDefaultAsync();
+            var gstDetails = await _dbContext.LPMGSTEnquiryDetails.Where(x => x.ApplicantDetailId == applicantDetails.Id).FirstOrDefaultAsync();
+            GstAddEnquiryCommandDto res = new GstAddEnquiryCommandDto();
+            if (applicantDetails != null && gstDetails!= null)
+            {
+                res.Lead_Id = Lead_Id;
+                res.ID = applicantDetails.Id;
+                res.FormNo = long.Parse(applicantDetails.FormNo);
+                res.CustomerName = applicantDetails.FirstName + " " + applicantDetails.LastName;
+                res.Email = applicantDetails.CustomerEmail;
+                res.MobileNo = applicantDetails.CustomerPhone;
+                res.GstNo = gstDetails.GstNo;
+                res.EmploymentType = applicantDetails.EmploymentType;
+                res.IsActive = applicantDetails.IsActive;
+                res.ApplicantType = applicantDetails.ApplicantType;
+                res.ApplicantDetailId = applicantDetails.Id;
+                res.AppTypeList = applicantTypeList;
+            }
+            else
+            {
+                res.Lead_Id = Lead_Id;
+                res.ID = applicantDetails.Id;
+                res.FormNo = long.Parse(applicantDetails.FormNo);
+                res.CustomerName = applicantDetails.FirstName + " " + applicantDetails.LastName;
+                res.Email = applicantDetails.CustomerEmail;
+                res.MobileNo = applicantDetails.CustomerPhone;
+                res.EmploymentType = applicantDetails.EmploymentType;
+                res.IsActive = applicantDetails.IsActive;
+                res.ApplicantType = applicantDetails.ApplicantType;
+                res.ApplicantDetailId = applicantDetails.Id;
+                res.AppTypeList = applicantTypeList;
+            }
             return res;
         }
 
@@ -159,30 +185,31 @@ namespace LoanProcessManagement.Persistence.Repositories
             var applicantDetails = await _dbContext.LpmLeadApplicantsDetails.Include(x => x.LpmLeadMaster)
                 .Where(x => x.lead_Id == request.lead_Id && x.ApplicantType == request.ApplicantType).FirstOrDefaultAsync();
 
-            LpmLeadIncomeAssessmentDetails details = new LpmLeadIncomeAssessmentDetails();
-
-            details.FormNo = request.FormNo;
-            details.lead_Id = request.lead_Id;
-            details.CreatedDate = DateTime.Now;
-            details.CreatedBy = request.CreatedBy;
-            details.LastModifiedDate = DateTime.Now;
-            details.LastModifiedBy = request.LastModifiedBy;
-            details.ApplicantDetailId = applicantDetails.Id;
-            details.ApplicantType = request.ApplicantType;
-            details.StartDate = request.StartDate;
-            details.EndDate = request.EndDate;
-            details.EmployerName1 = request.EmployerName1;
-            details.EmployerName2 = request.EmployerName2;
-            details.EmployerName3 = request.EmployerName3;
-            details.EmployerName4 = request.EmployerName4;
-            details.EmployerName5 = request.EmployerName5;
-            details.FileType = request.FileType;
-            details.Institution_Id = request.Institution_Id;
-            details.DocumentType = request.DocumentType;
-            details.PdfFileName = request.PdfFileName;
-            details.FilePassword = request.FilePassword;
-            details.IsActive = true;
-            details.IsSuccess = true;
+            LpmLeadIncomeAssessmentDetails details = new LpmLeadIncomeAssessmentDetails
+            {
+                FormNo = request.FormNo,
+                lead_Id = request.lead_Id,
+                CreatedDate = DateTime.Now,
+                CreatedBy = request.CreatedBy,
+                LastModifiedDate = DateTime.Now,
+                LastModifiedBy = request.LastModifiedBy,
+                ApplicantDetailId = applicantDetails.Id,
+                ApplicantType = request.ApplicantType,
+                StartDate = request.StartDate,
+                EndDate = request.EndDate,
+                EmployerName1 = request.EmployerName1,
+                EmployerName2 = request.EmployerName2,
+                EmployerName3 = request.EmployerName3,
+                EmployerName4 = request.EmployerName4,
+                EmployerName5 = request.EmployerName5,
+                FileType = request.FileType,
+                Institution_Id = request.Institution_Id,
+                DocumentType = request.DocumentType,
+                PdfFileName = request.PdfFileName,
+                FilePassword = request.FilePassword,
+                IsActive = true,
+                IsSuccess = true
+            };
             await _dbContext.LpmLeadIncomeAssessmentDetails.AddAsync(details);
             applicantDetails.isPerfiosSubmitSuccess = true;
             await _dbContext.SaveChangesAsync();
@@ -223,7 +250,15 @@ namespace LoanProcessManagement.Persistence.Repositories
                     Message = "Income assessment records fetched successfully"
                 }).ToListAsync();
 
-            return incomeAssessmentRecords;
+                foreach (var records in incomeAssessmentRecords)
+                {
+                    if (records.FileType == "FileUpload")
+                    {
+                        var institutionName = await _lpmInstitutionMastersRepository.GetInstitutionMastersByIdAsync(records.Institution_Id);
+                        records.InstitutionName = institutionName.Institution_Name ?? string.Empty;
+                    }
+                }
+                return incomeAssessmentRecords;
         }
         #endregion
 

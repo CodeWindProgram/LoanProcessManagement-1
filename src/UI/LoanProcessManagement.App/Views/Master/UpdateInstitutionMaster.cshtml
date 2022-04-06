@@ -1,9 +1,6 @@
-﻿@*@using LoanProcessManagement.Application.Features.RoleMaster.Queries.GetRoleMaster;*@
-@model LoanProcessManagement.Application.Features.InstitutionMasters.Commands.UpdateInstitutionMasters.UpdateInstitutionMastersCommand
+﻿@model LoanProcessManagement.Application.Features.InstitutionMasters.Commands.UpdateInstitutionMasters.UpdateInstitutionMastersCommand
 @{
-
-    //var record = (GetRoleMasterByIdDto)ViewData["data"];
-
+    ViewData["Title"] = "UpdateInstitutionMaster";
 }
 
 
@@ -33,7 +30,7 @@
                                     <div class="col-lg-4 col-sm-12">
                                         <label asp-for="Institution_Name" class="control-label">Institution Master Name<span style="color: Red">&nbsp;*</span></label>
 
-                                        <input asp-for="Institution_Name" class="form-control"  onkeydown="return /[a-z ]/i.test(event.key)" maxlength="20" />
+                                        <input asp-for="Institution_Name" class="form-control" onkeydown="return /[a-z ]/i.test(event.key)" maxlength="20" />
                                         <span asp-validation-for="Institution_Name" class="text-danger"></span>
                                     </div>
                                     <div class="col-lg-4 col-sm-12">
@@ -43,7 +40,7 @@
                                             <option value="">Select Insitution Type</option>
                                             <option value="Bank">Bank</option>
                                             <option value="FI">FI</option>
-                                        </select>                                       
+                                        </select>
                                         <span asp-validation-for="Institution_Type" class="text-danger"></span>
                                     </div>
 
@@ -74,26 +71,7 @@
     </div>
 </div>
 <script>
-    //$(document).ready(function () {
-    //    var check = $('#myCheckbox').val();
-    //    console.log(check)
-    //    var ch = check.toString();
-    //console.log(ch);
-    //    console.log(check);
-    //    if (check != "true") {
-    //    console.log("Unchecked");
-    //    $('#myCheckbox').prop('checked', false);
-    //    }
-    //    else if (check == "true") {
-    //    console.log("checked");
-    //        $('#myCheckbox').prop('checked', true);
-    //    }
-    //});
 
-
-    //function BtnClick() {
-    //    $('#myCheckbox').prop('checked', true);
-    //}
     function loadPage() {
 
         $("#div_dynamicTables").load("/Master/GetAllInstitution");
@@ -114,7 +92,6 @@
                     toastr.error(result.data.message);
 
                 }
-
             }
         });
         e.preventDefault();

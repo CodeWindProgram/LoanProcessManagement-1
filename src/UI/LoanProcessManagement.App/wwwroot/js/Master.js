@@ -2,7 +2,8 @@
 
 $(document).ready(function () {
     $('#selectVideo').change(function () {
-              if ($('#selectVideo').val() == 1) {
+        if ($('#selectVideo').val() == 1) {
+            $('#div_dynamicTables').empty();
             $("#div_dynamicTables").load("../Master/GetRoleMaster");
             //$.ajax({
             //    type: 'GET',
@@ -48,42 +49,54 @@ $(document).ready(function () {
             //    }
             //});
         }
-         else if ($('#selectVideo').val() == 2) {
+        else if ($('#selectVideo').val() == 2) {
+                  $('#div_dynamicTables').empty();
                   $("#div_dynamicTables").load("/Master/GetAllBranches");
          }
-         else if ($('#selectVideo').val() == 3) {
+        else if ($('#selectVideo').val() == 3) {
+                  $('#div_dynamicTables').empty();
                   $("#div_dynamicTables").load("/Master/GetAgencyList");
          }
         else if ($('#selectVideo').val() == 5) {
+            $('#div_dynamicTables').empty();
             $("#div_dynamicTables").load("../Master/GetLostLeadReasonMaster");
         }
         else if ($('#selectVideo').val() == 6) {
+                  $('#div_dynamicTables').empty();
                   $("#div_dynamicTables").load("/Master/GetRejectLeadReasonMaster");
         }
        
         else if ($('#selectVideo').val() == 7) {
+            $('#div_dynamicTables').empty();
             $("#div_dynamicTables").load("/Master/GetAllQueryType");
         }
         else if ($('#selectVideo').val() == 8) {
+            $('#div_dynamicTables').empty();
             $("#div_dynamicTables").load("/Master/GetAllScheme");
         }
         else if ($('#selectVideo').val() == 9) {
+            $('#div_dynamicTables').empty();
             $("#div_dynamicTables").load("/Master/GetAllLpmCategories");
         }
         else if ($('#selectVideo').val() == 10) {
+            $('#div_dynamicTables').empty();
             $("#div_dynamicTables").load("/Master/GetAllInstitution");
         }
         else if ($('#selectVideo').val() == 11) {
+            $('#div_dynamicTables').empty();
             $("#div_dynamicTables").load("/Master/GetAllLeadStatus");
         }
         else if ($('#selectVideo').val() == 12) {
+            $('#div_dynamicTables').empty();
            $("#div_dynamicTables").load("/Master/GetAllQualification");
             
         }
         else if ($('#selectVideo').val() == 13) {
+            $('#div_dynamicTables').empty();
             $("#div_dynamicTables").load("/Master/GetAllState");
         }
         else if ($('#selectVideo').val() == 15) {
+            $('#div_dynamicTables').empty();
             $("#div_dynamicTables").load("/Master/Getallproducts");
         }
         
