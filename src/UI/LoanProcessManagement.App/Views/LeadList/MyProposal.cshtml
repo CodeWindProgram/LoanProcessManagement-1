@@ -5,6 +5,16 @@
     var Records = (List<GetPerformanceSummaryQueryDTO>)ViewData["MyProposal"];
     var Role = ViewData["Role"].ToString();
 }
+<style>
+    #tblLoginReport {
+        table-layout: fixed;
+       
+    }
+    table thead th {
+        white-space: nowrap;
+    }
+  
+</style>
 <div>
 
 </div>
@@ -193,24 +203,20 @@
                 "sZeroRecords": "No Records to Display",
                 "sSearch": "Search "
             },
-            "columnDefs": [{
-                width: 90,
-                
-            }],
-        
+            "columnDefs": [
+                { "width": "150px", "targets": [0, 1] },
+
+            ],       
             "scrollX": true,
-            "iDisplayLength": 5,
-            "aLengthMenu": [[10, 50, 100, 200, 500], [10, 50, 100, 200, 500]],
-            "bSortClasses": false,
-            "bPaginate": true,
-            "bAutoWidth": false,
-            "bProcessing": true,
+            "scrollCollapse": true,
+            "autoWidth": true,
+           "paging": true,
             "bDestroy": true
         });
     });
 
     $("input[type='checkbox']").click(function () {
-
+        $("#tblLoginReport th").css({ "white-space": "nowrap" });
         var Branch = $("#DDLBranch option:selected").val();
         console.log(Branch);
         $.ajax({
@@ -240,63 +246,44 @@
                         "<td>" + item.status + "</td>" +
                         "<td style=display:none>" + item.sanctionTAT + "</td>" +
                         "<td>" + item.productName + "</td>" +
-
                         "<td>" + item.loanAmount + "</td>" +
-
-
                         "<td>" + item.insuaranceAmount + "</td>" +
-
                         "<td>" + item.convertedLead + "</td>" +
                         "<td>" + item.branchDataEntry + "</td>" +
                         "<td>" + item.inPrincipleSanction + "</td>" +
                         "<td>" + item.branchProcess + "</td>" +
                         "<td>" + item.thirdPartyCheck + "</td>" +
-
                         "<td>" + item.sanction + "</td>" +
                         "<td>" + item.disbursement + "</td>" +
                         "<td>" + item.rejection + "</td>" +
-
                         "</tr>";
                     $('#tblLoginReport tbody').append(rows);
                 })
-
+                
                 $('#tblLoginReport').DataTable();
 
             }
         });
-
 
         $(".display").dataTable({
             "oLanguage": {
                 "sZeroRecords": "No Records to Display",
                 "sSearch": "Search "
             },
-            "columnDefs": [{
-                width: 90,
-                targets: 0,
-                data: null,
-                orderable: false,
-                autoWidth: false,
-                defaultContent: '',
-            }],
+            "columnDefs": [
+                { "width": "150px", "targets": [0, 1] },
 
+            ],            
             "scrollX": true,
-            "iDisplayLength": 5,
-            "aLengthMenu": [[10, 50, 100, 200, 500], [10, 50, 100, 200, 500]],
-            "bSortClasses": false,
-            "bPaginate": true,
-            "bAutoWidth": false,
-            "bProcessing": true,
+            "scrollCollapse": true,
+            "autoWidth": true,
+            "paging": true,
             "bDestroy": true
         });
     });
 
-
-
-
-
     $("#DDLBranch").change(function () {
-
+        $("#tblLoginReport th").css({ "white-space": "nowrap" });
         var Branch = $("#DDLBranch option:selected").val();
         console.log(Branch);
         $.ajax({
@@ -326,53 +313,37 @@
                         "<td>" + item.status + "</td>" +
                         "<td style=display:none>" + item.sanctionTAT + "</td>" +
                         "<td>" + item.productName + "</td>" +
-
                         "<td>" + item.loanAmount + "</td>" +
-
-
                         "<td>" + item.insuaranceAmount + "</td>" +
-
                         "<td>" + item.convertedLead + "</td>" +
                         "<td>" + item.branchDataEntry + "</td>" +
                         "<td>" + item.inPrincipleSanction + "</td>" +
                         "<td>" + item.branchProcess + "</td>" +
                         "<td>" + item.thirdPartyCheck + "</td>" +
-
                         "<td>" + item.sanction + "</td>" +
                         "<td>" + item.disbursement + "</td>" +
                         "<td>" + item.rejection + "</td>" +
-
                         "</tr>";
                     $('#tblLoginReport tbody').append(rows);
                 })
-
                 $('#tblLoginReport').DataTable();
-
             }
         });
-
 
         $(".display").dataTable({
             "oLanguage": {
                 "sZeroRecords": "No Records to Display",
                 "sSearch": "Search "
             },
-            "columnDefs": [{
-                width: 90,
-                targets: 0,
-                data: null,
-                orderable: false,
-                autoWidth: false,
-                defaultContent: '',
-            }],
 
+            "columnDefs": [
+                { "width": "150px", "targets": [0, 1] },
+            ],
+            "scrollY": 200,
             "scrollX": true,
-            "iDisplayLength": 5,
-            "aLengthMenu": [[10, 50, 100, 200, 500], [10, 50, 100, 200, 500]],
-            "bSortClasses": false,
-            "bPaginate": true,
-            "bAutoWidth": false,
-            "bProcessing": true,
+            "scrollCollapse": true,
+            "autoWidth": true,
+            "paging": true,
             "bDestroy": true
         });
     });
