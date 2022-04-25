@@ -3,7 +3,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "LeadHistory";
 }
-
+<style>
+    table {
+        white-space: nowrap;
+        overflow-x: auto;
+    }
+    table thead th {
+            white-space: nowrap;
+        }
+</style>
 <div class="container app">
     <div class="col-sm-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
@@ -80,6 +88,8 @@
                 "sZeroRecords": "No Records to Display",
                 "sSearch": "Search "
             },
+            "scrollX": true,
+            "scrollCollapse": true,
             "iDisplayLength": 15,
             "aLengthMenu": [[25, 50, 100, 200, 500], [25, 50, 100, 200, 500]],
             "bSortClasses": false,

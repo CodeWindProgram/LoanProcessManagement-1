@@ -3,7 +3,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "LeadStatus";
 }
+<style>
+    table {
+        white-space: nowrap;
+        overflow-x: auto;
+    }
 
+        table thead th {
+            white-space: nowrap;
+        }
+</style>
 <div class="container app">
     <div class="col-sm-12 col-lg-12">
         <div data-effect="helix" id="panels" class="panel panel-info effect-helix in" style="transition: all 0.7s ease-in-out 0s;">
@@ -82,6 +91,22 @@
 </div>
 
 <script type="text/javascript">
+    $(document).ready(function () {
+        $(".display").dataTable({
+            "oLanguage": {
+                "sZeroRecords": "No Records to Display",
+                "sSearch": "Search "
+            },
+            "columnDefs": [
+                { "width": "150px", "targets": [0, 1] },
+            ],
+            "scrollX": true,
+            "scrollCollapse": true,
+            "autoWidth": true,
+            "paging": true,
+            "bDestroy": true
+        });
+    });
     function myfun() {
         var user1 = 0;
         var user2 = 0;
@@ -124,7 +149,21 @@
                 })
 
                 $('#tblLoginReport').DataTable();
-                
+                $(".display").dataTable({
+                    "oLanguage": {
+                        "sZeroRecords": "No Records to Display",
+                        "sSearch": "Search "
+                    },
+                    "columnDefs": [
+                        { "width": "150px", "targets": [0, 1] },
+
+                    ],
+                    "scrollX": true,
+                    "scrollCollapse": true,
+                    "autoWidth": true,
+                    "paging": true,
+                    "bDestroy": true
+                });
             }
         });
     };

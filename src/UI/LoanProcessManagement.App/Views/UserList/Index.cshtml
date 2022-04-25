@@ -5,8 +5,15 @@
     TempData["Title"] = "Index";
 }
 <style>
+    
+    table {
+        white-space: nowrap;
+        overflow-x: auto;
+    }
 
-
+    table thead th {
+        white-space: nowrap;
+    }
     .switch {
         position: relative;
         display: inline-block;
@@ -217,12 +224,13 @@
 </div>
 <script>
     $(document).ready(function () {
-
         var usrTable = $('#tblUserList').dataTable({
             "oLanguage": {
                 "sZeroRecords": "No Records to Display",
                 "sSearch": "Search "
             },
+            "scrollX": true,
+            "scrollCollapse": true,
             "iDisplayLength": 10,
             "aLengthMenu": [[10, 50, 100, 200, 500], [10, 50, 100, 200, 500]],
             "bSortClasses": false,
@@ -303,7 +311,6 @@
         else {
             location.href = '/UserList/Index';
         }
-
     });
 
     $(document).ready(function () {
@@ -313,7 +320,6 @@
     });
 
      $(document).ready(function () {
-
         if ('@TempData["AddUserSuccess"]' == 'True') {
             toastr.success('@TempData["AddUserMessage"]', "Success");
 
@@ -321,7 +327,5 @@
         else if('@TempData["AddUserSuccess"]' == 'False') {
             toastr.error('@TempData["AddUserMessage"]', "Error");
         }
-
     })
-
 </script>

@@ -6,9 +6,9 @@
     var Role = ViewData["Role"].ToString();
 }
 <style>
-    #tblLoginReport {
-        table-layout: fixed;
-       
+    table {
+        white-space: nowrap;
+        overflow-x: auto;
     }
     table thead th {
         white-space: nowrap;
@@ -260,30 +260,28 @@
                     $('#tblLoginReport tbody').append(rows);
                 })
                 
-                $('#tblLoginReport').DataTable();
+                /*$('#tblLoginReport').DataTable();*/
+                $(".display").dataTable({
+                    "oLanguage": {
+                        "sZeroRecords": "No Records to Display",
+                        "sSearch": "Search "
+                    },
+                    "columnDefs": [
+                        { "width": "150px", "targets": [0, 1] },
 
+                    ],
+                    "scrollX": true,
+                    "scrollCollapse": true,
+                    "autoWidth": true,
+                    "paging": true,
+                    "bDestroy": true
+                });
             }
-        });
-
-        $(".display").dataTable({
-            "oLanguage": {
-                "sZeroRecords": "No Records to Display",
-                "sSearch": "Search "
-            },
-            "columnDefs": [
-                { "width": "150px", "targets": [0, 1] },
-
-            ],            
-            "scrollX": true,
-            "scrollCollapse": true,
-            "autoWidth": true,
-            "paging": true,
-            "bDestroy": true
-        });
+        });      
     });
 
     $("#DDLBranch").change(function () {
-        $("#tblLoginReport th").css({ "white-space": "nowrap" });
+        $("#tblLoginReport").css({ "white-space": "nowrap"});
         var Branch = $("#DDLBranch option:selected").val();
         console.log(Branch);
         $.ajax({
@@ -326,25 +324,24 @@
                         "</tr>";
                     $('#tblLoginReport tbody').append(rows);
                 })
-                $('#tblLoginReport').DataTable();
+                /*$('#tblLoginReport').DataTable();*/
+                $(".display").dataTable({
+                    "oLanguage": {
+                        "sZeroRecords": "No Records to Display",
+                        "sSearch": "Search "
+                    },
+
+                    "columnDefs": [
+                        { "width": "150px", "targets": [0, 1] },
+                    ],
+                    "scrollY": 200,
+                    "scrollX": true,
+                    "scrollCollapse": true,
+                    "autoWidth": true,
+                    "paging": true,
+                    "bDestroy": true
+                });
             }
-        });
-
-        $(".display").dataTable({
-            "oLanguage": {
-                "sZeroRecords": "No Records to Display",
-                "sSearch": "Search "
-            },
-
-            "columnDefs": [
-                { "width": "150px", "targets": [0, 1] },
-            ],
-            "scrollY": 200,
-            "scrollX": true,
-            "scrollCollapse": true,
-            "autoWidth": true,
-            "paging": true,
-            "bDestroy": true
-        });
+        });       
     });
 </script>

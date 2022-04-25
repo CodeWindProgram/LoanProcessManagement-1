@@ -10,11 +10,6 @@
 </div>
 
 <script>
-    $(document).ready(function () {
-        $('.btn').click(function (e) {
-            $('.btn').removeClass("selected");
-            $(e.target).addClass("selected");
-        });
-    });
+    $(document).ready(function () {        var URL = window.location.href;        console.log(URL);        $('.btn').removeClass("selected");        $('.btn').removeClass("btn-secondary");        if (URL.includes('LeadSummary')) {            $('#anch_summary').removeClass("selected");            $('#anch_summary').removeClass("btn-default-submit");            $('#anch_summary').addClass("btn-secondary");        }        else if (URL.includes('Modification')) {            $('#anch_modification').removeClass("btn-default-submit");            $('#anch_modification').addClass("btn-secondary");        }        else if (URL.includes('LeadHistory')) {            $('#anch_history').removeClass("btn-default-submit");            $('#anch_history').addClass("btn-secondary");        }        else if (URL.includes('AllProductsList')) {            console.log("123");            $('#anch_products').removeClass("btn-default-submit");            $('#anch_products').addClass("btn-secondary");        }        else if (URL.includes('UpdatePropertyDetails')) {            $('#anch_propertyDetails').removeClass("btn-default-submit");            $('#anch_propertyDetails').addClass("btn-secondary");        }        else if (URL.includes('Query')) {            console.log("456");            $('#anch_queryHistory').removeClass("btn-default-submit");            $('#anch_queryHistory').addClass("btn-secondary");        }        else if (URL.includes('Third')) {            $('#ThirdPartyCheck').removeClass("btn-default-submit");            $('#ThirdPartyCheck').addClass("btn-secondary");        }        //$('.btn').click(function (e) {        //    console.log("11");        //    $('.btn').removeClass("selected");        //    $(e.target).addClass("selected");        //});    });
 
 </script>

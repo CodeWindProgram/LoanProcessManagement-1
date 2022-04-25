@@ -7,7 +7,7 @@
     }
     else if (temp[1] == 'Leadlist') {
         var element = $(".nav-item a[href='" + path + "']");
-        element.addClass("active");     
+        element.addClass("active");
     }
     else if (temp[1] == 'ChangePasswordUI') {
         var element = $(".nav-item a[href='" + path + "']");
@@ -60,7 +60,7 @@
 
     var parentEle = $(".nav-item a[href='" + path + "']")[0]?.parentElement.parentElement;
 
-    if (parentEle.closest('li') != null) {
+    if (parentEle != null && parentEle.closest('li') != null) {
         parentEle.closest('li').setAttribute("class", "nav-item menu-is-opening menu-open")
         parentEle.show();
     }
