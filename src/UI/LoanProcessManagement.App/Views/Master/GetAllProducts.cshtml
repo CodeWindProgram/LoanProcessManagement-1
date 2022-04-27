@@ -10,6 +10,14 @@
     th {
         text-align: center;
     }
+    table {
+        white-space: nowrap;
+        overflow-x: auto;
+    }
+
+        table thead th {
+            white-space: nowrap;
+        }
 </style>
 
 <div class="container app">
@@ -79,8 +87,12 @@
                 "sZeroRecords": "No Records to Display",
                 "sSearch": "Search "
             },
-            "iDisplayLength": 10,
-            "aLengthMenu": [[10, 50, 100, 200, 500], [10, 50, 100, 200, 500]],
+            "scrollX": true,
+            "scrollCollapse": true,
+            "columnDefs": [
+                { "width": "150px", "targets": [0, 1] },
+
+            ],
             "bSortClasses": false,
             "bPaginate": true,
             "bAutoWidth": false,

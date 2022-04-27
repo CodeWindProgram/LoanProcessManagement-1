@@ -36,16 +36,16 @@ namespace LoanProcessManagement.Application.Features.Branch.Queries
         {
             _logger.LogInformation("Handle Initiated");
             var branches = await _baseRepository.ListAllAsync();
-            List<LpmBranchMaster> ActiveBranches = new List<LpmBranchMaster>();
-            foreach (var item in branches)
-            {
-                if (item.IsActive)
-                {
-                    ActiveBranches.Add(item);
-                }
+            //List<LpmBranchMaster> ActiveBranches = new List<LpmBranchMaster>();
+            //foreach (var item in branches)
+            //{
+            //    if (item.IsActive )
+            //    {
+            //        ActiveBranches.Add(item);
+            //    }
                  
-            }
-            var mappedBranches = _mapper.Map<IEnumerable<GetAllBranchesDto>>(ActiveBranches);
+            //}
+            var mappedBranches = _mapper.Map<IEnumerable<GetAllBranchesDto>>(branches);
             //var mappedBranches = _mapper.Map<IEnumerable<GetAllBranchesDto>>(branches);
             _logger.LogInformation("Hanlde Completed");
             return mappedBranches;

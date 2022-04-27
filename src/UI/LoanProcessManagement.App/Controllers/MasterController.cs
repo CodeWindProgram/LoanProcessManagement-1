@@ -155,7 +155,8 @@ namespace LoanProcessManagement.App.Controllers
             {
                 Id = roleMasterVm.Id,
                 RoleName = roleMasterVm.getRoleMasterByIdQueryVm.RoleName,
-                LastModifiedDate = DateTime.Now
+                LastModifiedDate = DateTime.Now,
+                IsActive= roleMasterVm.getRoleMasterByIdQueryVm.IsActive
             };
             var response = await _roleMasterService.UpdateRoleMaster(rolemaster);
 
