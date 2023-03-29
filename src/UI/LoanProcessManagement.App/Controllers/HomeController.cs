@@ -361,6 +361,7 @@ namespace LoanProcessManagement.App.Controllers
         {
             string thumbnail = null;
             var Guids = Guid.NewGuid().ToString();
+            
             if (nameFile != null)
             {
                 Directory.CreateDirectory(_configuration["FilePaths:IconsDirectoryPath"].ToString());
