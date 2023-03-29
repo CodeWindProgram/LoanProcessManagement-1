@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = LoanProcessManagement.Domain
+build_property.ProjectDir = D:\Task1\LoanProcessManagement\src\Core\LoanProcessManagement.Domain\

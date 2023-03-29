@@ -1,0 +1,15 @@
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Infrastructure\bin\Debug\netcoreapp3.1\LoanProcessManagement.Infrastructure.deps.json
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Infrastructure\bin\Debug\netcoreapp3.1\LoanProcessManagement.Infrastructure.dll
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Infrastructure\bin\Debug\netcoreapp3.1\LoanProcessManagement.Infrastructure.pdb
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Infrastructure\bin\Debug\netcoreapp3.1\LoanProcessManagement.Application.dll
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Infrastructure\bin\Debug\netcoreapp3.1\LoanProcessManagement.Domain.dll
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Infrastructure\bin\Debug\netcoreapp3.1\LoanProcessManagement.Application.pdb
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Infrastructure\bin\Debug\netcoreapp3.1\LoanProcessManagement.Domain.pdb
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Infrastructure\obj\Debug\netcoreapp3.1\LoanProcessManagement.Infrastructure.csproj.AssemblyReference.cache
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Infrastructure\obj\Debug\netcoreapp3.1\LoanProcessManagement.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Infrastructure\obj\Debug\netcoreapp3.1\LoanProcessManagement.Infrastructure.AssemblyInfoInputs.cache
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Infrastructure\obj\Debug\netcoreapp3.1\LoanProcessManagement.Infrastructure.AssemblyInfo.cs
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Infrastructure\obj\Debug\netcoreapp3.1\LoanProcessManagement.Infrastructure.csproj.CoreCompileInputs.cache
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Infrastructure\obj\Debug\netcoreapp3.1\LoanProcessManagement.Infrastructure.csproj.CopyComplete
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Infrastructure\obj\Debug\netcoreapp3.1\LoanProcessManagement.Infrastructure.dll
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Infrastructure\obj\Debug\netcoreapp3.1\LoanProcessManagement.Infrastructure.pdb

@@ -1,0 +1,10 @@
+D:\Task1\LoanProcessManagement\src\Core\LoanProcessManagement.Domain\bin\Debug\netcoreapp3.1\LoanProcessManagement.Domain.deps.json
+D:\Task1\LoanProcessManagement\src\Core\LoanProcessManagement.Domain\bin\Debug\netcoreapp3.1\LoanProcessManagement.Domain.dll
+D:\Task1\LoanProcessManagement\src\Core\LoanProcessManagement.Domain\bin\Debug\netcoreapp3.1\LoanProcessManagement.Domain.pdb
+D:\Task1\LoanProcessManagement\src\Core\LoanProcessManagement.Domain\obj\Debug\netcoreapp3.1\LoanProcessManagement.Domain.csproj.AssemblyReference.cache
+D:\Task1\LoanProcessManagement\src\Core\LoanProcessManagement.Domain\obj\Debug\netcoreapp3.1\LoanProcessManagement.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Task1\LoanProcessManagement\src\Core\LoanProcessManagement.Domain\obj\Debug\netcoreapp3.1\LoanProcessManagement.Domain.AssemblyInfoInputs.cache
+D:\Task1\LoanProcessManagement\src\Core\LoanProcessManagement.Domain\obj\Debug\netcoreapp3.1\LoanProcessManagement.Domain.AssemblyInfo.cs
+D:\Task1\LoanProcessManagement\src\Core\LoanProcessManagement.Domain\obj\Debug\netcoreapp3.1\LoanProcessManagement.Domain.csproj.CoreCompileInputs.cache
+D:\Task1\LoanProcessManagement\src\Core\LoanProcessManagement.Domain\obj\Debug\netcoreapp3.1\LoanProcessManagement.Domain.dll
+D:\Task1\LoanProcessManagement\src\Core\LoanProcessManagement.Domain\obj\Debug\netcoreapp3.1\LoanProcessManagement.Domain.pdb

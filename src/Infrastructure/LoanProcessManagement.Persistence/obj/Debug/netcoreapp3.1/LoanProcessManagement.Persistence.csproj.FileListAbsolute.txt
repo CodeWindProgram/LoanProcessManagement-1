@@ -1,0 +1,15 @@
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Persistence\bin\Debug\netcoreapp3.1\LoanProcessManagement.Persistence.deps.json
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Persistence\bin\Debug\netcoreapp3.1\LoanProcessManagement.Persistence.dll
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Persistence\bin\Debug\netcoreapp3.1\LoanProcessManagement.Persistence.pdb
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Persistence\bin\Debug\netcoreapp3.1\LoanProcessManagement.Application.dll
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Persistence\bin\Debug\netcoreapp3.1\LoanProcessManagement.Domain.dll
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Persistence\bin\Debug\netcoreapp3.1\LoanProcessManagement.Application.pdb
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Persistence\bin\Debug\netcoreapp3.1\LoanProcessManagement.Domain.pdb
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Persistence\obj\Debug\netcoreapp3.1\LoanProcessManagement.Persistence.csproj.AssemblyReference.cache
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Persistence\obj\Debug\netcoreapp3.1\LoanProcessManagement.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Persistence\obj\Debug\netcoreapp3.1\LoanProcessManagement.Persistence.AssemblyInfoInputs.cache
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Persistence\obj\Debug\netcoreapp3.1\LoanProcessManagement.Persistence.AssemblyInfo.cs
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Persistence\obj\Debug\netcoreapp3.1\LoanProcessManagement.Persistence.csproj.CoreCompileInputs.cache
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Persistence\obj\Debug\netcoreapp3.1\LoanProcessManagement.Persistence.csproj.CopyComplete
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Persistence\obj\Debug\netcoreapp3.1\LoanProcessManagement.Persistence.dll
+D:\Task1\LoanProcessManagement\src\Infrastructure\LoanProcessManagement.Persistence\obj\Debug\netcoreapp3.1\LoanProcessManagement.Persistence.pdb
