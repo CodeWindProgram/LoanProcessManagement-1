@@ -364,7 +364,7 @@ namespace LoanProcessManagement.App.Controllers
             if (nameFile != null)
             {
                 Directory.CreateDirectory(_configuration["FilePaths:IconsDirectoryPath"].ToString());
-                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, _configuration["FilePaths:IconsPath"].ToString());
+                string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", _configuration["FilePaths:IconsPath"].ToString());
                 thumbnail = _configuration["FilePaths:IconsPath"].ToString() + Guids + "_" + nameFile.FileName;
                 var temp = Guids + "_" + nameFile.FileName;
                 string filePath = Path.Combine(uploadsFolder, temp);
