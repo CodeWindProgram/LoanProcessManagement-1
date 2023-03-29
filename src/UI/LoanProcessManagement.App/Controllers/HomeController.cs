@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -31,6 +32,7 @@ namespace LoanProcessManagement.App.Controllers
         private readonly IRoleMasterService _roleMasterService;
         private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly ILogger _logger;
         public HomeController(IAccountService accountService, ICommonServices commonService,IWebHostEnvironment webHostEnvironment, IMenuService menuService,
             IRoleMasterService roleMasterService,
             IConfiguration configuration)
@@ -361,18 +363,27 @@ namespace LoanProcessManagement.App.Controllers
         {
             string thumbnail = null;
             var Guids = Guid.NewGuid().ToString();
-            if (nameFile != null)
+            
+            try
             {
-                Directory.CreateDirectory(_configuration["FilePaths:IconsDirectoryPath"].ToString());
-                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, _configuration["FilePaths:IconsPath"].ToString());
-                thumbnail = _configuration["FilePaths:IconsPath"].ToString() + Guids + "_" + nameFile.FileName;
-                var temp = Guids + "_" + nameFile.FileName;
-                string filePath = Path.Combine(uploadsFolder, temp);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                if (nameFile != null)
                 {
-                    nameFile.CopyTo(fileStream);
+                    Directory.CreateDirectory(_configuration["FilePaths:IconsDirectoryPath"].ToString());
+                    string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", _configuration["FilePaths:IconsPath"].ToString());
+                    thumbnail = _configuration["FilePaths:IconsPath"].ToString() + Guids + "_" + nameFile.FileName;
+                    var temp = Guids + "_" + nameFile.FileName;
+                    string filePath = Path.Combine(uploadsFolder, temp);
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        nameFile.CopyTo(fileStream);
+                    }
                 }
             }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while processing the uploaded file.");
+            }
+            
             return thumbnail;
         }
 
